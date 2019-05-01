@@ -11,7 +11,7 @@
 
 #### 获取源码
 - [crowdfounding 码云](https://gitee.com/wayn111/crowdfounding)
-
+- [crowdfounding github](https://github.com/wayn111/crowdfounding)
 
 #### 参考项目
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
