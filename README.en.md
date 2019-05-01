@@ -1,36 +1,19 @@
 # crowdfounding
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
 
-#### Software Architecture
-Software architecture description
-
-#### Installation
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### Instructions
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### Contribution
-
-1. Fork the repository
-2. Create Feat_xxx branch
-3. Commit your code
-4. Create Pull Request
+#### Introduction
+- Learning-oriented open source framework, simple and efficient, reasonable modular split, showing the essence of technology
+- Crowdfounding is a streamlined background system developed with SpringMVC+Shiro+Mybatis-Plus as the core
+- Encache Cache annotation
+- Druid dataSource and Monitor web page
+- Use H+ as a background management template, based on jsp template transformation
 
 
-#### Gitee Feature
+#### Get Source code
+- [crowdfounding gitee](https://gitee.com/wayn111/crowdfounding)
 
-1. You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2. Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3. Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4. The most valuable open source project [GVP](https://gitee.com/gvp)
-5. The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6. The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+#### Reference 
+- [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
+- [bootdo](https://gitee.com/lcg0124/bootdo)
+- [RuoYi](https://gitee.com/y_project/RuoYi)
