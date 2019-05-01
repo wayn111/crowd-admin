@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	<bean id="securityManager"
+		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="cacheManager" ref="shiroEacheManager" />
+		<!-- Single realm app. If you have multiple realms, use the 'realms' property 
+			instead. -->
+		<property name="realm" ref="myRealm" />
+	</bean>
+
+	<!-- Let's use some enterprise caching support for better performance. You 
+		can replace this with any enterprise caching framework implementation that 
+		you like (Terracotta+Ehcache, Coherence, GigaSpaces, etc -->
+	<bean id="shiroEacheManager"
+		class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<!-- Set a net.sf.ehcache.CacheManager instance here if you already have 
+			one. If not, a new one will be creaed with a default config: -->
+		<!-- <property name="cacheManager" ref="ehcacheManagerFactory" /> -->
+		<property name="cacheManagerConfigFile" value="classpath:cache/shiro-ehcache.xml"/>
+	</bean>
+
+	<!-- Used by the SecurityManager to access security data (users, roles, 
+		etc). Many other realm implementations can be used too (PropertiesRealm, 
+		LdapRealm, etc. -->
+	<bean id="myRealm" class="com.wayn.framework.shiro.MyRealm">
+		<property name="credentialsMatcher">
+			<bean
+				class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+				<property name="hashAlgorithmName" value="MD5"></property>
+				<property name="hashIterations" value="1024"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- ========================================================= Shiro Spring-specific 
+		integration ========================================================= -->
+	<!-- Post processor that automatically invokes init() and destroy() methods 
+		for Spring-configured Shiro objects so you don't have to 1) specify an init-method 
+		and destroy-method attributes for every bean definition and 2) even know 
+		which Shiro objects require these methods to be called. -->
+	<bean id="lifecycleBeanPostProcessor"
+		class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+				
+	<!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+	<!-- the lifecycleBeanProcessor has run: -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+	    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	    <property name="securityManager" ref="securityManager"/>
+	</bean>
+
+	<!-- Define the Shiro Filter here (as a FactoryBean) instead of directly 
+		in web.xml - web.xml uses the DelegatingFilterProxy to access this bean. 
+		This allows us to wire things with more control as well utilize nice Spring 
+		things such as PropertiesPlaceholderConfigurer and abstract beans or anything 
+		else we might need: -->
+	<bean id="shiroFilter"
+		class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/home/login" />
+		<property name="successUrl" value="/" />
+		<property name="unauthorizedUrl" value="/error/illegalAccess" />
+		<!-- The 'filters' property is not necessary since any declared javax.servlet.Filter 
+			bean defined will be automatically acquired and available via its beanName 
+			in chain definitions, but you can perform overrides or parent/child consolidated 
+			configuration here if you like: -->
+		<!-- <property name="filters"> <util:map> <entry key="aName" value-ref="someFilterPojo"/> 
+			</util:map> </property> -->
+		<property name="filterChainDefinitions">
+			<value>
+				/static/** = anon
+				/home/* = anon
+				/** = authc
+			</value>
+		</property>
+	</bean>
+
+</beans>
