@@ -11,7 +11,7 @@
 
 #### Get Source code
 - [crowdfounding gitee](https://gitee.com/wayn111/crowdfounding)
-- [crowdfounding git](https://github.com/wayn111/crowdfounding/edit/master/README.en.md)
+- [crowdfounding git](https://github.com/wayn111/crowdfounding)
 
 
 #### Reference 
