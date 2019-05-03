@@ -131,14 +131,19 @@
 								}
 							}
 						}
+					},
+					deptName ： {
+						required : true
 					}
 				},
 				messages : {
-
 					userName : {
 						required : icon + "请输入您的用户名",
 						minlength : icon + "用户名必须两个字符以上",
 						remote : icon + "用户名已经存在"
+					},
+					deptName : {
+						required : icon + "请选择部门",
 					}
 				},
 				submitHandler : function() {
