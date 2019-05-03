@@ -27,6 +27,12 @@
 
 			<h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
 			<ul>
+				<li>
+					<a href="https://gitee.com/wayn111/crowdfounding" target="_blank">crowdfounding 码云</a>
+				</li>
+				<li>
+					<a href="https://github.com/wayn111/crowdfounding" target="_blank">crowdfounding github</a>
+				</li>
 			</ul>
 
 			<h3>&nbsp;&nbsp;&nbsp;参考项目</h3>

@@ -3,6 +3,7 @@ package com.wayn.controller.system;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -22,6 +23,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.util.Response;
+import com.wayn.domain.Dept;
 import com.wayn.domain.Role;
 import com.wayn.domain.User;
 import com.wayn.domain.vo.RoleChecked;
@@ -73,8 +75,11 @@ public class UserController extends BaseControlller {
 	public String edit(Model model, @PathVariable("id") String id) {
 		User user = userService.selectById(id);
 		model.addAttribute("user", user);
-		String deptName = deptService.selectById(user.getDeptId()).getDeptName();
-		model.addAttribute("deptName", deptName);
+		Dept dept = deptService.selectById(user.getDeptId());
+		if (Objects.nonNull(dept)) {
+			String deptName = dept.getDeptName();
+			model.addAttribute("deptName", deptName);
+		}
 		List<RoleChecked> roleCheckedList = roleService.listCheckedRolesByUid(id);
 		model.addAttribute("roles", roleCheckedList);
 		return PREFIX + "/edit";
@@ -106,7 +111,7 @@ public class UserController extends BaseControlller {
 	public boolean editExit(Model model, @RequestParam Map<String, Object> params) {
 		return !userService.exit(params);
 	}
-	
+
 	@RequiresPermissions("sys:user:add")
 	@ResponseBody
 	@PostMapping("/addSave")
