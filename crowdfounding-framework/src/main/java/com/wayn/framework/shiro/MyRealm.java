@@ -69,6 +69,9 @@ public class MyRealm extends AuthorizingRealm {
 		if (sysUser == null) {
 			throw new UnknownAccountException("用户不存在");
 		}
+		if (sysUser.getUserState() == -1) {
+			throw new UnknownAccountException("用户已被禁用");
+		}
 		if (!sysUser.getPassword().equals(password)) {
 			throw new IncorrectCredentialsException("账号或密码不正确");
 		}

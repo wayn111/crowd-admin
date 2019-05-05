@@ -132,7 +132,7 @@
 							}
 						}
 					},
-					deptName ： {
+					deptName : {
 						required : true
 					}
 				},

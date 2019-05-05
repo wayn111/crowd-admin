@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 02/05/2019 01:43:29
+ Date: 05/05/2019 12:29:32
 */
 
 SET NAMES utf8mb4;
@@ -38,7 +38,7 @@ INSERT INTO `sys_dept` VALUES (2, 0, '销售部', 'ssb', 2);
 INSERT INTO `sys_dept` VALUES (3, 0, 'test部门', '<script>alert(\'sb\')</script>', 3);
 INSERT INTO `sys_dept` VALUES (4, 1, 'cp1', '', NULL);
 INSERT INTO `sys_dept` VALUES (6, 3, '测试部门', '测试部门', NULL);
-INSERT INTO `sys_dept` VALUES (7, 6, 'ss1', '', NULL);
+INSERT INTO `sys_dept` VALUES (8, 2, '销售部1', '', 1);
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -1550,7 +1550,7 @@ CREATE TABLE `sys_menu`  (
   `code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编码',
   `resource` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '资源名称（菜单对应权限）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -1577,6 +1577,7 @@ INSERT INTO `sys_menu` VALUES (33, '删除', '16', '', '', 3, 3, NULL, 'sys:dept
 INSERT INTO `sys_menu` VALUES (34, '编辑', '5', '', '', 2, 3, NULL, 'sys:role:edit');
 INSERT INTO `sys_menu` VALUES (35, '系统监控', '0', '', 'fa fa-cc', 4, 1, NULL, '');
 INSERT INTO `sys_menu` VALUES (37, '监控查看', '35', '/system/monitor', 'fa fa-copyright', 1, 2, NULL, '');
+INSERT INTO `sys_menu` VALUES (38, '重置密码', '15', '', '', 4, 3, NULL, 'sys:user:resetPwd');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -1612,49 +1613,52 @@ CREATE TABLE `sys_role_menu`  (
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES ('0018b3c83c6a4bc787bcdb286defaa32', 'ca904d80931f4c368ac1c0919d16b6ae', 29);
-INSERT INTO `sys_role_menu` VALUES ('012ca5d8de924081aec32da21ef616cc', '7aedf9931d8a4ff3bc46c46e811a2304', 12);
-INSERT INTO `sys_role_menu` VALUES ('0d0c5e97b3d0408a80196854d5ef8fbc', 'b1f9ce5543a049be9f169a3f5e6b72a8', 35);
-INSERT INTO `sys_role_menu` VALUES ('10ecfbc466f64d649571593333c53daf', 'b1f9ce5543a049be9f169a3f5e6b72a8', 34);
-INSERT INTO `sys_role_menu` VALUES ('1476c94c8eaa45c2bcb45b8dbbc99eaa', 'b1f9ce5543a049be9f169a3f5e6b72a8', 16);
-INSERT INTO `sys_role_menu` VALUES ('2171733cb6a44bb8a94427e2e5c8e421', 'b1f9ce5543a049be9f169a3f5e6b72a8', 25);
-INSERT INTO `sys_role_menu` VALUES ('27d80db3d658411c98addd1dfda917ed', 'b1f9ce5543a049be9f169a3f5e6b72a8', 23);
-INSERT INTO `sys_role_menu` VALUES ('297875dbcff24efe9ce5b9160ae8bb6f', 'ca904d80931f4c368ac1c0919d16b6ae', 4);
-INSERT INTO `sys_role_menu` VALUES ('31fe726529824cdeab8a6cab69602699', 'b1f9ce5543a049be9f169a3f5e6b72a8', 22);
-INSERT INTO `sys_role_menu` VALUES ('327e8875df5a44ab9c2a5bb099b9df9d', 'b1f9ce5543a049be9f169a3f5e6b72a8', 27);
-INSERT INTO `sys_role_menu` VALUES ('3bd43c0d56e94706b24917d8c1fb1dcf', 'ca904d80931f4c368ac1c0919d16b6ae', 23);
-INSERT INTO `sys_role_menu` VALUES ('4ddec41d862a4a5b883aeeb2d1d02967', '7aedf9931d8a4ff3bc46c46e811a2304', 14);
-INSERT INTO `sys_role_menu` VALUES ('56114cf4131742c8a1809b023ebf4774', 'ca904d80931f4c368ac1c0919d16b6ae', 31);
-INSERT INTO `sys_role_menu` VALUES ('6b3f186da31a4bcb9f1e3ec813a00f03', 'b1f9ce5543a049be9f169a3f5e6b72a8', 5);
-INSERT INTO `sys_role_menu` VALUES ('7593789cfa4a40ce89bdf088dc56a1ea', 'ca904d80931f4c368ac1c0919d16b6ae', 27);
-INSERT INTO `sys_role_menu` VALUES ('7b93205986574e8dbeb152b3419c36d3', 'b1f9ce5543a049be9f169a3f5e6b72a8', 12);
-INSERT INTO `sys_role_menu` VALUES ('7c9933aa80e748bb9b733cdd236100ad', 'b1f9ce5543a049be9f169a3f5e6b72a8', 29);
-INSERT INTO `sys_role_menu` VALUES ('7f50a238040c4d9dae0e4ee3f81d6fde', 'ca904d80931f4c368ac1c0919d16b6ae', 1);
-INSERT INTO `sys_role_menu` VALUES ('805a0d2ad72e47c9a843223584741d48', 'b1f9ce5543a049be9f169a3f5e6b72a8', 37);
-INSERT INTO `sys_role_menu` VALUES ('881700686c114e018aceb5fbf29aa1bc', 'ca904d80931f4c368ac1c0919d16b6ae', 33);
-INSERT INTO `sys_role_menu` VALUES ('888c00aa69b44231b49d9f2f92f8b15d', 'b1f9ce5543a049be9f169a3f5e6b72a8', 28);
-INSERT INTO `sys_role_menu` VALUES ('8b1ac66bd5d24ddba87fd7ffabd1a415', 'b1f9ce5543a049be9f169a3f5e6b72a8', 4);
-INSERT INTO `sys_role_menu` VALUES ('8e0f5296d91a4c3a93b2073bd3254fe2', 'b1f9ce5543a049be9f169a3f5e6b72a8', 24);
-INSERT INTO `sys_role_menu` VALUES ('97d6e02a24dd47efb11c9d27b10b0244', 'ca904d80931f4c368ac1c0919d16b6ae', 24);
-INSERT INTO `sys_role_menu` VALUES ('9b9fe3cffad842379e6b8a3cae5d19a2', 'b1f9ce5543a049be9f169a3f5e6b72a8', 1);
-INSERT INTO `sys_role_menu` VALUES ('a062ac45843c4eb28d887f7e0a6f6888', 'ca904d80931f4c368ac1c0919d16b6ae', 32);
-INSERT INTO `sys_role_menu` VALUES ('a88f86438948443891c1c56e7a04b451', 'ca904d80931f4c368ac1c0919d16b6ae', 16);
-INSERT INTO `sys_role_menu` VALUES ('abec68047e7b480c8be76603d62a528d', 'b1f9ce5543a049be9f169a3f5e6b72a8', 32);
-INSERT INTO `sys_role_menu` VALUES ('ad72489f11964b398ce625cc3450a60a', 'b1f9ce5543a049be9f169a3f5e6b72a8', 19);
-INSERT INTO `sys_role_menu` VALUES ('af8eb50cac2f40cdb0946a1b58d2bb5a', 'b1f9ce5543a049be9f169a3f5e6b72a8', 14);
-INSERT INTO `sys_role_menu` VALUES ('b7830d722ea842ad9976fbce6cd3c493', 'ca904d80931f4c368ac1c0919d16b6ae', 5);
-INSERT INTO `sys_role_menu` VALUES ('bc9e4a5974f54cb1aef11777a899c17f', 'ca904d80931f4c368ac1c0919d16b6ae', 30);
-INSERT INTO `sys_role_menu` VALUES ('c17f17ba4be941469f9ddd579f9142b5', 'ca904d80931f4c368ac1c0919d16b6ae', 15);
-INSERT INTO `sys_role_menu` VALUES ('c5b749ddabf541beae306cb79f1afc99', 'b1f9ce5543a049be9f169a3f5e6b72a8', 30);
-INSERT INTO `sys_role_menu` VALUES ('cf57ffe622574925a76e35538089762e', 'b1f9ce5543a049be9f169a3f5e6b72a8', 31);
-INSERT INTO `sys_role_menu` VALUES ('d257a510bc794c589cb0f030b82b770b', 'b1f9ce5543a049be9f169a3f5e6b72a8', 15);
-INSERT INTO `sys_role_menu` VALUES ('e883e4b2345244fa9e1e9a619d91e408', 'ca904d80931f4c368ac1c0919d16b6ae', 26);
-INSERT INTO `sys_role_menu` VALUES ('e8ebf7c615ad4a4ca1a2f1b1191d676e', 'b1f9ce5543a049be9f169a3f5e6b72a8', 33);
-INSERT INTO `sys_role_menu` VALUES ('f488624fa910459db7bf66e7da2d84b1', 'ca904d80931f4c368ac1c0919d16b6ae', 25);
-INSERT INTO `sys_role_menu` VALUES ('f75b66ac4e89478282190074a37abb7d', '7aedf9931d8a4ff3bc46c46e811a2304', 22);
-INSERT INTO `sys_role_menu` VALUES ('fc9191af5d52466080a2f8014126e2c0', '7aedf9931d8a4ff3bc46c46e811a2304', 19);
-INSERT INTO `sys_role_menu` VALUES ('fe84d7bee51d44aab58046e51cfe6226', 'ca904d80931f4c368ac1c0919d16b6ae', 28);
-INSERT INTO `sys_role_menu` VALUES ('fef97a93f48a45b485a0a011c0be1635', 'b1f9ce5543a049be9f169a3f5e6b72a8', 26);
+INSERT INTO `sys_role_menu` VALUES ('039eaf3b368546ae9ec341a3eef30106', 'b1f9ce5543a049be9f169a3f5e6b72a8', 29);
+INSERT INTO `sys_role_menu` VALUES ('10c2eb65f2884e71879f8b721a876078', 'b1f9ce5543a049be9f169a3f5e6b72a8', 15);
+INSERT INTO `sys_role_menu` VALUES ('16d0ac55a5224b558b1bce79827875c9', 'ca904d80931f4c368ac1c0919d16b6ae', 5);
+INSERT INTO `sys_role_menu` VALUES ('1ec526d9dd1f4de4af072a0b74929b47', 'b1f9ce5543a049be9f169a3f5e6b72a8', 12);
+INSERT INTO `sys_role_menu` VALUES ('25feffe4905f44f79c74973caee4d319', 'ca904d80931f4c368ac1c0919d16b6ae', 26);
+INSERT INTO `sys_role_menu` VALUES ('2d55a83f4004407ba3eb2b7befc333ca', 'b1f9ce5543a049be9f169a3f5e6b72a8', 16);
+INSERT INTO `sys_role_menu` VALUES ('2d9a8168cbf84e429da80c80c916f87e', 'b1f9ce5543a049be9f169a3f5e6b72a8', 25);
+INSERT INTO `sys_role_menu` VALUES ('2ea8dd5270054b3ca286dcec93d797ac', 'b1f9ce5543a049be9f169a3f5e6b72a8', 31);
+INSERT INTO `sys_role_menu` VALUES ('2f234cde27d14430b7f5c28e3db9f403', 'b1f9ce5543a049be9f169a3f5e6b72a8', 26);
+INSERT INTO `sys_role_menu` VALUES ('368a4933f820441bba78fe8a1b56c10b', 'b1f9ce5543a049be9f169a3f5e6b72a8', 30);
+INSERT INTO `sys_role_menu` VALUES ('3916ffff394041fe94aa0afd05e824e6', 'b1f9ce5543a049be9f169a3f5e6b72a8', 5);
+INSERT INTO `sys_role_menu` VALUES ('47075248f09745aeb58d85ee9c307d40', 'ca904d80931f4c368ac1c0919d16b6ae', 29);
+INSERT INTO `sys_role_menu` VALUES ('4bedf7f3bd014df4b2b68b77807c2d55', 'ca904d80931f4c368ac1c0919d16b6ae', 33);
+INSERT INTO `sys_role_menu` VALUES ('4c3982ff387a41ada3c73354aab5abbd', 'ca904d80931f4c368ac1c0919d16b6ae', 35);
+INSERT INTO `sys_role_menu` VALUES ('4ecd3e20b4c14802b75af14b6db393e7', 'b1f9ce5543a049be9f169a3f5e6b72a8', 32);
+INSERT INTO `sys_role_menu` VALUES ('51d5c868e03b4680af81ce10ddfe1b6f', 'ca904d80931f4c368ac1c0919d16b6ae', 24);
+INSERT INTO `sys_role_menu` VALUES ('533111cff2384f758533f20bce3f356b', 'ca904d80931f4c368ac1c0919d16b6ae', 30);
+INSERT INTO `sys_role_menu` VALUES ('66120b60a51349108158eeec0c2a803a', 'ca904d80931f4c368ac1c0919d16b6ae', 38);
+INSERT INTO `sys_role_menu` VALUES ('679e90fe422b43399a1027c781c69fe6', 'b1f9ce5543a049be9f169a3f5e6b72a8', 14);
+INSERT INTO `sys_role_menu` VALUES ('67a81bd93665482a9683247dce29c4e0', 'b1f9ce5543a049be9f169a3f5e6b72a8', 24);
+INSERT INTO `sys_role_menu` VALUES ('6bf9448c39c74cc298e57bc235aa642a', 'b1f9ce5543a049be9f169a3f5e6b72a8', 38);
+INSERT INTO `sys_role_menu` VALUES ('6f59dd54cc15465f8ece0d1551a98d1a', 'b1f9ce5543a049be9f169a3f5e6b72a8', 34);
+INSERT INTO `sys_role_menu` VALUES ('771a5ccda53e4bc3b20ef3bf08da0ca1', 'ca904d80931f4c368ac1c0919d16b6ae', 25);
+INSERT INTO `sys_role_menu` VALUES ('830d13d0312d48bb97ed69e4185bc6bb', 'ca904d80931f4c368ac1c0919d16b6ae', 32);
+INSERT INTO `sys_role_menu` VALUES ('906167cc059349c8a151b637fef1ce2a', 'b1f9ce5543a049be9f169a3f5e6b72a8', 37);
+INSERT INTO `sys_role_menu` VALUES ('91d8403f69b3411688a877686bc76a41', 'ca904d80931f4c368ac1c0919d16b6ae', 23);
+INSERT INTO `sys_role_menu` VALUES ('92c6340df2fc4302837e3b153762a8b8', 'b1f9ce5543a049be9f169a3f5e6b72a8', 22);
+INSERT INTO `sys_role_menu` VALUES ('a5321d51c5724a8eb8de92c4b66a979b', '7aedf9931d8a4ff3bc46c46e811a2304', 22);
+INSERT INTO `sys_role_menu` VALUES ('a55cc50b8efe4157a441a9135545fdc4', 'ca904d80931f4c368ac1c0919d16b6ae', 28);
+INSERT INTO `sys_role_menu` VALUES ('ad6d39af3fdf49c99a5246ed61cc9040', 'ca904d80931f4c368ac1c0919d16b6ae', 15);
+INSERT INTO `sys_role_menu` VALUES ('b12f4b5b610c440ab3ec4bdea3308043', 'b1f9ce5543a049be9f169a3f5e6b72a8', 35);
+INSERT INTO `sys_role_menu` VALUES ('b1696aab5cd74aa1829cfb44e1f0addb', '7aedf9931d8a4ff3bc46c46e811a2304', 12);
+INSERT INTO `sys_role_menu` VALUES ('bff3a19fbb1a45d8ae88fd6b6c5aa823', 'ca904d80931f4c368ac1c0919d16b6ae', 34);
+INSERT INTO `sys_role_menu` VALUES ('c10c1723508740538e3edfc4b15026b5', 'ca904d80931f4c368ac1c0919d16b6ae', 16);
+INSERT INTO `sys_role_menu` VALUES ('c5bdb8290bd747e4b7b52a7e8a79b5fc', 'ca904d80931f4c368ac1c0919d16b6ae', 4);
+INSERT INTO `sys_role_menu` VALUES ('c8aca92fadc84c539e55b3ff15f7b392', 'b1f9ce5543a049be9f169a3f5e6b72a8', 33);
+INSERT INTO `sys_role_menu` VALUES ('d51e016da87641198367a60ad2aa726a', 'b1f9ce5543a049be9f169a3f5e6b72a8', 27);
+INSERT INTO `sys_role_menu` VALUES ('d5dbaeba957c41c79575de0970dd9413', 'ca904d80931f4c368ac1c0919d16b6ae', 37);
+INSERT INTO `sys_role_menu` VALUES ('d696dab5d6814c0288daa836b15c8f37', 'ca904d80931f4c368ac1c0919d16b6ae', 31);
+INSERT INTO `sys_role_menu` VALUES ('d9a1b9ddd7e445c796efbf8c012beca5', 'b1f9ce5543a049be9f169a3f5e6b72a8', 23);
+INSERT INTO `sys_role_menu` VALUES ('e5e561c8510046bba86e59dcff6b8047', 'b1f9ce5543a049be9f169a3f5e6b72a8', 28);
+INSERT INTO `sys_role_menu` VALUES ('f2b448ff86c9467b9bd66ea311a01fd2', 'ca904d80931f4c368ac1c0919d16b6ae', 1);
+INSERT INTO `sys_role_menu` VALUES ('f4731439e2ea47c6ad2b7cec5a86113d', 'ca904d80931f4c368ac1c0919d16b6ae', 27);
+INSERT INTO `sys_role_menu` VALUES ('f713056b6d9c4565a42f6f969cc054c4', 'b1f9ce5543a049be9f169a3f5e6b72a8', 4);
+INSERT INTO `sys_role_menu` VALUES ('fa66457051a84ed88c0070fbc3606b78', '7aedf9931d8a4ff3bc46c46e811a2304', 14);
+INSERT INTO `sys_role_menu` VALUES ('feaf055606a94a06890e6d123b2b3064', 'b1f9ce5543a049be9f169a3f5e6b72a8', 1);
 
 -- ----------------------------
 -- Table structure for sys_setting
@@ -1696,107 +1700,106 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('08dfdb940b124ee2a4f10fd4026a4150', 'admin67', '3db2aca9abcf85e96aafb0d0e250710b', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('091d48ce9b284a5586a4a071adfca556', 'admin11', '854cc025d7cbbd4c8ae5106aac0986ae', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('09b41bfce8c94f159c225282f51057c6', 'admin65', 'eb5901e2b753b223da9452c8892d3717', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('153cd89b66fa418b9e1507b97877a81e', 'admin0', '714e1274a7010d7e374c9450b8246eeb', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 7);
-INSERT INTO `sys_user` VALUES ('157491b6ed534ba2b9baaadada64cf13', 'admin84', '65cb62c170d2f93e4798914820ffd3a1', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('159963cc8b6d45efacec5326e71416f3', 'admin43', 'cca0214614fee79d347ea89609250587', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('21274915fd164596a166815569e1abd6', 'admin95', '4f039ddb865c2b6805341cd5f8887947', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('21f2efa9b51c4642ba6a07149a103ce4', 'admin31', 'c13bfa4ddf51bf738ff599b244ac8a3f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('23649d625cb44b56ba7b8ea4c383f9e2', 'admin25', 'ab42fdc096068adef253b74f0e52cbaa', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('302e20ca50604adbb7c065dae77c8a0d', 'admin97', 'baaac56c71ec989de0e020f70aebdd63', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('30abb74308d14a5d87bc6d644ccbc174', 'admin35', '83958fadf9561b1baeae79864c6a4cd8', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('32bd69960bf04b6e98cf606b3c5be554', 'admin82', 'c884c65cf34cd879a71a7f076f9de56d', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('3342521db11b43b290ac5aa8cb57548f', 'admin76', '199d3be1c72eda08296a9542ca8b2517', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('34b76815a83142dc890cd53f2276a1d6', 'admin89', '18f09e6bca55d286b4b3549307310eeb', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('364f67cb1e5848018719a7f2d03cceb7', 'admin68', 'ffd259524d41c110225a71c257756400', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('3aa05f9baa9e461fae34aeb172bd8b80', 'admin10', '003484dc9480df75c8f60d9e6abc1d21', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('3b97b9d031774e7b9151ac6a4d13eb5d', 'admin21', '0dbe41e871ccf8e662c1a24633a2541a', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('3d05f6d25a2845f6b858a317e4d2c562', 'admin55', '94854fedd9b17f9645e52a6a862b7a1c', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('41d48f3215954f86af1a917f79e06a01', 'admin1', '5826c6b4f4f7b527b3d6ecd6f45401a9', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('437dc53251244b3189c238f078bd7f1f', 'admin94', 'c3daccc1bcfa73305b2f5b2ca007b7bc', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('447945ac87e1407bb5ebbae1e8af5a5f', 'admin22', '88505542abcf4ab991bfb33bd43dc575', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('4642a58fd4a840ffa3c08089cd0f5e83', 'admin44', 'a51f0cc2133ed96cad4d5f92a63fb9a9', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('45281be2a49648fa9f613ad9447e1619', 'admin89', '18f09e6bca55d286b4b3549307310eeb', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('47b3b5dc6a0f4c419b1c36f044104727', 'admin97', 'baaac56c71ec989de0e020f70aebdd63', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('47ea45c6cc7545b386069151c554be83', 'admin73', 'd13e12a24f94b9a416ee1e4abce5f84e', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('4f22a7d443a147f59c85bebb25b21b2c', 'admin77', 'c1198d8b865032bcfd170d641e08f2e7', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('509be0794dab4cae9a5cdb3d9747ed6a', 'admin28', '937938b9284d9b48df4e55e145852eaf', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('51f3a28fc46a413cbe5acac4e0516519', 'admin6', 'c5e80cabe3ad3839a23898a60bc4595c', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('553055f4bead4ab9b681d4372edaf503', 'admin15', '21815e6258a6fe60186549e00d2384db', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('590517ce9c6e401a9c1a40536d14be31', 'admin48', '3350f6828b77c4c7e3418b3abc16a61f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('48d4954430c4439e83757848499fd1cd', 'admin10', '003484dc9480df75c8f60d9e6abc1d21', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('4fee9b2925bf49298ec31e8517b22664', 'admin95', '4f039ddb865c2b6805341cd5f8887947', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('572bc716f0be45bc90604bf143449bcb', 'admin76', '199d3be1c72eda08296a9542ca8b2517', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('5aafe4fb52074537ab0cab687e545932', 'admin67', '3db2aca9abcf85e96aafb0d0e250710b', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('5e73fd5ed9344403bc17da17cc96a2d1', 'wayn', '9868a0af5f170f6a5e0597b97a2f9225', 1, '2019-04-27 07:47:46', NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 2);
-INSERT INTO `sys_user` VALUES ('5eea63fd4c3e42649d98812bd769f2be', 'admin4', '6badb37442e463a4adfa930b994419ef', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('6034e3fc997e401cbf1da425402f3cfc', 'admin56', '79b641aacb6af40b4f3ef4368e340bf1', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('6053f4b8bf754327bef19e344ab65b0c', 'admin86', 'a6823ace16f2bc93dbc94d6ed3b9eaea', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('611f41d1176546379e6fe8864313b878', 'admin18', 'f69f556333747985a1dbaf57feb6b0fe', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('61f560458c334e499308a07620f2434d', 'admin98', '2c6c2f69e6c2052bab6395654c97be13', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('633f4d412c1643f193e8213ed40146f0', 'admin55', '94854fedd9b17f9645e52a6a862b7a1c', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('640cf1e4e073478bb6a7eb6680dd2e59', 'admin23', '27294d7b730c25ad535e2dd7f00d9cba', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('6752d32bbfd14d38988c488b45738889', 'admin37', 'ad4842b9e8bffed9c11f7c5d1a243ac9', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('690c75751c6d47ef9698252af3490518', 'admin96', '8be3271ceeae782b8bdc665d0031b73b', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('6def3a0cb32241ce9daf1010a34ea5df', 'admin64', '1502a8ac7332761c151fc481047e3fd5', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('6e1ee9e36bbf4d27a6638ce8bb848bdc', 'admin34', '8a28f5801857209385e35d59d29b2233', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('6f93f507252b4fe6b967dd7e57403a4b', 'admin91', '5717b7801a60ed0bacad900f25faea1e', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('7242451164524c01a6dd5fab64b4aeba', 'admin33', 'c445bb241886470c61669584e05ca8f3', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('72ae3a176b1643d28ec740ebb8825dd3', 'admin4', '6badb37442e463a4adfa930b994419ef', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('75f7ea39cb284304b274cf459a14c5b9', 'admin20', '2eefa2fadc5e58991b7432259a5c9486', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('772f4fa8a0dc44ba8c5a63acd293c572', 'admin87', '510ad414c7e17619f2f378d506d8e560', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('7803fb027832450a9c3201b54c5f4bb1', 'admin41', '9a1289f1a76fea844f35bd3f11d6584f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('7905d1ef389e445e905a35ba586daf17', 'admin60', '7b1998db9a82c14d1d4c566b72037d22', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('789a5ae89d134c389dc7972ce7115c5f', 'admin84', '65cb62c170d2f93e4798914820ffd3a1', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('7969ce226fb546cda0b65bb25306dd8b', 'admin11', '854cc025d7cbbd4c8ae5106aac0986ae', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('7bbf459c0ab64dd3ae0d805e8560d935', 'admin70', '99f8c2dd72ee3d6c1eeb4a1af1e8b395', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('7c64897d8f5d40678d8b25d17af04307', 'admin44', 'a51f0cc2133ed96cad4d5f92a63fb9a9', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('7cabf89d59144b448337589b6e3af8e4', 'admin69', '009e482938fe6b3275b62b8dd375bbdd', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('8170e0d6bda048f7b2ba8599b2b6ebab', 'admin72', '234161c8c227d11c2620c93d13daa20d', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('82023d9139374f36bd5b6f43d126acd8', 'admin57', 'f32fab31534e04db070b62dc7f543b58', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('869e34f9abe84b0397dd23d4b4ae27e3', 'admin80', '2b17911741f3d7511dea46489c411fb9', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('885f1f9e63d24629919e2b52ec0ae1e9', 'admin66', '2c454c5ab9ad4d6425225216724b309e', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('8a4b9affe59640b095aa0fac78a97e5a', 'admin29', '87c3d677a9df00c9d81ea999b372f15b', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('8b844a4ccc694520b6d04135a9a09b20', 'admin85', 'f9db44f95a0d6573b0512beba6fc6522', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('8dce7a63dc874c0f8d61b6eabf4cf1df', 'admin17', 'a4d28eff28afa1e51463e519326ecc63', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('8c94e4fa70104cd5af4f6c2b212d066b', 'admin48', '3350f6828b77c4c7e3418b3abc16a61f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('90c79c52657e4b31b3400e189c731c05', 'admin43', 'cca0214614fee79d347ea89609250587', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('95cc338c20db45df87e7388144bcc693', 'admin65', 'eb5901e2b753b223da9452c8892d3717', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('968e8e4ebd214349b3be4a52ddc67563', 'admin74', 'c45d8ba1acf391f9ddbdd228972811d5', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('96af89fcd5364f95877c7a57795056a3', 'admin28', '937938b9284d9b48df4e55e145852eaf', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('9b924047147e49b9b2837bc51d03947d', 'admin46', '84b3390c7f7d7dae4dc6a28e598f4699', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('9c8c4c6d5ab849b39efab0f1c1481bfa', 'admin8', '34ce131489133faf329b0e7b39405e91', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('a04b294b698940c7a849a3b40169221a', 'admin61', '8d6bef01e9f9f5929f0b83fa0b6336ed', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('a203ae14ce21475f92dc36b4a3a8880f', 'admin66', '2c454c5ab9ad4d6425225216724b309e', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('a36f42eee9484b379ef343a90a45c0df', 'admin63', '32d4fa8f1705e9e31e50d9c916463991', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('a380f47e7e7f4854a77b447a6efd6eb7', 'admin99', '137558e6746d384225cb7726e314384a', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('a3c57f340af94574ba405f2605faa16d', 'admin40', '05c960d884fde28feb22fb679c24e545', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('a43f15edc29d46e49b64b26cccbbb31f', 'admin51', '607061dc6a7e41823d5b685d76fb3775', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('a4c9ea44779f479290e339ff88b362bf', 'admin83', '2b926dcbab4af70f373852c536d780fb', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('aad7524b20894230a5261e4ff63c2db7', 'admin19', '9e71421630c279cc063b12aef35ac219', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('a87d4dbfe28c4209b61b67830e58325a', 'admin15', '21815e6258a6fe60186549e00d2384db', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('a91dfe576d764645b89be1e67c7e7752', 'admin40', '05c960d884fde28feb22fb679c24e545', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('ab841d67d11b4a67968560206a7654ea', 'admin68', 'ffd259524d41c110225a71c257756400', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('abf12b8f3996471aa310affca9fb648c', 'admin92', '909be5ea0fa7b16ea20e4e49d4bdd207', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('ae93549ee35c48dda17cf9113dc06db7', 'admin30', '3e7d3ab791bcba0f4a712348232d1faf', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('af1e6e8280a94b6dbc4c7f59df99c6fd', 'admin71', '6fe595039c0bd001ccda700c75a045fe', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('b1bda9e6bd2441a68096a5192da94b42', 'admin18', 'f69f556333747985a1dbaf57feb6b0fe', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('b46d623e9c3443acbd3aad8f6db2f24b', 'admin93', 'bbe4ec1b1ede131929dc391e6fbfd1e9', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('b4a380921569487485bc916d7d5b9800', 'admin88', '5916be1c36a4a452e5435e9a26d908ef', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('b97bc24840fe473fb33f59b4c469f591', 'admin52', '2e6b5af016b564a2de16afd8cc8664ad', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('ba71dcd652914714b8f69dd0c4b44eaa', 'admin22', '88505542abcf4ab991bfb33bd43dc575', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('bba44cdba0fb428991490f1317972025', 'admin35', '83958fadf9561b1baeae79864c6a4cd8', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('bcc39460e2864695b6711bb4767c2cf6', 'admin25', 'ab42fdc096068adef253b74f0e52cbaa', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('bd3cdac6c0f749cea087c8d62641e271', 'admin90', '4ab20bf55beed7f8222781f0a1d42c2f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('bea873d9d1dd4daaab4436ba7e9de6a7', 'admin26', '6fd06f8972c3641f1b472c944d6e2c0b', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('c3336c8bb4cf4479babfc2a6d9f4f4c5', 'admin24', '1ac87617ad1caeea367d868548f09373', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('c3507a3009c74ddc9728c1fad9e54acd', 'admin83', '2b926dcbab4af70f373852c536d780fb', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('c669d8fe79814ecdbd4b1da2b67a63b2', 'admin14', '7c2fc9bc810b2663d12447d33e90af53', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('c79a84e4c522489eaba54588b7d97f02', 'admin62', 'f75e2543123a55c10b34370b2ca18b01', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('c6a3b5e9451d49a49868492c65f608b8', 'admin1', '5826c6b4f4f7b527b3d6ecd6f45401a9', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('c79ba431f9f74dfbae585b87b0cde933', 'admin', '038bdaf98f2037b31f1e75b5b4c9b26e', 1, '2017-09-14 15:02:17', '', 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('c9b2d67d2a17498ca552ffdba480af97', 'admin50', 'efa7d572743448f31403afc15d02e1cc', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('cb09d177ecfe4804aa4196e0820c0247', 'admin38', 'f8868f87565686040329d53ae434e94f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('cc1b01c76b304e409e3c6e4e070f7e54', 'admin39', 'd4593d10e413efdc8cbea17ed65d28c8', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('cc21c34d22d04caba4d7430839fd5d44', 'admin47', 'f8ccb098cc69d6a84365d0e852e7cff5', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('cdf21c2e24634e38bb22a2372aabde2e', 'admin0', '7a1d893c382a287e4996cd71a8cfb35c', -1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('d039e97513b245f890c0954afb56495d', 'admin62', 'f75e2543123a55c10b34370b2ca18b01', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('d0ad2c3cfb794c7486401e38d9dd4903', 'admin78', '4dfb1bd4b0729d405311473413607ba8', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('d2158fb2b247449a873f20946f2d2db5', 'admin79', 'd6d7dec751d0111110d63ebf8fed98de', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('d557f8cb89a64fc585d505377236f69a', 'admin42', '95f749bd0775364fc871c357ecb76d4f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('d332de316e334e93b97ac095bfbb0d9f', 'admin94', 'c3daccc1bcfa73305b2f5b2ca007b7bc', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('d849a511d6174fafa08bc2b4d5f1cd37', 'admin30', '3e7d3ab791bcba0f4a712348232d1faf', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('d91fd8d568804c4ebd5a13a64d418f96', 'admin53', '5973b3cc8cc4180567b4624434694ca5', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('deef6c2a203d45eb93d90613574c4521', 'admin58', 'd626ef17d8fb29539633ff20bb893130', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('df0cc62ceee64090a085a68ec0c64ba8', 'admin64', '1502a8ac7332761c151fc481047e3fd5', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('e1777dc1820f481b968b951a0960e27a', 'admin59', '178e059fd6a9b830918a46b70bc01f9b', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('e23f051a34444a1b891035016403a1a1', 'admin24', '1ac87617ad1caeea367d868548f09373', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('e2ab5de23ec8482a863b51efd855ef5c', 'admin37', 'ad4842b9e8bffed9c11f7c5d1a243ac9', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('e7630ad234a246ae92244065336110b5', 'admin9', 'b18be9d72c16fb7d22329d472bf11048', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('e8968c4e9df74a44a5245c4946a96257', 'admin31', 'c13bfa4ddf51bf738ff599b244ac8a3f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('e9c5a858ba7b4a02a9af67ef2f3039db', 'admin75', '51851cc61ab8a5f3ce91a3beea80cbfc', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('ea1bf3856f594a3fb1158d10025bebb8', 'admin12', 'ff4bc8889d7a82ebfd6902fa98ed5f11', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('ed2a739584324f0299bc03d76f719a2d', 'admin87', '510ad414c7e17619f2f378d506d8e560', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('ed4d43d4b5e44dea8bffff71cf3a7ee1', 'admin16', '5ee0c7793c11a5f58272dbc14512ca08', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('f00f02b870e04441a2490fec6fecb3bc', 'admin6', 'c5e80cabe3ad3839a23898a60bc4595c', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('f13e5c51a69e4c3c81fa577628acbb58', 'admin3', '011fc8ac4227e4c4259a9de9d8431e5c', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('f2b791fe52d148c5925207f7c2de9305', 'admin27', '80ff20e5f28c6f79c66463594769e652', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('f4ccb296d8d741819823e6f4b9c7ca39', 'admin98', '2c6c2f69e6c2052bab6395654c97be13', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('f664290473e74591ae82ffc3cb16398e', 'admin72', '234161c8c227d11c2620c93d13daa20d', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('f6eda172a2ae453b87941325a57e57f5', 'admin32', 'acbe5b4cacb238b21fbdfce371809b55', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
-INSERT INTO `sys_user` VALUES ('f7d7a60291804941a446db515914be6d', 'admin49', '2d0cbbcfac0f860b557fae450202ab2a', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('f7cb9679aae24bb192e786d4da4b7458', 'admin42', '95f749bd0775364fc871c357ecb76d4f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('f8cff5e72b7240bebc12c723b3a58d60', 'admin77', 'c1198d8b865032bcfd170d641e08f2e7', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('f92965904c8d458a87e2bd1ed4291118', 'admin85', 'f9db44f95a0d6573b0512beba6fc6522', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('f9660c5c439f4e829ab1878574dc42af', 'admin54', 'c53a5bed04e1cb11a716a80eafbcdc1e', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('fa5c146199434dbb872d93e58ea69bf9', 'admin50', 'efa7d572743448f31403afc15d02e1cc', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('fa8e31d73acc4d538cb02cb0036029ac', 'admin81', '9654ea0063e74545cc6711cecd2b952d', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('faa9c7c66fcb4ce88f515c73071e5e27', 'admin45', '22afc6898e28084fedf387bbe1c709d3', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('faba376c15684599b8c6784e69b6c6e4', 'admin2', 'c3270271f36e5e795e54c2721896102e', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('fc58cd34219a457ebf1e7e8a39e26e76', 'admin82', 'c884c65cf34cd879a71a7f076f9de56d', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('fcd9208a738949c899380b5d734e7c39', 'admin49', '2d0cbbcfac0f860b557fae450202ab2a', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('fdb4844b95f946ee94a1d34d1fc8a606', 'admin36', 'c7ea3d254687293a700763d4471d7e7f', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('fdc6d2f83a3c4e4c938a8487a00a7482', 'admin19', '9e71421630c279cc063b12aef35ac219', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('fdd5203dcfc9451d9d48ad74724ce0a2', 'admin5', 'c23d153ef8a127c7f01f15cd3fd0eb21', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('fe696c30889041129918c3abf7262ac0', 'admin7', 'fcec990f13df1a26ac7d88e84907c17d', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
+INSERT INTO `sys_user` VALUES ('ff2afd78790a4b289986d1f67a743c7b', 'admin17', 'a4d28eff28afa1e51463e519326ecc63', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 INSERT INTO `sys_user` VALUES ('ff3dd29c90674925bd9a7a867df3ab63', 'admin13', 'f4af70c5d594b614481197f74cdae062', 1, NULL, NULL, 'http://news.mydrivers.com/Img/20110518/04481549.png', 1);
 
 -- ----------------------------
@@ -1813,10 +1816,11 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('25d99746b16e4a7dbd89ac17f7ee6b1e', 'cdf21c2e24634e38bb22a2372aabde2e', 'ca904d80931f4c368ac1c0919d16b6ae');
 INSERT INTO `sys_user_role` VALUES ('58e95178731e48bbb3a5589bd251e61f', '5e73fd5ed9344403bc17da17cc96a2d1', 'ca904d80931f4c368ac1c0919d16b6ae');
 INSERT INTO `sys_user_role` VALUES ('592ad9ce2ae44d76966e800ea7f97874', '5fcfa5a6c78c4fdfb9928657d955cdb1', 'ca904d80931f4c368ac1c0919d16b6ae');
-INSERT INTO `sys_user_role` VALUES ('64db33c67d974e03b2b95483cbe9c593', 'c79ba431f9f74dfbae585b87b0cde933', 'b1f9ce5543a049be9f169a3f5e6b72a8');
-INSERT INTO `sys_user_role` VALUES ('96ab4b49aa6b48aab586734373950b9b', 'c79ba431f9f74dfbae585b87b0cde933', '7aedf9931d8a4ff3bc46c46e811a2304');
-INSERT INTO `sys_user_role` VALUES ('b87bbdabe60240999ed04b48cc3be009', '153cd89b66fa418b9e1507b97877a81e', 'ca904d80931f4c368ac1c0919d16b6ae');
+INSERT INTO `sys_user_role` VALUES ('6cc6bbaf467d4d7f83d20fbfaf75d5dc', '48d4954430c4439e83757848499fd1cd', 'ca904d80931f4c368ac1c0919d16b6ae');
+INSERT INTO `sys_user_role` VALUES ('9d0548532c8e42cfb8ca38acfbfdffc0', 'c79ba431f9f74dfbae585b87b0cde933', '7aedf9931d8a4ff3bc46c46e811a2304');
+INSERT INTO `sys_user_role` VALUES ('e98228a901d2430e9dfd93efc13e2695', 'c79ba431f9f74dfbae585b87b0cde933', 'b1f9ce5543a049be9f169a3f5e6b72a8');
 
 SET FOREIGN_KEY_CHECKS = 1;
