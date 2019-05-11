@@ -149,14 +149,7 @@
 							},
 							{
 								field : 'createTime',
-								title : '创建时间',
-								formatter : function(value, row, index) {
-									if (value == '-1') {
-										return '<span class="badge badge-danger">禁用</span>';
-									} else if (value == '1') {
-										return '<span class="badge badge-primary">正常</span>';
-									}
-								}
+								title : '创建时间'
 							},
 							{
 								field : 'userState',

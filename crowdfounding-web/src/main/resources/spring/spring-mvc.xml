@@ -23,7 +23,30 @@
 	<!-- 静态资源配置 -->
 	<mvc:resources mapping="/static/**"
 		location="/static/" />
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                        <!-- 优先使用该媒体类型,为了解决IE浏览器下,返回JSON数据的下载问题 -->
+                        <value>text/html;charset=UTF-8</value>
+                        <value>text/json;charset=UTF-8</value>
+                    </list>
+                </property>
+                <!-- 使用内置日期工具进行处理 -->
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+	</mvc:annotation-driven>
 	<!-- 配置统一异常分处理器 -->
 	<!-- <bean class="com.ssm.util.UnifiedException"></bean> -->
 	<!-- 将spring不能处理的静态资源文件交给servlet处理，有了mvc:resources后不需要此配置 -->
