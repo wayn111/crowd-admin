@@ -6,7 +6,7 @@ import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.subject.Subject;
 
 import com.wayn.domain.User;
-import com.wayn.framework.shiro.MyRealm;
+import com.wayn.framework.shiro.realm.MyRealm;
 
 /**
  * Shiro工具类

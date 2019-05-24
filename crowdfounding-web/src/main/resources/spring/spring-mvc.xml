@@ -21,31 +21,33 @@
 	<context:component-scan
 		base-package="com.wayn.controller"></context:component-scan>
 	<!-- 静态资源配置 -->
-	<mvc:resources mapping="/static/**"
-		location="/static/" />
+	<mvc:resources mapping="/static/**" location="/static/" />
 	<mvc:annotation-driven>
-		<mvc:message-converters register-defaults="true">
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="supportedMediaTypes">
-                    <list>
-                        <value>application/json;charset=UTF-8</value>
-                        <!-- 优先使用该媒体类型,为了解决IE浏览器下,返回JSON数据的下载问题 -->
-                        <value>text/html;charset=UTF-8</value>
-                        <value>text/json;charset=UTF-8</value>
-                    </list>
-                </property>
-                <!-- 使用内置日期工具进行处理 -->
-                <property name="objectMapper">
-                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
-                        <property name="dateFormat">
-                            <bean class="java.text.SimpleDateFormat">
-                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
-                            </bean>
-                        </property>
-                    </bean>
-                </property>
-            </bean>
-        </mvc:message-converters>
+		<mvc:message-converters
+			register-defaults="true">
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<!-- 优先使用该媒体类型,为了解决IE浏览器下,返回JSON数据的下载问题 -->
+						<value>text/html;charset=UTF-8</value>
+						<value>text/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<!-- 使用内置日期工具进行处理 -->
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="dateFormat">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg type="java.lang.String"
+									value="yyyy-MM-dd HH:mm:ss" />
+							</bean>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
 	</mvc:annotation-driven>
 	<!-- 配置统一异常分处理器 -->
 	<!-- <bean class="com.ssm.util.UnifiedException"></bean> -->
@@ -63,11 +65,15 @@
 		<property name="defaultEncoding" value="UTF-8"></property>
 		<property name="maxInMemorySize" value="4096" />
 	</bean>
-	
-	<!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+
+	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after -->
 	<!-- the lifecycleBeanProcessor has run: -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-	    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-	    <property name="securityManager" ref="securityManager"/>
+	<!-- 如果通过spring-shiro.xml方式，启动shiro注解，还需要在mvc.xml中添加如下配置 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" />
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
 	</bean>
 </beans>

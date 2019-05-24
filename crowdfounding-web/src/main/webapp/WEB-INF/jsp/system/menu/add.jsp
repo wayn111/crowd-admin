@@ -124,7 +124,7 @@
 						parent.layer.msg(data.msg);
 						parent.reload();
 						//关闭当前窗口
-						var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+						let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 						parent.layer.close(index);
 					}
 				},
@@ -135,7 +135,7 @@
 			$.ajax(config);
 		}
 
-		var openMenu = function() {
+		let openMenu = function() {
 			layer.open({
 				type : 2,
 				title : "选择部门",
@@ -156,7 +156,7 @@
 					content : _ctx + '/system/menu/chooseIcon',
 					area : [ '480px', '90%' ],
 					success : function(layero, index) {
-						//var body = layer.getChildFrame('.ico-list', index);
+						//let body = layer.getChildFrame('.ico-list', index);
 						//console.log(layero, index);
 					}
 				});

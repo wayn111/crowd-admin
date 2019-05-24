@@ -25,15 +25,19 @@
 			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
 
+	<context:property-placeholder
+		location="classpath:*.properties" />
+
 	<!-- 开启aop，对类代理 -->
 	<aop:config proxy-target-class="true" />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<import resource="spring-dao.xml" />
 	<import resource="spring-service.xml" />
 	<import resource="spring-ehcache.xml" />
-	<import resource="spring-shiro.xml" />
-	<!-- 启用缓存注解功能 -->
+	<!-- <import resource="spring-shiro.xml" /> -->
+	
+	<!-- 启用缓存注解功能，需要在spring著配置文件中启动cache:annotation-driven -->
 	<cache:annotation-driven
 		cache-manager="ehcacheManager" />
-		
+
 </beans>

@@ -1,4 +1,4 @@
-package com.wayn.framework.shiro;
+package com.wayn.framework.shiro.realm;
 
 import java.util.Set;
 

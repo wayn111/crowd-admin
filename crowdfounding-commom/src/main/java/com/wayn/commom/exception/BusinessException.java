@@ -1,6 +1,6 @@
 package com.wayn.commom.exception;
 
-public class BusinessException extends Exception {
+public class BusinessException extends RuntimeException {
 
 	private static final long serialVersionUID = -4619828551183621511L;
 
