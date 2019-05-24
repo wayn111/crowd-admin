@@ -43,8 +43,8 @@
 		<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
 		<div>
 			<script type="text/javascript">
-				var s_edit_h = 'hidden';
-				var s_remove_h = 'hidden';
+				let s_edit_h = 'hidden';
+				let s_remove_h = 'hidden';
 			</script>
 			<shiro:hasPermission name="sys:role:edit">
 				<script>
@@ -103,7 +103,7 @@
 		}
 
 		function batchRemove() {
-			var rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+			let rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 			if (rows.length == 0) {
 				layer.msg("请选择要删除的数据");
 				return;
@@ -111,7 +111,7 @@
 			layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
 				btn : [ '确定', '取消' ]
 			}, function() {
-				var ids = new Array();
+				let ids = new Array();
 				$.each(rows, function(i, row) {
 					ids[i] = row['id'];
 				});
@@ -187,11 +187,11 @@
 											formatter : function(value, row,
 													index) {
 												if (value === 1) {
-						                            return '<span class="badge badge-primary">启动</span>';
-						                        }
+													return '<span class="badge badge-primary">启动</span>';
+												}
 												if (value === -1) {
-						                            return '<span class="badge badge-danger">禁用</span>';
-						                        }
+													return '<span class="badge badge-danger">禁用</span>';
+												}
 											}
 										},
 										{
@@ -208,12 +208,12 @@
 											align : 'center',
 											formatter : function(value, row,
 													index) {
-												var e = '<a class="btn btn-primary btn-sm '
+												let e = '<a class="btn btn-primary btn-sm '
 														+ s_edit_h
 														+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
 														+ row.id
 														+ '\')"><i class="fa fa-edit"></i></a> ';
-												var d = '<a class="btn btn-warning btn-sm '
+												let d = '<a class="btn btn-warning btn-sm '
 														+ s_remove_h
 														+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
 														+ row.id

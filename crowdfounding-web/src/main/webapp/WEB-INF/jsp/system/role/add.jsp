@@ -85,7 +85,7 @@
 
 		let menuIds = null;
 		function getAllSelected() {
-			var ref = $('#menuTree').jstree(true); // 获得整个树
+			let ref = $('#menuTree').jstree(true); // 获得整个树
 			let arr = ref.get_selected();
 			$("#menuTree").find(".jstree-undetermined")
 					.each(
@@ -136,7 +136,7 @@
 						parent.layer.msg(data.msg);
 						parent.reload();
 						//关闭当前窗口
-						var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+						let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 						parent.layer.close(index);
 					}
 				},

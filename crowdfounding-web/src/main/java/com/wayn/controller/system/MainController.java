@@ -29,7 +29,7 @@ public class MainController extends BaseControlller {
 
 	@GetMapping
 	public String index(Model model) throws BusinessException, Exception {
-		List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUser().getId());
+		List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
 		model.addAttribute("treeMenus", treeMenus);
 		model.addAttribute("user", getCurUser());
 		return HOME_PREFIX + "/home";
