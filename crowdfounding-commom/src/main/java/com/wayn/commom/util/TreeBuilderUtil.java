@@ -1,14 +1,25 @@
 package com.wayn.commom.util;
 
+import com.wayn.domain.vo.Tree;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.wayn.domain.vo.Tree;
-
+/**
+ * ztree所需json数据返回帮助类
+ * @author wayn
+ *
+ */
 public class TreeBuilderUtil {
 
+	/**
+	 * 按照root节点为id为0开时构建
+	 * @param <T>
+	 * @param nodes List<Tree<T>> list数据集合
+	 * @return
+	 */
 	public static <T> Tree<T> build(List<Tree<T>> nodes) {
 
 		if (nodes == null) {
@@ -17,11 +28,11 @@ public class TreeBuilderUtil {
 		List<Tree<T>> topNodes = new ArrayList<Tree<T>>();
 
 		for (Tree<T> children : nodes) {
-
+			
+			
 			String pid = children.getParentId();
 			if (pid == null || "0".equals(pid)) {
 				topNodes.add(children);
-
 				continue;
 			}
 
@@ -56,7 +67,14 @@ public class TreeBuilderUtil {
 		return root;
 	}
 
-	public static <T> List<Tree<T>> buildList(List<Tree<T>> nodes, String idParam) {
+	/**
+	 * 按照root节点为id为idParam开时构建
+	 * @param <T>
+	 * @param nodes List<Tree<T>> list数据集合
+	 * @param idParam root节点id
+	 * @return
+	 */
+	public static <T> List<Tree<T>> build(List<Tree<T>> nodes, String idParam) {
 		if (nodes == null) {
 			return null;
 		}

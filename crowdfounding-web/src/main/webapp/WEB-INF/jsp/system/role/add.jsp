@@ -80,8 +80,12 @@
 				},
 				"plugins" : [ "wholerow", "checkbox" ]
 			});
-			//$('#menuTree').jstree("open_all");
 		}
+
+		$("#menuTree").on("loaded.jstree", function(event, data) {
+			// 展开所有节点
+			$('#menuTree').jstree(true).open_all();
+		});
 
 		let menuIds = null;
 		function getAllSelected() {

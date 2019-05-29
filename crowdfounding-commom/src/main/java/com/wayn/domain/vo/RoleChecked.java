@@ -2,6 +2,11 @@ package com.wayn.domain.vo;
 
 import java.util.Date;
 
+/**
+ * 用户管理，配置该用户所拥有得角色选择框
+ * @author wayn
+ *
+ */
 public class RoleChecked {
 
 	private String id;

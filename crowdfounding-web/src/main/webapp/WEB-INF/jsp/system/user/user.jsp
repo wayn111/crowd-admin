@@ -19,7 +19,7 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<div class="ibox ibox-body">
 					<div class="ibox-title">
 						<h5>选择部门</h5>
@@ -29,7 +29,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-8">
+			<div class="col-sm-10">
 				<div class="ibox">
 					<div class="ibox-body">
 						<div class="fixed-table-toolbar">
@@ -276,7 +276,7 @@
 			});
 		}
 		function loadTree(tree) {
-			$('#jstree').jstree({
+			let ref = $('#jstree').jstree({
 				'core' : {
 					'data' : tree,
 					'themes' : {
@@ -286,8 +286,14 @@
 				},
 				"plugins" : [ "search" ]
 			});
-			$('#jstree').jstree().open_all();
+			
 		}
+		
+        $("#jstree").on("loaded.jstree", function (event, data) {
+            // 展开所有节点
+            $('#jstree').jstree(true).open_all();
+        });
+		
 		$('#jstree').on("changed.jstree", function(e, data) {
 			if (data.selected == -1) {
 				var opt = {
@@ -304,8 +310,8 @@
 				}
 				$('#exampleTable').bootstrapTable('refresh',opt);
 			}
-
 		});
+		
 		
 		$(function() {
 			var deptId = '';
