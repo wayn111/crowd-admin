@@ -72,7 +72,6 @@
 		}
 
 		function loadMenuTree(menuTree) {
-			debugger;
 			$('#menuTree').jstree({
 				"plugins" : [ "wholerow", "checkbox" ],
 				'core' : {

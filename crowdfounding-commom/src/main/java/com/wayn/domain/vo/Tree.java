@@ -1,11 +1,17 @@
 package com.wayn.domain.vo;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSON;
-
+/**
+ * 树形节点展示
+ * @author wayn
+ *
+ * @param <T>
+ */
 public class Tree<T> {
 	/**
 	 * 节点ID

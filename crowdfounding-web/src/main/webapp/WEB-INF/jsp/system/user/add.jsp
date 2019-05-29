@@ -49,7 +49,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">角色</label>
 								<div class="col-sm-8">
-									<c:forEach items="${roles}" let="role">
+									<c:forEach items="${roles}" var="role">
 										<label class="checkbox-inline"> <input name="roleId"
 											type="checkbox" value="${role.id}"> ${role.roleName }
 										</label>

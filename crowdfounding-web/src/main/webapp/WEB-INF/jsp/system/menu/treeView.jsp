@@ -45,9 +45,13 @@
 				},
 				"plugins" : [ "search" ]
 			});
-			$('#menuTree').jstree().open_all();
 		}
 
+		$("#menuTree").on("loaded.jstree", function(event, data) {
+			// 展开所有节点
+			//$('#menuTree').jstree(true).open_all();
+		});
+		
 		$('#menuTree').on("changed.jstree", function(e, data) {
 			if (data.node.id == '-1') {
 				parent.loadMenu(0, '顶级节点');

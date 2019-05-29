@@ -25,7 +25,7 @@
 	<%@ include file="/commom/footer.jsp"%>
 	<script>
 		let prefix = _ctx + '/system/dept';
-	
+
 		function getTreeData() {
 			$.ajax({
 				type : "POST",
@@ -45,10 +45,17 @@
 				},
 				"plugins" : [ "search" ]
 			});
-			$('#deptTree').jstree().open_all();
 		}
-		
+
+		$("#deptTree").on("loaded.jstree", function(event, data) {
+			// 展开所有节点
+			$('#deptTree').jstree(true).open_all();
+		});
+
 		$('#deptTree').on("changed.jstree", function(e, data) {
+			if(!loadDeptFlag){
+				return;
+			}
 			if (data.node.id == '-1') {
 				parent.loadDept(0, '顶级节点');
 			} else {
@@ -56,9 +63,9 @@
 			}
 			var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 			parent.layer.close(index);
-			
-		});	
-		
+
+		});
+
 		$(function(){
 			getTreeData();
 		})
