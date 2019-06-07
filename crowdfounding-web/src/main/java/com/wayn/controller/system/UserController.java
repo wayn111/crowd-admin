@@ -59,13 +59,14 @@ public class UserController extends BaseControlller {
 	@PostMapping("/list")
 	public Page<User> list(Model model, @RequestBody Map<String, Object> params) {
 		Page<User> page = getPage(params);
+		page.setCondition(params);
 		return userService.listPage(page, params);
 	}
 
 	@RequiresPermissions("sys:user:add")
 	@GetMapping("/add")
 	public String add(Model model) {
-		List<Role> list = roleService.selectList(new EntityWrapper<Role>());
+		List<Role> list = roleService.selectList(new EntityWrapper<Role>().eq("roleState", 1));
 		model.addAttribute("roles", list);
 		return PREFIX + "/add";
 	}

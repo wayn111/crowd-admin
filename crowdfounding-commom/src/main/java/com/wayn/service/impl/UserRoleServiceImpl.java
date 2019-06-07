@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -25,11 +26,15 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleDao, UserRole> impl
 
 	@Override
 	public Set<String> findRolesByUid(String id) {
-		List<UserRole> list = selectList(new EntityWrapper<UserRole>().eq("userId", id));
+		//复杂连表
+		List<UserRole> list = selectList(new EntityWrapper<UserRole>().setSqlSelect("distinct roleId")
+				.exists(" SELECT u.id FROM sys_user u WHERE u.id = userId ")
+				.exists("  SELECT r.id FROM sys_role r WHERE r.id = roleId AND r.roleState = 1 "));
+		List<String> list2 = list.stream().map(userRole -> {
+			return userRole.getRoleId();
+		}).collect(Collectors.toList());
 		Set<String> set = new HashSet<String>();
-		list.forEach(data -> {
-			set.add(data.getRoleId());
-		});
+		set.addAll(list2);
 		return set;
 	}
 

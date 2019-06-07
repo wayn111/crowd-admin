@@ -81,7 +81,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 	}
 
 	/**
-	 * 获取菜单树，包含按钮
+	 * 获取菜单树
 	 */
 	@Override
 	public Tree<Menu> getTree() {

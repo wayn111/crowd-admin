@@ -43,18 +43,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
 	@Override
 	public Page<User> listPage(Page<User> page, Map<String, Object> params) {
-		String deptId = params.get("deptId").toString();
-		String searchName = params.get("name").toString();
-		Wrapper<User> wrapper = new EntityWrapper<User>();
-		if (StringUtils.isNotBlank(deptId)) {
-			List<Long> childrenIds = deptService.listChildrenIds(Long.valueOf(deptId));
-			wrapper.in("deptId", childrenIds).orderBy("userName");
-		}
-		if (StringUtils.isNotBlank(searchName)) {
-			wrapper.like("userName", searchName);
-		}
-		wrapper.orderBy("userName");
-		Page<User> selectPage = selectPage(page, wrapper);
+		page.setCondition(params);
+		Page<User> selectPage = selectPage(page, new EntityWrapper<User>());
 		return selectPage;
 	}
 

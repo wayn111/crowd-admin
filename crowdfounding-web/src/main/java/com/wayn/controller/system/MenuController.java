@@ -31,7 +31,6 @@ public class MenuController extends BaseControlller {
 	private MenuService menuService;
 
 	private static final String PREFIX = "system/menu";
-	private static final String PUBLIC_PREFIX = "public";
 
 	@GetMapping
 	public String menuIndex(Model model) {
@@ -77,7 +76,7 @@ public class MenuController extends BaseControlller {
 
 	@GetMapping("/chooseIcon")
 	public String chooseIcon(Model model) {
-		return PUBLIC_PREFIX + "/FontIcoList";
+		return PREFIX + "/icon";
 	}
 
 	@RequiresPermissions("sys:menu:add")

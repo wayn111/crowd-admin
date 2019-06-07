@@ -1,8 +1,7 @@
 package com.wayn.controller.system;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.Response;
@@ -42,10 +43,10 @@ public class RoleController extends BaseControlller {
 	@RequiresPermissions("sys:role:role")
 	@ResponseBody
 	@PostMapping("/list")
-	public List<Role> list(Model model) {
-		List<Role> list = new ArrayList<Role>();
-		list.addAll(roleService.selectList(new EntityWrapper<Role>()));
-		return list;
+	public Page<Role> list(Model model, @RequestBody Map<String, Object> params) {
+		Page<Role> page = getPage(params);
+		page.setCondition(params);
+		return roleService.selectPage(page, new EntityWrapper<Role>());
 	}
 
 	@RequiresPermissions("sys:role:add")

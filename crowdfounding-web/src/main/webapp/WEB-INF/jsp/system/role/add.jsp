@@ -10,9 +10,6 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5></h5>
-					</div>
 					<div class="ibox-content">
 						<form class="form-horizontal m-t layui-form" id="role-form">
 							<div class="form-group">
@@ -23,7 +20,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">角色状态</label>
+								<label class="col-sm-3 control-label">状态</label>
 								<div class="col-sm-8">
 									<input type="hidden" id="roleState" name="roleState" value="1">
 									<input type="checkbox" name="roleStateSwicth" checked>
@@ -84,7 +81,7 @@
 
 		$("#menuTree").on("loaded.jstree", function(event, data) {
 			// 展开所有节点
-			$('#menuTree').jstree(true).open_all();
+			//$('#menuTree').jstree(true).open_all();
 		});
 
 		let menuIds = null;
@@ -151,23 +148,8 @@
 			$.ajax(config);
 		}
 
-		function switchInit() {
-			$("[name='roleStateSwicth']").bootstrapSwitch({
-				onText : "启动",
-				offText : "禁用",
-				onColor : "success",
-				onSwitchChange : function(event, state) {
-					if (state) {
-						$('#roleState').val('1');
-					} else {
-						$('#roleState').val('-1');
-					}
-				}
-			});
-		}
-
 		$(function() {
-			switchInit();
+			switchInit('role');
 			validateRule();
 			getMenuTreeData();
 		})

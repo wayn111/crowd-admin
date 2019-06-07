@@ -10,9 +10,6 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5></h5>
-					</div>
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="role-form">
 							<div class="form-group">
@@ -24,7 +21,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">角色状态</label>
+								<label class="col-sm-3 control-label">状态</label>
 								<div class="col-sm-8">
 									<input type="hidden" id="roleState" name="roleState"
 										value="${role1.roleState }"> <input type="checkbox"
@@ -81,14 +78,18 @@
 					}
 				},
 				"checkbox" : {
-					//"keep_selected_style" : false,
-					//"undetermined" : true,
-					//"three_state" : false,
-					//"cascade" : ' up'
+				//"keep_selected_style" : false,
+				//"undetermined" : true,
+				//"three_state" : false,
+				//"cascade" : ' up'
 				}
 			});
 			$('#menuTree').jstree('open_all');
 		}
+		$("#menuTree").on("loaded.jstree", function(event, data) {
+			// 展开所有节点
+			//$('#menuTree').jstree(true).open_all();
+		});
 
 		let menuIds = null;
 		function getAllSelected() {
@@ -151,25 +152,9 @@
 			$.ajax(config);
 		}
 
-		function switchInit() {
-			let state = $('#roleState').val() == "1" ? true : false;
-			$("[name='roleStateSwicth']").bootstrapSwitch({
-				state : state,
-				onText : "启动",
-				offText : "禁用",
-				onColor : "success",
-				onSwitchChange : function(event, state) {
-					if (state) {
-						$('#roleState').val('1');
-					} else {
-						$('#roleState').val('-1');
-					}
-				}
-			});
-		}
-
 		$(function() {
-			switchInit();
+			let state = $('#roleState').val() == "1" ? true : false;
+			switchInit('role', state);
 			validateRule();
 			getMenuTreeData();
 		})
