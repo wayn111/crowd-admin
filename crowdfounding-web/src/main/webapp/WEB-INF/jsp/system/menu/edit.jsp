@@ -146,7 +146,7 @@
 		var openMenu = function() {
 			layer.open({
 				type : 2,
-				title : "选择部门",
+				title : "选择菜单",
 				area : [ '300px', '450px' ],
 				content : prefix + "/treeView"
 			})
@@ -161,6 +161,7 @@
 				layer.open({
 					type : 2,
 					title : '图标列表',
+					anim: 5,
 					content : _ctx + '/system/menu/chooseIcon',
 					area : [ '480px', '90%' ],
 					success : function(layero, index) {

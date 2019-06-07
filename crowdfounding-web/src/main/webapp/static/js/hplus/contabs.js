@@ -7,6 +7,9 @@ $(function () {
         return k
     }
 
+    /**
+     * 切换主页到当前tab
+     */
     function g(n) {
         var o = f($(n).prevAll()), q = f($(n).nextAll());
         var l = f($(".content-tabs").children().not(".J_menuTabs"));
@@ -91,6 +94,9 @@ $(function () {
         }
     });
 
+    /**
+     * 点击左侧菜单，加载右侧tab页
+     */
     function c() {
         var o = $(this).attr("href"), m = $(this).data("index"), l = $.trim($(this).text()), k = true;
         if (o == undefined || $.trim(o).length == 0) {
@@ -227,6 +233,7 @@ $(function () {
     	$('#content-main iframe').each(function(){
     		if($(this).data('id') == iframeId){
     			$(this).attr('src',iframeId);
+    			return false;
     		}
     	})
     }

@@ -38,7 +38,7 @@ public class Role implements Serializable {
     private String roleDesc;
 
     /**
-     * 状态,1-启用,-1禁用
+     * 状态,1启用,-1禁用
      */
     private Integer roleState;
 

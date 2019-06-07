@@ -35,13 +35,9 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">状态:</label>
 								<div class="col-sm-8">
-									<label class="radio-inline"> <input type="radio"
-										name="userState" value="1"
-										<c:if test="${user.userState == '1' }">checked</c:if> /> 正常
-									</label> <label class="radio-inline"> <input type="radio"
-										name="userState" value="-1"
-										<c:if test="${user.userState == '-1' }">checked</c:if> /> 禁用
-									</label>
+									<input type="hidden" id="userState" name="userState"
+										value="${user.userState }"> <input type="checkbox"
+										name="userStateSwicth" checked>
 								</div>
 							</div>
 							<input type="hidden" name="roleIds" id="roleIds">
@@ -166,6 +162,8 @@
 		}
 
 		$(function() {
+			let state = $('#userState').val() == "1" ? true : false;
+			switchInit('user', state);
 			validateRule();
 		})
 	</script>

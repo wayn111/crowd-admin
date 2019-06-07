@@ -7,6 +7,8 @@
 	rel="stylesheet">
 <link href="${_ctx }/static/plugin/layer/skin/layer.css"
 	rel="stylesheet">
+<link href="${_ctx }/static/plugin/jquery-layout/layout-default-latest.css?v=1.4"
+	rel="stylesheet">
 <link href="${_ctx }/static/css/font-awesome.css?v=4.7.0"
 	rel="stylesheet">
 <link href="${_ctx }/static/css/animate.css" rel="stylesheet">
@@ -16,6 +18,12 @@
 	rel="stylesheet">
 <link
 	href="${_ctx }/static/plugin/bootstrap-switch/css/bootstrap3/bootstrap-switch.css"
+	rel="stylesheet">
+<link
+	href="${_ctx }/static/plugin/select2-4.0.7/dist/css/select2.min.css"
+	rel="stylesheet">
+<link
+	href="${_ctx }/static/plugin/select2-4.0.7/dist/css/select2-bootstrap.min.css"
 	rel="stylesheet">
 <link href="${_ctx }/static/css/style.css?v=4.0" rel="stylesheet">
 

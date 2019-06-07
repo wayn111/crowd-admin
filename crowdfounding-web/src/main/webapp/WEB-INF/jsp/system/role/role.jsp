@@ -18,20 +18,37 @@
 
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
-		<div class="col-sm-12">
+		<div class="col-sm-12 search-collapse">
+			<form class="form-inline" id="roleSelect">
+				<div class="form-group">
+					<label for="exampleInputName2">角色名称</label> <input type="text"
+						class="form-control" id="roleName" name="roleName">
+				</div>
+				<div class="form-group magin-left10">
+					<label for="exampleInputEmail2">角色状态</label> <select
+						class="js-example-basic-single" id="roleState" name="roleState">
+					</select>
+				</div>
+				<a class="btn btn-primary btn-rounded btn-sm magin-left10"
+					onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a> <a
+					class="btn btn-warning btn-rounded btn-sm" onclick="selectReset()"><i
+					class="fa fa-refresh"></i>&nbsp;重置</a>
+			</form>
+		</div>
+		<div class="col-sm-12 select-table">
 			<div class="ibox">
 				<div class="ibox-body">
-					<div id="exampleToolbar" role="group" class="t-bar">
+					<div id="exampleToolbar" role="group">
 						<shiro:hasPermission name="sys:role:add">
 							<button type="button" class="btn btn-primary" title="在根节点下添加菜单"
 								onclick="add('0')">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
 						</shiro:hasPermission>
-						<shiro:hasPermission name="system:role:remove">
+						<shiro:hasPermission name="sys:role:remove">
 							<button type="button" class="btn btn-danger"
 								onclick="batchRemove()">
-								<i class="fa fa-exchange" aria-hidden="true"></i>删除
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</shiro:hasPermission>
 					</div>
@@ -137,91 +154,100 @@
 		}
 
 		function load() {
-			$('#table1')
-					.bootstrapTable(
-							{
-								method : 'post', // 服务器数据的请求方式 get or post
-								url : prefix + "/list?_r=" + Math.random(), // 服务器数据的加载地址
-								striped : true, // 设置为true会有隔行变色效果
-								dataType : "json", // 服务器返回的数据类型
-								pagination : true, // 设置为true会在底部显示分页条
-								// queryParamsType : "limit",
-								// //设置为limit则会发送符合RESTFull格式的参数
-								singleSelect : false, // 设置为true将禁止多选
-								iconSize : 'outline',
-								toolbar : '#exampleToolbar',
-								silent : true, //静默刷新数据
-								// contentType : "application/x-www-form-urlencoded",
-								// //发送到服务器的数据编码类型
-								pageSize : 10, // 如果设置了分页，每页数据条数
-								pageNumber : 1, // 如果设置了分布，首页页码
-								search : true, // 是否显示搜索框
-								showColumns : true, // 是否显示内容下拉框（选择显示的列）
-								sidePagination : "client", // 设置在哪里进行分页，可选值为"client" 或者
-								// "server"
-								// queryParams : queryParams,
-								// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
-								// queryParamsType = 'limit' ,返回参数必须包含
-								// limit, offset, search, sort, order 否则, 需要包含:
-								// pageSize, pageNumber, searchText, sortName,
-								// sortOrder.
-								// 返回false将会终止请求
-								columns : [
-										{ // 列配置项
-											// 数据类型，详细参数配置参见文档http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
-											checkbox : true
-										// 列表中显示复选框
-										},
-										{
-											field : 'id', // 列字段名
-											width : '16%',
-											title : '序号' // 列标题
-										},
-										{
-											field : 'roleName',
-											title : '角色名'
-										},
-										{
-											field : 'roleState',
-											title : '角色状态',
-											formatter : function(value, row,
-													index) {
-												if (value === 1) {
-													return '<span class="badge badge-primary">启动</span>';
-												}
-												if (value === -1) {
-													return '<span class="badge badge-danger">禁用</span>';
-												}
-											}
-										},
-										{
-											field : 'roleDesc',
-											title : '角色描述'
-										},
-										{
-											field : '',
-											title : '权限'
-										},
-										{
-											title : '操作',
-											field : 'roleId',
-											align : 'center',
-											formatter : function(value, row,
-													index) {
-												let e = '<a class="btn btn-primary btn-sm '
-														+ s_edit_h
-														+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-														+ row.id
-														+ '\')"><i class="fa fa-edit"></i></a> ';
-												let d = '<a class="btn btn-warning btn-sm '
-														+ s_remove_h
-														+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-														+ row.id
-														+ '\')"><i class="fa fa-remove"></i></a> ';
-												return e + d;
-											}
-										} ]
-							});
+			$('#table1').bootstrapTable(
+					{
+						method : 'post', // 服务器数据的请求方式 get or post
+						url : prefix + "/list?_r=" + Math.random(), // 服务器数据的加载地址
+						showRefresh : true, //显示刷新按钮
+						showToggle : true, //show the toggle button to toggle table / card view.
+						striped : true, // 设置为true会有隔行变色效果
+						dataType : "json", // 服务器返回的数据类型
+						pagination : true, // 设置为true会在底部显示分页条
+						// //设置为limit则会发送符合RESTFull格式的参数
+						singleSelect : false, // 设置为true将禁止多选
+						iconSize : 'outline',
+						toolbar : '#exampleToolbar',
+						silent : true, //静默刷新数据
+						// contentType : "application/x-www-form-urlencoded",
+						// //发送到服务器的数据编码类型
+						pageSize : 10, // 如果设置了分页，每页数据条数
+						pageNumber : 1, // 如果设置了分布，首页页码
+						//search : true, // 是否显示搜索框
+						showColumns : true, // 是否显示内容下拉框（选择显示的列）
+						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+						dataField : "records",
+						sortName : 'createTime',
+						sortOrder : 'desc',
+						queryParamsType : "",//If queryParamsType = 'limit', 
+						//the params object contains: limit, offset, search, sort, order.
+						//Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
+						queryParams : function(params) {
+							params.roleName = $('#roleName').val();
+							params.roleState = $('#roleState').val();
+							return params;
+						},
+						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
+						// queryParamsType = 'limit' ,返回参数必须包含
+						// limit, offset, search, sort, order 否则, 需要包含:
+						// pageSize, pageNumber, searchText, sortName,
+						// sortOrder.
+						// 返回false将会终止请求
+						columns : [
+								{ // 列配置项
+									// 数据类型，详细参数配置参见文档http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
+									checkbox : true
+								// 列表中显示复选框
+								},
+								{
+									field : 'id', // 列字段名
+									width : '16%',
+									title : '序号' // 列标题
+								},
+								{
+									field : 'roleName',
+									title : '角色名',
+									sortable : true
+								},
+								{
+									field : 'roleState',
+									title : '角色状态',
+									formatter : function(value, row, index) {
+										if (value === 1) {
+											return '<span class="badge badge-primary">启动</span>';
+										}
+										if (value === -1) {
+											return '<span class="badge badge-danger">禁用</span>';
+										}
+									}
+								},
+								{
+									field : 'roleDesc',
+									title : '角色描述'
+								},
+								{
+									field : 'createTime',
+									title : '创建时间',
+									width : '200px'
+								},
+								{
+									field : '',
+									title : '权限'
+								},
+								{
+									title : '操作',
+									field : 'roleId',
+									align : 'center',
+									formatter : function(value, row, index) {
+										let e = '<a class="btn btn-primary btn-sm ' + s_edit_h
+												+ '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id
+												+ '\')"><i class="fa fa-edit"></i></a> ';
+										let d = '<a class="btn btn-warning btn-sm ' + s_remove_h
+												+ '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
+												+ '\')"><i class="fa fa-remove"></i></a> ';
+										return e + d;
+									}
+								} ]
+					});
 		}
 
 		function reload() {
@@ -229,6 +255,20 @@
 		}
 
 		$(function() {
+			let config = {
+				width : '100px',
+				data : [ {
+					id : '',
+					text : '全部'
+				}, {
+					id : 1,
+					text : '启用'
+				}, {
+					id : -1,
+					text : '禁用'
+				} ],
+			}
+			$('.js-example-basic-single').select2(config);
 			load();
 		})
 	</script>

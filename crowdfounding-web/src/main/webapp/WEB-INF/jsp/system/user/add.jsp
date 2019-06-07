@@ -38,11 +38,8 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">状态:</label>
 								<div class="col-sm-8">
-									<label class="radio-inline"> <input type="radio"
-										name="userState" value="1" checked /> 正常
-									</label> <label class="radio-inline"> <input type="radio"
-										name="userState" value="-1" /> 禁用
-									</label>
+									<input type="hidden" id="userState" name="userState" value="1">
+									<input type="checkbox" name="userStateSwicth" checked>
 								</div>
 							</div>
 							<input type="hidden" name="roleIds" id="roleIds">
@@ -170,6 +167,7 @@
 		}
 
 		$(function() {
+			switchInit('user');
 			validateRule();
 		})
 	</script>

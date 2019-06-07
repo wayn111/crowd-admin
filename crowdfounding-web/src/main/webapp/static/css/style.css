@@ -3188,7 +3188,7 @@ video {
 }
 
 .wrapper-content {
-    padding: 20px;
+    padding: 10px 20px;
 }
 
 #page-wrapper {
@@ -3647,12 +3647,13 @@ code {
     -webkit-border-image: none;
     -o-border-image: none;
     border-image: none;
-    border-style: solid solid none;
+    /*border-style: solid solid none;*/
     border-width: 4px 0px 0;
     color: inherit;
     margin-bottom: 0;
     padding: 14px 15px 7px;
     min-height: 48px;
+    float: left;
 }
 
 .ibox-content {
@@ -7362,5 +7363,29 @@ body.skin-3 {
     color: #333333!important;
     background-color: #ffffff!important;
     border-color: #cccccc!important;
+}
+/*列表页查询框样式*/
+.search-collapse, .select-table {
+    width: 100%;
+    background: #fff;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+}
+.search-collapse {
+    position: relative;
+}
+
+.magin-left10{
+	margin-left: 13px;
+}
+.wayn-ibox-tools{
+	display: inline-block;
+    float: none;
+    margin-top: 5px;
+    position: relative;
+    padding: 0;
 }
 

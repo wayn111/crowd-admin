@@ -24,11 +24,10 @@
 </head>
 
 <body class="signin">
-
 	<div class="signinpanel">
         <div class="row">
             <div class="col-sm-7">
-                <div class="signin-info">
+                <div class="signin-info animated flash">
                     <div class="logopanel m-b">
                         <h1>[ H+ ]</h1>
                     </div>

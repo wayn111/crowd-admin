@@ -81,9 +81,16 @@ public class BaseControlller {
 	 * @return
 	 */
 	protected <T> Page<T> getPage(Map<String, Object> params) {
-		int pageNumber = (int) params.get("pageNumber");
-		int pageSize = (int) params.get("pageSize");
-		return new Page<T>(pageNumber, pageSize);
+		int pageNumber = (int) params.remove("pageNumber");
+		int pageSize = (int) params.remove("pageSize");
+		String sortName = (String) params.remove("sortName");
+		String sortOrder = (String) params.remove("sortOrder");
+		if ("desc".equals(sortOrder)) {
+			return new Page<T>(pageNumber, pageSize, sortName, false);
+		} else {
+			return new Page<T>(pageNumber, pageSize, sortName, true);
+		}
+
 	}
 
 	/**
