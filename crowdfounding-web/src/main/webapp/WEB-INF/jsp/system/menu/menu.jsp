@@ -21,7 +21,24 @@
 
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
-		<div class="col-sm-12">
+		<div class="col-sm-12 search-collapse">
+			<form class="form-inline" id="roleSelect">
+				<div class="form-group">
+					<label for="exampleInputName2">菜单名称</label> <input type="text"
+						class="form-control" id="menuName" name="menuName">
+				</div>
+				<div class="form-group magin-left10">
+					<label for="exampleInputEmail2">菜单类型</label> <select
+						class="js-example-basic-single" id="type" name="type">
+					</select>
+				</div>
+				<a class="btn btn-primary btn-rounded btn-sm magin-left10"
+					onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a> <a
+					class="btn btn-warning btn-rounded btn-sm" onclick="selectReset()"><i
+					class="fa fa-refresh"></i>&nbsp;重置</a>
+			</form>
+		</div>
+		<div class="col-sm-12 select-table">
 			<div class="ibox">
 				<div class="ibox-body">
 					<div id="exampleToolbar" role="group" class="t-bar">
@@ -132,9 +149,12 @@
 	            parentCode: 'pid',
 	            type: "POST", // 请求数据的ajax类型
 	            url: prefix + '/list?_r=' + Math.random(), // 请求数据的ajax的url
-	            ajaxParams: {}, // 请求数据的ajax的data属性
+	            ajaxParams: JSON.stringify({
+	            	menuName : $('#menuName').val().trim(),
+					type : $('#type').val()
+	            }), // 请求数据的ajax的data属性
 	            expandColumn: '1',// 在哪一列上面显示展开按钮
-	            striped: true, // 是否各行渐变色
+	            striped: false, // 是否各行渐变色
 	            bordered: true, // 是否显示边框
 	            expandAll: false, // 是否全部展开
 				columns :[
@@ -228,6 +248,23 @@
 		}
 		
 		$(function() {
+			let config = {
+				width : '100px',
+				data : [ {
+					id : '',
+						text : '全部'
+				}, {
+					id : 1,
+					text : '目录'
+				}, {
+					id : 2,
+					text : '菜单'
+				}, {
+					id : 3,
+					text : '按钮'
+				} ]
+			}
+			$('.js-example-basic-single').select2(config);
 			load();
 		})
 	</script>

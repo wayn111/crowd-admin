@@ -21,7 +21,19 @@
 
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
-		<div class="col-sm-12">
+		<div class="col-sm-12 search-collapse">
+			<form class="form-inline" id="roleSelect">
+				<div class="form-group">
+					<label for="exampleInputName2">部门名称</label> <input type="text"
+						class="form-control" id="deptName" name="deptName">
+				</div>
+				<a class="btn btn-primary btn-rounded btn-sm magin-left10"
+					onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a> <a
+					class="btn btn-warning btn-rounded btn-sm" onclick="selectReset()"><i
+					class="fa fa-refresh"></i>&nbsp;重置</a>
+			</form>
+		</div>
+		<div class="col-sm-12 select-table">
 			<div class="ibox">
 				<div class="ibox-body">
 					<div id="exampleToolbar" role="group" class="t-bar">
@@ -132,9 +144,11 @@
 	            parentCode: 'pid',
 	            type: "POST", // 请求数据的ajax类型
 	            url: prefix + '/list?_r=' + Math.random(), // 请求数据的ajax的url
-	            ajaxParams: {}, // 请求数据的ajax的data属性
+	            ajaxParams: JSON.stringify({
+	            	deptName : $('#deptName').val().trim()
+	            }), // 请求数据的ajax的data属性
 	            expandColumn: '1',// 在哪一列上面显示展开按钮
-	            striped: true, // 是否各行渐变色
+	            striped: false, // 是否各行渐变色
 	            bordered: true, // 是否显示边框
 	            expandAll: false, // 是否全部展开
 				columns :[

@@ -3,8 +3,10 @@ package com.wayn.service.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.domain.Role;
@@ -45,6 +48,16 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
 
 	@Autowired
 	private UserRoleService userRoleService;
+
+	@Override
+	public Page<Role> listPage(Page<Role> page, Map<String, Object> params) {
+		String roleName = (String) params.remove("roleName");
+		page.setCondition(params);
+		EntityWrapper<Role> wrapper = new EntityWrapper<Role>();
+		wrapper.like("roleName", roleName);
+		Page<Role> selectPage = selectPage(page, wrapper);
+		return selectPage;
+	}
 
 	@CacheEvict(value = "menuCache", allEntries = true)
 	@Transactional
@@ -122,19 +135,18 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
 	 */
 	@Override
 	public List<RoleChecked> listCheckedRolesByUid(String uid) {
-		List<Role> list = selectList(new EntityWrapper<Role>());
-		List<RoleChecked> list2 = new ArrayList<RoleChecked>();
+		List<Role> list = selectList(new EntityWrapper<Role>().eq("roleState", 1));
 		Set<String> sets = userRoleService.findRolesByUid(uid);
-		list.forEach(role -> {
+		List<RoleChecked> list2 = list.stream().map(role -> {
 			RoleChecked checked = new RoleChecked();
 			BeanUtils.copyProperties(role, checked);
-			sets.forEach(roleId -> {
-				if (role.getId().equals(roleId)) {
+			sets.forEach(item -> {
+				if (item.equals(checked.getId())) {
 					checked.setChecked(true);
 				}
 			});
-			list2.add(checked);
-		});
+			return checked;
+		}).collect(Collectors.toList());
 		return list2;
 	}
 

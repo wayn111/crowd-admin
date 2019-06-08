@@ -38,7 +38,10 @@
 		    ON ur.`roleId` = rm.`roleId`
 		LEFT JOIN sys_menu m
 		    ON m.`id` = rm.`menuId`
+		LEFT JOIN sys_role r
+		    ON r.`id` = ur.`roleId`
 		WHERE ur.`userId` = #{uid}
+				AND r.`roleState` = 1
 		        AND m.`resource` IS NOT NULL
 		        AND m.`resource` != ''
 		        AND (m.type=2 OR m.type=3)

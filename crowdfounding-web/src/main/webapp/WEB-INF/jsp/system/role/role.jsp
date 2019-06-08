@@ -182,7 +182,7 @@
 						//the params object contains: limit, offset, search, sort, order.
 						//Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
 						queryParams : function(params) {
-							params.roleName = $('#roleName').val();
+							params.roleName = $('#roleName').val().trim();
 							params.roleState = $('#roleState').val();
 							return params;
 						},

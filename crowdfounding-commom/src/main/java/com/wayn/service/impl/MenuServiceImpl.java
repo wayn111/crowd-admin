@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -155,6 +156,18 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 	@Override
 	public boolean deleteById(Serializable id) {
 		return super.deleteById(id);
+	}
+
+	@Override
+	public List<Menu> list(Map<String, Object> params) {
+		String menuName = (String) params.get("menuName");
+		String type = (String) params.get("type");
+		EntityWrapper<Menu> wrapper = new EntityWrapper<Menu>();
+		wrapper.like("menuName", menuName);
+		if (StringUtils.isNotEmpty(type)) {
+			wrapper.eq("type", Integer.parseInt(type));
+		}
+		return selectList(wrapper.orderBy("sort"));
 	}
 
 }

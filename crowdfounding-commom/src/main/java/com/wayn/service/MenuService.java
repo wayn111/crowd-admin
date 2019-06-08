@@ -1,6 +1,7 @@
 package com.wayn.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.wayn.domain.Menu;
@@ -24,4 +25,6 @@ public interface MenuService extends IService<Menu> {
 	public Tree<Menu> getTree();
 
 	public Tree<Menu> getTree(String roleId);
+	
+	public List<Menu> list(Map<String, Object> params);
 }

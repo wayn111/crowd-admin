@@ -2,16 +2,18 @@ package com.wayn.controller.system;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,7 +23,6 @@ import com.wayn.commom.util.Response;
 import com.wayn.domain.Menu;
 import com.wayn.domain.vo.Tree;
 import com.wayn.framework.util.ShiroUtil;
-import com.wayn.mapper.RoleMenuDao;
 import com.wayn.service.MenuService;
 
 @Controller
@@ -40,10 +41,8 @@ public class MenuController extends BaseControlller {
 	@RequiresPermissions("sys:menu:menu")
 	@ResponseBody
 	@PostMapping("/list")
-	public List<Menu> list(Model model) {
-		List<Menu> list = new ArrayList<Menu>();
-		list.addAll(menuService.selectList(new EntityWrapper<Menu>().orderBy("sort")));
-		return list;
+	public List<Menu> list(Model model, @RequestBody Map<String, Object> params) {
+		return menuService.list(params);
 	}
 
 	@RequiresPermissions("sys:menu:add")
