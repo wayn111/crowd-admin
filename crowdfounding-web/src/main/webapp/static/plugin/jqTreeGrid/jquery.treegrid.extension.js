@@ -130,6 +130,7 @@
                 url : options.url,
                 data : parms?parms:options.ajaxParams,
                 dataType : "JSON",
+                contentType: 'application/json',
                 success : function(data, textStatus, jqXHR) {
                     // 加载完数据先清空
                     tbody.html("");
@@ -252,7 +253,7 @@
         parentCode : 'pid',// 用于设置父子关系
         rootCodeValue: null,//设置根节点code值----可指定根节点，默认为null,"",0,"0"
         data : [], // 构造table的数据集合
-        type : "GET", // 请求数据的ajax类型
+        type : "POST", // 请求数据的ajax类型
         url : null, // 请求数据的ajax的url
         ajaxParams : {}, // 请求数据的ajax的data属性
         expandColumn : null,// 在哪一列上面显示展开按钮

@@ -33,7 +33,7 @@ public class LoginController extends BaseControlller {
 		Subject currentUser = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
 		if (!currentUser.isAuthenticated()) {
-			token.setRememberMe(true);
+			//token.setRememberMe(true);
 			currentUser.login(token);
 		}
 		return Response.success();

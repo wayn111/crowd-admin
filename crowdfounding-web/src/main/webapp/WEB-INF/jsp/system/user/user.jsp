@@ -131,7 +131,7 @@
 						//Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
 						queryParams : function(params) {
 							params.deptId = $('#deptId').val();
-							params.userName = $('#userName').val();
+							params.userName = $('#userName').val().trim();
 							params.userState = $('#userState').val();
 							return params;
 						},
@@ -146,7 +146,8 @@
 								},
 								{
 									field : 'userName',
-									title : '用户名'
+									title : '用户名',
+									sortable : true
 								},
 								{
 									field : 'createTime',

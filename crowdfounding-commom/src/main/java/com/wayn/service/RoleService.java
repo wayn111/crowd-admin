@@ -2,10 +2,13 @@ package com.wayn.service;
 
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.domain.Role;
+import com.wayn.domain.User;
 import com.wayn.domain.vo.RoleChecked;
 
 import java.util.List;
+import java.util.Map;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -27,4 +30,6 @@ public interface RoleService extends IService<Role> {
 	boolean batchRemove(String[] ids) throws BusinessException;
 
 	List<RoleChecked> listCheckedRolesByUid(String uid);
+
+	Page<Role> listPage(Page<Role> page, Map<String, Object> params);
 }

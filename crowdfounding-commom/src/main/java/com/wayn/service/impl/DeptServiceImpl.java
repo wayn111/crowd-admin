@@ -2,7 +2,9 @@ package com.wayn.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.util.TreeBuilderUtil;
 import com.wayn.domain.Dept;
+import com.wayn.domain.Menu;
 import com.wayn.domain.vo.Tree;
 import com.wayn.mapper.DeptDao;
 import com.wayn.service.DeptService;
@@ -58,6 +61,14 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
 			}
 		});
 		return deptIds;
+	}
+
+	@Override
+	public List<Dept> list(Map<String, Object> params) {
+		String deptName = (String) params.get("deptName");
+		EntityWrapper<Dept> wrapper = new EntityWrapper<Dept>();
+		wrapper.like("deptName", deptName);
+		return selectList(wrapper.orderBy("sort"));
 	}
 
 }

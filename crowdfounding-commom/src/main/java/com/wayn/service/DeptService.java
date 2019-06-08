@@ -4,6 +4,7 @@ import com.wayn.domain.Dept;
 import com.wayn.domain.vo.Tree;
 
 import java.util.List;
+import java.util.Map;
 
 import com.baomidou.mybatisplus.service.IService;
 
@@ -20,4 +21,6 @@ public interface DeptService extends IService<Dept> {
 	Tree<Dept> getTree();
 
 	List<Long> listChildrenIds(Long pid);
+	
+	List<Dept> list(Map<String, Object> params);
 }

@@ -22,6 +22,7 @@ import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.Response;
 import com.wayn.domain.Role;
+import com.wayn.domain.User;
 import com.wayn.service.MenuService;
 import com.wayn.service.RoleService;
 
@@ -45,8 +46,7 @@ public class RoleController extends BaseControlller {
 	@PostMapping("/list")
 	public Page<Role> list(Model model, @RequestBody Map<String, Object> params) {
 		Page<Role> page = getPage(params);
-		page.setCondition(params);
-		return roleService.selectPage(page, new EntityWrapper<Role>());
+		return roleService.listPage(page, params);
 	}
 
 	@RequiresPermissions("sys:role:add")

@@ -59,7 +59,6 @@ public class UserController extends BaseControlller {
 	@PostMapping("/list")
 	public Page<User> list(Model model, @RequestBody Map<String, Object> params) {
 		Page<User> page = getPage(params);
-		page.setCondition(params);
 		return userService.listPage(page, params);
 	}
 

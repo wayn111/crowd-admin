@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.domain.User;
@@ -43,8 +42,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
 	@Override
 	public Page<User> listPage(Page<User> page, Map<String, Object> params) {
+		String userName = (String) params.remove("userName");
 		page.setCondition(params);
-		Page<User> selectPage = selectPage(page, new EntityWrapper<User>());
+		EntityWrapper<User> wrapper = new EntityWrapper<User>();
+		wrapper.like("userName", userName);
+		Page<User> selectPage = selectPage(page, wrapper);
 		return selectPage;
 	}
 
