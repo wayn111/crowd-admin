@@ -1,5 +1,8 @@
 package com.wayn.commom.exception;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -14,6 +17,12 @@ import com.wayn.commom.util.Response;
 @RestControllerAdvice
 public class BusinessExceptionHander extends BaseControlller {
 
+	/**
+	 * 处理认证异常
+	 * @param e
+	 * @param request
+	 * @return
+	 */
 	@ExceptionHandler(AuthenticationException.class)
 	public Object handleAuthorizationException(AuthenticationException e, HttpServletRequest request) {
 		logger.error(e.getMessage(), e);
@@ -35,6 +44,8 @@ public class BusinessExceptionHander extends BaseControlller {
 		if (HttpUtil.isAjax(request)) {
 			return Response.error("服务器内部错误");
 		}
-		return new ModelAndView("error/500");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", e.getMessage());
+		return new ModelAndView("error/500", map);
 	}
 }

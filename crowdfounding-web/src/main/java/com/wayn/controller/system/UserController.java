@@ -49,6 +49,7 @@ public class UserController extends BaseControlller {
 	@Autowired
 	private UserRoleService userRoleService;
 
+	@RequiresPermissions("sys:user:user")
 	@GetMapping
 	public String userIndex(Model model) {
 		return PREFIX + "/user";

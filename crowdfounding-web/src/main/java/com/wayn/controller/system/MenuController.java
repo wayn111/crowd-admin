@@ -1,10 +1,8 @@
 package com.wayn.controller.system;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.util.Response;
 import com.wayn.domain.Menu;
@@ -33,6 +30,7 @@ public class MenuController extends BaseControlller {
 
 	private static final String PREFIX = "system/menu";
 
+	@RequiresPermissions("sys:menu:menu")
 	@GetMapping
 	public String menuIndex(Model model) {
 		return PREFIX + "/menu";
