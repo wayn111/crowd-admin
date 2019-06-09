@@ -1,8 +1,13 @@
 package com.wayn.framework.util;
 
+import java.util.Iterator;
+
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.mgt.RealmSecurityManager;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.wayn.domain.User;
@@ -60,7 +65,14 @@ public class ShiroUtil {
 
 	public static void clearCachedAuthorizationInfo() {
 		RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
-		MyRealm realm = (MyRealm) rsm.getRealms().iterator().next();
-		realm.clearCachedAuthorizationInfo();
+		MyRealm shiroRealm = (MyRealm) rsm.getRealms().iterator().next();
+		Subject subject = SecurityUtils.getSubject();
+		String realmName = subject.getPrincipals().getRealmNames().iterator().next();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(subject.getPrincipal(), realmName);
+		subject.runAs(principals);
+		//用realm删除principle
+		shiroRealm.getAuthorizationCache().remove(subject.getPrincipals());
+		//切换身份也就是刷新了
+		subject.releaseRunAs();
 	}
 }

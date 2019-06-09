@@ -101,6 +101,10 @@ public class MyRealm extends AuthorizingRealm {
 	}
 
 	public void clearCachedAuthorizationInfo() {
-		clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
+		doClearCache(SecurityUtils.getSubject().getPrincipals());
+		//clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
 	}
+	
+	
+	
 }

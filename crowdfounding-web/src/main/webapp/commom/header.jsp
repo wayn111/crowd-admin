@@ -7,7 +7,8 @@
 	rel="stylesheet">
 <link href="${_ctx }/static/plugin/layer/skin/layer.css"
 	rel="stylesheet">
-<link href="${_ctx }/static/plugin/jquery-layout/layout-default-latest.css?v=1.4"
+<link
+	href="${_ctx }/static/plugin/jquery-layout/layout-default-latest.css?v=1.4"
 	rel="stylesheet">
 <link href="${_ctx }/static/css/font-awesome.css?v=4.7.0"
 	rel="stylesheet">

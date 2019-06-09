@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -163,5 +164,19 @@ public class BaseControlller {
 			return curUser.getId();
 		}
 		return null;
+	}
+
+	/**
+	 * 返回当前系统会会话Id
+	 * @return
+	 * @throws BusinessException 
+	 */
+	protected String getSessionId() throws BusinessException {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject == null) {
+			throw new BusinessException("系统用户不存在");
+		}
+		Session session = subject.getSession();
+		return session.getId().toString();
 	}
 }

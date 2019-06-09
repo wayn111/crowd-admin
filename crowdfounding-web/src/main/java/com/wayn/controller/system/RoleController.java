@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.Response;
 import com.wayn.domain.Role;
-import com.wayn.domain.User;
+import com.wayn.framework.util.ShiroUtil;
 import com.wayn.service.MenuService;
 import com.wayn.service.RoleService;
 
@@ -36,6 +35,7 @@ public class RoleController extends BaseControlller {
 	@Autowired
 	private MenuService menuService;
 
+	@RequiresPermissions("sys:role:role")
 	@GetMapping
 	public String roleIndex(Model model) {
 		return PREFIX + "/role";
@@ -69,6 +69,7 @@ public class RoleController extends BaseControlller {
 	public Response addSave(Model model, Role role, String menuIds) {
 		role.setCreateTime(new Date());
 		roleService.save(role, menuIds);
+		ShiroUtil.clearCachedAuthorizationInfo();
 		return Response.success("新增角色成功");
 	}
 
@@ -77,6 +78,7 @@ public class RoleController extends BaseControlller {
 	@PostMapping("/editSave")
 	public Response editSave(Model model, Role role, String menuIds) {
 		roleService.update(role, menuIds);
+		ShiroUtil.clearCachedAuthorizationInfo();
 		return Response.success("修改角色成功");
 	}
 

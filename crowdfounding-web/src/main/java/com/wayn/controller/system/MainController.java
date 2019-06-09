@@ -2,7 +2,6 @@ package com.wayn.controller.system;
 
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

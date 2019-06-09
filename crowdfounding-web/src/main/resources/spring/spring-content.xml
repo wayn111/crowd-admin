@@ -35,7 +35,27 @@
 	<import resource="spring-service.xml" />
 	<import resource="spring-ehcache.xml" />
 	<!-- <import resource="spring-shiro.xml" /> -->
-	
+
+	<!-- 开启druids-pring监控 -->
+	<bean id="druid-stat-interceptor"
+		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+	</bean>
+
+	<bean id="druid-stat-pointcut"
+		class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+		scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>com.wayn.*</value>
+			</list>
+		</property>
+	</bean>
+
+	<aop:config>
+		<aop:advisor advice-ref="druid-stat-interceptor"
+			pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
+
 	<!-- 启用缓存注解功能，需要在spring著配置文件中启动cache:annotation-driven -->
 	<cache:annotation-driven
 		cache-manager="ehcacheManager" />
