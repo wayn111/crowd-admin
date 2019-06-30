@@ -15,7 +15,7 @@
 		base-package="com.wayn.service">
 	</context:component-scan>
 	
-	<tx:annotation-driven transaction-manager="transactionManager" order="1"/>
+	<tx:annotation-driven transaction-manager="transactionManager" order="0"/>
 
 	<!-- 事务管理器 -->
 	<bean id="transactionManager"
@@ -45,7 +45,7 @@
 	<!-- 切面 -->
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice"
-			pointcut="execution(* com.wayn.service.impl.*.*(..))" order="0"/>
+			pointcut="execution(* com.wayn.service.impl.*.*(..))" order="1"/>
 	</aop:config>
 	
 </beans>

@@ -1,7 +1,8 @@
 package com.wayn.service;
 
-import com.wayn.domain.Log;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
+import com.wayn.domain.Log;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2019-04-13
  */
 public interface LogService extends IService<Log> {
-
+    Page<Log> listPage(Page<Log> page, Log log);
 }

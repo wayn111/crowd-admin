@@ -2,6 +2,7 @@ package com.wayn.domain.vo;
 
 import com.alibaba.fastjson.JSON;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,9 @@ import java.util.Map;
  *
  * @param <T>
  */
-public class Tree<T> {
+public class Tree<T> implements Serializable {
+
+	private static final long serialVersionUID = 1218560379804614405L;
 	/**
 	 * 节点ID
 	 */
@@ -28,7 +31,7 @@ public class Tree<T> {
 	/**
 	 * 节点是否被选中 true false
 	 */
-	private boolean checked = false;
+	private Boolean checked = false;
 	/**
 	 * 节点属性
 	 */
@@ -46,11 +49,11 @@ public class Tree<T> {
 	/**
 	 * 是否有父节点
 	 */
-	private boolean hasParent = false;
+	private Boolean hasParent = false;
 	/**
 	 * 是否有子节点
 	 */
-	private boolean hasChildren = false;
+	private Boolean hasChildren = false;
 
 	public String getId() {
 		return id;
@@ -76,11 +79,11 @@ public class Tree<T> {
 		this.state = state;
 	}
 
-	public boolean isChecked() {
+	public Boolean isChecked() {
 		return checked;
 	}
 
-	public void setChecked(boolean checked) {
+	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}
 
@@ -100,19 +103,19 @@ public class Tree<T> {
 		this.children = children;
 	}
 
-	public boolean isHasParent() {
+	public Boolean isHasParent() {
 		return hasParent;
 	}
 
-	public void setHasParent(boolean isParent) {
+	public void setHasParent(Boolean isParent) {
 		this.hasParent = isParent;
 	}
 
-	public boolean isHasChildren() {
+	public Boolean isHasChildren() {
 		return hasChildren;
 	}
 
-	public void setChildren(boolean isChildren) {
+	public void setChildren(Boolean isChildren) {
 		this.hasChildren = isChildren;
 	}
 
@@ -124,8 +127,8 @@ public class Tree<T> {
 		this.parentId = parentId;
 	}
 
-	public Tree(String id, String text, Map<String, Object> state, boolean checked, Map<String, Object> attributes,
-			List<Tree<T>> children, boolean isParent, boolean isChildren, String parentID) {
+	public Tree(String id, String text, Map<String, Object> state, Boolean checked, Map<String, Object> attributes,
+			List<Tree<T>> children, Boolean isParent, Boolean isChildren, String parentID) {
 		super();
 		this.id = id;
 		this.text = text;

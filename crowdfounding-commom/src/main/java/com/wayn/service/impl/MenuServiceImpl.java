@@ -1,19 +1,8 @@
 package com.wayn.service.impl;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.TreeBuilderUtil;
 import com.wayn.domain.Menu;
 import com.wayn.domain.RoleMenu;
@@ -21,6 +10,16 @@ import com.wayn.domain.vo.Tree;
 import com.wayn.mapper.MenuDao;
 import com.wayn.mapper.RoleMenuDao;
 import com.wayn.service.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -39,11 +38,30 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 	@Autowired
 	private RoleMenuDao roleMenuDao;
 
+	@CacheEvict(value = "menuCache", allEntries = true)
+	@Override
+	public boolean save(Menu menu) {
+		return insert(menu);
+	}
+
+	@CacheEvict(value = "menuCache", allEntries = true)
+	@Override
+	public boolean update(Menu menu) {
+		return updateById(menu);
+	}
+
+	@CacheEvict(value = "menuCache", allEntries = true)
+	@Override
+	public boolean remove(Long id) throws BusinessException {
+		return deleteById(id);
+	}
+
 	@Override
 	public List<String> selectMenuIdsByUid(String id) {
 		return menuDao.selectMenuIdsByUid(id);
 	}
 
+	@Cacheable(value = "menuCache", key = "#root.method + '_' + #root.args[0]")
 	@Override
 	public List<String> selectResourceByUid(String id) {
 		return menuDao.selectResourceByUid(id);
@@ -52,7 +70,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 	/**
 	 * 获取首页菜单
 	 */
-	@Cacheable(value = "menuCache", key = "#id + '_selectTreeMenuByUserId'")
+	@Cacheable(value = "menuCache", key = "#root.method + '_' + #id")
 	@Override
 	public List<Menu> selectTreeMenuByUserId(String id) {
 		List<Menu> menus = roleMenuDao.selectRoleMenuIdsByUserId(id);
@@ -62,8 +80,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 
 	/**
 	 * 将菜单列表封装成菜单树，不包含按钮
+	 *
 	 * @param menus
-	 * @param pid 顶级父id
+	 * @param pid   顶级父id
 	 * @return
 	 */
 	public List<Menu> selectTreeMenuByMenusAndPid(List<Menu> menus, Long pid) {
@@ -84,6 +103,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 	/**
 	 * 获取菜单树
 	 */
+	@Cacheable(value = "menuCache", key = "#root.method + '_menuTree_'")
 	@Override
 	public Tree<Menu> getTree() {
 		List<Tree<Menu>> trees = new ArrayList<Tree<Menu>>();
@@ -100,8 +120,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 
 	/**
 	 * 获取菜单树，包含按钮，并根据用户id查询该用户是否包含此菜单，设置菜单是否选中
+	 *
 	 * @param id 用户id
 	 */
+	@Cacheable(value = "menuCache", key = "#root.method + '_roleID_' + #root.args[0]")
 	@Override
 	public Tree<Menu> getTree(String id) {
 		List<RoleMenu> list = roleMenuDao.selectList(new EntityWrapper<RoleMenu>().eq("roleId", id));
@@ -158,15 +180,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 		return super.deleteById(id);
 	}
 
+	@Cacheable(value = "menuCache", key = "#root.method + '_' + #root.args[0]")
 	@Override
-	public List<Menu> list(Map<String, Object> params) {
-		String menuName = (String) params.get("menuName");
-		String type = (String) params.get("type");
+	public List<Menu> list(Menu menu) {
 		EntityWrapper<Menu> wrapper = new EntityWrapper<Menu>();
-		wrapper.like("menuName", menuName);
-		if (StringUtils.isNotEmpty(type)) {
-			wrapper.eq("type", Integer.parseInt(type));
-		}
+		wrapper.like("menuName", menu.getMenuName());
+		wrapper.eq(menu.getType() != null, "type", menu.getType());
 		return selectList(wrapper.orderBy("sort"));
 	}
 

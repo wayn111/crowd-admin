@@ -1,11 +1,10 @@
 package com.wayn.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.baomidou.mybatisplus.service.IService;
 import com.wayn.domain.Menu;
 import com.wayn.domain.vo.Tree;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,15 +15,21 @@ import com.wayn.domain.vo.Tree;
  * @since 2019-04-13
  */
 public interface MenuService extends IService<Menu> {
-	public List<String> selectMenuIdsByUid(String id);
+    boolean save(Menu menu);
 
-	public List<String> selectResourceByUid(String id);
+    boolean update(Menu menu);
 
-	public List<Menu> selectTreeMenuByUserId(String id) throws Exception;
+    boolean remove(Long id);
 
-	public Tree<Menu> getTree();
+    public List<String> selectMenuIdsByUid(String id);
 
-	public Tree<Menu> getTree(String roleId);
-	
-	public List<Menu> list(Map<String, Object> params);
+    public List<String> selectResourceByUid(String id);
+
+    public List<Menu> selectTreeMenuByUserId(String id) throws Exception;
+
+    public Tree<Menu> getTree();
+
+    public Tree<Menu> getTree(String roleId);
+
+    public List<Menu> list(Menu menu);
 }

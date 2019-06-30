@@ -130,7 +130,7 @@
                 url : options.url,
                 data : parms?parms:options.ajaxParams,
                 dataType : "JSON",
-                contentType: 'application/json',
+                contentType: options.contentType,
                 success : function(data, textStatus, jqXHR) {
                     // 加载完数据先清空
                     tbody.html("");
@@ -255,6 +255,7 @@
         data : [], // 构造table的数据集合
         type : "POST", // 请求数据的ajax类型
         url : null, // 请求数据的ajax的url
+        contentType: 'application/x-www-form-urlencoded',
         ajaxParams : {}, // 请求数据的ajax的data属性
         expandColumn : null,// 在哪一列上面显示展开按钮
         expandAll : true, // 是否全部展开

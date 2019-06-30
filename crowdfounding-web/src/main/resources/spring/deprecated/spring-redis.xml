@@ -14,10 +14,8 @@
 
 	<bean id="jedisPoolConfig"
 		class="redis.clients.jedis.JedisPoolConfig">
-		<property name="maxActive" value="500" /><!-- 最大连接数 -->
 		<property name="maxIdle" value="100" /><!-- 最大闲置 -->
 		<property name="minIdle" value="10" /><!-- 最小闲置 -->
-		<property name="maxWait" value="5000" /><!-- 最大等待 -->
 		<property name="testOnBorrow" value="true" /><!-- 可以获取 -->
 	</bean>
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">

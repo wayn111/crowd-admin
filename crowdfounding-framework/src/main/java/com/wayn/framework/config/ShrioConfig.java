@@ -1,9 +1,10 @@
 package com.wayn.framework.config;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-
+import com.wayn.commom.consts.Constant;
+import com.wayn.framework.redis.RedisOpts;
+import com.wayn.framework.shiro.cache.RedisCacheManager;
+import com.wayn.framework.shiro.realm.MyRealm;
+import com.wayn.framework.shiro.session.RedisSessionDAO;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -11,18 +12,20 @@ import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
-import com.wayn.commom.consts.Config;
-import com.wayn.framework.shiro.cache.RedisCacheManager;
-import com.wayn.framework.shiro.realm.MyRealm;
-import com.wayn.framework.shiro.redis.RedisManager;
-import com.wayn.framework.shiro.session.RedisSessionDAO;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 
 @Configuration
 public class ShrioConfig {
@@ -38,6 +41,9 @@ public class ShrioConfig {
 	private String cacheType;
 	@Value("${session-timeout}")
 	private int tomcatTimeout;
+
+	@Autowired
+	private RedisOpts opts;
 
 	@Bean
 	public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
@@ -65,10 +71,10 @@ public class ShrioConfig {
 		//设置realm.
 		securityManager.setRealm(userRealm());
 		// 自定义缓存实现 使用redis
-		if (Config.CACHE_TYPE_REDIS.equals(cacheType)) {
+		if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
 			securityManager.setCacheManager(rediscacheManager());
 		} else {
-			securityManager.setCacheManager(ehCacheManager());
+			securityManager.setCacheManager(shiroEhCacheManager());
 		}
 		securityManager.setSessionManager(sessionManager());
 		return securityManager;
@@ -83,10 +89,11 @@ public class ShrioConfig {
 		userRealm.setCredentialsMatcher(credentialsMatcher);
 		return userRealm;
 	}
+
 	/**
 	 * 启动shiro注解
 	 */
-	/*@Bean
+	@Bean
 	@DependsOn("lifecycleBeanPostProcessor")
 	public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
 		DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
@@ -95,29 +102,19 @@ public class ShrioConfig {
 		defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
 		return defaultAdvisorAutoProxyCreator;
 	}
-	
+
 	@Bean
 	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
 		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
 		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
 		return authorizationAttributeSourceAdvisor;
-	}*/
+	}
 
 	/**
 	 * 配置shiro redisManager
 	 *
 	 * @return
 	 */
-	@Bean
-	public RedisManager redisManager() {
-		RedisManager redisManager = new RedisManager();
-		redisManager.setHost(host);
-		redisManager.setPort(port);
-		redisManager.setExpire(1800);// 配置缓存过期时间
-		//redisManager.setTimeout(1800);
-		redisManager.setPassword(password);
-		return redisManager;
-	}
 
 	/**
 	 * cacheManager 缓存 redis实现
@@ -127,7 +124,7 @@ public class ShrioConfig {
 	 */
 	public RedisCacheManager rediscacheManager() {
 		RedisCacheManager redisCacheManager = new RedisCacheManager();
-		redisCacheManager.setRedisManager(redisManager());
+		redisCacheManager.setOpts(opts);
 		return redisCacheManager;
 	}
 
@@ -138,13 +135,12 @@ public class ShrioConfig {
 	@Bean
 	public RedisSessionDAO redisSessionDAO() {
 		RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-		redisSessionDAO.setRedisManager(redisManager());
 		return redisSessionDAO;
 	}
 
 	@Bean
 	public SessionDAO sessionDAO() {
-		if (Config.CACHE_TYPE_REDIS.equals(cacheType)) {
+		if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
 			return redisSessionDAO();
 		} else {
 			return new MemorySessionDAO();
@@ -165,8 +161,7 @@ public class ShrioConfig {
 		return sessionManager;
 	}
 
-	@Bean
-	public EhCacheManager ehCacheManager() {
+	public EhCacheManager shiroEhCacheManager() {
 		EhCacheManager em = new EhCacheManager();
 		em.setCacheManagerConfigFile("classpath:cache/shiro-ehcache.xml");
 		return em;

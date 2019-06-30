@@ -144,9 +144,9 @@
 	            parentCode: 'pid',
 	            type: "POST", // 请求数据的ajax类型
 	            url: prefix + '/list?_r=' + Math.random(), // 请求数据的ajax的url
-	            ajaxParams: JSON.stringify({
+	            ajaxParams: {
 	            	deptName : $('#deptName').val().trim()
-	            }), // 请求数据的ajax的data属性
+	            }, // 请求数据的ajax的data属性
 	            expandColumn: '1',// 在哪一列上面显示展开按钮
 	            striped: false, // 是否各行渐变色
 	            bordered: true, // 是否显示边框

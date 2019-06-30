@@ -1,5 +1,6 @@
 package com.wayn.domain.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,8 +8,9 @@ import java.util.Date;
  * @author wayn
  *
  */
-public class RoleChecked {
+public class RoleChecked implements Serializable {
 
+	private static final long serialVersionUID = 4921874281517667471L;
 	private String id;
 
 	/**
@@ -34,7 +36,7 @@ public class RoleChecked {
 	/**
 	 * role多选框，是否选中标志
 	 */
-	private boolean checked;
+	private Boolean checked = false;
 
 	public String getId() {
 		return id;
@@ -80,7 +82,7 @@ public class RoleChecked {
 		return checked;
 	}
 
-	public void setChecked(boolean checked) {
+	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}
 

@@ -1,20 +1,14 @@
 package com.wayn.commom.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import com.wayn.commom.consts.Constant;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Map;
 import java.util.logging.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.wayn.commom.consts.Config;
 
 public class HttpUtil {
 
@@ -77,7 +71,7 @@ public class HttpUtil {
 	 */
 	public static void ajaxStatus(HttpServletResponse response, int status, String tip) {
 		try {
-			response.setContentType("text/html;charset=" + Config.SSO_ENCODING);
+			response.setContentType("text/html;charset=" + Constant.SSO_ENCODING);
 			response.setStatus(status);
 			PrintWriter out = response.getWriter();
 			out.print(tip);
@@ -162,7 +156,7 @@ public class HttpUtil {
 	 *            返回地址参数名
 	 * @param retUrl
 	 *            返回地址
-	 * @param Map
+	 * @param data
 	 *            携带参数
 	 * @return
 	 */
@@ -176,7 +170,7 @@ public class HttpUtil {
 		retStr.append(retParam);
 		retStr.append("=");
 		try {
-			retStr.append(URLEncoder.encode(retUrl, Config.SSO_ENCODING));
+			retStr.append(URLEncoder.encode(retUrl, Constant.SSO_ENCODING));
 		} catch (UnsupportedEncodingException e) {
 			logger.severe("encodeRetURL error." + url);
 			e.printStackTrace();
@@ -207,7 +201,7 @@ public class HttpUtil {
 		String retUrl = "";
 
 		try {
-			retUrl = URLDecoder.decode(url, Config.SSO_ENCODING);
+			retUrl = URLDecoder.decode(url, Constant.SSO_ENCODING);
 		} catch (UnsupportedEncodingException e) {
 			logger.severe("encodeRetURL error." + url);
 			e.printStackTrace();

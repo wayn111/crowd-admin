@@ -168,7 +168,7 @@
 						iconSize : 'outline',
 						toolbar : '#exampleToolbar',
 						silent : true, //静默刷新数据
-						// contentType : "application/x-www-form-urlencoded",
+						contentType : "application/x-www-form-urlencoded",
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数
 						pageNumber : 1, // 如果设置了分布，首页页码
@@ -255,20 +255,7 @@
 		}
 
 		$(function() {
-			let config = {
-				width : '100px',
-				data : [ {
-					id : '',
-					text : '全部'
-				}, {
-					id : 1,
-					text : '启用'
-				}, {
-					id : -1,
-					text : '禁用'
-				} ],
-			}
-			$('.js-example-basic-single').select2(config);
+			select2Init('.js-example-basic-single');
 			load();
 		})
 	</script>

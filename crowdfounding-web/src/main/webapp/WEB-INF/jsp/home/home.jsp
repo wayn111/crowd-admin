@@ -56,15 +56,15 @@
 									class="fa arrow"></span>
 								</a>
 								<ul class="nav nav-second-level">
-									<c:forEach var="childMenu" items="${menu.children }">
+									<c:forEach var="childMenu" items="${menu.children }" varStatus="status">
 										<li><c:choose>
 												<c:when test="${empty childMenu.url}">
 													<a class="J_menuItem" href="javascript:void(0)"
-														data-index="0">${childMenu.menuName }</a>
+														data-index="${status.index}">${childMenu.menuName }</a>
 												</c:when>
 												<c:otherwise>
 													<a class="J_menuItem" href="${_ctx }${childMenu.url }"
-														data-index="0">${childMenu.menuName }</a>
+														data-index="${status.index}">${childMenu.menuName }</a>
 												</c:otherwise>
 											</c:choose></li>
 									</c:forEach>

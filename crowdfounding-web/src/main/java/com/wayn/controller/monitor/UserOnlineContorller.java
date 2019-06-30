@@ -1,26 +1,19 @@
 package com.wayn.controller.monitor;
 
-import java.util.List;
-import java.util.Map;
-
+import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.util.Response;
+import com.wayn.domain.UserOnline;
+import com.wayn.enums.Operator;
+import com.wayn.framework.annotation.Log;
+import com.wayn.service.UserOnlineService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.util.Response;
-import com.wayn.domain.UserOnline;
-import com.wayn.framework.util.ShiroUtil;
-import com.wayn.service.UserOnlineService;
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/monitor/online")
 @Controller
@@ -35,14 +28,15 @@ public class UserOnlineContorller extends BaseControlller {
 		return PREFIX + "/online";
 	}
 
+	@Log(value = "在线用户管理")
 	@RequiresPermissions("monitor:online:online")
 	@ResponseBody
 	@PostMapping("/list")
 	public List<UserOnline> list(Model model, @RequestBody(required = false) Map<String, Object> params) {
-		ShiroUtil.clearCachedAuthorizationInfo();
 		return userOnlineService.list();
 	}
 
+	@Log(value = "在线用户管理",operator = Operator.LOGOUT)
 	@RequiresPermissions("monitor:online:logout")
 	@ResponseBody
 	@DeleteMapping("/forceLogout/{id}")
@@ -55,6 +49,7 @@ public class UserOnlineContorller extends BaseControlller {
 
 	}
 
+	@Log(value = "在线用户管理",operator = Operator.LOGOUT)
 	@RequiresPermissions("monitor:online:logout")
 	@ResponseBody
 	@PostMapping("/batchForceLogout")
