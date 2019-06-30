@@ -31,7 +31,11 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     @Override
     public Page<Dict> listPage(Page<Dict> page, Dict dict) {
         EntityWrapper<Dict> wrapper = new EntityWrapper<>();
-        wrapper.eq("type", 1);
+        Integer type = dict.getType();
+        if (type == 2) {
+            wrapper.eq("dictType", dict.getDictType());
+        }
+        wrapper.eq("type", type);
         wrapper.eq("delFlag", "0");
         wrapper.like("name", dict.getName());
         return selectPage(page, wrapper);
@@ -39,14 +43,14 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
 
     @Override
     public boolean exists(Dict dict) {
-        //如果是修改字典分类，数据值未改变则通过校验
+        //如果是修改字典数据，数据值未改变则通过校验
         if (dict.getId() != null) {
             String value = dict.getValue();
             if (selectById(dict.getId()).getValue().equals(value)) {
                 return false;
             }
         }
-        int count = selectCount(new EntityWrapper<Dict>().eq("value", dict.getValue()));
+        int count = selectCount(new EntityWrapper<Dict>().eq("value", dict.getValue()).eq("type", dict.getType()));
         return count > 0 ? true : false;
     }
 

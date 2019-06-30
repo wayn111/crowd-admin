@@ -13,7 +13,7 @@
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="dict-form">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">字典名称：</label>
+                            <label class="col-sm-3 control-label">标签名：</label>
                             <div class="col-sm-8">
                                 <%--字典类型--%>
                                 <input name="type" type="hidden" value="${dict.type}">
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">字典类型：</label>
+                            <label class="col-sm-3 control-label">字典值：</label>
                             <div class="col-sm-8">
                                 <input id="value" name="value" class="form-control"
                                        type="value" value="${dict.value}">
@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">备注：</label>
                             <div class="col-sm-8">
-                                <input id="remarks" name="remarks" class="form-control" type="text" value="${dict.remarks}">
+                                <input id="remarks" name="remarks" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
@@ -62,7 +62,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + "/commom/dict/type"
+    let prefix = _ctx + "/commom/dict/data"
 
     function save() {
         $.ajax({

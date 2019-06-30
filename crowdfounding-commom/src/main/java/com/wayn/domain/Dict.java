@@ -53,9 +53,9 @@ public class Dict implements Serializable {
     private BigDecimal sort;
 
     /**
-     * 父级编号
+     * 字典类型
      */
-    private Long parentId;
+    private String dictType;
 
     /**
      * 创建者
@@ -141,15 +141,6 @@ public class Dict implements Serializable {
         return this;
     }
 
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public Dict setParentId(Long parentId) {
-        this.parentId = parentId;
-        return this;
-    }
-
     public String getCreateBy() {
         return createBy;
     }
@@ -204,6 +195,15 @@ public class Dict implements Serializable {
         return this;
     }
 
+    public String getDictType() {
+        return dictType;
+    }
+
+    public Dict setDictType(String dictType) {
+        this.dictType = dictType;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Dict{" +
@@ -213,7 +213,7 @@ public class Dict implements Serializable {
                 ", dictState=" + dictState +
                 ", type=" + type +
                 ", sort=" + sort +
-                ", parentId=" + parentId +
+                ", dictType='" + dictType + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +
                 ", updateBy='" + updateBy + '\'' +

@@ -12,19 +12,20 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/commom/dict/type")
+@RequestMapping("/commom/dict/data")
 @Controller
-public class DictTypeController extends BaseControlller {
+public class DictDataController extends BaseControlller {
 
-    private static final String PREFIX = "commom/dict/type";
+    private static final String PREFIX = "commom/dict/data";
 
     @Autowired
     private DictService dictService;
 
     @RequiresPermissions("commom:dict:type")
-    @GetMapping
-    public String typeIndex() {
-        return PREFIX + "/type";
+    @GetMapping("/{dictType}")
+    public String dataIndex(ModelMap modelMap, @PathVariable("dictType") String dictType) {
+        modelMap.put("dictType", dictType);
+        return PREFIX + "/data";
     }
 
     @RequiresPermissions("commom:dict:type")
@@ -38,7 +39,7 @@ public class DictTypeController extends BaseControlller {
     @RequiresPermissions("commom:dict:add")
     @GetMapping("/add")
     public String add(ModelMap modelMap) {
-        modelMap.put("type", 1);
+        modelMap.put("type", 2);
         return PREFIX + "/add";
     }
 
@@ -55,7 +56,7 @@ public class DictTypeController extends BaseControlller {
     @PostMapping("/addSave")
     public Response addSave(ModelMap modelMap, Dict dict) {
         dictService.save(dict);
-        return Response.success("新增字典分类成功");
+        return Response.success("新增字典数据成功");
     }
 
     @RequiresPermissions("commom:dict:edit")
@@ -63,7 +64,7 @@ public class DictTypeController extends BaseControlller {
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, Dict dict) {
         dictService.update(dict);
-        return Response.success("修改字典分类成功");
+        return Response.success("修改字典数据成功");
     }
 
 
@@ -72,7 +73,7 @@ public class DictTypeController extends BaseControlller {
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Long id) {
         dictService.remove(id);
-        return Response.success("删除字典分类成功");
+        return Response.success("删除字典数据成功");
     }
 
     @RequiresPermissions("commom:dict:remove")
@@ -80,7 +81,7 @@ public class DictTypeController extends BaseControlller {
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) {
         dictService.batchRemove(ids);
-        return Response.success("删除字典分类成功");
+        return Response.success("删除字典数据成功");
     }
 
     @ResponseBody
