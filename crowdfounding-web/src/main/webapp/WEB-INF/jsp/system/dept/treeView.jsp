@@ -29,6 +29,7 @@
 		function getTreeData() {
 			$.ajax({
 				type : "POST",
+				dataType :'json',
 				url : prefix + "/tree",
 				success : function(tree) {
 					loadTree(tree);
@@ -53,9 +54,6 @@
 		});
 
 		$('#deptTree').on("changed.jstree", function(e, data) {
-			if(!loadDeptFlag){
-				return;
-			}
 			if (data.node.id == '-1') {
 				parent.loadDept(0, '顶级节点');
 			} else {

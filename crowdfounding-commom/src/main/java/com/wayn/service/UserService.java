@@ -1,11 +1,10 @@
 package com.wayn.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.IService;
 import com.wayn.domain.User;
 
 import java.util.Map;
-
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
@@ -17,7 +16,7 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface UserService extends IService<User> {
 
-	Page<User> listPage(Page<User> page, Map<String, Object> params);
+	Page<User> listPage(Page<User> page, User user);
 
 	boolean exit(Map<String, Object> params);
 

@@ -85,6 +85,7 @@
 			$.ajax({
 				cache : true,
 				type : "POST",
+				dataType: "json",
 				url : prefix + "/addSave",
 				data : $('#user-form').serialize(),// 你的formid
 				async : false,
@@ -114,7 +115,7 @@
 						required : true,
 						minlength : 2,
 						remote : {
-							url : prefix + "/addExit", // 后台处理程序
+							url : prefix + "/exists", // 后台处理程序
 							type : "post", // 数据发送方式
 							dataType : "json", // 接受数据格式
 							data : { // 要传递的数据

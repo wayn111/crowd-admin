@@ -1,21 +1,19 @@
 package com.wayn.commom.exception;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.util.HttpUtil;
+import com.wayn.commom.util.Response;
 import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.util.HttpUtil;
-import com.wayn.commom.util.Response;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
-public class BusinessExceptionHander extends BaseControlller {
+public class BusinessExceptionAdvice extends BaseControlller {
 
 	/**
 	 * 处理认证异常

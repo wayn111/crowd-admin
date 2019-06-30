@@ -1,9 +1,8 @@
 package com.wayn.service.impl;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.wayn.domain.User;
+import com.wayn.domain.UserOnline;
+import com.wayn.service.UserOnlineService;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -11,9 +10,9 @@ import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wayn.domain.User;
-import com.wayn.domain.UserOnline;
-import com.wayn.service.UserOnlineService;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserOnlineServiceImpl implements UserOnlineService {
@@ -53,7 +52,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
 	@Override
 	public void forceLogout(String sessionId) {
 		Session session = sessionDAO.readSession(sessionId);
-		if(session != null) {
+ 		if(session != null) {
 			session.stop();
 			sessionDAO.delete(session);
 		}

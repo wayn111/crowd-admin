@@ -1,12 +1,13 @@
 package com.wayn.commom.base;
 
-import java.util.Map;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.wayn.commom.consts.Constant;
+import com.wayn.commom.exception.BusinessException;
+import com.wayn.commom.util.HttpUtil;
+import com.wayn.commom.util.ServletUtil;
+import com.wayn.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -14,12 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.wayn.commom.exception.BusinessException;
-import com.wayn.commom.util.HttpUtil;
-import com.wayn.domain.User;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public class BaseControlller {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -63,9 +63,9 @@ public class BaseControlller {
 	 * <p>
 	 * 获取分页对象
 	 * </p>
-	 * 
-	 * @param size
-	 *            每页显示数量
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param <T>
 	 * @return
 	 */
 	protected <T> Page<T> getPage(int pageNumber, int pageSize) {
@@ -76,16 +76,15 @@ public class BaseControlller {
 	 * <p>
 	 * 获取分页对象
 	 * </p>
-	 * 
-	 * @param params
-	 *            分页查询参数
+	 *
+	 * @param params 分页查询参数
 	 * @return
 	 */
 	protected <T> Page<T> getPage(Map<String, Object> params) {
-		int pageNumber = (int) params.remove("pageNumber");
-		int pageSize = (int) params.remove("pageSize");
-		String sortName = (String) params.remove("sortName");
-		String sortOrder = (String) params.remove("sortOrder");
+		int pageNumber = Integer.parseInt(params.remove("pageNumber").toString());
+		int pageSize = Integer.parseInt(params.remove("pageSize").toString());
+		String sortName = params.remove("sortName").toString();
+		String sortOrder = params.remove("sortOrder").toString();
 		if ("desc".equals(sortOrder)) {
 			return new Page<T>(pageNumber, pageSize, sortName, false);
 		} else {
@@ -94,11 +93,22 @@ public class BaseControlller {
 
 	}
 
+	protected <T> Page<T> getPage() {
+		Integer pageNumber = ServletUtil.getParameterToInt(Constant.PAGE_NUMBER);
+		Integer pageSize = ServletUtil.getParameterToInt(Constant.PAGE_SIZE);
+		String sortName = ServletUtil.getParameter(Constant.SORT_NAME);
+		String sortOrder = ServletUtil.getParameter(Constant.SORT_ORDER);
+		if ("desc".equals(sortOrder)) {
+			return new Page<T>(pageNumber, pageSize, sortName, false);
+		} else {
+			return new Page<T>(pageNumber, pageSize, sortName, true);
+		}
+	}
+
 	/**
 	 * 重定向至地址 url
-	 * 
-	 * @param url
-	 *            请求地址
+	 *
+	 * @param url 请求地址
 	 * @return
 	 */
 	protected String redirectTo(String url) {
@@ -108,11 +118,9 @@ public class BaseControlller {
 	}
 
 	/**
-	 * 
 	 * 返回 JSON 格式对象
-	 * 
-	 * @param object
-	 *            转换对象
+	 *
+	 * @param object 转换对象
 	 * @return
 	 */
 	protected String toJson(Object object) {
@@ -120,13 +128,10 @@ public class BaseControlller {
 	}
 
 	/**
-	 * 
 	 * 返回 JSON 格式对象
-	 * 
-	 * @param object
-	 *            转换对象
-	 * @param features
-	 *            序列化特点
+	 *
+	 * @param object   转换对象
+	 * @param format 序列化特点
 	 * @return
 	 */
 	protected String toJson(Object object, String format) {
@@ -138,8 +143,9 @@ public class BaseControlller {
 
 	/**
 	 * 返回当前系统用户
+	 *
 	 * @return
-	 * @throws BusinessException 
+	 * @throws BusinessException
 	 */
 	protected User getCurUser() throws BusinessException {
 		Subject subject = SecurityUtils.getSubject();
@@ -155,8 +161,9 @@ public class BaseControlller {
 
 	/**
 	 * 返回当前系统用户Id
+	 *
 	 * @return
-	 * @throws BusinessException 
+	 * @throws BusinessException
 	 */
 	protected String getCurUserId() throws BusinessException {
 		User curUser = getCurUser();
@@ -168,8 +175,9 @@ public class BaseControlller {
 
 	/**
 	 * 返回当前系统会会话Id
+	 *
 	 * @return
-	 * @throws BusinessException 
+	 * @throws BusinessException
 	 */
 	protected String getSessionId() throws BusinessException {
 		Subject subject = SecurityUtils.getSubject();

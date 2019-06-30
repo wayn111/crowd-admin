@@ -1,18 +1,17 @@
-package com.wayn.controller.system;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+package com.wayn.controller.home;
 
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.domain.Menu;
 import com.wayn.service.CacheManagerService;
 import com.wayn.service.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/main")

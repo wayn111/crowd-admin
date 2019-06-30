@@ -61,6 +61,7 @@
 		function getMenuTreeData() {
 			$.ajax({
 				type : "POST",
+				dataType : "json",
 				url : _ctx + '/system/menu/tree/' + $('#roleId').val(),
 				success : function(menuTree) {
 					loadMenuTree(menuTree);

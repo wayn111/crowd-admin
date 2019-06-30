@@ -1,15 +1,12 @@
 package com.wayn.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.IService;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.domain.Role;
-import com.wayn.domain.User;
 import com.wayn.domain.vo.RoleChecked;
 
 import java.util.List;
-import java.util.Map;
-
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
@@ -23,7 +20,7 @@ public interface RoleService extends IService<Role> {
 
 	boolean save(Role role, String menuIds);
 
-	boolean update(Role role, String menuIds);
+	boolean update(Role role, String menuIds) throws Exception;
 
 	boolean remove(String roleId) throws BusinessException;
 
@@ -31,5 +28,5 @@ public interface RoleService extends IService<Role> {
 
 	List<RoleChecked> listCheckedRolesByUid(String uid);
 
-	Page<Role> listPage(Page<Role> page, Map<String, Object> params);
+	Page<Role> listPage(Page<Role> page, Role role);
 }

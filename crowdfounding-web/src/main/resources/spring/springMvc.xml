@@ -5,6 +5,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
@@ -17,9 +18,14 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util-4.3.xsd
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
 	<context:component-scan
-		base-package="com.wayn.controller"></context:component-scan>
+		base-package="com.wayn.controller" />
+	<context:component-scan
+		base-package="com.wayn.service" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- 静态资源配置 -->
 	<mvc:resources mapping="/static/**" location="/static/" />
 	<mvc:annotation-driven>
@@ -33,6 +39,7 @@
 						<!-- 优先使用该媒体类型,为了解决IE浏览器下,返回JSON数据的下载问题 -->
 						<value>text/html;charset=UTF-8</value>
 						<value>text/json;charset=UTF-8</value>
+						<value>application/x-www-form-urlencoded;charset=UTF-8</value>
 					</list>
 				</property>
 				<!-- 使用内置日期工具进行处理 -->
@@ -66,14 +73,4 @@
 		<property name="maxInMemorySize" value="4096" />
 	</bean>
 
-	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after -->
-	<!-- the lifecycleBeanProcessor has run: -->
-	<!-- 如果通过spring-shiro.xml方式，启动shiro注解，还需要在mvc.xml中添加如下配置 -->
-	<bean
-		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-		depends-on="lifecycleBeanPostProcessor" />
-	<bean
-		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager" />
-	</bean>
 </beans>

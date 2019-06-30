@@ -8,7 +8,7 @@ $(function () {
     }
 
     /**
-     * 切换主页到当前tab
+     * 显示切换tab动画
      */
     function g(n) {
         var o = f($(n).prevAll()), q = f($(n).nextAll());

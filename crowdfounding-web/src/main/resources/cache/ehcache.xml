@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache name="es">
 
-	<diskStore path="java.io.tmpdir" />
-	<!--
+    <diskStore path="java.io.tmpdir"/>
+    <!--
        name:缓存名称。
        maxElementsInMemory：缓存最大个数。
        eternal:对象是否永久有效，一但设置了，timeout将不起作用。
@@ -19,30 +19,31 @@
        memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。
                         默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。
        clearOnFlush：内存数量最大时是否清除。
-    	-->
-	<defaultCache maxEntriesLocalHeap="1000" eternal="false"
-		timeToIdleSeconds="3600" timeToLiveSeconds="3600" overflowToDisk="false">
-	</defaultCache>
+        -->
+    <defaultCache maxEntriesLocalHeap="1000" eternal="false"
+                  timeToIdleSeconds="3600" timeToLiveSeconds="3600" overflowToDisk="false">
+    </defaultCache>
 
-	<!-- 测试缓存 -->
-	<cache name="mytest" maxElementsInMemory="100000" eternal="true"
-		overflowToDisk="false" memoryStoreEvictionPolicy="LRU">
-	</cache>
-	<!-- 权限缓存 1 分钟 -->
-	<cache name="permissionCache" maxEntriesLocalHeap="2000" eternal="false"
-		timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
-		statistics="true">
-	</cache>
-	<!-- 菜单缓存 1分钟 -->
-	<cache name="menuCache" maxEntriesLocalHeap="2000" eternal="false"
-		timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
-		statistics="true">
-	</cache>
-	
-	<!-- 全局常量缓存 -->
-	<cache name="settingCache" maxEntriesLocalHeap="2000" eternal="false"
-		timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
-		statistics="true">
-	</cache>
-	
+    <!-- 部门缓存 1 分钟-->
+    <cache name="deptCache" maxEntriesLocalHeap="2000" eternal="false"
+           timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
+           statistics="true">
+    </cache>
+    <!-- 权限缓存 1 分钟 -->
+    <cache name="permissionCache" maxEntriesLocalHeap="2000" eternal="false"
+           timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
+           statistics="true">
+    </cache>
+    <!-- 菜单缓存 1分钟 -->
+    <cache name="menuCache" maxEntriesLocalHeap="2000" eternal="false"
+           timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <!-- 全局常量缓存 -->
+    <cache name="settingCache" maxEntriesLocalHeap="2000" eternal="false"
+           timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
+           statistics="true">
+    </cache>
+
 </ehcache>

@@ -1,12 +1,10 @@
 package com.wayn.service;
 
+import com.baomidou.mybatisplus.service.IService;
 import com.wayn.domain.Dept;
 import com.wayn.domain.vo.Tree;
 
 import java.util.List;
-import java.util.Map;
-
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
@@ -18,9 +16,15 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface DeptService extends IService<Dept> {
 
+	boolean save(Dept dept);
+
+	boolean update(Dept dept);
+
+	boolean remove(Integer id);
+
 	Tree<Dept> getTree();
 
 	List<Long> listChildrenIds(Long pid);
 	
-	List<Dept> list(Map<String, Object> params);
+	List<Dept> list(Dept dept);
 }

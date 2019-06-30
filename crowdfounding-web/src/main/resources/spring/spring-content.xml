@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd    
 	http://www.springframework.org/schema/context    
 	http://www.springframework.org/schema/context/spring-context.xsd    
@@ -17,47 +17,48 @@
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd
 	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-	<context:component-scan
-		base-package="com.wayn.*">
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Service" />
-	</context:component-scan>
+    <context:component-scan
+            base-package="com.wayn.*">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    <!-- 开启aop，对类代理 -->
+    <aop:config proxy-target-class="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<import resource="spring-dao.xml" />
+    <import resource="spring-service.xml" />
+    <import resource="spring-ehcache.xml" />-->
+    <!--<import resource="spring-shiro.xml" />-->
 
-	<context:property-placeholder
-		location="classpath:*.properties" />
+    <!-- 开启druids-pring监控 -->
+    <bean id="druid-stat-interceptor"
+          class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+    </bean>
 
-	<!-- 开启aop，对类代理 -->
-	<aop:config proxy-target-class="true" />
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<import resource="spring-dao.xml" />
-	<import resource="spring-service.xml" />
-	<import resource="spring-ehcache.xml" />
-	<!-- <import resource="spring-shiro.xml" /> -->
+    <bean id="druid-stat-pointcut"
+          class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+          scope="prototype">
+        <property name="patterns">
+            <list>
+                <value>com.wayn.*</value>
+            </list>
+        </property>
+    </bean>
 
-	<!-- 开启druids-pring监控 -->
-	<bean id="druid-stat-interceptor"
-		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
-	</bean>
+    <aop:config>
+        <aop:advisor advice-ref="druid-stat-interceptor"
+                     pointcut-ref="druid-stat-pointcut"/>
+    </aop:config>
 
-	<bean id="druid-stat-pointcut"
-		class="org.springframework.aop.support.JdkRegexpMethodPointcut"
-		scope="prototype">
-		<property name="patterns">
-			<list>
-				<value>com.wayn.*</value>
-			</list>
-		</property>
-	</bean>
+    <beans profile="docker">
+        <context:property-placeholder
+                location="classpath:proj-docker.properties"/>
+    </beans>
 
-	<aop:config>
-		<aop:advisor advice-ref="druid-stat-interceptor"
-			pointcut-ref="druid-stat-pointcut" />
-	</aop:config>
-
-	<!-- 启用缓存注解功能，需要在spring著配置文件中启动cache:annotation-driven -->
-	<cache:annotation-driven
-		cache-manager="ehcacheManager" />
-
+    <beans profile="dev">
+        <context:property-placeholder
+                location="classpath:proj-dev.properties"/>
+    </beans>
 </beans>

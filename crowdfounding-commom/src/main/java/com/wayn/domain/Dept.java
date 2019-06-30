@@ -1,10 +1,11 @@
 package com.wayn.domain;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -40,7 +41,7 @@ public class Dept implements Serializable {
 	/**
 	 * 排序
 	 */
-	private Integer sort;
+	private BigDecimal sort;
 
 	public Long getId() {
 		return id;
@@ -74,11 +75,11 @@ public class Dept implements Serializable {
 		this.deptDesc = deptDesc;
 	}
 
-	public Integer getSort() {
+	public BigDecimal getSort() {
 		return sort;
 	}
 
-	public void setSort(Integer sort) {
+	public void setSort(BigDecimal sort) {
 		this.sort = sort;
 	}
 

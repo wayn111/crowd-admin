@@ -56,7 +56,7 @@
 			value="classpath:mybatis/mybatis-config.xml" />
 		<property name="typeAliasesPackage" value="com.wayn.domain" />
 		<property name="mapperLocations"
-			value="classpath:com/wayn/mapper/xml/*Mapper.xml" />
+			value="classpath*:com/wayn/mapper/*Mapper.xml" />
 		<property name="plugins">
 			<array>
 				<!-- 分页插件配置 -->

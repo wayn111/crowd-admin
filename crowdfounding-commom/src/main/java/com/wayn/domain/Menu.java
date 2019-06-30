@@ -1,13 +1,14 @@
 package com.wayn.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -51,7 +52,7 @@ public class Menu implements Serializable {
 	/**
 	 * 排序
 	 */
-	private Integer sort;
+	private BigDecimal sort;
 
 	/**
 	 * 类别，1表示目录，2表示菜单，3表示按钮
@@ -111,11 +112,11 @@ public class Menu implements Serializable {
 		this.icon = icon;
 	}
 
-	public Integer getSort() {
+	public BigDecimal getSort() {
 		return sort;
 	}
 
-	public void setSort(Integer sort) {
+	public void setSort(BigDecimal sort) {
 		this.sort = sort;
 	}
 

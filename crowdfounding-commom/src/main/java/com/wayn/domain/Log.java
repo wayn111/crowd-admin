@@ -1,12 +1,11 @@
 package com.wayn.domain;
 
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -24,7 +23,7 @@ public class Log implements Serializable {
     /**
      * 主键
      */
-    @TableId(type=IdType.UUID)
+    @TableId(type = IdType.UUID)
     private String id;
 
     /**
@@ -33,9 +32,14 @@ public class Log implements Serializable {
     private String userName;
 
     /**
+     * 模块名称
+     */
+    private String moduleName;
+
+    /**
      * 日志
      */
-    private String title;
+    private String operation;
 
     /**
      * 地址
@@ -59,6 +63,7 @@ public class Log implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getUserName() {
         return userName;
     }
@@ -66,13 +71,15 @@ public class Log implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public String getTitle() {
-        return title;
+
+    public String getOperation() {
+        return operation;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
+
     public String getUrl() {
         return url;
     }
@@ -80,6 +87,7 @@ public class Log implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
     public String getParams() {
         return params;
     }
@@ -87,6 +95,7 @@ public class Log implements Serializable {
     public void setParams(String params) {
         this.params = params;
     }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -95,15 +104,24 @@ public class Log implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
     @Override
     public String toString() {
         return "Log{" +
-        "id=" + id +
-        ", userName=" + userName +
-        ", title=" + title +
-        ", url=" + url +
-        ", params=" + params +
-        ", createTime=" + createTime +
-        "}";
+                "id='" + id + '\'' +
+                ", userName='" + userName + '\'' +
+                ", moduleName='" + moduleName + '\'' +
+                ", operation='" + operation + '\'' +
+                ", url='" + url + '\'' +
+                ", params='" + params + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 }

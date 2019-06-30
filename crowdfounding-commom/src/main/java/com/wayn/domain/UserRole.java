@@ -22,7 +22,7 @@ public class UserRole implements Serializable {
     /**
      * 主键
      */
-    @TableId(type=IdType.UUID)
+    @TableId(type = IdType.UUID)
     private String Id;
 
     /**
@@ -42,6 +42,7 @@ public class UserRole implements Serializable {
     public void setId(String Id) {
         this.Id = Id;
     }
+
     public String getUserId() {
         return userId;
     }
@@ -49,6 +50,7 @@ public class UserRole implements Serializable {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
     public String getRoleId() {
         return roleId;
     }
@@ -60,9 +62,10 @@ public class UserRole implements Serializable {
     @Override
     public String toString() {
         return "UserRole{" +
-        "Id=" + Id +
-        ", userId=" + userId +
-        ", roleId=" + roleId +
-        "}";
+                "Id='" + Id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", roleId='" + roleId + '\'' +
+                '}';
     }
 }
+

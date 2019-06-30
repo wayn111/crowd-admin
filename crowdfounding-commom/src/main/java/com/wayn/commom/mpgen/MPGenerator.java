@@ -1,4 +1,4 @@
-package com.wayn.framework.mpgen;
+package com.wayn.commom.mpgen;
 
 import org.junit.Test;
 
@@ -25,13 +25,12 @@ public class MPGenerator {
 	public void generateCode() {
 		String packageName = "com.wayn";
 		boolean serviceNameStartWithI = false;// user -> UserService, 设置成true: user -> IUserService
-		generateByTables(serviceNameStartWithI, packageName, "sys_dept", "sys_role", "sys_user_role", "sys_role_menu",
-				"sys_user", "sys_menu", "sys_setting", "sys_log");
+		generateByTables(serviceNameStartWithI, packageName, "sys_dict");
 	}
 
 	private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
 		GlobalConfig config = new GlobalConfig();
-		String dbUrl = "jdbc:mysql://192.168.0.110:3306/crowdfounding?characterEncoding=utf8&useSSL=false&serverTimezone=UTC";
+		String dbUrl = "jdbc:mysql://192.168.233.128:3306/crowdfounding?characterEncoding=utf8&useSSL=false&serverTimezone=UTC";
 		DataSourceConfig dataSourceConfig = new DataSourceConfig();
 		dataSourceConfig.setDbType(DbType.MYSQL).setUrl(dbUrl).setUsername("root").setPassword("admin123")
 				.setDriverName("com.mysql.cj.jdbc.Driver");

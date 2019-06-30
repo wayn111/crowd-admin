@@ -38,7 +38,7 @@
     </appender>
 	
 	 <!-- logback为java中的包 -->   
-  	<logger name="com.wayn.mapper" level="debug">
+  	<logger name="com.wayn.mapper" level="DEBUG">
   		<appender-ref ref="SQL" />
   	</logger>   
 	

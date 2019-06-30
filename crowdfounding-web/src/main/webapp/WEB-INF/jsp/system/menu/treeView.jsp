@@ -29,6 +29,7 @@
 		function getTreeData() {
 			$.ajax({
 				type : "POST",
+                dataType :'json',
 				url : prefix + "/tree",
 				success : function(tree) {
 					loadTree(tree);
@@ -51,14 +52,14 @@
 			// 展开所有节点
 			//$('#menuTree').jstree(true).open_all();
 		});
-		
+
 		$('#menuTree').on("changed.jstree", function(e, data) {
 			if (data.node.id == '-1') {
 				parent.loadMenu(0, '顶级节点');
 			} else {
 				parent.loadMenu(data.node.id, data.node.text);
 			}
-			var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+			let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 			parent.layer.close(index);
 
 		});
