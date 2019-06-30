@@ -69,12 +69,14 @@
 											</c:choose></li>
 									</c:forEach>
 								</ul>
-							</c:if> <c:if test="${menu.type eq 2 }">
+							</c:if>
+							<c:if test="${menu.type eq 2 }">
 								<a href="#"> <i class="fa fa-home"></i> <span
 									class="nav-label">${menu.menuName }</span> <span
 									class="fa arrow"></span>
 								</a>
-							</c:if></li>
+							</c:if>
+						</li>
 					</c:forEach>
 				</ul>
 			</div>

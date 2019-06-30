@@ -16,7 +16,7 @@
                             <label class="col-sm-3 control-label">字典名称：</label>
                             <div class="col-sm-8">
                                 <%--字典类型--%>
-                                <input name="type" type="hidden" value="1">
+                                <input name="type" type="hidden" value="${type}">
                                 <input id="name" name="name" class="form-control"
                                        type="text">
                             </div>
@@ -108,7 +108,8 @@
                             },
                             value: function () {
                                 return $("#value").val();
-                            }
+                            },
+                            type: 1
                         }
                     }
                 }

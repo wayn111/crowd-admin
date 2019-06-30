@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowdfounding 字典类型</title>
+    <title>crowdfounding 字典数据</title>
     <meta name="keywords" content="wayn,基于H+,后台HTML,响应式后台">
     <meta name="description"
           content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
@@ -23,6 +23,7 @@
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label>名称</label>
+                <input type="hidden" id="dictType" value="${dictType}">
                 <input type="text"
                        class="form-control" id="name">
             </div>
@@ -74,7 +75,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + "/commom/dict/type";
+    let prefix = _ctx + "/commom/dict/data";
 
     function load(deptId) {
         $('#exampleTable').bootstrapTable(
@@ -108,7 +109,8 @@
                 //Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
                 queryParams: function (params) {
                     params.name = $('#name').val();
-                    params.type = 1;
+                    params.dictType = $('#dictType').val();
+                    params.type = 2;
                     return params;
                 },
                 columns: [
@@ -122,11 +124,11 @@
                     },
                     {
                         field: 'name',
-                        title: '字典名称'
+                        title: '标签名'
                     },
                     {
                         field: 'value',
-                        title: '字典类型'
+                        title: '字典值'
                     }, {
                         field: 'dictState',
                         title: '字典状态',
@@ -150,19 +152,6 @@
                         width: '15%'
                     },
                     {
-                        title: '字典数据',
-                        width: '8%',
-                        formatter: function (value, row, index) {
-                            return '<button type="button" class="btn btn-sm btn-info" onclick="dictData(\'' + row.value + '\')">' +
-                                '<i class="fa fa-trash" aria-hidden="true"></i>列表</button>';
-                        }
-                    },
-                    {
-                        field: 'createTime',
-                        title: '创建时间',
-                        width: '15%'
-                    },
-                    {
                         title: '操作',
                         width: '15%',
                         align: 'center',
@@ -179,10 +168,6 @@
             });
     }
 
-    function dictData(value) {
-        menuItemCreate(_ctx + '/commom/dict/data/' + value, '字典数据');
-    }
-
     function reload() {
         $('#exampleTable').bootstrapTable('refresh');
     }
@@ -191,7 +176,7 @@
         // iframe层
         layer.open({
             type: 2,
-            title: '增加字典分类',
+            title: '增加字典数据',
             maxmin: true,
             shadeClose: false, // 点击遮罩关闭层
             area: ['800px', '520px'],
@@ -221,7 +206,7 @@
     function edit(id) {
         layer.open({
             type: 2,
-            title: '字典分类修改',
+            title: '字典数据修改',
             maxmin: true,
             shadeClose: false,
             area: ['800px', '520px'],
