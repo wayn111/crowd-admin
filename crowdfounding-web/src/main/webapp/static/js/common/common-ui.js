@@ -1,6 +1,46 @@
 $(function () {
     $.fn.select2.defaults.set("language", "zh-CN");
     $.fn.select2.defaults.set("theme", "bootstrap");
+
+    // laydate 时间控件绑定
+    if ($(".select-time").length > 0) {
+        var startDate = laydate.render({
+            elem: '#startTime',
+            max: $('#endTime').val(),
+            theme: 'molv',
+            trigger: 'click',
+            done: function (value, date) {
+                // 结束时间大于开始时间
+                if (value !== '') {
+                    endDate.config.min.year = date.year;
+                    endDate.config.min.month = date.month - 1;
+                    endDate.config.min.date = date.date;
+                } else {
+                    endDate.config.min.year = '';
+                    endDate.config.min.month = '';
+                    endDate.config.min.date = '';
+                }
+            }
+        });
+        var endDate = laydate.render({
+            elem: '#endTime',
+            min: $('#startTime').val(),
+            theme: 'molv',
+            trigger: 'click',
+            done: function (value, date) {
+                // 开始时间小于结束时间
+                if (value !== '') {
+                    startDate.config.max.year = date.year;
+                    startDate.config.max.month = date.month - 1;
+                    startDate.config.max.date = date.date;
+                } else {
+                    startDate.config.max.year = '';
+                    startDate.config.max.month = '';
+                    startDate.config.max.date = '';
+                }
+            }
+        });
+    }
 });
 
 /**
@@ -20,7 +60,7 @@ function select2Init(selector, config) {
             text: '禁用'
         }]
     };
-    deFaultConfig = $.extend(true, deFaultConfig, config);
+    deFaultConfig = $.extend({}, deFaultConfig, config);
     $(selector).select2(deFaultConfig);
 }
 
@@ -73,7 +113,7 @@ function menuItemCreate(url, name) {
         if ($(this).data("id") == o) {
             if (!$(this).hasClass("active")) {
                 $(this).addClass("active").siblings(".J_menuTab").removeClass("active");
-                $('.page-tabs-content',topWindow).animate({ marginLeft: ""}, "fast");
+                $('.page-tabs-content', topWindow).addClass('layui-anim layui-anim-up')
                 $(".J_mainContent .J_iframe", topWindow).each(function () {
                     if ($(this).data("id") == o) {
                         $(this).show().siblings(".J_iframe").hide();
@@ -91,7 +131,7 @@ function menuItemCreate(url, name) {
         let n = '<iframe class="J_iframe" name="iframe' + m + '" width="100%" height="100%" src="' + o + '" frameborder="0" data-id="' + o + '" seamless></iframe>';
         $(".J_mainContent", topWindow).find("iframe.J_iframe").hide().parents(".J_mainContent").append(n);
         $(".J_menuTabs .page-tabs-content", topWindow).append(p);
-        $('.page-tabs-content',topWindow).animate({ marginLeft: ""}, "fast");
+        $('.page-tabs-content', topWindow).addClass('layui-anim layui-anim-up')
     }
     return false
 }

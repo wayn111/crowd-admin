@@ -1,5 +1,6 @@
 package com.wayn.controller.commom;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.util.Response;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/commom/dict/data")
 @Controller
@@ -25,6 +28,8 @@ public class DictDataController extends BaseControlller {
     @GetMapping("/{dictType}")
     public String dataIndex(ModelMap modelMap, @PathVariable("dictType") String dictType) {
         modelMap.put("dictType", dictType);
+        List<JSONObject> objectList = dictService.selectDicts(dictType);
+        modelMap.put("dicts", objectList);
         return PREFIX + "/data";
     }
 

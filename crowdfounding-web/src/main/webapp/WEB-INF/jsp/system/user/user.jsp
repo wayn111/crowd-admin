@@ -45,6 +45,12 @@
                     class="js-example-basic-single" name="userState" id="userState">
                 </select>
             </div>
+            <div class="form-group magin-left10 select-time">
+                <label>创建时间</label>
+                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
+                <span>-</span>
+                <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
+            </div>
             <a class="btn btn-primary btn-rounded btn-sm magin-left10"
                onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a> <a
                 class="btn btn-warning btn-rounded btn-sm" onclick="selectReset()"><i
@@ -134,6 +140,8 @@
                     params.deptId = $('#deptId').val();
                     params.userName = $('#userName').val().trim();
                     params.userState = $('#userState').val();
+                    params.startTime = $('#startTime').val();
+                    params.endTime = $('#endTime').val();
                     return params;
                 },
                 columns: [
@@ -331,7 +339,11 @@
         }
     });
     $(function () {
-        select2Init('.js-example-basic-single');
+        let config = {
+            data: JSON.parse('${states}'),
+            width: '150px'
+        };
+        select2Init('.js-example-basic-single',config);
         let panehHidden = false;
         if ($(this).width() < 769) {
             panehHidden = true;

@@ -3,8 +3,8 @@ package com.wayn.domain;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.wayn.commom.base.BaseEntity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,9 +16,7 @@ import java.util.Date;
  * @since 2019-04-13
  */
 @TableName("sys_log")
-public class Log implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Log extends BaseEntity {
 
     /**
      * 主键
@@ -49,7 +47,7 @@ public class Log implements Serializable {
     /**
      * 参数
      */
-    private String params;
+    private String requestParams;
 
     /**
      * 日志时间
@@ -88,12 +86,13 @@ public class Log implements Serializable {
         this.url = url;
     }
 
-    public String getParams() {
-        return params;
+    public String getRequestParams() {
+        return requestParams;
     }
 
-    public void setParams(String params) {
-        this.params = params;
+    public Log setRequestParams(String requestParams) {
+        this.requestParams = requestParams;
+        return this;
     }
 
     public Date getCreateTime() {
@@ -120,7 +119,7 @@ public class Log implements Serializable {
                 ", moduleName='" + moduleName + '\'' +
                 ", operation='" + operation + '\'' +
                 ", url='" + url + '\'' +
-                ", params='" + params + '\'' +
+                ", requestParams='" + requestParams + '\'' +
                 ", createTime=" + createTime +
                 '}';
     }

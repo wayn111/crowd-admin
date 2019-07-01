@@ -25,6 +25,12 @@ public class LogServiceImpl extends ServiceImpl<LogDao, Log> implements LogServi
         EntityWrapper<Log> wrapper = new EntityWrapper<>();
         wrapper.like("userName", log.getUserName());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
+        if (StringUtils.isNotEmpty(log.getStartTime())) {
+            wrapper.ge("createTime", log.getStartTime() + " 00:00:00");
+        }
+        if (StringUtils.isNotEmpty(log.getEndTime())) {
+            wrapper.le("createTime", log.getEndTime() + " 23:59:59");
+        }
         return selectPage(page, wrapper);
     }
 }

@@ -7,6 +7,7 @@ import com.wayn.domain.vo.Tree;
 import com.wayn.enums.Operator;
 import com.wayn.framework.annotation.Log;
 import com.wayn.framework.util.ShiroUtil;
+import com.wayn.service.DictService;
 import com.wayn.service.MenuService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,16 @@ import java.util.List;
 public class MenuController extends BaseControlller {
     @Autowired
     private MenuService menuService;
+    @Autowired
+    private DictService dictService;
 
     private static final String PREFIX = "system/menu";
+
 
     @RequiresPermissions("sys:menu:menu")
     @GetMapping
     public String menuIndex(Model model) {
+        model.addAttribute("menuTypes", dictService.selectDictsValueByType("menuType"));
         return PREFIX + "/menu";
     }
 

@@ -8,6 +8,7 @@ import com.wayn.domain.Role;
 import com.wayn.enums.Operator;
 import com.wayn.framework.annotation.Log;
 import com.wayn.framework.util.ShiroUtil;
+import com.wayn.service.DictService;
 import com.wayn.service.MenuService;
 import com.wayn.service.RoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -26,11 +27,15 @@ public class RoleController extends BaseControlller {
 	private RoleService roleService;
 
 	@Autowired
+	private DictService dictService;
+
+	@Autowired
 	private MenuService menuService;
 
 	@RequiresPermissions("sys:role:role")
 	@GetMapping
 	public String roleIndex(Model model) {
+		model.addAttribute("states", dictService.selectDictsValueByType("state"));
 		return PREFIX + "/role";
 	}
 
