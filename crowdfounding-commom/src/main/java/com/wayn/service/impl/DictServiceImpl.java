@@ -1,5 +1,6 @@
 package com.wayn.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -7,12 +8,15 @@ import com.wayn.domain.Dict;
 import com.wayn.domain.User;
 import com.wayn.mapper.DictDao;
 import com.wayn.service.DictService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -32,11 +36,17 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     public Page<Dict> listPage(Page<Dict> page, Dict dict) {
         EntityWrapper<Dict> wrapper = new EntityWrapper<>();
         Integer type = dict.getType();
-        if (type == 2) {
+        if (type == 2 && StringUtils.isNotEmpty(dict.getDictType())) {
             wrapper.eq("dictType", dict.getDictType());
         }
         wrapper.eq("type", type);
         wrapper.eq("delFlag", "0");
+        if (StringUtils.isNotEmpty(dict.getStartTime())) {
+            wrapper.ge("createTime", dict.getStartTime() + " 00:00:00");
+        }
+        if (StringUtils.isNotEmpty(dict.getEndTime())) {
+            wrapper.le("createTime", dict.getEndTime() + " 23:59:59");
+        }
         wrapper.like("name", dict.getName());
         return selectPage(page, wrapper);
     }
@@ -76,5 +86,47 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     @Override
     public boolean batchRemove(Long[] ids) {
         return deleteBatchIds(Arrays.asList(ids));
+    }
+
+    @Override
+    public List<JSONObject> selectDicts(String dictType) {
+        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
+        wrapper.eq("type", 1);
+        wrapper.eq("delFlag", "0");
+        List<Dict> dicts = selectList(wrapper);
+        List<JSONObject> objectList = dicts.stream().map(data -> {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", data.getValue());
+            jsonObject.put("text", data.getName());
+            if (dictType.equals(data.getValue())) {
+                jsonObject.put("selected", true);
+            }
+            return jsonObject;
+        }).collect(Collectors.toList());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", "");
+        jsonObject.put("text", "全部");
+        objectList.add(0, jsonObject);
+        return objectList;
+    }
+
+    @Override
+    public List<JSONObject> selectDictsValueByType(String dictType) {
+        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
+        wrapper.eq("type", 2);
+        wrapper.eq("delFlag", "0");
+        wrapper.eq("dictType", dictType);
+        List<Dict> dicts = selectList(wrapper);
+        List<JSONObject> objectList = dicts.stream().map(data -> {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", data.getValue());
+            jsonObject.put("text", data.getName());
+            return jsonObject;
+        }).collect(Collectors.toList());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", "");
+        jsonObject.put("text", "全部");
+        objectList.add(0, jsonObject);
+        return objectList;
     }
 }

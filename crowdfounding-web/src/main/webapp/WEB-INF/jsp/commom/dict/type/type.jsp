@@ -26,6 +26,12 @@
                 <input type="text"
                        class="form-control" id="name">
             </div>
+            <div class="form-group select-time">
+                <label>创建时间</label>
+                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
+                <span>-</span>
+                <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
+            </div>
             <a class="btn btn-primary btn-rounded btn-sm magin-left10"
                onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a>
             <a
@@ -108,6 +114,8 @@
                 //Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
                 queryParams: function (params) {
                     params.name = $('#name').val();
+                    params.startTime= $('#startTime').val();
+                    params.endTime = $('#endTime').val();
                     params.type = 1;
                     return params;
                 },
@@ -154,13 +162,14 @@
                         width: '8%',
                         formatter: function (value, row, index) {
                             return '<button type="button" class="btn btn-sm btn-info" onclick="dictData(\'' + row.value + '\')">' +
-                                '<i class="fa fa-trash" aria-hidden="true"></i>列表</button>';
+                                '<i class="fa fa-server" aria-hidden="true"></i>列表</button>';
                         }
                     },
                     {
                         field: 'createTime',
                         title: '创建时间',
-                        width: '15%'
+                        width: '15%',
+                        sortable: true
                     },
                     {
                         title: '操作',

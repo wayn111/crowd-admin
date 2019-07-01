@@ -7,7 +7,7 @@
         <result column="userName" property="userName" />
         <result column="title" property="title" />
         <result column="url" property="url" />
-        <result column="params" property="params" />
+        <result column="requestParams" property="requestParams" />
         <result column="createTime" property="createTime" />
     </resultMap>
 </mapper>

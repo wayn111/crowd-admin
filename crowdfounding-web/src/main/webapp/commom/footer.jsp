@@ -14,6 +14,7 @@
 <script type="text/javascript"
 	src="${_ctx }/static/plugin/bootstrap-switch/js/bootstrap-switch.js"></script>
 <script src="${_ctx }/static/plugin/layer/layer.min.js"></script>
+<script src="${_ctx }/static/plugin/layDate-v5.0.9/laydate/laydate.js"></script>
 <script
 	src="${_ctx }/static/plugin/select2-4.0.7/dist/js/select2.min.js"></script>
 <script src="${_ctx }/static/plugin/select2-4.0.7/dist/js/i18n/zh-CN.js"></script>

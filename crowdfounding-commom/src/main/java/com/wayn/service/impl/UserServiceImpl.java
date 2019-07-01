@@ -42,6 +42,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         wrapper.like("userName", user.getUserName());
         wrapper.eq(user.getUserState() != null, "userState", user.getUserState());
         wrapper.eq(user.getDeptId() != null, "deptId", user.getDeptId());
+        if (StringUtils.isNotEmpty(user.getStartTime())) {
+            wrapper.ge("createTime", user.getStartTime() + " 00:00:00");
+        }
+        if (StringUtils.isNotEmpty(user.getEndTime())) {
+            wrapper.le("createTime", user.getEndTime() + " 23:59:59");
+        }
         Page<User> selectPage = selectPage(page, wrapper);
         return selectPage;
     }

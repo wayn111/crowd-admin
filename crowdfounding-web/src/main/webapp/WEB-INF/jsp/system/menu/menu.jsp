@@ -99,7 +99,7 @@
 		        content: prefix + '/add/' + pId // iframe的url
 		    });
 		}
-		
+
 		function edit(id) {
 			layer.open({
 		        type: 2,
@@ -110,7 +110,7 @@
 		        content: prefix + '/edit/' + id // iframe的url
 		    });
 		}
-		
+
 		function remove(id) {
 		    layer.confirm('确定要删除选中的记录？', {
 		        btn: ['确定', '取消']
@@ -129,7 +129,7 @@
 		        });
 		    })
 		}
-		
+
 		// tree表格树 展开/折叠
 		let expandFlag;
 		function expandAllOrCollapseAll(){
@@ -141,7 +141,7 @@
 		    }
 		    expandFlag = expandFlag ? false: true;
 		}
-		
+
 		let load = function(){
 			$('#table1').bootstrapTreeTable({
 				id: 'id',
@@ -247,28 +247,16 @@
 				]
 			});
 		}
-		
+
 		function reload(){
 			load();
 		}
-		
+
 		$(function() {
 			let config = {
-				width : '100px',
-				data : [ {
-					id : '',
-						text : '全部'
-				}, {
-					id : 1,
-					text : '目录'
-				}, {
-					id : 2,
-					text : '菜单'
-				}, {
-					id : 3,
-					text : '按钮'
-				} ]
-			}
+	            width: '150px',
+				data: JSON.parse('${menuTypes}')
+			};
 			$('.js-example-basic-single').select2(config);
 			load();
 		})

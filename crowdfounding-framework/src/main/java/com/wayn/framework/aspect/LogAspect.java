@@ -62,7 +62,7 @@ public class LogAspect {
                         obj.put(key, value);
                     }
                 });
-                log2.setParams(obj.toJSONString());
+                log2.setRequestParams(obj.toJSONString());
             }
             logQueue.add(log2);
         }

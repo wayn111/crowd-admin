@@ -3,8 +3,8 @@ package com.wayn.domain;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.wayn.commom.base.BaseEntity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -17,9 +17,7 @@ import java.util.Date;
  * @since 2019-06-27
  */
 @TableName("sys_dict")
-public class Dict implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Dict extends BaseEntity {
 
     /**
      * 编号

@@ -20,10 +20,14 @@
 <div class="wrapper wrapper-content ui-layout-center gray-bg">
     <div class="col-sm-12 search-collapse">
         <form class="form-inline">
-            <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
-                <label>名称</label>
-                <input type="hidden" id="dictType" value="${dictType}">
+                <label>字典名称</label>
+                <select
+                        class="js-example-basic-single" id="dictType">
+                </select>
+            </div>
+            <div class="form-group">
+                <label>标签名</label>
                 <input type="text"
                        class="form-control" id="name">
             </div>
@@ -77,7 +81,7 @@
 <script>
     let prefix = _ctx + "/commom/dict/data";
 
-    function load(deptId) {
+    function load() {
         $('#exampleTable').bootstrapTable(
             {
                 method: 'post', // 服务器数据的请求方式 get or post
@@ -129,6 +133,9 @@
                     {
                         field: 'value',
                         title: '字典值'
+                    }, {
+                        field: 'dictType',
+                        title: '字典类型'
                     }, {
                         field: 'dictState',
                         title: '字典状态',
@@ -249,6 +256,11 @@
     }
 
     $(function () {
+        let config = {
+            data: JSON.parse('${dicts}'),
+            width: '150px'
+        };
+        select2Init('.js-example-basic-single', config);
         load();
     });
 </script>

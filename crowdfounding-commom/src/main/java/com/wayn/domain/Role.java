@@ -1,12 +1,11 @@
 package com.wayn.domain;
 
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.wayn.commom.base.BaseEntity;
 
-import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -17,9 +16,8 @@ import java.io.Serializable;
  * @since 2019-04-13
  */
 @TableName("sys_role")
-public class Role implements Serializable {
+public class Role extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
 
     /**
      * 主键

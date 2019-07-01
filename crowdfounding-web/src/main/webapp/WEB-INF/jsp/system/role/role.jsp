@@ -21,13 +21,19 @@
 		<div class="col-sm-12 search-collapse">
 			<form class="form-inline" id="roleSelect">
 				<div class="form-group">
-					<label for="exampleInputName2">角色名称</label> <input type="text"
+					<label for="">角色名称</label> <input type="text"
 						class="form-control" id="roleName" name="roleName">
 				</div>
 				<div class="form-group magin-left10">
-					<label for="exampleInputEmail2">角色状态</label> <select
+					<label for="">角色状态</label> <select
 						class="js-example-basic-single" id="roleState" name="roleState">
 					</select>
+				</div>
+				<div class="form-group magin-left10 select-time">
+					<label>创建时间</label>
+					<input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
+					<span>-</span>
+					<input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
 				</div>
 				<a class="btn btn-primary btn-rounded btn-sm magin-left10"
 					onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a> <a
@@ -178,12 +184,14 @@
 						dataField : "records",
 						sortName : 'createTime',
 						sortOrder : 'desc',
-						queryParamsType : "",//If queryParamsType = 'limit', 
+						queryParamsType : "",//If queryParamsType = 'limit',
 						//the params object contains: limit, offset, search, sort, order.
 						//Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
 						queryParams : function(params) {
 							params.roleName = $('#roleName').val().trim();
 							params.roleState = $('#roleState').val();
+							params.startTime = $('#startTime').val();
+							params.endTime = $('#endTime').val();
 							return params;
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -255,7 +263,11 @@
 		}
 
 		$(function() {
-			select2Init('.js-example-basic-single');
+			let config = {
+				data: JSON.parse('${states}'),
+				width: '150px'
+			};
+			select2Init('.js-example-basic-single',config);
 			load();
 		})
 	</script>
