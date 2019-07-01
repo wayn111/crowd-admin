@@ -7,6 +7,7 @@
 - Encache Cache annotation
 - Druid dataSource and Monitor web page
 - Use H+ as a background management template, based on jsp template transformation
+- Integrated dictionary management and online users as well as logging
 
 
 #### Get Source code
