@@ -11,6 +11,8 @@ import com.wayn.service.DictService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -64,6 +66,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         return count > 0 ? true : false;
     }
 
+    @CacheEvict(value = "dictCache", allEntries = true)
     @Override
     public boolean save(Dict dict) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
@@ -71,6 +74,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         return insert(dict);
     }
 
+    @CacheEvict(value = "dictCache", allEntries = true)
     @Override
     public boolean update(Dict dict) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
@@ -78,18 +82,21 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         return updateById(dict);
     }
 
+    @CacheEvict(value = "dictCache", allEntries = true)
     @Override
     public boolean remove(Long id) {
         return deleteById(id);
     }
 
+    @CacheEvict(value = "dictCache", allEntries = true)
     @Override
     public boolean batchRemove(Long[] ids) {
         return deleteBatchIds(Arrays.asList(ids));
     }
 
+    @Cacheable(value = "dictCache", key = "#root.method + '_' + #root.args[0]")
     @Override
-    public List<JSONObject> selectDicts(String dictType) {
+    public List<JSONObject> selectDicts(String dictTypeSelected) {
         EntityWrapper<Dict> wrapper = new EntityWrapper<>();
         wrapper.eq("type", 1);
         wrapper.eq("delFlag", "0");
@@ -98,7 +105,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id", data.getValue());
             jsonObject.put("text", data.getName());
-            if (dictType.equals(data.getValue())) {
+            if (dictTypeSelected.equals(data.getValue())) {
                 jsonObject.put("selected", true);
             }
             return jsonObject;
@@ -110,6 +117,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         return objectList;
     }
 
+    @Cacheable(value = "dictCache", key = "#root.method + '_' + #root.args[0]")
     @Override
     public List<JSONObject> selectDictsValueByType(String dictType) {
         EntityWrapper<Dict> wrapper = new EntityWrapper<>();
@@ -127,6 +135,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         return objectList;
     }
 
+    @Cacheable(value = "dictCache", key = "#root.method + '_' + #root.args[0]")
     @Override
     public List<JSONObject> selectDictsValueByTypeNoAll(String dictType) {
         EntityWrapper<Dict> wrapper = new EntityWrapper<>();
@@ -141,6 +150,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
 
     /**
      * 将字典列表转化为select2接受的json格式
+     *
      * @param dicts
      * @return
      */
