@@ -43,5 +43,12 @@ public interface DictService extends IService<Dict> {
      */
     List<JSONObject> selectDictsValueByType(String dictType);
 
+    /**
+     * 查询对应字典分类下所有字典数据，不包含“全部”
+     * @param dictType
+     * @return
+     */
+    List<JSONObject> selectDictsValueByTypeNoAll(String dictType);
+
 
 }

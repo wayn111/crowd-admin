@@ -26,7 +26,7 @@
                 <input type="text"
                        class="form-control" id="name">
             </div>
-            <div class="form-group select-time">
+            <div class="form-group magin-left10 select-time">
                 <label>创建时间</label>
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
                 <span>-</span>

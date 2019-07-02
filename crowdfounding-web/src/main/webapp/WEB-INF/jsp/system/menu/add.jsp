@@ -24,13 +24,11 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">菜单类型：</label>
 								<div class="col-sm-8">
-									<label class="radio-inline"> <input type="radio"
-										name="type" value="1" /> 目录
-									</label> <label class="radio-inline"> <input type="radio"
-										name="type" value="2" /> 菜单
-									</label> <label class="radio-inline"> <input type="radio"
-										name="type" value="3" /> 按钮
-									</label>
+									<c:forEach items="${menuTypes}" var="dict">
+										<label class="radio-inline"> <input type="radio"
+											name="type" value="${dict.id}" /> ${dict.text}
+										</label>
+									</c:forEach>
 								</div>
 							</div>
 							<div class="form-group">
