@@ -23,6 +23,7 @@
 				<li>Encache权限缓存。</li>
 				<li>Druid数据源,数据库监控。</li>
 				<li>使用H+作为后台管理模板，基于jsp模板改造</li>
+				<li>集成字典管理和在线用户以及日志记录。</li>
 			</ul>
 
 			<h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
