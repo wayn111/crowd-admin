@@ -113,20 +113,43 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     @Override
     public List<JSONObject> selectDictsValueByType(String dictType) {
         EntityWrapper<Dict> wrapper = new EntityWrapper<>();
-        wrapper.eq("type", 2);
-        wrapper.eq("delFlag", "0");
-        wrapper.eq("dictType", dictType);
+        wrapper.eq("type", 2)
+                .eq("delFlag", "0")
+                .eq("delFlag", "0")
+                .eq("dictType", dictType)
+                .eq("dictState", 1);
         List<Dict> dicts = selectList(wrapper);
-        List<JSONObject> objectList = dicts.stream().map(data -> {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id", data.getValue());
-            jsonObject.put("text", data.getName());
-            return jsonObject;
-        }).collect(Collectors.toList());
+        List<JSONObject> objectList = convert2select(dicts);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", "");
         jsonObject.put("text", "全部");
         objectList.add(0, jsonObject);
         return objectList;
+    }
+
+    @Override
+    public List<JSONObject> selectDictsValueByTypeNoAll(String dictType) {
+        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
+        wrapper.eq("type", 2)
+                .eq("delFlag", "0")
+                .eq("delFlag", "0")
+                .eq("dictType", dictType)
+                .eq("dictState", 1);
+        List<Dict> dicts = selectList(wrapper);
+        return convert2select(dicts);
+    }
+
+    /**
+     * 将字典列表转化为select2接受的json格式
+     * @param dicts
+     * @return
+     */
+    public List<JSONObject> convert2select(List<Dict> dicts) {
+        return dicts.stream().map(data -> {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", data.getValue());
+            jsonObject.put("text", data.getName());
+            return jsonObject;
+        }).collect(Collectors.toList());
     }
 }

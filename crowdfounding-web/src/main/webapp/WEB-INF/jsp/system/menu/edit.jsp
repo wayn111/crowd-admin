@@ -26,16 +26,11 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">菜单类型：</label>
 								<div class="col-sm-8">
-									<label class="radio-inline"> <input type="radio"
-										name="type" value="1"
-										<c:if test="${menu.type == 1 }">checked</c:if> /> 目录
-									</label> <label class="radio-inline"> <input type="radio"
-										name="type" value="2"
-										<c:if test="${menu.type == 2 }">checked</c:if> /> 菜单
-									</label> <label class="radio-inline"> <input type="radio"
-										name="type" value="3"
-										<c:if test="${menu.type == 3 }">checked</c:if> /> 按钮
-									</label>
+									<c:forEach items="${menuTypes}" var="dict">
+										<label class="radio-inline"> <input type="radio"
+										name="type" value="${dict.id}" <c:if test="${menu.type == dict.id }">checked</c:if>/> ${dict.text}
+										</label>
+									</c:forEach>
 								</div>
 							</div>
 							<div class="form-group">

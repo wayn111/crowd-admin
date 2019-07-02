@@ -71,7 +71,8 @@ public class RedisSessionDAO extends AbstractSessionDAO {
 		Set<byte[]> keys = redisOpts.keys(this.keyPrefix + "*");
 		if (keys != null && keys.size() > 0) {
 			for (byte[] key : keys) {
-				Session s = (Session) SerializeUtils.deserialize(redisOpts.get(key));
+				Session s = (Session) SerializeUtils.
+						deserialize(redisOpts.get(key));
 				sessions.add(s);
 			}
 		}

@@ -46,6 +46,7 @@ public class MenuController extends BaseControlller {
     @RequiresPermissions("sys:menu:add")
     @GetMapping("/add/{pid}")
     public String add(Model model, @PathVariable("pid") Long pid) {
+        model.addAttribute("menuTypes", dictService.selectDictsValueByTypeNoAll("menuType"));
         model.addAttribute("pid", pid);
         if (pid == 0) {
             model.addAttribute("pName", "顶级节点");
@@ -59,6 +60,7 @@ public class MenuController extends BaseControlller {
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
         Menu menu = menuService.selectById(id);
+        model.addAttribute("menuTypes", dictService.selectDictsValueByTypeNoAll("menuType"));
         model.addAttribute("menu", menu);
         model.addAttribute("pid", menu.getPid());
         String pName = "";

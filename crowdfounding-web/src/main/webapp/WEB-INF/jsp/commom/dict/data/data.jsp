@@ -26,7 +26,7 @@
                         class="js-example-basic-single" id="dictType">
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group magin-left10">
                 <label>标签名</label>
                 <input type="text"
                        class="form-control" id="name">
