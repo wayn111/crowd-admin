@@ -31,10 +31,10 @@ public interface DictService extends IService<Dict> {
 
     /**
      * 查询所有字典类型，根据dictType设置默认选中
-     * @param dictType
+     * @param dictTypeSelected
      * @return
      */
-    List<JSONObject> selectDicts(String dictType);
+    List<JSONObject> selectDicts(String dictTypeSelected);
 
     /**
      * 查询对应字典分类下所有字典数据

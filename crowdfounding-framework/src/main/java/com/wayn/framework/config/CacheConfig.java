@@ -95,6 +95,7 @@ public class CacheConfig extends CachingConfigurerSupport {
 			cacheNames.add("menuCache");
 			cacheNames.add("deptCache");
 			cacheNames.add("permissionCache");
+			cacheNames.add("dictCache");
 			((RedisCacheManager) cacheManager).setCacheNames(cacheNames);
 
 		} else {
