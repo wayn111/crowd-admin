@@ -23,12 +23,12 @@
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label>名称</label>
-                <input type="text"
-                       class="form-control" id="name">
+                <input type="text" class="form-control typeahead" data-provide="typeahead" id="name">
             </div>
             <div class="form-group magin-left10 select-time">
                 <label>创建时间</label>
-                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
+                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
+                       placeholder="开始时间"/>
                 <span>-</span>
                 <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
             </div>
@@ -79,6 +79,8 @@
     </div>
 </div>
 <%@ include file="/commom/footer.jsp" %>
+<script
+        src="${_ctx }/static/plugin/bootstrap-ypeahead/bootstrap3-typeahead.min.js"></script>
 <script>
     let prefix = _ctx + "/commom/dict/type";
 
@@ -114,7 +116,7 @@
                 //Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
                 queryParams: function (params) {
                     params.name = $('#name').val();
-                    params.startTime= $('#startTime').val();
+                    params.startTime = $('#startTime').val();
                     params.endTime = $('#endTime').val();
                     params.type = 1;
                     return params;
@@ -273,6 +275,14 @@
     }
 
     $(function () {
+        //预处理输入
+        $('.typeahead').typeahead({
+            source: [
+                {id: "someId1", name: '状态'},
+                {id: "someId2", name: '类型'}
+            ],
+            autoSelect: true
+        });
         load();
     });
 </script>
