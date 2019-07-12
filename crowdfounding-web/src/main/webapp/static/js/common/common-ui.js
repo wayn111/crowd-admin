@@ -102,7 +102,7 @@ function menuItemCreate(url, name) {
 
 function layDate() {
     if ($(".select-time").length > 0) {
-        var startDate = laydate.render({
+        let startDate = laydate.render({
             elem: '#startTime',
             max: $('#endTime').val(),
             theme: 'molv',
@@ -120,7 +120,7 @@ function layDate() {
                 }
             }
         });
-        var endDate = laydate.render({
+        let endDate = laydate.render({
             elem: '#endTime',
             min: $('#startTime').val(),
             theme: 'molv',

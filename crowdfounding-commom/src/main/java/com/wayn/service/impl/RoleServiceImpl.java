@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.exception.BusinessException;
+import com.wayn.commom.util.ParameterUtil;
 import com.wayn.domain.Role;
 import com.wayn.domain.RoleMenu;
 import com.wayn.domain.UserRole;
@@ -45,15 +46,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
 
     @Override
     public Page<Role> listPage(Page<Role> page, Role role) {
-        EntityWrapper<Role> wrapper = new EntityWrapper<Role>();
+        EntityWrapper<Role> wrapper = ParameterUtil.get();
         wrapper.like("roleName", role.getRoleName());
         wrapper.eq(role.getRoleState() != null, "roleState", role.getRoleState());
-        if (StringUtils.isNotEmpty(role.getStartTime())) {
-            wrapper.ge("createTime", role.getStartTime() + " 00:00:00");
-        }
-        if (StringUtils.isNotEmpty(role.getEndTime())) {
-            wrapper.le("createTime", role.getEndTime() + " 23:59:59");
-        }
         Page<Role> selectPage = selectPage(page, wrapper);
         return selectPage;
     }

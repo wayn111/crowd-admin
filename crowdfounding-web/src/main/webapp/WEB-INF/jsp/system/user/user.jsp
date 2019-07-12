@@ -36,17 +36,17 @@
         <form class="form-inline" id="roleSelect">
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
-                <label for="exampleInputName2">用户名称</label> <input type="text"
-                                                                   class="form-control" id="userName" name="userName">
+                <label for="userName">用户名称</label>
+                <input type="text" class="form-control" id="userName" name="userName">
             </div>
             <div class="form-group magin-left10">
-                <label for="exampleInputEmail2">用户状态</label>
+                <label for="userState">用户状态</label>
                 <select
                     class="js-example-basic-single" name="userState" id="userState">
                 </select>
             </div>
             <div class="form-group magin-left10 select-time">
-                <label>创建时间</label>
+                <label for="startTime">创建时间</label>
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
                 <span>-</span>
                 <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
@@ -146,27 +146,35 @@
                 },
                 columns: [
                     {
-                        checkbox: true
+                        checkbox: true,
+                        width: '4%',
                     },
                     {
                         field: 'id',
-                        width: '23%',
+                        width: '18%',
                         title: '序号'
                     },
                     {
                         field: 'userName',
                         title: '用户名',
+                        width: '10%',
                         sortable: true
                     },
                     {
                         field: 'createTime',
                         title: '创建时间',
-                        width: '200px'
+                        width: '10%',
+                        sortable: true
+                    },
+                    {
+                        field: 'remarks',
+                        title: '备注'
                     },
                     {
                         field: 'userState',
                         title: '状态',
                         align: 'center',
+                        width: '8%',
                         formatter: function (value, row, index) {
                             if (value == '-1') {
                                 return '<span class="badge badge-danger">禁用</span>';
@@ -179,6 +187,7 @@
                         title: '操作',
                         field: 'userId',
                         align: 'center',
+                        width: '15%',
                         formatter: function (value, row, index) {
                             var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
                                 + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id

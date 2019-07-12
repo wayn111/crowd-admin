@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.wayn.commom.util.ParameterUtil;
 import com.wayn.domain.Dict;
 import com.wayn.domain.User;
 import com.wayn.mapper.DictDao;
@@ -36,19 +37,13 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
 
     @Override
     public Page<Dict> listPage(Page<Dict> page, Dict dict) {
-        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
+        EntityWrapper<Dict> wrapper = ParameterUtil.get();
         Integer type = dict.getType();
         if (type == 2 && StringUtils.isNotEmpty(dict.getDictType())) {
             wrapper.eq("dictType", dict.getDictType());
         }
         wrapper.eq("type", type);
         wrapper.eq("delFlag", "0");
-        if (StringUtils.isNotEmpty(dict.getStartTime())) {
-            wrapper.ge("createTime", dict.getStartTime() + " 00:00:00");
-        }
-        if (StringUtils.isNotEmpty(dict.getEndTime())) {
-            wrapper.le("createTime", dict.getEndTime() + " 23:59:59");
-        }
         wrapper.like("name", dict.getName());
         return selectPage(page, wrapper);
     }
@@ -79,6 +74,8 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     public boolean update(Dict dict) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         dict.setUpdateBy(user.getUserName()).setUpdateTime(new Date());
+        Dict oldDict = selectById(dict.getId());
+        updateForSet("dictType = '" + dict.getValue() + "'", new EntityWrapper<Dict>().eq("dictType", oldDict.getValue()).eq("type",""));
         return updateById(dict);
     }
 

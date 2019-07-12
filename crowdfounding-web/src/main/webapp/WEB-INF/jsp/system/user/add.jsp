@@ -29,7 +29,8 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">部门：</label>
 								<div class="col-sm-8">
-									<input id="deptId" name="deptId" class="hidden"> <input
+									<input id="deptId" name="deptId" class="hidden">
+									<input
 										id="deptName" name="deptName" class="form-control" type="text"
 										style="cursor: pointer;" onclick="openDept()"
 										readonly="readonly" placeholder="选择所属部门">
@@ -51,6 +52,12 @@
 											type="checkbox" value="${role.id}"> ${role.roleName }
 										</label>
 									</c:forEach>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<textarea id="remarks" name="remarks" class="form-control" rows="3"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -134,7 +141,6 @@
 					}
 				},
 				messages : {
-
 					userName : {
 						required : icon + "请输入您的用户名",
 						minlength : icon + "用户名必须两个字符以上",
@@ -154,14 +160,14 @@
 			})
 		}
 
-		let openDept = function() {
+		let openDept = function () {
 			layer.open({
-				type : 2,
-				title : "选择部门",
-				area : [ '300px', '450px' ],
-				content : _ctx + "/system/dept/treeView"
+				type: 2,
+				title: "选择部门",
+				area: ['300px', '450px'],
+				content: _ctx + "/system/dept/treeView"
 			})
-		}
+		};
 		function loadDept(deptId, deptName) {
 			$("#deptId").val(deptId);
 			$("#deptName").val(deptName);

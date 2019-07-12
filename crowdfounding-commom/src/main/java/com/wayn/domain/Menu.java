@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.wayn.commom.base.BaseEntity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,7 @@ import java.util.List;
  * @since 2019-04-13
  */
 @TableName("sys_menu")
-public class Menu implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Menu extends BaseEntity<Menu> {
 
 	/**
 	 * 主键

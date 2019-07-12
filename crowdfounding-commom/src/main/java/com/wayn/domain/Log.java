@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BaseEntity;
 
-import java.util.Date;
-
 /**
  * <p>
  * 日志表
@@ -16,7 +14,7 @@ import java.util.Date;
  * @since 2019-04-13
  */
 @TableName("sys_log")
-public class Log extends BaseEntity {
+public class Log extends BaseEntity<Log> {
 
     /**
      * 主键
@@ -48,11 +46,6 @@ public class Log extends BaseEntity {
      * 参数
      */
     private String requestParams;
-
-    /**
-     * 日志时间
-     */
-    private Date createTime;
 
     public String getId() {
         return id;
@@ -95,14 +88,6 @@ public class Log extends BaseEntity {
         return this;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
     public String getModuleName() {
         return moduleName;
     }
@@ -120,7 +105,6 @@ public class Log extends BaseEntity {
                 ", operation='" + operation + '\'' +
                 ", url='" + url + '\'' +
                 ", requestParams='" + requestParams + '\'' +
-                ", createTime=" + createTime +
-                '}';
+                "} " + super.toString();
     }
 }
