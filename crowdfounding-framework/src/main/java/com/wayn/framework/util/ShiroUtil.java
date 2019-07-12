@@ -61,8 +61,7 @@ public class ShiroUtil {
 		RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
 		MyRealm shiroRealm = (MyRealm) rsm.getRealms().iterator().next();
 		shiroRealm.clearCachedAuthorizationInfo();
-		
-		
+
 		/*Subject subject = SecurityUtils.getSubject();
 		String realmName = subject.getPrincipals().getRealmNames().iterator().next();
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(subject.getPrincipal(), realmName);
@@ -71,6 +70,6 @@ public class ShiroUtil {
 		shiroRealm.getAuthorizationCache().remove(subject.getPrincipals());
 		//切换身份也就是刷新了
 		subject.releaseRunAs();*/
-		
+
 	}
 }
