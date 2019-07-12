@@ -24,7 +24,7 @@
 		<div class="col-sm-12 search-collapse">
 			<form class="form-inline" id="roleSelect">
 				<div class="form-group">
-					<label for="exampleInputName2">部门名称</label> <input type="text"
+					<label for="deptName">部门名称</label> <input type="text"
 						class="form-control" id="deptName" name="deptName">
 				</div>
 				<a class="btn btn-primary btn-rounded btn-sm magin-left10"
@@ -170,7 +170,7 @@
 	                    title: '描述',
 	                    valign: 'center',
 	                    width: '20%',
-	                    field: 'deptDesc'
+	                    field: 'remarks'
 	                },
 	                {
 	                    title: '操作',

@@ -3,6 +3,7 @@ package com.wayn.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.wayn.commom.util.ParameterUtil;
 import com.wayn.domain.User;
 import com.wayn.domain.UserRole;
 import com.wayn.mapper.UserDao;
@@ -38,16 +39,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public Page<User> listPage(Page<User> page, User user) {
-        EntityWrapper<User> wrapper = new EntityWrapper<User>();
+        EntityWrapper<User> wrapper = ParameterUtil.get();
         wrapper.like("userName", user.getUserName());
         wrapper.eq(user.getUserState() != null, "userState", user.getUserState());
         wrapper.eq(user.getDeptId() != null, "deptId", user.getDeptId());
-        if (StringUtils.isNotEmpty(user.getStartTime())) {
-            wrapper.ge("createTime", user.getStartTime() + " 00:00:00");
-        }
-        if (StringUtils.isNotEmpty(user.getEndTime())) {
-            wrapper.le("createTime", user.getEndTime() + " 23:59:59");
-        }
         Page<User> selectPage = selectPage(page, wrapper);
         return selectPage;
     }
@@ -63,12 +58,14 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
             }
         }
         Integer count = userDao.selectCount(new EntityWrapper<User>().eq("userName", userName));
-        return count > 0 ? true : false;
+        return count > 0;
     }
 
     @Transactional
     @Override
     public boolean save(User user, String roleIds) {
+        user.setCreateTime(new Date());
+        user.setPassword(new SimpleHash("MD5", user.getPassword(), user.getUserName(), 1024).toString());
         boolean flag = insert(user);
         List<UserRole> list = new ArrayList<UserRole>();
         if (StringUtils.isNotBlank(roleIds)) {

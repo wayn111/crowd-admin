@@ -29,10 +29,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">备注：</label>
+								<label class="col-sm-3 control-label">角色备注：</label>
 								<div class="col-sm-8">
-									<input id="roleDesc" name="roleDesc" class="form-control"
-										type="text" value="${role1.roleDesc }">
+									<input id="remarks" name="remarks" class="form-control"
+										type="text" value="${role1.remarks }">
 								</div>
 							</div>
 							<div class="form-group">

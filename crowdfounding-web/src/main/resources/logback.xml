@@ -29,7 +29,7 @@
         <file>${logPath}/sql.log</file>
         <encoder>
             <pattern>
-            	%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{36}.%M %L -- %msg%n
+            	%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{48}.%M %L -- %msg%n
             </pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -37,11 +37,13 @@
         </rollingPolicy>
     </appender>
 	
-	 <!-- logback为java中的包 -->   
+	 <!-- logger为java中的包 -->
   	<logger name="com.wayn.mapper" level="DEBUG">
   		<appender-ref ref="SQL" />
-  	</logger>   
-	
+  	</logger>
+	<!--<logger name="org.springframework" level="INFO">
+		<appender-ref ref="STDOUT" />
+	</logger>-->
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 		<!-- <appender-ref ref="INFO" /> -->

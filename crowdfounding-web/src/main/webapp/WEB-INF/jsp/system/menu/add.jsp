@@ -151,7 +151,7 @@
 				layer.open({
 					type : 2,
 					title : '图标列表',
-					anim: 5,
+					anim : 5,
 					content : _ctx + '/system/menu/chooseIcon',
 					area : [ '480px', '90%' ],
 					success : function(layero, index) {

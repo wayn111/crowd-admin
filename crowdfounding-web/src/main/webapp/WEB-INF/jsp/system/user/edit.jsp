@@ -13,8 +13,7 @@
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="user-form">
                         <input id="id" name="id" type="hidden" value="${user.id }">
-                        <input id="password" name=password type="hidden"
-                               value="${user.password }">
+                        <input id="password" name=password type="hidden" value="${user.password }">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">用户名：</label>
                             <div class="col-sm-8">
@@ -26,19 +25,20 @@
                             <label class="col-sm-3 control-label">部门：</label>
                             <div class="col-sm-8">
                                 <input id="deptId" name="deptId" class="hidden"
-                                       value="${user.deptId }"> <input id="deptName"
-                                                                       name="deptName" class="form-control" type="text"
-                                                                       style="cursor: pointer;" onclick="openDept()"
-                                                                       readonly="readonly" placeholder="选择所属部门"
-                                                                       value="${deptName }">
+                                       value="${user.deptId }">
+                                <input id="deptName"
+                                       name="deptName" class="form-control" type="text"
+                                       style="cursor: pointer;" onclick="openDept()"
+                                       readonly="readonly" placeholder="选择所属部门"
+                                       value="${deptName }">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">状态:</label>
                             <div class="col-sm-8">
                                 <input type="hidden" id="userState" name="userState"
-                                       value="${user.userState }"> <input type="checkbox"
-                                                                          name="userStateSwicth" checked>
+                                       value="${user.userState }">
+                                <input type="checkbox" name="userStateSwicth" checked>
                             </div>
                         </div>
                         <input type="hidden" name="roleIds" id="roleIds">
@@ -46,12 +46,17 @@
                             <label class="col-sm-3 control-label">角色</label>
                             <div class="col-sm-8">
                                 <c:forEach items="${roles}" var="role">
-                                    <label class="checkbox-inline"> <input name="roleId"
-                                                                           type="checkbox" value="${role.id}"
-                                                                           <c:if test="${role.checked  }">checked</c:if>>
-                                            ${role.roleName }
+                                    <label class="checkbox-inline">
+                                        <input name="roleId" type="checkbox" value="${role.id}"
+                                               <c:if test="${role.checked  }">checked</c:if>>${role.roleName }
                                     </label>
                                 </c:forEach>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注：</label>
+                            <div class="col-sm-8">
+                                <textarea id="remarks" name="remarks" class="form-control" rows="3">${user.remarks }</textarea>
                             </div>
                         </div>
                         <div class="form-group">

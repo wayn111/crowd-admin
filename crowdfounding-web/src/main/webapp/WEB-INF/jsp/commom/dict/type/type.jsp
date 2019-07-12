@@ -20,13 +20,12 @@
 <div class="wrapper wrapper-content ui-layout-center gray-bg">
     <div class="col-sm-12 search-collapse">
         <form class="form-inline">
-            <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
-                <label>名称</label>
+                <label for="name">名称</label>
                 <input type="text" class="form-control typeahead" data-provide="typeahead" id="name">
             </div>
             <div class="form-group magin-left10 select-time">
-                <label>创建时间</label>
+                <label for="startTime">创建时间</label>
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
                        placeholder="开始时间"/>
                 <span>-</span>
@@ -170,7 +169,7 @@
                     {
                         field: 'createTime',
                         title: '创建时间',
-                        width: '15%',
+                        width: '10%',
                         sortable: true
                     },
                     {

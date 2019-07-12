@@ -21,13 +21,13 @@
     <div class="col-sm-12 search-collapse">
         <form class="form-inline">
             <div class="form-group">
-                <label>字典名称</label>
+                <label for="dictType">字典名称</label>
                 <select
                         class="js-example-basic-single" id="dictType">
                 </select>
             </div>
             <div class="form-group magin-left10">
-                <label>标签名</label>
+                <label for="name">标签名</label>
                 <input type="text"
                        class="form-control" id="name">
             </div>

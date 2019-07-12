@@ -3,6 +3,7 @@ package com.wayn.controller.system;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.util.Response;
 import com.wayn.domain.Menu;
+import com.wayn.domain.vo.MenuVO;
 import com.wayn.domain.vo.Tree;
 import com.wayn.enums.Operator;
 import com.wayn.framework.annotation.Log;
@@ -39,7 +40,7 @@ public class MenuController extends BaseControlller {
     @RequiresPermissions("sys:menu:menu")
     @ResponseBody
     @PostMapping("/list")
-    public List<Menu> list(Model model, Menu menu) {
+    public List<Menu> list(Model model, MenuVO menu) {
         return menuService.list(menu);
     }
 

@@ -3,8 +3,8 @@ package com.wayn.domain;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.wayn.commom.base.BaseEntity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -16,9 +16,7 @@ import java.math.BigDecimal;
  * @since 2019-04-13
  */
 @TableName("sys_dept")
-public class Dept implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Dept extends BaseEntity<Dept> {
 
 	/**
 	 * 主键
@@ -32,11 +30,6 @@ public class Dept implements Serializable {
 	 * 部门名称
 	 */
 	private String deptName;
-
-	/**
-	 * 描述
-	 */
-	private String deptDesc;
 
 	/**
 	 * 排序
@@ -67,26 +60,12 @@ public class Dept implements Serializable {
 		this.deptName = deptName;
 	}
 
-	public String getDeptDesc() {
-		return deptDesc;
-	}
-
-	public void setDeptDesc(String deptDesc) {
-		this.deptDesc = deptDesc;
-	}
-
 	public BigDecimal getSort() {
 		return sort;
 	}
 
 	public void setSort(BigDecimal sort) {
 		this.sort = sort;
-	}
-
-	@Override
-	public String toString() {
-		return "Dept [id=" + id + ", pid=" + pid + ", deptName=" + deptName + ", deptDesc=" + deptDesc + ", sort="
-				+ sort + "]";
 	}
 
 }

@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BaseEntity;
 
-import java.util.Date;
-
 /**
  * <p>
  * 用户表
@@ -16,7 +14,7 @@ import java.util.Date;
  * @since 2019-04-13
  */
 @TableName("sys_user")
-public class User extends BaseEntity {
+public class User extends BaseEntity<User> {
 
 	public static final Integer _0 = 0;
 	public static final Integer _1 = 1;
@@ -41,16 +39,6 @@ public class User extends BaseEntity {
 	 * 用户状态,1-启用,-1禁用
 	 */
 	private Integer userState;
-
-	/**
-	 * 创建时间
-	 */
-	private Date createTime;
-
-	/**
-	 * 描述
-	 */
-	private String userDesc;
 
 	/**
 	 * 头像
@@ -94,22 +82,6 @@ public class User extends BaseEntity {
 		this.userState = userState;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public String getUserDesc() {
-		return userDesc;
-	}
-
-	public void setUserDesc(String userDesc) {
-		this.userDesc = userDesc;
-	}
-
 	public String getUserImg() {
 		return userImg;
 	}
@@ -128,8 +100,13 @@ public class User extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "User{" + "id=" + id + ", userName=" + userName + ", password=" + password + ", userState=" + userState
-				+ ", createTime=" + createTime + ", userDesc=" + userDesc + ", userImg=" + userImg + ", deptId="
-				+ deptId + "}";
+		return "User{" +
+				"id='" + id + '\'' +
+				", userName='" + userName + '\'' +
+				", password='" + password + '\'' +
+				", userState=" + userState +
+				", userImg='" + userImg + '\'' +
+				", deptId=" + deptId +
+				"} " + super.toString();
 	}
 }

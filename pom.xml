@@ -12,6 +12,7 @@
 		<module>crowdfounding-commom</module>
 		<module>crowdfounding-web</module>
 		<module>crowdfounding-framework</module>
+		<module>crowdfounding-generator</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>crowdfounding-parent</name>
@@ -45,6 +46,8 @@
 		<jstl.version>1.2</jstl.version>
 		<freemarker.version>2.3.28</freemarker.version>
 		<bitwalker.version>1.19</bitwalker.version>
+		<jsoup.version>1.9.2</jsoup.version>
+		<velocity.version>2.1</velocity.version>
 	</properties>
 
 	<dependencies>
@@ -235,7 +238,7 @@
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
 		</dependency>
-		
+
 		<!-- 解析客户端操作系统、浏览器等 -->
 		<dependency>
 			<groupId>eu.bitwalker</groupId>
@@ -263,6 +266,19 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-web</artifactId>
 			<version>${shiro.version}</version>
+		</dependency>
+
+		<!-- xss过滤组件 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
+		</dependency>
+		<!-- velocity版本 -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-engine-core</artifactId>
+			<version>${velocity.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

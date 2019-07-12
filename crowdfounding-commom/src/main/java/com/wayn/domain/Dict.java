@@ -17,7 +17,7 @@ import java.util.Date;
  * @since 2019-06-27
  */
 @TableName("sys_dict")
-public class Dict extends BaseEntity {
+public class Dict extends BaseEntity<Dict> {
 
     /**
      * 编号
