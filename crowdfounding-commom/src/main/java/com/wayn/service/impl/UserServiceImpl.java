@@ -13,6 +13,7 @@ import com.wayn.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,7 +61,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         Integer count = userDao.selectCount(new EntityWrapper<User>().eq("userName", userName));
         return count > 0;
     }
-
+    
+    @CacheEvict(value = "menuCache", allEntries = true)
     @Transactional
     @Override
     public boolean save(User user, String roleIds) {
@@ -84,6 +86,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         return flag;
     }
 
+    @CacheEvict(value = "menuCache", allEntries = true)
     @Transactional
     @Override
     public boolean update(User user, String roleIds) {

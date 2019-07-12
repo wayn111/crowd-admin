@@ -23,6 +23,7 @@ public class DeptController extends BaseControlller {
     @Autowired
     private DeptService deptService;
 
+    @RequiresPermissions("sys:dept:dept")
     @GetMapping
     public String deptIndex() {
         return PREFIX + "/dept";
