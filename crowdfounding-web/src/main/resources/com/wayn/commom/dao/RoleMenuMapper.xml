@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wayn.commom.dao.RoleMenuDao">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.wayn.commom.domain.RoleMenu">
+		<id column="id" property="id" />
+		<result column="roleId" property="roleId" />
+		<result column="menuId" property="menuId" />
+	</resultMap>
+	
+	<resultMap id="MenuResultMap" type="com.wayn.commom.domain.Menu">
+		<id column="id" property="id" />
+		<result column="menuName" property="menuName" />
+		<result column="pid" property="pid" />
+		<result column="url" property="url" />
+		<result column="icon" property="icon" />
+		<result column="sort" property="sort" />
+		<result column="type" property="type" />
+		<result column="code" property="code" />
+		<result column="resource" property="resource" />
+	</resultMap>
+
+	<select id="selectRoleMenuIdsByUserId"
+		parameterType="java.lang.String" resultMap="MenuResultMap">
+		SELECT DISTINCT
+			m.id,
+			m.menuName,
+			m.pid,
+			m.url,
+			m.icon,
+			m.sort,
+			m.type,
+			m.code,
+			m.resource 
+		FROM
+			sys_role_menu rm
+			LEFT JOIN sys_user_role ur ON rm.roleId = ur.roleId
+			LEFT JOIN sys_role r ON r.id = ur.roleId
+			LEFT JOIN sys_menu m ON m.id = rm.menuId 
+		WHERE
+			ur.userId = #{uid} 
+			AND r.roleState = 1
+			AND m.type in ( 1, 2 )
+		ORDER  BY m.sort ASC
+	</select>
+	
+	<insert id="batchSave">
+		insert into sys_role_menu(id,roleId,menuId) values
+		<foreach  item="item" index="index"  collection="list"
+			separator=",">
+			(#{item.id},#{item.roleId},#{item.menuId})
+		</foreach>
+	</insert>
+</mapper>

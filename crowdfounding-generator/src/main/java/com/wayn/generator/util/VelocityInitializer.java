@@ -17,7 +17,7 @@ public class VelocityInitializer {
         Properties p = new Properties();
         try {
             // 加载classpath目录下的vm文件
-            p.setProperty("file.resource.loader.class",
+            p.setProperty("resource.loader.file.class",
                     "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
             // 定义字符集
             p.setProperty(Velocity.ENCODING_DEFAULT, "UTF-8");

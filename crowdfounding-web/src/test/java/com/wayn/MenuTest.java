@@ -10,8 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.wayn.domain.Menu;
-import com.wayn.mapper.RoleMenuDao;
+import com.wayn.commom.domain.Menu;
+import com.wayn.commom.dao.RoleMenuDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/spring-*.xml" })

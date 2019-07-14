@@ -1,0 +1,85 @@
+package com.wayn.web.controller.commom;
+
+import com.baomidou.mybatisplus.plugins.Page;
+import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.util.Response;
+import com.wayn.commom.domain.${className};
+import com.wayn.commom.service.${className}Service;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+@RequestMapping("/${moduleName}/${classname}")
+@Controller
+public class ${className}Controller extends BaseControlller {
+
+    private static final String PREFIX = "${moduleName}/${classname}";
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+
+    @RequiresPermissions("${moduleName}:${classname}:list")
+    @GetMapping
+    public String ${className}Index() {
+        return PREFIX + "/type";
+    }
+
+    @RequiresPermissions("${moduleName}:${classname}:list")
+    @ResponseBody
+    @PostMapping("/list")
+    public Page<Dict> list(Model model, ${className} ${classname}) {
+        Page<${className}> page = getPage();
+        return ${classname}Service.select${className}list(page, ${classname});
+    }
+
+    @RequiresPermissions("${moduleName}:${classname}:add")
+    @GetMapping("/add")
+    public String add(ModelMap modelMap) {
+        return PREFIX + "/add";
+    }
+
+    @RequiresPermissions("${moduleName}:${classname}:edit")
+    @GetMapping("/edit/{id}")
+    public String edit(ModelMap modelMap, @PathVariable("id") Long id) {
+        ${className} ${classname} = ${classname}Service.selectById(id);
+        modelMap.put("${classname}", ${classname});
+        return PREFIX + "/edit";
+    }
+
+    @RequiresPermissions("${moduleName}:${classname}:add")
+    @ResponseBody
+    @PostMapping("/addSave")
+    public Response addSave(ModelMap modelMap, ${className} ${classname}) {
+        ${classname}Service.save(${classname});
+        return Response.success("新增成功");
+    }
+
+    @RequiresPermissions("${moduleName}:${classname}:edit")
+    @ResponseBody
+    @PostMapping("/editSave")
+    public Response editSave(ModelMap modelMap, ${className} ${classname}) {
+        ${classname}Service.update(${classname});
+        return Response.success("修改成功");
+    }
+
+
+    @RequiresPermissions("${moduleName}:${classname}:remove")
+    @ResponseBody
+    @DeleteMapping("/remove/{id}")
+    public Response remove(ModelMap modelMap, @PathVariable("id") ${primaryKey.attrType} id) {
+        ${classname}Service.remove(id);
+        return Response.success("删除成功");
+    }
+
+    @RequiresPermissions("${moduleName}:${classname}:remove")
+    @ResponseBody
+    @PostMapping("/batchRemove")
+    public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") ${primaryKey.attrType}[] ids) {
+        ${classname}Service.batchRemove(ids);
+        return Response.success("删除成功");
+    }
+
+}

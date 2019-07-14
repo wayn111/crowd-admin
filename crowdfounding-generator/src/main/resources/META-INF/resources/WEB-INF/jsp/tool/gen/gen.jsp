@@ -25,6 +25,16 @@
                 <label for="tableName">数据表名称</label>
                 <input type="text" class="form-control" id="tableName" name="tableName">
             </div>
+            <div class="form-group magin-left10">
+                <label for="tableName">数据表备注</label>
+                <input type="text" class="form-control" id="tableComment" name="tableComment">
+            </div>
+            <div class="form-group magin-left10 select-time">
+                <label for="startTime">创建时间</label>
+                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
+                <span>-</span>
+                <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
+            </div>
             <a class="btn btn-primary btn-rounded btn-sm magin-left10"
                onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索
             </a>
@@ -97,6 +107,9 @@
                     //Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
                     queryParams: function (params) {
                         params.tableName = $('#tableName').val();
+                        params.tableComment = $('#tableComment').val();
+                        params.startTime = $('#startTime').val();
+                        params.endTime = $('#endTime').val();
                         return params;
                     },
                     // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -125,6 +138,10 @@
                             title: '表名称' // 列标题
                         },
                         {
+                            field: 'tableComment', // 列字段名
+                            title: '表备注' // 列标题
+                        },
+                        {
                             field: 'createTime',
                             title: '创建时间'
                         },
@@ -148,21 +165,8 @@
     }
 
     function genCode(tableName) {
-        $.ajax({
-            url: prefix + "/genCode/" + tableName,
-            type: "POST",
-            data: {
-                'tableName': tableName
-            },
-            success: function (r) {
-                if (r.code == 100) {
-                    layer.msg(r.msg);
-                    reload();
-                } else {
-                    layer.msg(r.msg);
-                }
-            }
-        });
+        location.href = prefix + "/genCode/" + tableName;
+        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
     }
 
     function batchGenCode() {
@@ -176,21 +180,7 @@
         $.each(rows, function (i, row) {
             names[i] = row['tableName'];
         });
-        $.ajax({
-            type: 'POST',
-            data: {
-                "names": names
-            },
-            url: prefix + '/batchGenCode',
-            success: function (data) {
-                if (data.code != 100) {
-                    layer.alert(data.msg);
-                } else {
-                    layer.msg(data.msg);
-                    reload();
-                }
-            }
-        });
+        location.href = prefix + "/batchGenCode?names=" + names;
     }
 
     function reload() {

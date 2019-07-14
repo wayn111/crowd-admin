@@ -1,10 +1,10 @@
 package com.wayn.framework.shiro.realm;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.wayn.domain.User;
-import com.wayn.service.RoleMenuService;
-import com.wayn.service.UserRoleService;
-import com.wayn.service.UserService;
+import com.wayn.commom.domain.User;
+import com.wayn.commom.service.RoleMenuService;
+import com.wayn.commom.service.UserRoleService;
+import com.wayn.commom.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

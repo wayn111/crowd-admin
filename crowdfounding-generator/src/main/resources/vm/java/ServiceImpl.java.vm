@@ -1,0 +1,55 @@
+package com.wayn.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import ${package}.mapper.${className}Dao;
+import ${package}.domain.${className};
+import ${package}.service.${className}Service;
+
+/**
+ * ${tableComment} 服务层实现
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${className}> implements ${className}Service {
+    @Autowired
+    private ${className}Dao ${classname}Dao;
+
+    /**
+     * 查询${tableComment}信息
+     *
+     * @param page
+     * @return ${tableComment}信息
+     */
+    @Override
+    public ${className} select${className}List(Page page, ${className} ${classname}) {
+        return ${classname}dao. select${className}List(page,${classname});
+    }
+
+    @Override
+    public boolean save(${className} ${classname}) {
+        return insert(${classname});
+    }
+
+    @Override
+    public boolean update(${className} ${classname}) {
+        return updateById(${classname});
+    }
+
+    @Override
+    public boolean remove(${primaryKey.attrType} id) {
+        return deleteById(id);
+    }
+
+    @Override
+    public boolean batchRemove(${primaryKey.attrType}[] ids) {
+        return deleteBatchIds(Arrays.asList(ids));
+    }
+
+}
