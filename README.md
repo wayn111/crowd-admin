@@ -20,8 +20,9 @@
 - [RuoYi](https://gitee.com/y_project/RuoYi)
 
 ### 实例截图
+
 -------------
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0714/171521_91bc7764_1731679.png "main.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0714/171533_c3af9135_1731679.png "user.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0714/171544_8ed45408_1731679.png "role-add.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0714/171557_056253cd_1731679.png "log.png")
+![首页](https://images.gitee.com/uploads/images/2019/0714/171521_91bc7764_1731679.png "main.png")
+![用户管理](https://images.gitee.com/uploads/images/2019/0714/171533_c3af9135_1731679.png "user.png")
+![添加角色](https://images.gitee.com/uploads/images/2019/0714/171544_8ed45408_1731679.png "role-add.png")
+![日志查看](https://images.gitee.com/uploads/images/2019/0714/171557_056253cd_1731679.png "log.png")
