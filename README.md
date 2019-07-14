@@ -21,7 +21,7 @@
 
 ### 实例截图
 -------------
-![](https://git.oschina.net/uploads/images/2017/0914/161552_cb781545_89451.png "1.png")
-![](https://git.oschina.net/uploads/images/2017/0914/161612_2616eeed_89451.png "2.png")
-![](https://git.oschina.net/uploads/images/2017/0914/161619_db1dd09f_89451.png "3.png")
-![](https://git.oschina.net/uploads/images/2017/0914/161627_7e08a1ea_89451.png "4.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0714/171521_91bc7764_1731679.png "main.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0714/171533_c3af9135_1731679.png "user.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0714/171544_8ed45408_1731679.png "role-add.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0714/171557_056253cd_1731679.png "log.png")
