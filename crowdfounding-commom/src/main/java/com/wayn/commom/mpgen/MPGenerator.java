@@ -21,31 +21,31 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
  */
 public class MPGenerator {
 
-	@Test
-	public void generateCode() {
-		String packageName = "com.wayn";
-		boolean serviceNameStartWithI = false;// user -> UserService, 设置成true: user -> IUserService
-		generateByTables(serviceNameStartWithI, packageName, "sys_dict");
-	}
+    @Test
+    public void generateCode() {
+        String packageName = "com.wayn" ;
+        boolean serviceNameStartWithI = false;// user -> UserService, 设置成true: user -> IUserService
+        generateByTables(serviceNameStartWithI, packageName, "sys_setting");
+    }
 
-	private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
-		GlobalConfig config = new GlobalConfig();
-		String dbUrl = "jdbc:mysql://192.168.233.128:3306/crowdfounding?characterEncoding=utf8&useSSL=false&serverTimezone=UTC";
-		DataSourceConfig dataSourceConfig = new DataSourceConfig();
-		dataSourceConfig.setDbType(DbType.MYSQL).setUrl(dbUrl).setUsername("root").setPassword("admin123")
-				.setDriverName("com.mysql.cj.jdbc.Driver");
-		StrategyConfig strategyConfig = new StrategyConfig();
-		strategyConfig.setTablePrefix(new String[] { "sys_" }).setCapitalMode(true).setEntityLombokModel(false)
-				.setNaming(NamingStrategy.underline_to_camel).setInclude(tableNames);// 修改替换成你需要的表名，多个表名传数组
-		config.setActiveRecord(false).setAuthor("wayn").setOutputDir("./src/main/java").setFileOverride(true);
-		if (!serviceNameStartWithI) {
-			config.setServiceName("%sService");
-			config.setMapperName("%sDao");
-			config.setServiceImplName("%sServiceImpl");
-		}
-		new AutoGenerator().setTemplateEngine(new FreemarkerTemplateEngine()).setGlobalConfig(config)
-				.setDataSource(dataSourceConfig).setStrategy(strategyConfig)
-				.setPackageInfo(new PackageConfig().setParent(packageName).setEntity("domain")).execute();
-	}
+    private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
+        GlobalConfig config = new GlobalConfig();
+        String dbUrl = "jdbc:mysql://192.168.233.128:3306/crowdfounding?characterEncoding=utf8&useSSL=false&serverTimezone=UTC" ;
+        DataSourceConfig dataSourceConfig = new DataSourceConfig();
+        dataSourceConfig.setDbType(DbType.MYSQL).setUrl(dbUrl).setUsername("root").setPassword("admin123")
+                .setDriverName("com.mysql.cj.jdbc.Driver");
+        StrategyConfig strategyConfig = new StrategyConfig();
+        strategyConfig.setTablePrefix(new String[]{"sys_"}).setCapitalMode(true).setEntityLombokModel(false)
+                .setNaming(NamingStrategy.underline_to_camel).setInclude(tableNames);// 修改替换成你需要的表名，多个表名传数组
+        config.setActiveRecord(false).setAuthor("wayn").setOutputDir("./src/main/java").setFileOverride(true);
+        if (!serviceNameStartWithI) {
+            config.setServiceName("%sService");
+            config.setMapperName("%sDao");
+            config.setServiceImplName("%sServiceImpl");
+        }
+        new AutoGenerator().setTemplateEngine(new FreemarkerTemplateEngine()).setGlobalConfig(config)
+                .setDataSource(dataSourceConfig).setStrategy(strategyConfig)
+                .setPackageInfo(new PackageConfig().setParent(packageName).setEntity("domain").setMapper("dao")).execute();
+    }
 
 }

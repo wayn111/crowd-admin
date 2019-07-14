@@ -236,7 +236,7 @@
 												var e = '<a class="btn btn-primary btn-sm ' + s_edit_h
 														+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
 														+ item.id + '\')"><i class="fa fa-edit"></i></a> ';
-												var p = '<a class="btn btn-primary btn-sm ' + s_add_h
+												var p = item.type == 3?'':'<a class="btn btn-primary btn-sm ' + s_add_h
 														+ '" href="#" mce_href="#" title="添加下级" onclick="add(\''
 														+ item.id + '\')"><i class="fa fa-plus"></i></a> ';
 												var d = '<a class="btn btn-warning btn-sm ' + s_remove_h

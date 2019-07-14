@@ -21,7 +21,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">状态</label>
+								<label class="col-sm-3 control-label">状态：</label>
 								<div class="col-sm-8">
 									<input type="hidden" id="roleState" name="roleState"
 										value="${role1.roleState }"> <input type="checkbox"

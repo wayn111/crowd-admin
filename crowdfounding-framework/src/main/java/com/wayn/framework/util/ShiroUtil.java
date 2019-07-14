@@ -1,6 +1,6 @@
 package com.wayn.framework.util;
 
-import com.wayn.domain.User;
+import com.wayn.commom.domain.User;
 import com.wayn.framework.shiro.realm.MyRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;

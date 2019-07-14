@@ -27,6 +27,20 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-3 control-label">手机：</label>
+								<div class="col-sm-8">
+									<input id="phone" name="phone" class="form-control"
+										   type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">邮箱：</label>
+								<div class="col-sm-8">
+									<input id="email" name="email" class="form-control"
+										   type="email">
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-3 control-label">部门：</label>
 								<div class="col-sm-8">
 									<input id="deptId" name="deptId" class="hidden">
@@ -37,7 +51,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">状态:</label>
+								<label class="col-sm-3 control-label">状态：</label>
 								<div class="col-sm-8">
 									<input type="hidden" id="userState" name="userState" value="1">
 									<input type="checkbox" name="userStateSwicth" checked>
@@ -45,7 +59,7 @@
 							</div>
 							<input type="hidden" name="roleIds" id="roleIds">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">角色</label>
+								<label class="col-sm-3 control-label">角色：</label>
 								<div class="col-sm-8">
 									<c:forEach items="${roles}" var="role">
 										<label class="checkbox-inline"> <input name="roleId"

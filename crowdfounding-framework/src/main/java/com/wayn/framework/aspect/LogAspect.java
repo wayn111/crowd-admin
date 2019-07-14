@@ -1,7 +1,7 @@
 package com.wayn.framework.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wayn.domain.User;
+import com.wayn.commom.domain.User;
 import com.wayn.framework.annotation.Log;
 import com.wayn.framework.manager.LogQueue;
 import com.wayn.framework.util.ShiroUtil;
@@ -46,7 +46,7 @@ public class LogAspect {
         Log log = method.getAnnotation(Log.class);
         User user = ShiroUtil.getSessionUser();
         if (log != null) {
-            com.wayn.domain.Log log2 = new com.wayn.domain.Log();
+            com.wayn.commom.domain.Log log2 = new com.wayn.commom.domain.Log();
             log2.setCreateTime(new Date());
             log2.setModuleName(log.value());
             log2.setOperation(log.operator().getName());

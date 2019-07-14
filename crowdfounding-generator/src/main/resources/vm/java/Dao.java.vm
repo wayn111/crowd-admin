@@ -1,0 +1,23 @@
+package ${package}.mapper;
+
+import ${package}.domain.${className};
+import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import java.util.List;
+
+/**
+ * ${tableComment} 数据层
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}Dao extends BaseMapper<${className}>{
+    /**
+     * 查询${tableComment}信息
+     *
+     * @param 分页对象，自动分页
+     * @return ${tableComment}信息
+     */
+    public List<${className}> select${className}List(Pagination page, ${className} ${classname});
+
+}

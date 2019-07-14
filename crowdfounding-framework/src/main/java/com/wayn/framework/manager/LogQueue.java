@@ -1,6 +1,6 @@
 package com.wayn.framework.manager;
 
-import com.wayn.domain.Log;
+import com.wayn.commom.domain.Log;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.BlockingQueue;

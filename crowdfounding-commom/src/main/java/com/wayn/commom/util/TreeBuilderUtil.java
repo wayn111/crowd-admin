@@ -1,6 +1,6 @@
 package com.wayn.commom.util;
 
-import com.wayn.domain.vo.Tree;
+import com.wayn.commom.domain.vo.Tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;

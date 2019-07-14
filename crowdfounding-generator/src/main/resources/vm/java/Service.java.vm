@@ -1,0 +1,54 @@
+package com.wayn.service;
+
+import ${package}.domain.${className};
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.IService;
+import java.util.List;
+
+/**
+ * ${tableComment} 服务层
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}Service extends IService<${className}> {
+    /**
+     * 查询${tableComment}信息
+     *
+     * @param page 分页对象，自动分页
+     * @return ${tableComment}信息
+     */
+    public List<${className}> select${className}List(Page page, ${className} ${classname});
+
+    /**
+     * 新增{tableComment}
+     *
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+    boolean save(${className} ${classname});
+
+    /**
+     * 修改${tableComment}
+     *
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+    boolean update(${className} ${classname});
+
+    /**
+     * 删除${tableComment}
+     *
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+    boolean remove(${primaryKey.attrType} id);
+
+    /**
+     * 批量删除${tableComment}
+     *
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+    boolean batchRemove(${primaryKey.attrType}[] ids);
+}

@@ -1,6 +1,6 @@
 package com.wayn.framework.annotation;
 
-import com.wayn.enums.Operator;
+import com.wayn.commom.enums.Operator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

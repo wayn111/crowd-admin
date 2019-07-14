@@ -8,7 +8,7 @@ import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.ServletUtil;
-import com.wayn.domain.User;
+import com.wayn.commom.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;

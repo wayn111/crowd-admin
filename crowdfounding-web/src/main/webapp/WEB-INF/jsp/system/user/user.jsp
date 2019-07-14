@@ -37,7 +37,15 @@
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label for="userName">用户名称</label>
-                <input type="text" class="form-control" id="userName" name="userName">
+                <input type="text" class="form-control wayn-width-125" id="userName" name="userName">
+            </div>
+            <div class="form-group magin-left10">
+                <label for="userName">手机号</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+            </div>
+            <div class="form-group magin-left10">
+                <label for="userName">邮箱</label>
+                <input type="text" class="form-control" id="email" name="email">
             </div>
             <div class="form-group magin-left10">
                 <label for="userState">用户状态</label>
@@ -139,6 +147,8 @@
                 queryParams: function (params) {
                     params.deptId = $('#deptId').val();
                     params.userName = $('#userName').val().trim();
+                    params.phone = $('#phone').val();
+                    params.email = $('#email').val();
                     params.userState = $('#userState').val();
                     params.startTime = $('#startTime').val();
                     params.endTime = $('#endTime').val();
@@ -151,14 +161,22 @@
                     },
                     {
                         field: 'id',
-                        width: '18%',
+                        width: '16%',
                         title: '序号'
                     },
                     {
                         field: 'userName',
                         title: '用户名',
-                        width: '10%',
                         sortable: true
+                    },
+                    {
+                        field: 'phone',
+                        title: '手机号',
+                        sortable: true
+                    },
+                    {
+                        field: 'email',
+                        title: '邮箱',
                     },
                     {
                         field: 'createTime',
@@ -174,7 +192,6 @@
                         field: 'userState',
                         title: '状态',
                         align: 'center',
-                        width: '8%',
                         formatter: function (value, row, index) {
                             if (value == '-1') {
                                 return '<span class="badge badge-danger">禁用</span>';
@@ -187,7 +204,6 @@
                         title: '操作',
                         field: 'userId',
                         align: 'center',
-                        width: '15%',
                         formatter: function (value, row, index) {
                             var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
                                 + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id
@@ -219,7 +235,7 @@
             title: '增加用户',
             maxmin: true,
             shadeClose: false, // 点击遮罩关闭层
-            area: ['800px', '520px'],
+            area: ['800px', '590px'],
             content: prefix + '/add'
         });
     }
@@ -249,7 +265,7 @@
             title: '用户修改',
             maxmin: true,
             shadeClose: false,
-            area: ['800px', '520px'],
+            area: ['800px', '540px'],
             content: prefix + '/edit/' + id // iframe的url
         });
     }
@@ -260,7 +276,7 @@
             title: '重置密码',
             maxmin: true,
             shadeClose: false, // 点击遮罩关闭层
-            area: ['400px', '260px'],
+            area: ['400px', '320px'],
             content: prefix + '/resetPwd/' + id // iframe的url
         });
     }
@@ -350,7 +366,7 @@
     $(function () {
         let config = {
             data: JSON.parse('${states}'),
-            width: '150px'
+            width: '80px'
         };
         select2Init('.js-example-basic-single',config);
         let panehHidden = false;

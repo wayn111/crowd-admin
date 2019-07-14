@@ -54,9 +54,9 @@
 		<property name="globalConfig" ref="globalConfig" />
 		<property name="configLocation"
 			value="classpath:mybatis/mybatis-config.xml" />
-		<property name="typeAliasesPackage" value="com.wayn.domain" />
+		<property name="typeAliasesPackage" value="com.wayn.commom.domain" />
 		<property name="mapperLocations"
-			value="classpath*:com/wayn/mapper/*Mapper.xml" />
+			value="classpath*:com/wayn/commom/dao/*Mapper.xml" />
 		<property name="plugins">
 			<array>
 				<!-- 分页插件配置 -->
@@ -79,6 +79,6 @@
 	</bean>
 	<bean id="mapperScannerConfigurer"
 		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.wayn.mapper" />
+		<property name="basePackage" value="com.wayn.commom.dao" />
 	</bean>
 </beans>
