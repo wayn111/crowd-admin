@@ -68,4 +68,13 @@ public class Dept extends BaseEntity<Dept> {
 		this.sort = sort;
 	}
 
+	@Override
+	public String toString() {
+		return "Dept{" +
+				"id=" + id +
+				", pid=" + pid +
+				", deptName='" + deptName + '\'' +
+				", sort=" + sort +
+				"} " + super.toString();
+	}
 }

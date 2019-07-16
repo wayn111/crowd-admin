@@ -3738,6 +3738,7 @@ table.table-mail tr td {
     cursor: pointer;
     margin-left: 5px;
     color: #c4c4c4;
+    padding: 4px 1px 0px 0px;
 }
 
 .ibox-tools a.btn-primary {
@@ -7393,4 +7394,15 @@ body.skin-3 {
 }
 .wayn-width-125 {
     width: 125px !important;
+}
+.tree-search-content{
+	padding: 20px 10px 10px 5px;
+}
+.tree-search-content input{
+	width: 150px;
+    vertical-align: middle;
+    line-height: 24px;
+    height: 26px;
+    border: 1px solid #bbb;
+    padding: 0 4px;
 }

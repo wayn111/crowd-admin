@@ -137,7 +137,7 @@
 			layer.open({
 				type : 2,
 				title : "选择菜单",
-				area : [ '300px', '450px' ],
+				area : [ '330px', '480px' ],
 				content : prefix + "/treeView"
 			})
 		}

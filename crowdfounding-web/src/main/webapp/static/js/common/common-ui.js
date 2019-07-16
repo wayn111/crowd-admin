@@ -5,6 +5,8 @@ $(function () {
 
     // laydate 时间控件绑定
     layDate();
+
+    treeSearchInit();
 });
 
 /**
@@ -26,6 +28,8 @@ function select2Init(selector, config) {
     };
     deFaultConfig = $.extend({}, deFaultConfig, config);
     $(selector).select2(deFaultConfig);
+    
+    treeSearchInit();
 }
 
 
@@ -139,4 +143,14 @@ function layDate() {
             }
         });
     }
+}
+
+/**
+ * 初始化树搜索控件
+ * @returns
+ */
+function treeSearchInit(){
+	$('#keyword').on('keyup',function(){
+		search();
+	});
 }

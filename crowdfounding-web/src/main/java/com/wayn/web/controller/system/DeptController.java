@@ -86,7 +86,7 @@ public class DeptController extends BaseControlller {
     @RequiresPermissions("sys:dept:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
-    public Response remove(Model model, @PathVariable("id") Integer id) {
+    public Response remove(Model model, @PathVariable("id") Long id) {
         deptService.remove(id);
         return Response.success("部门删除成功");
     }

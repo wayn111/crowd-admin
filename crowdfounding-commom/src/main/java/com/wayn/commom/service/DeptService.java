@@ -20,7 +20,7 @@ public interface DeptService extends IService<Dept> {
 
 	boolean update(Dept dept);
 
-	boolean remove(Integer id);
+	boolean remove(Long id);
 
 	Tree<Dept> getTree();
 

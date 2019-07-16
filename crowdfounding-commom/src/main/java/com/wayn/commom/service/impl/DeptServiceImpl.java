@@ -43,7 +43,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
 
     @CacheEvict(value = "deptCache", allEntries = true)
     @Override
-    public boolean remove(Integer id) {
+    public boolean remove(Long id) {
         return deleteById(id);
     }
 
