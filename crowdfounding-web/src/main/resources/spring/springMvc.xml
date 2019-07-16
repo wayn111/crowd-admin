@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
@@ -21,56 +21,65 @@
 	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-	<context:component-scan
-		base-package="com.wayn.web.controller" />
-	<context:component-scan
-		base-package="com.wayn.commom.service" />
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<!-- 静态资源配置 -->
-	<mvc:resources mapping="/static/**" location="/static/" />
-	<mvc:annotation-driven>
-		<mvc:message-converters
-			register-defaults="true">
-			<bean
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="supportedMediaTypes">
-					<list>
-						<value>application/json;charset=UTF-8</value>
-						<!-- 优先使用该媒体类型,为了解决IE浏览器下,返回JSON数据的下载问题 -->
-						<value>text/html;charset=UTF-8</value>
-						<value>text/json;charset=UTF-8</value>
-						<value>application/x-www-form-urlencoded;charset=UTF-8</value>
-					</list>
-				</property>
-				<!-- 使用内置日期工具进行处理 -->
-				<property name="objectMapper">
-					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-						<property name="dateFormat">
-							<bean class="java.text.SimpleDateFormat">
-								<constructor-arg type="java.lang.String"
-									value="yyyy-MM-dd HH:mm:ss" />
-							</bean>
-						</property>
-					</bean>
-				</property>
-			</bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
-	<!-- 配置统一异常分处理器 -->
-	<!-- <bean class="com.ssm.util.UnifiedException"></bean> -->
-	<!-- 将spring不能处理的静态资源文件交给servlet处理，有了mvc:resources后不需要此配置 -->
-	<!-- <mvc:default-servlet-handler/> -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/"></property>
-		<property name="suffix" value=".jsp"></property>
-	</bean>
-	<!-- 文件上传解析器 -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="314572800" />
-		<property name="defaultEncoding" value="UTF-8"></property>
-		<property name="maxInMemorySize" value="4096" />
-	</bean>
+    <context:component-scan
+            base-package="com.wayn.web.controller"/>
+    <context:component-scan
+            base-package="com.wayn.commom.service"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 静态资源配置 -->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:annotation-driven>
+        <mvc:message-converters
+                register-defaults="true">
+            <bean
+                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                        <!-- 优先使用该媒体类型,为了解决IE浏览器下,返回JSON数据的下载问题 -->
+                        <value>text/html;charset=UTF-8</value>
+                        <value>text/json;charset=UTF-8</value>
+                        <value>application/x-www-form-urlencoded;charset=UTF-8</value>
+                    </list>
+                </property>
+                <!-- 使用内置日期工具进行处理 -->
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String"
+                                                 value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- API 接口跨域配置 -->
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="http://localhost:3000"
+                     allowed-methods="POST,GET,OPTIONS,DELETE,PUT"
+                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                     allow-credentials="true"/>
+    </mvc:cors>
+    <!-- 配置统一异常分处理器 -->
+    <!-- <bean class="com.ssm.util.UnifiedException"></bean> -->
+    <!-- 将spring不能处理的静态资源文件交给servlet处理，有了mvc:resources后不需要此配置 -->
+    <!-- <mvc:default-servlet-handler/> -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <!-- 文件上传解析器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="314572800"/>
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="maxInMemorySize" value="4096"/>
+    </bean>
 
 </beans>

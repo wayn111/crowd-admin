@@ -24,7 +24,11 @@
         </div>
         <div class="ibox-tools wayn-ibox-tools">
             <a type="button" class="btn btn-box-tool menuItem" href="#"
-               onclick="dept()" title="管理部门"><i class="fa fa-edit"></i></a>
+               onclick="dept()" title="管理部门"><i class="fa fa-edit"></i>
+            </a>
+            <a type="button" class="btn btn-box-tool menuItem" href="#"
+               onclick="refresh()" title="管理部门"><i class="fa fa-refresh"></i>
+            </a>
         </div>
         <div class="ibox-content">
             <div id="jstree"></div>
@@ -50,12 +54,13 @@
             <div class="form-group magin-left10">
                 <label for="userState">用户状态</label>
                 <select
-                    class="js-example-basic-single" name="userState" id="userState">
+                        class="js-example-basic-single" name="userState" id="userState">
                 </select>
             </div>
             <div class="form-group magin-left10 select-time">
                 <label for="startTime">创建时间</label>
-                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
+                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
+                       placeholder="开始时间"/>
                 <span>-</span>
                 <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
             </div>
@@ -89,9 +94,9 @@
     <!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
     <div>
         <script type="text/javascript">
-            var s_edit_h = 'hidden';
-            var s_remove_h = 'hidden';
-            var s_resetPwd_h = 'hidden';
+            let s_edit_h = 'hidden';
+            let s_remove_h = 'hidden';
+            let s_resetPwd_h = 'hidden';
         </script>
         <shiro:hasPermission name="sys:user:edit">
             <script>
@@ -112,7 +117,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + "/system/user"
+    let prefix = _ctx + "/system/user";
 
     function load(deptId) {
         $('#exampleTable').bootstrapTable(
@@ -205,13 +210,13 @@
                         field: 'userId',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
+                            let e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
                                 + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id
                                 + '\')"><i class="fa fa-edit "></i></a> ';
-                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
+                            let d = '<a class="btn btn-warning btn-sm ' + s_remove_h
                                 + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h
+                            let f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h
                                 + '" href="#" title="重置密码"  mce_href="#" onclick="resetPwd(\'' + row.id
                                 + '\')"><i class="fa fa-key"></i></a> ';
                             return e + d + f;
@@ -225,7 +230,32 @@
     }
 
     function dept() {
-        menuItemCreate(_ctx + '/system/dept','部门管理');
+        menuItemCreate(_ctx + '/system/dept', '部门管理');
+    }
+
+    function refresh() {
+        var index = 0;
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: _ctx + "/system/dept/tree",
+            beforeSend: function (xhr) {
+                index = layer.msg('加载中', {
+                    icon: 16,
+                    shade: 0.1,
+                    time: 270
+                });
+            },
+            success: function (tree) {
+                debugger
+                $('#jstree').jstree(true).settings.core.data = tree;
+                $('#jstree').jstree(true).refresh();
+            },
+            error: function (err) {
+                layer.msg(err);
+                layer.close(index);
+            }
+        });
     }
 
     function add() {
@@ -282,7 +312,7 @@
     }
 
     function batchRemove() {
-        var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+        let rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
         if (rows.length == 0) {
             layer.msg("请选择要删除的数据");
             return;
@@ -291,7 +321,7 @@
             btn: ['确定', '取消']
             // 按钮
         }, function () {
-            var ids = new Array();
+            let ids = new Array();
             // 遍历所有选择的行数据，取每条数据对应的ID
             $.each(rows, function (i, row) {
                 ids[i] = row['id'];
@@ -315,19 +345,19 @@
         });
     }
 
-    function getTreeData() {
+    function getTreeData(load) {
         $.ajax({
             type: "POST",
             dataType: "json",
             url: _ctx + "/system/dept/tree",
             success: function (tree) {
-                loadTree(tree);
+                load(tree);
             }
         });
     }
 
     function loadTree(tree) {
-        let ref = $('#jstree').jstree({
+        $('#jstree').jstree({
             'core': {
                 'data': tree,
                 'themes': {
@@ -336,7 +366,6 @@
             },
             "plugins": ["search"]
         });
-
     }
 
     $("#jstree").on("loaded.jstree", function (event, data) {
@@ -346,29 +375,30 @@
 
     $('#jstree').on("changed.jstree", function (e, data) {
         if (data.selected == -1) {
-            var opt = {
+            let opt = {
                 query: {
                     deptId: '',
                 }
-            }
+            };
             $('#deptId').val('');
             $('#exampleTable').bootstrapTable('refresh', opt);
         } else {
-            var opt = {
+            let opt = {
                 query: {
                     deptId: data.selected[0],
                 }
-            }
+            };
             $('#deptId').val(data.selected[0]);
             $('#exampleTable').bootstrapTable('refresh', opt);
         }
     });
+
     $(function () {
         let config = {
             data: JSON.parse('${states}'),
             width: '80px'
         };
-        select2Init('.js-example-basic-single',config);
+        select2Init('.js-example-basic-single', config);
         let panehHidden = false;
         if ($(this).width() < 769) {
             panehHidden = true;
@@ -378,7 +408,7 @@
             initClosed: panehHidden,
             west__size: 210
         });
-        getTreeData();
+        getTreeData(loadTree);
         load($('#deptId').val());
     });
 </script>

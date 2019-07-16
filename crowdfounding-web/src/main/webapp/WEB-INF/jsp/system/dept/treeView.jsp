@@ -10,6 +10,10 @@
 
     <div class="row">
         <div class="col-sm-12">
+        	<div class="tree-search-content">
+	            <label for="keyword">关键字：</label><input type="text" class="empty" id="keyword" maxlength="50">
+				<button class="btn  btn-xs" onclick="search()">搜索</button>
+			</div>
             <div class="ibox-content">
                 <div id="deptTree"></div>
             </div>
@@ -25,6 +29,10 @@
 <script>
     let prefix = _ctx + '/system/dept';
 
+    function search(){
+		$('#deptTree').jstree(true).search($('#keyword').val())
+	}
+    
     function getTreeData() {
         $.ajax({
             type: "POST",

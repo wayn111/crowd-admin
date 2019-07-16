@@ -7,12 +7,14 @@
 <%@ include file="/commom/header.jsp"%>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
-
 		<div class="row">
 			<div class="col-sm-12">
-
+                <div class="tree-search-content">
+                    <label for="keyword">关键字：</label><input type="text" class="empty" id="keyword" maxlength="50">
+					<button class="btn  btn-xs" onclick="search()">搜索</button>
+				</div>
 				<div class="ibox-content">
-					<div id="menuTree"></div>
+                    <div id="menuTree"></div>
 				</div>
 				<div class="form-group hidden">
 					<div class="col-sm-12 col-sm-offset-12">
@@ -25,7 +27,11 @@
 	<%@ include file="/commom/footer.jsp"%>
 	<script>
 		let prefix = _ctx + '/system/menu';
-
+		
+		function search(){
+			$('#menuTree').jstree(true).search($('#keyword').val())
+		}
+		
 		function getTreeData() {
 			$.ajax({
 				type : "POST",
@@ -61,7 +67,6 @@
 			}
 			let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 			parent.layer.close(index);
-
 		});
 
 		$(function() {
