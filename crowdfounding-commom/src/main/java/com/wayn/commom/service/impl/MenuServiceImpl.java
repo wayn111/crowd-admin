@@ -185,7 +185,27 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
         EntityWrapper<Menu> wrapper = new EntityWrapper<>();
         wrapper.like("menuName", menu.getMenuName());
         wrapper.in(StringUtils.isNotEmpty(menu.getType()), "type", Arrays.asList(menu.getType().split(",")));
-        return selectList(wrapper.orderBy("sort"));
+        List<Menu> menus = selectList(wrapper.orderBy("sort"));
+        List<Menu> menusList = new ArrayList<>(menus);
+        if (StringUtils.isNotEmpty(menu.getMenuName())) {
+            selectChildren(menus, menusList);
+        }
+        return menusList;
+    }
+
+    /**
+     * 根据pid查询子菜单
+     * @param menus
+     * @param menusList
+     * @return
+     */
+    public List<Menu> selectChildren(List<Menu> menus, List<Menu> menusList) {
+        menus.forEach(item -> {
+            if (item.getType() < 3) {
+                menusList.addAll(selectChildren(selectList(new EntityWrapper<Menu>().eq("pid", item.getId()).orderBy("sort")), menusList));
+            }
+        });
+        return menus;
     }
 
 }

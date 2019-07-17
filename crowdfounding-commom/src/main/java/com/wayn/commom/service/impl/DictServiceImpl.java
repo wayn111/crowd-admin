@@ -121,15 +121,14 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         EntityWrapper<Dict> wrapper = new EntityWrapper<>();
         wrapper.eq("type", 2)
                 .eq("delFlag", "0")
-                .eq("delFlag", "0")
                 .eq("dictType", dictType)
                 .eq("dictState", 1);
-        List<Dict> dicts = selectList(wrapper);
-        List<JSONObject> objectList = convert2select(dicts);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", "");
+        List<Dict> dictList = selectList(wrapper);
+        List<JSONObject> objectList = convert2select(dictList);
+        /*JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", "all");
         jsonObject.put("text", "全部");
-        objectList.add(0, jsonObject);
+        objectList.add(0, jsonObject);*/
         return objectList;
     }
 
@@ -138,7 +137,6 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     public List<JSONObject> selectDictsValueByTypeNoAll(String dictType) {
         EntityWrapper<Dict> wrapper = new EntityWrapper<>();
         wrapper.eq("type", 2)
-                .eq("delFlag", "0")
                 .eq("delFlag", "0")
                 .eq("dictType", dictType)
                 .eq("dictState", 1);

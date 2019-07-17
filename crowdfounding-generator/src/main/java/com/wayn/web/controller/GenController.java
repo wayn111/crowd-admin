@@ -15,37 +15,40 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/tool/gen" )
+@RequestMapping("/tool/gen")
 public class GenController extends BaseControlller {
 
-    private static final String PREFIX = "tool/gen" ;
+    private static final String PREFIX = "tool/gen";
 
     @Autowired
     private GenService genService;
 
+    @RequiresPermissions("tool:gen:list")
     @GetMapping
     public String genIndex() {
-        return PREFIX + "/gen" ;
+        return PREFIX + "/gen";
     }
 
-    @RequiresPermissions("tool:gen:list" )
+    @RequiresPermissions("tool:gen:list")
     @ResponseBody
-    @PostMapping("/list" )
+    @PostMapping("/list")
     public Page<TableInfo> list(Model model, TableInfo tableInfo) {
         Page<TableInfo> page = getPage();
         Page<TableInfo> tableInfoPage = genService.selectTableList(page, tableInfo);
         return tableInfoPage;
     }
 
-    @GetMapping("/genCode/{name}" )
-    public void genCode(@PathVariable("name" ) String tableName, HttpServletResponse response) throws IOException {
+    @RequiresPermissions("tool:gen:gen")
+    @GetMapping("/genCode/{name}")
+    public void genCode(@PathVariable("name") String tableName, HttpServletResponse response) throws IOException {
         byte[] data = genService.generatorCode(tableName);
         genCode(response, data);
     }
 
-    @GetMapping("/batchGenCode" )
+    @RequiresPermissions("tool:gen:gen")
+    @GetMapping("/batchGenCode")
     public void batchGenCode(String names, HttpServletResponse response) throws IOException {
-        byte[] data = genService.generatorCode(names.split("," , -1));
+        byte[] data = genService.generatorCode(names.split(",", -1));
         genCode(response, data);
     }
 
@@ -58,9 +61,9 @@ public class GenController extends BaseControlller {
      */
     private void genCode(HttpServletResponse response, byte[] data) throws IOException {
         response.reset();
-        response.setHeader("Content-Disposition" , "attachment; filename=\"crowd.zip\"" );
-        response.addHeader("Content-Length" , "" + data.length);
-        response.setContentType("application/octet-stream; charset=UTF-8" );
+        response.setHeader("Content-Disposition", "attachment; filename=\"crowd.zip\"");
+        response.addHeader("Content-Length", "" + data.length);
+        response.setContentType("application/octet-stream; charset=UTF-8");
         IOUtils.write(data, response.getOutputStream());
     }
 
