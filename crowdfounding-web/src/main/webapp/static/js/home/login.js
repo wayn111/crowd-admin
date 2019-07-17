@@ -6,7 +6,7 @@ function validateRule() {
 		rules : {
 			userName : {
 				required : true,
-				minlength : 3
+				minlength : 2
 			},
 			password : {
 				required : true
@@ -16,7 +16,7 @@ function validateRule() {
 		messages : {
 			userName : {
 				required : e + "请输入用户名",
-				minlength : e + "用户名必需由三个字母组成"
+				minlength : e + "用户名最少由二个字母组成"
 			},
 			password : {
 				required : e + "请输入密码",
