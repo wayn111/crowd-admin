@@ -28,7 +28,7 @@
 				</div>
 				<div class="form-group magin-left10">
 					<label for="type">菜单类型</label> <select value=""
-						class="js-example-basic-single" id="type" name="type">
+						class="js-example-basic-multi" id="type" name="type">
 					</select>
 				</div>
 				<a class="btn btn-primary btn-rounded btn-sm magin-left10"
@@ -148,7 +148,8 @@
 								code : 'id',
 								parentCode : 'pid',
 								type : "POST", // 请求数据的ajax类型
-								url : prefix + '/list?_r=' + Math.random(), // 请求数据的ajax的url
+								url : prefix + '/list', // 请求数据的ajax的url
+								cache : false,
 								ajaxParams : {
 									menuName : $('#menuName').val().trim(),
 									type : function() {
@@ -258,7 +259,7 @@
 				data : JSON.parse('${menuTypes}'),
 				multiple : true
 			};
-			$('.js-example-basic-single').select2(config);
+            select2Init('.js-example-basic-multi',config);
 			load();
 		})
 	</script>

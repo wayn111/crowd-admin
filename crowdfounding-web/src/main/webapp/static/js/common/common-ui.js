@@ -40,6 +40,7 @@ function select2Init(selector, config) {
 function selectReset() {
     $('form').first()[0].reset();
     $('.js-example-basic-single').val(null).trigger('change');
+    $('.js-example-basic-multi').val(null).trigger('change');
 }
 
 /**

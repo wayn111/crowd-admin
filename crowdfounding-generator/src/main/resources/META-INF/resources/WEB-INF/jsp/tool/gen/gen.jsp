@@ -48,7 +48,7 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div id="exampleToolbar" role="group" class="t-bar">
-                    <shiro:hasPermission name="tool:gen:remove">
+                    <shiro:hasPermission name="tool:gen:gen">
                         <button type="button" class="btn btn-info"
                                 onclick="batchGenCode()">
                             <i class="fa fa-download" aria-hidden="true"></i>批量生成
@@ -65,7 +65,7 @@
         <script type="text/javascript">
             var s_remove = 'hidden';
         </script>
-        <shiro:hasPermission name="tool:gen:remove">
+        <shiro:hasPermission name="tool:gen:gen">
             <script>
                 s_remove = '';
             </script>
