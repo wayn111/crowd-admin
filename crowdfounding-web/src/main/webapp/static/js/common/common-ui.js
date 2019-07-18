@@ -28,7 +28,7 @@ function select2Init(selector, config) {
     };
     deFaultConfig = $.extend({}, deFaultConfig, config);
     $(selector).select2(deFaultConfig);
-    
+
     treeSearchInit();
 }
 
@@ -150,8 +150,24 @@ function layDate() {
  * 初始化树搜索控件
  * @returns
  */
-function treeSearchInit(){
-	$('#keyword').on('keyup',function(){
-		search();
-	});
+function treeSearchInit() {
+    $('#keyword').on('keyup', function () {
+        search();
+    });
+}
+
+/**
+ * bootstrap-table行选中，复选框自动勾选
+ * @param row
+ * @param element
+ */
+function rowClickSelect(row, element) {
+    $(element).toggleClass('selected');
+    if ($(element).find('input').prop('checked')) {
+        $(element).find('input').prop('checked', false);
+        row[0] = false;
+    } else {
+        $(element).find('input').prop('checked', true);
+        row[0] = true;
+    }
 }
