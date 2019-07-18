@@ -94,7 +94,7 @@
 		        content: prefix + '/add/' + pId // iframe的url
 		    });
 		}
-		
+
 		function edit(id) {
 			layer.open({
 		        type: 2,
@@ -105,7 +105,7 @@
 		        content: prefix + '/edit/' + id // iframe的url
 		    });
 		}
-		
+
 		function remove(id) {
 		    layer.confirm('确定要删除选中的记录？', {
 		        btn: ['确定', '取消']
@@ -124,7 +124,7 @@
 		        });
 		    })
 		}
-		
+
 		// tree表格树 展开/折叠
 		let expandFlag;
 		function expandAllOrCollapseAll(){
@@ -136,14 +136,15 @@
 		    }
 		    expandFlag = expandFlag ? false: true;
 		}
-		
+
 		let load = function(){
 			$('#table1').bootstrapTreeTable({
 				id: 'id',
 	            code: 'id',
 	            parentCode: 'pid',
 	            type: "POST", // 请求数据的ajax类型
-	            url: prefix + '/list?_r=' + Math.random(), // 请求数据的ajax的url
+				cache: false,
+	            url: prefix + '/list', // 请求数据的ajax的url
 	            ajaxParams: {
 	            	deptName : $('#deptName').val().trim()
 	            }, // 请求数据的ajax的data属性
@@ -199,11 +200,11 @@
 				]
 			});
 		}
-		
+
 		function reload(){
 			load();
 		}
-		
+
 		$(function() {
 			load();
 		})

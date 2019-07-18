@@ -168,7 +168,8 @@
         $('#table1').bootstrapTable(
             {
                 method: 'post', // 服务器数据的请求方式 get or post
-                url: prefix + "/list?_r=" + Math.random(), // 服务器数据的加载地址
+                url: prefix + "/list?", // 服务器数据的加载地址
+                cache: false,
                 showRefresh: true, //显示刷新按钮
                 showToggle: true, //show the toggle button to toggle table / card view.
                 striped: true, // 设置为true会有隔行变色效果

@@ -87,6 +87,7 @@
         $('#exampleTable').bootstrapTable(
             {
                 method: 'post', // 服务器数据的请求方式 get or post
+                cache: false,
                 url: prefix + "/list", // 服务器数据的加载地址
                 showRefresh: true, //显示刷新按钮
                 showToggle: true, //show the toggle button to toggle table / card view.

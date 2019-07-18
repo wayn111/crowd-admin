@@ -23,6 +23,16 @@ public class Log extends BaseEntity<Log> {
     private String id;
 
     /**
+     * 操作状态 1 正常 -1 失败
+     */
+    private Integer operState;
+
+    /**
+     * 错误消息
+     */
+    private String errorMsg;
+
+    /**
      * 用户
      */
     private String userName;
@@ -38,9 +48,19 @@ public class Log extends BaseEntity<Log> {
     private String operation;
 
     /**
-     * 地址
+     * 请求路径
      */
     private String url;
+
+    /**
+     * 请求ip
+     */
+    private String ip;
+
+    /**
+     * 浏览器信息
+     */
+    private String agent;
 
     /**
      * 参数
@@ -96,14 +116,54 @@ public class Log extends BaseEntity<Log> {
         this.moduleName = moduleName;
     }
 
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public Log setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+        return this;
+    }
+
+    public Integer getOperState() {
+        return operState;
+    }
+
+    public Log setOperState(Integer operState) {
+        this.operState = operState;
+        return this;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public Log setIp(String ip) {
+        this.ip = ip;
+        return this;
+    }
+
+    public String getAgent() {
+        return agent;
+    }
+
+    public Log setAgent(String agent) {
+        this.agent = agent;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Log{" +
                 "id='" + id + '\'' +
+                ", operState=" + operState +
+                ", errorMsg='" + errorMsg + '\'' +
                 ", userName='" + userName + '\'' +
                 ", moduleName='" + moduleName + '\'' +
                 ", operation='" + operation + '\'' +
                 ", url='" + url + '\'' +
+                ", ip='" + ip + '\'' +
+                ", agent='" + agent + '\'' +
                 ", requestParams='" + requestParams + '\'' +
                 "} " + super.toString();
     }
