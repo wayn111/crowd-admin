@@ -25,6 +25,7 @@ public class LogServiceImpl extends ServiceImpl<LogDao, Log> implements LogServi
     public Page<Log> listPage(Page<Log> page, Log log) {
         EntityWrapper<Log> wrapper = ParameterUtil.get();
         wrapper.like("userName", log.getUserName());
+        wrapper.eq(log.getOperState() != null, "operState", log.getOperState());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
         return selectPage(page, wrapper);
     }

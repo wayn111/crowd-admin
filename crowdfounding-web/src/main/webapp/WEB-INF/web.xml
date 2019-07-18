@@ -80,6 +80,10 @@
             <param-value>classpath:spring/springMvc.xml</param-value>
         </init-param>
         <init-param>
+            <param-name>throwExceptionIfNoHandlerFound</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
             <param-name>spring.profiles.default</param-name>
             <param-value>dev</param-value>
         </init-param>
@@ -129,15 +133,15 @@
         <filter-name>DruidWebStatFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <error-page>
+    <!--在springmvc的throwExceptionIfNoHandlerFound属性配置true后，NoHandlerFound异常将会被抛出，由全局异常处理类处理，故放弃error-page配置-->
+    <!--<error-page>
         <error-code>404</error-code>
         <location>/error/404.jsp</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
         <location>/error/500.jsp</location>
-    </error-page>
+    </error-page>-->
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>

@@ -50,6 +50,6 @@ public class LoginController extends BaseControlller {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         //sessionDAO.delete(subject.getSession(false));
-        return redirectTo(PREFIX + "/login");
+        return redirectTo("/");
     }
 }

@@ -3,7 +3,9 @@ package com.wayn.web.controller;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.TableInfo;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.GenService;
+import com.wayn.framework.annotation.Log;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class GenController extends BaseControlller {
         return PREFIX + "/gen";
     }
 
+    @Log(value = "代码生成")
     @RequiresPermissions("tool:gen:list")
     @ResponseBody
     @PostMapping("/list")
@@ -38,6 +41,7 @@ public class GenController extends BaseControlller {
         return tableInfoPage;
     }
 
+    @Log(value = "代码生成", operator = Operator.GENCODE)
     @RequiresPermissions("tool:gen:gen")
     @GetMapping("/genCode/{name}")
     public void genCode(@PathVariable("name") String tableName, HttpServletResponse response) throws IOException {
@@ -45,6 +49,7 @@ public class GenController extends BaseControlller {
         genCode(response, data);
     }
 
+    @Log(value = "代码生成", operator = Operator.GENCODE)
     @RequiresPermissions("tool:gen:gen")
     @GetMapping("/batchGenCode")
     public void batchGenCode(String names, HttpServletResponse response) throws IOException {

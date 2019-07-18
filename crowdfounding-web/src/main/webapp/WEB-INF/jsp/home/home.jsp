@@ -90,11 +90,11 @@
 					<div class="navbar-header">
 						<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
 							href="#"><i class="fa fa-bars"></i> </a>
-						<form role="search" class="navbar-form-custom" method="post"
-							action="http://www.zi-han.net/theme/hplus/search_results.html">
+						<form role="search" class="navbar-form-custom" method="get"
+							action="https://www.baidu.com/s">
 							<div class="form-group">
-								<input type="text" placeholder="请输入您需要查找的内容 …"
-									class="form-control" name="top-search" id="top-search">
+								<input type="text" placeholder="百度一下，了解更多"
+									class="form-control" id="wd" name="wd">
 							</div>
 						</form>
 					</div>
@@ -144,8 +144,7 @@
 			</div>
 			<div class="footer">
 				<div class="pull-right">
-					&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's
-						blog</a>
+					© 2019 WAYN Copyright
 				</div>
 			</div>
 		</div>

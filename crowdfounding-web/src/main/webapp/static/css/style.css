@@ -7415,4 +7415,7 @@ body.skin-3 {
     padding: 10px 20px 20px 10px;
     font-weight: 700;
     line-height: 25px;
+    border-radius: 4px;
+    min-height: 34px;
+    margin: 7px 0px 15px 0px;
 }
