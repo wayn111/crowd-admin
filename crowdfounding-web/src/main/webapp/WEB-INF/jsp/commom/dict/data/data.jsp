@@ -107,6 +107,7 @@
                 dataField: "records",
                 sortName: 'sort',
                 sortOrder: 'asc',
+                onClickRow: rowClickSelect,
                 // "server"
                 queryParamsType: "",//If queryParamsType = 'limit',
                 //the params object contains: limit, offset, search, sort, order.
