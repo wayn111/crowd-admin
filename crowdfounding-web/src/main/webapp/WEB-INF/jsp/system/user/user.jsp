@@ -124,6 +124,7 @@
             {
                 method: 'post', // 服务器数据的请求方式 get or post
                 url: prefix + "/list", // 服务器数据的加载地址
+                cache: false,
                 showRefresh: true, //显示刷新按钮
                 showToggle: true, //show the toggle button to toggle table / card view.
                 iconSize: 'outline',
@@ -248,7 +249,6 @@
                 });
             },
             success: function (tree) {
-                debugger
                 $('#jstree').jstree(true).settings.core.data = tree;
                 $('#jstree').jstree(true).refresh();
             },

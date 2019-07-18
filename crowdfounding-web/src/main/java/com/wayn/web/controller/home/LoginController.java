@@ -32,7 +32,7 @@ public class LoginController extends BaseControlller {
         return PREFIX + "/login";
     }
 
-    @Log(value = "系统登陆", isNeedParam = false)
+    @Log(value = "系统登陆")
     @ResponseBody
     @PostMapping("/doLogin")
     public Response doLogin(String userName, String password, HttpServletRequest request) {

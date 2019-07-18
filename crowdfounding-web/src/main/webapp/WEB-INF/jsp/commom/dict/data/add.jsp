@@ -64,7 +64,6 @@
     let prefix = _ctx + "/commom/dict/data"
 
     function save() {
-        debugger;
         let parentWindow = $(window.parent.document);
         let dictType = $('#dictType', parentWindow).val();
         $.ajax({

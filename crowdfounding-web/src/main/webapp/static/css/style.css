@@ -7380,7 +7380,7 @@ body.skin-3 {
 }
 
 .magin-left10{
-	margin-left: 13px;
+	margin-left: 10px;
 }
 .wayn-ibox-tools{
 	display: inline-block;
@@ -7405,4 +7405,14 @@ body.skin-3 {
     height: 26px;
     border: 1px solid #bbb;
     padding: 0 4px;
+}
+.wayn-div-padding{
+    padding: 0px 15px 0px 15px;
+}
+
+.wayn-div {
+    border: 1px solid #ccc;
+    padding: 10px 20px 20px 10px;
+    font-weight: 700;
+    line-height: 25px;
 }
