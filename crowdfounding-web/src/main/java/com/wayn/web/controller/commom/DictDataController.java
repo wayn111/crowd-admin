@@ -3,9 +3,11 @@ package com.wayn.web.controller.commom;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.util.Response;
 import com.wayn.commom.domain.Dict;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
+import com.wayn.commom.util.Response;
+import com.wayn.framework.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,7 @@ public class DictDataController extends BaseControlller {
         return PREFIX + "/data";
     }
 
+    @Log(value = "字典数据")
     @RequiresPermissions("commom:dict:type")
     @ResponseBody
     @PostMapping("/list")
@@ -56,6 +59,7 @@ public class DictDataController extends BaseControlller {
         return PREFIX + "/edit";
     }
 
+    @Log(value = "字典数据", operator = Operator.ADD)
     @RequiresPermissions("commom:dict:add")
     @ResponseBody
     @PostMapping("/addSave")
@@ -64,6 +68,7 @@ public class DictDataController extends BaseControlller {
         return Response.success("新增字典数据成功");
     }
 
+    @Log(value = "字典数据", operator = Operator.UPDATE)
     @RequiresPermissions("commom:dict:edit")
     @ResponseBody
     @PostMapping("/editSave")
@@ -72,7 +77,7 @@ public class DictDataController extends BaseControlller {
         return Response.success("修改字典数据成功");
     }
 
-
+    @Log(value = "字典数据", operator = Operator.DELETE)
     @RequiresPermissions("commom:dict:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
@@ -81,6 +86,7 @@ public class DictDataController extends BaseControlller {
         return Response.success("删除字典数据成功");
     }
 
+    @Log(value = "字典数据", operator = Operator.DELETE)
     @RequiresPermissions("commom:dict:remove")
     @ResponseBody
     @PostMapping("/batchRemove")

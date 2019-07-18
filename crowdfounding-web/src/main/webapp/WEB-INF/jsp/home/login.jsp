@@ -27,18 +27,18 @@
 	<div class="signinpanel">
         <div class="row">
             <div class="col-sm-7">
-                <div class="signin-info animated flash">
+                <div class="signin-info">
                     <div class="logopanel m-b">
                         <h1>[ H+ ]</h1>
                     </div>
                     <div class="m-b"></div>
                     <h4>欢迎使用 <strong>H+ 后台主题UI框架</strong></h4>
                     <ul class="m-b">
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势一</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势二</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势三</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势四</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势五</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> spring</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> mybatis-plus</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> shiro</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 代码生成</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 系统监控</li>
                     </ul>
                     <strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>
                 </div>
@@ -55,7 +55,7 @@
         </div>
         <div class="signup-footer">
             <div class="pull-left">
-                &copy; 2015 All Rights Reserved. H+
+                © 2019 WAYN Copyright
             </div>
         </div>
     </div>

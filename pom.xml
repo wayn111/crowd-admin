@@ -48,6 +48,7 @@
         <bitwalker.version>1.19</bitwalker.version>
         <jsoup.version>1.9.2</jsoup.version>
         <velocity.version>2.1</velocity.version>
+        <oshi.version>3.13.3</oshi.version>
     </properties>
 
     <dependencies>
@@ -279,6 +280,14 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>${velocity.version}</version>
         </dependency>
+        <!-- 服务器监控 -->
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>${oshi.version}</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <plugins>

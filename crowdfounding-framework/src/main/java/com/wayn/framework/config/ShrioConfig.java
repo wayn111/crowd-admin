@@ -56,11 +56,15 @@ public class ShrioConfig {
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		shiroFilterFactoryBean.setLoginUrl("/home/login");
 		shiroFilterFactoryBean.setSuccessUrl("/");
-		shiroFilterFactoryBean.setUnauthorizedUrl("/error/illegalAccess");
+		shiroFilterFactoryBean.setUnauthorizedUrl("/error/unauth");
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-		filterChainDefinitionMap.put("/static/**", "anon");
+		filterChainDefinitionMap.put("/", "anon");
 		filterChainDefinitionMap.put("/home/*", "anon");
-		filterChainDefinitionMap.put("/**", "authc");
+		filterChainDefinitionMap.put("/static/**", "anon");
+		filterChainDefinitionMap.put("/main", "authc");
+		filterChainDefinitionMap.put("/system/**", "authc");
+		filterChainDefinitionMap.put("/monitor/**", "authc");
+		filterChainDefinitionMap.put("/commom/**", "authc");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}
