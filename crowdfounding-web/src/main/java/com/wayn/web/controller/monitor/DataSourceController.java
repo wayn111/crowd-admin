@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/system/monitor")
-public class MonitorController extends BaseControlller {
+@RequestMapping("/monitor/datasource")
+public class DataSourceController extends BaseControlller {
 
 	@Log(value = "数据源监控")
-	@RequiresPermissions("monitor:system:driud")
+	@RequiresPermissions("monitor:datasource:datasource")
 	@GetMapping
 	public String monitorindex(Model model) {
 		return redirectTo("/druid");
