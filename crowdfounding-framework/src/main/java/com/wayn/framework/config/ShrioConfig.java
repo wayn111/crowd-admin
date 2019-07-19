@@ -42,7 +42,7 @@ public class ShrioConfig {
 	@Value("${session-timeout}")
 	private int tomcatTimeout;
 
-	@Autowired
+	@Autowired(required = false)
 	private RedisOpts opts;
 
 	@Bean
@@ -136,7 +136,6 @@ public class ShrioConfig {
 	 * RedisSessionDAO shiro sessionDao层的实现 通过redis
 	 * 使用的是shiro-redis开源插件
 	 */
-	@Bean
 	public RedisSessionDAO redisSessionDAO() {
 		RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
 		return redisSessionDAO;

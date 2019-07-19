@@ -23,7 +23,11 @@
     <defaultCache maxEntriesLocalHeap="1000" eternal="false"
                   timeToIdleSeconds="3600" timeToLiveSeconds="3600" overflowToDisk="false">
     </defaultCache>
-
+    <!-- 字典缓存 1 分钟-->
+    <cache name="dictCache" maxEntriesLocalHeap="2000" eternal="false"
+           timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
+           statistics="true">
+    </cache>
     <!-- 部门缓存 1 分钟-->
     <cache name="deptCache" maxEntriesLocalHeap="2000" eternal="false"
            timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
