@@ -1,12 +1,14 @@
 package com.wayn.framework.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.util.Set;
 
+@Profile({"dev", "docker"})
 @Component
 public class RedisOpts {
 
