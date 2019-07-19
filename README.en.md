@@ -18,6 +18,7 @@
 
 ### Online demo
 - <a href="http://wayn.xin:8080/crowdfounding-web" target="_blank">crowdfounding-web</a>
+- admin/123456
 
 ### Reference 
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
