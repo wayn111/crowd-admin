@@ -15,6 +15,9 @@
 - [crowdfounding 码云](https://gitee.com/wayn111/crowdfounding)
 - [crowdfounding github](https://github.com/wayn111/crowdfounding)
 
+### 在线演示
+- http://wayn.xin:8080/crowdfounding-web
+
 ### 参考项目
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
 - [bootdo](https://gitee.com/lcg0124/bootdo)
