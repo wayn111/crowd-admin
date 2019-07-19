@@ -17,6 +17,7 @@
 
 ### 在线演示
 - <a href="http://wayn.xin:8080/crowdfounding-web" target="_blank">crowdfounding-web</a>
+- admin/123456
 
 ### 参考项目
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
