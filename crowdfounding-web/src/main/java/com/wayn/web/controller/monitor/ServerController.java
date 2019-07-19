@@ -1,5 +1,6 @@
 package com.wayn.web.controller.monitor;
 
+import com.wayn.framework.annotation.Log;
 import com.wayn.framework.web.domian.Server;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ServerController {
     private static final String PREFIX = "monitor/server";
 
+    @Log(value = "服务监控")
     @RequiresPermissions("monitor:server:server")
     @GetMapping
     public String systemIndex(ModelMap map) throws Exception {

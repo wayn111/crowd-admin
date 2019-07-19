@@ -19,7 +19,7 @@
 <body class="gray-bg">
 <div class="ui-layout-west">
     <div class="ibox ibox-body">
-        <div class="ibox-title">
+        <div class="ibox-title" style="float: left;">
             <h5>选择部门</h5>
         </div>
         <div class="ibox-tools wayn-ibox-tools">
@@ -242,7 +242,7 @@
             dataType: "json",
             url: _ctx + "/system/dept/tree",
             beforeSend: function (xhr) {
-                index = layer.msg('加载中', {
+                layer.msg('加载中', {
                     icon: 16,
                     shade: 0.1,
                     time: 270
