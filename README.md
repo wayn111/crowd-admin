@@ -27,7 +27,7 @@
 - [bootdo](https://gitee.com/lcg0124/bootdo)
 - [RuoYi](https://gitee.com/y_project/RuoYi)
 
-### 实例截图
+### Instance screenshot
 
 -------------
 __home__
