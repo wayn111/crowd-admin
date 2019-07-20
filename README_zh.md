@@ -1,6 +1,8 @@
 # crowdfounding
 
-### [简体中文](README_zh.md)|[English](README.md)
+### Language
+- [简体中文](README_zh.md)|[English](README_en.md)
+
 ### 项目介绍
 - 面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质
 - crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统。

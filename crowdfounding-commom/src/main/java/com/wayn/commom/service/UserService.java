@@ -30,4 +30,5 @@ public interface UserService extends IService<User> {
 
 	boolean resetPwd(String id, String password);
 
+	boolean editAcount(String id, String userName);
 }

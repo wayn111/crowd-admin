@@ -97,6 +97,7 @@
             let s_edit_h = 'hidden';
             let s_remove_h = 'hidden';
             let s_resetPwd_h = 'hidden';
+            let s_editAcount_h = 'hidden';
         </script>
         <shiro:hasPermission name="sys:user:edit">
             <script>
@@ -111,6 +112,11 @@
         <shiro:hasPermission name="sys:user:resetPwd">
             <script>
                 s_resetPwd_h = '';
+            </script>
+        </shiro:hasPermission>'
+        <shiro:hasPermission name="sys:user:editAcount">
+            <script>
+                s_editAcount_h = '';
             </script>
         </shiro:hasPermission>
     </div>
@@ -218,10 +224,13 @@
                             let d = '<a class="btn btn-warning btn-sm ' + s_remove_h
                                 + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
                                 + '\')"><i class="fa fa-remove"></i></a> ';
+                            let a = '<a class="btn btn-success btn-sm ' + s_editAcount_h
+                                + '" href="#" title="编辑用户名称"  mce_href="#" onclick="editAcount(\'' + row.id
+                                + '\')"><i class="fa fa-user"></i></a> ';
                             let f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h
                                 + '" href="#" title="重置密码"  mce_href="#" onclick="resetPwd(\'' + row.id
                                 + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d + f;
+                            return e + d + a + f;
                         }
                     }]
             });
@@ -309,6 +318,17 @@
             shadeClose: false, // 点击遮罩关闭层
             area: ['400px', '320px'],
             content: prefix + '/resetPwd/' + id // iframe的url
+        });
+    }
+
+    function editAcount(id) {
+        layer.open({
+            type: 2,
+            title: '编辑用户名称',
+            maxmin: true,
+            shadeClose: false, // 点击遮罩关闭层
+            area: ['400px', '320px'],
+            content: prefix + '/editAcount/' + id // iframe的url
         });
     }
 

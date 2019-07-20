@@ -1,5 +1,7 @@
 # crowdfounding
 
+### Language
+- [简体中文](README_zh.md)|[English](README_en.md)
 
 ### Introduction
 - Learning-oriented open source framework, simple and efficient, reasonable modular split, showing the essence of technology

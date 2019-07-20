@@ -18,7 +18,7 @@
                             <label class="col-sm-3 control-label">用户名：</label>
                             <div class="col-sm-8">
                                 <input id="userName" name="userName" class="form-control"
-                                       type="text" value="${user.userName }">
+                                       type="text" value="${user.userName }" readonly>
                             </div>
                         </div>
                         <div class="form-group">

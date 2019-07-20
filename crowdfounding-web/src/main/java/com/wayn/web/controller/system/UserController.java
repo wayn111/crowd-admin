@@ -95,6 +95,22 @@ public class UserController extends BaseControlller {
         return Response.success("修改用户密码成功");
     }
 
+    @RequiresPermissions("sys:user:editAcount")
+    @GetMapping("/editAcount/{id}")
+    public String editAcount(Model model, @PathVariable("id") String id) {
+        model.addAttribute("id", id);
+        model.addAttribute("userName", userService.selectById(id).getUserName());
+        return PREFIX + "/editAcount";
+    }
+
+    @RequiresPermissions("sys:user:editAcount")
+    @ResponseBody
+    @PostMapping("/editAcount")
+    public Response editAcount(Model model, @RequestParam String id, @RequestParam String userName) {
+        userService.editAcount(id, userName);
+        return Response.success("修改用户名称成功");
+    }
+
     @ResponseBody
     @PostMapping("/exists")
     public boolean exists(Model model, @RequestParam Map<String, Object> params) {
