@@ -131,9 +131,13 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public boolean resetPwd(String id, String password) {
-        User user = selectById(id);
-        user.setPassword(new SimpleHash("MD5", password, selectById(id).getUserName(), 1024).toString());
-        updateById(user);
+        updateForSet("password = '" + password + "'", new EntityWrapper<User>().eq("id", id));
+        return true;
+    }
+
+    @Override
+    public boolean editAcount(String id, String userName) {
+        updateForSet("userName = '" + userName + "'", new EntityWrapper<User>().eq("id", id));
         return true;
     }
 
