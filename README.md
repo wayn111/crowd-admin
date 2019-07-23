@@ -19,7 +19,7 @@
 - [crowdfounding git](https://github.com/wayn111/crowdfounding)
 
 ### Online demo
-- <a href="http://wayn.xin:8080/crowdfounding-web" target="_blank">crowdfounding-web</a>
+- <a href="http://wayn.xin" target="_blank">crowdfounding-web</a>
 - admin/123456
 
 ### Reference 
