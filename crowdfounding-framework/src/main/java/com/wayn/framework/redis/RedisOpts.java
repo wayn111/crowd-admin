@@ -1,6 +1,7 @@
 package com.wayn.framework.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
@@ -13,6 +14,7 @@ import java.util.Set;
 public class RedisOpts {
 
     // 0 - never expire
+    @Value("${redis.expire}")
     private int expire = 0;
 
     public int getExpire() {

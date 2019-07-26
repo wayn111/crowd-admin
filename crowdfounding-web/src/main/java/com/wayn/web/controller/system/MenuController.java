@@ -1,17 +1,18 @@
 package com.wayn.web.controller.system;
 
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.util.Response;
 import com.wayn.commom.domain.Menu;
 import com.wayn.commom.domain.vo.MenuVO;
 import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.enums.Operator;
-import com.wayn.framework.annotation.Log;
-import com.wayn.framework.util.ShiroUtil;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.service.MenuService;
+import com.wayn.commom.util.Response;
+import com.wayn.framework.annotation.Log;
+import com.wayn.framework.util.ShiroUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +27,19 @@ public class MenuController extends BaseControlller {
     @Autowired
     private DictService dictService;
 
+    @Autowired
+    private CacheManager cacheManager;
+
     private static final String PREFIX = "system/menu";
 
 
     @RequiresPermissions("sys:menu:menu")
     @GetMapping
     public String menuIndex(Model model) {
+        //缓存管理器测试
+        /*Cache menuCache = cacheManager.getCache("menuCache");
+        Cache.ValueWrapper valueWrapper = menuCache.get("public java.util.List com.wayn.commom.service.impl.MenuServiceImpl.selectTreeMenuByUserId(" +
+                "java.lang.String)_c79ba431f9f74dfbae585b87b0cde933");*/
         model.addAttribute("menuTypes", dictService.selectDictsValueByType("menuType"));
         return PREFIX + "/menu";
     }

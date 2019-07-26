@@ -28,6 +28,11 @@ public class RedisSessionDAO extends AbstractSessionDAO {
     private RedisOpts redisOpts;
 
     /**
+     * session获取时间
+     */
+    private Integer timeOut;
+
+    /**
      * The Redis key prefix for the sessions
      */
     private String keyPrefix = "shiro_redis_session:";
@@ -51,8 +56,8 @@ public class RedisSessionDAO extends AbstractSessionDAO {
 
         byte[] key = getByteKey(session.getId());
         byte[] value = SerializeUtils.serialize(session);
-        session.setTimeout(redisOpts.getExpire() * 1000);
-        this.redisOpts.set(key, value, redisOpts.getExpire());
+        //设置session失效时间
+        this.redisOpts.set(key, value, timeOut);
     }
 
     @Override
@@ -110,4 +115,12 @@ public class RedisSessionDAO extends AbstractSessionDAO {
         return preKey.getBytes();
     }
 
+    public Integer getTimeOut() {
+        return timeOut;
+    }
+
+    public RedisSessionDAO setTimeOut(Integer timeOut) {
+        this.timeOut = timeOut;
+        return this;
+    }
 }
