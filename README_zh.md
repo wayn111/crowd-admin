@@ -18,7 +18,7 @@
 - [crowdfounding github](https://github.com/wayn111/crowdfounding)
 
 ### 在线演示
-- <a href="http://wayn.xin:8080/crowdfounding-web" target="_blank">crowdfounding-web</a>
+- <a href="http://wayn.xin" target="_blank">crowdfounding-web</a>
 - 账号：admin 密码：123456
 
 ### 参考项目
