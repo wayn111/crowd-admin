@@ -78,4 +78,16 @@ public class BaseEntity<T> implements Serializable {
         this.updateTime = updateTime;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "BaseEntity{" +
+                "startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", wrapper=" + wrapper +
+                '}';
+    }
 }

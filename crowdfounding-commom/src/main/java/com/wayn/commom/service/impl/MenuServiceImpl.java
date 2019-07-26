@@ -69,7 +69,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     /**
      * 获取首页菜单
      */
-    @Cacheable(value = "menuCache", key = "#root.method + '_' + #id")
+    @Cacheable(value = "menuCache", key = "#root.method + '_' + #root.args[0]")
     @Override
     public List<Menu> selectTreeMenuByUserId(String id) {
         List<Menu> menus = roleMenuDao.selectRoleMenuIdsByUserId(id);
@@ -102,7 +102,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     /**
      * 获取菜单树
      */
-    @Cacheable(value = "menuCache", key = "#root.method + '_menuTree_'")
+    @Cacheable(value = "menuCache", key = "#root.method + '_menuTree'")
     @Override
     public Tree<Menu> getTree() {
         List<Tree<Menu>> trees = new ArrayList<Tree<Menu>>();

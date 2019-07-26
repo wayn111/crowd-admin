@@ -16,132 +16,147 @@ import java.util.List;
  */
 public class MenuVO extends BaseEntity<MenuVO> {
 
-	/**
-	 * 主键
-	 */
-	private Long id;
+    /**
+     * 主键
+     */
+    private Long id;
 
-	/**
-	 * 菜单名称
-	 */
-	private String menuName;
+    /**
+     * 菜单名称
+     */
+    private String menuName;
 
-	/**
-	 * 父级菜单ID
-	 */
-	private Long pid;
+    /**
+     * 父级菜单ID
+     */
+    private Long pid;
 
-	/**
-	 * 连接地址
-	 */
-	private String url;
+    /**
+     * 连接地址
+     */
+    private String url;
 
-	/**
-	 * 图标
-	 */
-	private String icon;
+    /**
+     * 图标
+     */
+    private String icon;
 
-	/**
-	 * 排序
-	 */
-	private BigDecimal sort;
+    /**
+     * 排序
+     */
+    private BigDecimal sort;
 
-	/**
-	 * 类别，1表示目录，2表示菜单，3表示按钮
-	 */
-	private String type;
+    /**
+     * 类别，1表示目录，2表示菜单，3表示按钮
+     */
+    private String type;
 
-	/**
-	 * 编码
-	 */
-	private String code;
+    /**
+     * 编码
+     */
+    private String code;
 
-	/**
-	 * 资源名称（菜单对应权限）
-	 */
-	private String resource;
+    /**
+     * 资源名称（菜单对应权限）
+     */
+    private String resource;
 
-	private List<MenuVO> children = new ArrayList<MenuVO>();
+    private List<MenuVO> children = new ArrayList<MenuVO>();
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getMenuName() {
-		return menuName;
-	}
+    public String getMenuName() {
+        return menuName;
+    }
 
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
-	}
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
 
-	public Long getPid() {
-		return pid;
-	}
+    public Long getPid() {
+        return pid;
+    }
 
-	public void setPid(Long pid) {
-		this.pid = pid;
-	}
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	public String getIcon() {
-		return icon;
-	}
+    public String getIcon() {
+        return icon;
+    }
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
-	public BigDecimal getSort() {
-		return sort;
-	}
+    public BigDecimal getSort() {
+        return sort;
+    }
 
-	public void setSort(BigDecimal sort) {
-		this.sort = sort;
-	}
+    public void setSort(BigDecimal sort) {
+        this.sort = sort;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public MenuVO setType(String type) {
-		this.type = type;
-		return this;
-	}
+    public MenuVO setType(String type) {
+        this.type = type;
+        return this;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getResource() {
-		return resource;
-	}
+    public String getResource() {
+        return resource;
+    }
 
-	public void setResource(String resource) {
-		this.resource = resource;
-	}
+    public void setResource(String resource) {
+        this.resource = resource;
+    }
 
-	public List<MenuVO> getChildren() {
-		return children;
-	}
+    public List<MenuVO> getChildren() {
+        return children;
+    }
 
-	public void setChildren(List<MenuVO> children) {
-		this.children = children;
-	}
+    public void setChildren(List<MenuVO> children) {
+        this.children = children;
+    }
 
+    @Override
+    public String toString() {
+        return "MenuVO{" +
+                "id=" + id +
+                ", menuName='" + menuName + '\'' +
+                ", pid=" + pid +
+                ", url='" + url + '\'' +
+                ", icon='" + icon + '\'' +
+                ", sort=" + sort +
+                ", type='" + type + '\'' +
+                ", code='" + code + '\'' +
+                ", resource='" + resource + '\'' +
+                ", children=" + children +
+                "} ";
+    }
 }

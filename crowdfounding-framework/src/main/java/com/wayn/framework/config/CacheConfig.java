@@ -49,6 +49,10 @@ public class CacheConfig extends CachingConfigurerSupport {
     @Value("${redis.timeout}")
     private int timeout = 0;
 
+    // 0 - never expire
+    @Value("${redis.expire}")
+    private int expire = 0;
+
     @Profile({"dev", "docker"})
     @Bean
     public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig) {
@@ -94,7 +98,7 @@ public class CacheConfig extends CachingConfigurerSupport {
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
             cacheManager = new RedisCacheManager(redisTemplate);
             ((RedisCacheManager) cacheManager).setUsePrefix(true);
-            ((RedisCacheManager) cacheManager).setDefaultExpiration(1200L);
+            ((RedisCacheManager) cacheManager).setDefaultExpiration(expire);
             //定义缓存名称
             List<String> cacheNames = new ArrayList<String>();
             cacheNames.add("menuCache");

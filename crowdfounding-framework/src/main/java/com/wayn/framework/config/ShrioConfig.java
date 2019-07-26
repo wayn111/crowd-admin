@@ -40,7 +40,7 @@ public class ShrioConfig {
 	@Value("${cache.type}")
 	private String cacheType;
 	@Value("${session-timeout}")
-	private int tomcatTimeout;
+	private int sessionTimeout;
 
 	@Autowired(required = false)
 	private RedisOpts opts;
@@ -138,6 +138,7 @@ public class ShrioConfig {
 	 */
 	public RedisSessionDAO redisSessionDAO() {
 		RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+		redisSessionDAO.setTimeOut(sessionTimeout);
 		return redisSessionDAO;
 	}
 
@@ -156,7 +157,7 @@ public class ShrioConfig {
 	@Bean
 	public DefaultWebSessionManager sessionManager() {
 		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-		sessionManager.setGlobalSessionTimeout(tomcatTimeout * 1000);
+		sessionManager.setGlobalSessionTimeout(sessionTimeout * 1000);
 		sessionManager.setSessionDAO(sessionDAO());
 		Collection<SessionListener> listeners = new ArrayList<SessionListener>();
 		listeners.add(new BDSessionListener());
