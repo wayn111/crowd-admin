@@ -37,7 +37,7 @@ ps:项目名是博主某日照网上视频教程copy而来，开源不易，如�
 ### 开发教程
 - 此处参考[RuoYi](https://gitee.com/y_project/RuoYi)文档
 - 登陆账号：admin 密码：123456
-- 如有疑问，<a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1669738430&website=www.oicqzone.com">QQ</a>
+- 如有疑问，[QQ](tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1669738430&website=www.oicqzone.com)
  
 ### 获取源码
 - [crowdfounding 码云](https://gitee.com/wayn111/crowdfounding)
