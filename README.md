@@ -7,7 +7,7 @@
 crowdfounding(众筹)是一个面向学习型的开源框架，集合了开发者日常工作项目上所学以及对开源项目
 [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)，
 [bootdo](https://gitee.com/lcg0124/bootdo)，
-[RuoYi](https://gitee.com/y_project/RuoYi)等的学习总结后，开发出的后台管理系统，也是博主这两年工作生涯技术上的缩影，_代码层次良好，注重复用，追求功能上的尽量简介而不失优雅_，取名crowdfounding！
+[RuoYi](https://gitee.com/y_project/RuoYi)等的学习总结后，开发出的后台管理系统，也是开发者这两年工作生涯技术上的缩影，_代码层次良好，注重复用，追求功能上的尽量简介而不失优雅_，取名crowdfounding！
 (ctrl+c/ctrl+c)
 
 ps:项目名是博主某日照网上视频教程copy而来，开源不易，如有疑问，请先百度：)
