@@ -1,11 +1,14 @@
 package com.wayn.web.controller.home;
 
+import com.google.code.kaptcha.Constants;
+import com.google.code.kaptcha.Producer;
 import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.Response;
 import com.wayn.framework.annotation.Log;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/home")
@@ -25,7 +33,7 @@ public class LoginController extends BaseControlller {
     private static final String PREFIX = "home";
 
     @Autowired
-    private SessionDAO sessionDAO;
+    private Producer producer;
 
     @GetMapping("/login")
     public String login(ModelMap map) {
@@ -35,7 +43,11 @@ public class LoginController extends BaseControlller {
     @Log(value = "系统登陆")
     @ResponseBody
     @PostMapping("/doLogin")
-    public Response doLogin(String userName, String password, HttpServletRequest request) {
+    public Response doLogin(String userName, String password, String clienkaptcha) {
+        String kaptcha = (String) SecurityUtils.getSubject().getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if (!StringUtils.equals(clienkaptcha, kaptcha)) {
+            return Response.error("验证码错误");
+        }
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         if (!currentUser.isAuthenticated()) {
@@ -49,7 +61,33 @@ public class LoginController extends BaseControlller {
     public String logout(Model model) {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        //sessionDAO.delete(subject.getSession(false));
         return redirectTo("/");
+    }
+
+    /**
+     * 验证码
+     *
+     * @param rsp
+     * @param session
+     */
+    @GetMapping(value = "/captcha")
+    public void kaptcha(HttpServletResponse rsp, HttpSession session) {
+        try (ServletOutputStream out = rsp.getOutputStream()) {
+            rsp.setDateHeader("Expires", 0);
+            rsp.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+            rsp.addHeader("Cache-Control", "post-check=0, pre-check=0");
+            rsp.setHeader("Pragma", "no-cache");
+            rsp.setContentType("image/jpeg");
+
+            String capText = producer.createText();
+            //将验证码存入shiro 登录用户的session
+            session.setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);
+            BufferedImage image = producer.createImage(capText);
+            ImageIO.write(image, "jpg", out);
+            out.flush();
+        } catch (IOException e) {
+            throw new BusinessException(e.getMessage());
+        }
+
     }
 }
