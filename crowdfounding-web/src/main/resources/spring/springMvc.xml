@@ -96,7 +96,7 @@ http://www.springframework.org/schema/cache http://www.springframework.org/schem
                         <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
                         <!-- 不要噪点 -->
                         <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
-                        <prop key="kaptcha.image.width">86</prop>
+                        <prop key="kaptcha.image.width">79</prop>
                         <prop key="kaptcha.image.height">37</prop>
                         <prop key="kaptcha.textproducer.font.size">25</prop>
                         <prop key="kaptcha.textproducer.char.length">4</prop>
