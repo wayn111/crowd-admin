@@ -49,14 +49,14 @@
                 <input type="text" class="form-control" name="userName" placeholder="用户名"/>
                 <input type="password" class="form-control m-b" name="password" placeholder="密码"/>
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-7">
                         <div class="form-group">
                             <input class="form-control" id="kaptcha-input" name="clienkaptcha"
                                    placeholder="请输入验证码"
                                    maxlength="4">
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-5">
                         <a href="javascript:void(0);" rel="external nofollow" title="点击更换验证码">
                             <img id="verify-img" alt="更换验证码" height="37" width="100%"
                                  onclick="getVerify(this);">

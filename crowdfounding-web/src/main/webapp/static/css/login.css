@@ -141,9 +141,7 @@ body.signin {
 }
 #login-form #kaptcha-input{
 	margin-top: 0px;
-	font-size: 5px;
 }
 #login-form #verify-img{
-	padding-right: 15px;
 	padding-left: 0px;
 }
