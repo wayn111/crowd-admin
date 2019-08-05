@@ -12,7 +12,7 @@
     <%@ include file="/commom/taglib.jsp" %>
     <%@ include file="/commom/header.jsp" %>
     <link href="${_ctx }/static/css/login.css?v=4.0"
-		rel="stylesheet">
+          rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -24,43 +24,141 @@
 </head>
 
 <body class="signin">
-	<div class="signinpanel">
-        <div class="row">
-            <div class="col-sm-7">
-                <div class="signin-info">
-                    <div class="logopanel m-b">
-                        <h1>[ H+ ]</h1>
-                    </div>
-                    <div class="m-b"></div>
-                    <h4>欢迎使用 <strong>H+ 后台主题UI框架</strong></h4>
-                    <ul class="m-b">
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> spring</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> mybatis-plus</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> shiro</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 代码生成</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 系统监控</li>
-                    </ul>
-                    <strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="signin-info">
+                <div class="logopanel m-b">
+                    <h1>[ crowdfounding ]</h1>
                 </div>
-            </div>
-            <div class="col-sm-5">
-                <form id="login-form" action="#">
-                    <h4 class="no-margins">登录：</h4>
-                    <p class="m-t-md">登录到H+后台主题UI框架</p>
-                    <input type="text" class="form-control uname" name="userName" placeholder="用户名"/>
-                    <input type="password" class="form-control pword m-b" name="password" placeholder="密码"/>
-                    <button id="login-button" class="btn btn-success btn-block" type="submit">登录</button>
-                </form>
+                <div class="m-b"></div>
+                <h4>欢迎使用 <strong>crowdfounding</strong></h4>
+                <ul class="m-b">
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> spring</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> mybatis-plus</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> shiro</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 代码生成</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 系统监控</li>
+                </ul>
             </div>
         </div>
-        <div class="signup-footer">
-            <div class="pull-left">
-                © 2019 WAYN Copyright
-            </div>
+        <div class="col-sm-5">
+            <form id="login-form" action="#">
+                <h4 class="no-margins">登录：</h4>
+                <p class="m-t-md">登录到crowdfounding后台</p>
+                <input type="text" class="form-control" name="userName" placeholder="用户名"/>
+                <input type="password" class="form-control m-b" name="password" placeholder="密码"/>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <input class="form-control" id="kaptcha-input" name="clienkaptcha"
+                                   placeholder="请输入验证码"
+                                   maxlength="4">
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="javascript:void(0);" rel="external nofollow" title="点击更换验证码">
+                            <img id="verify-img" alt="更换验证码" height="37" width="100%"
+                                 onclick="getVerify(this);">
+                        </a>
+                    </div>
+                </div>
+                <button id="login-button" class="btn btn-success btn-block" type="submit">登录</button>
+                <div class="outside-login">
+                    <div class="outside-login-tit">
+                        <span>代码链接</span>
+                    </div>
+                    <div class="outside-login-cot">
+                        <a class="outside-login-btn gitee" target="_Blank"
+                           href="https://gitee.com/wayn111/crowdfounding">
+                            <em><i class="fa fa-git-square"></i></em>
+                            <span>码云仓库</span>
+                        </a>
+                        <a class="outside-login-btn git" target="_Blank"
+                           href="https://github.com/wayn111/crowdfounding">
+                            <em><i class="fa fa-github"></i></em>
+                            <span>GitHub仓库</span>
+                        </a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <%@ include file="/commom/footer.jsp" %>
-	<script src="${_ctx }/static/js/home/login.js"></script>
+    <div class="signup-footer">
+        <div class="pull-left">
+            © 2019 WAYN Copyright
+        </div>
+    </div>
+</div>
+<%@ include file="/commom/footer.jsp" %>
+<script>
+    let prefix = _ctx + "/home";
+
+    function validateRule() {
+        let e = '<i class="fa fa-times-circle"></i> ';
+        $("#login-form").validate({
+            rules: {
+                userName: {
+                    required: true,
+                    minlength: 2,
+                },
+                password: {
+                    required: true
+                },
+                clienkaptcha: {
+                    required: true
+                }
+
+            },
+            messages: {
+                userName: {
+                    required: e + "请输入用户名",
+                    minlength: e + "用户名最少由二个字母组成"
+                },
+                password: {
+                    required: e + "请输入密码",
+                },
+                clienkaptcha: {
+                    required: e + "请输入验证码"
+                }
+            },
+            submitHandler: function () {
+                login();
+            }
+        });
+    }
+
+    function login() {
+        let config = {
+            url: prefix + "/doLogin",
+            data: $('#login-form').serialize(),
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+                if (data.code != 100) {
+                    layer.msg(data.msg);
+                    $('#kaptcha-input').val();
+                } else {
+                    location = _ctx + "/main";
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        };
+        $.ajax(config);
+    }
+
+    function getVerify(_this) {
+        $(_this).attr('src', _ctx + "/home/captcha?r=" + Math.random());
+    }
+
+    $(function () {
+        getVerify(document.getElementById('verify-img'));
+        validateRule();
+    })
+
+</script>
 </body>
 <!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 </html>

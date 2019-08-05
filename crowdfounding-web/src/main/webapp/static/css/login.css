@@ -50,7 +50,8 @@ body.signin {
 }
 
 .signinpanel form {
-	background: rgba(255, 255, 255, .2);
+	background: #ffffff45;
+	color: gray;
 	border: 1px solid rgba(255, 255, 255, .3);
 	-moz-box-shadow: 0 3px 0 rgba(12, 12, 12, .03);
 	-webkit-box-shadow: 0 3px 0 rgba(12, 12, 12, .03);
@@ -93,4 +94,56 @@ body.signin {
 		margin: 0 20px;
 		width: auto
 	}
+}
+
+.outside-login{
+	border-top: #dcdee3 1px solid;
+	padding: 7% 0 0;
+	text-align: center;
+	position: relative;
+	margin: 9% 0% 0;
+	border-radius: 0 0 1% 1%;
+}
+.outside-login-tit{
+	position: absolute;
+	top: -8px;
+	left: 50%;
+	margin: 0 0 0 -50px;
+	text-align: center;
+	width: 100px;
+	height: 14px;
+	line-height: 1;
+	color: #999;
+}
+.outside-login-btn {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	width: 33.3333%;
+}
+.outside-login-btn em {
+	display: block;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 50%;
+	margin: 0 auto 5px;
+	white-space: normal;
+	font-size: 20px;
+	color: #fff;
+}
+
+.git em{
+	background-color: #211b1b;
+}
+.gitee em{
+	background-color: #ff4700
+}
+#login-form #kaptcha-input{
+	margin-top: 0px;
+	font-size: 5px;
+}
+#login-form #verify-img{
+	padding-right: 15px;
+	padding-left: 0px;
 }
