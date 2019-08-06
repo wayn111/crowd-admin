@@ -157,17 +157,14 @@ function treeSearchInit() {
 }
 
 /**
- * bootstrap-table行选中，复选框自动勾选
- * @param row
- * @param element
+ * 生成表格序号
+ * @param selector
+ * @param index
+ * @returns {*}
  */
-function rowClickSelect(row, element) {
-    $(element).toggleClass('selected');
-    if ($(element).find('input').prop('checked')) {
-        $(element).find('input').prop('checked', false);
-        row[0] = false;
-    } else {
-        $(element).find('input').prop('checked', true);
-        row[0] = true;
-    }
+function generatorTableSequence(selector, index) {
+    //return index + 1;
+    var pageSize = $(selector).bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
+    var pageNumber = $(selector).bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
+    return pageSize * (pageNumber - 1) + index + 1;//返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
 }

@@ -190,7 +190,7 @@
                 dataField: "records",
                 sortName: 'createTime',
                 sortOrder: 'desc',
-                onClickRow: rowClickSelect,
+                clickToSelect: true,
                 queryParamsType: "",//If queryParamsType = 'limit',
                 //the params object contains: limit, offset, search, sort, order.
                 //Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
@@ -272,9 +272,15 @@
     }
 
     $(function () {
+        let data = JSON.parse('${states}');
+        data.splice(0, 0, {
+            id: '',
+            text: '全部'
+        });
         let config = {
-            data: JSON.parse('${states}'),
-            width: '150px'
+            data: data,
+            width: '150px',
+            minimumResultsForSearch: -1
         };
         select2Init('.js-example-basic-single', config);
         load();

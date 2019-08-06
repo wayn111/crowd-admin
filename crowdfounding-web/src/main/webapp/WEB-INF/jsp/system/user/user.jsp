@@ -152,7 +152,7 @@
                 dataField: "records",
                 sortName: 'createTime',
                 sortOrder: 'desc',
-                onClickRow: rowClickSelect,
+                clickToSelect: true,
                 // "server"
                 queryParamsType: "",//If queryParamsType = 'limit',
                 //the params object contains: limit, offset, search, sort, order.
@@ -173,9 +173,12 @@
                         width: '4%',
                     },
                     {
-                        field: 'id',
-                        width: '16%',
-                        title: '序号'
+                        title: '序号',
+                        align: 'center',
+                        width: 10,
+                        formatter: function (value, row, index) {
+                            return generatorTableSequence('#exampleTable', index);
+                        }
                     },
                     {
                         field: 'userName',
@@ -194,7 +197,6 @@
                     {
                         field: 'createTime',
                         title: '创建时间',
-                        width: '10%',
                         sortable: true
                     },
                     {
@@ -415,9 +417,15 @@
     });
 
     $(function () {
+        let data = JSON.parse('${states}');
+        data.splice(0, 0, {
+            id: '',
+            text: '全部'
+        });
         let config = {
-            data: JSON.parse('${states}'),
-            width: '80px'
+            data: data,
+            width: '80px',
+            minimumResultsForSearch: -1
         };
         select2Init('.js-example-basic-single', config);
         let panehHidden = false;
@@ -427,7 +435,7 @@
         //初始化layout
         $('body').layout({
             initClosed: panehHidden,
-            west__size: 210
+            west__size: 240
         });
         getTreeData(loadTree);
         load($('#deptId').val());
