@@ -57,10 +57,10 @@
 	</div>
 	<%@ include file="/commom/footer.jsp"%>
 	<script>
-		let prefix = _ctx + "/system/dept";
+		var prefix = _ctx + "/system/dept";
 
 		function validateRule() {
-			let e = '<i class="fa fa-times-circle"></i> ';
+			var e = '<i class="fa fa-times-circle"></i> ';
 			$("#dept-form").validate({
 				rules : {
 					deptName : {
@@ -80,7 +80,7 @@
 		}
 
 		function save() {
-			let config = {
+			var config = {
 				url : prefix + "/addSave",
 				data : $('#dept-form').serialize(),
 				type : "POST",

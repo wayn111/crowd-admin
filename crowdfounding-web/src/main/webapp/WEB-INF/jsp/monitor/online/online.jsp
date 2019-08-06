@@ -48,7 +48,7 @@
 	</div>
 	<%@ include file="/commom/footer.jsp"%>
 	<script>
-		let prefix = _ctx + '/monitor/online';
+		var prefix = _ctx + '/monitor/online';
 
 		function load() {
 			$('#table1').bootstrapTable(

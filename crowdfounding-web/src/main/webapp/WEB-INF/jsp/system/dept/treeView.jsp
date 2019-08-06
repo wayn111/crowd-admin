@@ -27,7 +27,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + '/system/dept';
+    var prefix = _ctx + '/system/dept';
 
     function search(){
 		$('#deptTree').jstree(true).search($('#keyword').val())
@@ -69,7 +69,7 @@
         } else {
             parent.loadDept(data.node.id, data.node.text);
         }
-        let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+        var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
         parent.layer.close(index);
 
     });

@@ -79,7 +79,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + "/commom/dict/data";
+    var prefix = _ctx + "/commom/dict/data";
 
     function load() {
         $('#exampleTable').bootstrapTable(
@@ -165,10 +165,10 @@
                         width: '15%',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            let e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
+                            var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
                                 + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id
                                 + '\')"><i class="fa fa-edit "></i></a> ';
-                            let d = '<a class="btn btn-warning btn-sm ' + s_remove_h
+                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
                                 + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
                                 + '\')"><i class="fa fa-remove"></i></a> ';
                             return e + d;
@@ -258,7 +258,7 @@
     }
 
     $(function () {
-        let config = {
+        var config = {
             data: JSON.parse('${dicts}'),
             width: '150px'
         };

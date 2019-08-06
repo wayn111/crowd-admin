@@ -7,6 +7,6 @@
 <c:set var="_ctx" value="${pageContext.request.contextPath}" />
 <c:set var="_session" value="<%=session.getId()%>" />
 <script type="text/javascript">
-	let _ctx = '${_ctx}';
-	let _session = '${_session}';
+	var _ctx = '${_ctx}';
+	var _session = '${_session}';
 </script>

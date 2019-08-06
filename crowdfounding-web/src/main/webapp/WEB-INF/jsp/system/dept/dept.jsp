@@ -83,7 +83,7 @@
 	<script
 		src="${_ctx }/static/plugin/jqTreeGrid/jquery.treegrid.extension.js"></script>
 	<script>
-		let prefix =  _ctx + '/system/dept';
+		var prefix =  _ctx + '/system/dept';
 		function add(pId) {
 			layer.open({
 		        type: 2,
@@ -126,7 +126,7 @@
 		}
 
 		// tree表格树 展开/折叠
-		let expandFlag;
+		var expandFlag;
 		function expandAllOrCollapseAll(){
 			expandFlag = expandFlag ? expandFlag : false;
 		    if (!expandFlag) {
@@ -137,7 +137,7 @@
 		    expandFlag = expandFlag ? false: true;
 		}
 
-		let load = function(){
+		var load = function(){
 			$('#table1').bootstrapTreeTable({
 				id: 'id',
 	            code: 'id',

@@ -31,7 +31,7 @@
 	</div>
 	<%@ include file="/commom/footer.jsp"%>
 	<script>
-		let prefix = _ctx + '/system/user';
+		var prefix = _ctx + '/system/user';
 
 		function save() {
 			$.ajax({
@@ -50,7 +50,7 @@
 						parent.layer.msg(data.msg);
 						parent.reload();
 						//关闭当前窗口
-						let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+						var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 						parent.layer.close(index);
 					}
 
@@ -59,7 +59,7 @@
 
 		}
 		function validateRule() {
-			let icon = "<i class='fa fa-times-circle'></i> ";
+			var icon = "<i class='fa fa-times-circle'></i> ";
 			$("#user-form").validate({
 				rules : {
 					password : {

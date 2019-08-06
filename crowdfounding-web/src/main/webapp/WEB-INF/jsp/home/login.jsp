@@ -92,10 +92,10 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + "/home";
+    var prefix = _ctx + "/home";
 
     function validateRule() {
-        let e = '<i class="fa fa-times-circle"></i> ';
+        var e = '<i class="fa fa-times-circle"></i> ';
         $("#login-form").validate({
             rules: {
                 userName: {
@@ -129,7 +129,7 @@
     }
 
     function login() {
-        let config = {
+        var config = {
             url: prefix + "/doLogin",
             data: $('#login-form').serialize(),
             type: "POST",

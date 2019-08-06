@@ -1,6 +1,6 @@
 $(function () {
     function f(l) {
-        let k = 0;
+        var k = 0;
         $(l).each(function () {
             k += $(this).outerWidth(true)
         });
@@ -11,17 +11,17 @@ $(function () {
      * 显示切换tab动画
      */
     function g(n) {
-        let o = f($(n).prevAll()), q = f($(n).nextAll());
-        let l = f($(".content-tabs").children().not(".J_menuTabs"));
-        let k = $(".content-tabs").outerWidth(true) - l;
-        let p = 0;
+        var o = f($(n).prevAll()), q = f($(n).nextAll());
+        var l = f($(".content-tabs").children().not(".J_menuTabs"));
+        var k = $(".content-tabs").outerWidth(true) - l;
+        var p = 0;
         if ($(".page-tabs-content").outerWidth() < k) {
             p = 0
         } else {
             if (q <= (k - $(n).outerWidth(true) - $(n).next().outerWidth(true))) {
                 if ((k - $(n).next().outerWidth(true)) > q) {
                     p = o;
-                    let m = n;
+                    var m = n;
                     while ((p - $(m).outerWidth()) > ($(".page-tabs-content").outerWidth() - k)) {
                         p -= $(m).prev().outerWidth();
                         m = $(m).prev()
@@ -37,15 +37,15 @@ $(function () {
     }
 
     function a() {
-        let o = Math.abs(parseInt($(".page-tabs-content").css("margin-left")));
-        let l = f($(".content-tabs").children().not(".J_menuTabs"));
-        let k = $(".content-tabs").outerWidth(true) - l;
-        let p = 0;
+        var o = Math.abs(parseInt($(".page-tabs-content").css("margin-left")));
+        var l = f($(".content-tabs").children().not(".J_menuTabs"));
+        var k = $(".content-tabs").outerWidth(true) - l;
+        var p = 0;
         if ($(".page-tabs-content").width() < k) {
             return false
         } else {
-            let m = $(".J_menuTab:first");
-            let n = 0;
+            var m = $(".J_menuTab:first");
+            var n = 0;
             while ((n + $(m).outerWidth(true)) <= o) {
                 n += $(m).outerWidth(true);
                 m = $(m).next()
@@ -63,15 +63,15 @@ $(function () {
     }
 
     function b() {
-        let o = Math.abs(parseInt($(".page-tabs-content").css("margin-left")));
-        let l = f($(".content-tabs").children().not(".J_menuTabs"));
-        let k = $(".content-tabs").outerWidth(true) - l;
-        let p = 0;
+        var o = Math.abs(parseInt($(".page-tabs-content").css("margin-left")));
+        var l = f($(".content-tabs").children().not(".J_menuTabs"));
+        var k = $(".content-tabs").outerWidth(true) - l;
+        var p = 0;
         if ($(".page-tabs-content").width() < k) {
             return false
         } else {
-            let m = $(".J_menuTab:first");
-            let n = 0;
+            var m = $(".J_menuTab:first");
+            var n = 0;
             while ((n + $(m).outerWidth(true)) <= o) {
                 n += $(m).outerWidth(true);
                 m = $(m).next()
@@ -98,7 +98,7 @@ $(function () {
      * 点击左侧菜单，加载右侧tab页
      */
     function c() {
-        let o = $(this).attr("href"), m = $(this).data("index"), l = $.trim($(this).text()), k = true;
+        var o = $(this).attr("href"), m = $(this).data("index"), l = $.trim($(this).text()), k = true;
         if (o == undefined || $.trim(o).length == 0) {
             return false
         }
@@ -119,10 +119,10 @@ $(function () {
             }
         });
         if (k) {
-            let p = '<a href="javascript:;" class="active J_menuTab" data-id="' + o + '">' + l + ' <i class="fa fa-times-circle"></i></a>';
+            var p = '<a href="javascript:;" class="active J_menuTab" data-id="' + o + '">' + l + ' <i class="fa fa-times-circle"></i></a>';
             $(".J_menuTab").removeClass("active");
-            let n = '<iframe class="J_iframe" name="iframe' + m + '" width="100%" height="100%" src="' + o + '" frameborder="0" data-id="' + o + '" seamless></iframe>';
-            let index = layer.msg('正在加载中', {
+            var n = '<iframe class="J_iframe" name="iframe' + m + '" width="100%" height="100%" src="' + o + '" frameborder="0" data-id="' + o + '" seamless></iframe>';
+            var index = layer.msg('正在加载中', {
                 icon: 16,
                 shade: 0.1
             });
@@ -139,11 +139,11 @@ $(function () {
     $(".J_menuItem").on("click", c);
 
     function h() {
-        let m = $(this).parents(".J_menuTab").data("id");
-        let l = $(this).parents(".J_menuTab").width();
+        var m = $(this).parents(".J_menuTab").data("id");
+        var l = $(this).parents(".J_menuTab").width();
         if ($(this).parents(".J_menuTab").hasClass("active")) {
             if ($(this).parents(".J_menuTab").next(".J_menuTab").size()) {
-                let k = $(this).parents(".J_menuTab").next(".J_menuTab:eq(0)").data("id");
+                var k = $(this).parents(".J_menuTab").next(".J_menuTab:eq(0)").data("id");
                 $(this).parents(".J_menuTab").next(".J_menuTab:eq(0)").addClass("active");
                 $(".J_mainContent .J_iframe").each(function () {
                     if ($(this).data("id") == k) {
@@ -151,7 +151,7 @@ $(function () {
                         return false
                     }
                 });
-                let n = parseInt($(".page-tabs-content").css("margin-left"));
+                var n = parseInt($(".page-tabs-content").css("margin-left"));
                 if (n < 0) {
                     $(".page-tabs-content").animate({marginLeft: (n + l) + "px"}, "fast")
                 }
@@ -164,7 +164,7 @@ $(function () {
                 })
             }
             if ($(this).parents(".J_menuTab").prev(".J_menuTab").size()) {
-                let k = $(this).parents(".J_menuTab").prev(".J_menuTab:last").data("id");
+                var k = $(this).parents(".J_menuTab").prev(".J_menuTab:last").data("id");
                 $(this).parents(".J_menuTab").prev(".J_menuTab:last").addClass("active");
                 $(".J_mainContent .J_iframe").each(function () {
                     if ($(this).data("id") == k) {
@@ -213,7 +213,7 @@ $(function () {
 
     function e() {
         if (!$(this).hasClass("active")) {
-            let k = $(this).data("id");
+            var k = $(this).data("id");
             $(".J_mainContent .J_iframe").each(function () {
                 if ($(this).data("id") == k) {
                     $(this).show().siblings(".J_iframe").hide();
@@ -228,18 +228,18 @@ $(function () {
     $(".J_menuTabs").on("click", ".J_menuTab", e);
 
     function d() {
-        let l = $('.J_iframe[data-id="' + $(this).data("id") + '"]');
-        let k = l.attr("src")
+        var l = $('.J_iframe[data-id="' + $(this).data("id") + '"]');
+        var k = l.attr("src")
     }
 
     /**
      * 刷新当前tab
      */
     function r() {
-        let iframeId = $('.page-tabs .page-tabs-content .active.J_menuTab').data('id');
+        var iframeId = $('.page-tabs .page-tabs-content .active.J_menuTab').data('id');
         $('#content-main iframe').each(function () {
             if ($(this).data('id') == iframeId) {
-                let index = layer.load(2);
+                var index = layer.load(2);
                 $(this).attr('src', iframeId);
                 $('.J_mainContent iframe.J_iframe:visible').load(function () {
                     layer.close(index);

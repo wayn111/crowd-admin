@@ -74,7 +74,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + '/tool/gen';
+    var prefix = _ctx + '/tool/gen';
 
     function load() {
         $('#table1')
@@ -155,7 +155,7 @@
                             field: 'id',
                             align: 'center',
                             formatter: function (value, row, index) {
-                                let d = '<a class="'
+                                var d = '<a class="'
                                     + s_remove
                                     + ' btn btn-warning btn-sm" href="#" title="代码生成"  mce_href="#" onclick="genCode(\''
                                     + row.tableName + '\')"><i class="fa fa-download"></i>代码生成</a> ';
@@ -171,7 +171,7 @@
     }
 
     function batchGenCode() {
-        let rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+        var rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
         if (rows.length == 0) {
             layer.msg("请选择要生成得表");
             return;

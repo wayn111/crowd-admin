@@ -13,7 +13,7 @@ $(function () {
  * 初始化select2控件
  */
 function select2Init(selector, config) {
-    let deFaultConfig = {
+    var deFaultConfig = {
         width: '100px',
         data: [{
             id: '',
@@ -73,8 +73,8 @@ function switchInit(module, state = true) {
  */
 function menuItemCreate(url, name) {
     //m 确保data-index不重复
-    let o = url, m = Math.ceil(Math.random() * 1000) + 1000, l = name, k = true;
-    let topWindow = $(window.top.document);
+    var o = url, m = Math.ceil(Math.random() * 1000) + 1000, l = name, k = true;
+    var topWindow = $(window.top.document);
     if (o == undefined || $.trim(o).length == 0) {
         return false
     }
@@ -95,9 +95,9 @@ function menuItemCreate(url, name) {
         }
     });
     if (k) {
-        let p = '<a href="javascript:;" class="active J_menuTab" data-id="' + o + '">' + l + ' <i class="fa fa-times-circle"></i></a>';
+        var p = '<a href="javascript:;" class="active J_menuTab" data-id="' + o + '">' + l + ' <i class="fa fa-times-circle"></i></a>';
         $(".J_menuTab", topWindow).removeClass("active");
-        let n = '<iframe class="J_iframe" name="iframe' + m + '" width="100%" height="100%" src="' + o + '" frameborder="0" data-id="' + o + '" seamless></iframe>';
+        var n = '<iframe class="J_iframe" name="iframe' + m + '" width="100%" height="100%" src="' + o + '" frameborder="0" data-id="' + o + '" seamless></iframe>';
         $(".J_mainContent", topWindow).find("iframe.J_iframe").hide().parents(".J_mainContent").append(n);
         $(".J_menuTabs .page-tabs-content", topWindow).append(p);
         $('.page-tabs-content', topWindow).addClass('layui-anim layui-anim-up')
@@ -107,7 +107,7 @@ function menuItemCreate(url, name) {
 
 function layDate() {
     if ($(".select-time").length > 0) {
-        let startDate = laydate.render({
+        var startDate = laydate.render({
             elem: '#startTime',
             max: $('#endTime').val(),
             theme: 'molv',
@@ -125,7 +125,7 @@ function layDate() {
                 }
             }
         });
-        let endDate = laydate.render({
+        var endDate = laydate.render({
             elem: '#endTime',
             min: $('#startTime').val(),
             theme: 'molv',
