@@ -188,9 +188,7 @@
 											valign : 'center',
 											width : '5%',
 											formatter : function(item, index) {
-												return item.icon == null ? ''
-														: '<i class="' + item.icon
-	                            + ' fa-lg"></i>';
+												return item.icon == null ? '' : '<i class="' + item.icon + ' fa-lg"></i>';
 											}
 										},
 										{
@@ -255,9 +253,10 @@
 
 		$(function() {
 			let config = {
-				width : '250px',
+				width : '150px',
 				data : JSON.parse('${menuTypes}'),
-				multiple : true
+				multiple : true,
+				minimumResultsForSearch: -1
 			};
             select2Init('.js-example-basic-multi',config);
 			load();
