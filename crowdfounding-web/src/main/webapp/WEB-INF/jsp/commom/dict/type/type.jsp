@@ -81,7 +81,7 @@
 <script
         src="${_ctx }/static/plugin/bootstrap-ypeahead/bootstrap3-typeahead.min.js"></script>
 <script>
-    let prefix = _ctx + "/commom/dict/type";
+    var prefix = _ctx + "/commom/dict/type";
 
     function load(deptId) {
         $('#exampleTable').bootstrapTable(
@@ -137,7 +137,10 @@
                     },
                     {
                         field: 'value',
-                        title: '字典类型'
+                        title: '字典类型',
+                        formatter: function (value, row, index) {
+                            return '<a href="#" onclick="dictData(\'' + row.value + '\')">'+row.value+'</a>';
+                        }
                     }, {
                         field: 'dictState',
                         title: '字典状态',
@@ -179,10 +182,10 @@
                         width: '15%',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            let e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
+                            var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
                                 + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id
                                 + '\')"><i class="fa fa-edit "></i></a> ';
-                            let d = '<a class="btn btn-warning btn-sm ' + s_remove_h
+                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
                                 + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
                                 + '\')"><i class="fa fa-remove"></i></a> ';
                             return e + d;

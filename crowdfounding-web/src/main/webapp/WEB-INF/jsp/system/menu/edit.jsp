@@ -85,10 +85,10 @@
 	</div>
 	<%@ include file="/commom/footer.jsp"%>
 	<script>
-		let prefix = _ctx + "/system/menu";
+		var prefix = _ctx + "/system/menu";
 
 		function validateRule() {
-			let e = '<i class="fa fa-times-circle"></i> ';
+			var e = '<i class="fa fa-times-circle"></i> ';
 			$("#menu-form").validate({
 				debug : true,
 				rules : {
@@ -115,7 +115,7 @@
 		}
 
 		function update() {
-			let config = {
+			var config = {
 				url : prefix + "/editSave",
 				data : $('#menu-form').serialize(),
 				type : "POST",

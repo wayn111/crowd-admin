@@ -70,8 +70,8 @@
     <!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
     <div>
         <script type="text/javascript">
-            let s_edit_h = 'hidden';
-            let s_remove_h = 'hidden';
+            var s_edit_h = 'hidden';
+            var s_remove_h = 'hidden';
         </script>
         <shiro:hasPermission name="sys:role:edit">
             <script>
@@ -87,7 +87,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + '/system/role';
+    var prefix = _ctx + '/system/role';
 
     function add() {
         layer.open({
@@ -131,7 +131,7 @@
     }
 
     function batchRemove() {
-        let rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+        var rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
         if (rows.length == 0) {
             layer.msg("请选择要删除的数据");
             return;
@@ -139,7 +139,7 @@
         layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
             btn: ['确定', '取消']
         }, function () {
-            let ids = new Array();
+            var ids = new Array();
             $.each(rows, function (i, row) {
                 ids[i] = row['id'];
             });
@@ -255,10 +255,10 @@
                         field: 'roleId',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            let e = '<a class="btn btn-primary btn-sm ' + s_edit_h
+                            var e = '<a class="btn btn-primary btn-sm ' + s_edit_h
                                 + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id
                                 + '\')"><i class="fa fa-edit"></i></a> ';
-                            let d = '<a class="btn btn-warning btn-sm ' + s_remove_h
+                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
                                 + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
                                 + '\')"><i class="fa fa-remove"></i></a> ';
                             return e + d;
@@ -272,12 +272,12 @@
     }
 
     $(function () {
-        let data = JSON.parse('${states}');
+        var data = JSON.parse('${states}');
         data.splice(0, 0, {
             id: '',
             text: '全部'
         });
-        let config = {
+        var config = {
             data: data,
             width: '150px',
             minimumResultsForSearch: -1

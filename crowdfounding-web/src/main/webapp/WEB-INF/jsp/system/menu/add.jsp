@@ -81,10 +81,10 @@
 	</div>
 	<%@ include file="/commom/footer.jsp"%>
 	<script>
-		let prefix = _ctx + "/system/menu";
+		var prefix = _ctx + "/system/menu";
 
 		function validateRule() {
-			let e = '<i class="fa fa-times-circle"></i> ';
+			var e = '<i class="fa fa-times-circle"></i> ';
 			$("#menu-form").validate({
 				rules : {
 					menuName : {
@@ -110,7 +110,7 @@
 		}
 
 		function save() {
-			let config = {
+			var config = {
 				url : prefix + "/addSave",
 				data : $('#menu-form').serialize(),
 				type : "POST",
@@ -122,7 +122,7 @@
 						parent.layer.msg(data.msg);
 						parent.reload();
 						//关闭当前窗口
-						let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+						var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 						parent.layer.close(index);
 					}
 				},
@@ -133,7 +133,7 @@
 			$.ajax(config);
 		}
 
-		let openMenu = function() {
+		var openMenu = function() {
 			layer.open({
 				type : 2,
 				title : "选择菜单",
@@ -155,7 +155,7 @@
 					content : _ctx + '/system/menu/chooseIcon',
 					area : [ '480px', '90%' ],
 					success : function(layero, index) {
-						//let body = layer.getChildFrame('.ico-list', index);
+						//var body = layer.getChildFrame('.ico-list', index);
 						//console.log(layero, index);
 					}
 				});

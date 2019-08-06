@@ -94,10 +94,10 @@
     <!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
     <div>
         <script type="text/javascript">
-            let s_edit_h = 'hidden';
-            let s_remove_h = 'hidden';
-            let s_resetPwd_h = 'hidden';
-            let s_editAcount_h = 'hidden';
+            var s_edit_h = 'hidden';
+            var s_remove_h = 'hidden';
+            var s_resetPwd_h = 'hidden';
+            var s_editAcount_h = 'hidden';
         </script>
         <shiro:hasPermission name="sys:user:edit">
             <script>
@@ -123,7 +123,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + "/system/user";
+    var prefix = _ctx + "/system/user";
 
     function load(deptId) {
         $('#exampleTable').bootstrapTable(
@@ -220,16 +220,16 @@
                         field: 'userId',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            let e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
+                            var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
                                 + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id
                                 + '\')"><i class="fa fa-edit "></i></a> ';
-                            let d = '<a class="btn btn-warning btn-sm ' + s_remove_h
+                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
                                 + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            let a = '<a class="btn btn-success btn-sm ' + s_editAcount_h
+                            var a = '<a class="btn btn-success btn-sm ' + s_editAcount_h
                                 + '" href="#" title="编辑用户名称"  mce_href="#" onclick="editAcount(\'' + row.id
                                 + '\')"><i class="fa fa-user"></i></a> ';
-                            let f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h
+                            var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h
                                 + '" href="#" title="重置密码"  mce_href="#" onclick="resetPwd(\'' + row.id
                                 + '\')"><i class="fa fa-key"></i></a> ';
                             return e + d + a + f;
@@ -335,7 +335,7 @@
     }
 
     function batchRemove() {
-        let rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+        var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
         if (rows.length == 0) {
             layer.msg("请选择要删除的数据");
             return;
@@ -344,7 +344,7 @@
             btn: ['确定', '取消']
             // 按钮
         }, function () {
-            let ids = new Array();
+            var ids = new Array();
             // 遍历所有选择的行数据，取每条数据对应的ID
             $.each(rows, function (i, row) {
                 ids[i] = row['id'];
@@ -398,7 +398,7 @@
 
     $('#jstree').on("changed.jstree", function (e, data) {
         if (data.selected == -1) {
-            let opt = {
+            var opt = {
                 query: {
                     deptId: '',
                 }
@@ -406,7 +406,7 @@
             $('#deptId').val('');
             $('#exampleTable').bootstrapTable('refresh', opt);
         } else {
-            let opt = {
+            var opt = {
                 query: {
                     deptId: data.selected[0],
                 }
@@ -417,18 +417,18 @@
     });
 
     $(function () {
-        let data = JSON.parse('${states}');
+        var data = JSON.parse('${states}');
         data.splice(0, 0, {
             id: '',
             text: '全部'
         });
-        let config = {
+        var config = {
             data: data,
             width: '80px',
             minimumResultsForSearch: -1
         };
         select2Init('.js-example-basic-single', config);
-        let panehHidden = false;
+        var panehHidden = false;
         if ($(this).width() < 769) {
             panehHidden = true;
         }

@@ -61,11 +61,11 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + "/commom/dict/data"
+    var prefix = _ctx + "/commom/dict/data"
 
     function save() {
-        let parentWindow = $(window.parent.document);
-        let dictType = $('#dictType', parentWindow).val();
+        var parentWindow = $(window.parent.document);
+        var dictType = $('#dictType', parentWindow).val();
         $.ajax({
             cache: false,
             type: "POST",
@@ -82,7 +82,7 @@
                     parent.layer.msg(data.msg);
                     parent.reload();
                     //关闭当前窗口
-                    let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
                     parent.layer.close(index);
                 }
             }
@@ -90,7 +90,7 @@
     }
 
     function validateRule() {
-        let icon = "<i class='fa fa-times-circle'></i> ";
+        var icon = "<i class='fa fa-times-circle'></i> ";
         $("#dict-form").validate({
             rules: {
                 name: {

@@ -87,10 +87,10 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    let prefix = _ctx + '/system/user';
+    var prefix = _ctx + '/system/user';
 
     function getCheckedRoles() {
-        let adIds = "";
+        var adIds = "";
         $("input:checkbox[name=roleId]:checked").each(function (i) {
             if (0 == i) {
                 adIds = $(this).val();
@@ -120,7 +120,7 @@
                     parent.layer.msg(data.msg);
                     parent.reload();
                     //关闭当前窗口
-                    let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
                     parent.layer.close(index);
                 }
 
@@ -130,7 +130,7 @@
     }
 
     function validateRule() {
-        let icon = "<i class='fa fa-times-circle'></i> ";
+        var icon = "<i class='fa fa-times-circle'></i> ";
         $("#user-form").validate({
             rules: {
                 userName: {
@@ -171,7 +171,7 @@
         })
     }
 
-    let openDept = function () {
+    var openDept = function () {
         layer.open({
             type: 2,
             title: "选择部门",
@@ -186,7 +186,7 @@
     }
 
     $(function () {
-        let state = $('#userState').val() == "1" ? true : false;
+        var state = $('#userState').val() == "1" ? true : false;
         switchInit('user', state);
         validateRule();
     })

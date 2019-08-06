@@ -26,7 +26,7 @@
 	</div>
 	<%@ include file="/commom/footer.jsp"%>
 	<script>
-		let prefix = _ctx + '/system/menu';
+		var prefix = _ctx + '/system/menu';
 		
 		function search(){
 			$('#menuTree').jstree(true).search($('#keyword').val())
@@ -65,7 +65,7 @@
 			} else {
 				parent.loadMenu(data.node.id, data.node.text);
 			}
-			let index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+			var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 			parent.layer.close(index);
 		});
 

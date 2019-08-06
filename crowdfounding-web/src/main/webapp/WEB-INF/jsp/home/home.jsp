@@ -103,7 +103,37 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li><a title="全屏显示" id="fullScreen"><i
-                            class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+                            class="fa fa-arrows-alt"></i> 全屏显示</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info"
+                           data-toggle="dropdown" href="#"> <i class="fa fa-envelope"></i>
+                            <span class="label label-warning">{{total}}</span>通知
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li v-for="row in rows" class="m-t-xs">
+                                <div class="dropdown-messages-box">
+                                    <a class="pull-left"> <i
+                                            class="fa fa-server"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <small class="pull-right">{{row.before}}</small>
+                                        <strong>{{row.sender}}</strong>
+                                        {{row.title}} <br>
+                                        <small class="text-muted">{{row.updateDate}}</small>
+                                    </div>
+                                </div>
+                                <div class="divider"></div>
+                            </li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a class="J_menuItem" href="/oa/notify/selfNotify"> <i
+                                            class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="dropdown hidden-xs"><a
                             class="right-sidebar-toggle" aria-expanded="false"> <i
                             class="fa fa-tasks"></i> 主题
@@ -160,7 +190,6 @@
                         class="fa fa-gear"></i> 主题
                 </a></li>
             </ul>
-
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane active">
                     <div class="sidebar-title">
@@ -232,7 +261,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!--右侧边栏结束-->
@@ -244,10 +272,83 @@
 <script src="${_ctx }/static/js/hplus/hplus.js?v=4.1.0"></script>
 <script src="${_ctx }/static/js/hplus/contabs.js"></script>
 <script src="${_ctx }/static/plugin/pace/pace.min.js"></script>
+<script src="${_ctx }/static/plugin/toastr/toastr.min.js"></script>
+<script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>
+<script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
+<script src="${_ctx }/static/plugin/vue-2.2.2/vue.min.js"></script>
 <script src="${_ctx }/static/plugin/fullscreen/jquery.fullscreen.js"></script>
 <script>
     $("#fullScreen").on("click", function () {
         $("#wrapper").fullScreen();
+    });
+
+    var stompClient = null;
+    $(function () {
+        connect();
+    });
+
+    function connect() {
+        var sock = new SockJS("/endpointChat");
+        var stomp = Stomp.over(sock);
+        stomp.connect('guest', 'guest', function (frame) {
+
+            /**  订阅了/user/queue/notifications 发送的消息,这里雨在控制器的 convertAndSendToUser 定义的地址保持一致, 
+             *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
+             *  */
+            stomp.subscribe("/user/queue/notifications", handleNotification);
+            stomp.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    "onclick": null,
+                    "showDuration": "400",
+                    "hideDuration": "1000",
+                    "timeOut": "7000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.info(JSON.parse(response.body).responseMessage);
+            });
+        });
+
+        function handleNotification(message) {
+            wrapper.notify();
+            toastr.info(message.body);
+        }
+    }
+
+    var wrapper = new Vue({
+        el: '#wrapper',
+        data: {
+            total: '',
+            rows: '',
+        },
+        methods: {
+            notify: function () {
+                $.getJSON('/oa/notify/message', function (r) {
+                    wrapper.total = r.total;
+                    wrapper.rows = r.rows;
+                });
+            },
+            personal: function () {
+                layer.open({
+                    type: 2,
+                    title: '个人设置',
+                    maxmin: true,
+                    shadeClose: false,
+                    area: ['800px', '600px'],
+                    content: '/sys/user/personal'
+                });
+            }
+        },
+        created: function () {
+            this.notify()
+        }
     })
 </script>
 </body>
