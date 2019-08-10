@@ -53,6 +53,10 @@ public class CacheConfig extends CachingConfigurerSupport {
     @Value("${redis.expire}")
     private int expire = 0;
 
+    //数据库位置
+    @Value("${redis.databaseIndex}")
+    private int databaseIndex = 0;
+
     @Profile({"dev", "docker"})
     @Bean
     public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig) {
@@ -60,6 +64,7 @@ public class CacheConfig extends CachingConfigurerSupport {
         connectionFactory.setHostName(host);
         connectionFactory.setPort(port);
         connectionFactory.setPassword(password);
+        connectionFactory.setDatabase(databaseIndex);
         return connectionFactory;
     }
 

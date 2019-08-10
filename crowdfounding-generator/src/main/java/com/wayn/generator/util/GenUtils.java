@@ -1,8 +1,8 @@
 package com.wayn.generator.util;
 
 import com.wayn.commom.consts.Constant;
-import com.wayn.commom.domain.ColumnInfo;
-import com.wayn.commom.domain.TableInfo;
+import com.wayn.generator.domain.ColumnInfo;
+import com.wayn.generator.domain.TableInfo;
 import com.wayn.generator.config.GenConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -35,6 +35,31 @@ public class GenUtils {
      * 类型转换
      */
     public static Map<String, String> javaTypeMap = new HashMap<String, String>();
+
+    static {
+        javaTypeMap.put("tinyint", "Integer");
+        javaTypeMap.put("smallint", "Integer");
+        javaTypeMap.put("mediumint", "Integer");
+        javaTypeMap.put("int", "Integer");
+        javaTypeMap.put("number", "Integer");
+        javaTypeMap.put("integer", "integer");
+        javaTypeMap.put("bigint", "Long");
+        javaTypeMap.put("float", "Float");
+        javaTypeMap.put("double", "Double");
+        javaTypeMap.put("decimal", "BigDecimal");
+        javaTypeMap.put("bit", "Boolean");
+        javaTypeMap.put("char", "String");
+        javaTypeMap.put("varchar", "String");
+        javaTypeMap.put("varchar2", "String");
+        javaTypeMap.put("tinytext", "String");
+        javaTypeMap.put("text", "String");
+        javaTypeMap.put("mediumtext", "String");
+        javaTypeMap.put("longtext", "String");
+        javaTypeMap.put("time", "Date");
+        javaTypeMap.put("date", "Date");
+        javaTypeMap.put("datetime", "Date");
+        javaTypeMap.put("timestamp", "Date");
+    }
 
     /**
      * 设置列信息
@@ -123,7 +148,12 @@ public class GenUtils {
         String autoRemovePre = GenConfig.getAutoRemovePre();
         String tablePrefix = GenConfig.getTablePrefix();
         if (Constant.TRUE.equals(autoRemovePre) && StringUtils.isNotEmpty(tablePrefix)) {
-            tableName = tableName.replaceFirst(tablePrefix, "");
+            for (String prefix : tablePrefix.split(",", -1)) {
+                if (tableName.contains(prefix)) {
+                    tableName = tableName.replaceFirst(prefix, "");
+                    break;
+                }
+            }
         }
         return convertToCamelCase(tableName);
     }
@@ -210,30 +240,5 @@ public class GenUtils {
     public static String replaceKeyword(String keyword) {
         String keyName = keyword.replaceAll("(?:表|信息|管理)", "");
         return keyName;
-    }
-
-    static {
-        javaTypeMap.put("tinyint", "Integer");
-        javaTypeMap.put("smallint", "Integer");
-        javaTypeMap.put("mediumint", "Integer");
-        javaTypeMap.put("int", "Integer");
-        javaTypeMap.put("number", "Integer");
-        javaTypeMap.put("integer", "integer");
-        javaTypeMap.put("bigint", "Long");
-        javaTypeMap.put("float", "Float");
-        javaTypeMap.put("double", "Double");
-        javaTypeMap.put("decimal", "BigDecimal");
-        javaTypeMap.put("bit", "Boolean");
-        javaTypeMap.put("char", "String");
-        javaTypeMap.put("varchar", "String");
-        javaTypeMap.put("varchar2", "String");
-        javaTypeMap.put("tinytext", "String");
-        javaTypeMap.put("text", "String");
-        javaTypeMap.put("mediumtext", "String");
-        javaTypeMap.put("longtext", "String");
-        javaTypeMap.put("time", "Date");
-        javaTypeMap.put("date", "Date");
-        javaTypeMap.put("datetime", "Date");
-        javaTypeMap.put("timestamp", "Date");
     }
 }

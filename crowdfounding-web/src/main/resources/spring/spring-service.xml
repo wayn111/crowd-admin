@@ -12,7 +12,7 @@
 
 	<!-- 扫描包加载Service实现类 -->
 	<context:component-scan
-		base-package="com.wayn.commom.service">
+		base-package="com.wayn.**.service">
 	</context:component-scan>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" order="0"/>
@@ -45,7 +45,7 @@
 	<!-- 切面 -->
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* com.wayn.commom.service.impl.*.*(..))" order="1"/>
+                     pointcut="execution(* com.wayn.**.service.impl.*.*(..))" order="1"/>
 	</aop:config>
 	
 </beans>

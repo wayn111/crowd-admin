@@ -33,6 +33,12 @@
             <artifactId>crowdfounding-framework</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+		<!-- velocity版本 -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-engine-core</artifactId>
+			<version>${velocity.version}</version>
+		</dependency>
     </dependencies>
 
 	<build>

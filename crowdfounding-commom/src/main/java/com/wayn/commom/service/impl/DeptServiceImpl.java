@@ -2,10 +2,10 @@ package com.wayn.commom.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.wayn.commom.util.TreeBuilderUtil;
-import com.wayn.commom.domain.Dept;
-import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.dao.DeptDao;
+import com.wayn.commom.domain.Dept;
+import com.wayn.commom.util.TreeBuilderUtil;
+import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;

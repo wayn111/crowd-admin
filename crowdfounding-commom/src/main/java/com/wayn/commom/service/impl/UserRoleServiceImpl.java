@@ -1,7 +1,7 @@
 package com.wayn.commom.service.impl;
 
-import com.wayn.commom.domain.UserRole;
 import com.wayn.commom.dao.UserRoleDao;
+import com.wayn.commom.domain.UserRole;
 import com.wayn.commom.service.UserRoleService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
