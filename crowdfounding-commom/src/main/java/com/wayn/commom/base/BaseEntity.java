@@ -20,9 +20,6 @@ public class BaseEntity<T> implements Serializable {
     private Date createTime;
 
     @TableField(exist = false)
-    private Date updateTime;
-
-    @TableField(exist = false)
     private EntityWrapper<T> wrapper;
 
     public String getStartTime() {
@@ -56,26 +53,17 @@ public class BaseEntity<T> implements Serializable {
         return remarks;
     }
 
+    public BaseEntity<T> setRemarks(String remarks) {
+        this.remarks = remarks;
+        return this;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
 
     public BaseEntity<T> setCreateTime(Date createTime) {
         this.createTime = createTime;
-        return this;
-    }
-
-    public BaseEntity<T> setRemarks(String remarks) {
-        this.remarks = remarks;
-        return this;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public BaseEntity<T> setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
         return this;
     }
 
@@ -86,7 +74,6 @@ public class BaseEntity<T> implements Serializable {
                 ", endTime='" + endTime + '\'' +
                 ", remarks='" + remarks + '\'' +
                 ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 ", wrapper=" + wrapper +
                 '}';
     }

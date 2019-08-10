@@ -60,10 +60,6 @@ public class Dict extends BaseEntity<Dict> {
      */
     private String createBy;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
 
     /**
      * 更新者
@@ -74,11 +70,6 @@ public class Dict extends BaseEntity<Dict> {
      * 更新时间
      */
     private Date updateTime;
-
-    /**
-     * 备注信息
-     */
-    private String remarks;
 
     /**
      * 删除标记
@@ -148,15 +139,6 @@ public class Dict extends BaseEntity<Dict> {
         return this;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public Dict setCreateTime(Date createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
     public String getUpdateBy() {
         return updateBy;
     }
@@ -175,14 +157,6 @@ public class Dict extends BaseEntity<Dict> {
         return this;
     }
 
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public Dict setRemarks(String remarks) {
-        this.remarks = remarks;
-        return this;
-    }
 
     public String getDelFlag() {
         return delFlag;
@@ -213,10 +187,8 @@ public class Dict extends BaseEntity<Dict> {
                 ", sort=" + sort +
                 ", dictType='" + dictType + '\'' +
                 ", createBy='" + createBy + '\'' +
-                ", createTime=" + createTime +
                 ", updateBy='" + updateBy + '\'' +
                 ", updateTime=" + updateTime +
-                ", remarks='" + remarks + '\'' +
                 ", delFlag='" + delFlag + '\'' +
                 '}';
     }

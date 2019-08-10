@@ -1,16 +1,15 @@
-package com.wayn.web.controller.commom;
+package ${package}.web.controller.commom;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.util.Response;
-import com.wayn.commom.domain.${className};
-import com.wayn.commom.service.${className}Service;
+import com.wayn.generator.service.${className}Service;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import ${package}.commom.domian.${className};
 
 @RequestMapping("/${moduleName}/${classname}")
 @Controller
@@ -30,7 +29,7 @@ public class ${className}Controller extends BaseControlller {
     @RequiresPermissions("${moduleName}:${classname}:list")
     @ResponseBody
     @PostMapping("/list")
-    public Page<Dict> list(Model model, ${className} ${classname}) {
+    public Page<${className}> list(Model model, ${className} ${classname}) {
         Page<${className}> page = getPage();
         return ${classname}Service.select${className}list(page, ${classname});
     }

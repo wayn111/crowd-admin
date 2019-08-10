@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.wayn.common.domain.BaseEntity;
+import com.wayn.commom.base.BaseEntity;
 #foreach ($column in $columns)
     #if($column.attrType == 'Date' && ($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark'))
     import java.util.Date;
@@ -31,7 +31,7 @@ public class ${className} extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
 #foreach ($column in $columns)
-    #if($column.attrname != 'createTime' && $column.attrname != 'updateTime' && $column.attrname != 'remark')
+    #if($column.attrname != 'createTime' && $column.attrname != 'updateTime' && $column.attrname != 'remarks')
     /** $column.columnComment */
     #if($column.attrname == $primaryKey.attrname)
         #if($primaryKey.attrType == 'String')
@@ -63,6 +63,6 @@ public class ${className} extends BaseEntity {
     #foreach ($column in $columns)
             .append("${column.attrname}", get${column.attrName}())
     #end
-            .toString();
+        .append(super.toString()).toString();
     }
 }

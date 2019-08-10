@@ -42,7 +42,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-5 animated bounceInDown">
             <form id="login-form" action="#">
                 <h4 class="no-margins">登录：</h4>
                 <p class="m-t-md">登录到crowdfounding后台</p>

@@ -1,4 +1,4 @@
-package com.wayn.service.impl;
+package ${package}.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import ${package}.mapper.${className}Dao;
+import ${package}.dao.${className}Dao;
 import ${package}.domain.${className};
 import ${package}.service.${className}Service;
 
@@ -28,8 +28,8 @@ public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${clas
      * @return ${tableComment}信息
      */
     @Override
-    public ${className} select${className}List(Page page, ${className} ${classname}) {
-        return ${classname}dao. select${className}List(page,${classname});
+    public Page<${className}> select${className}List(Page<${className}> page, ${className} ${classname}) {
+        return page.setRecords({classname}Dao. select${className}List(page,${classname}));
     }
 
     @Override

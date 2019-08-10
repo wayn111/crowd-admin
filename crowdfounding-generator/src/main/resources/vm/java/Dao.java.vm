@@ -1,4 +1,4 @@
-package ${package}.mapper;
+package ${package}.dao;
 
 import ${package}.domain.${className};
 import com.baomidou.mybatisplus.mapper.BaseMapper;
@@ -15,7 +15,7 @@ public interface ${className}Dao extends BaseMapper<${className}>{
     /**
      * 查询${tableComment}信息
      *
-     * @param 分页对象，自动分页
+     * @param page，自动分页
      * @return ${tableComment}信息
      */
     public List<${className}> select${className}List(Pagination page, ${className} ${classname});

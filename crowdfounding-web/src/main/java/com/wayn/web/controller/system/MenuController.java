@@ -38,7 +38,7 @@ public class MenuController extends BaseControlller {
     public String menuIndex(Model model) {
         //缓存管理器测试
         /*Cache menuCache = cacheManager.getCache("menuCache");
-        Cache.ValueWrapper valueWrapper = menuCache.get("public java.util.List com.wayn.commom.service.impl.MenuServiceImpl.selectTreeMenuByUserId(" +
+        Cache.ValueWrapper valueWrapper = menuCache.get("public java.util.List com.wayn.generator.service.impl.MenuServiceImpl.selectTreeMenuByUserId(" +
                 "java.lang.String)_c79ba431f9f74dfbae585b87b0cde933");*/
         model.addAttribute("menuTypes", dictService.selectDictsValueByType("menuType"));
         return PREFIX + "/menu";

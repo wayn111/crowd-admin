@@ -127,7 +127,7 @@
                             </li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a class="J_menuItem" href="/oa/notify/selfNotify"> <i
+                                    <a class="J_menuItem" href="${_ctx}/notify/selfNotify"> <i
                                             class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                     </a>
                                 </div>
@@ -267,17 +267,19 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script src="${_ctx }/static/plugin/metisMenu/jquery.metisMenu.js"></script>
-<script
-        src="${_ctx }/static/plugin/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${_ctx }/static/plugin/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="${_ctx }/static/js/hplus/hplus.js?v=4.1.0"></script>
 <script src="${_ctx }/static/js/hplus/contabs.js"></script>
 <script src="${_ctx }/static/plugin/pace/pace.min.js"></script>
+<script src="${_ctx }/static/plugin/fullscreen/jquery.fullscreen.js"></script>
 <script src="${_ctx }/static/plugin/toastr/toastr.min.js"></script>
 <script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>
 <script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
 <script src="${_ctx }/static/plugin/vue-2.2.2/vue.min.js"></script>
-<script src="${_ctx }/static/plugin/fullscreen/jquery.fullscreen.js"></script>
 <script>
+
+    var prefix = _ctx + '/oa/notify';
+
     $("#fullScreen").on("click", function () {
         $("#wrapper").fullScreen();
     });
@@ -288,11 +290,11 @@
     });
 
     function connect() {
-        var sock = new SockJS("/endpointChat");
+        var sock = new SockJS("/notify");
         var stomp = Stomp.over(sock);
         stomp.connect('guest', 'guest', function (frame) {
 
-            /**  订阅了/user/queue/notifications 发送的消息,这里雨在控制器的 convertAndSendToUser 定义的地址保持一致, 
+            /**  订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
              *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
              *  */
             stomp.subscribe("/user/queue/notifications", handleNotification);
@@ -323,16 +325,16 @@
     }
 
     var wrapper = new Vue({
-        el: '#wrapper',
+        el: '#page-wrapper',
         data: {
             total: '',
             rows: '',
         },
         methods: {
             notify: function () {
-                $.getJSON('/oa/notify/message', function (r) {
-                    wrapper.total = r.total;
-                    wrapper.rows = r.rows;
+                $.getJSON(prefix + '/message', function (r) {
+                    wrapper.total = r.map.total;
+                    wrapper.rows = r.map.rows;
                 });
             },
             personal: function () {

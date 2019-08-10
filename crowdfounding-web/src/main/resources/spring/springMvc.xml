@@ -22,9 +22,9 @@
 http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <context:component-scan
-            base-package="com.wayn.web.controller"/>
+            base-package="com.wayn.**.controller"/>
     <context:component-scan
-            base-package="com.wayn.commom.service"/>
+            base-package="com.wayn.**.service"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <!-- 静态资源配置 -->
     <mvc:resources mapping="/static/**" location="/static/"/>
@@ -101,7 +101,7 @@ http://www.springframework.org/schema/cache http://www.springframework.org/schem
                         <prop key="kaptcha.textproducer.font.size">25</prop>
                         <prop key="kaptcha.textproducer.char.length">4</prop>
                         <prop key="kaptcha.textproducer.char.space">6</prop>
-                        <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+                        <!--<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>-->
                         <!-- 和登录框背景颜色一致 -->
                         <prop key="kaptcha.background.clear.from">247,247,247</prop>
                         <prop key="kaptcha.background.clear.to">126,236,236</prop>
