@@ -103,8 +103,8 @@
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li><a title="全屏显示" id="fullScreen"><i
-                            class="fa fa-arrows-alt"></i> 全屏显示</a>
+                    <li onclick="fullScreen()">
+                        <a title="全屏显示"><i class="fa fa-arrows-alt"></i> 全屏显示</a>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info"
@@ -151,7 +151,7 @@
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab"
-                       data-id="${_ctx }/main/mainIndex">首页</a>
+                       data-id="${_ctx }/main/mainIndex1">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight">
@@ -175,8 +175,8 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="${_ctx }/main/mainIndex" frameborder="0"
-                    data-id="${_ctx }/main/mainIndex" seamless></iframe>
+                    src="${_ctx }/main/mainIndex1" frameborder="0"
+                    data-id="${_ctx }/main/mainIndex1" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">
@@ -299,21 +299,22 @@
         "hideMethod": "fadeOut"
     };
 
-    $("#fullScreen").on("click", function () {
+    /**
+     * 全屏显示
+     *
+     */
+    function fullScreen() {
         $("#wrapper").fullScreen();
-    });
+    }
 
     $(function () {
         connect();
     });
-    var stompClient = null;
+    var stomp = null;
 
     function connect() {
         var sock = new SockJS(_ctx + "/notify");
         var stomp = Stomp.over(sock);
-        setTimeout(function () {
-            stomp.send('/app/micro', {}, JSON.stringify({"msg": "hello"}));
-        }, 5000);
         stomp.connect('guest', 'guest', function (frame) {
             /**  订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
              *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
@@ -379,10 +380,6 @@
             }
         });
         layer.full(index);
-    }
-
-    function reload() {
-
     }
 </script>
 </body>

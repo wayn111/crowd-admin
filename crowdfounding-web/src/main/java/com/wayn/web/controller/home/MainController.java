@@ -38,4 +38,9 @@ public class MainController extends BaseControlller {
 	public String mainIndex(Model model) {
 		return MAIN_PREFIX + "/main";
 	}
+
+	@GetMapping("/mainIndex1")
+	public String mainIndex1(Model model) {
+		return MAIN_PREFIX + "/main1";
+	}
 }
