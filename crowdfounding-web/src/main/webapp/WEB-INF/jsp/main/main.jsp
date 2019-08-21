@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="panel panel-default">
-		<div class="panel-heading">了解crowdfounding</div>
+		<%--<div class="panel-heading">了解crowdfounding</div>--%>
 		<div style="padding: 10px 0 20px 10px;">
 			<h3>&nbsp;&nbsp;&nbsp;项目介绍</h3>
 			<ul>

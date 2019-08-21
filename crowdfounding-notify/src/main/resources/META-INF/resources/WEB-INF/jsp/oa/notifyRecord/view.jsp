@@ -26,12 +26,15 @@
                         <button class="btn btn-white btn-xs" type="button">乐视超级自行车</button>--%>
                     </div>
                     <div class="text-center article-title">
+                        <span class="text-muted"><i class="fa fa-clock-o"></i>
+                            <fmt:formatDate value="${notifyRecordVO.createTime}" pattern="yyyy年MM月dd日" />
+                        </span>
                         <h1>
                             ${notifyRecordVO.title}
                         </h1>
                     </div>
                     ${notifyRecordVO.content}
-                    <div class="pull-right" style="font-size: 17px;">
+                    <div class="pull-right" style="font-size: 14px;">
                         ${notifyRecordVO.createBy}
                     </div>
                 </div>
