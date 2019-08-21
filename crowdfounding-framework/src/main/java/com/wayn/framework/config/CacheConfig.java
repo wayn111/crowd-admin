@@ -110,6 +110,7 @@ public class CacheConfig extends CachingConfigurerSupport {
             cacheNames.add("deptCache");
             cacheNames.add("permissionCache");
             cacheNames.add("dictCache");
+            cacheNames.add("timerTaskCache");
             ((RedisCacheManager) cacheManager).setCacheNames(cacheNames);
         } else {
             cacheManager = ehCacheCacheManager();

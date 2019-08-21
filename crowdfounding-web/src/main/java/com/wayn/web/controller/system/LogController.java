@@ -2,9 +2,10 @@ package com.wayn.web.controller.system;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.util.Response;
 import com.wayn.commom.domain.Log;
 import com.wayn.commom.service.LogService;
+import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.Response;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,8 @@ public class LogController extends BaseControlller {
     @PostMapping("/list")
     public Page<Log> list(Model model, Log log) {
         Page<Log> page = getPage();
+        //设置通用查询字段
+        ParameterUtil.setWrapper();
         return logService.listPage(page, log);
     }
 

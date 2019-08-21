@@ -17,45 +17,65 @@ import java.util.stream.Collectors;
 @Service
 public class UserOnlineServiceImpl implements UserOnlineService {
 
-	@Autowired
-	private SessionDAO sessionDAO;
+    @Autowired
+    private SessionDAO sessionDAO;
 
-	@Override
-	public List<UserOnline> list() {
-		//获取当前系统在线用户
-		Collection<Session> activeSessions = sessionDAO.getActiveSessions();
-		List<UserOnline> list = activeSessions.stream().map(session -> {
-			UserOnline userOnline = new UserOnline();
-			if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
-				return null;
-			} else {
-				SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
-						.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-				Object primaryPrincipal = principalCollection.getPrimaryPrincipal();
-				User user = (User) primaryPrincipal;
-				userOnline.setUsername(user.getUserName());
-				userOnline.setOnlineSession(user.toString());
-			}
-			
-			userOnline.setId((String) session.getId());
-			userOnline.setHost(session.getHost());
-			userOnline.setStartTimestamp(session.getStartTimestamp());
-			userOnline.setLastAccessTime(session.getLastAccessTime());
-			userOnline.setTimeout(session.getTimeout());
-			return userOnline;
-		}).filter(userOnline -> {
-			return userOnline != null ? true : false;
-		}).collect(Collectors.toList());
-		return list;
-	}
+    @Override
+    public List<UserOnline> list() {
+        //获取当前系统在线用户
+        Collection<Session> activeSessions = sessionDAO.getActiveSessions();
+        List<UserOnline> list = activeSessions.stream().map(session -> {
+            UserOnline userOnline = new UserOnline();
+            if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
+                return null;
+            } else {
+                SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
+                        .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+                Object primaryPrincipal = principalCollection.getPrimaryPrincipal();
+                User user = (User) primaryPrincipal;
+                userOnline.setUsername(user.getUserName());
+                userOnline.setOnlineSession(user.toString());
+            }
 
-	@Override
-	public void forceLogout(String sessionId) {
-		Session session = sessionDAO.readSession(sessionId);
- 		if(session != null) {
-			session.stop();
-			sessionDAO.delete(session);
-		}
-	}
+            userOnline.setId((String) session.getId());
+            userOnline.setHost(session.getHost());
+            userOnline.setStartTimestamp(session.getStartTimestamp());
+            userOnline.setLastAccessTime(session.getLastAccessTime());
+            userOnline.setTimeout(session.getTimeout());
+            return userOnline;
+        }).filter(userOnline -> {
+            return userOnline != null ? true : false;
+        }).collect(Collectors.toList());
+        return list;
+    }
+
+    @Override
+    public List<User> listUser() {
+        //获取当前系统在线用户
+        Collection<Session> activeSessions = sessionDAO.getActiveSessions();
+        List<User> list = activeSessions.stream().map(session -> {
+            if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
+                return null;
+            } else {
+                SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
+                        .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+                Object primaryPrincipal = principalCollection.getPrimaryPrincipal();
+                return (User) primaryPrincipal;
+            }
+
+        }).filter(user -> {
+            return user != null ? true : false;
+        }).collect(Collectors.toList());
+        return list;
+    }
+
+    @Override
+    public void forceLogout(String sessionId) {
+        Session session = sessionDAO.readSession(sessionId);
+        if (session != null) {
+            session.stop();
+            sessionDAO.delete(session);
+        }
+    }
 
 }

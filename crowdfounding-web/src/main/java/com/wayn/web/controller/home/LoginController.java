@@ -45,7 +45,7 @@ public class LoginController extends BaseControlller {
     @PostMapping("/doLogin")
     public Response doLogin(String userName, String password, String clienkaptcha) {
         String kaptcha = (String) SecurityUtils.getSubject().getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        if (!StringUtils.equals(clienkaptcha, kaptcha)) {
+        if (!StringUtils.equalsIgnoreCase(clienkaptcha, kaptcha)) {
             return Response.error("验证码错误");
         }
         Subject currentUser = SecurityUtils.getSubject();

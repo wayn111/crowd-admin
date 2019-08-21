@@ -9,13 +9,13 @@
 <div class="wrapper wrapper-content ">
     <div class="row">
         <div class="col-sm-12">
-            <div class="ibox float-e-margins">
+            <div class="ibox float-e-margins animated fadeInRight">
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="user-form">
                         <input id="id" name="id" type="hidden" value="${user.id }">
                         <input id="password" name=password type="hidden" value="${user.password }">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">用户名：</label>
+                            <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>用户名：</label>
                             <div class="col-sm-8">
                                 <input id="userName" name="userName" class="form-control"
                                        type="text" value="${user.userName }" readonly>
@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">部门：</label>
+                            <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>部门：</label>
                             <div class="col-sm-8">
                                 <input id="deptId" name="deptId" class="hidden"
                                        value="${user.deptId }">
@@ -60,7 +60,7 @@
                             <label class="col-sm-3 control-label">角色：</label>
                             <div class="col-sm-8">
                                 <c:forEach items="${roles}" var="role">
-                                    <label class="checkbox-inline">
+                                    <label class="checkbox-inline i-checks">
                                         <input name="roleId" type="checkbox" value="${role.id}"
                                                <c:if test="${role.checked  }">checked</c:if>>${role.roleName }
                                     </label>
@@ -70,7 +70,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">备注：</label>
                             <div class="col-sm-8">
-                                <textarea id="remarks" name="remarks" class="form-control" rows="3">${user.remarks }</textarea>
+                                <textarea id="remarks" name="remarks" class="form-control"
+                                          rows="3">${user.remarks }</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -165,6 +166,7 @@
                     required: icon + "请选择部门",
                 }
             },
+            focusCleanup: true,
             submitHandler: function () {
                 save();
             }
@@ -178,7 +180,7 @@
             area: ['300px', '450px'],
             content: _ctx + "/system/dept/treeView"
         })
-    }
+    };
 
     function loadDept(deptId, deptName) {
         $("#deptId").val(deptId);
@@ -187,7 +189,7 @@
 
     $(function () {
         var state = $('#userState').val() == "1" ? true : false;
-        switchInit('user', state);
+        switchInit('userState', {state});
         validateRule();
     })
 </script>

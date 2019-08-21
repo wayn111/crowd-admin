@@ -19,7 +19,7 @@
     </resultMap>
 
     <sql id="selectNotifyVo">
-        select id, type, title, content, files, notifyState, createBy, createTime, updateBy, updateTime, remarks, delFlag, from oa_notify
+        select id, type, title, content, files, notifyState, publishTime, (select userName from sys_user where sys_user.id = createBy) as createBy , createTime,(select userName from sys_user where sys_user.id = updateBy) as updateBy, updateTime, remarks, delFlag from oa_notify
     </sql>
 
     <select id="selectNotifyList" parameterType="Notify" resultMap="NotifyResult">
@@ -27,16 +27,21 @@
         <where>
             <if test="id != null ">and id = #{id}</if>
             <if test="type != null ">and type = #{type}</if>
-            <if test="title != null  and title != '' ">and title = #{title}</if>
-            <if test="content != null  and content != '' ">and content = #{content}</if>
+            <if test="title != null  and title != '' ">and title like CONCAT('%',#{title},'%')</if>
+            <if test="content != null  and content != '' ">and content like CONCAT('%',#{content},'%')</if>
             <if test="files != null  and files != '' ">and files = #{files}</if>
             <if test="notifyState != null ">and notifyState = #{notifyState}</if>
-            <if test="createBy != null ">and createBy = #{createBy}</if>
-            <if test="createTime != null ">and createTime = #{createTime}</if>
+            <if test="publishTime != null ">and publishTime = #{publishTime}</if>
+            <if test="createBy != null and createBy != ''">and createBy = #{createBy}</if>
+            <if test="startTime != null and startTime != ''">and createTime <![CDATA[ > ]]> #{startTime}</if>
+            <if test="endTime != null and endTime != ''">and createTime <![CDATA[ < ]]> #{endTime}</if>
+            <if test="publishStartTime != null and publishStartTime != ''">and publishTime <![CDATA[ > ]]> #{publishStartTime}</if>
+            <if test="publishEndTime != null and publishEndTime != ''">and publishTime <![CDATA[ < ]]> #{publishEndTime}</if>
             <if test="updateBy != null  and updateBy != '' ">and updateBy = #{updateBy}</if>
             <if test="updateTime != null ">and updateTime = #{updateTime}</if>
             <if test="remarks != null  and remarks != '' ">and remarks = #{remarks}</if>
             <if test="delFlag != null  and delFlag != '' ">and delFlag = #{delFlag}</if>
+            and delFlag = 0
         </where>
     </select>
 

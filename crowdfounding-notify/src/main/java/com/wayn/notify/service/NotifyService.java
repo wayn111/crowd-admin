@@ -23,17 +23,19 @@ public interface NotifyService extends IService<Notify> {
      * 新增{tableComment}
      *
      * @param notify 通知通告信息
+     * @param receiveUserIds
      * @return 结果
      */
-    boolean save(Notify notify);
+    boolean save(Notify notify, String receiveUserIds);
 
     /**
      * 修改通知通告
      *
      * @param notify 通知通告信息
+     * @param receiveUserIds
      * @return 结果
      */
-    boolean update(Notify notify);
+    boolean update(Notify notify, String receiveUserIds);
 
     /**
      * 删除通知通告

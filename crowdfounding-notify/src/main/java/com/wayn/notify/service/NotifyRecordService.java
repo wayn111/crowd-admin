@@ -3,6 +3,8 @@ package com.wayn.notify.service;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.wayn.notify.domain.NotifyRecord;
+import com.wayn.notify.domain.NotifyRecordTip;
+import com.wayn.notify.domain.vo.NotifyRecordVO;
 
 /**
  * 通知记录 服务层
@@ -15,9 +17,10 @@ public interface NotifyRecordService extends IService<NotifyRecord> {
      * 查询通知记录信息
      *
      * @param page 分页对象，自动分页
+     * @param notifyRecord
      * @return 通知记录信息
      */
-    public Page<NotifyRecord> selectNotifyRecordList(Page<NotifyRecord> page, NotifyRecord notifyRecord);
+    public Page<NotifyRecordVO> selectNotifyRecordList(Page<NotifyRecordVO> page, NotifyRecordVO notifyRecord);
 
     /**
      * 新增{tableComment}
@@ -50,4 +53,8 @@ public interface NotifyRecordService extends IService<NotifyRecord> {
      * @return 结果
      */
     boolean batchRemove(Long[] ids);
+
+    NotifyRecordVO selectNotifyByNotifyRecordId(Long id);
+
+    Page<NotifyRecordTip> selectNotifyRecordTipList(Page<NotifyRecordTip> page, String curUserId);
 }

@@ -3,14 +3,16 @@ package com.wayn.web.controller.system;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.enums.Operator;
-import com.wayn.commom.service.*;
-import com.wayn.commom.util.Response;
-import com.wayn.framework.annotation.Log;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.Role;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.RoleChecked;
+import com.wayn.commom.domain.vo.Tree;
+import com.wayn.commom.enums.Operator;
+import com.wayn.commom.service.*;
+import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.Response;
+import com.wayn.framework.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,6 +56,8 @@ public class UserController extends BaseControlller {
     @PostMapping("/list")
     public Page<User> list(Model model, User user) {
         Page<User> page = getPage();
+        //设置通用查询字段
+        ParameterUtil.setWrapper();
         return userService.listPage(page, user);
     }
 
@@ -154,5 +158,17 @@ public class UserController extends BaseControlller {
         userService.batchRemove(ids);
         return Response.success("删除用户成功");
 
+    }
+
+
+    @ResponseBody
+    @PostMapping("/tree")
+    public Tree<Dept> tree(Model model) {
+        return userService.getTree();
+    }
+
+    @GetMapping("/treeView")
+    public String treeView(Model model) {
+        return PREFIX + "/treeView";
     }
 }

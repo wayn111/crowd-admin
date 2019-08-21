@@ -11,6 +11,7 @@
           content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
     <%@ include file="/commom/taglib.jsp" %>
     <%@ include file="/commom/header.jsp" %>
+    <link href="${_ctx }/static/plugin/toastr/toastr.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -113,22 +114,22 @@
                         <ul class="dropdown-menu dropdown-messages">
                             <li v-for="row in rows" class="m-t-xs">
                                 <div class="dropdown-messages-box">
-                                    <a class="pull-left"> <i
-                                            class="fa fa-server"></i>
+                                    <a class="pull-left" v-on:click="viewNotifyRecord(row.notifyRecordId)">
+                                        <i class="fa fa-paper-plane"></i>
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">{{row.before}}</small>
-                                        <strong>{{row.sender}}</strong>
+                                        <strong>{{row.createBy}}</strong>
                                         {{row.title}} <br>
-                                        <small class="text-muted">{{row.updateDate}}</small>
+                                        <small class="text-muted">{{row.updateTime}}</small>
                                     </div>
                                 </div>
                                 <div class="divider"></div>
                             </li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a class="J_menuItem" href="${_ctx}/notify/selfNotify"> <i
-                                            class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+                                    <a class="J_menuItem" href="${_ctx}/oa/notifyRecord">
+                                        <i class="fa fa-envelope"></i> <strong> 我的通知</strong>
                                     </a>
                                 </div>
                             </li>
@@ -138,6 +139,8 @@
                             class="right-sidebar-toggle" aria-expanded="false"> <i
                             class="fa fa-tasks"></i> 主题
                     </a></li>
+
+
                 </ul>
             </nav>
         </div>
@@ -278,42 +281,45 @@
 <script src="${_ctx }/static/plugin/vue-2.2.2/vue.min.js"></script>
 <script>
 
-    var prefix = _ctx + '/oa/notify';
+    var prefix = _ctx + '/oa/notifyRecord';
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "1000",
+        "timeOut": "14000",
+        "extendedTimeOut": "5000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
 
     $("#fullScreen").on("click", function () {
         $("#wrapper").fullScreen();
     });
 
-    var stompClient = null;
     $(function () {
         connect();
     });
+    var stompClient = null;
 
     function connect() {
-        var sock = new SockJS("/notify");
+        var sock = new SockJS(_ctx + "/notify");
         var stomp = Stomp.over(sock);
+        setTimeout(function () {
+            stomp.send('/app/micro', {}, JSON.stringify({"msg": "hello"}));
+        }, 5000);
         stomp.connect('guest', 'guest', function (frame) {
-
             /**  订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
              *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
-             *  */
+             */
             stomp.subscribe("/user/queue/notifications", handleNotification);
             stomp.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "progressBar": true,
-                    "positionClass": "toast-bottom-right",
-                    "onclick": null,
-                    "showDuration": "400",
-                    "hideDuration": "1000",
-                    "timeOut": "7000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
                 toastr.info(JSON.parse(response.body).responseMessage);
             });
         });
@@ -332,9 +338,9 @@
         },
         methods: {
             notify: function () {
-                $.getJSON(prefix + '/message', function (r) {
-                    wrapper.total = r.map.total;
-                    wrapper.rows = r.map.rows;
+                $.getJSON(prefix + '/notifyRecordTip', function (r) {
+                    wrapper.total = r.total;
+                    wrapper.rows = r.records;
                 });
             },
             personal: function () {
@@ -351,7 +357,33 @@
         created: function () {
             this.notify()
         }
-    })
+    });
+
+    function viewNotifyRecord(id) {
+        var index = layer.open({
+            type: 2,
+            title: '通知公告查看',
+            maxmin: true,
+            shadeClose: false,
+            area: ['800px', '520px'],
+            content: prefix + '/view/' + id,// iframe的url
+            success: function (layero, index) {
+                // 已发布后
+                var iframeWin = layero.find('iframe')[0];
+                formView(iframeWin.contentWindow.document);
+                wrapper.notify();
+            },
+            btn: ['取消'],
+            cancel: function (index) {
+                return true;
+            }
+        });
+        layer.full(index);
+    }
+
+    function reload() {
+
+    }
 </script>
 </body>
 

@@ -3,7 +3,7 @@ package com.wayn.commom.domain;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.wayn.commom.base.BaseEntity;
+import com.wayn.commom.base.BusinessEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,7 +17,7 @@ import java.util.Date;
  * @since 2019-06-27
  */
 @TableName("sys_dict")
-public class Dict extends BaseEntity<Dict> {
+public class Dict extends BusinessEntity<Dict> {
 
     /**
      * 编号

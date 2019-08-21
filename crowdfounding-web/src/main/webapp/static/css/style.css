@@ -2336,15 +2336,9 @@ table.dataTable thead .sorting:after {
 .google-map {
     height: 300px;
 }
-/* Validation */
-label.error {
-    color: #cc5965;
-    display: inline-block;
-    margin-left: 5px;
-}
 
 .form-control.error {
-    border: 1px dotted #cc5965;
+    border: 1px solid #cc5965;
 }
 /* ngGrid */
 .gridStyle {
@@ -7418,4 +7412,35 @@ body.skin-3 {
     border-radius: 4px;
     min-height: 34px;
     margin: 7px 0px 15px 0px;
+}
+
+.wayn-required-span {
+    color: red;
+}
+
+/**
+ jquery-validate error样式
+ */
+label.error {
+    /*position: absolute;
+    right: 18px;
+    top: 10px;*/
+    color: #ef392b;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.i-checks label.error, .check-box label.error, .radio-box label.error {
+    position: absolute;
+    right: auto;
+    width: 150px;
+    left: 210px;
+    top: 1px;
+    max-width: none;
+}
+
+input.error, select.error, .form-control.error {
+    background-color: #fbe2e2;
+    border-color: #c66161;
+    color: #c00;
 }

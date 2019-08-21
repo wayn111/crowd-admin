@@ -13,7 +13,7 @@
                 <div class="ibox-content">
                     <form class="form-horizontal m-t layui-form" id="role-form">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">角色名：</label>
+                            <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>角色名：</label>
                             <div class="col-sm-8">
                                 <input id="roleName" name="roleName" class="form-control"
                                        type="text">
@@ -37,6 +37,7 @@
                             <label class="col-sm-3 control-label">菜单权限：</label>
                             <div class="col-sm-8">
                                 <div id="menuTree"></div>
+                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>勾选角色对应权限</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -117,6 +118,7 @@
                 },
             },
             ignore: ".ignore",
+            focusCleanup: true,
             submitHandler: function () {
                 getAllSelected();
                 save();
@@ -149,7 +151,7 @@
     }
 
     $(function () {
-        switchInit('role');
+        switchInit('roleState');
         validateRule();
         getMenuTreeData();
     })

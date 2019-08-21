@@ -51,9 +51,7 @@
                 <div class="row">
                     <div class="col-xs-7">
                         <div class="form-group">
-                            <input class="form-control" id="kaptcha-input" name="clienkaptcha"
-                                   placeholder="请输入验证码"
-                                   maxlength="4">
+                            <input class="form-control" id="kaptcha-input" name="clienkaptcha" maxlength="4" placeholder="验证码">
                         </div>
                     </div>
                     <div class="col-xs-5">
@@ -122,6 +120,7 @@
                     required: e + "请输入验证码"
                 }
             },
+            focusCleanup: true,
             submitHandler: function () {
                 login();
             }

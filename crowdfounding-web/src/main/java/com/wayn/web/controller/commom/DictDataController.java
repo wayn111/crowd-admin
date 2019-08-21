@@ -6,6 +6,7 @@ import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.Dict;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
+import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
 import com.wayn.framework.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -41,6 +42,8 @@ public class DictDataController extends BaseControlller {
     @PostMapping("/list")
     public Page<Dict> list(Model model, Dict dict) {
         Page<Dict> page = getPage();
+        //设置通用查询字段
+        ParameterUtil.setWrapper();
         return dictService.listPage(page, dict);
     }
 

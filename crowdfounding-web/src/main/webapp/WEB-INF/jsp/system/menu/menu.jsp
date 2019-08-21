@@ -196,7 +196,6 @@
 											field : 'type',
 											align : 'center',
 											valign : 'center',
-											width : '10%',
 											formatter : function(item, index) {
 												if (item.type === 1) {
 													return '<span class="label label-primary">目录</span>';
@@ -212,13 +211,11 @@
 										{
 											title : '地址',
 											valign : 'center',
-											width : '20%',
 											field : 'url'
 										},
 										{
 											title : '权限标识',
 											valign : 'center',
-											width : '20%',
 											field : 'resource'
 										},
 										{
@@ -234,13 +231,13 @@
 											formatter : function(item, index) {
 												var e = '<a class="btn btn-primary btn-sm ' + s_edit_h
 														+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-														+ item.id + '\')"><i class="fa fa-edit"></i></a> ';
+														+ item.id + '\')"><i class="fa fa-edit"></i>编辑</a> ';
 												var p = item.type == 3?'':'<a class="btn btn-primary btn-sm ' + s_add_h
 														+ '" href="#" mce_href="#" title="添加下级" onclick="add(\''
-														+ item.id + '\')"><i class="fa fa-plus"></i></a> ';
+														+ item.id + '\')"><i class="fa fa-plus"></i>添加下级</a> ';
 												var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
 														+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-														+ item.id + '\')"><i class="fa fa-remove"></i></a> ';
+														+ item.id + '\')"><i class="fa fa-remove"></i>删除</a> ';
 												return e + d + p;
 											}
 										} ]

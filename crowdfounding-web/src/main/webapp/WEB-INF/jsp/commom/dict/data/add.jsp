@@ -9,7 +9,7 @@
 <div class="wrapper wrapper-content ">
     <div class="row">
         <div class="col-sm-12">
-            <div class="ibox float-e-margins">
+            <div class="ibox float-e-margins animated fadeInRight">
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="dict-form">
                         <div class="form-group">
@@ -127,6 +127,7 @@
                     remote: icon + "字典类型已经存在"
                 }
             },
+            focusCleanup: true,
             submitHandler: function () {
                 save();
             }
@@ -134,7 +135,7 @@
     }
 
     $(function () {
-        switchInit('dict');
+        switchInit('dictState');
         validateRule();
     })
 </script>

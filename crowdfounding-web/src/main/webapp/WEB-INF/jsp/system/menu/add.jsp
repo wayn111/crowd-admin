@@ -6,7 +6,7 @@
 <%@ include file="/commom/taglib.jsp"%>
 <%@ include file="/commom/header.jsp"%>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content animated jackInTheBox">
+	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
@@ -22,17 +22,17 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">菜单类型：</label>
+								<label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>菜单类型：</label>
 								<div class="col-sm-8">
 									<c:forEach items="${menuTypes}" var="dict">
-										<label class="radio-inline"> <input type="radio"
-											name="type" value="${dict.id}" /> ${dict.text}
+										<label class="radio-inline i-checks">
+										<input type="radio" name="type" value="${dict.id}" /> ${dict.text}
 										</label>
 									</c:forEach>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">菜单名称：</label>
+								<label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>菜单名称：</label>
 								<div class="col-sm-8">
 									<input id="menuName" name="menuName" class="form-control"
 										type="text">
@@ -42,13 +42,14 @@
 								<label class="col-sm-3 control-label">链接地址：</label>
 								<div class="col-sm-8">
 									<input id="url" name="url" class="form-control" type="text">
+									<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>填写控制器访问地址，如/sys/user，/sys/user/add</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">权限标识：</label>
 								<div class="col-sm-8">
-									<input id="resource" name="resource" class="form-control"
-										type="text">
+									<input id="resource" name="resource" class="form-control" type="text">
+									<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>填写控制器访问所需权限，如sys:user:list，sys:user:add</span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -103,6 +104,7 @@
 					}
 				},
 				ignore : ".ignore",
+				focusCleanup : true,
 				submitHandler : function() {
 					save();
 				}
@@ -140,7 +142,8 @@
 				area : [ '330px', '480px' ],
 				content : prefix + "/treeView"
 			})
-		}
+		};
+
 		function loadMenu(pid, pName) {
 			$("#pid").val(pid);
 			$("#pName").val(pName);

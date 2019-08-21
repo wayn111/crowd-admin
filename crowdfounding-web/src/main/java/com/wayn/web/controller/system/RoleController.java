@@ -2,15 +2,16 @@ package com.wayn.web.controller.system;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.exception.BusinessException;
-import com.wayn.commom.util.Response;
 import com.wayn.commom.domain.Role;
 import com.wayn.commom.enums.Operator;
-import com.wayn.framework.annotation.Log;
-import com.wayn.framework.util.ShiroUtil;
+import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.service.MenuService;
 import com.wayn.commom.service.RoleService;
+import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.Response;
+import com.wayn.framework.annotation.Log;
+import com.wayn.framework.util.ShiroUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +46,8 @@ public class RoleController extends BaseControlller {
 	@PostMapping("/list")
 	public Page<Role> list(Model model, Role role) {
 		Page<Role> page = getPage();
+		//设置通用查询字段
+		ParameterUtil.setWrapper();
 		return roleService.listPage(page, role);
 	}
 

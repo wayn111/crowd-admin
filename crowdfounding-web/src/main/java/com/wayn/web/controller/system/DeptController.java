@@ -1,12 +1,12 @@
 package com.wayn.web.controller.system;
 
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.util.Response;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.enums.Operator;
-import com.wayn.framework.annotation.Log;
 import com.wayn.commom.service.DeptService;
+import com.wayn.commom.util.Response;
+import com.wayn.framework.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +64,7 @@ public class DeptController extends BaseControlller {
         return PREFIX + "/edit";
     }
 
-    @Log(value = "部门管理",operator = Operator.ADD)
+    @Log(value = "部门管理", operator = Operator.ADD)
     @RequiresPermissions("sys:dept:add")
     @ResponseBody
     @PostMapping("/addSave")
@@ -73,7 +73,7 @@ public class DeptController extends BaseControlller {
         return Response.success("部门新增成功");
     }
 
-    @Log(value = "部门管理",operator = Operator.UPDATE)
+    @Log(value = "部门管理", operator = Operator.UPDATE)
     @RequiresPermissions("sys:dept:edit")
     @ResponseBody
     @PostMapping("/editSave")
@@ -82,7 +82,7 @@ public class DeptController extends BaseControlller {
         return Response.success("部门修改成功");
     }
 
-    @Log(value = "部门管理",operator = Operator.DELETE)
+    @Log(value = "部门管理", operator = Operator.DELETE)
     @RequiresPermissions("sys:dept:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")

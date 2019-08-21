@@ -8,13 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>crowdfounding-notify</artifactId>
-
     <name>crowdfounding-notify</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
-
+    <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -31,17 +27,6 @@
             <groupId>com.wayn</groupId>
             <artifactId>crowdfounding-framework</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!-- websocket 通信 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-websocket</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-messaging</artifactId>
-            <version>${spring.version}</version>
         </dependency>
     </dependencies>
 

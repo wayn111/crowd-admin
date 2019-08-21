@@ -2,13 +2,17 @@ package com.wayn.notify.service.impl;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.wayn.commom.util.DateUtils;
 import com.wayn.notify.dao.NotifyRecordDao;
 import com.wayn.notify.domain.NotifyRecord;
+import com.wayn.notify.domain.NotifyRecordTip;
+import com.wayn.notify.domain.vo.NotifyRecordVO;
 import com.wayn.notify.service.NotifyRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 通知记录 服务层实现
@@ -23,7 +27,7 @@ public class NotifyRecordServiceImpl extends ServiceImpl<NotifyRecordDao, Notify
 
 
     @Override
-    public Page<NotifyRecord> selectNotifyRecordList(Page<NotifyRecord> page, NotifyRecord notifyRecord) {
+    public Page<NotifyRecordVO> selectNotifyRecordList(Page<NotifyRecordVO> page, NotifyRecordVO notifyRecord) {
         return page.setRecords(notifyRecordDao.selectNotifyRecordList(page, notifyRecord));
     }
 
@@ -45,6 +49,20 @@ public class NotifyRecordServiceImpl extends ServiceImpl<NotifyRecordDao, Notify
     @Override
     public boolean batchRemove(Long[] ids) {
         return deleteBatchIds(Arrays.asList(ids));
+    }
+
+    @Override
+    public NotifyRecordVO selectNotifyByNotifyRecordId(Long id) {
+        return notifyRecordDao.selectNotifyByNotifyRecordId(id);
+    }
+
+    @Override
+    public Page<NotifyRecordTip> selectNotifyRecordTipList(Page<NotifyRecordTip> page, String curUserId) {
+        List<NotifyRecordTip> notifyRecordTips = notifyRecordDao.selectNotifyRecordTipList(page, curUserId);
+        for (NotifyRecordTip notifyRecordTip : notifyRecordTips) {
+            notifyRecordTip.setBefore(DateUtils.getTimeBefore(notifyRecordTip.getPublishTime()));
+        }
+        return page.setRecords(notifyRecordTips);
     }
 
 }
