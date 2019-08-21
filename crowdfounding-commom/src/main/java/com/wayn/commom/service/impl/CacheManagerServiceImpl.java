@@ -1,82 +1,47 @@
 package com.wayn.commom.service.impl;
 
 import com.wayn.commom.service.CacheManagerService;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Ehcache;
-import net.sf.ehcache.Element;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 @Service
 public class CacheManagerServiceImpl implements CacheManagerService {
 
-    @Autowired()
-    public EhCacheCacheManager ehCacheManager;
-
+    @Autowired
     private CacheManager cacheManager;
 
-    @PostConstruct
-    public void init() {
-        cacheManager = ehCacheManager.getCacheManager();
 
-    }
-
-    /**
-     * 获取所有缓存的名称
-     *
-     * @return
-     */
+    @Override
     public String[] getCacheNames() {
-        return cacheManager.getCacheNames();
+        Collection<String> cacheNames = cacheManager.getCacheNames();
+        return cacheNames.toArray(new String[]{});
     }
 
-    /**
-     * 根据名称获取缓存对象
-     *
-     * @param name
-     * @return
-     */
-    public Ehcache getEhcache(String name) {
-        return cacheManager.getEhcache(name);
+    @Override
+    public Cache getCache(String name) {
+        return cacheManager.getCache(name);
     }
 
-    /**
-     * 获取缓存名中所有的key
-     *
-     * @param name
-     * @return
-     */
-    public List getEhcacheKeys(String name) {
-        return getEhcache(name).getKeys();
+    @Override
+    public Object getElements(String name, String key) {
+        Cache.ValueWrapper valueWrapper = cacheManager.getCache(name).get(key);
+        Object o = valueWrapper.get();
+        return o;
     }
 
-    /**
-     * 根据缓存名和key获取Element对象
-     *
-     * @param name
-     * @param key
-     * @return
-     */
-    public Element getElements(String name, String key) {
-        Ehcache cache = getEhcache(name);
-        if (cache == null) {
-            return null;
-        }
-
-        return cache.getQuiet(key);
+    @Override
+    public <T> T getElements(String name, String key, Class<T> type) {
+        T t = cacheManager.getCache(name).get(key, type);
+        return t;
     }
 
-    public List<Ehcache> getEhCaches() {
-        String[] cacheNames = getCacheNames();
-        List<Ehcache> list = new ArrayList<Ehcache>();
-        for (String cacheName : cacheNames) {
-            list.add(cacheManager.getEhcache(cacheName));
-        }
-        return list;
+    @Override
+    public void putElements(String name, String key, Object value) {
+        cacheManager.getCache(name).put(key,value);
     }
+
 }

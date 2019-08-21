@@ -26,7 +26,7 @@
 </style>
 </head>
 <body>
-	<div class="ico-list animated flash">
+	<div class="ico-list animated fadeInRight">
 		<i class="fa fa-address-book" aria-hidden="true"></i> <i
 			class="fa fa-address-book-o" aria-hidden="true"></i> <i
 			class="fa fa-address-card" aria-hidden="true"></i> <i

@@ -3,7 +3,7 @@ package com.wayn.commom.domain;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.wayn.commom.base.BaseEntity;
+import com.wayn.commom.base.BusinessEntity;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ import com.wayn.commom.base.BaseEntity;
  * @since 2019-04-13
  */
 @TableName("sys_role")
-public class Role extends BaseEntity<Role> {
+public class Role extends BusinessEntity<Role> {
 
 
     /**

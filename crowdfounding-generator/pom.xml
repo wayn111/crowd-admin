@@ -13,8 +13,7 @@
 	<packaging>jar</packaging>
 	<artifactId>crowdfounding-generator</artifactId>
 	<name>crowdfounding-generator</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
+	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,14 +32,5 @@
             <artifactId>crowdfounding-framework</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-		<!-- velocity版本 -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-engine-core</artifactId>
-			<version>${velocity.version}</version>
-		</dependency>
     </dependencies>
-
-	<build>
-	</build>
 </project>

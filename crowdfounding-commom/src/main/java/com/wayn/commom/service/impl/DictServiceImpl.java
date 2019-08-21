@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.dao.DictDao;
-import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.Dict;
+import com.wayn.commom.domain.User;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.util.ParameterUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -76,20 +76,20 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         dict.setUpdateBy(user.getUserName()).setUpdateTime(new Date());
         Dict oldDict = selectById(dict.getId());
-        updateForSet("dictType = '" + dict.getValue() + "'", new EntityWrapper<Dict>().eq("dictType", oldDict.getValue()).eq("type",""));
+        updateForSet("dictType = '" + dict.getValue() + "'", new EntityWrapper<Dict>().eq("dictType", oldDict.getValue()).eq("type", ""));
         return updateById(dict);
     }
 
     @CacheEvict(value = "dictCache", allEntries = true)
     @Override
     public boolean remove(Serializable id) {
-        return deleteById(id);
+        return updateForSet("delFlag = 1", new EntityWrapper<Dict>().eq("id", id));
     }
 
     @CacheEvict(value = "dictCache", allEntries = true)
     @Override
     public boolean batchRemove(Serializable[] ids) {
-        return deleteBatchIds(Arrays.asList(ids));
+        return updateForSet("delFlag = 1", new EntityWrapper<Dict>().in("id", Arrays.asList(ids)));
     }
 
     @Cacheable(value = "dictCache", key = "#root.method + '_' + #root.args[0]")

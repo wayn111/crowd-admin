@@ -1,7 +1,6 @@
 package com.wayn.commom.base;
 
 import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,12 +14,7 @@ public class BaseEntity<T> implements Serializable {
     @TableField(exist = false)
     private String endTime;
 
-    private String remarks;
-
     private Date createTime;
-
-    @TableField(exist = false)
-    private EntityWrapper<T> wrapper;
 
     public String getStartTime() {
         return startTime;
@@ -40,24 +34,6 @@ public class BaseEntity<T> implements Serializable {
         return this;
     }
 
-    public EntityWrapper<T> getWrapper() {
-        return wrapper;
-    }
-
-    public BaseEntity<T> setWrapper(EntityWrapper<T> wrapper) {
-        this.wrapper = wrapper;
-        return this;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public BaseEntity<T> setRemarks(String remarks) {
-        this.remarks = remarks;
-        return this;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -72,9 +48,7 @@ public class BaseEntity<T> implements Serializable {
         return "BaseEntity{" +
                 "startTime='" + startTime + '\'' +
                 ", endTime='" + endTime + '\'' +
-                ", remarks='" + remarks + '\'' +
                 ", createTime=" + createTime +
-                ", wrapper=" + wrapper +
                 '}';
     }
 }

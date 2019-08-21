@@ -3,7 +3,7 @@ package com.wayn.commom.domain;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.wayn.commom.base.BaseEntity;
+import com.wayn.commom.base.BusinessEntity;
 
 import java.math.BigDecimal;
 
@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  * @since 2019-04-13
  */
 @TableName("sys_dept")
-public class Dept extends BaseEntity<Dept> {
+public class Dept extends BusinessEntity<Dept> {
 
 	/**
 	 * 主键

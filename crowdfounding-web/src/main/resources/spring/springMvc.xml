@@ -3,9 +3,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
@@ -13,21 +10,24 @@
 	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.3.xsd
-	http://www.springframework.org/schema/tx
-	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
-	http://www.springframework.org/schema/util
-	http://www.springframework.org/schema/util/spring-util-4.3.xsd
+
+
+
+
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
     <context:component-scan
             base-package="com.wayn.**.controller"/>
     <context:component-scan
             base-package="com.wayn.**.service"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <context:property-placeholder location="classpath:proj-commom.properties" file-encoding="utf-8"/>
     <!-- 静态资源配置 -->
     <mvc:resources mapping="/static/**" location="/static/"/>
+    <!--本地文件上传路径-->
+    <mvc:resources mapping="/upload/**" location="file:///${wayn.uploadDir}/"/>
     <mvc:annotation-driven>
         <mvc:message-converters
                 register-defaults="true">

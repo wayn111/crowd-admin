@@ -23,7 +23,7 @@ public class ${className}Controller extends BaseControlller {
     @RequiresPermissions("${moduleName}:${classname}:list")
     @GetMapping
     public String ${className}Index() {
-        return PREFIX + "/type";
+        return PREFIX + "/${classname}";
     }
 
     @RequiresPermissions("${moduleName}:${classname}:list")

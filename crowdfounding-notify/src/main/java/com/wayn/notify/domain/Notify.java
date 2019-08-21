@@ -1,9 +1,10 @@
 package com.wayn.notify.domain;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.wayn.commom.base.BaseEntity;
+import com.wayn.commom.base.BusinessEntity;
 
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import java.util.Date;
  * @date 2019-08-10
  */
 @TableName("oa_notify")
-public class Notify extends BaseEntity {
+public class Notify extends BusinessEntity {
 
     /**
      * 编号
@@ -38,9 +39,23 @@ public class Notify extends BaseEntity {
      */
     private String files;
     /**
-     * 通知状态 1 正常 -1 关闭
+     *  通知状态 1 已发布 -1 未发布
      */
     private Integer notifyState;
+
+    /**
+     * 发布时间
+     */
+    private Date publishTime;
+
+    /**
+     * 页面查询时间
+     */
+    @TableField(exist = false)
+    private String publishStartTime;
+    @TableField(exist = false)
+    private String publishEndTime;
+
     /**
      * 创建者
      */
@@ -54,7 +69,7 @@ public class Notify extends BaseEntity {
      */
     private Date updateTime;
     /**
-     * 删除标记
+     * 删除标记 0 存在 1 删除
      */
     private String delFlag;
 
@@ -142,6 +157,34 @@ public class Notify extends BaseEntity {
         return this;
     }
 
+    public Date getPublishTime() {
+        return publishTime;
+    }
+
+    public Notify setPublishTime(Date publishTime) {
+        this.publishTime = publishTime;
+        return this;
+    }
+
+    public String getPublishStartTime() {
+        return publishStartTime;
+    }
+
+    public Notify setPublishStartTime(String publishStartTime) {
+        this.publishStartTime = publishStartTime;
+        return this;
+    }
+
+    public String getPublishEndTime() {
+        return publishEndTime;
+    }
+
+    public Notify setPublishEndTime(String publishEndTime) {
+        this.publishEndTime = publishEndTime;
+        return this;
+    }
+
+
     @Override
     public String toString() {
         return "Notify{" +
@@ -151,6 +194,7 @@ public class Notify extends BaseEntity {
                 ", content='" + content + '\'' +
                 ", files='" + files + '\'' +
                 ", notifyState=" + notifyState +
+                ", publishTime=" + publishTime +
                 ", createBy='" + createBy + '\'' +
                 ", updateBy='" + updateBy + '\'' +
                 ", updateTime=" + updateTime +

@@ -27,7 +27,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">部门名称：</label>
+								<label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>部门名称：</label>
 								<div class="col-sm-8">
 									<input id="deptName" name="deptName" class="form-control"
 										type="text" value="${dept.deptName}">
@@ -76,6 +76,7 @@
 					},
 				},
 				ignore : ".ignore",
+				focusCleanup: true,
 				submitHandler : function() {
 					save();
 				}

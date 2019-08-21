@@ -17,6 +17,10 @@
 <script src="${_ctx }/static/plugin/layDate-v5.0.9/laydate/laydate.js"></script>
 <script
 	src="${_ctx }/static/plugin/select2-4.0.7/dist/js/select2.min.js"></script>
+<script
+		src="${_ctx }/static/plugin/iCheck/icheck.min.js"></script>
 <script src="${_ctx }/static/plugin/select2-4.0.7/dist/js/i18n/zh-CN.js"></script>
+<script src="${_ctx }/static/plugin/summernote/summernote.min.js"></script>
+<script src="${_ctx }/static/plugin/summernote/lang/summernote-zh-CN.js"></script>
 <script src="${_ctx }/static/js/common/common-ui.js"></script>
 

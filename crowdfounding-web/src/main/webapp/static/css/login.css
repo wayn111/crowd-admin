@@ -50,7 +50,7 @@ body.signin {
 }
 
 .signinpanel form {
-	background: #ffffff45;
+	background: rgba(255, 255, 255, .3);
 	color: gray;
 	border: 1px solid rgba(255, 255, 255, .3);
 	-moz-box-shadow: 0 3px 0 rgba(12, 12, 12, .03);

@@ -6,7 +6,7 @@
 <%@ include file="/commom/taglib.jsp" %>
 <%@ include file="/commom/header.jsp" %>
 <body class="gray-bg">
-<div class="wrapper wrapper-content ">
+<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
@@ -115,7 +115,6 @@
                 }
             },
             messages: {
-
                 name: {
                     required: icon + "请输入字典名称",
                     minlength: icon + "字典名称必须两个字符以上"
@@ -125,6 +124,7 @@
                     remote: icon + "字典类型已经存在"
                 }
             },
+            focusCleanup: true,
             submitHandler: function () {
                 save();
             }
@@ -132,7 +132,7 @@
     }
 
     $(function () {
-        switchInit('dict');
+        switchInit('dictState');
         validateRule();
     })
 </script>

@@ -15,7 +15,6 @@ import java.util.Date;
  */
 @TableName("oa_notify_record")
 public class NotifyRecord extends BaseEntity {
-    private static final long serialVersionUID = 1L;
 
     /**
      * 主键
@@ -31,9 +30,13 @@ public class NotifyRecord extends BaseEntity {
      */
     private String receiveUserId;
     /**
+     * 接收人name
+     */
+    private String receiveUserName;
+    /**
      * 是否已读
      */
-    private boolean isRead;
+    private Boolean isRead;
     /**
      * 阅读时间
      */
@@ -66,11 +69,15 @@ public class NotifyRecord extends BaseEntity {
         return this;
     }
 
-    public boolean isRead() {
+    public Boolean setIsRead() {
         return isRead;
     }
 
-    public NotifyRecord setRead(boolean read) {
+    public Boolean getRead() {
+        return isRead;
+    }
+
+    public NotifyRecord setRead(Boolean read) {
         isRead = read;
         return this;
     }
@@ -84,12 +91,26 @@ public class NotifyRecord extends BaseEntity {
         return this;
     }
 
+    public String getReceiveUserName() {
+        return receiveUserName;
+    }
+
+    public NotifyRecord setReceiveUserName(String receiveUserName) {
+        this.receiveUserName = receiveUserName;
+        return this;
+    }
+
+    public Boolean getIsRead() {
+        return isRead;
+    }
+
     @Override
     public String toString() {
         return "NotifyRecord{" +
                 "id=" + id +
                 ", notifyId=" + notifyId +
                 ", receiveUserId='" + receiveUserId + '\'' +
+                ", receiveUserName='" + receiveUserName + '\'' +
                 ", isRead=" + isRead +
                 ", readDate=" + readDate +
                 "} " + super.toString();

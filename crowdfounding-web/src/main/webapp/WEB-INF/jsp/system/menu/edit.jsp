@@ -6,7 +6,7 @@
 <%@ include file="/commom/taglib.jsp"%>
 <%@ include file="/commom/header.jsp"%>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content">
+	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
@@ -24,17 +24,17 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">菜单类型：</label>
+								<label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>菜单类型：</label>
 								<div class="col-sm-8">
 									<c:forEach items="${menuTypes}" var="dict">
-										<label class="radio-inline"> <input type="radio"
+										<label class="radio-inline i-checks"> <input type="radio"
 										name="type" value="${dict.id}" <c:if test="${menu.type == dict.id }">checked</c:if>/> ${dict.text}
 										</label>
 									</c:forEach>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">菜单名称：</label>
+								<label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>菜单名称：</label>
 								<div class="col-sm-8">
 									<input id="menuName" name="menuName" class="form-control"
 										type="text" value="${menu.menuName }">
@@ -108,6 +108,7 @@
 					}
 				},
 				ignore : ".ignore",
+				focusCleanup : true,
 				submitHandler : function() {
 					update();
 				}
@@ -145,7 +146,8 @@
 				area : [ '350px', '480px' ],
 				content : prefix + "/treeView"
 			})
-		}
+		};
+
 		function loadMenu(pid, pName) {
 			$("#pid").val(pid);
 			$("#pName").val(pName);

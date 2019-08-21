@@ -1,15 +1,21 @@
 package com.wayn.commom.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.wayn.commom.dao.DeptDao;
 import com.wayn.commom.dao.UserDao;
+import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserRole;
-import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.service.DeptService;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
+import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.TreeBuilderUtil;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -32,6 +39,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private DeptDao deptDao;
     @Autowired
     private UserRoleService userRoleService;
 
@@ -139,6 +148,66 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     public boolean editAcount(String id, String userName) {
         updateForSet("userName = '" + userName + "'", new EntityWrapper<User>().eq("id", id));
         return true;
+    }
+
+    //    @Cacheable(value = "userCache", key = "#root.method  + '_user'")
+    @Override
+    public Tree<Dept> getTree() {
+        List<Tree<Dept>> trees = new ArrayList<Tree<Dept>>();
+        List<Dept> depts = deptDao.selectList(new EntityWrapper<Dept>());
+        List<User> users = userDao.selectList(new EntityWrapper<User>());
+        // 获取部门所有pid
+        List<Long> ds = depts.stream().map(item -> {
+            return item.getPid();
+        }).distinct().collect(Collectors.toList());
+        // 获取用户所有deptId
+        List<Long> us = users.stream().map(item -> {
+            return item.getDeptId();
+        }).distinct().collect(Collectors.toList());
+        // 合并部门pid和用户deptId
+        Long[] objects = ds.toArray(new Long[]{});
+        Long[] objects1 = us.toArray(new Long[]{});
+        Long[] allDepts = (Long[]) ArrayUtils.addAll(objects, objects1);
+        for (Dept dept : depts) {
+            // 过滤掉无用户挂载的部门
+            if (!ArrayUtils.contains(allDepts, dept.getId())) {
+                continue;
+            }
+            Tree<Dept> tree = new Tree<Dept>();
+            tree.setId(dept.getId().toString());
+            tree.setParentId(dept.getPid().toString());
+            tree.setText(dept.getDeptName());
+            Map<String, Object> state = new HashMap<>(16);
+            state.put("opened", true);
+            state.put("mType", "dept");
+            tree.setState(state);
+            trees.add(tree);
+        }
+        for (User user : users) {
+            Tree<Dept> tree = new Tree<Dept>();
+            tree.setId(user.getId());
+            tree.setParentId(user.getDeptId().toString());
+            tree.setText(user.getUserName());
+            Map<String, Object> state = new HashMap<>(16);
+            state.put("opened", true);
+            state.put("mType", "user");
+            tree.setState(state);
+            trees.add(tree);
+        }
+        return TreeBuilderUtil.build(trees);
+    }
+
+    @Override
+    public List<JSONObject> selectUser2JsonObj() {
+        List<User> users = selectList(new EntityWrapper<User>());
+        List<JSONObject> list = new ArrayList<>();
+        for (User user : users) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", user.getId());
+            jsonObject.put("text", user.getUserName());
+            list.add(jsonObject);
+        }
+        return list;
     }
 
 }

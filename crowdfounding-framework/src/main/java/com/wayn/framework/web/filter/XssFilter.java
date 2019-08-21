@@ -16,13 +16,11 @@ public class XssFilter implements Filter {
     private static boolean enabled = true;
 
     private static List<String> excludes = new ArrayList<>();
-    private static List<String> includes = new ArrayList<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         enabled = Boolean.valueOf(filterConfig.getInitParameter("enabled"));
         excludes.addAll(Arrays.stream(filterConfig.getInitParameter("excludes").split("," , -1)).collect(Collectors.toList()));
-        includes.addAll(Arrays.stream(filterConfig.getInitParameter("includes").split("," , -1)).collect(Collectors.toList()));
     }
 
     @Override

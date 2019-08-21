@@ -1,13 +1,16 @@
 package com.wayn.commom.service;
 
-import java.util.List;
-
+import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserOnline;
+
+import java.util.List;
 
 public interface UserOnlineService {
 
-	
-	List<UserOnline> list();
-	
-	void forceLogout(String sessionId);
+
+    List<UserOnline> list();
+
+    List<User> listUser();
+
+    void forceLogout(String sessionId);
 }

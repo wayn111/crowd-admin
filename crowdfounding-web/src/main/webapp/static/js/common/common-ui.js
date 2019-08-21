@@ -1,16 +1,20 @@
 $(function () {
-    //select2
-    $.fn.select2.defaults.set("language", "zh-CN");
-    $.fn.select2.defaults.set("theme", "bootstrap");
+    // select2
+    $.fn.select2.defaults.set("language", "zh-CN"); // 设置默认语言
+    $.fn.select2.defaults.set("theme", "bootstrap"); // 设置默认主题
 
     // laydate 时间控件绑定
-    layDate();
+    layDateQuery();
 
+    // 初始化绑定树搜索控件
     treeSearchInit();
+
+    // 初始化多选框/单选框控件
+    $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
 });
 
 /**
- * 初始化select2控件
+ * 绑定select2控件
  */
 function select2Init(selector, config) {
     var deFaultConfig = {
@@ -44,28 +48,34 @@ function selectReset() {
 }
 
 /**
- * 初始化选择控件
+ * 初始化bootstrapSwitch选择控件
  * @param module
  * @param state
  * @returns
  */
-function switchInit(module, state = true) {
+function switchInit(module, config) {
     /*if ('boolean' != typeof state) {
         throw new Error('state must be boolean type');
     }*/
-    $("[name='" + module + "StateSwicth']").bootstrapSwitch({
-        state: state,
-        onText: "启用",
-        offText: "禁用",
+    var defaultConfig = {
+        onText: '启用',
+        offText: '禁用',
+        state: true,
         onColor: "success",
+        size: 'small',
         onSwitchChange: function (event, state) {
             if (state) {
-                $('#' + module + 'State').val('1');
+                $('#' + module).val('1');
             } else {
-                $('#' + module + 'State').val('-1');
+                $('#' + module
+                ).val('-1');
             }
         }
-    });
+    };
+    if (config) {
+        defaultConfig = $.extend({}, defaultConfig, config);
+    }
+    $("[name='" + module + "Swicth']").bootstrapSwitch(defaultConfig);
 }
 
 /**
@@ -105,7 +115,48 @@ function menuItemCreate(url, name) {
     return false
 }
 
-function layDate() {
+/**
+ * 绑定laydate控件
+ */
+function layDateQuery() {
+    $('.select-time').each(function (index, item) {
+        var startDate = laydate.render({
+            elem: $('input[name="startTime"]', item)[0],
+            max: $('#endTime').val(),
+            theme: 'molv',
+            trigger: 'click',
+            done: function (value, date) {
+                // 结束时间大于开始时间
+                if (value !== '') {
+                    endDate.config.min.year = date.year;
+                    endDate.config.min.month = date.month - 1;
+                    endDate.config.min.date = date.date;
+                } else {
+                    endDate.config.min.year = '';
+                    endDate.config.min.month = '';
+                    endDate.config.min.date = '';
+                }
+            }
+        });
+        var endDate = laydate.render({
+            elem: $('input[name="endTime"]', item)[0],
+            min: $('#startTime').val(),
+            theme: 'molv',
+            trigger: 'click',
+            done: function (value, date) {
+                // 开始时间小于结束时间
+                if (value !== '') {
+                    startDate.config.max.year = date.year;
+                    startDate.config.max.month = date.month - 1;
+                    startDate.config.max.date = date.date;
+                } else {
+                    startDate.config.max.year = '';
+                    startDate.config.max.month = '';
+                    startDate.config.max.date = '';
+                }
+            }
+        });
+    });
     if ($(".select-time").length > 0) {
         var startDate = laydate.render({
             elem: '#startTime',
@@ -157,7 +208,51 @@ function treeSearchInit() {
 }
 
 /**
- * 生成表格序号
+ * 绑定文本编辑器
+ * @param selector
+ * @param config
+ */
+function textareEditorInit(selector, config = {
+    placeholder: '请输入内容',
+    tabsize: 2,
+    height: 200
+}) {
+    var defaultConfig = {
+        lang: 'zh-CN',
+        dialogsInBody: true,
+    };
+    defaultConfig = $.extend({}, defaultConfig, config);
+    $(selector).summernote(defaultConfig);
+}
+
+// 上传文件
+function summernoteSendFile(file, obj) {
+    var data = new FormData();
+    data.append("file", file);
+    $.ajax({
+        type: "POST",
+        url: _ctx + "/commom/upload",
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (result) {
+        debugger
+            if (result.code == 100) {
+                $(obj).summernote('editor.insertImage', result.map.url, result.map.fileName);
+            } else {
+                layer.alert(result.map.msg);
+            }
+        },
+        error: function (error) {
+            layer.alert('图片上传失败。');
+        }
+    });
+}
+
+/**
+ * 生成bootstrap-table表格序号
  * @param selector
  * @param index
  * @returns {*}
@@ -167,4 +262,19 @@ function generatorTableSequence(selector, index) {
     var pageSize = $(selector).bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
     var pageNumber = $(selector).bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
     return pageSize * (pageNumber - 1) + index + 1;//返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+}
+
+/**
+ * 表单查看,input，select，textarea不能更改
+ * @param win
+ */
+function formView(win) {
+    $('input[onclick]', win).off().removeAttr('onclick');
+    $('input[name],textarea[name]', win).attr('readOnly', true);
+    $('input[name]', win).each(function (index, item) {
+        if ($(item).attr('name').indexOf('Time') > 1) {
+            $(item).attr('disabled', true);
+        }
+    });
+    $('select[name]', win).attr('disabled', true);
 }

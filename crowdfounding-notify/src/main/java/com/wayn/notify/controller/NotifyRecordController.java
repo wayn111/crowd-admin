@@ -1,10 +1,14 @@
 package com.wayn.notify.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.notify.domain.NotifyRecord;
-import com.wayn.notify.service.NotifyRecordService;
+import com.wayn.commom.service.UserService;
 import com.wayn.commom.util.Response;
+import com.wayn.notify.domain.NotifyRecord;
+import com.wayn.notify.domain.NotifyRecordTip;
+import com.wayn.notify.domain.vo.NotifyRecordVO;
+import com.wayn.notify.service.NotifyRecordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,40 +20,48 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class NotifyRecordController extends BaseControlller {
 
-    private static final String PREFIX = "wayn/notifyRecord";
+    private static final String PREFIX = "oa/notifyRecord";
 
     @Autowired
     private NotifyRecordService notifyRecordService;
 
-    @RequiresPermissions("wayn:notifyRecord:list")
+    @Autowired
+    private UserService userService;
+
+    @RequiresPermissions("oa:notifyRecord:list")
     @GetMapping
-    public String NotifyRecordIndex() {
-        return PREFIX + "/type";
+    public String NotifyRecordIndex(ModelMap modelMap) {
+        modelMap.addAttribute("users", userService.selectUser2JsonObj());
+        return PREFIX + "/notifyRecord";
     }
 
-    @RequiresPermissions("wayn:notifyRecord:list")
+    @RequiresPermissions("oa:notifyRecord:list")
     @ResponseBody
     @PostMapping("/list")
-    public Page<NotifyRecord> list(Model model, NotifyRecord notifyRecord) {
-        Page<NotifyRecord> page = getPage();
-        return notifyRecordService.selectNotifyRecordList(page, notifyRecord);
+    public Page<NotifyRecordVO> list(Model model, NotifyRecordVO notifyRecordVO) {
+        notifyRecordVO.setReceiveUserId(getCurUserId());
+        Page<NotifyRecordVO> page = getPage();
+        return notifyRecordService.selectNotifyRecordList(page, notifyRecordVO);
     }
 
-    @RequiresPermissions("wayn:notifyRecord:add")
+    @RequiresPermissions("oa:notifyRecord:add")
     @GetMapping("/add")
     public String add(ModelMap modelMap) {
         return PREFIX + "/add";
     }
 
-    @RequiresPermissions("wayn:notifyRecord:edit")
-    @GetMapping("/edit/{id}")
-    public String edit(ModelMap modelMap, @PathVariable("id") Long id) {
-        NotifyRecord notifyRecord = notifyRecordService.selectById(id);
-        modelMap.put("notifyRecord", notifyRecord);
-        return PREFIX + "/edit";
+    @RequiresPermissions("oa:notifyRecord:list")
+    @GetMapping("/{option}/{id}")
+    public String edit(ModelMap modelMap, @PathVariable("option") String option, @PathVariable("id") Long id) {
+        NotifyRecordVO notifyRecordVO = notifyRecordService.selectNotifyByNotifyRecordId(id);
+        if (!notifyRecordVO.getRead()) {
+            notifyRecordService.updateForSet("isRead = 1", new EntityWrapper<NotifyRecord>().eq("id", id));
+        }
+        modelMap.put("notifyRecordVO", notifyRecordVO);
+        return PREFIX + "/" + option;
     }
 
-    @RequiresPermissions("wayn:notifyRecord:add")
+    @RequiresPermissions("oa:notifyRecord:add")
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(ModelMap modelMap, NotifyRecord notifyRecord) {
@@ -57,7 +69,7 @@ public class NotifyRecordController extends BaseControlller {
         return Response.success("新增成功");
     }
 
-    @RequiresPermissions("wayn:notifyRecord:edit")
+    @RequiresPermissions("oa:notifyRecord:edit")
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, NotifyRecord notifyRecord) {
@@ -66,7 +78,7 @@ public class NotifyRecordController extends BaseControlller {
     }
 
 
-    @RequiresPermissions("wayn:notifyRecord:remove")
+    @RequiresPermissions("oa:notifyRecord:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Long id) {
@@ -74,12 +86,20 @@ public class NotifyRecordController extends BaseControlller {
         return Response.success("删除成功");
     }
 
-    @RequiresPermissions("wayn:notifyRecord:remove")
+    @RequiresPermissions("oa:notifyRecord:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) {
         notifyRecordService.batchRemove(ids);
         return Response.success("删除成功");
+    }
+
+    @ResponseBody
+    @GetMapping("/notifyRecordTip")
+    public Page<NotifyRecordTip> notifyRecordTip() {
+        Page<NotifyRecordTip> page = getPage(1, 5);
+        Page<NotifyRecordTip> list = notifyRecordService.selectNotifyRecordTipList(page, getCurUserId());
+        return list;
     }
 
 }

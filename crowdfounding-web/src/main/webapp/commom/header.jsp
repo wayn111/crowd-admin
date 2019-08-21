@@ -26,5 +26,8 @@
 <link
 	href="${_ctx }/static/plugin/select2-4.0.7/dist/css/select2-bootstrap.min.css"
 	rel="stylesheet">
+<link
+		href="${_ctx }/static/plugin/iCheck/custom.css" rel="stylesheet">
+<link href="${_ctx }/static/plugin/summernote/summernote.css" rel="stylesheet">
 <link href="${_ctx }/static/css/style.css?v=4.0" rel="stylesheet">
 
