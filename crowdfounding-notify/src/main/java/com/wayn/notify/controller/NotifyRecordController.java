@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.service.UserService;
+import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
 import com.wayn.notify.domain.NotifyRecord;
 import com.wayn.notify.domain.NotifyRecordTip;
@@ -11,6 +12,7 @@ import com.wayn.notify.domain.vo.NotifyRecordVO;
 import com.wayn.notify.service.NotifyRecordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +30,9 @@ public class NotifyRecordController extends BaseControlller {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
+
     @RequiresPermissions("oa:notifyRecord:list")
     @GetMapping
     public String NotifyRecordIndex(ModelMap modelMap) {
@@ -41,6 +46,8 @@ public class NotifyRecordController extends BaseControlller {
     public Page<NotifyRecordVO> list(Model model, NotifyRecordVO notifyRecordVO) {
         notifyRecordVO.setReceiveUserId(getCurUserId());
         Page<NotifyRecordVO> page = getPage();
+        //设置通用查询字段
+        ParameterUtil.set(notifyRecordVO);
         return notifyRecordService.selectNotifyRecordList(page, notifyRecordVO);
     }
 
@@ -58,6 +65,7 @@ public class NotifyRecordController extends BaseControlller {
         if (!notifyRecordVO.getRead()) {
             notifyRecordService.updateForSet("isRead = 1", new EntityWrapper<NotifyRecord>().eq("id", id));
         }
+        simpMessagingTemplate.convertAndSendToUser(getCurUser().toString(), "/queue/notifiyRecordTip", "");
         modelMap.put("notifyRecordVO", notifyRecordVO);
         return PREFIX + "/" + option;
     }

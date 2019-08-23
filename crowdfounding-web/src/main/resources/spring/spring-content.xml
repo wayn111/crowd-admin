@@ -25,25 +25,8 @@
     <import resource="spring-ehcache.xml" />-->
     <!--<import resource="spring-shiro.xml" />-->
 
-    <!-- 开启druids-pring监控 -->
-    <bean id="druid-stat-interceptor"
-          class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
-    </bean>
-
-    <bean id="druid-stat-pointcut"
-          class="org.springframework.aop.support.JdkRegexpMethodPointcut"
-          scope="prototype">
-        <property name="patterns">
-            <list>
-                <value>com.wayn.*</value>
-            </list>
-        </property>
-    </bean>
-
-    <aop:config>
-        <aop:advisor advice-ref="druid-stat-interceptor"
-                     pointcut-ref="druid-stat-pointcut"/>
-    </aop:config>
+    <!--配置消息代理,手动注册bean-->
+    <bean id="com.wayn.notify.controller.StompController" class="com.wayn.notify.controller.StompController" />
 
     <beans profile="ehcache">
         <bean id="proper" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">

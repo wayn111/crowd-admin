@@ -116,6 +116,14 @@ function menuItemCreate(url, name) {
 }
 
 /**
+ * 关闭当前激活tab
+ */
+function tabItemClose() {
+    var topWindow = $(window.top.document);
+    $('.J_menuTabs .J_menuTab.active i', topWindow).trigger('click');
+}
+
+/**
  * 绑定laydate控件
  */
 function layDateQuery() {
@@ -238,7 +246,6 @@ function summernoteSendFile(file, obj) {
         processData: false,
         dataType: 'json',
         success: function (result) {
-        debugger
             if (result.code == 100) {
                 $(obj).summernote('editor.insertImage', result.map.url, result.map.fileName);
             } else {

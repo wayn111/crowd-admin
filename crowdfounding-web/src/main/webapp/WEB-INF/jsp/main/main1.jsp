@@ -12,7 +12,7 @@
           name="viewport">
 </head>
 <body class="gray-bg">
-<div class="wrapper wrapper-content  animated fadeInRight">
+<div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-sm-6">
             <div class="ibox float-e-margins">
@@ -37,14 +37,13 @@
                     </div>--%>
                 </div>
                 <div class="ibox-content">
-                    <ul>
+                    <ul class="wayn-ul-li">
                         <li>面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质</li>
-                        <li>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统。</li>
-                        <li>Encache权限缓存。</li>
+                        <li>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统，带有代码生成模块，节省开发成本。</li>
+                        <li>基于stomp协议实现后台消息推送以及指定用户通信的功能。</li>
+                        <li>Encache/Redis作为权限缓存，可切换。</li>
                         <li>Druid数据源,数据库监控。</li>
                         <li>使用H+作为后台管理模板，基于jsp模板改造</li>
-                        <li>集成字典管理和在线用户以及日志记录。</li>
-                        <li>添加代码生成模块。</li>
                     </ul>
 
                     <h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
@@ -85,12 +84,14 @@
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v11">v1.1.0</a><code
-                                            class="pull-right">2015.12.21</code>
+                                            class="pull-right">2019.8.21</code>
                                     </h5>
                                 </div>
                                 <div id="v11" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                        <div class="alert alert-success">此版本添加了办公通知模块，方便系统用户进行消息通知发布与管理</div>
+                                        <div class="alert alert-success">
+                                            此版本添加了办公通知模块，实现了基于stomp后台消息推送功能，方便系统用户进行消息通知发布与管理
+                                        </div>
                                         <ol>
                                             <li>办公通知 -> 我的通知功能开发完成；</li>
                                             <li>办公通知 -> 通知管理功能开发完成；</li>
@@ -103,7 +104,7 @@
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v10">v1.0.0</a><code
-                                            class="pull-right">2019.8.1</code>
+                                            class="pull-right">2019.8.10</code>
                                     </h5>
                                 </div>
                                 <div id="v10" class="panel-collapse collapse">

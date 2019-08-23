@@ -74,7 +74,7 @@
 
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
-									<button id="save-button" type="submit" class="btn btn-primary">提交</button>
+									<button id="save-button" type="submit" class="btn btn-primary">提 交</button>
 								</div>
 							</div>
 						</form>

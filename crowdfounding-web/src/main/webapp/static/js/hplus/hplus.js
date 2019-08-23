@@ -15,8 +15,8 @@ function localStorageSupport() {
 }
 
 layer.config({
-    extend: ["extend/layer.ext.js", "skin/moon/style.css"],
-    skin: "layer-ext-moon"
+    // extend: ["extend/layer.ext.js", "skin/moon/style.css"],
+    // skin: "layer-ext-moon"
 }), $(document).ready(function () {
     function e() {
         var e = $("body > #wrapper").height() - 61;

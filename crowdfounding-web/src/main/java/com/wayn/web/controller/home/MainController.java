@@ -1,8 +1,8 @@
 package com.wayn.web.controller.home;
 
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.domain.Menu;
+import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.service.CacheManagerService;
 import com.wayn.commom.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,30 +17,30 @@ import java.util.List;
 @RequestMapping("/main")
 public class MainController extends BaseControlller {
 
-	@Autowired
-	private MenuService menuService;
+    private static final String HOME_PREFIX = "home";
+    private static final String MAIN_PREFIX = "main";
+    @Autowired
+    private MenuService menuService;
 
-	@Autowired
-	private CacheManagerService cacheService;
+    @Autowired
+    private CacheManagerService cacheService;
 
-	private static final String HOME_PREFIX = "home";
-	private static final String MAIN_PREFIX = "main";
+    @GetMapping
+    public String index(Model model) throws BusinessException, Exception {
+        List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
+        model.addAttribute("treeMenus", treeMenus);
+        model.addAttribute("user", getCurUser());
+        return HOME_PREFIX + "/home";
+    }
 
-	@GetMapping
-	public String index(Model model) throws BusinessException, Exception {
-		List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
-		model.addAttribute("treeMenus", treeMenus);
-		model.addAttribute("user", getCurUser());
-		return HOME_PREFIX + "/home";
-	}
+    @GetMapping("/mainIndex")
+    public String mainIndex(Model model) {
+        return MAIN_PREFIX + "/main";
+    }
 
-	@GetMapping("/mainIndex")
-	public String mainIndex(Model model) {
-		return MAIN_PREFIX + "/main";
-	}
+    @GetMapping("/mainIndex1")
+    public String mainIndex1(Model model) {
+        return MAIN_PREFIX + "/main1";
+    }
 
-	@GetMapping("/mainIndex1")
-	public String mainIndex1(Model model) {
-		return MAIN_PREFIX + "/main1";
-	}
 }

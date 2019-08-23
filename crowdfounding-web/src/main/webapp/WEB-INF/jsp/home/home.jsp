@@ -34,10 +34,11 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-							<span>
-								<img alt="image" class="img-circle" src="${_ctx }/static/img/profile_small.jpg"/>
-							</span>
-                        <a <%--data-toggle="dropdown"--%> class="dropdown-toggle" href="#">
+                        <h3 style="color: white;margin: 0px 0px 18px 0px;font-size: 23px;">crowdfounding</h3>
+                        <span>
+                            <img alt="image" class="img-circle" src="${_ctx }/static/img/profile_small.jpg"/>
+                        </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<span class="clear">
 								<span class="block m-t-xs">
 									<strong class="font-bold">${user.userName }</strong>
@@ -45,8 +46,8 @@
 								<span class="text-muted text-xs block">欢迎您<b class="caret"></b></span>
 							</span>
                         </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="J_menuItem" href="profile.html">个人资料</a></li>
+                        <ul class="dropdown-menu animated fadeIn m-t-xs user-menu">
+                            <li><a class="J_menuItem" href="${_ctx }/profile">个人资料</a></li>
                             <li class="divider"></li>
                             <li><a href="${_ctx }/home/logout">安全退出</a></li>
                         </ul>
@@ -55,9 +56,10 @@
                 </li>
                 <c:forEach var="menu" items="${treeMenus }">
                     <li><c:if test="${menu.type eq 1 }">
-                        <a href="#"> <i class="${menu.icon }"></i> <span
-                                class="nav-label">${menu.menuName }</span> <span
-                                class="fa arrow"></span>
+                        <a href="#">
+                            <i class="${menu.icon }"></i>
+                            <span class="nav-label">${menu.menuName }</span>
+                            <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <c:forEach var="childMenu" items="${menu.children }" varStatus="status">
@@ -135,12 +137,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown hidden-xs"><a
-                            class="right-sidebar-toggle" aria-expanded="false"> <i
-                            class="fa fa-tasks"></i> 主题
-                    </a></li>
-
-
+                    <li class="dropdown hidden-xs" id="sendws">
+                        <a class="right-sidebar-toggle" aria-expanded="false">
+                            <i class="fa fa-tasks"></i> 主题
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -151,7 +152,7 @@
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab"
-                       data-id="${_ctx }/main/mainIndex1">首页</a>
+                       data-id="${_ctx }/main/mainIndex">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight">
@@ -160,11 +161,10 @@
             <div class="btn-group roll-nav roll-right">
                 <button class="dropdown J_tabClose" data-toggle="dropdown">
                     关闭操作<span class="caret"></span>
-
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <!-- <li class="J_tabShowActive"><a>定位当前选项卡</a></li>
-                    <li class="divider"></li> -->
+                    <li class="J_tabShowActive"><a>定位当前选项卡</a></li>
+                    <li class="divider"></li>
                     <li class="J_tabRefresh"><a>刷新当前选项卡</a></li>
                     <li class="J_tabCloseOther"><a>关闭其他选项卡</a></li>
                     <li class="J_tabCloseAll"><a>关闭全部选项卡</a></li>
@@ -176,7 +176,7 @@
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
                     src="${_ctx }/main/mainIndex1" frameborder="0"
-                    data-id="${_ctx }/main/mainIndex1" seamless></iframe>
+                    data-id="${_ctx }/main/mainIndex" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">
@@ -278,9 +278,8 @@
 <script src="${_ctx }/static/plugin/toastr/toastr.min.js"></script>
 <script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>
 <script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
-<script src="${_ctx }/static/plugin/vue-2.2.2/vue.min.js"></script>
+<script src="${_ctx }/static/plugin/vue-2.2.6/vue.min.js"></script>
 <script>
-
     var prefix = _ctx + '/oa/notifyRecord';
 
     toastr.options = {
@@ -291,8 +290,8 @@
         "onclick": null,
         "showDuration": "400",
         "hideDuration": "1000",
-        "timeOut": "14000",
-        "extendedTimeOut": "5000",
+        "timeOut": "7000",
+        "extendedTimeOut": "3000",
         "showEasing": "swing",
         "hideEasing": "linear",
         "showMethod": "fadeIn",
@@ -309,26 +308,27 @@
 
     $(function () {
         connect();
+        toastr['success']('欢迎来crowdounding！');
     });
-    var stomp = null;
 
     function connect() {
         var sock = new SockJS(_ctx + "/notify");
-        var stomp = Stomp.over(sock);
-        stomp.connect('guest', 'guest', function (frame) {
+        var stompClient = Stomp.over(sock);
+        stompClient.connect('guest', 'guest', function (frame) {
             /**  订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
              *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
              */
-            stomp.subscribe("/user/queue/notifications", handleNotification);
-            stomp.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
-                toastr.info(JSON.parse(response.body).responseMessage);
+            stompClient.subscribe("/user/queue/notifications", function (response) {
+                wrapper.notify();
+                toastr.info(response.body);
             });
-        });
-
-        function handleNotification(message) {
-            wrapper.notify();
-            toastr.info(message.body);
-        }
+            stompClient.subscribe('/user/queue/notifiyRecordTip', function (response) {
+                wrapper.notify()
+            });
+            stompClient.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
+                toastr.info(JSON.parse(response.body).msg);
+            });
+        })
     }
 
     var wrapper = new Vue({
@@ -342,16 +342,6 @@
                 $.getJSON(prefix + '/notifyRecordTip', function (r) {
                     wrapper.total = r.total;
                     wrapper.rows = r.records;
-                });
-            },
-            personal: function () {
-                layer.open({
-                    type: 2,
-                    title: '个人设置',
-                    maxmin: true,
-                    shadeClose: false,
-                    area: ['800px', '600px'],
-                    content: '/sys/user/personal'
                 });
             }
         },
@@ -372,9 +362,8 @@
                 // 已发布后
                 var iframeWin = layero.find('iframe')[0];
                 formView(iframeWin.contentWindow.document);
-                wrapper.notify();
             },
-            btn: ['取消'],
+            btn: ['取 消'],
             cancel: function (index) {
                 return true;
             }

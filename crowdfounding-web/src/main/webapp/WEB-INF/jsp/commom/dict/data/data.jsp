@@ -134,7 +134,7 @@
                     },
                     {
                         field: 'value',
-                        title: '字典值'
+                        title: '标签值'
                     }, {
                         field: 'dictType',
                         title: '字典类型'

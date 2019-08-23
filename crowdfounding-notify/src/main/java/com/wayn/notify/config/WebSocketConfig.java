@@ -15,12 +15,15 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
-        stompEndpointRegistry.addEndpoint("/notify").withSockJS();
+        stompEndpointRegistry.addEndpoint("/notify");
+        stompEndpointRegistry.addEndpoint("/notify").setAllowedOrigins("*").withSockJS();
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/topic", "/queue");
-        registry.setApplicationDestinationPrefixes("/app");
+        registry.setUserDestinationPrefix("/user/");
+        registry.setApplicationDestinationPrefixes("/app");//走@messageMapping
     }
+    
 }
