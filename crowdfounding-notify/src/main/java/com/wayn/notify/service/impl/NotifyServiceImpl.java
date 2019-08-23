@@ -44,6 +44,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
+
     @Autowired
     private UserOnlineService userOnlineService;
 
@@ -75,7 +76,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         if (notify.getNotifyState() != 1) {
             AsyncExecutorUtil.scheduled(task, notify.getPublishTime());
         } else {
-            AsyncExecutorUtil.scheduled(task, DateUtils.addMilliseconds(new Date(), 1500));
+            AsyncExecutorUtil.scheduled(task, DateUtils.addMilliseconds(new Date(), 1000));
         }
         notifyRecordService.insertBatch(collect);
         return insert;
@@ -95,7 +96,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         if (notify.getNotifyState() != 1) {
             AsyncExecutorUtil.scheduled(task, notify.getPublishTime());
         } else {
-            AsyncExecutorUtil.scheduled(task, DateUtils.addMilliseconds(new Date(), 1500));
+            AsyncExecutorUtil.scheduled(task, DateUtils.addMilliseconds(new Date(), 1000));
         }
         notifyRecordService.insertBatch(collect);
         return update;

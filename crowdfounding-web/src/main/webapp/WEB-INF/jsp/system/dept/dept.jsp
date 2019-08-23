@@ -167,6 +167,12 @@
 	                    field: 'deptName',
 	                    width: '20%'
 	                },
+					{
+						title: '排序',
+						valign: 'center',
+						width: '5%',
+						field: 'sort'
+					},
 	                {
 	                    title: '描述',
 	                    valign: 'center',
@@ -200,7 +206,7 @@
 	                }
 				]
 			});
-		}
+		};
 
 		function reload(){
 			load();

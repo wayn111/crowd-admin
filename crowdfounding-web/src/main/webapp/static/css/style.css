@@ -196,7 +196,7 @@ body.body-small .navbar-top-links li:last-child {
 }
 
 .nav-header {
-    padding: 33px 25px;
+    padding: 16px 20px;
     background: url("patterns/header-profile.png") no-repeat;
 }
 
@@ -4111,6 +4111,9 @@ a.close-canvas-menu:hover {
 
 .m-t-xs {
     margin-top: 5px;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
+    padding: 3px 10px 0px 0px;
 }
 
 .m-t-sm {
@@ -7353,6 +7356,11 @@ body.skin-3 {
     padding:0;
 }
 
+/*-------------------------------------------------------------------------------------------------------------*/
+.ibox-content ul.wayn-ul-li li{
+    height: 22px;
+}
+
 /*编辑器按钮样式冲突*/
 .note-editor .btn-default {
     color: #333333!important;
@@ -7375,6 +7383,19 @@ body.skin-3 {
 
 .magin-left10{
 	margin-left: 10px;
+}
+.wayn-border-left0 {
+    border-left: 0 !important;
+}
+.wayn-border-right0 {
+    border-right: 0 !important;
+}
+.wayn-li-item{
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 .wayn-ibox-tools{
 	display: inline-block;

@@ -10,10 +10,6 @@
 	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.3.xsd
-
-
-
-
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
@@ -57,6 +53,14 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="com.wayn.framework.web.interceptor.impl.SameUrlDataInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
     <!-- API 接口跨域配置 -->
     <mvc:cors>
         <mvc:mapping path="/**"
@@ -65,6 +69,28 @@
                      allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
                      allow-credentials="true"/>
     </mvc:cors>
+
+
+    <!-- 开启druids-pring监控 -->
+    <bean id="druid-stat-interceptor"
+          class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+    </bean>
+
+    <bean id="druid-stat-pointcut"
+          class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+          scope="prototype">
+        <property name="patterns">
+            <list>
+                <value>com.wayn.*</value>
+            </list>
+        </property>
+    </bean>
+
+    <aop:config>
+        <aop:advisor advice-ref="druid-stat-interceptor"
+                     pointcut-ref="druid-stat-pointcut"/>
+    </aop:config>
+
     <!-- 配置统一异常分处理器 -->
     <!-- <bean class="com.ssm.util.UnifiedException"></bean> -->
     <!-- 将spring不能处理的静态资源文件交给servlet处理，有了mvc:resources后不需要此配置 -->
@@ -93,7 +119,7 @@
                         <prop key="kaptcha.border">no</prop>
                         <prop key="kaptcha.textproducer.font.color">blue</prop>
                         <!-- 渲染效果：水纹：WaterRipple；鱼眼：FishEyeGimpy；阴影：ShadowGimpy -->
-                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
                         <!-- 不要噪点 -->
                         <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
                         <prop key="kaptcha.image.width">100</prop>
@@ -101,7 +127,7 @@
                         <prop key="kaptcha.textproducer.font.size">25</prop>
                         <prop key="kaptcha.textproducer.char.length">4</prop>
                         <prop key="kaptcha.textproducer.char.space">6</prop>
-                        <!--<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>-->
+                        <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
                         <!-- 和登录框背景颜色一致 -->
                         <prop key="kaptcha.background.clear.from">247,247,247</prop>
                         <prop key="kaptcha.background.clear.to">126,236,236</prop>

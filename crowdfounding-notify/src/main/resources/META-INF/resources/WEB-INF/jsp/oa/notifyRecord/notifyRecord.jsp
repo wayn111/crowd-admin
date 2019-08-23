@@ -79,6 +79,8 @@
     </div>
 </div>
 <%@ include file="/commom/footer.jsp" %>
+<script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>
+<script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
 <script>
     var prefix = _ctx + '/oa/notifyRecord';
 
@@ -214,7 +216,7 @@
 
     function remove(id) {
         layer.confirm('确定要删除选中的记录？', {
-            btn: ['确定', '取消']
+            btn: ['确 定', '取 消']
         }, function () {
             $.ajax({
                 url: prefix + "/remove/" + id,
@@ -243,9 +245,8 @@
                 // 已发布后
                 var iframeWin = layero.find('iframe')[0];
                 formView(iframeWin.contentWindow.document);
-                reload();
             },
-            btn: ['取消'],
+            btn: ['取 消'],
             cancel: function (index) {
                 return true;
             }
@@ -322,7 +323,21 @@
         select2Init('select[name="createBy"]', config);
         select2Init('select[name="read"]', config1);
         load();
-    })
+        connect();
+    });
+
+    function connect() {
+        var sock = new SockJS(_ctx + "/notify");
+        var stompClient = Stomp.over(sock);
+        stompClient.connect('guest', 'guest', function (frame) {
+            /**  订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
+             *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
+             */
+            stompClient.subscribe("/user/queue/notifiyRecordTip", function (response) {
+                reload();
+            });
+        });
+    }
 </script>
 </body>
 <!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->

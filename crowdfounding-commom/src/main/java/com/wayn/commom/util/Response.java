@@ -66,4 +66,12 @@ public class Response {
 		this.map = map;
 	}
 
+	@Override
+	public String toString() {
+		return "Response{" +
+				"code=" + code +
+				", msg='" + msg + '\'' +
+				", map=" + map +
+				'}';
+	}
 }
