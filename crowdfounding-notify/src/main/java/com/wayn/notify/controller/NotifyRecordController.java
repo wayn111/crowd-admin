@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class NotifyRecordController extends BaseControlller {
 
-    private static final String PREFIX = "oa/notifyRecord";
+    private static final String PREFIX = "oa/notifyRecord" ;
 
     @Autowired
     private NotifyRecordService notifyRecordService;
@@ -37,7 +37,7 @@ public class NotifyRecordController extends BaseControlller {
     @GetMapping
     public String NotifyRecordIndex(ModelMap modelMap) {
         modelMap.addAttribute("users", userService.selectUser2JsonObj());
-        return PREFIX + "/notifyRecord";
+        return PREFIX + "/notifyRecord" ;
     }
 
     @RequiresPermissions("oa:notifyRecord:list")
@@ -54,7 +54,7 @@ public class NotifyRecordController extends BaseControlller {
     @RequiresPermissions("oa:notifyRecord:add")
     @GetMapping("/add")
     public String add(ModelMap modelMap) {
-        return PREFIX + "/add";
+        return PREFIX + "/add" ;
     }
 
     @RequiresPermissions("oa:notifyRecord:list")
@@ -65,7 +65,7 @@ public class NotifyRecordController extends BaseControlller {
         if (!notifyRecordVO.getRead()) {
             notifyRecordService.updateForSet("isRead = 1", new EntityWrapper<NotifyRecord>().eq("id", id));
         }
-        simpMessagingTemplate.convertAndSendToUser(getCurUser().toString(), "/queue/notifiyRecordTip", "");
+        simpMessagingTemplate.convertAndSendToUser(getCurUserId(), "/queue/notifyRecordTip", "");
         modelMap.put("notifyRecordVO", notifyRecordVO);
         return PREFIX + "/" + option;
     }

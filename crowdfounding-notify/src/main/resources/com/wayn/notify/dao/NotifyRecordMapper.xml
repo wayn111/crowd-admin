@@ -58,7 +58,7 @@
 
     <sql id="selectNotifyRecordTipJoinNotify">
         select n.id, n.createTime,n.publishTime, (select userName from sys_user where sys_user.id = n.createBy) as createBy,
-        n.updateTime, n.updateBy, n.title, n.content, n.type, n.remarks, n.delFlag, r.id as notifyRecordId
+        n.updateTime, (select userName from sys_user where sys_user.id = n.updateBy) as updateBy, n.title, n.content, n.type, n.remarks, n.delFlag, r.id as notifyRecordId
             from oa_notify_record r left join oa_notify n
             on r.notifyId = n.id
     </sql>

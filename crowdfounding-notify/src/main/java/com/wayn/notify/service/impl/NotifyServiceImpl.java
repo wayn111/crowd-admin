@@ -120,7 +120,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
                 for (User user : userOnlineService.listUser()) {
                     for (String userId : receiveUserList) {
                         if (userId.equals(user.getId())) {
-                            simpMessagingTemplate.convertAndSendToUser(user.toString(), "/queue/notifications", "新消息：" + notify.getTitle());
+                            simpMessagingTemplate.convertAndSendToUser(userId, "/queue/notifications", "新消息：" + notify.getTitle());
                         }
                     }
                 }

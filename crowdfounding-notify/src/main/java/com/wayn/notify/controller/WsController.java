@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
  * stomp消息路由
  */
 @Controller
-public class StompController {
+public class WsController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 

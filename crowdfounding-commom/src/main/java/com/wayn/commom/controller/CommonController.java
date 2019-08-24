@@ -2,7 +2,6 @@ package com.wayn.commom.controller;
 
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.*;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -65,22 +64,7 @@ public class CommonController {
         try {
             // 上传文件路径
             String filePath = ProperUtil.get("wayn.uploadDir");
-            int fileNameLength = file.getOriginalFilename().length();
-            if (fileNameLength > 100) {
-                throw new BusinessException("文件名称过长");
-            }
-            String fileName = file.getOriginalFilename();
-            String extension = FilenameUtils.getExtension(fileName);
-            String encodingFilename = FileUtils.encodingFilename(fileName);
-            fileName = DateUtils.datePath() + "/" + encodingFilename + "." + extension;
-            File desc = new File(filePath, fileName);
-            if (!desc.getParentFile().exists()) {
-                desc.getParentFile().mkdirs();
-            }
-            if (!desc.exists()) {
-                desc.createNewFile();
-            }
-            file.transferTo(desc);
+            String fileName = FileUploadUtil.uploadFile(file, filePath);
             String requestUrl = HttpUtil.getRequestContext(request);
             String url = requestUrl + "/upload/" + fileName;
             return Response.success().add("url", url).add("fileName", fileName);
@@ -89,4 +73,5 @@ public class CommonController {
             return Response.error(e.getMessage());
         }
     }
+
 }

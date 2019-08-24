@@ -26,12 +26,15 @@
     <!--<import resource="spring-shiro.xml" />-->
 
     <!--配置消息代理,手动注册bean-->
-    <bean id="com.wayn.notify.controller.StompController" class="com.wayn.notify.controller.StompController" />
+    <bean id="com.wayn.notify.controller.StompController" class="com.wayn.notify.controller.WsController" />
 
     <beans profile="ehcache">
         <bean id="proper" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
             <property name="locations">
                 <array>
+                    <value>
+                        classpath:proj-commom.properties
+                    </value>
                     <value>
                         classpath:proj-ehcahce.properties
                     </value>
@@ -45,6 +48,9 @@
             <property name="locations">
                 <array>
                     <value>
+                        classpath:proj-commom.properties
+                    </value>
+                    <value>
                         classpath:proj-docker.properties
                     </value>
                 </array>
@@ -57,6 +63,9 @@
             <property name="fileEncoding" value="utf-8"/>
             <property name="locations">
                 <array>
+                    <value>
+                        classpath:proj-commom.properties
+                    </value>
                     <value>
                         classpath:proj-dev.properties
                     </value>

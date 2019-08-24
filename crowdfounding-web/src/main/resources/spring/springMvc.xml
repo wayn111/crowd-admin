@@ -119,7 +119,7 @@
                         <prop key="kaptcha.border">no</prop>
                         <prop key="kaptcha.textproducer.font.color">blue</prop>
                         <!-- 渲染效果：水纹：WaterRipple；鱼眼：FishEyeGimpy；阴影：ShadowGimpy -->
-                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
                         <!-- 不要噪点 -->
                         <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
                         <prop key="kaptcha.image.width">100</prop>

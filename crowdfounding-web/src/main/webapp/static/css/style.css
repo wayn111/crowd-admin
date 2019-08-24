@@ -4111,9 +4111,6 @@ a.close-canvas-menu:hover {
 
 .m-t-xs {
     margin-top: 5px;
-    border-radius: 3px;
-    box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
-    padding: 3px 10px 0px 0px;
 }
 
 .m-t-sm {
@@ -7360,6 +7357,11 @@ body.skin-3 {
 .ibox-content ul.wayn-ul-li li{
     height: 22px;
 }
+.wayn-m-t-xs{
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
+    padding: 3px 10px 0px 0px;
+}
 
 /*编辑器按钮样式冲突*/
 .note-editor .btn-default {
@@ -7381,7 +7383,7 @@ body.skin-3 {
     position: relative;
 }
 
-.magin-left10{
+.margin-left10{
 	margin-left: 10px;
 }
 .wayn-border-left0 {

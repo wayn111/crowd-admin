@@ -7,7 +7,7 @@
     <%@ include file="/commom/taglib.jsp" %>
     <%@ include file="/commom/header.jsp" %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>欢迎页</title>
+    <title>crowdfounding 个人资料</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
           name="viewport">
 </head>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="text-center">
-                        <p><img class="img-circle img-lg" src="${_ctx }/static/img/profile_small.jpg"
+                        <p><img class="img-circle img-lg" src="${user.userImg }"
                                 style="width: 120px"></p>
                         <p><a href="javascript:avatar()">修改头像</a></p>
                     </div>
@@ -169,6 +169,31 @@
 <script>
     var prefix = _ctx + '/profile';
 
+    function avatar() {
+        layer.open({
+            type: 2,
+            title: '上传头像',
+            maxmin: true,
+            shadeClose: false,
+            area: ['840px', '700px'],
+            content: prefix + '/avatar',// iframe的url
+            success: function (layero, index) {
+                // 已发布后
+                var iframeWin = layero.find('iframe')[0];
+            },
+            btn: ['确 定','取 消'],
+            yes: function (index, layero) {
+                //按钮【按钮一】的回调
+                var iframeWin = layero.find('iframe')[0];
+                var contentWindow = iframeWin.contentWindow;
+                contentWindow.submitHandler();
+            },
+            cancel: function (index) {
+                return true;
+            }
+        });
+    }
+
     function validateRule() {
         var icon = "<i class='fa fa-times-circle'></i> ";
         $("#form-user-resetPwd").validate({
@@ -177,7 +202,7 @@
                     required: true,
                     minlength: 6,
                     remote: {
-                        url: prefix + "/oldPasswordJudge", // 后台处理程序
+                        url: prefix + "/judgeOldPasswordSuccess", // 后台处理程序
                         type: "post", // 数据发送方式
                         dataType: "json", // 接受数据格式
                         data: { // 要传递的数据
@@ -224,36 +249,36 @@
                 $("#form-user-resetPwd")[0].reset();
                 layer.alert(data.msg);
             } else {
-                debugger;
                 parent.layer.alert(data.msg);
             }
         })
     }
 
+    /**
+     * 查看旧密码
+     */
+    $("#oldPasswordView").hover(function () {
+        $("#oldPassword").attr('type', 'text')
+    }, function () {
+        $("#oldPassword").attr('type', 'password')
+    });
+
+    /**
+     * 基本资料修改
+     */
+    $('#submitBtn').on('click', function () {
+        $.post(prefix + '/updateUser', $('#user-form').serialize(), function (data) {
+            if (data.code == 100) {
+                layer.alert(data.msg);
+            } else {
+                parent.layer.alert(data.msg);
+            }
+        })
+    });
+
+
     $(function () {
         validateRule();
-
-        /**
-         * 查看旧密码
-         */
-        $("#oldPasswordView").hover(function () {
-            $("#oldPassword").attr('type', 'text')
-        }, function () {
-            $("#oldPassword").attr('type', 'password')
-        });
-
-        /**
-         * 基本资料修改
-         */
-        $('#submitBtn').on('click', function () {
-            $.post(prefix + '/updateUser', $('#user-form').serialize(), function (data) {
-                if (data.code == 100) {
-                    layer.alert(data.msg);
-                } else {
-                    parent.layer.alert(data.msg);
-                }
-            })
-        });
     })
 </script>
 </body>
