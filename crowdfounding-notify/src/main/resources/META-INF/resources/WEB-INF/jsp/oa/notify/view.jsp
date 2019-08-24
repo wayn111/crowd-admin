@@ -46,6 +46,7 @@
                             <label class="col-sm-3 control-label">通知内容：</label>
                             <div class="col-sm-8">
                                 <input name="content" id="content" class="hide" type="hidden">
+                                <textarea id="content-textarea" class="hide">${notify.content}</textarea>
                                 <div class="summernote"></div>
                             </div>
                         </div>
@@ -107,7 +108,10 @@
                 }
             }
         });
-        $('.summernote').summernote('code', '${notify.content}');
+        // 对content内容进行转义
+        var content = $('#content-textarea').val();
+        content = content.replace(/&wayn;/g, '&quot;');
+        $('.summernote').summernote('code', content);
         $('.summernote').summernote('disable');
         // 初始化页面数据 end
     })

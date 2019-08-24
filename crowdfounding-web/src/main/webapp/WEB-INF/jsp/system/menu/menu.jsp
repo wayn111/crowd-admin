@@ -26,12 +26,12 @@
 					<label for="menuName">菜单名称</label> <input type="text"
 						class="form-control" id="menuName" name="menuName">
 				</div>
-				<div class="form-group magin-left10">
+				<div class="form-group margin-left10">
 					<label for="type">菜单类型</label> <select value=""
 						class="js-example-basic-multi" id="type" name="type">
 					</select>
 				</div>
-				<a class="btn btn-primary btn-rounded btn-sm magin-left10"
+				<a class="btn btn-primary btn-rounded btn-sm margin-left10"
 					onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a> <a
 					class="btn btn-warning btn-rounded btn-sm" onclick="selectReset()"><i
 					class="fa fa-refresh"></i>&nbsp;重置</a>

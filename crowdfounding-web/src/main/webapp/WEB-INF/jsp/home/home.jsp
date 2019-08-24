@@ -36,18 +36,20 @@
                     <div class="dropdown profile-element">
                         <h3 style="color: white;margin: 0px 0px 18px 0px;font-size: 23px;">crowdfounding</h3>
                         <span>
-                            <img alt="image" class="img-circle" src="${_ctx }/static/img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="${user.userImg}"
+                                 style="cursor:pointer;height: 64px"
+                                 onclick="javascript:$('#userData').trigger('click');"/>
                         </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<span class="clear">
 								<span class="block m-t-xs">
 									<strong class="font-bold">${user.userName }</strong>
+                                    <span class="margin-left10">欢迎您<b class="caret"></b></span>
 								</span>
-								<span class="text-muted text-xs block">欢迎您<b class="caret"></b></span>
 							</span>
                         </a>
                         <ul class="dropdown-menu animated fadeIn m-t-xs user-menu">
-                            <li><a class="J_menuItem" href="${_ctx }/profile">个人资料</a></li>
+                            <li><a class="J_menuItem" id="userData" href="${_ctx }/profile">个人资料</a></li>
                             <li class="divider"></li>
                             <li><a href="${_ctx }/home/logout">安全退出</a></li>
                         </ul>
@@ -114,16 +116,16 @@
                             <span class="label label-warning">{{total}}</span>通知
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
-                            <li v-for="row in rows" class="m-t-xs">
+                            <li v-for="row in rows" class="m-t-xs wayn-m-t-xs">
                                 <div class="dropdown-messages-box">
                                     <a class="pull-left" v-on:click="viewNotifyRecord(row.notifyRecordId)">
                                         <i class="fa fa-paper-plane"></i>
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">{{row.before}}</small>
-                                        <strong>{{row.createBy}}</strong>
+                                        <strong>{{row.updateBy?row.updateBy:row.createBy}}</strong>
                                         {{row.title}} <br>
-                                        <small class="text-muted">{{row.updateTime}}</small>
+                                        <small class="text-muted">{{row.updateTime?row.updateTime:row.createTime}}</small>
                                     </div>
                                 </div>
                                 <div class="divider"></div>
@@ -290,8 +292,8 @@
         "onclick": null,
         "showDuration": "400",
         "hideDuration": "1000",
-        "timeOut": "7000",
-        "extendedTimeOut": "3000",
+        "timeOut": "10000",
+        "extendedTimeOut": "5000",
         "showEasing": "swing",
         "hideEasing": "linear",
         "showMethod": "fadeIn",
@@ -322,8 +324,11 @@
                 wrapper.notify();
                 toastr.info(response.body);
             });
-            stompClient.subscribe('/user/queue/notifiyRecordTip', function (response) {
-                wrapper.notify()
+            stompClient.subscribe('/user/queue/notifyRecordTip', function (response) {
+                wrapper.notify();
+            });
+            stompClient.subscribe('/user/queue/getResponse', function (response) {
+                toastr.info(response.body);
             });
             stompClient.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
                 toastr.info(JSON.parse(response.body).msg);
@@ -340,12 +345,13 @@
         methods: {
             notify: function () {
                 $.getJSON(prefix + '/notifyRecordTip', function (r) {
+                    console.log(r);
                     wrapper.total = r.total;
                     wrapper.rows = r.records;
                 });
             }
         },
-        created: function () {
+        mounted: function () {
             this.notify()
         }
     });
@@ -369,6 +375,18 @@
             }
         });
         layer.full(index);
+    }
+
+
+    /**
+     * 检查用户认证信息
+     */
+    function judgeUserAuthentication(msg) {
+        $.post(_ctx + "/profile/auth", function (data) {
+            if (data.code != 100) {
+                toastr.info(msg);
+            }
+        })
     }
 </script>
 </body>

@@ -50,6 +50,7 @@
         <jsoup.version>1.9.2</jsoup.version>
         <velocity.version>2.1</velocity.version>
         <oshi.version>3.13.3</oshi.version>
+        <thumbnailator.version>0.4.8</thumbnailator.version>
     </properties>
 
     <dependencies>
@@ -300,6 +301,13 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
             <version>${velocity.version}</version>
+        </dependency>
+
+        <!-- 图片处理-->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
         </dependency>
 
 

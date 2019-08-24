@@ -25,24 +25,24 @@
                 <label for="title">通知标题</label>
                 <input type="text" class="form-control" id="title" name="title">
             </div>
-            <div class="form-group magin-left10">
+            <div class="form-group margin-left10">
                 <label for="createBy">发布人</label>
                 <select class="js-example-basic-single" name="createBy" id="createBy">
                 </select>
             </div>
-            <div class="form-group magin-left10">
+            <div class="form-group margin-left10">
                 <label for="createBy">状态</label>
                 <select class="js-example-basic-single" name="read" id="read">
                 </select>
             </div>
-            <div class="form-group magin-left10 select-time">
+            <div class="form-group margin-left10 select-time">
                 <label for="startTime">创建时间</label>
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
                        placeholder="开始时间"/>
                 <span>-</span>
                 <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
             </div>
-            <a class="btn btn-primary btn-rounded btn-sm magin-left10"
+            <a class="btn btn-primary btn-rounded btn-sm margin-left10"
                onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索
             </a>
             <a class="btn btn-warning btn-rounded btn-sm"
@@ -333,7 +333,7 @@
             /**  订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
              *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
              */
-            stompClient.subscribe("/user/queue/notifiyRecordTip", function (response) {
+            stompClient.subscribe("/user/queue/notifyRecordTip", function (response) {
                 reload();
             });
         });

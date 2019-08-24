@@ -74,6 +74,9 @@ public class NotifyController extends BaseControlller {
             notifyVO.setPublishTime(DateFormatUtils.format(notify.getPublishTime(), "yyyy-MM-dd HH:mm:ss"));
         }
         BeanUtils.copyProperties(notify, notifyVO, "publishTime", "createTime", "updateTime");
+        // 对content内容进行转义
+        String s = notifyVO.getContent().replaceAll("&quot;", "&wayn;");
+        notifyVO.setContent(s);
         modelMap.put("notify", notifyVO);
         // 查询接收用户
         List<NotifyRecord> records = notifyRecordService.selectList(new EntityWrapper<NotifyRecord>().eq("notifyId", notifyVO.getId()));
