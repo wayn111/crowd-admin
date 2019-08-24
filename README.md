@@ -8,11 +8,11 @@ crowdfounding(众筹)是一个面向学习型的开源框架，集合了开发�
 [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)，
 [bootdo](https://gitee.com/lcg0124/bootdo)，
 [RuoYi](https://gitee.com/y_project/RuoYi)等的学习总结后，开发出的后台管理系统，
-基于经典技术组合（Spring、Apache Shiro、MyBatis、JSP）
+基于经典技术组合（Spring、Apache Shiro、MyBatis、Websocket、JSP），集成了系统管理、消息通知、服务监控、代码生成等常用功能，
 也是开发者这两年工作生涯技术上的缩影，_代码层次良好，注重复用，追求功能上的尽量简介而不失优雅_，取名crowdfounding！
 (ctrl+c/ctrl+c)
 
-ps:项目名是开发者某日照网上教程copy而来，开源不易，如有疑问，请先百度：)
+ps:项目名是开发者某日照网上教程copy而来` :)`
 
 
 ### 技术选型
@@ -20,10 +20,11 @@ ps:项目名是开发者某日照网上教程copy而来，开源不易，如有�
     - 核心框架：Spring
     - 控制层框架：SpringMVC
     - 权限控制：Shiro
+    - 消息推送：Websocket
     - 持久层框架：Mybatis-Plus
     - 日志管理：SLF4J > logback
     - 缓存控制：Ehcache/Redis可切换
-    - 环境控制：dev/pro配置文件可灵活切换
+    - 环境控制：使用spring profile可根据`System/JVM`参数灵活切换配置文件
 2. 前端
     - 模板选型：Jsp
     - 管理模板：H+
@@ -31,6 +32,7 @@ ps:项目名是开发者某日照网上教程copy而来，开源不易，如有�
     - 数据表格：bootstrapTable
     - 弹出层：layer
     - 通知消息：Toastr
+    - 消息推送/轮询：sockJs、stomp
     - 树结构控件：jsTree
     - checkbox选择控件：bootstrapSwitch
 3. 开发平台
@@ -47,7 +49,7 @@ ps:项目名是开发者某日照网上教程copy而来，开源不易，如有�
     - 部门管理：用户所属部门
     - 日志操作：记录用户操作，包含请求参数
 2. 办公通知
-    - 我的通知：接收发送给当前用户得通知信息
+    - 我的通知：接收当前用户得通知信息
     - 通知管理：用户发送并管理通知消息
 3. 基础管理
     - 数据字典：对系统中经常使用的一些较为固定的数据进行维护

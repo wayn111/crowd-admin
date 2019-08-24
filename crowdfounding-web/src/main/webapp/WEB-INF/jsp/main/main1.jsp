@@ -83,14 +83,35 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v12">v1.2.0</a><code
+                                            class="pull-right">2019.8.24</code>
+                                    </h5>
+                                </div>
+                                <div id="v12" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            添加个人资料以及头像上传功能，完成头部导航通知栏实时提示办公消息功能,修复了一些消息通知的bug以及代码优化
+                                        </div>
+                                        <ol>
+                                            <li>个人资料 -> 我的资料功能开发完成；</li>
+                                            <li>个人资料 -> 上传头像功能开发完成；</li>
+                                            <li>头部导航 -> 通知栏提示功能开发完成；</li>
+                                            <li>修复了办公通知的一些bug以及代码优化；</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v11">v1.1.0</a><code
                                             class="pull-right">2019.8.21</code>
                                     </h5>
                                 </div>
-                                <div id="v11" class="panel-collapse collapse in">
+                                <div id="v11" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
-                                            此版本添加了办公通知模块，实现了基于stomp后台消息推送功能，方便系统用户进行消息通知发布与管理
+                                            添加办公通知模块，实现了基于stomp后台消息推送功能，方便系统用户进行消息通知发布与管理
                                         </div>
                                         <ol>
                                             <li>办公通知 -> 我的通知功能开发完成；</li>
