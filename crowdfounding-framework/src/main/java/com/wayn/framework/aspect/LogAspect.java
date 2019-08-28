@@ -76,7 +76,7 @@ public class LogAspect {
             log2.setModuleName(log.value());
             log2.setOperation(log.operator().getName());
             log2.setUserName((user != null) ? user.getUserName() : "游客");
-            log2.setUrl(request.getRequestURI().toString());
+            log2.setUrl(StringUtils.substring(request.getRequestURI(), 0, 100));
             log2.setIp(ShiroUtil.getIP());
             log2.setOperState(Constant.OPERATOR_SUCCESS);
             log2.setAgent(UserAgentUtils.getUserAgent(request));
