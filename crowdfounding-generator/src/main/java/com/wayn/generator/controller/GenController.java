@@ -41,7 +41,7 @@ public class GenController extends BaseControlller {
         return tableInfoPage;
     }
 
-    @Log(value = "代码生成", operator = Operator.GENCODE)
+    @Log(value = "代码生成", operator = Operator.GEN_CODE)
     @RequiresPermissions("tool:gen:gen")
     @GetMapping("/genCode/{name}")
     public void genCode(@PathVariable("name") String tableName, HttpServletResponse response) throws IOException {
@@ -49,7 +49,7 @@ public class GenController extends BaseControlller {
         genCode(response, data);
     }
 
-    @Log(value = "代码生成", operator = Operator.GENCODE)
+    @Log(value = "代码生成", operator = Operator.GEN_CODE)
     @RequiresPermissions("tool:gen:gen")
     @GetMapping("/batchGenCode")
     public void batchGenCode(String names, HttpServletResponse response) throws IOException {

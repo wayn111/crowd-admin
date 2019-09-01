@@ -173,7 +173,7 @@
     function batchGenCode() {
         var rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
         if (rows.length == 0) {
-            layer.msg("请选择要生成得表");
+            layer.msg("请选择要生成得表", {icon: 6});
             return;
         }
         var names = new Array();
