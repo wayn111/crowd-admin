@@ -15,8 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author bootdo 1992lcg@163.com
- * @version V1.0
+ * redis的Shiro sessionDAO实现
  */
 public class RedisSessionDAO extends AbstractSessionDAO {
 
@@ -99,7 +98,6 @@ public class RedisSessionDAO extends AbstractSessionDAO {
             logger.error("session id is null");
             return null;
         }
-
         Session s = (Session) SerializeUtils.deserialize(redisOpts.get(this.getByteKey(sessionId)));
         return s;
     }

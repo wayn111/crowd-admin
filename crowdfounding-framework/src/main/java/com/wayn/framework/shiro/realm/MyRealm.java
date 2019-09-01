@@ -5,6 +5,7 @@ import com.wayn.commom.domain.User;
 import com.wayn.commom.service.RoleMenuService;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
+import com.wayn.framework.util.ShiroUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -27,7 +28,7 @@ import java.util.Set;
 public class MyRealm extends AuthorizingRealm {
 
 
-    @Value("${singeUserAuth}")
+    @Value("${wayn.singeUserAuth}")
     private boolean singeUserAuth;
 
     /**
@@ -84,7 +85,7 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken token2 = (UsernamePasswordToken) token;
         String username = token2.getUsername();
-        String password = encrypt(username, new String(token2.getPassword()));
+        String password = ShiroUtil.md5encrypt(new String(token2.getPassword()), username);
         User sysUser = userService.selectOne(new EntityWrapper<User>().eq("userName", username));
         if (sysUser == null) {
             throw new UnknownAccountException("用户不存在");
@@ -92,9 +93,9 @@ public class MyRealm extends AuthorizingRealm {
         if (sysUser.getUserState() == -1) {
             throw new UnknownAccountException("用户已被禁用");
         }
-        if (!sysUser.getPassword().equals(password)) {
+        /*if (!sysUser.getPassword().equals(password)) {
             throw new IncorrectCredentialsException("账号或密码不正确");
-        }
+        }*/
         if (sysUser.getUserState() == User._0) {
             throw new LockedAccountException("该用户已被锁定，请稍后再试");
         }
@@ -126,9 +127,6 @@ public class MyRealm extends AuthorizingRealm {
         return info;
     }
 
-    public String encrypt(String username, String password) {
-        return new SimpleHash("MD5", password, username, 1024).toString();
-    }
 
     public void clearCachedAuthorizationInfo() {
         doClearCache(SecurityUtils.getSubject().getPrincipals());

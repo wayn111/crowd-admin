@@ -98,8 +98,9 @@ public class CacheConfig extends CachingConfigurerSupport {
 
     @Primary
     @Bean
-    public CacheManager cacheManager(@Autowired(required = false) RedisTemplate<String, Object> redisTemplate) {
-        CacheManager cacheManager = null;
+    public CacheManager cacheManager(@Autowired(required = false) RedisTemplate<String, Object> redisTemplate,
+                                     @Autowired(required = false) net.sf.ehcache.CacheManager ehCacheManager) {
+        CacheManager cacheManager;
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
             cacheManager = new RedisCacheManager(redisTemplate);
             ((RedisCacheManager) cacheManager).setUsePrefix(true);
@@ -113,19 +114,22 @@ public class CacheConfig extends CachingConfigurerSupport {
             cacheNames.add("timerTaskCache");
             ((RedisCacheManager) cacheManager).setCacheNames(cacheNames);
         } else {
-            cacheManager = ehCacheCacheManager();
+            cacheManager = ehCacheCacheManager(ehCacheManager);
         }
         return cacheManager;
     }
 
-    @Bean
-    public EhCacheCacheManager ehCacheCacheManager() {
-        EhCacheCacheManager ehCacheCacheManager = new EhCacheCacheManager();
-        net.sf.ehcache.CacheManager cacheManager1 = net.sf.ehcache.CacheManager
-                .newInstance(getClass().getClassLoader().getResource("cache/ehcache.xml"));
-        ehCacheCacheManager.setCacheManager(cacheManager1);
+    public EhCacheCacheManager ehCacheCacheManager(net.sf.ehcache.CacheManager cacheManager) {
+        EhCacheCacheManager ehCacheCacheManager = new EhCacheCacheManager(cacheManager);
         return ehCacheCacheManager;
     }
+
+    @Bean
+    public net.sf.ehcache.CacheManager ehCacheManager() {
+        return net.sf.ehcache.CacheManager
+                .newInstance(getClass().getClassLoader().getResourceAsStream("cache/ehcache.xml"));
+    }
+
 
     @Bean(name = "cacheKeyGenerator")
     public KeyGenerator cacheKeyGenerator() {

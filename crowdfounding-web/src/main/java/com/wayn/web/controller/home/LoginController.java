@@ -71,7 +71,7 @@ public class LoginController extends BaseControlller {
      * @param session
      */
     @GetMapping(value = "/captcha")
-    public void kaptcha(HttpServletResponse rsp, HttpSession session) {
+    public void captcha(HttpServletResponse rsp, HttpSession session) {
         try (ServletOutputStream out = rsp.getOutputStream()) {
             rsp.setDateHeader("Expires", 0);
             rsp.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");

@@ -5,7 +5,7 @@ import com.wayn.commom.consts.Constant;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.util.UserAgentUtils;
 import com.wayn.framework.annotation.Log;
-import com.wayn.framework.manager.LogQueue;
+import com.wayn.framework.manager.log.LogQueue;
 import com.wayn.framework.util.ShiroUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;

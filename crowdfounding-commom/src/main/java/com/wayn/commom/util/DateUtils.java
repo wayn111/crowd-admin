@@ -162,6 +162,33 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     }
 
     /**
+     * 计算距离现在多久，非精确
+     *
+     * @param date
+     * @return
+     */
+    public static String getTimeAfter(Date date) {
+        Date now = new Date();
+        long l = date.getTime() - now.getTime();
+        long day = l / (24 * 60 * 60 * 1000);
+        long hour = (l / (60 * 60 * 1000) - day * 24);
+        long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
+        long s = (l / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        String r = "";
+        if (day > 0) {
+            r += day + "天";
+        } else if (hour > 0) {
+            r += hour + "小时";
+        } else if (min > 0) {
+            r += min + "分";
+        } else if (s > 0) {
+            r += s + "秒";
+        }
+        r += "后";
+        return r;
+    }
+
+    /**
      * 计算距离现在多久，精确
      *
      * @param date
