@@ -1,7 +1,9 @@
 package com.wayn.framework.web.filter;
 
+import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.enums.OnlineStatus;
+import com.wayn.commom.service.DeptService;
 import com.wayn.commom.shiro.session.OnlineSession;
 import com.wayn.framework.util.ShiroUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -10,14 +12,23 @@ import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
 
+
+/**
+ * 定义自己的shiro过滤器
+ */
 public class OnlineSessionFilter extends AccessControlFilter {
 
     private static final String ONLINE_SESSION = "online_session";
+
+    @Autowired
+    private DeptService deptService;
+
 
     /**
      * 强制退出后重定向的地址
@@ -61,11 +72,12 @@ public class OnlineSessionFilter extends AccessControlFilter {
                 if (user != null) {
                     onlineSession.setUserId(user.getId());
                     onlineSession.setUsername(user.getUserName());
-                    onlineSession.markAttributeChanged();
+                    Dept dept = deptService.selectById(user.getDeptId());
+                    onlineSession.setDeptName(dept.getDeptName());
                 }
-            }
-            if (onlineSession.getStatus() == OnlineStatus.off_line) {
-                return false;
+                if (onlineSession.getStatus() == OnlineStatus.OFF_LINE) {
+                    return false;
+                }
             }
         }
         return true;

@@ -30,23 +30,29 @@ public class UserOnlineServiceImpl implements UserOnlineService {
             UserOnline userOnline = new UserOnline();
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
                 return null;
-            } else {
+            } /*else {
                 SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
                         .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
                 Object primaryPrincipal = principalCollection.getPrimaryPrincipal();
                 User user = (User) primaryPrincipal;
                 userOnline.setUsername(user.getUserName());
                 userOnline.setOnlineSession(user.toString());
+            }*/
+            if (session instanceof OnlineSession) {
+                OnlineSession onlineSession = (OnlineSession) session;
+                userOnline.setUserId(onlineSession.getUserId());
+                userOnline.setUsername(onlineSession.getUsername());
+                userOnline.setDeptName(onlineSession.getDeptName());
+                userOnline.setOs(onlineSession.getOs());
+                userOnline.setBrowser(onlineSession.getBrowser());
             }
             // 设置session属性至onlineUser中
             userOnline.setId((String) session.getId());
+            userOnline.setOnlineSession(session.toString());
             userOnline.setHost(session.getHost());
             userOnline.setStartTimestamp(session.getStartTimestamp());
             userOnline.setLastAccessTime(session.getLastAccessTime());
             userOnline.setTimeout(session.getTimeout());
-            OnlineSession onlineSession = (OnlineSession) session;
-            userOnline.setOs(onlineSession.getOs());
-            userOnline.setBrowser(onlineSession.getBrowser());
             return userOnline;
 
         }).filter(Objects::nonNull).collect(Collectors.toList());

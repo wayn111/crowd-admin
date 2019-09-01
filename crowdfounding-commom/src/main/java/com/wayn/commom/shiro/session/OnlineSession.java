@@ -1,6 +1,7 @@
 package com.wayn.commom.shiro.session;
 
 import com.wayn.commom.enums.OnlineStatus;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.shiro.session.mgt.SimpleSession;
 
 /**
@@ -22,6 +23,11 @@ public class OnlineSession extends SimpleSession {
     private String username;
 
     /**
+     * 部门名称
+     */
+    private String deptName;
+
+    /**
      * 登录IP地址
      */
     private String host;
@@ -39,12 +45,7 @@ public class OnlineSession extends SimpleSession {
     /**
      * 在线状态
      */
-    private OnlineStatus status = OnlineStatus.on_line;
-
-    /**
-     * 属性是否改变 优化session数据同步
-     */
-    private transient boolean attributeChanged = false;
+    private OnlineStatus status = OnlineStatus.ON_LINE;
 
     @Override
     public String getHost() {
@@ -89,18 +90,6 @@ public class OnlineSession extends SimpleSession {
         this.status = status;
     }
 
-    public void markAttributeChanged() {
-        this.attributeChanged = true;
-    }
-
-    public void resetAttributeChanged() {
-        this.attributeChanged = false;
-    }
-
-    public boolean isAttributeChanged() {
-        return attributeChanged;
-    }
-
     @Override
     public void setAttribute(Object key, Object value) {
         super.setAttribute(key, value);
@@ -120,21 +109,25 @@ public class OnlineSession extends SimpleSession {
         return this;
     }
 
-    public OnlineSession setAttributeChanged(boolean attributeChanged) {
-        this.attributeChanged = attributeChanged;
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public OnlineSession setDeptName(String deptName) {
+        this.deptName = deptName;
         return this;
     }
 
     @Override
     public String toString() {
-        return "OnlineSession{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", host='" + host + '\'' +
-                ", browser='" + browser + '\'' +
-                ", os='" + os + '\'' +
-                ", status=" + status +
-                ", attributeChanged=" + attributeChanged +
-                "} super = " + super.getId() + "---" + super.getAttributes();
+        return new ToStringBuilder(this)
+                .append("userId", userId)
+                .append("username", username)
+                .append("deptName", deptName)
+                .append("host", host)
+                .append("browser", browser)
+                .append("os", os)
+                .append("status", status)
+                .toString();
     }
 }

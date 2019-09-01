@@ -1,8 +1,7 @@
 package com.wayn.framework.shiro.cache;
 
 /**
- * @author bootdo 1992lcg@163.com
- * @version V1.0
+ * 定义实现shiro.cache.CacheManager的RedisCacheManager
  */
 import com.wayn.framework.redis.RedisOpts;
 import org.apache.shiro.cache.Cache;
