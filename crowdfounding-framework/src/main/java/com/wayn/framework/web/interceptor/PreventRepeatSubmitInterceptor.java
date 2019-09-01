@@ -2,7 +2,7 @@ package com.wayn.framework.web.interceptor;
 
 import com.google.gson.Gson;
 import com.wayn.commom.util.Response;
-import com.wayn.framework.annotation.RepeatSubmit;
+import com.wayn.commom.annotation.RepeatSubmit;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;

@@ -8,7 +8,7 @@ import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
-import com.wayn.framework.annotation.Log;
+import com.wayn.commom.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

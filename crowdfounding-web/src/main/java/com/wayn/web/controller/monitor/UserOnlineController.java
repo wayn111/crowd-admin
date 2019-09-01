@@ -1,5 +1,6 @@
 package com.wayn.web.controller.monitor;
 
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserOnline;
@@ -7,7 +8,6 @@ import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.CacheManagerService;
 import com.wayn.commom.service.UserOnlineService;
 import com.wayn.commom.util.Response;
-import com.wayn.framework.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;

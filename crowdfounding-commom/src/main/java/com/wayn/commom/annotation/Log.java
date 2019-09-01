@@ -1,4 +1,4 @@
-package com.wayn.framework.annotation;
+package com.wayn.commom.annotation;
 
 import com.wayn.commom.enums.Operator;
 

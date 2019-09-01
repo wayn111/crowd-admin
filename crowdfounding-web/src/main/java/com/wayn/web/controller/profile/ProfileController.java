@@ -11,7 +11,7 @@ import com.wayn.commom.util.FileUploadUtil;
 import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.ProperUtil;
 import com.wayn.commom.util.Response;
-import com.wayn.framework.annotation.RepeatSubmit;
+import com.wayn.commom.annotation.RepeatSubmit;
 import com.wayn.framework.util.ShiroUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;

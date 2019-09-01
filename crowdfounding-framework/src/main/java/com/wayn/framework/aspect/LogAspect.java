@@ -1,10 +1,10 @@
 package com.wayn.framework.aspect;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.consts.Constant;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.util.UserAgentUtils;
-import com.wayn.framework.annotation.Log;
 import com.wayn.framework.manager.log.LogQueue;
 import com.wayn.framework.util.ShiroUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +31,7 @@ public class LogAspect {
     @Autowired
     private LogQueue logQueue;
 
-    @Pointcut("@annotation(com.wayn.framework.annotation.Log)")
+    @Pointcut("@annotation(com.wayn.commom.annotation.Log)")
     public void logPointCut() {
     }
 

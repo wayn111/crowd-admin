@@ -2,10 +2,10 @@ package com.wayn.web.controller.home;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.Response;
-import com.wayn.framework.annotation.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;

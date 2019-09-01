@@ -1,9 +1,9 @@
 package com.wayn.generator.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.enums.Operator;
-import com.wayn.framework.annotation.Log;
 import com.wayn.generator.domain.TableInfo;
 import com.wayn.generator.service.GenService;
 import org.apache.commons.io.IOUtils;
