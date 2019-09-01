@@ -20,7 +20,7 @@
 </head>
 
 <body class="gray-bg">
-	<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="wrapper wrapper-content">
 		<div class="col-sm-12 search-collapse">
 			<form class="form-inline" id="roleSelect">
 				<div class="form-group">
@@ -117,7 +117,7 @@
 		                if (data.code != 100) {
 		                    layer.alert(data.msg);
 		                } else {
-		                    layer.msg("删除成功");
+		                    layer.msg("删除成功", {icon: 1});
 		                    reload();
 		                }
 		            }
@@ -167,18 +167,18 @@
 	                    field: 'deptName',
 	                    width: '20%'
 	                },
-					{
-						title: '排序',
-						valign: 'center',
-						width: '5%',
-						field: 'sort'
-					},
 	                {
 	                    title: '描述',
 	                    valign: 'center',
 	                    width: '20%',
 	                    field: 'remarks'
 	                },
+					{
+						title: '排序',
+						valign: 'center',
+						width: '5%',
+						field: 'sort'
+					},
 	                {
 	                    title: '操作',
 	                    field: 'id',

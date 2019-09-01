@@ -125,7 +125,7 @@
 					if (data.code != 100) {
 						layer.alert(data.msg);
 					} else {
-						parent.layer.msg(data.msg);
+						parent.layer.msg(data.msg, {icon: 1});
 						parent.reload();
 						//关闭当前窗口
 						var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引

@@ -1,10 +1,8 @@
 package com.wayn;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import org.apache.shiro.crypto.hash.SimpleHash;
+import com.wayn.commom.domain.User;
+import com.wayn.commom.service.UserService;
+import com.wayn.framework.util.ShiroUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.wayn.commom.domain.User;
-import com.wayn.commom.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/spring-*.xml" })
@@ -31,7 +30,7 @@ public class UserTest {
 			user.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 			user.setUserName("admin" + i);
 			user.setDeptId(1L);
-			user.setPassword(new SimpleHash("MD5", "123456", user.getUserName(), 1024).toString());
+			user.setPassword(ShiroUtil.md5encrypt("123456","admin"));
 			entityList.add(user);
 		}
 		userService.insertBatch(entityList);

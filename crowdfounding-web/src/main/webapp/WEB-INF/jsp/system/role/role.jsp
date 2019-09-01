@@ -122,7 +122,7 @@
                     if (data.code != 100) {
                         layer.alert(data.msg);
                     } else {
-                        layer.msg(data.msg);
+                        layer.msg(data.msg, {icon: 1});
                         reload();
                     }
                 }
@@ -133,7 +133,7 @@
     function batchRemove() {
         var rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
         if (rows.length == 0) {
-            layer.msg("请选择要删除的数据");
+            layer.msg("请选择要删除的数据", {icon: 6});
             return;
         }
         layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
@@ -156,7 +156,7 @@
                         layer.alert(data.msg);
                     } else {
                         reload();
-                        layer.msg(data.msg);
+                        layer.msg(data.msg, {icon: 1});
                     }
                 }
             });

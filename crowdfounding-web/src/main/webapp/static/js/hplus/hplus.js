@@ -4,8 +4,12 @@ function NavToggle() {
 
 function SmoothlyMenu() {
     $("body").hasClass("mini-navbar") ? $("body").hasClass("fixed-sidebar") ? ($("#side-menu").hide(), setTimeout(function () {
+        $('.wayn-h3,#user-state').toggle();
+        $('.wayn-profile').removeClass('bounceInDown');
         $("#side-menu").fadeIn(500)
     }, 300)) : $("#side-menu").removeAttr("style") : ($("#side-menu").hide(), setTimeout(function () {
+        $('.wayn-h3,#user-state').toggle();
+        $('.wayn-profile').removeClass('fadeInDown').addClass('bounceInDown');
         $("#side-menu").fadeIn(500)
     }, 100))
 }
