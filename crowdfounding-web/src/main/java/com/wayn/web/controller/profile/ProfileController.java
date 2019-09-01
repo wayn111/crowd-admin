@@ -12,9 +12,9 @@ import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.ProperUtil;
 import com.wayn.commom.util.Response;
 import com.wayn.framework.annotation.RepeatSubmit;
+import com.wayn.framework.util.ShiroUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -37,7 +37,7 @@ import java.util.List;
 @RequestMapping("/profile")
 public class ProfileController extends BaseControlller {
 
-    private static final String PREFIX = "profile" ;
+    private static final String PREFIX = "profile";
 
     @Autowired
     private DeptService deptService;
@@ -57,13 +57,13 @@ public class ProfileController extends BaseControlller {
             deptNames.add(dept.getDeptName());
         }
         model.addAttribute("deptName", StringUtils.join(deptNames, " / "));
-        return PREFIX + "/profile" ;
+        return PREFIX + "/profile";
     }
 
     @GetMapping("/avatar")
     public String avatar(Model model) {
         model.addAttribute("imgSrc", getCurUser().getUserImg());
-        return PREFIX + "/avatar" ;
+        return PREFIX + "/avatar";
     }
 
     /**
@@ -101,7 +101,7 @@ public class ProfileController extends BaseControlller {
     @PostMapping("judgeOldPasswordSuccess")
     public boolean judgeOldPasswordSuccess(String oldPassword) {
         // 获取加密后的密码
-        String password = new SimpleHash("MD5", oldPassword, userService.selectById(getCurUserId()).getUserName(), 1024).toString();
+        String password = ShiroUtil.md5encrypt(oldPassword, userService.selectById(getCurUserId()).getUserName());
         List<User> users = userService.selectList(new EntityWrapper<User>().eq("password", password));
         return users.size() > 0;
     }
@@ -109,7 +109,7 @@ public class ProfileController extends BaseControlller {
     @ResponseBody
     @PostMapping("userResetPwd")
     public Response userResetPwd(UserResetPasswordVO userResetPasswordVO) {
-        String password = new SimpleHash("MD5", userResetPasswordVO.getNewPassword(), userService.selectById(getCurUserId()).getUserName(), 1024).toString();
+        String password = ShiroUtil.md5encrypt(userResetPasswordVO.getNewPassword(), userService.selectById(getCurUserId()).getUserName());
         userService.updateForSet("password = '" + password + "'", new EntityWrapper<User>().eq("id", getCurUserId()));
         return Response.success("修改用户密码成功！");
     }
@@ -126,7 +126,7 @@ public class ProfileController extends BaseControlller {
     @PostMapping("updateAvatar")
     public Response updateAvatar(@RequestParam("avatarfile") MultipartFile file) throws IOException {
         // 上传文件路径
-        String filePath = ProperUtil.get("wayn.uploadDir") + "/avatar" ;
+        String filePath = ProperUtil.get("wayn.uploadDir") + "/avatar";
         String fileName = FileUploadUtil.uploadFile(file, filePath);
         // Thumbnails.of(filePath + "/" + fileName).size(64, 64).toFile(new File(filePath, fileName));
         String requestUrl = HttpUtil.getRequestContext(request);

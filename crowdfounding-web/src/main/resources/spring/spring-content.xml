@@ -18,12 +18,7 @@
                                 expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
     <!-- 开启aop，对类代理 -->
-    <aop:config proxy-target-class="true"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <!--<import resource="spring-dao.xml" />
-    <import resource="spring-service.xml" />
-    <import resource="spring-ehcache.xml" />-->
-    <!--<import resource="spring-shiro.xml" />-->
 
     <!--配置消息代理,手动注册bean-->
     <bean id="com.wayn.notify.controller.StompController" class="com.wayn.notify.controller.WsController" />

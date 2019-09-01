@@ -1,9 +1,9 @@
 package com.wayn.framework.config;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionListener;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BDSessionListener implements SessionListener {
 
@@ -22,7 +22,6 @@ public class BDSessionListener implements SessionListener {
 	@Override
 	public void onExpiration(Session session) {
 		sessionCount.decrementAndGet();
-
 	}
 
 	public int getSessionCount() {

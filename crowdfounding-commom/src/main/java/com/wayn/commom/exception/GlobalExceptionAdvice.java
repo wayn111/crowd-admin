@@ -5,6 +5,7 @@ import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.Response;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +35,20 @@ public class GlobalExceptionAdvice extends BaseControlller {
     }
 
     /**
+     * 处理密码错误异常
+     *
+     * @param e
+     * @param request
+     * @return
+     */
+    @ExceptionHandler(IncorrectCredentialsException.class)
+    public Object handleIncorrectCredentialsException(IncorrectCredentialsException e, HttpServletRequest request) {
+        logger.error(e.getMessage(), e);
+        return Response.error("账号或密码不正确");
+    }
+
+
+    /**
      * 处理为授权异常
      *
      * @param e
@@ -57,7 +72,7 @@ public class GlobalExceptionAdvice extends BaseControlller {
      * @return
      */
     @ExceptionHandler(NoHandlerFoundException.class)
-    public Object handleShiroException(NoHandlerFoundException e, HttpServletRequest request) {
+    public Object handle404Exception(NoHandlerFoundException e, HttpServletRequest request) {
         logger.error(e.getMessage(), e);
         if (HttpUtil.isAjax(request)) {
             return Response.error("您请求路径不存在，请检查url！");

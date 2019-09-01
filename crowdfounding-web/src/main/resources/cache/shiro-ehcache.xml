@@ -90,7 +90,7 @@ even after a JVM restart.  -->
            diskExpiryThreadIntervalSeconds="600"/>
 
     <cache name="org.apache.shiro.realm.SimpleAccountRealm.authorization"
-           maxElementsInMemory="100"
+           maxElementsInMemory="1000"
            eternal="false"
            timeToLiveSeconds="600"
            overflowToDisk="false"/>

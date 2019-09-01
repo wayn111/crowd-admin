@@ -13,8 +13,8 @@ import com.wayn.commom.service.*;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
 import com.wayn.framework.annotation.Log;
+import com.wayn.framework.util.ShiroUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,7 +96,7 @@ public class UserController extends BaseControlller {
     @ResponseBody
     @PostMapping("/resetPwd")
     public Response resetPwd(Model model, @RequestParam String id, @RequestParam String password) {
-        userService.resetPwd(id, new SimpleHash("MD5", password, userService.selectById(id).getUserName(), 1024).toString());
+        userService.resetPwd(id, ShiroUtil.md5encrypt(password, userService.selectById(id).getUserName()));
         return Response.success("修改用户密码成功");
     }
 

@@ -3,6 +3,7 @@ package com.wayn.commom.service.impl;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserOnline;
 import com.wayn.commom.service.UserOnlineService;
+import com.wayn.commom.shiro.session.OnlineSession;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +26,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
     public List<UserOnline> list() {
         //获取当前系统在线用户
         Collection<Session> activeSessions = sessionDAO.getActiveSessions();
-        List<UserOnline> list = activeSessions.stream().map(session -> {
+        return activeSessions.stream().map(session -> {
             UserOnline userOnline = new UserOnline();
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
                 return null;
@@ -36,24 +38,25 @@ public class UserOnlineServiceImpl implements UserOnlineService {
                 userOnline.setUsername(user.getUserName());
                 userOnline.setOnlineSession(user.toString());
             }
-
+            // 设置session属性至onlineUser中
             userOnline.setId((String) session.getId());
             userOnline.setHost(session.getHost());
             userOnline.setStartTimestamp(session.getStartTimestamp());
             userOnline.setLastAccessTime(session.getLastAccessTime());
             userOnline.setTimeout(session.getTimeout());
+            OnlineSession onlineSession = (OnlineSession) session;
+            userOnline.setOs(onlineSession.getOs());
+            userOnline.setBrowser(onlineSession.getBrowser());
             return userOnline;
-        }).filter(userOnline -> {
-            return userOnline != null ? true : false;
-        }).collect(Collectors.toList());
-        return list;
+
+        }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     @Override
     public List<User> listUser() {
-        //获取当前系统在线用户
+        //获取当前系统 SimplePrincipalCollection 中保存的在线用户
         Collection<Session> activeSessions = sessionDAO.getActiveSessions();
-        List<User> list = activeSessions.stream().map(session -> {
+        return activeSessions.stream().map(session -> {
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
                 return null;
             } else {
@@ -63,10 +66,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
                 return (User) primaryPrincipal;
             }
 
-        }).filter(user -> {
-            return user != null ? true : false;
-        }).collect(Collectors.toList());
-        return list;
+        }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     @Override

@@ -21,7 +21,7 @@ public class ShiroUtil {
      * @param salt
      * @return
      */
-    public static String md51024Pwd(String password, Object salt) {
+    public static String md5encrypt(String password, Object salt) {
         return new SimpleHash("MD5", password, salt, 1024).toString();
     }
 
