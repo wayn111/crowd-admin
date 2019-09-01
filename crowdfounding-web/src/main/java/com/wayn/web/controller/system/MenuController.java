@@ -1,5 +1,6 @@
 package com.wayn.web.controller.system;
 
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.Menu;
 import com.wayn.commom.domain.vo.MenuVO;
@@ -8,7 +9,6 @@ import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.service.MenuService;
 import com.wayn.commom.util.Response;
-import com.wayn.framework.annotation.Log;
 import com.wayn.framework.util.ShiroUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
