@@ -33,28 +33,24 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element">
-                        <h3 style="color: white;margin: 0px 0px 18px 0px;font-size: 23px;">crowdfounding</h3>
-                        <span>
+                    <div class="wayn-profile animated">
+                        <h3 class="wayn-h3">crowdfounding</h3>
+                        <div id="user-avatar" class="pull-left" style="margin-top: 6px">
                             <img alt="image" class="img-circle" src="${user.userImg}"
                                  style="cursor:pointer;height: 64px"
-                                 onclick="javascript:$('#userData').trigger('click');"/>
-                        </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							<span class="clear">
-								<span class="block m-t-xs">
-									<strong class="font-bold">${user.userName }</strong>
-                                    <span class="margin-left10">欢迎您<b class="caret"></b></span>
-								</span>
-							</span>
-                        </a>
-                        <ul class="dropdown-menu animated fadeIn m-t-xs user-menu">
-                            <li><a class="J_menuItem" id="userData" href="${_ctx }/profile">个人资料</a></li>
-                            <li class="divider"></li>
-                            <li><a href="${_ctx }/home/logout">安全退出</a></li>
-                        </ul>
+                                 onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')"/>
+                        </div>
+                        <div id="user-state" class="pull-left margin-left10">
+                            <p style="margin: 10px 0px 10px 0px;color: white">
+                                <strong class="font-bold">${user.userName }</strong>
+                            </p>
+                            <span>
+                                <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                                <a href="${_ctx }/home/logout" style="padding-left:5px;"><i
+                                        class="fa fa-sign-out text-danger"></i> 注销</a>
+                            </span>
+                        </div>
                     </div>
-                    <div class="logo-element">H+</div>
                 </li>
                 <c:forEach var="menu" items="${treeMenus }">
                     <li><c:if test="${menu.type eq 1 }">
@@ -284,7 +280,7 @@
 <script>
     var prefix = _ctx + '/oa/notifyRecord';
 
-    toastr.options = {
+    var toastrDefaultConfig = {
         "closeButton": true,
         "debug": false,
         "progressBar": true,
@@ -299,6 +295,8 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
+
+    toastr.options = toastrDefaultConfig;
 
     /**
      * 全屏显示
@@ -322,13 +320,22 @@
              */
             stompClient.subscribe("/user/queue/notifications", function (response) {
                 wrapper.notify();
-                toastr.info(response.body);
+                showToastr({
+                    type: 'info',
+                    msg: response.body
+                });
             });
             stompClient.subscribe('/user/queue/notifyRecordTip', function (response) {
                 wrapper.notify();
             });
             stompClient.subscribe('/user/queue/getResponse', function (response) {
-                toastr.info(response.body);
+                showToastr({
+                    type: 'info',
+                    msg: response.body,
+                    timeOut: -1,
+                    extendedTimeOut: -1,
+                    positionClass: 'toast-bottom-full-width'
+                });
             });
             stompClient.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
                 toastr.info(JSON.parse(response.body).msg);
@@ -377,6 +384,14 @@
         layer.full(index);
     }
 
+    /**
+     * 显示通知提示
+     */
+    function showToastr(config) {
+        toastr.options = $.extend({}, toastr.options, config);
+        toastr[config.type](config.msg);
+        toastr.options = toastrDefaultConfig;
+    }
 
     /**
      * 检查用户认证信息

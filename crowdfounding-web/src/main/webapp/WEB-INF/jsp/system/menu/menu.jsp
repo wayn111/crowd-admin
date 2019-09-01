@@ -120,7 +120,7 @@
 						if (data.code != 100) {
 							layer.alert(data.msg);
 						} else {
-							layer.msg("删除成功");
+							layer.msg("删除成功", {icon: 1});
 							reload();
 						}
 					}

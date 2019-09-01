@@ -10,10 +10,10 @@
 
     <div class="row">
         <div class="col-sm-12">
-        	<div class="tree-search-content">
-	            <label for="keyword">关键字：</label><input type="text" class="empty" id="keyword" maxlength="50">
-				<button class="btn  btn-xs" onclick="search()">搜索</button>
-			</div>
+            <div class="tree-search-content">
+                <label for="keyword">关键字：</label><input type="text" class="empty" id="keyword" maxlength="50">
+                <button class="btn  btn-xs" onclick="search()">搜索</button>
+            </div>
             <div class="ibox-content">
                 <div id="deptTree"></div>
             </div>
@@ -29,10 +29,10 @@
 <script>
     var prefix = _ctx + '/system/dept';
 
-    function search(){
-		$('#deptTree').jstree(true).search($('#keyword').val())
-	}
-    
+    function search() {
+        $('#deptTree').jstree(true).search($('#keyword').val())
+    }
+
     function getTreeData() {
         $.ajax({
             type: "POST",
@@ -63,7 +63,7 @@
 
     $('#deptTree').on("changed.jstree", function (e, data) {
         if (data.node.id == '-1') {
-            layer.msg('请勿选择顶级节点！');
+            layer.msg('请勿选择顶级节点！', {icon: 2});
             return;
             parent.loadDept(0, '顶级节点');
         } else {

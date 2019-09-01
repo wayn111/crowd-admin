@@ -135,7 +135,7 @@
             dataType: "json",
             success: function (data) {
                 if (data.code != 100) {
-                    layer.msg(data.msg);
+                    layer.msg(data.msg, {icon: 5});
                     $('#kaptcha-input').val();
                 } else {
                     location = _ctx + "/main";

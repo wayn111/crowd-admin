@@ -92,7 +92,7 @@ function menuItemCreate(url, name) {
         if ($(this).data("id") == o) {
             if (!$(this).hasClass("active")) {
                 $(this).addClass("active").siblings(".J_menuTab").removeClass("active");
-                $('.page-tabs-content', topWindow).addClass('layui-anim layui-anim-up')
+                $('.page-tabs-content', topWindow).addClass('layui-anim layui-anim-up');
                 $(".J_mainContent .J_iframe", topWindow).each(function () {
                     if ($(this).data("id") == o) {
                         $(this).show().siblings(".J_iframe").hide();
@@ -105,10 +105,17 @@ function menuItemCreate(url, name) {
         }
     });
     if (k) {
+        var index = window.top.layer.msg('正在加载中', {
+            icon: 16,
+            shade: 0.1
+        });
         var p = '<a href="javascript:;" class="active J_menuTab" data-id="' + o + '">' + l + ' <i class="fa fa-times-circle"></i></a>';
         $(".J_menuTab", topWindow).removeClass("active");
         var n = '<iframe class="J_iframe" name="iframe' + m + '" width="100%" height="100%" src="' + o + '" frameborder="0" data-id="' + o + '" seamless></iframe>';
         $(".J_mainContent", topWindow).find("iframe.J_iframe").hide().parents(".J_mainContent").append(n);
+        $('.J_mainContent iframe.J_iframe:visible').load(function () {
+            window.top.layer.close(index);
+        });
         $(".J_menuTabs .page-tabs-content", topWindow).append(p);
         $('.page-tabs-content', topWindow).addClass('layui-anim layui-anim-up')
     }
@@ -220,14 +227,13 @@ function treeSearchInit() {
  * @param selector
  * @param config
  */
-function textareEditorInit(selector, config = {
-    placeholder: '请输入内容',
-    tabsize: 2,
-    height: 200
-}) {
+function textareaEditorInit(selector, config) {
     var defaultConfig = {
         lang: 'zh-CN',
         dialogsInBody: true,
+        placeholder: '请输入内容',
+        tabsize: 2,
+        height: 200
     };
     defaultConfig = $.extend({}, defaultConfig, config);
     $(selector).summernote(defaultConfig);

@@ -106,6 +106,14 @@
 								title : '主机'
 							},
 							{
+								field : 'os',
+								title : '操作系统'
+							},
+							{
+								field : 'browser',
+								title : '浏览器'
+							},
+							{
 								field : 'startTimestamp',
 								title : '登录时间'
 							},
@@ -155,10 +163,10 @@
 					},
 					success : function(r) {
 						if (r.code == 100) {
-							layer.msg(r.msg);
+							layer.msg(r.msg, {icon: 1});
 							reload();
 						} else {
-							layer.msg(r.msg);
+							layer.alert(r.msg);
 						}
 					}
 				});
@@ -168,7 +176,7 @@
 		function batchForceLogout() {
 			var rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 			if (rows.length == 0) {
-				layer.msg("请选择要下线的用户");
+				layer.msg("请选择要下线的用户", {icon: 6});
 				return;
 			}
 			layer.confirm("确认要强制下线选中的'" + rows.length + "'个用户吗?", {
@@ -190,7 +198,7 @@
 						if (data.code != 100) {
 							layer.alert(data.msg);
 						} else {
-							layer.msg(data.msg);
+							layer.msg(data.msg, {icon: 1});
 							reload();
 						}
 					}

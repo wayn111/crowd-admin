@@ -145,3 +145,7 @@ body.signin {
 #login-form #verify-img{
 	padding-left: 0px;
 }
+
+.layui-layer-dialog .layui-layer-content{
+	color: #676a6c;
+}
