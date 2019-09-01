@@ -140,7 +140,7 @@
                 if (data.code != 100) {
                     layer.alert(data.msg);
                 } else {
-                    parent.layer.msg(data.msg);
+                    parent.layer.msg(data.msg, {icon: 1});
                     parent.reload();
                     // 关闭当前窗口
                     var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
@@ -227,7 +227,7 @@
             min: 0,
             value: '${notify.publishTime}'
         });
-        textareEditorInit('.summernote', {
+        textareaEditorInit('.summernote', {
             placeholder: '请输入通知内容',
             tabsize: 2,
             height: 249,

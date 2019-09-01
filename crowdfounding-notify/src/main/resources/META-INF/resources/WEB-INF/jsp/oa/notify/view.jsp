@@ -97,7 +97,7 @@
             min: 0,
             value: '${notify.publishTime}'
         });
-        textareEditorInit('.summernote', {
+        textareaEditorInit('.summernote', {
             placeholder: '请输入通知内容',
             tabsize: 2,
             height: 249,
