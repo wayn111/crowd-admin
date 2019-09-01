@@ -1,4 +1,4 @@
-package com.wayn.notify.mbean;
+package com.wayn.notify.manager.mbean;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.jmx.export.MBeanExporter;
@@ -14,7 +14,7 @@ public class MbeanManager {
     /**
      * 导出WebSocketMessageBrokerStats信息·
      * @param webSocketMessageBrokerStats
-     * @return
+     * @return  mBeanExporter
      */
     @Bean
     public MBeanExporter mBeanExporter(WebSocketMessageBrokerStats webSocketMessageBrokerStats) {
