@@ -8,6 +8,7 @@ import com.wayn.framework.shiro.realm.MyRealm;
 import com.wayn.framework.shiro.session.EhCacheSessionDAO;
 import com.wayn.framework.shiro.session.OnlineSessionFactory;
 import com.wayn.framework.shiro.session.RedisSessionDAO;
+import com.wayn.framework.web.filter.OnlineSessionFilter;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -27,9 +28,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
+import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
@@ -77,13 +80,26 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl(loginUrl);
         shiroFilterFactoryBean.setSuccessUrl(successUrl);
         shiroFilterFactoryBean.setUnauthorizedUrl(unauthorizedUrl);
+        // 定义自己的过滤器
+        Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
+        filters.put("onlineSession", onlineSessionFilter());
+        shiroFilterFactoryBean.setFilters(filters);
+        // 定义拦过滤器链
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/home/*", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "authc,onlineSession");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
+    }
+
+    @Bean
+    public Filter onlineSessionFilter() {
+        OnlineSessionFilter onlineSessionFilter = new OnlineSessionFilter();
+        onlineSessionFilter.setForceLogoutUrl(loginUrl);
+        onlineSessionFilter.setSessionDAO(sessionDAO());
+        return onlineSessionFilter;
     }
 
     @Bean
