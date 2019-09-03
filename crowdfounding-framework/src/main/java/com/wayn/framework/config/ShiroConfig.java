@@ -3,7 +3,7 @@ package com.wayn.framework.config;
 import com.wayn.commom.consts.Constant;
 import com.wayn.framework.redis.RedisOpts;
 import com.wayn.framework.shiro.cache.RedisCacheManager;
-import com.wayn.framework.shiro.credentialsmatch.MyCredentialsMatcher;
+import com.wayn.framework.shiro.credentials.MyCredentialsMatcher;
 import com.wayn.framework.shiro.realm.MyRealm;
 import com.wayn.framework.shiro.session.EhCacheSessionDAO;
 import com.wayn.framework.shiro.session.OnlineSessionFactory;
