@@ -5,12 +5,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowdfounding 登陆</title>
-    <meta name="keywords" content="wayn,基于H+,后台HTML,响应式后台">
+    <title>crowdfounding 首页</title>
+    <meta name="keywords" content="crowdfounding,基于H+,后台HTML,响应式后台">
     <meta name="description"
-          content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+          content="design by wayn">
     <%@ include file="/commom/taglib.jsp" %>
     <%@ include file="/commom/header.jsp" %>
+    <link href="${_ctx }/static/plugin/metisMenu/jquery.contextMenu.min.css" rel="stylesheet">
     <link href="${_ctx }/static/plugin/toastr/toastr.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
@@ -59,7 +60,7 @@
                             <span class="nav-label">${menu.menuName }</span>
                             <span class="fa arrow"></span>
                         </a>
-                        <ul class="nav nav-second-level">
+                        <ul class="nav nav-second-level collapse">
                             <c:forEach var="childMenu" items="${menu.children }" varStatus="status">
                                 <li><c:choose>
                                     <c:when test="${empty childMenu.url}">
@@ -300,7 +301,6 @@
 
     /**
      * 全屏显示
-     *
      */
     function fullScreen() {
         $("#wrapper").fullScreen();
@@ -311,6 +311,9 @@
         toastr['success']('欢迎来crowdounding！');
     });
 
+    /**
+     * 建立stomp连接
+     */
     function connect() {
         var sock = new SockJS(_ctx + "/notify");
         var stompClient = Stomp.over(sock);
@@ -363,7 +366,11 @@
         }
     });
 
-    function viewNotifyRecord(id) {
+
+    /**
+     * 查看通知记录
+     * /
+     function viewNotifyRecord(id) {
         var index = layer.open({
             type: 2,
             title: '通知公告查看',
@@ -384,7 +391,7 @@
         layer.full(index);
     }
 
-    /**
+     /**
      * 显示通知提示
      */
     function showToastr(config) {
