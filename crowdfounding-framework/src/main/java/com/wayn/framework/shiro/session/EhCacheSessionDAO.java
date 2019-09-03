@@ -78,7 +78,6 @@ public class EhCacheSessionDAO extends AbstractSessionDAO {
     public Collection<Session> getActiveSessions() {
         Results results = onlineUser.createQuery().includeValues().execute();
         List<Result> all = results.all();
-        List<Session> collect = all.stream().map(result -> (Session) result.getValue()).collect(Collectors.toList());
-        return collect;
+        return all.stream().map(result -> (Session) result.getValue()).collect(Collectors.toList());
     }
 }

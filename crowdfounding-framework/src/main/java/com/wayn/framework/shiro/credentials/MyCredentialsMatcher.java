@@ -1,4 +1,4 @@
-package com.wayn.framework.shiro.credentialsmatch;
+package com.wayn.framework.shiro.credentials;
 
 import com.wayn.commom.util.DateUtils;
 import net.sf.ehcache.Cache;
