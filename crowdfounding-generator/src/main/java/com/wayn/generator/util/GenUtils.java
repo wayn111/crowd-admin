@@ -175,7 +175,7 @@ public class GenUtils {
         }
 
         if (template.contains("Dao.java.vm")) {
-            return javaPath + "dao" + "/" + className + "Mapper.java";
+            return javaPath + "dao" + "/" + className + "Dao.java";
         }
 
         if (template.contains("Service.java.vm")) {
