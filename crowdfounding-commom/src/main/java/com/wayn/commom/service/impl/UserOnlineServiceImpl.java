@@ -2,6 +2,7 @@ package com.wayn.commom.service.impl;
 
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserOnline;
+import com.wayn.commom.enums.OnlineStatus;
 import com.wayn.commom.service.UserOnlineService;
 import com.wayn.commom.shiro.session.OnlineSession;
 import org.apache.shiro.session.Session;
@@ -45,6 +46,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
                 userOnline.setDeptName(onlineSession.getDeptName());
                 userOnline.setOs(onlineSession.getOs());
                 userOnline.setBrowser(onlineSession.getBrowser());
+                userOnline.setStatus(onlineSession.getStatus());
             }
             // 设置session属性至onlineUser中
             userOnline.setId((String) session.getId());
@@ -77,10 +79,12 @@ public class UserOnlineServiceImpl implements UserOnlineService {
 
     @Override
     public void forceLogout(String sessionId) {
-        Session session = sessionDAO.readSession(sessionId);
+        OnlineSession session = (OnlineSession) sessionDAO.readSession(sessionId);
         if (session != null) {
-            session.stop();
-            sessionDAO.delete(session);
+            session.setExpired(true);
+            session.setTimeout(0);
+            session.setStatus(OnlineStatus.OFF_LINE);
+            sessionDAO.update(session);
         }
     }
 

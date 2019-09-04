@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BaseEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * <p>
@@ -154,17 +155,18 @@ public class Log extends BaseEntity<Log> {
 
     @Override
     public String toString() {
-        return "Log{" +
-                "id='" + id + '\'' +
-                ", operState=" + operState +
-                ", errorMsg='" + errorMsg + '\'' +
-                ", userName='" + userName + '\'' +
-                ", moduleName='" + moduleName + '\'' +
-                ", operation='" + operation + '\'' +
-                ", url='" + url + '\'' +
-                ", ip='" + ip + '\'' +
-                ", agent='" + agent + '\'' +
-                ", requestParams='" + requestParams + '\'' +
-                "} " + super.toString();
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("operState", operState)
+                .append("errorMsg", errorMsg)
+                .append("userName", userName)
+                .append("moduleName", moduleName)
+                .append("operation", operation)
+                .append("url", url)
+                .append("ip", ip)
+                .append("agent", agent)
+                .append("requestParams", requestParams)
+                .append("createTime", super.getCreateTime())
+                .toString();
     }
 }
