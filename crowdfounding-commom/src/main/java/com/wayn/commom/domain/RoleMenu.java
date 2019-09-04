@@ -3,6 +3,7 @@ package com.wayn.commom.domain;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
 
@@ -61,6 +62,10 @@ public class RoleMenu implements Serializable {
 
 	@Override
 	public String toString() {
-		return "RoleMenu{" + "id=" + id + ", roleId=" + roleId + ", menuId=" + menuId + "}";
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("roleId", roleId)
+				.append("menuId", menuId)
+				.toString();
 	}
 }

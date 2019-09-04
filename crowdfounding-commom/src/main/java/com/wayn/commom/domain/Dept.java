@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BusinessEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
@@ -70,11 +71,13 @@ public class Dept extends BusinessEntity<Dept> {
 
 	@Override
 	public String toString() {
-		return "Dept{" +
-				"id=" + id +
-				", pid=" + pid +
-				", deptName='" + deptName + '\'' +
-				", sort=" + sort +
-				"} " + super.toString();
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("pid", pid)
+				.append("deptName", deptName)
+				.append("sort", sort)
+				.append("createTime", super.getCreateTime())
+				.append("remarks", super.getRemarks())
+				.toString();
 	}
 }

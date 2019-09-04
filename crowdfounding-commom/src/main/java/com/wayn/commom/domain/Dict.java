@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BusinessEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -178,18 +179,20 @@ public class Dict extends BusinessEntity<Dict> {
 
     @Override
     public String toString() {
-        return "Dict{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                ", dictState=" + dictState +
-                ", type=" + type +
-                ", sort=" + sort +
-                ", dictType='" + dictType + '\'' +
-                ", createBy='" + createBy + '\'' +
-                ", updateBy='" + updateBy + '\'' +
-                ", updateTime=" + updateTime +
-                ", delFlag='" + delFlag + '\'' +
-                '}';
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("value", value)
+                .append("dictState", dictState)
+                .append("type", type)
+                .append("sort", sort)
+                .append("dictType", dictType)
+                .append("createBy", createBy)
+                .append("createTime", super.getCreateTime())
+                .append("updateBy", updateBy)
+                .append("updateTime", updateTime)
+                .append("delFlag", delFlag)
+                .append("remarks", super.getRemarks())
+                .toString();
     }
 }
