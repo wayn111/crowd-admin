@@ -37,14 +37,16 @@
                     </div>--%>
                 </div>
                 <div class="ibox-content">
-                    <ul class="wayn-ul-li">
-                        <li>面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质</li>
-                        <li>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统，带有代码生成模块，节省开发成本。</li>
-                        <li>基于stomp协议实现后台消息推送以及指定用户通信的功能。</li>
-                        <li>Encache/Redis作为权限缓存，可切换。</li>
-                        <li>Druid数据源,数据库监控。</li>
-                        <li>使用H+作为后台管理模板，基于jsp模板改造</li>
-                    </ul>
+                    <blockquote class="text-warning" style="font-size:14px">
+                        <h4>面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质</h4>
+                        <br>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统
+                        <br>基于stomp协议实现后台消息推送以及指定用户通信的功能
+                        <br>Encache/Redis作为权限缓存，可切换
+                        <br>Druid数据源,数据库监控
+                        <br>使用H+作为后台管理模板，基于jsp模板改造
+                        <br>如果你先找一个简单易学，代码风格良好，基于现有功能快速上手开发的话
+                        <h4 class="text-danger">那么，现在crowdfounding来了</h4>
+                    </blockquote>
 
                     <h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
                     <ul>
