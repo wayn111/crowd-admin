@@ -28,10 +28,9 @@ import com.wayn.commom.base.BaseEntity;
  */
 @TableName("${tableName}")
 public class ${className} extends BaseEntity {
-    private static final long serialVersionUID = 1L;
 
 #foreach ($column in $columns)
-    #if($column.attrname != 'createTime' && $column.attrname != 'updateTime' && $column.attrname != 'remarks')
+    #if($column.attrname != 'createTime' && $column.attrname != 'remarks')
     /** $column.columnComment */
     #if($column.attrname == $primaryKey.attrname)
         #if($primaryKey.attrType == 'String')

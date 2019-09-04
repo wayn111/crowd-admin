@@ -6,7 +6,7 @@
 
     <resultMap type="${className}" id="${className}Result">
         #foreach ($column in $columns)
-        <result property="${column.attrname}"    column="${column.columnName}"    />
+        <result property="${column.attrname}" column="${column.columnName}"    />
         #end
     </resultMap>
 
@@ -18,7 +18,13 @@
         <include refid="select${className}Vo"/>
         <where>
             #foreach($column in $columns)
-            <if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname.trim() != '' #end"> and $column.columnName = #{$column.attrname}</if>
+                #if($column.attrType == 'Date')
+                    #set($attr=$column.attrname.substring(0,$column.attrname.indexOf('Time')))
+                    <if test="${attr}StartTime != null and ${attr}StartTime != ''">and $column.attrname.trim() <![CDATA[ > ]]> #{${attr}StartTime}</if>
+                    <if test="${attr}EndTime != null and ${attr}EndTime != ''">and $column.attrname.trim() <![CDATA[ < ]]> #{${attr}EndTime}</if>
+                #else
+                    <if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname.trim() != '' #end"> and $column.columnName = #{$column.attrname}</if>
+                #end
             #end
         </where>
     </select>
