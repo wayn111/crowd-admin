@@ -16,7 +16,7 @@ public class AsyncExecutorUtil {
 
     static {
         if (timer == null) {
-            timer = new Timer("notify-publish-thread");
+            timer = new Timer("timer-executor-thread");
         }
     }
 
@@ -32,7 +32,7 @@ public class AsyncExecutorUtil {
     }
 
 
-    public static void tiemrDestroyed() {
+    public static void timerDestroyed() {
         timer.cancel();
     }
 }
