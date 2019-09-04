@@ -32,7 +32,7 @@ public class ${className}Controller extends BaseControlller {
     public Page<${className}> list(Model model, ${className} ${classname}) {
         Page<${className}> page = getPage();
         ParameterUtil.set(${classname});
-        return ${classname}Service.select${className}list(page, ${classname});
+        return ${classname}Service.select${className}List(page, ${classname});
     }
 
     @RequiresPermissions("${moduleName}:${classname}:add")

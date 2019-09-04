@@ -29,7 +29,7 @@ public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${clas
      */
     @Override
     public Page<${className}> select${className}List(Page<${className}> page, ${className} ${classname}) {
-        return page.setRecords({classname}Dao. select${className}List(page,${classname}));
+        return page.setRecords(${classname}Dao. select${className}List(page,${classname}));
     }
 
     @Override
