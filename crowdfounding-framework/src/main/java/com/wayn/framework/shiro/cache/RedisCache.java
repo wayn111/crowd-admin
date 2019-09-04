@@ -5,8 +5,8 @@ package com.wayn.framework.shiro.cache;
  * @version V1.0
  */
 
+import com.wayn.commom.util.SerializeUtils;
 import com.wayn.framework.redis.RedisOpts;
-import com.wayn.framework.util.SerializeUtils;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.util.CollectionUtils;

@@ -215,6 +215,9 @@ public class ShiroConfig {
         sessionIdCookie.setName("wayn-session-id");
         sessionManager.setSessionIdCookie(sessionIdCookie);
         sessionManager.setSessionIdUrlRewritingEnabled(false);
+
+        // 设置sessionValidation任务执行周期时间
+        sessionManager.setSessionValidationInterval(30 * 60 * 1000);
         // 设置全局session超时时间
         sessionManager.setGlobalSessionTimeout(sessionTimeout * 1000);
         // 设置sessionDao实现
