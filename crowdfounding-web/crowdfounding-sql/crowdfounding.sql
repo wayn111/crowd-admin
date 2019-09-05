@@ -62,7 +62,7 @@ CREATE TABLE `oa_notify_record`  (
   `receiveUserId` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接收人id',
   `receiveUserName` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接收人name',
   `isRead` tinyint(4) NULL DEFAULT NULL COMMENT '是否已读',
-  `readDate` datetime(0) NULL DEFAULT NULL COMMENT '阅读时间',
+  `readTime` datetime(0) NULL DEFAULT NULL COMMENT '阅读时间',
   `createTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 605 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '通知记录' ROW_FORMAT = Dynamic;

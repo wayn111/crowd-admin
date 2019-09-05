@@ -38,7 +38,7 @@
                 </div>
                 <div class="ibox-content">
                     <blockquote class="text-warning" style="font-size:14px">
-                        <h4>面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质</h4>
+                        面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质
                         <br>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统
                         <br>基于stomp协议实现后台消息推送以及指定用户通信的功能
                         <br>Encache/Redis作为权限缓存，可切换

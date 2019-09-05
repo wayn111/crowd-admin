@@ -135,10 +135,10 @@
                         title: '状态',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            if (value == 'on_line') {
+                            if (value == 'ON_LINE') {
                                 return '<span class="label label-success">在线</span>';
-                            } else if (value == 'off_line') {
-                                return '<span class="label label-primary">离线</span>';
+                            } else if (value == 'OFF_LINE') {
+                                return '<span class="label label-info">离线</span>';
                             }
                         }
                     },

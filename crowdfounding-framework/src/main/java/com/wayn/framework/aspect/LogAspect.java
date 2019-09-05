@@ -95,7 +95,8 @@ public class LogAspect {
             }
             if (e != null) {
                 log2.setOperState(Constant.OPERATOR_fail);
-                log2.setErrorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
+                String errorMsg = e.getMessage().replaceAll("'", "&quot;");
+                log2.setErrorMsg(StringUtils.substring(errorMsg, 0, 2000));
             }
             logQueue.add(log2);
         }
