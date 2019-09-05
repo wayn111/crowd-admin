@@ -74,6 +74,7 @@ public class OnlineSessionFilter extends AccessControlFilter {
                     onlineSession.setUsername(user.getUserName());
                     Dept dept = deptService.selectById(user.getDeptId());
                     onlineSession.setDeptName(dept.getDeptName());
+                    sessionDAO.update(onlineSession);
                 }
                 if (onlineSession.getStatus() == OnlineStatus.OFF_LINE) {
                     return false;
