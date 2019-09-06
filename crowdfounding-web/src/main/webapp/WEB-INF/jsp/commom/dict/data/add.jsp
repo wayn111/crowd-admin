@@ -64,14 +64,12 @@
     var prefix = _ctx + "/commom/dict/data"
 
     function save() {
-        var parentWindow = $(window.parent.document);
-        var dictType = $('#dictType', parentWindow).val();
         $.ajax({
             cache: false,
             type: "POST",
             url: prefix + "/addSave",
             dataType: 'json',
-            data: $('#dict-form').serialize() + '&dictType=' + dictType,
+            data: $('#dict-form').serialize() + '&dictType=' + window.parent.dictType, // 字典类别
             error: function (request) {
                 parent.layer.alert("Connection error");
             },
@@ -111,20 +109,22 @@
                             value: function () {
                                 return $("#value").val();
                             },
-                            type: 1
+                            dictType: function () {
+                                return window.parent.dictType;
+                            },
+                            type: 2
                         }
                     }
                 }
             },
             messages: {
-
                 name: {
-                    required: icon + "请输入字典名称",
-                    minlength: icon + "字典名称必须两个字符以上"
+                    required: icon + "请输入标签名",
+                    minlength: icon + "标签名必须两个字符以上"
                 },
                 value: {
-                    required: icon + "请输入字典类型",
-                    remote: icon + "字典类型已经存在"
+                    required: icon + "请输入字典值",
+                    remote: icon + "字典值已经存在"
                 }
             },
             focusCleanup: true,

@@ -66,7 +66,7 @@ public class NotifyController extends BaseControlller {
 
     @RequiresPermissions("oa:notify:edit")
     @GetMapping("/{option}/{id}")
-    public String edit(ModelMap modelMap, @PathVariable("option") String option, @PathVariable("id") Long id) {
+    public String option(ModelMap modelMap, @PathVariable("option") String option, @PathVariable("id") Long id) {
         // 查询通知
         Notify notify = notifyService.selectById(id);
         NotifyVO notifyVO = new NotifyVO();

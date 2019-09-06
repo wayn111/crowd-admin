@@ -63,14 +63,18 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div id="exampleToolbar" role="group" class="t-bar">
-                    <button type="button" class="btn btn-info"
-                            onclick="add()">
-                        <i class="fa fa-plus" aria-hidden="true"></i>添加
-                    </button>
-                    <button type="button" class="btn  btn-danger"
-                            onclick="batchRemove()">
-                        <i class="fa fa-trash" aria-hidden="true"></i>删除
-                    </button>
+                    <shiro:hasPermission name="oa:notify:add">
+                        <button type="button" class="btn btn-info"
+                                onclick="add()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>添加
+                        </button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="oa:notify:remove">
+                        <button type="button" class="btn  btn-danger"
+                                onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </shiro:hasPermission>
                 </div>
                 <table id="table1" data-mobile-responsive="true">
                 </table>
@@ -80,14 +84,29 @@
     <!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
     <div>
         <script type="text/javascript">
-            var s_add_h = '';
+            var s_add_h = 'hidden';
         </script>
         <script type="text/javascript">
-            var s_edit_h = '';
+            var s_edit_h = 'hidden';
         </script>
         <script type="text/javascript">
-            var s_remove_h = '';
+            var s_remove_h = 'hidden';
         </script>
+        <shiro:hasPermission name="oa:notify:add">
+            <script>
+                s_add_h = '';
+            </script>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="oa:notify:edit">
+            <script>
+                s_edit_h = '';
+            </script>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="oa:notify:remove">
+            <script>
+                s_remove_h = '';
+            </script>
+        </shiro:hasPermission>
     </div>
 </div>
 <%@ include file="/commom/footer.jsp" %>

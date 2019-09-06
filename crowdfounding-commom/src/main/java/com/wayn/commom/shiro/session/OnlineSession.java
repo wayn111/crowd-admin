@@ -10,6 +10,7 @@ import org.apache.shiro.session.mgt.SimpleSession;
  * @author ruoyi
  */
 public class OnlineSession extends SimpleSession {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -28,11 +29,6 @@ public class OnlineSession extends SimpleSession {
     private String deptName;
 
     /**
-     * 登录IP地址
-     */
-    private String host;
-
-    /**
      * 浏览器类型
      */
     private String browser;
@@ -47,32 +43,6 @@ public class OnlineSession extends SimpleSession {
      */
     private OnlineStatus status = OnlineStatus.ON_LINE;
 
-    @Override
-    public String getHost() {
-        return host;
-    }
-
-    @Override
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public String getBrowser() {
-        return browser;
-    }
-
-    public void setBrowser(String browser) {
-        this.browser = browser;
-    }
-
-    public String getOs() {
-        return os;
-    }
-
-    public void setOs(String os) {
-        this.os = os;
-    }
-
     public String getUserId() {
         return userId;
     }
@@ -80,24 +50,6 @@ public class OnlineSession extends SimpleSession {
     public OnlineSession setUserId(String userId) {
         this.userId = userId;
         return this;
-    }
-
-    public OnlineStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OnlineStatus status) {
-        this.status = status;
-    }
-
-    @Override
-    public void setAttribute(Object key, Object value) {
-        super.setAttribute(key, value);
-    }
-
-    @Override
-    public Object removeAttribute(Object key) {
-        return super.removeAttribute(key);
     }
 
     public String getUsername() {
@@ -118,13 +70,51 @@ public class OnlineSession extends SimpleSession {
         return this;
     }
 
+    public String getBrowser() {
+        return browser;
+    }
+
+    public OnlineSession setBrowser(String browser) {
+        this.browser = browser;
+        return this;
+    }
+
+    public String getOs() {
+        return os;
+    }
+
+    public OnlineSession setOs(String os) {
+        this.os = os;
+        return this;
+    }
+
+    public OnlineStatus getStatus() {
+        return status;
+    }
+
+    public OnlineSession setStatus(OnlineStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    @Override
+    public void setAttribute(Object key, Object value) {
+        super.setAttribute(key, value);
+    }
+
+    @Override
+    public Object removeAttribute(Object key) {
+        return super.removeAttribute(key);
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .append("sessionId", super.getId())
                 .append("userId", userId)
                 .append("username", username)
                 .append("deptName", deptName)
-                .append("host", host)
+                .append("host", super.getHost())
                 .append("browser", browser)
                 .append("os", os)
                 .append("status", status)

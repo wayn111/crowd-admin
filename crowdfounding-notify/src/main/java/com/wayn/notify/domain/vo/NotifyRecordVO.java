@@ -38,7 +38,7 @@ public class NotifyRecordVO extends NotifyVO {
     /**
      * 阅读时间
      */
-    private Date readDate;
+    private Date readTime;
 
     public Long getId() {
         return id;
@@ -85,13 +85,12 @@ public class NotifyRecordVO extends NotifyVO {
         return this;
     }
 
-    public Date getReadDate() {
-        return readDate;
+    public Date getReadTime() {
+        return readTime;
     }
 
-    public NotifyRecordVO setReadDate(Date readDate) {
-        this.readDate = readDate;
+    public NotifyRecordVO setReadTime(Date readTime) {
+        this.readTime = readTime;
         return this;
     }
-
 }

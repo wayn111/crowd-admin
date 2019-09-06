@@ -36,10 +36,15 @@ public class RedisSessionDAO extends AbstractSessionDAO {
      */
     private String keyPrefix = "shiro_redis_session:";
 
+
     @Override
-    public void update(Session session) throws UnknownSessionException {
+    protected Serializable doCreate(Session session) {
+        Serializable sessionId = this.generateSessionId(session);
+        this.assignSessionId(session, sessionId);
         this.saveSession(session);
+        return sessionId;
     }
+
 
     /**
      * save session
@@ -57,6 +62,11 @@ public class RedisSessionDAO extends AbstractSessionDAO {
         byte[] value = SerializeUtils.serialize(session);
         //设置session失效时间
         this.redisOpts.set(key, value, timeOut);
+    }
+
+    @Override
+    public void update(Session session) throws UnknownSessionException {
+        this.saveSession(session);
     }
 
     @Override
@@ -84,13 +94,6 @@ public class RedisSessionDAO extends AbstractSessionDAO {
         return sessions;
     }
 
-    @Override
-    protected Serializable doCreate(Session session) {
-        Serializable sessionId = this.generateSessionId(session);
-        this.assignSessionId(session, sessionId);
-        this.saveSession(session);
-        return sessionId;
-    }
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
@@ -98,8 +101,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
             logger.error("session id is null");
             return null;
         }
-        Session s = (Session) SerializeUtils.deserialize(redisOpts.get(this.getByteKey(sessionId)));
-        return s;
+        return (Session) SerializeUtils.deserialize(redisOpts.get(this.getByteKey(sessionId)));
     }
 
     /**

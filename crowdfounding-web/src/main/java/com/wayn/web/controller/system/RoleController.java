@@ -11,7 +11,7 @@ import com.wayn.commom.service.MenuService;
 import com.wayn.commom.service.RoleService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
-import com.wayn.framework.util.ShiroUtil;
+import com.wayn.framework.util.ShiroCacheUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,7 +72,7 @@ public class RoleController extends BaseControlller {
 	public Response addSave(Model model, Role role, String menuIds) {
 		role.setCreateTime(new Date());
 		roleService.save(role, menuIds);
-		ShiroUtil.clearCachedAuthorizationInfo();
+		ShiroCacheUtil.clearCachedAuthorizationInfo();
 		return Response.success("新增角色成功");
 	}
 
@@ -82,7 +82,7 @@ public class RoleController extends BaseControlller {
 	@PostMapping("/editSave")
 	public Response editSave(Model model, Role role, String menuIds) throws Exception {
 		roleService.update(role, menuIds);
-		ShiroUtil.clearCachedAuthorizationInfo();
+		ShiroCacheUtil.clearCachedAuthorizationInfo();
 		return Response.success("修改角色成功");
 	}
 

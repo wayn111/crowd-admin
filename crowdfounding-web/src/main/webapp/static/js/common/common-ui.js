@@ -283,7 +283,7 @@ function generatorTableSequence(selector, index) {
  */
 function formView(win) {
     $('input[onclick]', win).off().removeAttr('onclick');
-    $('input[name],textarea[name]', win).attr('readOnly', true);
+    $('input[name],textarea[name]', win).attr('readOnly', true).attr('disabled', true);
     $('input[name]', win).each(function (index, item) {
         if ($(item).attr('name').indexOf('Time') > 1) {
             $(item).attr('disabled', true);

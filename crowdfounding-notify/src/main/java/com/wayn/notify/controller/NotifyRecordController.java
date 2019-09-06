@@ -59,7 +59,7 @@ public class NotifyRecordController extends BaseControlller {
 
     @RequiresPermissions("oa:notifyRecord:list")
     @GetMapping("/{option}/{id}")
-    public String edit(ModelMap modelMap, @PathVariable("option") String option, @PathVariable("id") Long id) {
+    public String option(ModelMap modelMap, @PathVariable("option") String option, @PathVariable("id") Long id) {
         NotifyRecordVO notifyRecordVO = notifyRecordService.selectNotifyByNotifyRecordId(id);
         // 将状态变为已读
         if (!notifyRecordVO.getRead()) {
