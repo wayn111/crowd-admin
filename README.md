@@ -8,7 +8,7 @@ crowdfounding(众筹)是一个面向学习型的开源框架，集合了开发�
 [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)，
 [bootdo](https://gitee.com/lcg0124/bootdo)，
 [RuoYi](https://gitee.com/y_project/RuoYi)等的学习总结后，开发出的后台管理系统，
-基于经典技术组合（Spring、Apache Shiro、MyBatis、Websocket、JSP），集成了系统管理、消息通知、服务监控、代码生成等常用功能，
+基于经典技术组合（Spring、Apache Shiro、MyBatis、Websocket、Quartz、JSP），集成了系统管理、消息通知、服务监控、任务调度、代码生成等常用功能，
 也是开发者这两年工作生涯技术上的缩影，_代码层次良好，注重复用，追求功能上的尽量简介而不失优雅_，取名crowdfounding！
 (ctrl+c/ctrl+c)
 
@@ -55,6 +55,8 @@ ps:项目名是开发者某日照网上教程copy而来 :smile:
     - 数据字典：对系统中经常使用的一些较为固定的数据进行维护
 4. 系统工具
     - 代码生成：可动态根据数据库表，生成后台java代码
+    - 任务调度：根据调度策略以及执行目标配置任务
+    - 任务日志：记录任务日志，方便排错追踪
 5. 系统监控
     - 在线用户：当前系统中活跃用户状态监控，可强制下线
     - 数据监控：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈
