@@ -41,6 +41,7 @@
                         面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质
                         <br>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统
                         <br>基于stomp协议实现后台消息推送以及指定用户通信的功能
+                        <br>整合quartz实现任务调度级任务日志记录
                         <br>Encache/Redis作为权限缓存，可切换
                         <br>Druid数据源,数据库监控
                         <br>使用H+作为后台管理模板，基于jsp模板改造
@@ -60,13 +61,14 @@
 
                     <h3>&nbsp;&nbsp;&nbsp;参考项目</h3>
                     <ul>
-                        <li><a
-                                href="https://gitee.com/zhougaojun/KangarooAdmin/tree/master"
-                                target="_blank"> AdminLTE-admin</a></li>
+                        <li><a href="https://gitee.com/zhougaojun/KangarooAdmin/tree/master"
+                               target="_blank"> AdminLTE-admin</a></li>
                         <li><a href="https://gitee.com/lcg0124/bootdo" target="_blank">
                             bootdo</a></li>
                         <li><a href="https://gitee.com/y_project/RuoYi" target="_blank">
                             ruoyi</a></li>
+                        <li><a href="https://github.com/wuyouzhuguli/FEBS-Security" target="_blank">
+                            FEBS-Security</a></li>
                     </ul>
                 </div>
             </div>
@@ -85,11 +87,31 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v15">v1.5.0</a><code
+                                            class="pull-right">2019.9.6</code>
+                                    </h5>
+                                </div>
+                                <div id="v15" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            整合quartz实现任务调度及任务日志记录，修复代码生成，办公通知，基础模块部分bug
+                                        </div>
+                                        <ol>
+                                            <li>系统工具 -> 任务调度功能开发完成；</li>
+                                            <li>系统工具 -> 任务日志功能开发完成；</li>
+                                            <li>修复了代码生成，办公通知，基础模块的一些bug以及代码优化；</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v12">v1.2.0</a><code
                                             class="pull-right">2019.8.24</code>
                                     </h5>
                                 </div>
-                                <div id="v12" class="panel-collapse collapse in">
+                                <div id="v12" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             添加个人资料以及头像上传功能，完成头部导航通知栏实时提示办公消息功能,修复了一些消息通知的bug以及代码优化
