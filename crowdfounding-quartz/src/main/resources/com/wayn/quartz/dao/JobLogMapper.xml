@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wayn.quartz.dao.JobLogDao">
+
+    <resultMap type="JobLog" id="JobLogResult">
+        <result property="id" column="id"/>
+        <result property="jobName" column="jobName"/>
+        <result property="jobGroup" column="jobGroup"/>
+        <result property="invokeTarget" column="invokeTarget"/>
+        <result property="jobMessage" column="jobMessage"/>
+        <result property="jobState" column="jobState"/>
+        <result property="exceptionInfo" column="exceptionInfo"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+
+    <sql id="selectJobLogVo">
+        select id, jobName, jobGroup, invokeTarget, jobMessage, jobState, exceptionInfo, createTime from sys_job_log
+    </sql>
+
+    <select id="selectJobLogList" parameterType="JobLog" resultMap="JobLogResult">
+        <include refid="selectJobLogVo"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="jobName != null  and jobName != '' ">and jobName like CONCAT('%',#{jobName},'%')</if>
+            <if test="jobGroup != null  and jobGroup != '' ">and jobGroup = #{jobGroup}</if>
+            <if test="invokeTarget != null  and invokeTarget != '' ">and invokeTarget = #{invokeTarget}</if>
+            <if test="jobMessage != null  and jobMessage != '' ">and jobMessage = #{jobMessage}</if>
+            <if test="jobState != null  and jobState != '' ">and jobState = #{jobState}</if>
+            <if test="exceptionInfo != null  and exceptionInfo != '' ">and exceptionInfo = #{exceptionInfo}</if>
+            <if test="startTime != null and startTime != ''">and createTime <![CDATA[ > ]]> #{startTime}</if>
+            <if test="endTime != null and endTime != ''">and createTime <![CDATA[ < ]]> #{endTime}</if>
+        </where>
+    </select>
+
+</mapper>

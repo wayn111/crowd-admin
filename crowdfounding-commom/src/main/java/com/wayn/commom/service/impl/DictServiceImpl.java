@@ -58,7 +58,11 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
                 return false;
             }
         }
-        int count = selectCount(new EntityWrapper<Dict>().eq("value", dict.getValue()).eq("type", dict.getType()));
+        int count = selectCount(new EntityWrapper<Dict>()
+                .eq("value", dict.getValue())
+                .eq("type", dict.getType())
+                .eq("dictType", dict.getDictType())
+                .eq("delFlag", 0));
         return count > 0 ? true : false;
     }
 
@@ -125,23 +129,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
                 .eq("dictState", 1);
         List<Dict> dictList = selectList(wrapper);
         List<JSONObject> objectList = convert2select(dictList);
-        /*JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", "all");
-        jsonObject.put("text", "全部");
-        objectList.add(0, jsonObject);*/
         return objectList;
-    }
-
-    @Cacheable(value = "dictCache", key = "#root.method + '_' + #root.args[0]")
-    @Override
-    public List<JSONObject> selectDictsValueByTypeNoAll(String dictType) {
-        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
-        wrapper.eq("type", 2)
-                .eq("delFlag", "0")
-                .eq("dictType", dictType)
-                .eq("dictState", 1);
-        List<Dict> dicts = selectList(wrapper);
-        return convert2select(dicts);
     }
 
     /**

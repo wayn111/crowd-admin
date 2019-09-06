@@ -4,8 +4,10 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.stereotype.Component;
 
-public class SpringContentUtil implements BeanFactoryPostProcessor {
+@Component
+public class SpringContextUtil implements BeanFactoryPostProcessor {
     /**
      * Spring应用上下文环境
      */
@@ -13,7 +15,7 @@ public class SpringContentUtil implements BeanFactoryPostProcessor {
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        SpringContentUtil.beanFactory = beanFactory;
+        SpringContextUtil.beanFactory = beanFactory;
     }
 
     /**

@@ -2,7 +2,7 @@ package com.wayn;
 
 import com.wayn.commom.domain.User;
 import com.wayn.commom.service.UserService;
-import com.wayn.framework.util.ShiroUtil;
+import com.wayn.commom.shiro.util.ShiroUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

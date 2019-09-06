@@ -336,12 +336,16 @@
                     type: 'info',
                     msg: response.body,
                     timeOut: -1,
-                    extendedTimeOut: -1,
-                    positionClass: 'toast-bottom-full-width'
+                    extendedTimeOut: -1
                 });
             });
             stompClient.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
-                toastr.info(JSON.parse(response.body).msg);
+                showToastr({
+                    type: 'info',
+                    msg: response.body,
+                    timeOut: -1,
+                    extendedTimeOut: -1
+                });
             });
         })
     }
@@ -369,8 +373,8 @@
 
     /**
      * 查看通知记录
-     * /
-     function viewNotifyRecord(id) {
+     */
+    function viewNotifyRecord(id) {
         var index = layer.open({
             type: 2,
             title: '通知公告查看',
@@ -391,7 +395,7 @@
         layer.full(index);
     }
 
-     /**
+    /**
      * 显示通知提示
      */
     function showToastr(config) {

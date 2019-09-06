@@ -81,6 +81,8 @@
 <script>
     var prefix = _ctx + "/commom/dict/data";
 
+    var dictType;
+
     function load() {
         $('#exampleTable').bootstrapTable(
             {
@@ -178,6 +180,7 @@
     }
 
     function reload() {
+        dictType = $('#dictType').val();
         $('#exampleTable').bootstrapTable('refresh');
     }
 
@@ -263,6 +266,7 @@
             width: '150px'
         };
         select2Init('.js-example-basic-single', config);
+        dictType = $('#dictType').val();
         load();
     });
 </script>

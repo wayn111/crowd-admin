@@ -7,7 +7,7 @@ import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.service.RoleMenuService;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
-import com.wayn.framework.util.ShiroUtil;
+import com.wayn.commom.shiro.util.ShiroUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

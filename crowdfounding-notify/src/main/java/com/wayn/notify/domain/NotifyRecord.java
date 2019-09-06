@@ -41,7 +41,7 @@ public class NotifyRecord extends BaseEntity {
     /**
      * 阅读时间
      */
-    private Date readDate;
+    private Date readTime;
 
     public Long getId() {
         return id;
@@ -83,12 +83,12 @@ public class NotifyRecord extends BaseEntity {
         return this;
     }
 
-    public Date getReadDate() {
-        return readDate;
+    public Date getReadTime() {
+        return readTime;
     }
 
-    public NotifyRecord setReadDate(Date readDate) {
-        this.readDate = readDate;
+    public NotifyRecord setReadTime(Date readTime) {
+        this.readTime = readTime;
         return this;
     }
 
@@ -113,7 +113,7 @@ public class NotifyRecord extends BaseEntity {
                 .append("receiveUserId", receiveUserId)
                 .append("receiveUserName", receiveUserName)
                 .append("isRead", isRead)
-                .append("readDate", readDate)
+                .append("readTime", readTime)
                 .append("createTime", super.getCreateTime())
                 .toString();
     }

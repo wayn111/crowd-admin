@@ -1,18 +1,18 @@
 package com.wayn.web.controller.profile;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.wayn.commom.annotation.RepeatSubmit;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.UserResetPasswordVO;
 import com.wayn.commom.service.DeptService;
 import com.wayn.commom.service.UserService;
+import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.FileUploadUtil;
 import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.ProperUtil;
 import com.wayn.commom.util.Response;
-import com.wayn.commom.annotation.RepeatSubmit;
-import com.wayn.framework.util.ShiroUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.PrincipalCollection;

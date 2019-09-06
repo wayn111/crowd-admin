@@ -1,19 +1,11 @@
-package com.wayn.framework.util;
+package com.wayn.commom.shiro.util;
 
 import com.wayn.commom.domain.User;
-import com.wayn.framework.shiro.realm.MyRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.subject.Subject;
 
-/**
- * Shiro工具类
- *
- * @author jameszhou
- */
 public class ShiroUtil {
-
     /**
      * 密码加密
      *
@@ -62,25 +54,10 @@ public class ShiroUtil {
 
     /**
      * 获取请求ip
+     *
      * @return
      */
     public static String getIP() {
         return SecurityUtils.getSubject().getSession().getHost();
-    }
-
-    public static void clearCachedAuthorizationInfo() {
-        RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
-        MyRealm shiroRealm = (MyRealm) rsm.getRealms().iterator().next();
-        shiroRealm.clearCachedAuthorizationInfo();
-
-		/*Subject subject = SecurityUtils.getSubject();
-		String realmName = subject.getPrincipals().getRealmNames().iterator().next();
-		SimplePrincipalCollection principals = new SimplePrincipalCollection(subject.getPrincipal(), realmName);
-		subject.runAs(principals);
-		//用realm删除principle
-		shiroRealm.getAuthorizationCache().remove(subject.getPrincipals());
-		//切换身份也就是刷新了
-		subject.releaseRunAs();*/
-
     }
 }

@@ -96,7 +96,7 @@
                     {
                         field: 'id', // 列字段名
                         title: '会话id', // 列标题
-						width: '18%'
+                        width: '18%'
                     },
                     {
                         field: 'username',
@@ -150,7 +150,7 @@
                             var d = '<a class="' + s_logout + ' btn btn-warning btn-sm" href="#" title="强退"  mce_href="#" onclick="forceLogout(\''
                                 + row.id
                                 + '\')"><i class="fa fa-remove"></i>强退</a> ';
-                            return d;
+                            return row.status == 'ON_LINE' ? d : '';
                         }
                     }]
             });

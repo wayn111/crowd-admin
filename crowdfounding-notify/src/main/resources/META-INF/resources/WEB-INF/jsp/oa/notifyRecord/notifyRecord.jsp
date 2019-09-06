@@ -55,10 +55,12 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div id="exampleToolbar" role="group" class="t-bar">
-                    <button type="button" class="btn  btn-danger"
-                            onclick="batchRemove()">
-                        <i class="fa fa-trash" aria-hidden="true"></i>删除
-                    </button>
+                    <shiro:hasPermission name="oa:notify:remove">
+                        <button type="button" class="btn  btn-danger"
+                                onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </shiro:hasPermission>
                 </div>
                 <table id="table1" data-mobile-responsive="true">
                 </table>
@@ -68,14 +70,21 @@
     <!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
     <div>
         <script type="text/javascript">
-            var s_add_h = '';
+            var s_view_h = 'hidden';
         </script>
         <script type="text/javascript">
-            var s_edit_h = '';
+            var s_remove_h = 'hidden';
         </script>
-        <script type="text/javascript">
-            var s_remove_h = '';
-        </script>
+        <shiro:hasPermission name="oa:notify:remove">
+            <script>
+                s_view_h = '';
+            </script>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="oa:notify:remove">
+            <script>
+                s_remove_h = '';
+            </script>
+        </shiro:hasPermission>
     </div>
 </div>
 <%@ include file="/commom/footer.jsp" %>
@@ -201,7 +210,7 @@
                             width: '10%',
                             align: 'center',
                             formatter: function (value, row, index) {
-                                var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
+                                var e = '<a  class="btn btn-primary btn-sm ' + s_view_h
                                     + '" href="#" mce_href="#" title="查看" onclick="view(\'' + row.id
                                     + '\')"><i class="fa fa-book"></i>查看</a> ';
                                 var d = '<a class="btn btn-warning btn-sm ' + s_remove_h

@@ -9,7 +9,7 @@ import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.service.MenuService;
 import com.wayn.commom.util.Response;
-import com.wayn.framework.util.ShiroUtil;
+import com.wayn.framework.util.ShiroCacheUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
@@ -22,16 +22,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/system/menu")
 public class MenuController extends BaseControlller {
+    private static final String PREFIX = "system/menu";
     @Autowired
     private MenuService menuService;
     @Autowired
     private DictService dictService;
-
     @Autowired
     private CacheManager cacheManager;
-
-    private static final String PREFIX = "system/menu";
-
 
     @RequiresPermissions("sys:menu:menu")
     @GetMapping
@@ -55,7 +52,7 @@ public class MenuController extends BaseControlller {
     @RequiresPermissions("sys:menu:add")
     @GetMapping("/add/{pid}")
     public String add(Model model, @PathVariable("pid") Long pid) {
-        model.addAttribute("menuTypes", dictService.selectDictsValueByTypeNoAll("menuType"));
+        model.addAttribute("menuTypes", dictService.selectDictsValueByType("menuType"));
         model.addAttribute("pid", pid);
         if (pid == 0) {
             model.addAttribute("pName", "顶级节点");
@@ -69,7 +66,7 @@ public class MenuController extends BaseControlller {
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
         Menu menu = menuService.selectById(id);
-        model.addAttribute("menuTypes", dictService.selectDictsValueByTypeNoAll("menuType"));
+        model.addAttribute("menuTypes", dictService.selectDictsValueByType("menuType"));
         model.addAttribute("menu", menu);
         model.addAttribute("pid", menu.getPid());
         String pName = "";
@@ -93,7 +90,7 @@ public class MenuController extends BaseControlller {
     @PostMapping("/addSave")
     public Response addSave(Model model, Menu menu) {
         menuService.save(menu);
-        ShiroUtil.clearCachedAuthorizationInfo();
+        ShiroCacheUtil.clearCachedAuthorizationInfo();
         return Response.success("菜单新增成功");
     }
 
@@ -103,7 +100,7 @@ public class MenuController extends BaseControlller {
     @PostMapping("/editSave")
     public Response editSave(Model model, Menu menu) {
         menuService.update(menu);
-        ShiroUtil.clearCachedAuthorizationInfo();
+        ShiroCacheUtil.clearCachedAuthorizationInfo();
         return Response.success("菜单修改成功");
     }
 
@@ -113,7 +110,7 @@ public class MenuController extends BaseControlller {
     @DeleteMapping("/remove/{id}")
     public Response remove(Model model, @PathVariable("id") Long id) {
         menuService.remove(id);
-        ShiroUtil.clearCachedAuthorizationInfo();
+        ShiroCacheUtil.clearCachedAuthorizationInfo();
         return Response.success("菜单删除成功");
     }
 

@@ -14,7 +14,6 @@ import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +48,6 @@ public class UserOnlineController extends BaseControlller {
     @ResponseBody
     @PostMapping("/list")
     public List<UserOnline> list(Model model, @RequestBody(required = false) Map<String, Object> params) {
-        Cache onlineUser = cacheManagerService.getCache("onlineUser");
         return userOnlineService.list();
     }
 
