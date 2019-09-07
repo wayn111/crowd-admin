@@ -1,11 +1,13 @@
 package com.wayn.quartz.util;
 
+import com.wayn.commom.util.DateUtils;
 import com.wayn.commom.util.SpringContextUtil;
 import com.wayn.quartz.domain.Job;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +18,7 @@ import java.util.Objects;
  * @author ruoyi
  */
 public class JobInvokeUtil {
+
     /**
      * 执行方法
      *
@@ -104,7 +107,10 @@ public class JobInvokeUtil {
             String str = StringUtils.trimToEmpty(methodParams[i]);
             // String字符串类型，包含'
             if (StringUtils.contains(str, "'")) {
-                classs.add(new Object[]{StringUtils.replace(str, "'", ""), String.class});
+                // date类型，str可被解析为date对象
+                String replace = StringUtils.replace(str, "'", "");
+                classs.add(DateUtils.checkDateStrIsValid(str) ? new Object[]{DateUtils.parseDate(replace), Date.class}
+                        : new Object[]{replace, String.class});
             }
             // boolean布尔类型，等于true或者false
             else if (StringUtils.equals(str, "true") || StringUtils.equalsIgnoreCase(str, "false")) {
@@ -156,5 +162,33 @@ public class JobInvokeUtil {
             index++;
         }
         return classs;
+    }
+
+    public static boolean checkInvokeTargetIsValid(String invokeTarget) throws Exception {
+
+        String method = StringUtils.substringBefore(invokeTarget, "(");
+        String methodName = StringUtils.substringAfterLast(method, ".");
+        String className = StringUtils.substringBeforeLast(method, ".");
+        // 是否包含包名
+        if (className.contains(".")) {
+            Class<?> aClass = Class.forName(className);
+            List<Object[]> methodParams = JobInvokeUtil.getMethodParams(invokeTarget);
+            if (Objects.nonNull(methodParams) && methodParams.size() > 0) {
+                aClass.getDeclaredMethod(methodName, JobInvokeUtil.getMethodParamsType(methodParams));
+            } else {
+                aClass.getDeclaredMethod(methodName);
+            }
+            return true;
+        } else {
+            Object bean = SpringContextUtil.getBean(className);
+            Class<?> aClass = bean.getClass();
+            List<Object[]> methodParams = JobInvokeUtil.getMethodParams(invokeTarget);
+            if (Objects.nonNull(methodParams) && methodParams.size() > 0) {
+                aClass.getDeclaredMethod(methodName, JobInvokeUtil.getMethodParamsType(methodParams));
+            } else {
+                aClass.getDeclaredMethod(methodName);
+            }
+            return true;
+        }
     }
 }

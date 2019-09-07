@@ -8,8 +8,11 @@ import com.wayn.commom.util.Response;
 import com.wayn.quartz.domain.Job;
 import com.wayn.quartz.service.JobService;
 import com.wayn.quartz.util.CronUtils;
+import com.wayn.quartz.util.JobInvokeUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.quartz.SchedulerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class JobController extends BaseControlller {
 
     private static final String PREFIX = "quartz/job";
-
+    private Logger logger = LoggerFactory.getLogger(JobController.class);
     @Autowired
     private JobService jobService;
 
@@ -91,7 +94,6 @@ public class JobController extends BaseControlller {
         return Response.success("删除成功");
     }
 
-
     @RequiresPermissions("quartz:job:executor")
     @ResponseBody
     @PostMapping("/changeStatus/{id}")
@@ -110,7 +112,6 @@ public class JobController extends BaseControlller {
         return Response.success("删除成功");
     }
 
-
     /**
      * 校验cron表达式是否有效
      */
@@ -118,5 +119,20 @@ public class JobController extends BaseControlller {
     @ResponseBody
     public boolean checkCronExpressionIsValid(String cronExpression) {
         return CronUtils.isValid(cronExpression);
+    }
+
+    /**
+     * 校验目标调度字符串是否有效
+     */
+    @PostMapping("/checkInvokeTargetIsValid")
+    @ResponseBody
+    public boolean checkInvokeTargetIsValid(String invokeTarget) {
+        try {
+            return JobInvokeUtil.checkInvokeTargetIsValid(invokeTarget);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("目标调度字符串 {} 无效", e.getMessage());
+        }
+        return false;
     }
 }

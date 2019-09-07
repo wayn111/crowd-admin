@@ -141,7 +141,18 @@
                     }
                 },
                 invokeTarget: {
-                    required: true
+                    required: true,
+                    remote: {
+                        url: prefix + "/checkInvokeTargetIsValid", // 后台处理程序
+                        //contentType: 'application/json;charset=UTF-8',
+                        type: "post", // 数据发送方式
+                        dataType: "json", // 接受数据格式
+                        data: { // 要传递的数据
+                            cronExpression: function () {
+                                return $("#cronExpression").val();
+                            }
+                        }
+                    }
                 }
             },
             messages: {
@@ -153,7 +164,8 @@
                     remote: icon + "请输入正确的cron表达式"
                 },
                 invokeTarget: {
-                    required: icon + "请输入调用目标字符串"
+                    required: icon + "请输入调用目标字符串",
+                    remote: icon + "请输入有效的目标字符串"
                 }
             },
             focusCleanup: true,
