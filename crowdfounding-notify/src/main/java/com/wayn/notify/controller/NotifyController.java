@@ -15,6 +15,7 @@ import com.wayn.notify.service.NotifyService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.quartz.SchedulerException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,12 +81,8 @@ public class NotifyController extends BaseControlller {
         modelMap.put("notify", notifyVO);
         // 查询接收用户
         List<NotifyRecord> records = notifyRecordService.selectList(new EntityWrapper<NotifyRecord>().eq("notifyId", notifyVO.getId()));
-        List<String> receiveUserIds = records.stream().map(item -> {
-            return item.getReceiveUserId();
-        }).collect(Collectors.toList());
-        List<String> receiveUserNames = records.stream().map(item -> {
-            return item.getReceiveUserName();
-        }).collect(Collectors.toList());
+        List<String> receiveUserIds = records.stream().map(NotifyRecord::getReceiveUserId).collect(Collectors.toList());
+        List<String> receiveUserNames = records.stream().map(NotifyRecord::getReceiveUserName).collect(Collectors.toList());
         modelMap.put("receiveUserIds", StringUtils.join(receiveUserIds, ","));
         modelMap.put("receiveUserNames", StringUtils.join(receiveUserNames, ","));
         return PREFIX + "/" + option;
@@ -106,7 +103,7 @@ public class NotifyController extends BaseControlller {
     @RequiresPermissions("oa:notify:edit")
     @ResponseBody
     @PostMapping("/editSave")
-    public Response editSave(ModelMap modelMap, NotifyVO notifyVO, String receiveUserIds) throws ParseException {
+    public Response editSave(ModelMap modelMap, NotifyVO notifyVO, String receiveUserIds) throws ParseException, SchedulerException {
         Notify notify = getNotify(notifyVO);
         if (StringUtils.isEmpty(receiveUserIds)) {
             receiveUserIds = "";
@@ -139,7 +136,7 @@ public class NotifyController extends BaseControlller {
     @RequiresPermissions("oa:notify:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
-    public Response remove(ModelMap modelMap, @PathVariable("id") Long id) {
+    public Response remove(ModelMap modelMap, @PathVariable("id") Long id) throws SchedulerException {
         notifyService.remove(id);
         return Response.success("删除成功");
     }
@@ -147,7 +144,7 @@ public class NotifyController extends BaseControlller {
     @RequiresPermissions("oa:notify:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
-    public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) {
+    public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) throws SchedulerException {
         notifyService.batchRemove(ids);
         return Response.success("删除成功");
     }

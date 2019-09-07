@@ -273,7 +273,7 @@
     }
 
     function remove(id) {
-        layer.confirm('确定要删除选中的记录？', {
+        layer.confirm('确定要删除选中的记录,未发布的通知将被取消', {
             btn: ['确定', '取消']
         }, function () {
             $.ajax({
@@ -338,7 +338,7 @@
             layer.msg("请选择要删除的数据", {icon: 6});
             return;
         }
-        layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+        layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗,未发布的通知将被取消", {
             btn: ['确定', '取消']
             // 按钮
         }, function () {

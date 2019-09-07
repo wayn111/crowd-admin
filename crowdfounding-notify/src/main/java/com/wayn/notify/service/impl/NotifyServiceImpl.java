@@ -4,24 +4,25 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.domain.User;
-import com.wayn.commom.service.UserOnlineService;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.shiro.util.ShiroUtil;
-import com.wayn.commom.util.AsyncExecutorUtil;
 import com.wayn.notify.dao.NotifyDao;
 import com.wayn.notify.domain.Notify;
 import com.wayn.notify.domain.NotifyRecord;
 import com.wayn.notify.service.NotifyRecordService;
 import com.wayn.notify.service.NotifyService;
-import com.wayn.notify.util.TimertaskManger;
+import com.wayn.notify.util.NotifyScheduleUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -43,10 +44,8 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
     private NotifyRecordService notifyRecordService;
 
     @Autowired
-    private SimpMessagingTemplate simpMessagingTemplate;
+    private Scheduler scheduler;
 
-    @Autowired
-    private UserOnlineService userOnlineService;
 
     /**
      * 查询通知通告信息
@@ -71,75 +70,43 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         boolean insert = insert(notify);
         List<NotifyRecord> collect = new ArrayList<>();
         List<String> receiveUserList = fillNotifyRecordList(notify, receiveUserIds, collect);
-        TimerTask task = getTimerTask(notify, receiveUserList);
-        // 如果不是立即发布，则在指定时间发布通知
-        if (notify.getNotifyState() != 1) {
-            AsyncExecutorUtil.scheduled(task, notify.getPublishTime());
-        } else {
-            AsyncExecutorUtil.scheduled(task, DateUtils.addMilliseconds(new Date(), 1000));
-        }
+        NotifyScheduleUtil.createScheduleJob(scheduler, notify, receiveUserList);
         notifyRecordService.insertBatch(collect);
         return insert;
     }
 
     @Transactional
     @Override
-    public boolean update(Notify notify, String receiveUserIds) {
+    public boolean update(Notify notify, String receiveUserIds) throws SchedulerException {
         notify.setUpdateTime(new Date());
         notify.setUpdateBy(ShiroUtil.getSessionUid());
         boolean update = updateById(notify);
         notifyRecordService.delete(new EntityWrapper<NotifyRecord>().eq("notifyId", notify.getId()));
         List<NotifyRecord> collect = new ArrayList<>();
         List<String> receiveUserList = fillNotifyRecordList(notify, receiveUserIds, collect);
-        // 如果不是立即发布，则在指定时间发布通知
-        TimerTask task = getTimerTask(notify, receiveUserList);
-        if (notify.getNotifyState() != 1) {
-            AsyncExecutorUtil.scheduled(task, notify.getPublishTime());
-        } else {
-            AsyncExecutorUtil.scheduled(task, DateUtils.addMilliseconds(new Date(), 1000));
+        if (scheduler.checkExists(NotifyScheduleUtil.getTriggerKey(notify.getId()))) {
+            scheduler.deleteJob(NotifyScheduleUtil.getJobKey(notify.getId()));
         }
+        NotifyScheduleUtil.createScheduleJob(scheduler, notify, receiveUserList);
         notifyRecordService.insertBatch(collect);
         return update;
     }
 
-    /**
-     * 获取timerTask定时任务，在定时任务执行时，批量保存记录
-     *
-     * @param notify
-     * @param receiveUserList
-     * @return
-     */
-    public TimerTask getTimerTask(Notify notify, List<String> receiveUserList) {
-        if (TimertaskManger.contains(notify.getId().toString())) {
-            TimerTask task = TimertaskManger.get(notify.getId().toString());
-            task.cancel();
-        }
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                for (User user : userOnlineService.listUser()) {
-                    for (String userId : receiveUserList) {
-                        if (userId.equals(user.getId())) {
-                            simpMessagingTemplate.convertAndSendToUser(userId, "/queue/notifications", "新消息：" + notify.getTitle());
-                        }
-                    }
-                }
-                updateForSet("notifyState = 1", new EntityWrapper<Notify>().eq("id", notify.getId()));
-                TimertaskManger.remove(notify.getId().toString());
-                this.cancel();
-            }
-        };
-        TimertaskManger.put(notify.getId().toString(), task);
-        return task;
-    }
-
     @Override
-    public boolean remove(Long id) {
+    public boolean remove(Long id) throws SchedulerException {
+        if (scheduler.checkExists(NotifyScheduleUtil.getTriggerKey(id))) {
+            scheduler.deleteJob(NotifyScheduleUtil.getJobKey(id));
+        }
         return updateForSet("delFlag = 1", new EntityWrapper<Notify>().eq("id", id));
     }
 
     @Override
-    public boolean batchRemove(Long[] ids) {
+    public boolean batchRemove(Long[] ids) throws SchedulerException {
+        for (Long id : ids) {
+            if (scheduler.checkExists(NotifyScheduleUtil.getTriggerKey(id))) {
+                scheduler.deleteJob(NotifyScheduleUtil.getJobKey(id));
+            }
+        }
         return updateForSet("delFlag = 1", new EntityWrapper<Notify>().in("id", Arrays.asList(ids)));
     }
 
