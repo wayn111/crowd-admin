@@ -31,7 +31,7 @@ public class Job extends BusinessEntity<Job> {
      */
     private String jobGroup;
     /**
-     * 调用目标字符串
+     * 调用目标字符串（1，springBean调用 2，通过Class.forName反射调用）
      */
     private String invokeTarget;
     /**

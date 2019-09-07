@@ -217,4 +217,21 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         r += "前";
         return r;
     }
+
+    /**
+     * 检查日期字符串参数是否可用，目前支持<br>
+     * "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",<br>
+     * "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",<br>
+     * "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"
+     *
+     * @return
+     */
+    public static boolean checkDateStrIsValid(String str) {
+        try {
+            DateUtils.parseDate(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
