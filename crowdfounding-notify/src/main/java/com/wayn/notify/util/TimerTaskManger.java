@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 定时任务帮助类
  */
-public class TimertaskManger {
+public class TimerTaskManger {
 
     private static Map<String, TimerTask> map = new ConcurrentHashMap<>();
 

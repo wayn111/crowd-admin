@@ -52,6 +52,7 @@ public class ScheduleUtil {
             Long jobId = job.getId();
             String jobGroup = job.getJobGroup();
 
+            // 创建作业
             JobDetail jobDetail = JobBuilder.newJob(jobClass)
                     .withIdentity(getJobKey(job.getId(), job.getJobGroup()))
                     .build();
@@ -96,7 +97,7 @@ public class ScheduleUtil {
 
 
     /**
-     * 设置失火策略
+     * 设置错过触发策略
      */
     public static CronScheduleBuilder handleCronScheduleMisfirePolicy(Job job, CronScheduleBuilder cb)
             throws BusinessException {
