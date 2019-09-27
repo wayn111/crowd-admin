@@ -151,7 +151,7 @@ public class UserController extends BaseControlller {
 
     }
 
-    @Log(value = "用户管理", operator = Operator.BATCH_DELETE)
+    @Log(value = "用户管理", operator = Operator.DELETE)
     @RequiresPermissions("sys:user:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
