@@ -1,7 +1,9 @@
 package com.wayn.quartz.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
@@ -37,6 +39,7 @@ public class JobController extends BaseControlller {
         return PREFIX + "/job";
     }
 
+    @Log(value = "任务调度")
     @RequiresPermissions("quartz:job:list")
     @ResponseBody
     @PostMapping("/list")
@@ -62,6 +65,7 @@ public class JobController extends BaseControlller {
         return PREFIX + "/" + option;
     }
 
+    @Log(value = "任务调度", operator = Operator.ADD)
     @RequiresPermissions("quartz:job:add")
     @ResponseBody
     @PostMapping("/addSave")
@@ -70,6 +74,7 @@ public class JobController extends BaseControlller {
         return Response.success("新增成功");
     }
 
+    @Log(value = "任务调度", operator = Operator.UPDATE)
     @RequiresPermissions("quartz:job:edit")
     @ResponseBody
     @PostMapping("/editSave")
@@ -78,6 +83,7 @@ public class JobController extends BaseControlller {
         return Response.success("修改成功");
     }
 
+    @Log(value = "任务调度", operator = Operator.DELETE)
     @RequiresPermissions("quartz:job:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
@@ -86,6 +92,7 @@ public class JobController extends BaseControlller {
         return Response.success("删除成功");
     }
 
+    @Log(value = "任务调度", operator = Operator.DELETE)
     @RequiresPermissions("quartz:job:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
@@ -94,6 +101,7 @@ public class JobController extends BaseControlller {
         return Response.success("删除成功");
     }
 
+    @Log(value = "任务调度", operator = Operator.UPDATE)
     @RequiresPermissions("quartz:job:executor")
     @ResponseBody
     @PostMapping("/changeStatus/{id}")
@@ -104,6 +112,7 @@ public class JobController extends BaseControlller {
         return Response.success("修改成功");
     }
 
+    @Log(value = "任务调度", operator = Operator.EXECUTOR)
     @RequiresPermissions("quartz:job:executor")
     @ResponseBody
     @PostMapping("/run/{id}")

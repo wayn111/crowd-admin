@@ -4,6 +4,7 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.Response;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +41,7 @@ public class LoginController extends BaseControlller {
         return PREFIX + "/login";
     }
 
-    @Log(value = "系统登陆")
+    @Log(value = "系统登陆", operator = Operator.LOGIN)
     @ResponseBody
     @PostMapping("/doLogin")
     public Response doLogin(String userName, String password, String clienkaptcha) {
@@ -57,6 +58,7 @@ public class LoginController extends BaseControlller {
         return Response.success();
     }
 
+    @Log(value = "退出登陆", operator = Operator.LOGOUT)
     @GetMapping("/logout")
     public String logout(Model model) {
         Subject subject = SecurityUtils.getSubject();

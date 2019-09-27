@@ -2,7 +2,9 @@ package com.wayn.notify.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.util.DateUtils;
 import com.wayn.commom.util.ParameterUtil;
@@ -49,6 +51,7 @@ public class NotifyController extends BaseControlller {
         return PREFIX + "/notify";
     }
 
+    @Log(value = "办公通知")
     @RequiresPermissions("oa:notify:list")
     @ResponseBody
     @PostMapping("/list")
@@ -88,6 +91,7 @@ public class NotifyController extends BaseControlller {
         return PREFIX + "/" + option;
     }
 
+    @Log(value = "办公通知",operator = Operator.ADD)
     @RequiresPermissions("oa:notify:add")
     @ResponseBody
     @PostMapping("/addSave")
@@ -100,6 +104,7 @@ public class NotifyController extends BaseControlller {
         return Response.success("新增成功");
     }
 
+    @Log(value = "办公通知",operator = Operator.UPDATE)
     @RequiresPermissions("oa:notify:edit")
     @ResponseBody
     @PostMapping("/editSave")
@@ -133,6 +138,7 @@ public class NotifyController extends BaseControlller {
     }
 
 
+    @Log(value = "办公通知",operator = Operator.DELETE)
     @RequiresPermissions("oa:notify:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
@@ -141,6 +147,7 @@ public class NotifyController extends BaseControlller {
         return Response.success("删除成功");
     }
 
+    @Log(value = "办公通知",operator = Operator.DELETE)
     @RequiresPermissions("oa:notify:remove")
     @ResponseBody
     @PostMapping("/batchRemove")

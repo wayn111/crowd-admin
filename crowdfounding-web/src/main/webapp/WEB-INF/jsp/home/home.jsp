@@ -54,27 +54,45 @@
                     </div>
                 </li>
                 <c:forEach var="menu" items="${treeMenus }">
-                    <li><c:if test="${menu.type eq 1 }">
-                        <a href="#">
-                            <i class="${menu.icon }"></i>
-                            <span class="nav-label">${menu.menuName }</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level collapse">
-                            <c:forEach var="childMenu" items="${menu.children }" varStatus="status">
-                                <li><c:choose>
-                                    <c:when test="${empty childMenu.url}">
-                                        <a class="J_menuItem" href="javascript:void(0)"
-                                           data-index="${status.index}">${childMenu.menuName }</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a class="J_menuItem" href="${_ctx }${childMenu.url }"
-                                           data-index="${status.index}">${childMenu.menuName }</a>
-                                    </c:otherwise>
-                                </c:choose></li>
-                            </c:forEach>
-                        </ul>
-                    </c:if>
+                    <li>
+                        <c:if test="${menu.type eq 1 }">
+                            <a href="#">
+                                <i class="${menu.icon }"></i>
+                                <span class="nav-label">${menu.menuName }</span>
+                                <span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level collapse">
+                                <c:forEach var="childMenu" items="${menu.children }" varStatus="status">
+                                    <li>
+                                        <c:choose>
+                                            <c:when test="${childMenu.type eq 1}">
+                                                <a href="#">${childMenu.menuName}<span class="fa arrow"></span></a>
+                                                <ul class="nav nav-third-level collapse" aria-expanded="false"
+                                                    style="height: 0px;">
+                                                    <c:forEach var="childMenu2" items="${childMenu.children}" varStatus="status2">
+                                                        <c:choose>
+                                                            <c:when test="${childMenu2.type eq 1}">
+
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <li>
+                                                                    <a class="J_menuItem" href="${_ctx }${childMenu2.url }"
+                                                                       data-index="${status2.index}">${childMenu2.menuName }</a>
+                                                                </li>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:forEach>
+                                                </ul>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="J_menuItem" href="${_ctx }${childMenu.url }"
+                                                   data-index="${status.index}">${childMenu.menuName }</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </c:if>
                         <c:if test="${menu.type eq 2 }">
                             <a href="#"> <i class="fa fa-home"></i> <span
                                     class="nav-label">${menu.menuName }</span> <span
@@ -151,7 +169,7 @@
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab"
-                       data-id="${_ctx }/main/mainIndex">首页</a>
+                       data-id="${_ctx }/main/mainIndex1">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight">
@@ -175,7 +193,7 @@
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
                     src="${_ctx }/main/mainIndex1" frameborder="0"
-                    data-id="${_ctx }/main/mainIndex" seamless></iframe>
+                    data-id="${_ctx }/main/mainIndex1" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">

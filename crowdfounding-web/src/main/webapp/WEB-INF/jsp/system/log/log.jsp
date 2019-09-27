@@ -23,7 +23,17 @@
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label for="userName">操作用户</label>
-                <input type="text" class="form-control" id="userName" name="userName">
+                <input type="text" class="form-control wayn-width-105" id="userName" name="userName">
+            </div>
+            <div class="form-group  margin-left10">
+                <label for="userName">模块名称</label>
+                <input type="text" class="form-control wayn-width-105" id="moduleName" name="moduleName">
+            </div>
+            <div class="form-group margin-left10">
+                <label for="operState">操作类型</label>
+                <select
+                        class="js-example-basic-single" id="operation" name="operation">
+                </select>
             </div>
             <div class="form-group margin-left10">
                 <label for="operState">操作状态</label>
@@ -109,6 +119,8 @@
                     //Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
                     queryParams: function (params) {
                         params.userName = $('#userName').val();
+                        params.moduleName = $('#moduleName').val();
+                        params.operation = $('#operation').val();
                         params.operState = $('#operState').val();
                         params.startTime = $('#startTime').val();
                         params.endTime = $('#endTime').val();
@@ -144,6 +156,10 @@
                             title: '模块名称'
                         },
                         {
+                            field: 'operation',
+                            title: '操作类型'
+                        },
+                        {
                             field: 'operState',
                             title: '操作状态',
                             formatter: function (value, row, index) {
@@ -153,10 +169,6 @@
                                     return '<span class="badge badge-primary">成功</span>';
                                 }
                             }
-                        },
-                        {
-                            field: 'operation',
-                            title: '操作类型'
                         },
                         {
                             field: 'ip',
@@ -280,10 +292,21 @@
                 id: -1,
                 text: '失败'
             }],
-            width: '70px',
+            width: '80px',
             minimumResultsForSearch: -1
         };
-        select2Init('.js-example-basic-single', config);
+        select2Init('select[name="operState"]', config);
+        var optArr = ${operation};
+        optArr.splice(0, 0, {
+            id: '',
+            text: '全部'
+        });
+        var config1 = {
+            data: optArr,
+            width: '100px',
+            minimumResultsForSearch: -1
+        };
+        select2Init('select[name="operation"]', config1);
         load();
     })
 </script>

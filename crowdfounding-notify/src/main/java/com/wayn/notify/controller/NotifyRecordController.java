@@ -2,7 +2,9 @@ package com.wayn.notify.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class NotifyRecordController extends BaseControlller {
 
-    private static final String PREFIX = "oa/notifyRecord" ;
+    private static final String PREFIX = "oa/notifyRecord";
 
     @Autowired
     private NotifyRecordService notifyRecordService;
@@ -37,9 +39,10 @@ public class NotifyRecordController extends BaseControlller {
     @GetMapping
     public String NotifyRecordIndex(ModelMap modelMap) {
         modelMap.addAttribute("users", userService.selectUser2JsonObj());
-        return PREFIX + "/notifyRecord" ;
+        return PREFIX + "/notifyRecord";
     }
 
+    @Log(value = "我的通知")
     @RequiresPermissions("oa:notifyRecord:list")
     @ResponseBody
     @PostMapping("/list")
@@ -54,7 +57,7 @@ public class NotifyRecordController extends BaseControlller {
     @RequiresPermissions("oa:notifyRecord:add")
     @GetMapping("/add")
     public String add(ModelMap modelMap) {
-        return PREFIX + "/add" ;
+        return PREFIX + "/add";
     }
 
     @RequiresPermissions("oa:notifyRecord:list")
@@ -87,6 +90,7 @@ public class NotifyRecordController extends BaseControlller {
     }
 
 
+    @Log(value = "我的通知", operator = Operator.DELETE)
     @RequiresPermissions("oa:notifyRecord:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
@@ -95,6 +99,7 @@ public class NotifyRecordController extends BaseControlller {
         return Response.success("删除成功");
     }
 
+    @Log(value = "我的通知", operator = Operator.DELETE)
     @RequiresPermissions("oa:notifyRecord:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
