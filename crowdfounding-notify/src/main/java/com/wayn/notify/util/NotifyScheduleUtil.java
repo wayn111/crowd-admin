@@ -56,7 +56,7 @@ public class NotifyScheduleUtil {
             } else {
                 trigger = TriggerBuilder.newTrigger()
                         .withIdentity(getTriggerKey(jobId))
-                        .startAt(DateBuilder.futureDate(1000, DateBuilder.IntervalUnit.MILLISECOND)) // use DateBuilder to create a date in the future
+                        .startAt(DateBuilder.futureDate(500, DateBuilder.IntervalUnit.MILLISECOND)) // use DateBuilder to create a date in the future
                         .withSchedule(SimpleScheduleBuilder.simpleSchedule())
                         .forJob(jobDetail) // identify job with its JobKey
                         .build();

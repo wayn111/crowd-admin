@@ -1,8 +1,11 @@
 package com.wayn.web.controller.system;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.Log;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.LogService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
@@ -26,7 +29,15 @@ public class LogController extends BaseControlller {
 
     @RequiresPermissions("sys:log:log")
     @GetMapping
-    public String login(ModelMap map) {
+    public String log(ModelMap map) {
+        JSONArray arr = new JSONArray();
+        for (Operator operator : Operator.values()) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", operator.getCode());
+            obj.put("text", operator.getName());
+            arr.add(obj);
+        }
+        map.addAttribute("operation", arr);
         return PREFIX + "/log";
     }
 
@@ -35,7 +46,7 @@ public class LogController extends BaseControlller {
     @PostMapping("/list")
     public Page<Log> list(Model model, Log log) {
         Page<Log> page = getPage();
-        //设置通用查询字段
+        // 设置通用查询字段
         ParameterUtil.setWrapper();
         return logService.listPage(page, log);
     }

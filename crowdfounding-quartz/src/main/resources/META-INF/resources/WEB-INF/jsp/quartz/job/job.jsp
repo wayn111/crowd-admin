@@ -26,6 +26,11 @@
                 <input type="text" class="form-control" id="jobName" name="jobName">
             </div>
             <div class="form-group margin-left10">
+                <label for="jobName">任务分组</label>
+                <select class="js-example-basic-single" name="jobGroup" id="jobGroup">
+                </select>
+            </div>
+            <div class="form-group margin-left10">
                 <label for="jobState">任务状态</label>
                 <select class="js-example-basic-single" name="jobState" id="jobState">
                 </select>
@@ -123,6 +128,7 @@
                     //Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
                     queryParams: function (params) {
                         params.jobName = $('#jobName').val();
+                        params.jobGroup = $('#jobGroup').val();
                         params.jobState = $('#jobState').val();
                         params.startTime = $('#startTime').val();
                         params.endTime = $('#endTime').val();
@@ -419,6 +425,21 @@
             minimumResultsForSearch: -1
         };
         select2Init('select[name="jobState"]', config);
+        var config1 = {
+            data: [{
+                id: '',
+                text: '全部'
+            }, {
+                id: 'default',
+                text: '默认'
+            }, {
+                id: 'system',
+                text: '系统'
+            }],
+            width: '80px',
+            minimumResultsForSearch: -1
+        };
+        select2Init('select[name="jobGroup"]', config1);
         load();
     })
 </script>

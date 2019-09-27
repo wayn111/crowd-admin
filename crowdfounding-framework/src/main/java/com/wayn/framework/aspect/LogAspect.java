@@ -42,7 +42,7 @@ public class LogAspect {
      */
     @AfterReturning(value = "logPointCut()")
     public void doAfterReturning(JoinPoint joinPoint) {
-        handerLog(joinPoint, null);
+        handlerLog(joinPoint, null);
     }
 
     /**
@@ -52,7 +52,7 @@ public class LogAspect {
      */
     @AfterThrowing(value = "logPointCut()", throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
-        handerLog(joinPoint, e);
+        handlerLog(joinPoint, e);
     }
 
     /**
@@ -61,7 +61,7 @@ public class LogAspect {
      * @param joinPoint
      * @param e
      */
-    public void handerLog(JoinPoint joinPoint, Exception e) {
+    private void handlerLog(JoinPoint joinPoint, Exception e) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
@@ -74,7 +74,7 @@ public class LogAspect {
             com.wayn.commom.domain.Log log2 = new com.wayn.commom.domain.Log();
             log2.setCreateTime(new Date());
             log2.setModuleName(log.value());
-            log2.setOperation(log.operator().getName());
+            log2.setOperation(log.operator().getCode());
             log2.setUserName((user != null) ? user.getUserName() : "游客");
             log2.setUrl(StringUtils.substring(request.getRequestURI(), 0, 100));
             log2.setIp(ShiroUtil.getIP());
@@ -84,13 +84,15 @@ public class LogAspect {
             Map<String, String[]> parameterMap = request.getParameterMap();
             if (log.isNeedParam()) {
                 JSONObject obj = new JSONObject(true);
-                parameterMap.forEach((key, value) -> {
+                for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+                    String key = entry.getKey();
+                    String[] value = entry.getValue();
                     if (value.length == 1 && StringUtils.isNotEmpty(value[0])) {
                         obj.put(key, value[0]);
                     } else {
                         obj.put(key, value);
                     }
-                });
+                }
                 log2.setRequestParams(obj.toJSONString());
             }
             if (e != null) {
