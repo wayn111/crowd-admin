@@ -3,15 +3,19 @@ function NavToggle() {
 }
 
 function SmoothlyMenu() {
-    $("body").hasClass("mini-navbar") ? $("body").hasClass("fixed-sidebar") ? ($("#side-menu").hide(), setTimeout(function () {
-        $('.wayn-h3,#user-state').toggle();
-        $('.wayn-profile').removeClass('bounceInDown');
-        $("#side-menu").fadeIn(500)
-    }, 300)) : $("#side-menu").removeAttr("style") : ($("#side-menu").hide(), setTimeout(function () {
-        $('.wayn-h3,#user-state').toggle();
-        $('.wayn-profile').removeClass('fadeInDown').addClass('bounceInDown');
-        $("#side-menu").fadeIn(500)
-    }, 100))
+    if ($("body").hasClass("mini-navbar")) {
+        $("body").hasClass("fixed-sidebar") ? ($("#side-menu").hide(), setTimeout(function () {
+            $('.wayn-h3,#user-state').toggle();
+            $('.wayn-profile').removeClass('bounceInDown');
+            $("#side-menu").fadeIn(500)
+        }, 300)) : $("#side-menu").removeAttr("style");
+    } else {
+        $("#side-menu").hide(), setTimeout(function () {
+            $('.wayn-h3,#user-state').toggle();
+            $('.wayn-profile').removeClass('fadeInDown').addClass('bounceInDown');
+            $("#side-menu").fadeIn(500)
+        }, 100);
+    }
 }
 
 function localStorageSupport() {
@@ -80,3 +84,15 @@ layer.config({
         "on" == e && (l.hasClass("body-small") || l.addClass("mini-navbar")), "on" == a && ($(".navbar-static-top").removeClass("navbar-static-top").addClass("navbar-fixed-top"), l.addClass("fixed-nav")), "on" == o && l.addClass("boxed-layout")
     }
 });
+
+/**
+ * 移动端适配
+ */
+$(window).bind("load resize",
+    function () {
+        if ($(this).width() < 769) {
+            $('.navbar-static-side').fadeIn();
+            $(".wayn-h3,#user-state,.navbar-top-links").fadeOut();
+        }
+    }
+);
