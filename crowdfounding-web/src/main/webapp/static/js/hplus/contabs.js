@@ -197,8 +197,7 @@ $(function () {
 
     function i() {
         $(".page-tabs-content").children("[data-id]").not(":first").not(".active").each(function () {
-            $('.J_iframe[data-id="' + $(this).data("id") + '"]').remove();
-            $(this).remove()
+            commonCloseMenu.call(this);
         });
         $(".page-tabs-content").css("margin-left", "0")
     }
@@ -248,15 +247,49 @@ $(function () {
             }
         })
     }
+    $(".J_tabRefresh").on("click", r);
+
+
+    /**
+     * 关闭tab页通用方法
+     */
+    function commonCloseMenu() {
+        $('.J_iframe[data-id="' + $(this).data("id") + '"]').remove();
+        $(this).remove()
+    }
+
+    /**
+     * 关闭左侧tab
+     */
+    function closeLeftMenu() {
+        $(".page-tabs-content").children("[data-id].active").prevAll('.J_menuTab').not(':last').each(function () {
+            commonCloseMenu.call(this);
+        });
+        $(".page-tabs-content").css("margin-left", "0")
+    }
+
+    $(".J_tabCloseLeft").on("click", closeLeftMenu);
+
+    /**
+     * 关闭右侧tab
+     */
+    function closeRightMenu() {
+        $(".page-tabs-content").children("[data-id].active").nextAll('.J_menuTab').each(function () {
+            commonCloseMenu.call(this);
+        });
+        $(".page-tabs-content").css("margin-left", "0")
+    }
+
+    $(".J_tabCloseRight").on("click", closeRightMenu);
+
 
     $(".J_menuTabs").on("dblclick", ".J_menuTab", d);
     $(".J_tabLeft").on("click", a);
     $(".J_tabRight").on("click", b);
-    $(".J_tabRefresh").on("click", r);
+    $(".J_tabCloseActive").on("click", activeTabClose);
     $(".J_tabCloseAll").on("click", function () {
         $(".page-tabs-content").children("[data-id]").not(":first").each(function () {
-            $('.J_iframe[data-id="' + $(this).data("id") + '"]').remove();
-            $(this).remove()
+            commonCloseMenu.call(this);
         });
         $(".page-tabs-content").children("[data-id]:first").each(function () {
             $('.J_iframe[data-id="' + $(this).data("id") + '"]').show();

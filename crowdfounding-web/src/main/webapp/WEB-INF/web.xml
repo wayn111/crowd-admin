@@ -26,6 +26,7 @@
     <filter>
         <filter-name>xssFilter</filter-name>
         <filter-class>com.wayn.framework.web.filter.XssFilter</filter-class>
+        <async-supported>true</async-supported>
         <init-param>
             <param-name>enabled</param-name>
             <param-value>true</param-value>
@@ -121,6 +122,7 @@
     <filter>
         <filter-name>DruidWebStatFilter</filter-name>
         <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+        <async-supported>true</async-supported>
         <init-param>
             <param-name>exclusions</param-name>
             <param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*,*/logout</param-value>

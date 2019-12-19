@@ -108,6 +108,10 @@ public class NotifyRecordController extends BaseControlller {
         return Response.success("删除成功");
     }
 
+    /**
+     * 获取右上角通知图标最新状态
+     * @return
+     */
     @ResponseBody
     @GetMapping("/notifyRecordTip")
     public Page<NotifyRecordTip> notifyRecordTip() {

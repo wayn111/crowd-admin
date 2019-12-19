@@ -17,7 +17,7 @@
         <div class="col-sm-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>个人资料</h5>
+                    <h5>个人信息</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="text-center">
@@ -103,7 +103,7 @@
                                                         <i class="fa fa-check"></i>保 存
                                                     </button>&nbsp;
                                                     <button type="button" class="btn btn-sm btn-danger"
-                                                            onclick="tabItemClose()"><i class="fa fa-reply-all"></i>关 闭
+                                                            onclick="activeTabClose()"><i class="fa fa-reply-all"></i>关 闭
                                                     </button>
                                                 </div>
                                             </div>
@@ -150,7 +150,7 @@
                                                             class="fa fa-check"></i>保 存
                                                     </button>&nbsp;
                                                     <button type="button" class="btn btn-sm btn-danger"
-                                                            onclick="tabItemClose()"><i class="fa fa-reply-all"></i>关 闭
+                                                            onclick="activeTabClose()"><i class="fa fa-reply-all"></i>关 闭
                                                     </button>
                                                 </div>
                                             </div>

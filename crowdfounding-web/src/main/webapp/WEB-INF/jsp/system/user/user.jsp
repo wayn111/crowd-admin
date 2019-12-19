@@ -75,12 +75,12 @@
             <div class="ibox-body">
                 <div id="exampleToolbar" role="group">
                     <shiro:hasPermission name="sys:user:add">
-                        <button type="button" class="btn  btn-primary" onclick="add()">
+                        <button type="button" class="btn btn-primary" onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
                     </shiro:hasPermission>
                     <shiro:hasPermission name="sys:user:remove">
-                        <button type="button" class="btn  btn-danger"
+                        <button type="button" class="btn btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
                         </button>

@@ -339,9 +339,7 @@
         var sock = new SockJS(_ctx + "/notify");
         var stompClient = Stomp.over(sock);
         stompClient.connect('guest', 'guest', function (frame) {
-            /**  订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
-             *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
-             */
+            // 修改我的通知状态
             stompClient.subscribe("/user/queue/notifyRecordTip", function (response) {
                 reload();
             });

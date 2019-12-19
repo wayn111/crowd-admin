@@ -11,7 +11,7 @@
           content="design by wayn">
     <%@ include file="/commom/taglib.jsp" %>
     <%@ include file="/commom/header.jsp" %>
-    <link href="${_ctx }/static/plugin/metisMenu/jquery.contextMenu.min.css" rel="stylesheet">
+    <link href="${_ctx }/static/plugin/contextMenu/jquery.contextMenu.min.css" rel="stylesheet">
     <link href="${_ctx }/static/plugin/toastr/toastr.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
@@ -69,14 +69,16 @@
                                                 <a href="#">${childMenu.menuName}<span class="fa arrow"></span></a>
                                                 <ul class="nav nav-third-level collapse" aria-expanded="false"
                                                     style="height: 0px;">
-                                                    <c:forEach var="childMenu2" items="${childMenu.children}" varStatus="status2">
+                                                    <c:forEach var="childMenu2" items="${childMenu.children}"
+                                                               varStatus="status2">
                                                         <c:choose>
                                                             <c:when test="${childMenu2.type eq 1}">
 
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <li>
-                                                                    <a class="J_menuItem" href="${_ctx }${childMenu2.url }"
+                                                                    <a class="J_menuItem"
+                                                                       href="${_ctx }${childMenu2.url }"
                                                                        data-index="${status2.index}">${childMenu2.menuName }</a>
                                                                 </li>
                                                             </c:otherwise>
@@ -111,22 +113,15 @@
             <nav class="navbar navbar-static-top" role="navigation"
                  style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
+                    <a class="navbar-minimalize minimalize-styl-2"
                        href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="get"
-                          action="https://www.baidu.com/s">
-                        <div class="form-group">
-                            <input type="text" placeholder="百度一下，了解更多"
-                                   class="form-control" id="wd" name="wd">
-                        </div>
-                    </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li onclick="fullScreen()">
                         <a title="全屏显示"><i class="fa fa-arrows-alt"></i> 全屏显示</a>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle count-info"
+                        <a class="dropdown-toggle count-info" data-hover="dropdown" data-delay="0"
                            data-toggle="dropdown" href="#"> <i class="fa fa-envelope"></i>
                             <span class="label label-warning">{{total}}</span>通知
                         </a>
@@ -154,10 +149,21 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown hidden-xs" id="sendws">
-                        <a class="right-sidebar-toggle" aria-expanded="false">
-                            <i class="fa fa-tasks"></i> 主题
+                    <li class="dropdown user-menu">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown" data-delay="0">
+                            <span class="hidden-xs">${user.userName}</span>
                         </a>
+                        <ul class="dropdown-menu">
+                            <li class="mt5">
+                                <a href="javascript:void(0);" onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')">
+                                    <i class="fa fa-user"></i> 个人中心</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="${_ctx }/home/logout">
+                                    <i class="fa fa-sign-out"></i> 退出登录</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -176,19 +182,20 @@
                 <i class="fa fa-forward"></i>
             </button>
             <div class="btn-group roll-nav roll-right">
-                <button class="dropdown J_tabClose" data-toggle="dropdown">
+                <button class="dropdown J_tabClose" data-toggle="dropdown" data-hover="dropdown" data-delay="0">
                     关闭操作<span class="caret"></span>
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li class="J_tabShowActive"><a>定位当前选项卡</a></li>
+                    <li class="J_tabCloseActive"><a>关闭当前选项卡</a></li>
                     <li class="divider"></li>
-                    <li class="J_tabRefresh"><a>刷新当前选项卡</a></li>
+                    <li class="J_tabCloseLeft"><a>关闭左侧选项卡</a></li>
+                    <li class="J_tabCloseRight"><a>关闭右侧选项卡</a></li>
                     <li class="J_tabCloseOther"><a>关闭其他选项卡</a></li>
                     <li class="J_tabCloseAll"><a>关闭全部选项卡</a></li>
                 </ul>
             </div>
-            <a href="${_ctx }/home/logout" class="roll-nav roll-right J_tabExit"><i
-                    class="fa fa fa-sign-out"></i> 退出</a>
+            <a href="javascript:void(0);" class="roll-nav roll-right J_tabExit J_tabRefresh"><i
+                    class="fa fa fa-refresh"></i> 刷新</a>
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
@@ -197,105 +204,25 @@
         </div>
         <div class="footer">
             <div class="pull-right">
-                © 2019 WAYN Copyright
+                © 2019 Wayn Copyright
             </div>
         </div>
     </div>
     <!--右侧部分结束-->
-    <!--右侧边栏开始-->
-    <div id="right-sidebar">
-        <div class="sidebar-container">
-            <ul class="nav nav-tabs navs-3">
-                <li class="active"><a data-toggle="tab" href="#tab-1"> <i
-                        class="fa fa-gear"></i> 主题
-                </a></li>
-            </ul>
-            <div class="tab-content">
-                <div id="tab-1" class="tab-pane active">
-                    <div class="sidebar-title">
-                        <h3>
-                            <i class="fa fa-comments-o"></i> 主题设置
-                        </h3>
-                        <small><i class="fa fa-tim"></i>
-                            你可以从这里选择和预览主题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。 </small>
-                    </div>
-                    <div class="skin-setttings">
-                        <div class="title">主题设置</div>
-                        <div class="setings-item">
-                            <span>收起左侧菜单</span>
-                            <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="collapsemenu"
-                                           class="onoffswitch-checkbox" id="collapsemenu"> <label
-                                        class="onoffswitch-label" for="collapsemenu"> <span
-                                        class="onoffswitch-inner"></span> <span
-                                        class="onoffswitch-switch"></span>
-                                </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setings-item">
-                            <span>固定顶部</span>
-
-                            <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="fixednavbar"
-                                           class="onoffswitch-checkbox" id="fixednavbar"> <label
-                                        class="onoffswitch-label" for="fixednavbar"> <span
-                                        class="onoffswitch-inner"></span> <span
-                                        class="onoffswitch-switch"></span>
-                                </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setings-item">
-                            <span> 固定宽度 </span>
-
-                            <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="boxedlayout"
-                                           class="onoffswitch-checkbox" id="boxedlayout"> <label
-                                        class="onoffswitch-label" for="boxedlayout"> <span
-                                        class="onoffswitch-inner"></span> <span
-                                        class="onoffswitch-switch"></span>
-                                </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="title">皮肤选择</div>
-                        <div class="setings-item default-skin nb">
-								<span class="skin-name "> <a href="#" class="s-skin-0">
-										默认皮肤 </a>
-								</span>
-                        </div>
-                        <div class="setings-item blue-skin nb">
-								<span class="skin-name "> <a href="#" class="s-skin-1">
-										蓝色主题 </a>
-								</span>
-                        </div>
-                        <div class="setings-item yellow-skin nb">
-								<span class="skin-name "> <a href="#" class="s-skin-3">
-										黄色/紫色主题 </a>
-								</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--右侧边栏结束-->
 </div>
 <%@ include file="/commom/footer.jsp" %>
-<script src="${_ctx }/static/plugin/metisMenu/jquery.metisMenu.js"></script>
-<script src="${_ctx }/static/plugin/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${_ctx }/static/js/hplus/hplus.js?v=4.1.0"></script>
-<script src="${_ctx }/static/js/hplus/contabs.js"></script>
 <script src="${_ctx }/static/plugin/pace/pace.min.js"></script>
 <script src="${_ctx }/static/plugin/fullscreen/jquery.fullscreen.js"></script>
-<script src="${_ctx }/static/plugin/toastr/toastr.min.js"></script>
+<script src="${_ctx }/static/plugin/metisMenu/jquery.metisMenu.js"></script>
+<script src="${_ctx }/static/plugin/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${_ctx }/static/plugin/contextMenu/jquery.contextMenu.min.js"></script>
+<script src="${_ctx }/static/plugin/contextMenu/jquery.ui.position.min.js"></script>
+<script src="${_ctx }/static/js/hplus/hplus.js?v=4.1.0"></script>
+<script src="${_ctx }/static/js/hplus/contabs.js"></script>
+<script src="${_ctx }/static/plugin/vue-2.2.6/vue.min.js"></script>
 <script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>
 <script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
-<script src="${_ctx }/static/plugin/vue-2.2.6/vue.min.js"></script>
+<script src="${_ctx }/static/plugin/toastr/toastr.min.js"></script>
 <script>
     var prefix = _ctx + '/oa/notifyRecord';
 
@@ -327,6 +254,78 @@
     $(function () {
         connect();
         toastr['success']('欢迎来crowdounding！');
+        // tab栏右键菜单实现
+        $.contextMenu({
+            selector: ".J_menuTab",
+            trigger: 'right',
+            autoHide: true,
+            items: {
+                "close_current": {
+                    name: "关闭当前",
+                    icon: "fa-close",
+                    callback: function(key, opt) {
+                        opt.$trigger.find('i').trigger("click");
+                    }
+                },
+                "close_other": {
+                    name: "关闭其他",
+                    icon: "fa-window-close-o",
+                    callback: function(key, opt) {
+                        opt.$trigger.trigger('click');
+                        $('.J_tabCloseOther').trigger('click');
+                    }
+                },
+                "close_left": {
+                    name: "关闭左侧",
+                    icon: "fa-reply",
+                    callback: function(key, opt) {
+                        opt.$trigger.trigger('click');
+                        $('.J_tabCloseLeft').trigger('click');
+                    }
+                },
+                "close_right": {
+                    name: "关闭右侧",
+                    icon: "fa-share",
+                    callback: function(key, opt) {
+                        opt.$trigger.trigger('click');
+                        $('.J_tabCloseRight').trigger('click');
+                    }
+                },
+                "close_all": {
+                    name: "全部关闭",
+                    icon: "fa-window-close",
+                    callback: function(key, opt) {
+                        $('.J_tabCloseAll').trigger('click');
+                    }
+                },
+                "step": "---------",
+                "full": {
+                    name: "全屏显示",
+                    icon: "fa-arrows-alt",
+                    callback: function(key, opt) {
+                        opt.$trigger.trigger('click');
+                        var target = $('.J_iframe[data-id="' + this.data('id') + '"]');
+                        target.fullScreen(true);
+                    }
+                },
+                "refresh": {
+                    name: "刷新页面",
+                    icon: "fa-refresh",
+                    callback: function(key, opt) {
+                        opt.$trigger.trigger('click');
+                        $('.J_tabRefresh').trigger('click');
+                    }
+                },
+                "open": {
+                    name: "新窗口打开",
+                    icon: "fa-link",
+                    callback: function(key, opt) {
+                        var target = $('.J_iframe[data-id="' + this.data('id') + '"]');
+                        window.open(target.attr('src'));
+                    }
+                },
+            }
+        })
     });
 
     /**
@@ -336,8 +335,9 @@
         var sock = new SockJS(_ctx + "/notify");
         var stompClient = Stomp.over(sock);
         stompClient.connect('guest', 'guest', function (frame) {
-            /**  订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
-             *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
+            /** 
+             * 订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致, 
+             * 这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
              */
             stompClient.subscribe("/user/queue/notifications", function (response) {
                 wrapper.notify();
@@ -365,6 +365,12 @@
                     extendedTimeOut: -1
                 });
             });
+            // 定义消息载体
+            var payload = JSON.stringify({'code': 100, 'msg': 'tip'});
+            // 定义消息头
+            var head = {};
+            // 测试发送消息
+            // stompClient.send('/app/message', head, payload);
         })
     }
 
@@ -417,7 +423,7 @@
      * 显示通知提示
      */
     function showToastr(config) {
-        toastr.options = $.extend({}, toastr.options, config);
+        toastr.options = $.extend({}, toastrDefaultConfig, config);
         toastr[config.type](config.msg);
         toastr.options = toastrDefaultConfig;
     }
@@ -432,9 +438,7 @@
             }
         })
     }
+
 </script>
 </body>
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>
