@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 通知记录 服务层实现
@@ -60,7 +61,8 @@ public class NotifyRecordServiceImpl extends ServiceImpl<NotifyRecordDao, Notify
     public Page<NotifyRecordTip> selectNotifyRecordTipList(Page<NotifyRecordTip> page, String curUserId) {
         List<NotifyRecordTip> notifyRecordTips = notifyRecordDao.selectNotifyRecordTipList(page, curUserId);
         for (NotifyRecordTip notifyRecordTip : notifyRecordTips) {
-            notifyRecordTip.setBefore(DateUtils.getTimeBefore(notifyRecordTip.getPublishTime()));
+            notifyRecordTip.setBefore(DateUtils.getTimeBefore(Objects.nonNull(notifyRecordTip.getUpdateTime()) ?
+                    notifyRecordTip.getUpdateTime() : notifyRecordTip.getPublishTime()));
         }
         return page.setRecords(notifyRecordTips);
     }

@@ -36,6 +36,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
                 .setAllowedOrigins("*")
                 // 启用sockjs
                 .withSockJS()
+//                .setClientLibraryUrl("https://cdn.jsdelivr.net/npm/sockjs-client@1.3.0/dist/sockjs.min.js")
                 // 设置连接时长
                 .setDisconnectDelay(30 * 1000);
     }

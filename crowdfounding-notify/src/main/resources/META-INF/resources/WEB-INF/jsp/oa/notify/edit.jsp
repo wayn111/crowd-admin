@@ -37,7 +37,7 @@
                             <div class="col-sm-8">
                                 <input type="hidden" name="receiveUserIds" id="receiveUserIds"
                                        value="${receiveUserIds}">
-                                <input id="receiveUserName" name="receiveUserName" class="form-control ignore"
+                                <input id="receiveUserName" name="receiveUserName" class="form-control ignore" placeholder="请选择接收人"
                                        value="${receiveUserNames}"
                                        type="text" style="cursor: pointer;" onclick="openUser()" readonly>
                             </div>

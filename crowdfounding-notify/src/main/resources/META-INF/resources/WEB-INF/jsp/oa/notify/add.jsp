@@ -35,7 +35,7 @@
                             <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>接收人：</label>
                             <div class="col-sm-8">
                                 <input type="hidden" name="receiveUserIds" id="receiveUserIds">
-                                <input id="receiveUserName" name="receiveUserName" class="form-control ignore"
+                                <input id="receiveUserName" name="receiveUserName" class="form-control ignore" placeholder="请选择接收人"
                                        type="text" style="cursor: pointer;" onclick="openUser()" readonly>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                             <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>发布时间：</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="publishTime" name="publishTime"
-                                       placeholder="发布时间"/>
+                                       placeholder="发布时间">
                             </div>
                         </div>
                         <div class="form-group">

@@ -125,7 +125,7 @@ function menuItemCreate(url, name) {
 /**
  * 关闭当前激活tab
  */
-function tabItemClose() {
+function activeTabClose() {
     var topWindow = $(window.top.document);
     $('.J_menuTabs .J_menuTab.active i', topWindow).trigger('click');
 }
@@ -242,10 +242,10 @@ function textareaEditorInit(selector, config) {
 // 上传文件
 function summernoteSendFile(file, obj) {
     var data = new FormData();
-    data.append("file", file);
+    data.append('file', file);
     $.ajax({
-        type: "POST",
-        url: _ctx + "/commom/upload",
+        type: 'POST',
+        url: _ctx + '/commom/upload',
         data: data,
         cache: false,
         contentType: false,
@@ -271,10 +271,12 @@ function summernoteSendFile(file, obj) {
  * @returns {*}
  */
 function generatorTableSequence(selector, index) {
-    //return index + 1;
-    var pageSize = $(selector).bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
-    var pageNumber = $(selector).bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
-    return pageSize * (pageNumber - 1) + index + 1;//返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+    // 通过表的#id 可以得到每页多少条
+    var pageSize = $(selector).bootstrapTable('getOptions').pageSize;
+    // 通过表的#id 可以得到当前第几页
+    var pageNumber = $(selector).bootstrapTable('getOptions').pageNumber;
+    // 返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+    return pageSize * (pageNumber - 1) + index + 1;
 }
 
 /**

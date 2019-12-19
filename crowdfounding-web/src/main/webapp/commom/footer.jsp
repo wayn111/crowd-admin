@@ -6,6 +6,8 @@
 	src="${_ctx }/static/plugin/jquery-layout/jquery.layout-latest.js?v=1.4"></script>
 <script
 	src="${_ctx }/static/plugin/bootstrap-3.3.7-dist/js/bootstrap.min.js?v=3.3.7"></script>
+<script
+		src="${_ctx }/static/plugin/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
 <script src="${_ctx }/static/plugin/bootstrap-table/bootstrap-table.js"></script>
 <script
 	src="${_ctx }/static/plugin/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>

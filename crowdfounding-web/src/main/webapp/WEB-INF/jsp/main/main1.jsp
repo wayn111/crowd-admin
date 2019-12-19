@@ -238,6 +238,6 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script src="${_ctx }/static/plugin/jquery-ui/jquery-ui.min.js"></script>
-<script src="${_ctx }/static/js/hplus/content.js"></script>
+<%--<script src="${_ctx }/static/js/hplus/content.js"></script>--%>
 </body>
 </html>
