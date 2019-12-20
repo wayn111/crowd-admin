@@ -86,7 +86,10 @@
             contentType: false,
             success: function (data) {
                 parent.layer.msg(data.msg, {icon: 1});
-                //关闭当前窗口
+                // 更换父页面和顶层页面图片路径
+                $('.img-circle', parent.document).attr('src', data.map.imgSrc);
+                $('.img-circle', top.document).attr('src', data.map.imgSrc);
+                // 关闭当前窗口
                 var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
                 parent.layer.close(index);
             }
