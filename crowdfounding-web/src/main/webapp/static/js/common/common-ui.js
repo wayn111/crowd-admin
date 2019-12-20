@@ -292,4 +292,5 @@ function formView(win) {
         }
     });
     $('select[name]', win).attr('disabled', true);
+    $('input[type=radio][disabled]', win).css('cursor', 'default');
 }

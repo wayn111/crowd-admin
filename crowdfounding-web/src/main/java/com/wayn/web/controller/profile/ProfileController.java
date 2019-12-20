@@ -138,7 +138,7 @@ public class ProfileController extends BaseControlller {
         PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(userService.selectById(getCurUserId()), realmName);
         // 重新加载Principal
         subject.runAs(newPrincipalCollection);
-        return Response.success("上传头像成功！");
+        return Response.success("上传头像成功！").add("imgSrc", url);
     }
 
     /**
