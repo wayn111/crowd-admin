@@ -38,7 +38,7 @@
     </appender>
 
     <!-- logger为java中的包 -->
-    <logger name="com.wayn" level="DEBUG">
+    <logger name="com.wayn" level="INFO">
         <appender-ref ref="SQL"/>
     </logger>
     <!--<logger name="org.springframework" level="INFO">

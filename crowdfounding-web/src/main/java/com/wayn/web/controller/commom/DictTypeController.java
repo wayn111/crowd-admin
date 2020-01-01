@@ -15,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 字典管理
+ */
 @RequestMapping("/commom/dict/type")
 @Controller
 public class DictTypeController extends BaseControlller {

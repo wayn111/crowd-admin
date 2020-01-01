@@ -15,6 +15,7 @@
         <module>crowdfounding-generator</module>
         <module>crowdfounding-notify</module>
         <module>crowdfounding-quartz</module>
+        <module>crowdfounding-filemanager</module>
     </modules>
     <packaging>pom</packaging>
     <name>crowdfounding-parent</name>
@@ -33,6 +34,9 @@
         <druid.version>1.1.16</druid.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-fileupload.version>1.3.3</commons-fileupload.version>
+        <commons-codec.version>1.10</commons-codec.version>
+        <commons-compress.version>1.18</commons-compress.version>
+        <tika.version>1.12</tika.version>
         <fastjson.version>1.2.58</fastjson.version>
         <kaptcha-version>0.0.9</kaptcha-version>
         <ehcache.version>2.10.6</ehcache.version>
@@ -52,6 +56,8 @@
         <oshi.version>3.13.3</oshi.version>
         <thumbnailator.version>0.4.8</thumbnailator.version>
         <quartz.version>2.3.0</quartz.version>
+        <java-image-scaling.version>0.8.6</java-image-scaling.version>
+        <joda-time.version>2.9.2</joda-time.version>
     </properties>
 
     <dependencies>
@@ -67,6 +73,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>${tika.version}</version>
         </dependency>
         <!-- Jackson Json处理工具包 -->
         <dependency>
