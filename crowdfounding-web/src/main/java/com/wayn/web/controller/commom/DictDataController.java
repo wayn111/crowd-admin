@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 字典数据
+ */
 @RequestMapping("/commom/dict/data")
 @Controller
 public class DictDataController extends BaseControlller {
