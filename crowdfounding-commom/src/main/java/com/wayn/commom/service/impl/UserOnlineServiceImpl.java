@@ -5,6 +5,7 @@ import com.wayn.commom.domain.UserOnline;
 import com.wayn.commom.enums.OnlineStatus;
 import com.wayn.commom.service.UserOnlineService;
 import com.wayn.commom.shiro.session.OnlineSession;
+import com.wayn.commom.util.IP2RegionUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -51,7 +52,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
             // 设置session属性至onlineUser中
             userOnline.setId((String) session.getId());
             userOnline.setOnlineSession(session.toString());
-            userOnline.setHost(session.getHost());
+            userOnline.setHost(IP2RegionUtil.getCityInfo(session.getHost()));
             userOnline.setStartTimestamp(session.getStartTimestamp());
             userOnline.setLastAccessTime(session.getLastAccessTime());
             userOnline.setTimeout(session.getTimeout());

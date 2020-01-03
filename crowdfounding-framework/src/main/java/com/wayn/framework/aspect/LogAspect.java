@@ -5,6 +5,7 @@ import com.wayn.commom.annotation.Log;
 import com.wayn.commom.consts.Constant;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.shiro.util.ShiroUtil;
+import com.wayn.commom.util.IP2RegionUtil;
 import com.wayn.commom.util.UserAgentUtils;
 import com.wayn.framework.manager.log.LogQueue;
 import org.apache.commons.lang3.StringUtils;
@@ -77,7 +78,7 @@ public class LogAspect {
             log2.setOperation(log.operator().getCode());
             log2.setUserName((user != null) ? user.getUserName() : "游客");
             log2.setUrl(StringUtils.substring(request.getRequestURI(), 0, 100));
-            log2.setIp(ShiroUtil.getIP());
+            log2.setIp(IP2RegionUtil.getCityInfo(ShiroUtil.getIP()));
             log2.setOperState(Constant.OPERATOR_SUCCESS);
             log2.setAgent(UserAgentUtils.getUserAgent(request));
             //保存操作参数

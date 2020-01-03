@@ -29,6 +29,10 @@
                 <label for="userName">模块名称</label>
                 <input type="text" class="form-control wayn-width-105" id="moduleName" name="moduleName">
             </div>
+            <div class="form-group  margin-left10">
+                <label for="userName">IP</label>
+                <input type="text" class="form-control wayn-width-105" id="ip" name="ip">
+            </div>
             <div class="form-group margin-left10">
                 <label for="operState">操作类型</label>
                 <select
@@ -120,6 +124,7 @@
                     queryParams: function (params) {
                         params.userName = $('#userName').val();
                         params.moduleName = $('#moduleName').val();
+                        params.ip = $('#ip').val();
                         params.operation = $('#operation').val();
                         params.operState = $('#operState').val();
                         params.startTime = $('#startTime').val();
