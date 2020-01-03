@@ -38,6 +38,7 @@ public class LogServiceImpl extends ServiceImpl<LogDao, Log> implements LogServi
         EntityWrapper<Log> wrapper = ParameterUtil.get();
         wrapper.like("userName", log.getUserName());
         wrapper.like("moduleName", log.getModuleName());
+        wrapper.like("ip", log.getIp());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
         wrapper.eq(log.getOperState() != null, "operState", log.getOperState());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
