@@ -41,6 +41,7 @@
                         面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质
                         <br>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统
                         <br>基于stomp协议实现后台消息推送以及指定用户通信的功能
+                        <br>整合elfinder文件管理
                         <br>整合quartz实现任务调度级任务日志记录
                         <br>Encache/Redis作为权限缓存，可切换
                         <br>Druid数据源,数据库监控
@@ -87,11 +88,30 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v16">v1.6.0</a><code
+                                            class="pull-right">2020.1.3</code>
+                                    </h5>
+                                </div>
+                                <div id="v16" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            整合elfinder文件管理模块
+                                        </div>
+                                        <ol>
+                                            <li>基础管理 -> 文件管理功能开发完成；</li>
+                                            <li>优化部分代码；</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v15">v1.5.0</a><code
                                             class="pull-right">2019.9.6</code>
                                     </h5>
                                 </div>
-                                <div id="v15" class="panel-collapse collapse in">
+                                <div id="v15" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             整合quartz实现任务调度及任务日志记录，修复代码生成，办公通知，基础模块部分bug

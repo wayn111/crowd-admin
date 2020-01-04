@@ -1,7 +1,7 @@
 package com.wayn.commom.enums;
 
 /**
- * 日志记录操作枚举类
+ * 日志操作记录
  *
  * @author wayn
  */
@@ -15,6 +15,7 @@ public enum Operator {
     OTHER("其他", "other"),
     LOGIN("登陆", "login"),
     LOGOUT("登出", "logout"),
+    FILE_OPERATE("文件操作", "fileOperate"),
     GEN_CODE("代码生成", "genCode"),
     EXECUTOR("执行", "executor");
 

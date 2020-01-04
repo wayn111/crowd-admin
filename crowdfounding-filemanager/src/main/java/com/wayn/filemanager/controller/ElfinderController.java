@@ -1,5 +1,7 @@
 package com.wayn.filemanager.controller;
 
+import com.wayn.commom.annotation.Log;
+import com.wayn.commom.enums.Operator;
 import com.wayn.filemanager.command.ElfinderCommand;
 import com.wayn.filemanager.command.ElfinderCommandFactory;
 import com.wayn.filemanager.constant.ElFinderConstants;
@@ -9,6 +11,7 @@ import org.apache.commons.fileupload.FileItemHeaders;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -44,11 +47,15 @@ public class ElfinderController {
     @Resource(name = "elfinderStorageFactory")
     private ElfinderStorageFactory elfinderStorageFactory;
 
+    @Log("文件管理")
+    @RequiresPermissions("filemanager:file:file")
     @RequestMapping
     public String filemanager() {
         return PREFIX + "/filemanager";
     }
 
+    @Log(value = "文件管理", operator = Operator.FILE_OPERATE)
+    @RequiresPermissions("filemanager:file:file")
     @RequestMapping("/connector")
     public void connector(HttpServletRequest request, final HttpServletResponse response) throws IOException {
         try {

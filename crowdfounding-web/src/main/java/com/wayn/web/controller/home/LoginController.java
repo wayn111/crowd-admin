@@ -41,7 +41,7 @@ public class LoginController extends BaseControlller {
         return PREFIX + "/login";
     }
 
-    @Log(value = "系统登陆", operator = Operator.LOGIN)
+    @Log(value = "系统登陆", operator = Operator.LOGIN, isNeedParam = false)
     @ResponseBody
     @PostMapping("/doLogin")
     public Response doLogin(String userName, String password, String clienkaptcha) {
