@@ -2,7 +2,7 @@ package com.wayn.generator.service.impl;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.wayn.commom.consts.Constant;
+import com.wayn.commom.constant.Constant;
 import com.wayn.generator.config.GenConfig;
 import com.wayn.generator.dao.GenDao;
 import com.wayn.generator.domain.ColumnInfo;

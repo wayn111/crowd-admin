@@ -1,6 +1,6 @@
 package com.wayn.commom.util;
 
-import com.wayn.commom.consts.Constant;
+import com.wayn.commom.constant.Constant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

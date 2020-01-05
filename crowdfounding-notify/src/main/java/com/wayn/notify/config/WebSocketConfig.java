@@ -1,8 +1,7 @@
 package com.wayn.notify.config;
 
 import com.wayn.notify.config.handshakehandler.MyPrincipalHandshakeHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.wayn.notify.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -18,11 +17,11 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
-    private static final Logger log = LoggerFactory.getLogger(WebSocketConfig.class);
-
     @Autowired
     private MyPrincipalHandshakeHandler myPrincipalHandshakeHandler;
 
+    @Autowired
+    private MessageBrokerConfig brokerConfig;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
@@ -44,13 +43,23 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic", "/queue");
         registry.setUserDestinationPrefix("/user/");
-        registry.setApplicationDestinationPrefixes("/app");//走@messageMapping
+        if (Constant.BROKER_TYPE_ACTIVEMQ.equalsIgnoreCase(brokerConfig.getBrokerType())) {
+            registry.setApplicationDestinationPrefixes("/app");//走@messageMapping
+            registry.enableStompBrokerRelay("/topic", "/queue")
+                    .setRelayHost(brokerConfig.getHost())
+                    .setRelayPort(brokerConfig.getPort())
+                    .setClientLogin(brokerConfig.getUsername())
+                    .setClientPasscode(brokerConfig.getPassword())
+                    .setSystemLogin(brokerConfig.getUsername())
+                    .setSystemPasscode(brokerConfig.getPassword());
+        } else {
+            registry.enableSimpleBroker("/topic", "/queue");
+        }
 //        registry.setPathMatcher(new AntPathMatcher()); // 设置路径匹配规则
     }
 
-   // 通过configureClientInboundChannel方法进行用户认证处理
+    // 通过configureClientInboundChannel方法进行用户认证处理
     /*@Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         super.configureClientInboundChannel(registration);
