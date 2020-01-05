@@ -3,7 +3,7 @@ package com.wayn.commom.base;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.wayn.commom.consts.Constant;
+import com.wayn.commom.constant.Constant;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.HttpUtil;

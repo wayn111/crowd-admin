@@ -1,4 +1,4 @@
-package com.wayn.commom.consts;
+package com.wayn.commom.constant;
 
 public class Constant {
     /**

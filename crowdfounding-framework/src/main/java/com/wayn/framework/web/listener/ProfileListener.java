@@ -1,6 +1,6 @@
 package com.wayn.framework.web.listener;
 
-import com.wayn.commom.consts.Constant;
+import com.wayn.commom.constant.Constant;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

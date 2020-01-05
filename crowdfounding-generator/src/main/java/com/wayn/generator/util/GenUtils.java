@@ -1,6 +1,6 @@
 package com.wayn.generator.util;
 
-import com.wayn.commom.consts.Constant;
+import com.wayn.commom.constant.Constant;
 import com.wayn.generator.domain.ColumnInfo;
 import com.wayn.generator.domain.TableInfo;
 import com.wayn.generator.config.GenConfig;

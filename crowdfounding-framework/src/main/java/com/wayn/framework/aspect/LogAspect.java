@@ -2,7 +2,7 @@ package com.wayn.framework.aspect;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.consts.Constant;
+import com.wayn.commom.constant.Constant;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.IP2RegionUtil;
