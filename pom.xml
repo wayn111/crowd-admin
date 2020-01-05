@@ -36,7 +36,7 @@
         <commons-fileupload.version>1.3.3</commons-fileupload.version>
         <commons-codec.version>1.10</commons-codec.version>
         <commons-compress.version>1.18</commons-compress.version>
-        <tika.version>1.12</tika.version>
+        <tika.version>1.22</tika.version>
         <fastjson.version>1.2.58</fastjson.version>
         <kaptcha-version>0.0.9</kaptcha-version>
         <ehcache.version>2.10.6</ehcache.version>
