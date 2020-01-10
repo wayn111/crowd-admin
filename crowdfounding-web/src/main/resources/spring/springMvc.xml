@@ -19,13 +19,14 @@
             base-package="com.wayn.**.service"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
+    <!--mvc文件中占位符转义-->
+    <context:property-placeholder location="classpath:proj-commom.properties" file-encoding="utf-8"/>
     <!-- 静态资源配置 -->
     <mvc:resources mapping="/static/**" location="/static/"/>
     <!--本地文件上传路径-->
     <mvc:resources mapping="/upload/**" location="file:///${wayn.uploadDir}/"/>
     <mvc:annotation-driven>
-        <mvc:message-converters
-                register-defaults="true">
+        <mvc:message-converters>
             <bean
                     class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="supportedMediaTypes">

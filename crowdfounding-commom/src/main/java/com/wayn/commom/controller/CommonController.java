@@ -31,7 +31,7 @@ public class CommonController {
      * @param fileName 文件名称
      * @param delete   是否删除
      */
-    @GetMapping("/download/")
+    @GetMapping("/download")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request) {
         try {
             String uploadDir = ProperUtil.get("wayn.uploadDir");
