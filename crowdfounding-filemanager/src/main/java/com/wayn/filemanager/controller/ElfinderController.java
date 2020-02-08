@@ -47,7 +47,6 @@ public class ElfinderController {
     @Resource(name = "elfinderStorageFactory")
     private ElfinderStorageFactory elfinderStorageFactory;
 
-    @Log("文件管理")
     @RequiresPermissions("filemanager:file:file")
     @RequestMapping
     public String filemanager() {

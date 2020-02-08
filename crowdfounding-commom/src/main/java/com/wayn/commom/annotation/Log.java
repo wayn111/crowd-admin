@@ -10,21 +10,24 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Log {
-	/**
-	 * 模块名称
-	 * @return
-	 */
-	String value() default "";
+    /**
+     * 模块名称
+     *
+     * @return
+     */
+    String value() default "";
 
-	/**
-	 * 操作类型
-	 * @return
-	 */
-	Operator operator() default Operator.SELECT;
+    /**
+     * 操作类型
+     *
+     * @return
+     */
+    Operator operator() default Operator.SELECT;
 
-	/**
-	 * 是否记录方法参数
-	 * @return
-	 */
-	boolean isNeedParam() default true;
+    /**
+     * 是否记录请求参数
+     *
+     * @return
+     */
+    boolean isNeedParam() default true;
 }

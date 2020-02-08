@@ -2,7 +2,7 @@ package com.wayn.commom.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
-import com.wayn.commom.domain.Log;
+import com.wayn.commom.domain.OperLog;
 
 /**
  * <p>
@@ -12,6 +12,6 @@ import com.wayn.commom.domain.Log;
  * @author wayn
  * @since 2019-04-13
  */
-public interface LogService extends IService<Log> {
-    Page<Log> listPage(Page<Log> page, Log log);
+public interface LogService extends IService<OperLog> {
+    Page<OperLog> listPage(Page<OperLog> page, OperLog log);
 }

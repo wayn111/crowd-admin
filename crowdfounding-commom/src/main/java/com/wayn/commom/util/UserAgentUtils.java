@@ -185,9 +185,9 @@ public class UserAgentUtils {
      * @param request
      * @return
      */
-    public static String getBorderName(HttpServletRequest request) {
+    public static String getBrowserName(HttpServletRequest request) {
         String userAgent = getUserAgent(request);
-        return getBorderName(userAgent);
+        return getBrowserName(userAgent);
     }
 
     /**
@@ -196,7 +196,7 @@ public class UserAgentUtils {
      * @param userAgent
      * @return
      */
-    public static String getBorderName(String userAgent) {
+    public static String getBrowserName(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String borderName = browser.getName();
         logger.info("borderName is:{}", borderName);
@@ -210,9 +210,9 @@ public class UserAgentUtils {
      * @param request
      * @return
      */
-    public static String getBorderType(HttpServletRequest request) {
+    public static String getBrowserType(HttpServletRequest request) {
         String userAgent = getUserAgent(request);
-        return getBorderType(userAgent);
+        return getBrowserType(userAgent);
     }
 
     /**
@@ -221,7 +221,7 @@ public class UserAgentUtils {
      * @param userAgent
      * @return
      */
-    public static String getBorderType(String userAgent) {
+    public static String getBrowserType(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String borderType = browser.getBrowserType().getName();
         logger.info("borderType is:{}", borderType);
@@ -234,9 +234,9 @@ public class UserAgentUtils {
      * @param request
      * @return
      */
-    public static String getBorderGroup(HttpServletRequest request) {
+    public static String getBrowserGroup(HttpServletRequest request) {
         String userAgent = getUserAgent(request);
-        return getBorderGroup(userAgent);
+        return getBrowserGroup(userAgent);
     }
 
     /**
@@ -245,7 +245,7 @@ public class UserAgentUtils {
      * @param userAgent
      * @return
      */
-    public static String getBorderGroup(String userAgent) {
+    public static String getBrowserGroup(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String browerGroup = browser.getGroup().getName();
         logger.info("browerGroup is:{}", browerGroup);
@@ -284,9 +284,9 @@ public class UserAgentUtils {
      * @param request
      * @return
      */
-    public static String getBorderRenderingEngine(HttpServletRequest request) {
+    public static String getBrowserRenderingEngine(HttpServletRequest request) {
         String userAgent = getUserAgent(request);
-        return getBorderRenderingEngine(userAgent);
+        return getBrowserRenderingEngine(userAgent);
     }
 
     /**
@@ -295,7 +295,7 @@ public class UserAgentUtils {
      * @param userAgent
      * @return
      */
-    public static String getBorderRenderingEngine(String userAgent) {
+    public static String getBrowserRenderingEngine(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String renderingEngine = browser.getRenderingEngine().name();
         logger.info("renderingEngine is:{}", renderingEngine);
@@ -332,9 +332,9 @@ public class UserAgentUtils {
 //		String iosUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16A366 QQ/7.7.8.421 V1_IPH_SQ_7.7.8_1_APP_A Pixel/750 Core/UIWebView Device/Apple(iPhone 6s) NetType/WIFI QBWebViewType/1";
         String winUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36";
 
-        System.out.println("浏览器组：" + getBorderGroup(winUserAgent));
-        System.out.println("浏览器名字：" + getBorderName(winUserAgent));
-        System.out.println("浏览器类型" + getBorderType(winUserAgent));
+        System.out.println("浏览器组：" + getBrowserGroup(winUserAgent));
+        System.out.println("浏览器名字：" + getBrowserName(winUserAgent));
+        System.out.println("浏览器类型" + getBrowserType(winUserAgent));
         System.out.println("浏览器生产商：" + getBrowserManufacturer(winUserAgent));
         System.out.println("浏览器版本：" + getBrowserVersion(winUserAgent));
         System.out.println("设备生产厂商:" + getDeviceManufacturer(winUserAgent));
@@ -342,7 +342,7 @@ public class UserAgentUtils {
         System.out.println("设备操作系统：" + getOs(winUserAgent));
         System.out.println("操作系统的名字：" + getOsName(winUserAgent));
         System.out.println("操作系统的版本号：" + getOsVersion(winUserAgent));
-        System.out.println("操作系统浏览器的渲染引擎:" + getBorderRenderingEngine(winUserAgent));
+        System.out.println("操作系统浏览器的渲染引擎:" + getBrowserRenderingEngine(winUserAgent));
     }
 
 }

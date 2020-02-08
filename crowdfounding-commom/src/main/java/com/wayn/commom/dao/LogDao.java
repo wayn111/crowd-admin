@@ -1,6 +1,6 @@
 package com.wayn.commom.dao;
 
-import com.wayn.commom.domain.Log;
+import com.wayn.commom.domain.OperLog;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author wayn
  * @since 2019-04-13
  */
-public interface LogDao extends BaseMapper<Log> {
+public interface LogDao extends BaseMapper<OperLog> {
 
 }
