@@ -1,6 +1,6 @@
 package com.wayn.framework.manager.log;
 
-import com.wayn.commom.domain.Log;
+import com.wayn.commom.domain.OperLog;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.BlockingQueue;
@@ -11,13 +11,13 @@ import java.util.concurrent.LinkedBlockingDeque;
  */
 @Component
 public class LogQueue {
-    private BlockingQueue<Log> queue = new LinkedBlockingDeque<>();
+    private BlockingQueue<OperLog> queue = new LinkedBlockingDeque<>();
 
-    public void add(Log log) {
+    public void add(OperLog log) {
         queue.add(log);
     }
 
-    public Log take() throws InterruptedException {
+    public OperLog take() throws InterruptedException {
         return queue.take();
     }
 }

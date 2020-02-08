@@ -183,21 +183,22 @@
                             field: 'url',
                             title: '地址'
                         },
+
+                        {
+                            field: 'createTime',
+                            title: '操作时间',
+                            width: '10%',
+                            sortable: true
+                        },
                         {
                             field: 'params',
-                            title: '参数',
+                            title: '详情',
                             formatter: function (value, row, index) {
                                 var d = '<a class="'
                                     + ' btn btn-info btn-sm" href="#" title="详情"  mce_href="#" onclick="detail(\''
                                     + row.id + '\')"><i class="fa detail"></i>详情</a> ';
                                 return d;
                             }
-                        },
-                        {
-                            field: 'createTime',
-                            title: '操作时间',
-                            width: '10%',
-                            sortable: true
                         },
                         {
                             title: '操作',
@@ -308,8 +309,7 @@
         });
         var config1 = {
             data: optArr,
-            width: '100px',
-            minimumResultsForSearch: -1
+            width: '100px'
         };
         select2Init('select[name="operation"]', config1);
         load();

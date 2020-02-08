@@ -1,6 +1,6 @@
 package com.wayn.framework.manager.log;
 
-import com.wayn.commom.domain.Log;
+import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,10 +41,10 @@ public class LogConsumer implements Runnable {
 	}
 
 	private void logHander() {
-		List<Log> temp = new ArrayList<>();
+		List<OperLog> temp = new ArrayList<>();
 		try {
 			while (temp.size() <= logHanderNum) {
-				Log log = queue.take();
+				OperLog log = queue.take();
 				temp.add(log);
 			}
 			if (temp.size() != 0) {

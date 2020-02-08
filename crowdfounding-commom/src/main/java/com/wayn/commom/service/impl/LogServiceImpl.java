@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.dao.LogDao;
-import com.wayn.commom.domain.Log;
+import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.LogService;
 import com.wayn.commom.util.ParameterUtil;
@@ -23,7 +23,7 @@ import java.util.Map;
  * @since 2019-04-13
  */
 @Service
-public class LogServiceImpl extends ServiceImpl<LogDao, Log> implements LogService {
+public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogService {
     private static Map<String, String> map;
 
     static {
@@ -34,16 +34,16 @@ public class LogServiceImpl extends ServiceImpl<LogDao, Log> implements LogServi
     }
 
     @Override
-    public Page<Log> listPage(Page<Log> page, Log log) {
-        EntityWrapper<Log> wrapper = ParameterUtil.get();
+    public Page<OperLog> listPage(Page<OperLog> page, OperLog log) {
+        EntityWrapper<OperLog> wrapper = ParameterUtil.get();
         wrapper.like("userName", log.getUserName());
         wrapper.like("moduleName", log.getModuleName());
         wrapper.like("ip", log.getIp());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
         wrapper.eq(log.getOperState() != null, "operState", log.getOperState());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
-        Page<Log> logPage = selectPage(page, wrapper);
-        for (Log record : logPage.getRecords()) {
+        Page<OperLog> logPage = selectPage(page, wrapper);
+        for (OperLog record : logPage.getRecords()) {
             record.setOperation(map.get(record.getOperation()));
         }
         return logPage;

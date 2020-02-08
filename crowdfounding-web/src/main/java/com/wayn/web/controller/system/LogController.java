@@ -4,11 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.domain.Log;
+import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.LogService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
+import com.wayn.commom.util.UserAgentUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,8 +45,8 @@ public class LogController extends BaseControlller {
     @RequiresPermissions("sys:log:log")
     @ResponseBody
     @PostMapping("/list")
-    public Page<Log> list(Model model, Log log) {
-        Page<Log> page = getPage();
+    public Page<OperLog> list(Model model, OperLog log) {
+        Page<OperLog> page = getPage();
         // 设置通用查询字段
         ParameterUtil.setWrapper();
         return logService.listPage(page, log);
@@ -54,7 +55,11 @@ public class LogController extends BaseControlller {
     @RequestMapping("/detail/{id}")
     @GetMapping
     public String detail(ModelMap map, @PathVariable("id") String id) {
-        map.addAttribute("log", logService.selectById(id));
+        OperLog operLog = logService.selectById(id);
+        String browserName = UserAgentUtils.getBrowserName(operLog.getAgent());
+        String osName = UserAgentUtils.getOsName(operLog.getAgent());
+        operLog.setAgent(browserName + "\t" + osName);
+        map.addAttribute("log", operLog);
         return PREFIX + "/detail";
     }
 
