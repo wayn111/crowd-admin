@@ -31,7 +31,8 @@
             </div>
             <div class="form-group margin-left10 select-time">
                 <label for="startTime">创建时间</label>
-                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime" placeholder="开始时间"/>
+                <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
+                       placeholder="开始时间"/>
                 <span>-</span>
                 <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
             </div>
@@ -158,8 +159,12 @@
                                 var d = '<a class="'
                                     + s_remove
                                     + ' btn btn-warning btn-sm" href="#" title="代码生成"  mce_href="#" onclick="genCode(\''
-                                    + row.tableName + '\')"><i class="fa fa-download"></i>代码生成</a> ';
-                                return d;
+                                    + row.tvableName + '\')"><i class="fa fa-download"></i>代码生成</a> ';
+                                var v = '<a class="'
+                                    + s_remove
+                                    + ' btn btn-info btn-sm" href="#" title="预览"  mce_href="#" onclick="preview(\''
+                                    + row.tableName + '\')"><i class="fa fa-search"></i>预览</a> ';
+                                return v + d;
                             }
                         }]
                 });
@@ -167,7 +172,33 @@
 
     function genCode(tableName) {
         location.href = prefix + "/genCode/" + tableName;
-        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
+        layer.msg('执行成功,正在生成代码请稍后…', {icon: 1});
+    }
+
+    function preview(tableName) {
+        $.ajax({
+            type: 'GET',
+            url: prefix + '/previewCode/' + tableName,
+            success: function (data) {
+                if (data.code == 100) {
+                    var items = data.map.tabs;
+                    var tabs = [];
+                    for (var item in items) {
+                        var value = items[item];
+                        value = value.replace(/</g, "&lt;");
+                        value = value.replace(/>/g, "&gt;");
+                        tabs.push({
+                            title: item , content: "<pre class='layui-code'>" + value + "</pre>"
+                        })
+                    }
+                    top.layer.tab({
+                        area: ['90%', '90%'],
+                        shadeClose: true,
+                        tab: tabs
+                    });
+                }
+            }
+        });
     }
 
     function batchGenCode() {
