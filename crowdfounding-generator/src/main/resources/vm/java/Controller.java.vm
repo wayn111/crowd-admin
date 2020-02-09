@@ -11,6 +11,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ${package}.commom.domian.${className};
 
+/**
+ * ${tableComment} 控制层
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
 @RequestMapping("/${moduleName}/${classname}")
 @Controller
 public class ${className}Controller extends BaseControlller {

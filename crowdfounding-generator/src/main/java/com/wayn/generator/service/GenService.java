@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.wayn.generator.domain.TableInfo;
 
+import java.util.Map;
+
 /**
  * 代码生成service
  */
@@ -33,4 +35,11 @@ public interface GenService extends IService<TableInfo> {
      * @return 数据
      */
     public byte[] generatorCode(String[] tableNames);
+
+    /**
+     * 预览代码
+     * @return
+     * @param tableName
+     */
+    Map<String, String> previewCode(String tableName);
 }

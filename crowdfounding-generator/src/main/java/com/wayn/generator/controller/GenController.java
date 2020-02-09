@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.enums.Operator;
+import com.wayn.commom.util.Response;
 import com.wayn.generator.domain.TableInfo;
 import com.wayn.generator.service.GenService;
 import org.apache.commons.io.IOUtils;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/tool/gen")
@@ -39,6 +41,14 @@ public class GenController extends BaseControlller {
         Page<TableInfo> page = getPage();
         Page<TableInfo> tableInfoPage = genService.selectTableList(page, tableInfo);
         return tableInfoPage;
+    }
+
+    @ResponseBody
+    @RequiresPermissions("tool:gen:gen")
+    @GetMapping("/previewCode/{name}")
+    public Response previewCode(@PathVariable("name") String tableName, HttpServletResponse response) {
+        Map<String, String> dataMap = genService.previewCode(tableName);
+        return Response.success().add("tabs", dataMap);
     }
 
     @Log(value = "代码生成", operator = Operator.GEN_CODE)

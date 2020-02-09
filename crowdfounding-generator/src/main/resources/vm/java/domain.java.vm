@@ -33,11 +33,11 @@ public class ${className} extends BaseEntity {
     #if($column.attrname != 'createTime' && $column.attrname != 'remarks')
     /** $column.columnComment */
     #if($column.attrname == $primaryKey.attrname)
-        #if($primaryKey.attrType == 'String')
-        @TableId(type = IdType.UUID)
-        #else
-        @TableId(type = IdType.AUTO)
-        #end
+    #if($primaryKey.attrType == 'String')
+    @TableId(type = IdType.UUID)
+    #else
+    @TableId(type = IdType.AUTO)
+    #end
     private $column.attrType $column.attrname;
     #else
     private $column.attrType $column.attrname;
