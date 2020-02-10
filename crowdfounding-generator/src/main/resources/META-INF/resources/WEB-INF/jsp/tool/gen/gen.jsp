@@ -159,7 +159,7 @@
                                 var d = '<a class="'
                                     + s_remove
                                     + ' btn btn-warning btn-sm" href="#" title="代码生成"  mce_href="#" onclick="genCode(\''
-                                    + row.tvableName + '\')"><i class="fa fa-download"></i>代码生成</a> ';
+                                    + row.tableName + '\')"><i class="fa fa-download"></i>代码生成</a> ';
                                 var v = '<a class="'
                                     + s_remove
                                     + ' btn btn-info btn-sm" href="#" title="预览"  mce_href="#" onclick="preview(\''
@@ -179,6 +179,13 @@
         $.ajax({
             type: 'GET',
             url: prefix + '/previewCode/' + tableName,
+            beforeSend: function (xhr) {
+                layer.msg('加载中', {
+                    icon: 16,
+                    shade: 0.1,
+                    time: 270
+                });
+            },
             success: function (data) {
                 if (data.code == 100) {
                     var items = data.map.tabs;
@@ -192,7 +199,7 @@
                         })
                     }
                     top.layer.tab({
-                        area: ['90%', '90%'],
+                        area: ['90%', '90%'] ,
                         shadeClose: true,
                         tab: tabs
                     });
