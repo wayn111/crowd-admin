@@ -1,10 +1,5 @@
 package com.wayn.framework.shiro.cache;
 
-/**
- * @author bootdo 1992lcg@163.com
- * @version V1.0
- */
-
 import com.wayn.commom.util.SerializeUtils;
 import com.wayn.framework.redis.RedisOpts;
 import org.apache.shiro.cache.Cache;
@@ -15,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-public class RedisCache<K, V> implements  Cache<K, V> {
+public class RedisCache<K, V> implements Cache<K, V> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -140,14 +135,13 @@ public class RedisCache<K, V> implements  Cache<K, V> {
     @Override
     public int size() {
         try {
-            Long longSize = new Long(opts.dbSize());
+            Long longSize = opts.dbSize();
             return longSize.intValue();
         } catch (Throwable t) {
             throw new CacheException(t);
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Set<K> keys() {
         try {
@@ -155,7 +149,7 @@ public class RedisCache<K, V> implements  Cache<K, V> {
             if (CollectionUtils.isEmpty(keys)) {
                 return Collections.emptySet();
             }else{
-                Set<K> newKeys = new HashSet<K>();
+                Set<K> newKeys = new HashSet<>();
                 for(byte[] key:keys){
                     newKeys.add((K)key);
                 }
@@ -171,9 +165,8 @@ public class RedisCache<K, V> implements  Cache<K, V> {
         try {
             Set<byte[]> keys = opts.keys(this.keyPrefix + "*");
             if (!CollectionUtils.isEmpty(keys)) {
-                List<V> values = new ArrayList<V>(keys.size());
+                List<V> values = new ArrayList<>(keys.size());
                 for (byte[] key : keys) {
-                    @SuppressWarnings("unchecked")
                     V value = get((K)key);
                     if (value != null) {
                         values.add(value);
