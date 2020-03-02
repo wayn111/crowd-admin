@@ -25,6 +25,9 @@
     <mvc:resources mapping="/static/**" location="/static/"/>
     <!--本地文件上传路径-->
     <mvc:resources mapping="/upload/**" location="file:///${wayn.uploadDir}/"/>
+
+    <mvc:redirect-view-controller path="/index" redirect-url="/home/login"/>
+
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean
