@@ -22,11 +22,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.wayn</groupId>
-			<artifactId>crowdfounding-commom</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowdfounding-framework</artifactId>

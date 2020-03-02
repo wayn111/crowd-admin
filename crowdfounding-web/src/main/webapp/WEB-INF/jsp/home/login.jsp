@@ -51,7 +51,8 @@
                 <div class="row">
                     <div class="col-xs-7">
                         <div class="form-group">
-                            <input class="form-control" id="kaptcha-input" name="clienkaptcha" maxlength="4" placeholder="验证码">
+                            <input class="form-control" id="kaptcha-input" name="clienkaptcha" maxlength="4"
+                                   placeholder="验证码">
                         </div>
                     </div>
                     <div class="col-xs-5">
@@ -159,5 +160,4 @@
 
 </script>
 </body>
-<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 </html>

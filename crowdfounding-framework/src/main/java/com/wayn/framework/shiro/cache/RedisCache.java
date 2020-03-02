@@ -27,7 +27,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
     /**
      * The Redis key prefix for the sessions
      */
-    private String keyPrefix = "shiro_redis_session:";
+    private String keyPrefix = "shiro_redis_cache:";
 
     /**
      * Returns the Redis session keys
