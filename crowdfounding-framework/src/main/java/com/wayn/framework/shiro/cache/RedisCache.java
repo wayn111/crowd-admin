@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-public class RedisCache<K, V> implements Cache<K, V> {
+public class RedisCache<K, V> implements  Cache<K, V> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
