@@ -4,15 +4,7 @@
 - [简体中文](README_zh.md)|[English](README_en.md)
 
 ### 项目介绍
-crowdfounding(众筹)是一个面向学习型的开源框架，集合了开发者日常工作项目上所学以及对开源项目
-[AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)，
-[bootdo](https://gitee.com/lcg0124/bootdo)，
-[RuoYi](https://gitee.com/y_project/RuoYi)等的学习总结后，开发出的后台管理系统，
-基于经典技术组合（Spring、Apache Shiro、MyBatis、Websocket、Quartz、JSP），集成了系统管理、消息通知、服务监控、任务调度、代码生成等常用功能，
-也是开发者这两年工作生涯技术上的缩影，_代码层次良好，注重复用，追求功能上的尽量简介而不失优雅_，取名crowdfounding！
-(ctrl+c/ctrl+c)
-
-ps:项目名是开发者某日照网上教程copy而来 :smile: 
+crowdfounding是一个基于Spring,Shiro,Redis,Mybatis的通用后台权限管理系统，并且集成了消息通知，任务调度，代码生成等常用功能，易于上手，学习，使用二次开发。
 
 
 ### 技术选型
@@ -68,7 +60,6 @@ ps:项目名是开发者某日照网上教程copy而来 :smile:
 
 ### 开发教程
 - 此处参考[RuoYi](https://gitee.com/y_project/RuoYi)文档
-- 登陆账号：admin 密码：123456
 - 如有疑问，QQ:1669738430
  
 ### 获取源码
@@ -76,7 +67,7 @@ ps:项目名是开发者某日照网上教程copy而来 :smile:
 - [crowdfounding github](https://github.com/wayn111/crowdfounding)
 
 ### 在线演示
-- <a href="http://wayn.xin" target="_blank">crowdfounding-web</a>
+- [=<a href="http://wayn.xin" target="_blank">crowdfounding-web</a>=]
 - 账号：admin 密码：123456
 
 ### 参考项目
