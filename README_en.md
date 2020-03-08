@@ -5,8 +5,9 @@
 
 ### Introduction
 - Learning-oriented open source framework, simple and efficient, reasonable modular split, showing the essence of technology
-- Crowdfounding is a streamlined background system developed with SpringMVC+Shiro+Mybatis-Plus as the core
+- Crowdfounding is a streamlined background admin system developed with SpringMVC+Shiro+Mybatis-Plus as the core
 - Encache + Redis configuration switch
+- Websocket message push
 - Druid dataSource and Monitor web page
 - Use H+ as a background management template, based on jsp template transformation
 - Integrated dictionary management and online users as well as logging
