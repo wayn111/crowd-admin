@@ -12,7 +12,6 @@ import com.wayn.commom.util.Response;
 import com.wayn.framework.util.ShiroCacheUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,16 +26,10 @@ public class MenuController extends BaseControlller {
     private MenuService menuService;
     @Autowired
     private DictService dictService;
-    @Autowired
-    private CacheManager cacheManager;
 
     @RequiresPermissions("sys:menu:menu")
     @GetMapping
     public String menuIndex(Model model) {
-        //缓存管理器测试
-        /*Cache menuCache = cacheManager.getCache("menuCache");
-        Cache.ValueWrapper valueWrapper = menuCache.get("public java.util.List com.wayn.generator.service.impl.MenuServiceImpl.selectTreeMenuByUserId(" +
-                "java.lang.String)_c79ba431f9f74dfbae585b87b0cde933");*/
         model.addAttribute("menuTypes", dictService.selectDictsValueByType("menuType"));
         return PREFIX + "/menu";
     }

@@ -73,7 +73,6 @@
                                                                varStatus="status2">
                                                         <c:choose>
                                                             <c:when test="${childMenu2.type eq 1}">
-
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <li>

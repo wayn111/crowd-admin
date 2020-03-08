@@ -79,8 +79,7 @@ crowdfounding是一个基于Spring,Shiro,Redis,Mybatis的通用后台权限管�
 - [crowdfounding github](https://github.com/wayn111/crowdfounding)
 
 ### 在线演示
-- ~~<a href="http://wayn.xin" target="_blank">crowdfounding-web</a>~~
-- 账号：admin 密码：123456
+- <a href="http://wayn.xin" target="_blank">~~crowdfounding-web~~</a>
 
 ### 参考项目
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
@@ -89,22 +88,18 @@ crowdfounding是一个基于Spring,Shiro,Redis,Mybatis的通用后台权限管�
 
 ### 实例截图
 __系统登陆__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0824/175955_6658801e_1731679.png "系统登陆.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/系统登陆.png "系统登陆.png")
 __首页__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0824/180055_d2eda5fd_1731679.png "首页.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/首页.png "首页.png")
 __用户管理__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0824/180332_d2e3162e_1731679.png "用户管理.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/用户管理.png "用户管理.png")
 __添加角色__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0824/180453_538d9788_1731679.png "添加角色.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/添加角色.png "添加角色.png")
 __菜单管理__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0824/180536_36473cbc_1731679.png "菜单管理.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/菜单管理.png "菜单管理.png")
 __通知管理__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0824/180652_d022dcf8_1731679.png "通知管理.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/通知管理.png "通知管理.png")
 __查看通知__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0824/180748_5f342010_1731679.png "查看通知.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/查看通知.png "查看通知.png")
 __字典管理__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0824/180904_135aa88e_1731679.png "字典管理.png")
-__日志查看__
-![日志查看](https://images.gitee.com/uploads/images/2019/0714/171557_056253cd_1731679.png "log.png")
-__系统服务__
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0719/173156_b2dc84a5_1731679.png "server.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/字典管理.png "字典管理.png")
