@@ -1,10 +1,10 @@
-# crowdfounding
+# spring-mybatis-admin
 
 ### Language
 - [简体中文](README_zh.md)|[English](README_en.md)
 
 ### 项目介绍
-crowdfounding是一个基于Spring,Shiro,Redis,Mybatis的通用后台权限管理系统，并且集成了消息通知，任务调度，代码生成等常用功能，易于上手，学习，使用二次开发。
+spring-mybatis-admin是一个基于Spring,Shiro,Redis,Mybatis的通用后台权限管理系统，并且集成了消息通知，任务调度，代码生成等常用功能，易于上手，学习，使用二次开发。
 
 #### 主要特性
 - 项目按功能模块化，提升开发，测试效率
