@@ -5,12 +5,12 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.dao.MenuDao;
 import com.wayn.commom.dao.RoleMenuDao;
 import com.wayn.commom.domain.Menu;
-import com.wayn.commom.exception.BusinessException;
-import com.wayn.commom.util.TreeBuilderUtil;
 import com.wayn.commom.domain.RoleMenu;
 import com.wayn.commom.domain.vo.MenuVO;
 import com.wayn.commom.domain.vo.Tree;
+import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.service.MenuService;
+import com.wayn.commom.util.TreeBuilderUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -114,7 +114,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
             tree.setText(menu.getMenuName());
             trees.add(tree);
         });
-        return TreeBuilderUtil.<Menu>build(trees);
+        return TreeBuilderUtil.build(trees);
     }
 
     /**
@@ -195,6 +195,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
 
     /**
      * 根据pid查询子菜单
+     *
      * @param menus
      * @param menusList
      * @return
