@@ -1,4 +1,4 @@
-# spring-mybatis-admin
+# crowd-admin
 
 ### Language
 - [简体中文](README_zh.md)|[English](README_en.md)
