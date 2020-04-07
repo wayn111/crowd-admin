@@ -36,14 +36,7 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
-    @Value("${redis.host}")
-    private String host;
-    @Value("${redis.password}")
-    private String password;
-    @Value("${redis.port}")
-    private int port;
-    @Value("${redis.timeout}")
-    private int timeout;
+
     @Value("${cache.type}")
     private String cacheType;
     @Value("${shiro.session-timeout}")
@@ -81,7 +74,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSuccessUrl(successUrl);
         shiroFilterFactoryBean.setUnauthorizedUrl(unauthorizedUrl);
         // 定义自己的过滤器
-        Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
+        Map<String, Filter> filters = new LinkedHashMap<>();
         filters.put("onlineSession", onlineSessionFilter());
         shiroFilterFactoryBean.setFilters(filters);
         // 定义拦过滤器链
@@ -229,5 +222,4 @@ public class ShiroConfig {
         sessionManager.setSessionListeners(listeners);
         return sessionManager;
     }
-
 }

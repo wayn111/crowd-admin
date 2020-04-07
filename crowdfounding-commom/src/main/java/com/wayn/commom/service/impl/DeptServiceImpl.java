@@ -50,10 +50,10 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
     @Cacheable(value = "deptCache", key = "#root.method  + '_dept'")
     @Override
     public Tree<Dept> getTree() {
-        List<Tree<Dept>> trees = new ArrayList<Tree<Dept>>();
-        List<Dept> menus = deptDao.selectList(new EntityWrapper<Dept>());
+        List<Tree<Dept>> trees = new ArrayList<>();
+        List<Dept> menus = deptDao.selectList(new EntityWrapper<>());
         menus.forEach(menu -> {
-            Tree<Dept> tree = new Tree<Dept>();
+            Tree<Dept> tree = new Tree<>();
             tree.setId(menu.getId().toString());
             tree.setParentId(menu.getPid().toString());
             tree.setText(menu.getDeptName());

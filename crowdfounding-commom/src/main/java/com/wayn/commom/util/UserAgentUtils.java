@@ -53,7 +53,7 @@ public class UserAgentUtils {
             return osVersion;
 
         osVersion = strArr[1];
-        logger.info("osVersion is:{}", osVersion);
+        logger.debug("osVersion is:{}", osVersion);
         return osVersion;
     }
 
@@ -90,7 +90,7 @@ public class UserAgentUtils {
     public static String getOs(String userAgent) {
         OperatingSystem operatingSystem = getOperatingSystem(userAgent);
         String os = operatingSystem.getGroup().getName();
-        logger.info("os is:{}", os);
+        logger.debug("os is:{}", os);
         return os;
     }
 
@@ -115,7 +115,7 @@ public class UserAgentUtils {
     public static String getDevicetype(String userAgent) {
         OperatingSystem operatingSystem = getOperatingSystem(userAgent);
         String deviceType = operatingSystem.getDeviceType().toString();
-        logger.info("deviceType is:{}", deviceType);
+        logger.debug("deviceType is:{}", deviceType);
         return deviceType;
     }
 
@@ -139,7 +139,7 @@ public class UserAgentUtils {
     public static String getOsName(String userAgent) {
         OperatingSystem operatingSystem = getOperatingSystem(userAgent);
         String osName = operatingSystem.getName();
-        logger.info("osName is:{}", osName);
+        logger.debug("osName is:{}", osName);
         return osName;
     }
 
@@ -162,7 +162,7 @@ public class UserAgentUtils {
     public static String getDeviceManufacturer(String userAgent) {
         OperatingSystem operatingSystem = getOperatingSystem(userAgent);
         String deviceManufacturer = operatingSystem.getManufacturer().toString();
-        logger.info("deviceManufacturer is:{}", deviceManufacturer);
+        logger.debug("deviceManufacturer is:{}", deviceManufacturer);
         return deviceManufacturer;
     }
 
@@ -199,7 +199,7 @@ public class UserAgentUtils {
     public static String getBrowserName(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String borderName = browser.getName();
-        logger.info("borderName is:{}", borderName);
+        logger.debug("borderName is:{}", borderName);
         return borderName;
     }
 
@@ -224,7 +224,7 @@ public class UserAgentUtils {
     public static String getBrowserType(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String borderType = browser.getBrowserType().getName();
-        logger.info("borderType is:{}", borderType);
+        logger.debug("borderType is:{}", borderType);
         return borderType;
     }
 
@@ -248,7 +248,7 @@ public class UserAgentUtils {
     public static String getBrowserGroup(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String browerGroup = browser.getGroup().getName();
-        logger.info("browerGroup is:{}", browerGroup);
+        logger.debug("browerGroup is:{}", browerGroup);
         return browerGroup;
     }
 
@@ -273,7 +273,7 @@ public class UserAgentUtils {
     public static String getBrowserManufacturer(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String browserManufacturer = browser.getManufacturer().getName();
-        logger.info("browserManufacturer is:{}", browserManufacturer);
+        logger.debug("browserManufacturer is:{}", browserManufacturer);
         return browserManufacturer;
     }
 
@@ -298,7 +298,7 @@ public class UserAgentUtils {
     public static String getBrowserRenderingEngine(String userAgent) {
         Browser browser = getBrowser(userAgent);
         String renderingEngine = browser.getRenderingEngine().name();
-        logger.info("renderingEngine is:{}", renderingEngine);
+        logger.debug("renderingEngine is:{}", renderingEngine);
         return renderingEngine;
     }
 
