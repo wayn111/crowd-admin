@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BaseEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -217,21 +218,21 @@ public class OperLog extends BaseEntity<OperLog> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("operState", operState)
-                .append("errorMsg", errorMsg)
-                .append("userName", userName)
-                .append("moduleName", moduleName)
-                .append("operation", operation)
-                .append("url", url)
-                .append("method", method)
-                .append("ip", ip)
-                .append("agent", agent)
-                .append("executeTime", executeTime)
-                .append("requestParams", requestParams)
-                .append("requestMethod", requestMethod)
-                .append("requestResponse", requestResponse)
+        return new StringJoiner(", ", OperLog.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("operState=" + operState)
+                .add("errorMsg='" + errorMsg + "'")
+                .add("userName='" + userName + "'")
+                .add("moduleName='" + moduleName + "'")
+                .add("operation='" + operation + "'")
+                .add("url='" + url + "'")
+                .add("method='" + method + "'")
+                .add("ip='" + ip + "'")
+                .add("agent='" + agent + "'")
+                .add("executeTime=" + executeTime)
+                .add("requestParams='" + requestParams + "'")
+                .add("requestMethod='" + requestMethod + "'")
+                .add("requestResponse='" + requestResponse + "'")
                 .toString();
     }
 }

@@ -2,6 +2,7 @@ package com.wayn.commom.domain.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.StringJoiner;
 
 /**
  * 用户管理，配置该用户所拥有得角色选择框
@@ -88,8 +89,13 @@ public class RoleChecked implements Serializable {
 
 	@Override
 	public String toString() {
-		return "RoleChecked [id=" + id + ", roleName=" + roleName + ", roleDesc=" + roleDesc + ", roleState="
-				+ roleState + ", createTime=" + createTime + ", checked=" + checked + "]";
+		return new StringJoiner(", ", RoleChecked.class.getSimpleName() + "[", "]")
+				.add("id='" + id + "'")
+				.add("roleName='" + roleName + "'")
+				.add("roleDesc='" + roleDesc + "'")
+				.add("roleState=" + roleState)
+				.add("createTime=" + createTime)
+				.add("checked=" + checked)
+				.toString();
 	}
-
 }

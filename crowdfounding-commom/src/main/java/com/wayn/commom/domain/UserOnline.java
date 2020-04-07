@@ -1,9 +1,9 @@
 package com.wayn.commom.domain;
 
 import com.wayn.commom.enums.OnlineStatus;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
+import java.util.StringJoiner;
 
 public class UserOnline {
 
@@ -166,19 +166,19 @@ public class UserOnline {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("userId", userId)
-                .append("username", username)
-                .append("deptName", deptName)
-                .append("host", host)
-                .append("browser", browser)
-                .append("os", os)
-                .append("status", status)
-                .append("startTimestamp", startTimestamp)
-                .append("lastAccessTime", lastAccessTime)
-                .append("timeout", timeout)
-                .append("onlineSession", onlineSession)
+        return new StringJoiner(", ", UserOnline.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("userId='" + userId + "'")
+                .add("username='" + username + "'")
+                .add("deptName='" + deptName + "'")
+                .add("host='" + host + "'")
+                .add("browser='" + browser + "'")
+                .add("os='" + os + "'")
+                .add("status=" + status)
+                .add("startTimestamp=" + startTimestamp)
+                .add("lastAccessTime=" + lastAccessTime)
+                .add("timeout=" + timeout)
+                .add("onlineSession='" + onlineSession + "'")
                 .toString();
     }
 }

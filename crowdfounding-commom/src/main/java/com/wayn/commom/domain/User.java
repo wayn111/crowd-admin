@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BusinessEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -126,17 +127,15 @@ public class User extends BusinessEntity<User> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("userName", userName)
-                .append("password", password)
-                .append("userState", userState)
-                .append("userImg", userImg)
-                .append("phone", phone)
-                .append("email", email)
-                .append("deptId", deptId)
-                .append("createTime", super.getCreateTime())
-                .append("remarks", super.getRemarks())
+        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("userName='" + userName + "'")
+                .add("password='" + password + "'")
+                .add("userState=" + userState)
+                .add("userImg='" + userImg + "'")
+                .add("phone='" + phone + "'")
+                .add("email='" + email + "'")
+                .add("deptId=" + deptId)
                 .toString();
     }
 }

@@ -5,6 +5,7 @@ import com.wayn.commom.base.BaseEntity;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -146,17 +147,17 @@ public class MenuVO extends BaseEntity<MenuVO> {
 
     @Override
     public String toString() {
-        return "MenuVO{" +
-                "id=" + id +
-                ", menuName='" + menuName + '\'' +
-                ", pid=" + pid +
-                ", url='" + url + '\'' +
-                ", icon='" + icon + '\'' +
-                ", sort=" + sort +
-                ", type='" + type + '\'' +
-                ", code='" + code + '\'' +
-                ", resource='" + resource + '\'' +
-                ", children=" + children +
-                "} ";
+        return new StringJoiner(", ", MenuVO.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("menuName='" + menuName + "'")
+                .add("pid=" + pid)
+                .add("url='" + url + "'")
+                .add("icon='" + icon + "'")
+                .add("sort=" + sort)
+                .add("type='" + type + "'")
+                .add("code='" + code + "'")
+                .add("resource='" + resource + "'")
+                .add("children=" + children)
+                .toString();
     }
 }

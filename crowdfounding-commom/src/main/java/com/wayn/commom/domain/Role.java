@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BusinessEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -58,12 +59,10 @@ public class Role extends BusinessEntity<Role> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("roleName", roleName)
-                .append("roleState", roleState)
-                .append("createTime", super.getCreateTime())
-                .append("remarks", super.getRemarks())
+        return new StringJoiner(", ", Role.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("roleName='" + roleName + "'")
+                .add("roleState=" + roleState)
                 .toString();
     }
 }

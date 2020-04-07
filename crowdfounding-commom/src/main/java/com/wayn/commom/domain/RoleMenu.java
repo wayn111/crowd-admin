@@ -3,9 +3,9 @@ package com.wayn.commom.domain;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -62,10 +62,10 @@ public class RoleMenu implements Serializable {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("roleId", roleId)
-				.append("menuId", menuId)
+		return new StringJoiner(", ", RoleMenu.class.getSimpleName() + "[", "]")
+				.add("id='" + id + "'")
+				.add("roleId='" + roleId + "'")
+				.add("menuId=" + menuId)
 				.toString();
 	}
 }
