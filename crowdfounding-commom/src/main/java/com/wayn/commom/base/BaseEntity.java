@@ -1,10 +1,10 @@
 package com.wayn.commom.base;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableField;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.StringJoiner;
 
 public class BaseEntity<T> implements Serializable {
     private static final long serialVersionUID = 6746161463502783836L;
@@ -15,6 +15,7 @@ public class BaseEntity<T> implements Serializable {
     @TableField(exist = false)
     private String endTime;
 
+    @Excel(name = "创建时间", format = "yyyy-MM-dd HH:mm:ss", width = 20)
     private Date createTime;
 
     public String getStartTime() {
@@ -46,10 +47,10 @@ public class BaseEntity<T> implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", BaseEntity.class.getSimpleName() + "[", "]")
-                .add("startTime='" + startTime + "'")
-                .add("endTime='" + endTime + "'")
-                .add("createTime=" + createTime)
-                .toString();
+        return "BaseEntity{" +
+                "startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 }

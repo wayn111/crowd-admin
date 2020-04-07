@@ -1,5 +1,7 @@
 package com.wayn.web.controller.system;
 
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.afterturn.easypoi.excel.imports.ExcelImportService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.annotation.Log;
@@ -12,14 +14,22 @@ import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.*;
 import com.wayn.commom.shiro.util.ShiroUtil;
+import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,6 +37,8 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/system/user")
 public class UserController extends BaseControlller {
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
     private static final String PREFIX = "system/user";
 
     @Autowired
@@ -161,6 +173,31 @@ public class UserController extends BaseControlller {
 
     }
 
+    @PostMapping("/export")
+    public void export(User user, HttpServletResponse response) throws IOException {
+        ParameterUtil.setWrapper();
+        userService.export(user, response, request);
+    }
+
+    @GetMapping("/import")
+    public String importExecl() {
+        return PREFIX + "/import";
+    }
+
+    @ResponseBody
+    @PostMapping("/upload")
+    public Response upload(@RequestParam("file") MultipartFile file, HttpServletResponse response, HttpServletRequest request) throws Exception {
+        InputStream inputstream = file.getInputStream();
+        ImportParams params = new ImportParams();
+        List<User> list = new ExcelImportService().importExcelByIs(inputstream, User.class, params, false).getList();
+        String requestUrl = HttpUtil.getRequestContext(request);
+        list.forEach(item -> {
+            item.setUserImg(requestUrl + "/" + item.getUserImg().substring(item.getUserImg().indexOf("upload")));
+            item.setPassword(ShiroUtil.md5encrypt("123456", item.getUserName()));
+        });
+        userService.insertBatch(list);
+        return Response.success("导入用户数据成功");
+    }
 
     @ResponseBody
     @PostMapping("/tree")

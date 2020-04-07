@@ -56,6 +56,32 @@ public class CommonController {
     }
 
     /**
+     * 下载模板文件
+     *
+     * @param fileName 文件名称
+     */
+    @GetMapping("/downTemplate")
+    public void downTemplate(String fileName, HttpServletResponse response, HttpServletRequest request) {
+        try {
+            if (!FileUtils.isValidFilename(fileName)) {
+                throw new BusinessException("文件名称(" + fileName + ")非法，不允许下载。 ");
+            }
+
+            String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
+            String realPath = request.getSession().getServletContext().getRealPath("/") + File.separator + "template";
+            String filePath = realPath + File.separatorChar + fileName;
+
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("multipart/form-data");
+            response.setHeader("Content-Disposition",
+                    "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, realFileName));
+            FileUtils.writeBytes(filePath, response.getOutputStream());
+        } catch (Exception e) {
+            log.error("下载文件失败", e);
+        }
+    }
+
+    /**
      * 通用上传请求
      */
     @PostMapping("/upload")

@@ -1,5 +1,7 @@
 package com.wayn.commom.service.impl;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -10,19 +12,29 @@ import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserRole;
 import com.wayn.commom.domain.vo.Tree;
+import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.DeptService;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
+import com.wayn.commom.util.FileUtils;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.TreeBuilderUtil;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -46,6 +58,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Autowired
     private DeptService deptService;
+
+
+    @Value("${wayn.uploadDir}")
+    private String uploadDir;
 
     @Override
     public Page<User> listPage(Page<User> page, User user) {
@@ -199,7 +215,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public List<JSONObject> selectUser2JsonObj() {
-        List<User> users = selectList(new EntityWrapper<User>());
+        List<User> users = selectList(new EntityWrapper<>());
         List<JSONObject> list = new ArrayList<>();
         for (User user : users) {
             JSONObject jsonObject = new JSONObject();
@@ -208,6 +224,40 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
             list.add(jsonObject);
         }
         return list;
+    }
+
+    @Override
+    public void export(User user, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        EntityWrapper<User> wrapper = ParameterUtil.get();
+        wrapper.like("userName", user.getUserName());
+        wrapper.like("phone", user.getPhone());
+        wrapper.like("email", user.getEmail());
+        wrapper.eq(user.getUserState() != null, "userState", user.getUserState());
+        wrapper.eq(user.getDeptId() != null, "deptId", user.getDeptId());
+        ExportParams exportParams = new ExportParams();
+        exportParams.setStyle(IExcelExportStylerImpl.class);
+        exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
+        List<User> list = selectList(wrapper);
+        list.forEach(item -> {
+            item.setUserImg(uploadDir + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6));
+        });
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
+                User.class, list);
+        // 使用bos获取excl文件大小
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        workbook.write(bos);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Length", bos.size() + "");
+        response.setHeader("Content-Disposition",
+                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "用户列表.xls"));
+        response.setContentType("application/octet-stream;charset=UTF-8");
+        //保存数据
+        OutputStream os = response.getOutputStream();
+        workbook.write(os);
+        workbook.close();
+        os.close();
+        bos.close();
     }
 
 }

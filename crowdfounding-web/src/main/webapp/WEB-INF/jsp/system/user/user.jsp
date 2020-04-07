@@ -37,7 +37,7 @@
 </div>
 <div class="wrapper wrapper-content ui-layout-center gray-bg">
     <div class="col-sm-12 search-collapse">
-        <form class="form-inline" id="roleSelect">
+        <form class="form-inline" id="userSelect">
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label for="userName">用户名称</label>
@@ -83,6 +83,16 @@
                         <button type="button" class="btn btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="sys:user:add">
+                        <button type="button" class="btn btn-info" onclick="importExcel()">
+                            <i class="fa fa-import" aria-hidden="true"></i>导入
+                        </button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="	sys:user:user">
+                        <button type="button" class="btn btn-success" onclick="exportExcel()">
+                            <i class="fa fa-export" aria-hidden="true"></i>导出
                         </button>
                     </shiro:hasPermission>
                 </div>
@@ -193,6 +203,12 @@
                     {
                         field: 'email',
                         title: '邮箱',
+                    }, {
+                        field: 'userImg',
+                        title: '头像',
+                        formatter: function (value, row, index) {
+                            return '<img src="' + value + '" width="64" height="64" />';
+                        }
                     },
                     {
                         field: 'createTime',
@@ -331,6 +347,21 @@
             shadeClose: false, // 点击遮罩关闭层
             area: ['400px', '320px'],
             content: prefix + '/editAcount/' + id // iframe的url
+        });
+    }
+
+    function exportExcel() {
+        exportData(prefix + '/export', 'userSelect', '用户列表.xls');
+    }
+
+    function importExcel() {
+        layer.open({
+            type: 2,
+            title: '导入用户数据',
+            maxmin: true,
+            shadeClose: false, // 点击遮罩关闭层
+            area: ['400px', '320px'],
+            content: prefix + '/import/' // iframe的url
         });
     }
 

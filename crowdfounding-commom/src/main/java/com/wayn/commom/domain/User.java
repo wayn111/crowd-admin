@@ -1,5 +1,6 @@
 package com.wayn.commom.domain;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -27,6 +28,7 @@ public class User extends BusinessEntity<User> {
     /**
      * 用户名
      */
+    @Excel(name = "用户名")
     private String userName;
 
     /**
@@ -37,21 +39,25 @@ public class User extends BusinessEntity<User> {
     /**
      * 用户状态,1-启用,-1禁用
      */
+    @Excel(name = "用户状态", replace = {"启用_1", "禁用_-1"})
     private Integer userState;
 
     /**
      * 头像
      */
+    @Excel(name = "头像", type = 2, width = 40, height = 40, imageType = 1,savePath = "E:/wayn/upload/excel")
     private String userImg;
 
     /**
      * 手机
      */
+    @Excel(name = "手机号", width = 15)
     private String phone;
 
     /**
      * 邮箱
      */
+    @Excel(name = "邮箱", width = 20)
     private String email;
 
     /**
