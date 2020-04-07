@@ -294,3 +294,49 @@ function formView(win) {
     $('select[name]', win).attr('disabled', true);
     $('input[type=radio][disabled]', win).css('cursor', 'default');
 }
+
+/**
+ * 通用导出方法
+ */
+function exportData(exportUrl, formId, filename) {
+    var req = new XMLHttpRequest();
+    req.open("post", exportUrl);
+    req.responseType = "blob";
+    //监听进度事件
+    req.addEventListener("progress", function (evt, a, b) {
+        if (evt.lengthComputable) {
+            var percentComplete = evt.loaded / evt.total;
+            console.log(percentComplete);
+        }
+    }, false);
+    var index = layer.msg('正在下载，请稍后...', {
+        icon: 16, shade: 0.01
+    });
+    req.onreadystatechange = function () {
+        if (req.readyState === 4) {
+            if (req.status === 200) {
+                if (typeof window.chrome !== 'undefined') {
+                    // Chrome version
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(req.response);
+                    link.download = filename;
+                    link.click();
+                } else if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                    // IE version
+                    var blob = new Blob([req.response], {type: 'application/force-download'});
+                    window.navigator.msSaveBlob(blob, filename);
+                } else {
+                    // Firefox version
+                    var file = new File([req.response], filename, {type: 'application/force-download'});
+                    window.open(URL.createObjectURL(file));
+                }
+                layer.close(index)
+            } else {
+                layer.alert('下载失败！')
+            }
+
+        }
+    };
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send($('#' + formId + '').serialize());
+}

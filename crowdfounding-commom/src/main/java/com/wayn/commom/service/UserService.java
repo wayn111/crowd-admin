@@ -7,6 +7,9 @@ import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.Tree;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,27 +23,30 @@ import java.util.Map;
  */
 public interface UserService extends IService<User> {
 
-	Page<User> listPage(Page<User> page, User user);
+    Page<User> listPage(Page<User> page, User user);
 
-	boolean exit(Map<String, Object> params);
+    boolean exit(Map<String, Object> params);
 
-	boolean save(User user, String roleIds);
+    boolean save(User user, String roleIds);
 
-	boolean update(User user, String roleIds);
+    boolean update(User user, String roleIds);
 
-	boolean remove(String id);
+    boolean remove(String id);
 
-	boolean batchRemove(String[] ids);
+    boolean batchRemove(String[] ids);
 
-	boolean resetPwd(String id, String password);
+    boolean resetPwd(String id, String password);
 
-	boolean editAcount(String id, String userName);
+    boolean editAcount(String id, String userName);
 
     Tree<Dept> getTree();
 
-	/**
-	 * 将所有用户组装成select2需要的json对象
-	 * @return
-	 */
-	List<JSONObject> selectUser2JsonObj();
+    /**
+     * 将所有用户组装成select2需要的json对象
+     *
+     * @return
+     */
+    List<JSONObject> selectUser2JsonObj();
+
+    void export(User user, HttpServletResponse response, HttpServletRequest request) throws IOException;
 }

@@ -1,9 +1,12 @@
 package com.wayn.commom.base;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 import java.util.StringJoiner;
 
 public class BusinessEntity<T> extends BaseEntity<T> {
 
+    @Excel(name = "备注", width = 20)
     private String remarks;
 
     public String getRemarks() {
