@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.wayn.commom.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,14 +21,13 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @EnableCaching
 @Configuration
@@ -44,10 +44,6 @@ public class CacheConfig extends CachingConfigurerSupport {
 
     @Value("${redis.password}")
     private String password = "";
-
-    //timeout for jedis try to connect to redis server, not expire time! In milliseconds
-    @Value("${redis.timeout}")
-    private int timeout = 0;
 
     // 0 - never expire
     @Value("${redis.expire}")
@@ -71,7 +67,7 @@ public class CacheConfig extends CachingConfigurerSupport {
     @Profile({"dev", "docker"})
     @Bean
     public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
         redisTemplate.setKeySerializer(keySerializer());
         redisTemplate.setValueSerializer(valueSerializer());
@@ -87,63 +83,59 @@ public class CacheConfig extends CachingConfigurerSupport {
                 Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance);
         om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-        //return jackson2JsonRedisSerializer;
+        return jackson2JsonRedisSerializer;
 
         // 设置序列化 两种方式区别不大
-        return new JdkSerializationRedisSerializer();
+//        return new JdkSerializationRedisSerializer();
     }
 
     @Primary
     @Bean
     public CacheManager cacheManager(@Autowired(required = false) RedisTemplate<String, Object> redisTemplate,
                                      @Autowired(required = false) net.sf.ehcache.CacheManager ehCacheManager) {
-        CacheManager cacheManager;
+        CacheManager cacheManager = null;
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
             cacheManager = new RedisCacheManager(redisTemplate);
             ((RedisCacheManager) cacheManager).setUsePrefix(true);
             ((RedisCacheManager) cacheManager).setDefaultExpiration(expire);
             //定义缓存名称
-            List<String> cacheNames = new ArrayList<String>();
+            List<String> cacheNames = new ArrayList<>();
             cacheNames.add("menuCache");
             cacheNames.add("deptCache");
             cacheNames.add("permissionCache");
             cacheNames.add("dictCache");
             cacheNames.add("timerTaskCache");
             ((RedisCacheManager) cacheManager).setCacheNames(cacheNames);
-        } else {
+        } else if (Constant.CACHE_TYPE_EACHACEH.equals(cacheType)) {
             cacheManager = ehCacheCacheManager(ehCacheManager);
         }
         return cacheManager;
     }
 
     public EhCacheCacheManager ehCacheCacheManager(net.sf.ehcache.CacheManager cacheManager) {
-        EhCacheCacheManager ehCacheCacheManager = new EhCacheCacheManager(cacheManager);
-        return ehCacheCacheManager;
+        return new EhCacheCacheManager(cacheManager);
     }
 
     @Bean
     public net.sf.ehcache.CacheManager ehCacheManager() {
         return net.sf.ehcache.CacheManager
-                .newInstance(getClass().getClassLoader().getResourceAsStream("cache/ehcache.xml"));
+                .newInstance(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("cache/ehcache.xml")));
     }
 
 
     @Bean(name = "cacheKeyGenerator")
     public KeyGenerator cacheKeyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object target, Method method, Object... params) {
-                StringBuffer sb = new StringBuffer();
-                sb.append(target.getClass().getName());
-                sb.append(method.getName());
-                for (Object obj : params) {
-                    sb.append(obj.toString());
-                }
-                return sb.toString();
+        return (target, method, params) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append(target.getClass().getName());
+            sb.append(method.getName());
+            for (Object obj : params) {
+                sb.append(obj.toString());
             }
+            return sb.toString();
         };
     }
 }

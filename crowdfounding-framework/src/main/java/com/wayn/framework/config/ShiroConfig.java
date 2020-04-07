@@ -110,7 +110,7 @@ public class ShiroConfig {
         // 自定义缓存实现 使用redis
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
             securityManager.setCacheManager(rediscacheManager());
-        } else {
+        } else if(Constant.CACHE_TYPE_EACHACEH.equals(cacheType)) {
             securityManager.setCacheManager(shiroEhCacheManager());
         }
         securityManager.setSessionManager(sessionManager());
