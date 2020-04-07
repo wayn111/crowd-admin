@@ -262,14 +262,14 @@
                 "close_current": {
                     name: "关闭当前",
                     icon: "fa-close",
-                    callback: function(key, opt) {
+                    callback: function (key, opt) {
                         opt.$trigger.find('i').trigger("click");
                     }
                 },
                 "close_other": {
                     name: "关闭其他",
                     icon: "fa-window-close-o",
-                    callback: function(key, opt) {
+                    callback: function (key, opt) {
                         opt.$trigger.trigger('click');
                         $('.J_tabCloseOther').trigger('click');
                     }
@@ -277,7 +277,7 @@
                 "close_left": {
                     name: "关闭左侧",
                     icon: "fa-reply",
-                    callback: function(key, opt) {
+                    callback: function (key, opt) {
                         opt.$trigger.trigger('click');
                         $('.J_tabCloseLeft').trigger('click');
                     }
@@ -285,7 +285,7 @@
                 "close_right": {
                     name: "关闭右侧",
                     icon: "fa-share",
-                    callback: function(key, opt) {
+                    callback: function (key, opt) {
                         opt.$trigger.trigger('click');
                         $('.J_tabCloseRight').trigger('click');
                     }
@@ -293,7 +293,7 @@
                 "close_all": {
                     name: "全部关闭",
                     icon: "fa-window-close",
-                    callback: function(key, opt) {
+                    callback: function (key, opt) {
                         $('.J_tabCloseAll').trigger('click');
                     }
                 },
@@ -301,7 +301,7 @@
                 "full": {
                     name: "全屏显示",
                     icon: "fa-arrows-alt",
-                    callback: function(key, opt) {
+                    callback: function (key, opt) {
                         opt.$trigger.trigger('click');
                         var target = $('.J_iframe[data-id="' + this.data('id') + '"]');
                         target.fullScreen(true);
@@ -310,7 +310,7 @@
                 "refresh": {
                     name: "刷新页面",
                     icon: "fa-refresh",
-                    callback: function(key, opt) {
+                    callback: function (key, opt) {
                         opt.$trigger.trigger('click');
                         $('.J_tabRefresh').trigger('click');
                     }
@@ -318,7 +318,7 @@
                 "open": {
                     name: "新窗口打开",
                     icon: "fa-link",
-                    callback: function(key, opt) {
+                    callback: function (key, opt) {
                         var target = $('.J_iframe[data-id="' + this.data('id') + '"]');
                         window.open(target.attr('src'));
                     }
@@ -369,7 +369,7 @@
             // 定义消息头
             var head = {};
             // 测试发送消息
-            // stompClient.send('/app/message', head, payload);
+            stompClient.send('/app/message', head, payload);
         })
     }
 
