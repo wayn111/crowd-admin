@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -154,17 +154,17 @@ public class Menu implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("menuName", menuName)
-                .append("pid", pid)
-                .append("url", url)
-                .append("icon", icon)
-                .append("sort", sort)
-                .append("type", type)
-                .append("code", code)
-                .append("resource", resource)
-                .append("children", children)
+        return new StringJoiner(", ", Menu.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("menuName='" + menuName + "'")
+                .add("pid=" + pid)
+                .add("url='" + url + "'")
+                .add("icon='" + icon + "'")
+                .add("sort=" + sort)
+                .add("type=" + type)
+                .add("code='" + code + "'")
+                .add("resource='" + resource + "'")
+                .add("children=" + children)
                 .toString();
     }
 }

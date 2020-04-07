@@ -1,5 +1,7 @@
 package com.wayn.commom.base;
 
+import java.util.StringJoiner;
+
 public class BusinessEntity<T> extends BaseEntity<T> {
 
     private String remarks;
@@ -15,8 +17,8 @@ public class BusinessEntity<T> extends BaseEntity<T> {
 
     @Override
     public String toString() {
-        return "BusinessEntity{" +
-                "remarks='" + remarks + '\'' +
-                "} " + super.toString();
+        return new StringJoiner(", ", BusinessEntity.class.getSimpleName() + "[", "]")
+                .add("remarks='" + remarks + "'")
+                .toString();
     }
 }

@@ -1,11 +1,10 @@
 package com.wayn.commom.domain.vo;
 
-import com.alibaba.fastjson.JSON;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 /**
  * 树形节点展示
@@ -147,7 +146,16 @@ public class Tree<T> implements Serializable {
 
 	@Override
 	public String toString() {
-
-		return JSON.toJSONString(this);
+		return new StringJoiner(", ", Tree.class.getSimpleName() + "[", "]")
+				.add("id='" + id + "'")
+				.add("text='" + text + "'")
+				.add("state=" + state)
+				.add("checked=" + checked)
+				.add("attributes=" + attributes)
+				.add("children=" + children)
+				.add("parentId='" + parentId + "'")
+				.add("hasParent=" + hasParent)
+				.add("hasChildren=" + hasChildren)
+				.toString();
 	}
 }

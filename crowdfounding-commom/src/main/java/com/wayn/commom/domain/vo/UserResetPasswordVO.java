@@ -1,5 +1,7 @@
 package com.wayn.commom.domain.vo;
 
+import java.util.StringJoiner;
+
 public class UserResetPasswordVO{
 
     private String oldPassword;
@@ -23,4 +25,11 @@ public class UserResetPasswordVO{
         return this;
     }
 
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", UserResetPasswordVO.class.getSimpleName() + "[", "]")
+                .add("oldPassword='" + oldPassword + "'")
+                .add("newPassword='" + newPassword + "'")
+                .toString();
+    }
 }

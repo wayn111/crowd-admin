@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BusinessEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -179,20 +179,18 @@ public class Dict extends BusinessEntity<Dict> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("name", name)
-                .append("value", value)
-                .append("dictState", dictState)
-                .append("type", type)
-                .append("sort", sort)
-                .append("dictType", dictType)
-                .append("createBy", createBy)
-                .append("createTime", super.getCreateTime())
-                .append("updateBy", updateBy)
-                .append("updateTime", updateTime)
-                .append("delFlag", delFlag)
-                .append("remarks", super.getRemarks())
+        return new StringJoiner(", ", Dict.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("value='" + value + "'")
+                .add("dictState=" + dictState)
+                .add("type=" + type)
+                .add("sort=" + sort)
+                .add("dictType='" + dictType + "'")
+                .add("createBy='" + createBy + "'")
+                .add("updateBy='" + updateBy + "'")
+                .add("updateTime=" + updateTime)
+                .add("delFlag='" + delFlag + "'")
                 .toString();
     }
 }

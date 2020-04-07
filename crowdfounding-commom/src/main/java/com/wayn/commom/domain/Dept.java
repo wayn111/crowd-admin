@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BusinessEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -71,13 +71,11 @@ public class Dept extends BusinessEntity<Dept> {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("pid", pid)
-				.append("deptName", deptName)
-				.append("sort", sort)
-				.append("createTime", super.getCreateTime())
-				.append("remarks", super.getRemarks())
+		return new StringJoiner(", ", Dept.class.getSimpleName() + "[", "]")
+				.add("id=" + id)
+				.add("pid=" + pid)
+				.add("deptName='" + deptName + "'")
+				.add("sort=" + sort)
 				.toString();
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +33,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
     @CacheEvict(value = "deptCache", allEntries = true)
     @Override
     public boolean save(Dept dept) {
+        dept.setCreateTime(new Date());
         return insert(dept);
     }
 
