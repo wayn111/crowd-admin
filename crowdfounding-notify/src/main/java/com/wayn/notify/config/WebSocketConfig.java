@@ -53,7 +53,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
                     .setClientPasscode(brokerConfig.getPassword())
                     .setSystemLogin(brokerConfig.getUsername())
                     .setSystemPasscode(brokerConfig.getPassword());
-        } else {
+        } else if(Constant.BROKER_TYPE_MEMORY.equals(brokerConfig.getBrokerType())){
             registry.enableSimpleBroker("/topic", "/queue");
         }
 //        registry.setPathMatcher(new AntPathMatcher()); // 设置路径匹配规则

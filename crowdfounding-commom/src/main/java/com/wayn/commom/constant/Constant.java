@@ -25,6 +25,7 @@ public class Constant {
 
     //缓存方式
     public static String CACHE_TYPE_REDIS = "redis";
+    public static String CACHE_TYPE_EACHACEH = "ehcache";
 
     //当前页
     public static String PAGE_NUMBER = "pageNumber";
