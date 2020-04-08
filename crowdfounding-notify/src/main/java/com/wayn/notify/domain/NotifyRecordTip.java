@@ -26,4 +26,12 @@ public class NotifyRecordTip extends Notify {
         this.notifyRecordId = notifyRecordId;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "NotifyRecordTip{" +
+                "notifyRecordId=" + notifyRecordId +
+                ", before='" + before + '\'' +
+                "} " + super.toString();
+    }
 }

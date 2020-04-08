@@ -87,12 +87,12 @@
                     </shiro:hasPermission>
                     <shiro:hasPermission name="sys:user:add">
                         <button type="button" class="btn btn-info" onclick="importExcel()">
-                            <i class="fa fa-import" aria-hidden="true"></i>导入
+                            <i class="fa fa-upload" aria-hidden="true"></i>导入
                         </button>
                     </shiro:hasPermission>
                     <shiro:hasPermission name="	sys:user:user">
                         <button type="button" class="btn btn-success" onclick="exportExcel()">
-                            <i class="fa fa-export" aria-hidden="true"></i>导出
+                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>导出
                         </button>
                     </shiro:hasPermission>
                 </div>
@@ -351,7 +351,13 @@
     }
 
     function exportExcel() {
-        exportData(prefix + '/export', 'userSelect', '用户列表.xls');
+        layer.confirm("确认要导出所有用户数据吗?", {
+            btn: ['确定', '取消']
+            // 按钮
+        }, function () {
+            exportData(prefix + '/export', 'userSelect', '用户列表.xls');
+        }, function () {
+        });
     }
 
     function importExcel() {

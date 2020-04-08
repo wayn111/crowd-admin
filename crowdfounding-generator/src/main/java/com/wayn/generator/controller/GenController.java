@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
@@ -65,6 +66,11 @@ public class GenController extends BaseControlller {
     public void batchGenCode(String names, HttpServletResponse response) throws IOException {
         byte[] data = genService.generatorCode(names.split(",", -1));
         genCode(response, data);
+    }
+
+    @PostMapping("/export")
+    public void list(TableInfo tableInfo, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        genService.export(tableInfo, response, request);
     }
 
     /**

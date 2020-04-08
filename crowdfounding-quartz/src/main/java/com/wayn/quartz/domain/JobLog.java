@@ -1,5 +1,6 @@
 package com.wayn.quartz.domain;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -23,22 +24,27 @@ public class JobLog extends BaseEntity {
     /**
      * 任务名称
      */
+    @Excel(name = "任务名称")
     private String jobName;
     /**
      * 任务组名
      */
+    @Excel(name = "任务组名")
     private String jobGroup;
     /**
      * 调用目标字符串
      */
+    @Excel(name = "调用目标字符串", width = 40)
     private String invokeTarget;
     /**
      * 日志信息
      */
+    @Excel(name = "日志信息", width = 40)
     private String jobMessage;
     /**
      * 执行状态（1正常 -1失败）
      */
+    @Excel(name = "执行状态", type = 10, replace = {"正常_1", "失败_-1"})
     private Integer jobState;
     /**
      * 异常信息

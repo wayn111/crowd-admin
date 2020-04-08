@@ -19,7 +19,7 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="col-sm-12 search-collapse">
-        <form class="form-inline" id="roleSelect">
+        <form class="form-inline" id="jobLogSelect">
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label for="jobName">任务名称</label>
@@ -55,6 +55,12 @@
                         <button type="button" class="btn  btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="quartz:jobLog:list">
+                        <button type="button" class="btn  btn-success"
+                                onclick="exportExcel()">
+                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>导出
                         </button>
                     </shiro:hasPermission>
                 </div>
@@ -211,6 +217,15 @@
         })
     }
 
+    function exportExcel() {
+        layer.confirm("确认要导出所有操作日志数据吗?", {
+            btn: ['确定', '取消']
+            // 按钮
+        }, function () {
+            exportData(prefix + '/export', 'jobLogSelect', '任务日志列表.xls');
+        }, function () {
+        });
+    }
 
     function batchRemove() {
         var rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
@@ -222,7 +237,7 @@
             btn: ['确定', '取消']
             // 按钮
         }, function () {
-            var ids = new Array();
+            var ids = [];
             // 遍历所有选择的行数据，取每条数据对应的ID
             $.each(rows, function (i, row) {
                 ids[i] = row['id'];

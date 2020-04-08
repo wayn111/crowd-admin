@@ -13,7 +13,7 @@
                 <form class="form-horizontal m-t" id="user-form">
                     <div class="form-group">
                         <input type="file" id="file" name="file" onchange="fileChange()"/>
-                        <div class="m-t-sm  p-xxs ">
+                        <div class="m-t-sm">
                             <a class="btn btn-default btn-xs" onclick="downTemplate()"><i
                                     class="fa fa-file-excel-o"></i> 下载模板</a>
                         </div>
@@ -23,9 +23,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-8">
-                            <button type="button" class="btn btn-primary" onclick="importExcel()">导入</button>
-                        </div>
+                        <button type="button" class="btn btn-primary" onclick="importExcel()">导入</button>
                     </div>
                 </form>
             </div>

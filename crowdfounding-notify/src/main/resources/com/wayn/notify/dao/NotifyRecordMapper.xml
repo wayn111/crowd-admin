@@ -50,7 +50,7 @@
     </sql>
 
     <sql id="selectNotifyRecordJoinNotify">
-        select r.id, r.isRead, r.readTime, (select userName from sys_user where sys_user.id = n.createBy) as createBy,
+        select r.id, r.isRead, r.readTime, (select userName from sys_user where sys_user.id = n.createBy) as createBy,n.notifyState,
         n.createTime, n.updateTime, (select userName from sys_user where sys_user.id = n.updateBy) as updateBy, n.title, n.content, n.type, n.remarks, n.delFlag
             from oa_notify_record r left join oa_notify n
             on r.notifyId = n.id

@@ -20,6 +20,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @RequestMapping("/oa/notifyRecord")
 @Controller
 public class NotifyRecordController extends BaseControlller {
@@ -106,6 +109,14 @@ public class NotifyRecordController extends BaseControlller {
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) {
         notifyRecordService.batchRemove(ids);
         return Response.success("删除成功");
+    }
+
+    @PostMapping("/export")
+    public void export(NotifyRecordVO notifyRecordVO, HttpServletResponse response) throws IOException {
+        notifyRecordVO.setReceiveUserId(getCurUserId());
+        //设置通用查询字段
+        ParameterUtil.set(notifyRecordVO);
+        notifyRecordService.export(notifyRecordVO, response, request);
     }
 
     /**

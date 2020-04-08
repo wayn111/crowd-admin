@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BusinessEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 
@@ -188,22 +187,20 @@ public class Notify extends BusinessEntity {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("type", type)
-                .append("title", title)
-                .append("content", content)
-                .append("files", files)
-                .append("notifyState", notifyState)
-                .append("publishTime", publishTime)
-                .append("publishStartTime", publishStartTime)
-                .append("publishEndTime", publishEndTime)
-                .append("createBy", createBy)
-                .append("createTime", super.getCreateTime())
-                .append("updateBy", updateBy)
-                .append("updateTime", updateTime)
-                .append("remarks", super.getRemarks())
-                .append("delFlag", delFlag)
-                .toString();
+        return "Notify{" +
+                "id=" + id +
+                ", type=" + type +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", files='" + files + '\'' +
+                ", notifyState=" + notifyState +
+                ", publishTime=" + publishTime +
+                ", publishStartTime='" + publishStartTime + '\'' +
+                ", publishEndTime='" + publishEndTime + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", delFlag='" + delFlag + '\'' +
+                "} " + super.toString();
     }
 }

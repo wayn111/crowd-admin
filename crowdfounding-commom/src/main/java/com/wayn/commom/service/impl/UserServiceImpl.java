@@ -166,7 +166,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         return true;
     }
 
-    //    @Cacheable(value = "userCache", key = "#root.method  + '_user'")
     @Override
     public Tree<Dept> getTree() {
         List<Tree<Dept>> trees = new ArrayList<Tree<Dept>>();

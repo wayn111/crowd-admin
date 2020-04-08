@@ -1,5 +1,7 @@
 package com.wayn.commom.service.impl;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -7,20 +9,30 @@ import com.wayn.commom.dao.RoleDao;
 import com.wayn.commom.dao.RoleMenuDao;
 import com.wayn.commom.dao.UserRoleDao;
 import com.wayn.commom.domain.Role;
-import com.wayn.commom.domain.UserRole;
-import com.wayn.commom.exception.BusinessException;
-import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.domain.RoleMenu;
+import com.wayn.commom.domain.UserRole;
 import com.wayn.commom.domain.vo.RoleChecked;
+import com.wayn.commom.excel.IExcelExportStylerImpl;
+import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.service.RoleService;
 import com.wayn.commom.service.UserRoleService;
+import com.wayn.commom.util.FileUtils;
+import com.wayn.commom.util.ParameterUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -44,6 +56,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
     @Autowired
     private UserRoleService userRoleService;
 
+    @Value("${wayn.uploadDir}")
+    private String uploadDir;
+
     @Override
     public Page<Role> listPage(Page<Role> page, Role role) {
         EntityWrapper<Role> wrapper = ParameterUtil.get();
@@ -51,6 +66,34 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
         wrapper.eq(role.getRoleState() != null, "roleState", role.getRoleState());
         Page<Role> selectPage = selectPage(page, wrapper);
         return selectPage;
+    }
+
+    @Override
+    public void export(Role role, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        EntityWrapper<Role> wrapper = ParameterUtil.get();
+        wrapper.like("roleName", role.getRoleName());
+        wrapper.eq(role.getRoleState() != null, "roleState", role.getRoleState());
+        ExportParams exportParams = new ExportParams();
+        exportParams.setStyle(IExcelExportStylerImpl.class);
+        exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
+        List<Role> list = selectList(wrapper);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
+                Role.class, list);
+        // 使用bos获取excl文件大小
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        workbook.write(bos);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Length", bos.size() + "");
+        response.setHeader("Content-Disposition",
+                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "角色列表.xls"));
+        response.setContentType("application/octet-stream;charset=UTF-8");
+        //保存数据
+        OutputStream os = response.getOutputStream();
+        workbook.write(os);
+        workbook.close();
+        os.close();
+        bos.close();
     }
 
     @CacheEvict(value = "menuCache", allEntries = true)

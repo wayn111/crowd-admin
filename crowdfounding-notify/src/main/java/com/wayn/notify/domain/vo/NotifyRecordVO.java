@@ -1,5 +1,6 @@
 package com.wayn.notify.domain.vo;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
@@ -34,6 +35,7 @@ public class NotifyRecordVO extends NotifyVO {
     /**
      * 是否已读
      */
+    @Excel(name = "是否已读", replace = {"已读_true", "未读_false"})
     private Boolean isRead;
     /**
      * 阅读时间
@@ -85,6 +87,15 @@ public class NotifyRecordVO extends NotifyVO {
         return this;
     }
 
+    public Boolean getIsRead() {
+        return isRead;
+    }
+
+    public NotifyRecordVO setIsRead(Boolean read) {
+        isRead = read;
+        return this;
+    }
+
     public Date getReadTime() {
         return readTime;
     }
@@ -92,5 +103,17 @@ public class NotifyRecordVO extends NotifyVO {
     public NotifyRecordVO setReadTime(Date readTime) {
         this.readTime = readTime;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "NotifyRecordVO{" +
+                "id=" + id +
+                ", notifyId=" + notifyId +
+                ", receiveUserId='" + receiveUserId + '\'' +
+                ", receiveUserName='" + receiveUserName + '\'' +
+                ", isRead=" + isRead +
+                ", readTime=" + readTime +
+                "} " + super.toString();
     }
 }

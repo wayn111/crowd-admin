@@ -1,5 +1,6 @@
 package com.wayn.commom.domain;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -22,17 +23,19 @@ public class Role extends BusinessEntity<Role> {
     /**
      * 主键
      */
-    @TableId(type=IdType.UUID)
+    @TableId(type = IdType.UUID)
     private String id;
 
     /**
      * 角色名称
      */
+    @Excel(name = "角色名")
     private String roleName;
 
     /**
      * 状态,1启用,-1禁用
      */
+    @Excel(name = "角色状态", replace = {"启用_1", "禁用_-1"})
     private Integer roleState;
 
     public String getId() {
@@ -42,6 +45,7 @@ public class Role extends BusinessEntity<Role> {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getRoleName() {
         return roleName;
     }
@@ -49,6 +53,7 @@ public class Role extends BusinessEntity<Role> {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
     public Integer getRoleState() {
         return roleState;
     }

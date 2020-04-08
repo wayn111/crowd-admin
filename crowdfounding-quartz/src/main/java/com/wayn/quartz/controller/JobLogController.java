@@ -13,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @RequestMapping("/quartz/jobLog")
 @Controller
 public class JobLogController extends BaseControlller {
@@ -51,6 +55,12 @@ public class JobLogController extends BaseControlller {
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) {
         jobLogService.batchRemove(ids);
         return Response.success("删除成功");
+    }
+
+    @PostMapping("/export")
+    public void list(JobLog jobLog, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ParameterUtil.set(jobLog);
+        jobLogService.export(jobLog, response, request);
     }
 
 }

@@ -19,6 +19,9 @@ public interface GenDao extends BaseMapper<TableInfo> {
      */
     public List<TableInfo> selectTableList(Pagination page, TableInfo tableInfo);
 
+
+    public List<TableInfo> selectTableList(TableInfo tableInfo);
+
     /**
      * 根据表名称查询信息
      *

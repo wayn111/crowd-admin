@@ -19,7 +19,7 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="col-sm-12 search-collapse">
-        <form class="form-inline" id="roleSelect">
+        <form class="form-inline" id="logSelect">
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label for="userName">操作用户</label>
@@ -67,6 +67,11 @@
                     <shiro:hasPermission name="sys:log:remove">
                         <button type="button" class="btn btn-danger" onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="sys:log:log">
+                        <button type="button" class="btn btn-success" onclick="exportExcel()">
+                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>导出
                         </button>
                     </shiro:hasPermission>
                 </div>
@@ -246,6 +251,16 @@
                 }
             });
         })
+    }
+
+    function exportExcel() {
+        layer.confirm("确认要导出所有日志数据吗?", {
+            btn: ['确定', '取消']
+            // 按钮
+        }, function () {
+            exportData(prefix + '/export', 'logSelect', '日志列表.xls');
+        }, function () {
+        });
     }
 
     function batchRemove() {

@@ -1,16 +1,27 @@
 package com.wayn.notify.service.impl;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.util.DateUtils;
+import com.wayn.commom.util.FileUtils;
 import com.wayn.notify.dao.NotifyRecordDao;
 import com.wayn.notify.domain.NotifyRecord;
 import com.wayn.notify.domain.NotifyRecordTip;
 import com.wayn.notify.domain.vo.NotifyRecordVO;
 import com.wayn.notify.service.NotifyRecordService;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -65,6 +76,31 @@ public class NotifyRecordServiceImpl extends ServiceImpl<NotifyRecordDao, Notify
                     notifyRecordTip.getUpdateTime() : notifyRecordTip.getPublishTime()));
         }
         return page.setRecords(notifyRecordTips);
+    }
+
+    @Override
+    public void export(NotifyRecordVO notifyRecordVO, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        List<NotifyRecordVO> notifyRecordVOS = notifyRecordDao.selectNotifyRecordList(notifyRecordVO);
+        ExportParams exportParams = new ExportParams();
+        exportParams.setStyle(IExcelExportStylerImpl.class);
+        exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
+                NotifyRecordVO.class, notifyRecordVOS);
+        // 使用bos获取excl文件大小
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        workbook.write(bos);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Length", bos.size() + "");
+        response.setHeader("Content-Disposition",
+                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "我的通知列表.xls"));
+        response.setContentType("application/octet-stream;charset=UTF-8");
+        //保存数据
+        OutputStream os = response.getOutputStream();
+        workbook.write(os);
+        workbook.close();
+        os.close();
+        bos.close();
     }
 
 }

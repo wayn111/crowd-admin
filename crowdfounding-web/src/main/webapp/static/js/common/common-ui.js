@@ -330,9 +330,10 @@ function exportData(exportUrl, formId, filename) {
                     var file = new File([req.response], filename, {type: 'application/force-download'});
                     window.open(URL.createObjectURL(file));
                 }
-                layer.close(index)
+                layer.close(index);
             } else {
-                layer.alert('下载失败！')
+                layer.close(index);
+                layer.alert('下载失败！');
             }
 
         }

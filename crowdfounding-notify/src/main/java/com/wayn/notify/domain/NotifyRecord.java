@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BaseEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 
@@ -107,14 +106,13 @@ public class NotifyRecord extends BaseEntity {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("notifyId", notifyId)
-                .append("receiveUserId", receiveUserId)
-                .append("receiveUserName", receiveUserName)
-                .append("isRead", isRead)
-                .append("readTime", readTime)
-                .append("createTime", super.getCreateTime())
-                .toString();
+        return "NotifyRecord{" +
+                "id=" + id +
+                ", notifyId=" + notifyId +
+                ", receiveUserId='" + receiveUserId + '\'' +
+                ", receiveUserName='" + receiveUserName + '\'' +
+                ", isRead=" + isRead +
+                ", readTime=" + readTime +
+                "} " + super.toString();
     }
 }
