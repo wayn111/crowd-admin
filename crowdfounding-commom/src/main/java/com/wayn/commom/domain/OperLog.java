@@ -1,5 +1,6 @@
 package com.wayn.commom.domain;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -27,41 +28,51 @@ public class OperLog extends BaseEntity<OperLog> {
     /**
      * 操作状态 1 正常 -1 失败
      */
+    @Excel(name = "操作状态", replace = {"正常_1", "失败_-1"})
     private Integer operState;
 
     /**
      * 错误消息
      */
+    @Excel(name = "错误消息", width = 20)
     private String errorMsg;
 
     /**
      * 用户
      */
+    @Excel(name = "操作用户")
     private String userName;
 
     /**
      * 模块名称
      */
+    @Excel(name = "模块名称")
     private String moduleName;
 
     /**
      * 操作类型
      */
+    @Excel(name = "操作类型", replace = {"新建_add", "更新_update",
+            "删除_delete", "查询_select", "上传_upload", "下载_download", "其他_other",
+            "登陆_login", "登出_logout", "文件操作_fileOperate", "代码生成_genCode", "执行_executor"})
     private String operation;
 
     /**
      * 请求路径
      */
+    @Excel(name = "请求路径", width = 40)
     private String url;
 
     /**
      * 请求方法
      */
+    @Excel(name = "请求方法", width = 40)
     private String method;
 
     /**
      * 请求ip
      */
+    @Excel(name = "请求ip", width = 20)
     private String ip;
 
     /**

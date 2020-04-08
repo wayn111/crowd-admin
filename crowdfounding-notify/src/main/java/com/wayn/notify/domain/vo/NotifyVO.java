@@ -1,5 +1,6 @@
 package com.wayn.notify.domain.vo;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BaseEntity;
@@ -17,10 +18,12 @@ public class NotifyVO extends BaseEntity<NotifyVO> {
     /**
      * 通知类型 1 公告 2 通知
      */
+    @Excel(name = "通知类型", replace = {"公告_1", "通知_2"})
     private Integer type;
     /**
      * 标题
      */
+    @Excel(name = "标题")
     private String title;
     /**
      * 内容
@@ -33,6 +36,7 @@ public class NotifyVO extends BaseEntity<NotifyVO> {
     /**
      * 通知状态 1 已发布 -1 未发布
      */
+    @Excel(name = "通知状态", replace = {"已发布_1", "未发布_-1"}, type = 10)
     private Integer notifyState;
 
     /**
@@ -43,14 +47,17 @@ public class NotifyVO extends BaseEntity<NotifyVO> {
     /**
      * 创建者
      */
+    @Excel(name = "发布人")
     private String createBy;
     /**
      * 更新者
      */
+    @Excel(name = "修改人")
     private String updateBy;
     /**
      * 更新时间
      */
+    @Excel(name = "修改时间", width = 20)
     private String updateTime;
     /**
      * 删除标记
@@ -165,5 +172,23 @@ public class NotifyVO extends BaseEntity<NotifyVO> {
     public NotifyVO setRemarks(String remarks) {
         this.remarks = remarks;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "NotifyVO{" +
+                "id=" + id +
+                ", type=" + type +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", files='" + files + '\'' +
+                ", notifyState=" + notifyState +
+                ", publishTime='" + publishTime + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                ", remarks='" + remarks + '\'' +
+                "} " + super.toString();
     }
 }

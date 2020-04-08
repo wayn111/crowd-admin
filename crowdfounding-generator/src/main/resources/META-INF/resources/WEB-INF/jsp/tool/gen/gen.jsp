@@ -19,7 +19,7 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="col-sm-12 search-collapse">
-        <form class="form-inline" id="roleSelect">
+        <form class="form-inline" id="genSelect">
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label for="tableName">数据表名称</label>
@@ -53,6 +53,12 @@
                         <button type="button" class="btn btn-info"
                                 onclick="batchGenCode()">
                             <i class="fa fa-download" aria-hidden="true"></i>批量生成
+                        </button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="tool:gen:gen">
+                        <button type="button" class="btn btn-success"
+                                onclick="exportExcel()">
+                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>导出
                         </button>
                     </shiro:hasPermission>
                 </div>
@@ -207,6 +213,17 @@
             }
         });
     }
+
+    function exportExcel() {
+        layer.confirm("确认要导出所有用户数据吗?", {
+            btn: ['确定', '取消']
+            // 按钮
+        }, function () {
+            exportData(prefix + '/export', 'genSelect', '用户列表.xls');
+        }, function () {
+        });
+    }
+
 
     function batchGenCode() {
         var rows = $('#table1').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组

@@ -1,5 +1,6 @@
 package com.wayn.generator.domain;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.wayn.commom.base.BaseEntity;
 
 import java.util.Date;
@@ -16,11 +17,13 @@ public class TableInfo extends BaseEntity {
     /**
      * 表名称
      */
+    @Excel(name = "表名称", width = 20)
     private String tableName;
 
     /**
      * 表描述
      */
+    @Excel(name = "表备注", width = 20)
     private String tableComment;
 
     /**
@@ -65,16 +68,16 @@ public class TableInfo extends BaseEntity {
         return columns;
     }
 
+    public void setColumns(List<ColumnInfo> columns) {
+        this.columns = columns;
+    }
+
     public ColumnInfo getColumnsLast() {
         ColumnInfo columnInfo = null;
         if (columns != null && columns.size() > 0) {
             columnInfo = columns.get(0);
         }
         return columnInfo;
-    }
-
-    public void setColumns(List<ColumnInfo> columns) {
-        this.columns = columns;
     }
 
     public String getClassName() {

@@ -61,6 +61,11 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
                         </button>
                     </shiro:hasPermission>
+                    <shiro:hasPermission name="	sys:role:role">
+                        <button type="button" class="btn btn-success" onclick="exportExcel()">
+                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>导出
+                        </button>
+                    </shiro:hasPermission>
                 </div>
                 <table id="table1" data-mobile-responsive="true">
                 </table>
@@ -128,6 +133,16 @@
                 }
             });
         })
+    }
+
+    function exportExcel() {
+        layer.confirm("确认要导出所有角色数据吗?", {
+            btn: ['确定', '取消']
+            // 按钮
+        }, function () {
+            exportData(prefix + '/export', 'roleSelect', '角色列表.xls');
+        }, function () {
+        });
     }
 
     function batchRemove() {

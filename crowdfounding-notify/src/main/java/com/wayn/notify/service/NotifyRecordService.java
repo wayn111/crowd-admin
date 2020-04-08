@@ -6,6 +6,10 @@ import com.wayn.notify.domain.NotifyRecord;
 import com.wayn.notify.domain.NotifyRecordTip;
 import com.wayn.notify.domain.vo.NotifyRecordVO;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * 通知记录 服务层
  *
@@ -57,4 +61,6 @@ public interface NotifyRecordService extends IService<NotifyRecord> {
     NotifyRecordVO selectNotifyByNotifyRecordId(Long id);
 
     Page<NotifyRecordTip> selectNotifyRecordTipList(Page<NotifyRecordTip> page, String curUserId);
+
+    void export(NotifyRecordVO notifyRecordVO, HttpServletResponse response, HttpServletRequest request) throws IOException;
 }

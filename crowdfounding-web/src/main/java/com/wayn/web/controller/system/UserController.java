@@ -193,6 +193,7 @@ public class UserController extends BaseControlller {
         String requestUrl = HttpUtil.getRequestContext(request);
         list.forEach(item -> {
             item.setUserImg(requestUrl + "/" + item.getUserImg().substring(item.getUserImg().indexOf("upload")));
+            item.setDeptId(1L);
             item.setPassword(ShiroUtil.md5encrypt("123456", item.getUserName()));
         });
         userService.insertBatch(list);

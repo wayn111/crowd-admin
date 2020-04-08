@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.wayn.generator.domain.TableInfo;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -42,4 +45,6 @@ public interface GenService extends IService<TableInfo> {
      * @param tableName
      */
     Map<String, String> previewCode(String tableName);
+
+    void export(TableInfo tableInfo, HttpServletResponse response, HttpServletRequest request) throws IOException;
 }

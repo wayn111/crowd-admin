@@ -4,6 +4,10 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.wayn.quartz.domain.JobLog;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * 定时任务调度日志 服务层
  *
@@ -50,4 +54,6 @@ public interface JobLogService extends IService<JobLog> {
      * @return 结果
      */
     boolean batchRemove(Long[] ids);
+
+    void export(JobLog jobLog, HttpServletResponse response, HttpServletRequest request) throws IOException;
 }

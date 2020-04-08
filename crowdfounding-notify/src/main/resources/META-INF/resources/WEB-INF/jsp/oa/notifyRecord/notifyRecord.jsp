@@ -19,7 +19,7 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="col-sm-12 search-collapse">
-        <form class="form-inline" id="roleSelect">
+        <form class="form-inline" id="notifySelect">
             <input type="hidden" id="deptId" name="deptId">
             <div class="form-group">
                 <label for="title">通知标题</label>
@@ -55,10 +55,15 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div id="exampleToolbar" role="group" class="t-bar">
-                    <shiro:hasPermission name="oa:notify:remove">
+                    <shiro:hasPermission name="oa:notifyRecord:remove">
                         <button type="button" class="btn  btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="oa:notifyRecord:list">
+                        <button type="button" class="btn btn-success" onclick="exportExcel()">
+                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>导出
                         </button>
                     </shiro:hasPermission>
                 </div>
@@ -261,6 +266,16 @@
             }
         });
         parent.layer.full(index);
+    }
+
+    function exportExcel() {
+        layer.confirm("确认要导出所有日志数据吗?", {
+            btn: ['确定', '取消']
+            // 按钮
+        }, function () {
+            exportData(prefix + '/export', 'notifySelect', '我的通知列表.xls');
+        }, function () {
+        });
     }
 
     function batchRemove() {

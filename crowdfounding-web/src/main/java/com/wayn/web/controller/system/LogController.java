@@ -17,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,4 +82,9 @@ public class LogController extends BaseControlller {
         return Response.success("删除日志成功");
     }
 
+    @PostMapping("/export")
+    public void export(OperLog log, HttpServletResponse response) throws IOException {
+        ParameterUtil.setWrapper();
+        logService.export(log, response, request);
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * @author wayn
  * @date 2019-09-04
  */
-public interface JobLogDao extends BaseMapper<JobLog>{
+public interface JobLogDao extends BaseMapper<JobLog> {
     /**
      * 查询定时任务调度日志信息
      *
@@ -20,5 +20,7 @@ public interface JobLogDao extends BaseMapper<JobLog>{
      * @return 定时任务调度日志信息
      */
     public List<JobLog> selectJobLogList(Pagination page, JobLog jobLog);
+
+    public List<JobLog> selectJobLogList(JobLog jobLog);
 
 }

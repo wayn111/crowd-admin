@@ -18,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 
 @Controller
@@ -102,5 +104,11 @@ public class RoleController extends BaseControlller {
 	public Response batchRemove(Model model, @RequestParam("ids[]") String[] ids) throws BusinessException {
 		roleService.batchRemove(ids);
 		return Response.success("批量删除角色成功");
+	}
+
+	@PostMapping("/export")
+	public void export(Role role, HttpServletResponse response) throws IOException {
+		ParameterUtil.setWrapper();
+		roleService.export(role, response, request);
 	}
 }
