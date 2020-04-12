@@ -16,6 +16,7 @@ import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.DeptService;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
+import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.FileUtils;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.TreeBuilderUtil;
@@ -162,7 +163,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public boolean editAcount(String id, String userName) {
-        updateForSet("userName = '" + userName + "'", new EntityWrapper<User>().eq("id", id));
+        updateForSet("userName = '" + userName + "', password ='" + ShiroUtil.md5encrypt("123456", userName) + "'",
+                new EntityWrapper<User>().eq("id", id));
         return true;
     }
 
