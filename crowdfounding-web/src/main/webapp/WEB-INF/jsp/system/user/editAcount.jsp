@@ -5,6 +5,12 @@
 <meta charset="utf-8">
 <%@ include file="/commom/taglib.jsp"%>
 <%@ include file="/commom/header.jsp"%>
+<style>
+	.danger{
+		color: red;
+		font-size: 5px;
+	}
+</style>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
@@ -18,6 +24,9 @@
 								<input id="userName" name="userName" class="form-control" value="${userName}"
 									type="text">
 							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-12 control-label danger">修改用户名称后，密码将重置为123456.</label>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-8 col-sm-offset-3">
