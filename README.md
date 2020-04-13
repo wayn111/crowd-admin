@@ -71,12 +71,12 @@
 
 
 ### 开发教程
-- 此处参考[RuoYi](https://gitee.com/y_project/RuoYi)文档
-- 如有疑问，QQ:1669738430
+- [RuoYi](https://gitee.com/y_project/RuoYi)文档
+- [Mybatis Plus](https://gitee.com/y_project/RuoYi)文档
  
 ### 获取源码
 - [crowdfounding 码云](https://gitee.com/wayn111/crowdfounding)
-- [crowdfounding github](https://github.com/wayn111/crowdfounding)
+- [crowdfounding github](https://mp.baomidou.com/)
 
 ### 在线演示
 - <a href="http://wayn.xin" target="_blank">~~crowdfounding-web~~</a>
