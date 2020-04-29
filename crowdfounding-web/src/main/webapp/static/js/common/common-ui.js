@@ -11,6 +11,10 @@ $(function () {
 
     // 初始化多选框/单选框控件
     $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
+    $.validator.addMethod("checkEmail", function (value, element, params) {
+        var checkEmail = /^[a-z0-9]+@([a-z0-9]+\.)+[a-z]{2,4}$/i;
+        return this.optional(element) || (checkEmail.test(value));
+    }, "*请输入正确的邮箱！");
 });
 
 /**

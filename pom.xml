@@ -63,6 +63,7 @@
         <reactor-net.version>2.0.8.RELEASE</reactor-net.version>
         <netty-all.version>4.0.33.Final</netty-all.version>
         <easypoi.version>4.1.0</easypoi.version>
+        <mail.version>1.4.7</mail.version>
     </properties>
 
     <dependencies>
@@ -334,6 +335,11 @@
             <version>${thumbnailator.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${mail.version}</version>
+        </dependency>
 
     </dependencies>
     <build>

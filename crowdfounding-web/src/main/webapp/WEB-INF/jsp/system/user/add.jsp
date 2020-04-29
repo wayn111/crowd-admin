@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">邮箱：</label>
+                            <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>邮箱：</label>
                             <div class="col-sm-8">
                                 <input id="email" name="email" class="form-control"
                                        type="email">
@@ -152,6 +152,10 @@
                     required: true,
                     minlength: 6
                 },
+                email: {
+                    required: true,
+                    checkEmail: true
+                },
                 deptName: {
                     required: true
                 }
@@ -165,6 +169,10 @@
                 password: {
                     required: icon + "请输入您的密码",
                     minlength: icon + "密码必须6个字符以上"
+                },
+                email: {
+                    required: "请输入您的邮箱！",
+                    checkEmail: "请输入正确的邮箱！",
                 },
                 deptName: {
                     required: icon + "请选择部门",
