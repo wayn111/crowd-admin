@@ -47,6 +47,6 @@ public class MailController {
             return Response.error("邮件信息未配置完全，请先填写配置信息");
         }
         mailQueueProducer.sendMail(mailConfig, mailVO);
-        return Response.success("发送成功");
+        return Response.success("发送成功，请等待");
     }
 }
