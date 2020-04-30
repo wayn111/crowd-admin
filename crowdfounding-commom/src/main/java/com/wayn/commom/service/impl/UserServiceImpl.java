@@ -13,7 +13,6 @@ import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserRole;
 import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
-import com.wayn.commom.service.DeptService;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -56,10 +55,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     private DeptDao deptDao;
     @Autowired
     private UserRoleService userRoleService;
-
-    @Autowired
-    private DeptService deptService;
-
 
     @Value("${wayn.uploadDir}")
     private String uploadDir;

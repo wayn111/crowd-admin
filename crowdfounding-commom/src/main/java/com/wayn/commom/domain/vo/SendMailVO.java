@@ -1,13 +1,21 @@
 package com.wayn.commom.domain.vo;
 
+import java.io.Serializable;
+
 /**
  * 发送邮件VO对象
  */
-public class SendMailVO {
+public class SendMailVO implements Serializable {
+    private static final long serialVersionUID = 3496419936455305502L;
     /**
      * 接收人
      */
     private String receiverUser;
+
+    /**
+     * 发送邮箱
+     */
+    private String sendMail;
     /**
      * 邮件标题
      */
@@ -41,6 +49,15 @@ public class SendMailVO {
 
     public SendMailVO setContent(String content) {
         this.content = content;
+        return this;
+    }
+
+    public String getSendMail() {
+        return sendMail;
+    }
+
+    public SendMailVO setSendMail(String sendMail) {
+        this.sendMail = sendMail;
         return this;
     }
 }
