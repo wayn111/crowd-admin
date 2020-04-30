@@ -110,6 +110,5 @@ __字典管理__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/字典管理.png "字典管理.png")
 
 ### 特别赞助
-
-<a href="https://www.jetbrains.com/?from=FEBS Shiro">
-    <img src="screenshot/jetbrains.png" width="100px"></a>
+<a href="https://www.jetbrains.com/">
+<img src="./crowdfounding-web/crowdfounding-img/jetbrains.png" width="100px"></a>
