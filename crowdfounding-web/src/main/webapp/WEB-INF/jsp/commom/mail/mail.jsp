@@ -102,9 +102,16 @@
                                     <div class="panel-body wayn-border-left0 wayn-border-right0">
                                         <form class="form-horizontal m-t" id="sendMail-form">
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">接收人邮箱：</label>
+                                                <label class="col-sm-2 control-label">接收人名称：</label>
                                                 <div class="col-sm-10">
                                                     <input id="receiverUser" name="receiverUser" class="form-control"
+                                                           type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">接收人邮箱：</label>
+                                                <div class="col-sm-10">
+                                                    <input id="sendMail" name="sendMail" class="form-control"
                                                            type="text">
                                                 </div>
                                             </div>
@@ -227,6 +234,9 @@
         $("#sendMail-form").validate({
             rules: {
                 receiverUser: {
+                    required: true
+                },
+                sendMail: {
                     required: true,
                     checkEmail: true
                 },
@@ -239,6 +249,9 @@
             },
             messages: {
                 receiverUser: {
+                    required: icon + "请输入接收人名称",
+                },
+                sendMail: {
                     required: icon + "请输入接收人邮箱",
                     checkEmail: "请输入正确的邮箱！",
                 },

@@ -3,9 +3,8 @@ package com.wayn.web.controller.commom;
 import com.wayn.commom.domain.MailConfig;
 import com.wayn.commom.domain.vo.SendMailVO;
 import com.wayn.commom.service.MailConfigService;
-import com.wayn.commom.util.MailUtil;
 import com.wayn.commom.util.Response;
-import org.apache.commons.lang3.StringUtils;
+import com.wayn.framework.jms.queue.MailQueueProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +21,9 @@ public class MailController {
 
     @Autowired
     private MailConfigService mailConfigService;
+
+    @Autowired
+    private MailQueueProducer mailQueueProducer;
 
     @GetMapping
     public String index(HttpServletRequest request) {
@@ -41,12 +43,10 @@ public class MailController {
     @PostMapping("sendMail")
     public Response sendMail(SendMailVO mailVO) {
         MailConfig mailConfig = mailConfigService.selectById(1L);
-        if (StringUtils.isEmpty(mailConfig.getFromUser())
-                || StringUtils.isEmpty(mailConfig.getHost())
-                || StringUtils.isEmpty(mailConfig.getPass())) {
-            return Response.error("邮件未配置，请先填写配置信息");
+        if (!mailConfigService.checkMailConfig(mailConfig)) {
+            return Response.error("邮件信息未配置完全，请先填写配置信息");
         }
-        MailUtil.sendMail(mailConfig, mailVO);
+        mailQueueProducer.sendMail(mailConfig, mailVO);
         return Response.success("发送成功");
     }
 }

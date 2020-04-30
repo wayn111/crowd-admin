@@ -13,4 +13,6 @@ import com.wayn.commom.domain.MailConfig;
  */
 public interface MailConfigService extends IService<MailConfig> {
 
+    boolean checkMailConfig(MailConfig mailConfig);
+
 }

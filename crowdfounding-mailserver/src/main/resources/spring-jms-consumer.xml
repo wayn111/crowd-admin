@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:proj-dev.properties" file-encoding="utf-8"/>
+
+    <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 -->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://${activemq.host}:${activemq.port}"/>
+        <property name="trustedPackages">
+            <list>
+                <value>java.lang</value>
+                <value>java.util</value>
+                <value>com.wayn</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
+    <bean id="connectionFactory"
+          class="org.springframework.jms.connection.SingleConnectionFactory">
+        <!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
+        <property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+    </bean>
+
+    <!--这个是队列目的地，点对点的 文本信息 -->
+    <bean id="queueTextDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="${activemq.queueName}"/>
+    </bean>
+
+    <!-- 我的监听类 -->
+    <bean id="myQueueMessageListener" class="com.wayn.mailserver.listener.MailQueueListener">
+        <constructor-arg ref="templateEngine"/>
+    </bean>
+    <!-- 消息监听容器 -->
+    <bean
+            class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="queueTextDestination"/>
+        <property name="messageListener" ref="myQueueMessageListener"/>
+    </bean>
+
+    <!-- 模板引擎 -->
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver"/>
+    </bean>
+    <!-- 模板解析器 -->
+    <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+        <property name="suffix" value=".html"/>
+        <property name="prefix" value="/templates/"/>
+        <property name="templateMode" value="HTML5"/>
+        <property name="cacheable" value="false"/>
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
+</beans>

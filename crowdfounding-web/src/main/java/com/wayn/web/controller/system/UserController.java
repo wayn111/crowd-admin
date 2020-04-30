@@ -7,9 +7,11 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.Dept;
+import com.wayn.commom.domain.MailConfig;
 import com.wayn.commom.domain.Role;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.RoleChecked;
+import com.wayn.commom.domain.vo.SendMailVO;
 import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.*;
@@ -17,6 +19,7 @@ import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
+import com.wayn.framework.jms.queue.MailQueueProducer;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +58,12 @@ public class UserController extends BaseControlller {
 
     @Autowired
     private DictService dictService;
+
+    @Autowired
+    private MailConfigService mailConfigService;
+
+    @Autowired
+    private MailQueueProducer mailQueueProducer;
 
     @RequiresPermissions("sys:user:user")
     @GetMapping
@@ -139,8 +148,19 @@ public class UserController extends BaseControlller {
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(Model model, User user, String roleIds) {
-        userService.save(user, roleIds);
-        return Response.success("新增用户成功");
+        if (userService.save(user, roleIds)) {
+            MailConfig mailConfig = mailConfigService.selectById(1L);
+            if (!mailConfigService.checkMailConfig(mailConfig)) {
+                return Response.error("邮件信息未配置完全，请先填写配置信息");
+            }
+            SendMailVO mailVO = new SendMailVO();
+            mailVO.setReceiverUser(user.getUserName());
+            mailVO.setSendMail(user.getEmail());
+            mailVO.setTitle("欢迎：" + user.getUserName());
+            mailQueueProducer.sendMail(mailConfig, mailVO);
+            return Response.success("新增用户成功");
+        }
+        return Response.error("新增用户失败");
     }
 
     @Log(value = "用户管理", operator = Operator.UPDATE)
