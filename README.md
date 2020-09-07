@@ -4,18 +4,18 @@
 - [简体中文](README_zh.md)|[English](README_en.md)
 
 ### 项目介绍
-基于Spring,Shiro,Redis,Mybatis的通用后台权限管理系统，并且集成了rbac权限管理，消息通知，邮件发送，任务调度，代码生成，文件管理等常用功能，易于上手，学习，使用二次开发。
+基于Spring,Shiro,Redis,Mybatis的通用后台权限管理系统，并且集成了rbac权限管理，后台消息推送，邮件发送，任务调度，代码生成，elfinder文件管理等常用功能，易于上手，学习，使用二次开发。
 
 #### 主要特性
 - 项目按功能模块化，提升开发，测试效率
-- 支持多数据源操作
-- 支持消息推送
+- 支持后台消息推送
+- 集成elfinder进行文件管理
 - 支持数据字典
-- 支持邮件配置
-- 支持redis/echcache切换使用
+- 支持邮件发送，采用activeMQ异步解耦
 - 支持在线用户监控，登出等操作
+- 支持redis/echcache切换使用
 - 支持ip2regon本地化
-- 集成elfinder
+- 支持多数据源操作
 - 集成日志切面，方便日志记录
 - 前端js代码简洁，清晰，避免过度封装
 - 支持统一输出异常，避免繁琐的判断
@@ -49,7 +49,7 @@
     - Maven：3.5+
     - 数据库：mysql5+
     - ide：Eclipse/Idea
- 
+
 ### 内置模块
 1. 系统管理
     - 用户管理：系统操作者，可绑定多角色
@@ -58,13 +58,13 @@
     - 部门管理：用户所属部门
     - 日志操作：记录用户操作，包含请求参数
 2. 邮件服务
-    - 邮件发送：基于activeMQ监听消息，发送邮件
+    - 邮件发送：基于activeMQ异步发送邮件
 3. 办公通知
     - 我的通知：接收当前用户得通知信息
-    - 通知管理：用户发送并管理通知消息
+    - 通知管理：管理员发送并管理通知消息
 4. 基础管理
     - 数据字典：对系统中经常使用的一些较为固定的数据进行维护
-    - 文件管理：方便查看上传文件位置及管理操作
+    - 文件管理：方便管理查看系统内上传文件
 5. 系统工具
     - 代码生成：可动态根据数据库表，生成后台java代码
     - 任务调度：根据调度策略以及执行目标配置任务调度
@@ -78,7 +78,7 @@
 ### 开发教程
 - [RuoYi](https://gitee.com/y_project/RuoYi)文档
 - [Mybatis Plus](https://mp.baomidou.com/guide)文档
- 
+
 ### 获取源码
 - [crowdfounding 码云](https://gitee.com/wayn111/crowdfounding)
 - [crowdfounding github](https://github.com/wayn111/crowdfounding)
