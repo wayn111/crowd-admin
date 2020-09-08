@@ -1,7 +1,7 @@
 # crowd-admin
 
 ### Language
-- [简体中文](README_zh.md)|[English](README_en.md)
+- [简体中文](README.md)|[English](README_en.md)
 
 ### 项目介绍
 基于Spring,Shiro,Redis,Mybatis的通用后台权限管理系统，并且集成了rbac权限管理，后台消息推送，邮件发送，任务调度，代码生成，elfinder文件管理等常用功能，易于上手，学习，使用二次开发。
@@ -13,8 +13,8 @@
 - 支持数据字典
 - 支持邮件发送，采用activeMQ异步解耦
 - 支持在线用户监控，登出等操作
-- 支持redis/echcache切换使用
-- 支持ip2regon本地化
+- 支持redis/ehcache切换使用
+- 支持ip2region本地化
 - 支持多数据源操作
 - 集成日志切面，方便日志记录
 - 前端js代码简洁，清晰，避免过度封装
@@ -111,4 +111,4 @@ __字典管理__
 
 ### 特别赞助
 <a href="https://www.jetbrains.com/" target="_blank">
-<img src="./crowdfounding-web/crowdfounding-img/jetbrains.png" width="100px"></a>
+<img src="./crowdfounding-web/crowdfounding-img/jetbrains.png" width="100px" alt=""></a>
