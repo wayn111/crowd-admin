@@ -17,7 +17,7 @@ import java.util.Properties;
 
 public class MailUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(MailUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(MailUtil.class);
 
     public static void sendMail(MailConfig mailConfig, SendMailVO mailVO) {
         try {
