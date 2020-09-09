@@ -32,6 +32,12 @@ public class User extends BusinessEntity<User> {
     private String userName;
 
     /**
+     * 昵称
+     */
+    @Excel(name = "昵称")
+    private String nickName;
+
+    /**
      * 密码
      */
     private String password;
@@ -131,11 +137,21 @@ public class User extends BusinessEntity<User> {
         return this;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public User setNickName(String nickName) {
+        this.nickName = nickName;
+        return this;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
                 .add("userName='" + userName + "'")
+                .add("nickName='" + nickName + "'")
                 .add("password='" + password + "'")
                 .add("userState=" + userState)
                 .add("userImg='" + userImg + "'")
