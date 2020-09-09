@@ -73,19 +73,18 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     @Override
     public List<Menu> selectTreeMenuByUserId(String id) {
         List<Menu> menus = roleMenuDao.selectRoleMenuIdsByUserId(id);
-        List<Menu> treeMenus = selectTreeMenuByMenusAndPid(menus, 0L);
-        return treeMenus;
+        return selectTreeMenuByMenusAndPid(menus, 0L);
     }
 
     /**
      * 将菜单列表封装成菜单树，不包含按钮
      *
-     * @param menus
+     * @param menus 菜单集合
      * @param pid   顶级父id
-     * @return
+     * @return 返回菜单树
      */
     public List<Menu> selectTreeMenuByMenusAndPid(List<Menu> menus, Long pid) {
-        List<Menu> returnList = new ArrayList<Menu>();
+        List<Menu> returnList = new ArrayList<>();
         menus.forEach(menu -> {
             if (pid.equals(menu.getPid())) {
                 //只设置菜单类型为 目录 1 或者菜单 2 的记录
@@ -105,13 +104,17 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     @Cacheable(value = "menuCache", key = "#root.method + '_menuTree'")
     @Override
     public Tree<Menu> getTree() {
-        List<Tree<Menu>> trees = new ArrayList<Tree<Menu>>();
-        List<Menu> menus = menuDao.selectList(new EntityWrapper<Menu>());
+        List<Tree<Menu>> trees = new ArrayList<>();
+        List<Menu> menus = menuDao.selectList(new EntityWrapper<>());
         menus.forEach(menu -> {
-            Tree<Menu> tree = new Tree<Menu>();
+            Tree<Menu> tree = new Tree<>();
             tree.setId(menu.getId().toString());
             tree.setParentId(menu.getPid().toString());
-            tree.setText(menu.getMenuName());
+            if (menu.getType() == 3) {
+                tree.setText(menu.getMenuName() + "<font color='#888'>&nbsp;&nbsp;&nbsp;&nbsp;" + menu.getResource() + "</font>");
+            } else {
+                tree.setText(menu.getMenuName());
+            }
             trees.add(tree);
         });
         return TreeBuilderUtil.build(trees);
@@ -126,28 +129,23 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     @Override
     public Tree<Menu> getTree(String id) {
         List<RoleMenu> list = roleMenuDao.selectList(new EntityWrapper<RoleMenu>().eq("roleId", id));
-        List<Long> menuIds = new ArrayList<Long>();
-        list.forEach(item -> {
-            menuIds.add(item.getMenuId());
-        });
+        List<Long> menuIds = new ArrayList<>();
+        list.forEach(item -> menuIds.add(item.getMenuId()));
         //去掉菜单的父菜单，jstree默认会勾选父菜单
         if (menuIds.size() > 0) {
             List<Menu> list2 = menuDao.selectBatchIds(menuIds);
-            List<Long> temp = menuIds;
             for (Menu menu : list2) {
-                if (temp.contains(menu.getPid())) {
-                    menuIds.remove(menu.getPid());
-                }
+                menuIds.remove(menu.getPid());
             }
         }
-        List<Menu> menus = menuDao.selectList(new EntityWrapper<Menu>());
-        List<Tree<Menu>> trees = new ArrayList<Tree<Menu>>();
+        List<Menu> menus = menuDao.selectList(new EntityWrapper<>());
+        List<Tree<Menu>> trees = new ArrayList<>();
         menus.forEach(menu -> {
-            Tree<Menu> tree = new Tree<Menu>();
+            Tree<Menu> tree = new Tree<>();
             tree.setId(menu.getId().toString());
             tree.setParentId(menu.getPid().toString());
             tree.setText(menu.getMenuName());
-            Map<String, Object> state = new HashMap<String, Object>();
+            Map<String, Object> state = new HashMap<>();
             Long menuId = menu.getId();
             //设置选中状态
             if (menuIds.contains(menuId)) {
@@ -196,9 +194,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     /**
      * 根据pid查询子菜单
      *
-     * @param menus
-     * @param menusList
-     * @return
+     * @param menus     菜单集合
+     * @param menusList 递归菜单集合
+     * @return 递归便利后的菜单集合
      */
     public List<Menu> selectChildren(List<Menu> menus, List<Menu> menusList) {
         menus.forEach(item -> {
