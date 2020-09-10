@@ -5,10 +5,11 @@
     <resultMap id="BaseResultMap" type="com.wayn.commom.domain.User">
         <id column="id" property="id"/>
         <result column="userName" property="userName"/>
+        <result column="nickName" property="nickName"/>
         <result column="password" property="password"/>
         <result column="userState" property="userState"/>
         <result column="createTime" property="createTime"/>
-        <result column="userDesc" property="userDesc"/>
+        <result column="remarks" property="remarks"/>
         <result column="userImg" property="userImg"/>
         <result column="deptId" property="deptId"/>
     </resultMap>

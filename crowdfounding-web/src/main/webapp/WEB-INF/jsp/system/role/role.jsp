@@ -229,9 +229,12 @@
                         // 列表中显示复选框
                     },
                     {
-                        field: 'id', // 列字段名
-                        width: '16%',
-                        title: '序号' // 列标题
+                        title: '序号',
+                        align: 'center',
+                        width: 10,
+                        formatter: function (value, row, index) {
+                            return generatorTableSequence('#table1', index);
+                        }
                     },
                     {
                         field: 'roleName',
