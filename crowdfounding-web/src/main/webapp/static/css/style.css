@@ -7482,3 +7482,9 @@ input.error, select.error, .form-control.error {
     border-color: #c66161;
     color: #c00;
 }
+
+.layui-layer-content ul {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
