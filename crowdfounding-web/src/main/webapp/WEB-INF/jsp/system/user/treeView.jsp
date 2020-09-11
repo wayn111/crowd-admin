@@ -59,13 +59,13 @@
             },
             "types": {
                 "root": {
-                    "icon": "glyphicon glyphicon-folder-close",
+                    "icon": "fa fa-folder icon-state-default"
                 },
                 "dir": {
-                    "icon": 'glyphicon glyphicon-folder-close',
+                    "icon": "fa fa-folder icon-state-default"
                 },
                 "file": {
-                    "icon": "glyphicon glyphicon-file",
+                    "icon": "fa fa-folder icon-state-success"
                 }
             },
             // 'checkbox': {"tie_selection": false},

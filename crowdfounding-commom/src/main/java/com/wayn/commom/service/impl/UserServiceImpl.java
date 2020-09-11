@@ -67,8 +67,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         wrapper.like("email", user.getEmail());
         wrapper.eq(user.getUserState() != null, "userState", user.getUserState());
         wrapper.eq(user.getDeptId() != null, "deptId", user.getDeptId());
-        Page<User> selectPage = selectPage(page, wrapper);
-        return selectPage;
+        return selectPage(page, wrapper);
     }
 
     @Override
@@ -92,7 +91,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         user.setCreateTime(new Date());
         user.setPassword(new SimpleHash("MD5", user.getPassword(), user.getUserName(), 1024).toString());
         boolean flag = insert(user);
-        List<UserRole> list = new ArrayList<UserRole>();
+        List<UserRole> list = new ArrayList<>();
         if (StringUtils.isNotBlank(roleIds)) {
             String[] split = roleIds.split(",");
             for (String roleId : split) {
@@ -114,7 +113,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Override
     public boolean update(User user, String roleIds) {
         boolean flag = updateById(user);
-        List<UserRole> list = new ArrayList<UserRole>();
+        List<UserRole> list = new ArrayList<>();
         if (StringUtils.isNotBlank(roleIds)) {
             String[] split = roleIds.split(",");
             for (String roleId : split) {
@@ -144,9 +143,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     public boolean batchRemove(String[] ids) {
         List<String> list = Arrays.asList(ids);
         userDao.deleteBatchIds(list);
-        list.forEach(id -> {
-            userRoleService.delete(new EntityWrapper<UserRole>().eq("userId", id));
-        });
+        list.forEach(id -> userRoleService.delete(new EntityWrapper<UserRole>().eq("userId", id)));
         return true;
     }
 
@@ -165,30 +162,27 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public Tree<Dept> getTree() {
-        List<Tree<Dept>> trees = new ArrayList<Tree<Dept>>();
-        List<Dept> depts = deptDao.selectList(new EntityWrapper<Dept>());
-        List<User> users = userDao.selectList(new EntityWrapper<User>());
+        List<Tree<Dept>> trees = new ArrayList<>();
+        List<Dept> depts = deptDao.selectList(new EntityWrapper<>());
+        List<User> users = userDao.selectList(new EntityWrapper<>());
         // 获取部门所有pid
-        List<Long> ds = depts.stream().map(item -> {
-            return item.getPid();
-        }).distinct().collect(Collectors.toList());
+        List<Long> ds = depts.stream().map(Dept::getPid).distinct().collect(Collectors.toList());
         // 获取用户所有deptId
-        List<Long> us = users.stream().map(item -> {
-            return item.getDeptId();
-        }).distinct().collect(Collectors.toList());
+        List<Long> us = users.stream().map(User::getDeptId).distinct().collect(Collectors.toList());
         // 合并部门pid和用户deptId
         Long[] objects = ds.toArray(new Long[]{});
         Long[] objects1 = us.toArray(new Long[]{});
-        Long[] allDepts = (Long[]) ArrayUtils.addAll(objects, objects1);
+        Long[] allDepts = ArrayUtils.addAll(objects, objects1);
         for (Dept dept : depts) {
             // 过滤掉无用户挂载的部门
             if (!ArrayUtils.contains(allDepts, dept.getId())) {
                 continue;
             }
-            Tree<Dept> tree = new Tree<Dept>();
+            Tree<Dept> tree = new Tree<>();
             tree.setId(dept.getId().toString());
             tree.setParentId(dept.getPid().toString());
             tree.setText(dept.getDeptName());
+            tree.setType("dir");
             Map<String, Object> state = new HashMap<>(16);
             state.put("opened", true);
             state.put("mType", "dept");
@@ -196,10 +190,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
             trees.add(tree);
         }
         for (User user : users) {
-            Tree<Dept> tree = new Tree<Dept>();
+            Tree<Dept> tree = new Tree<>();
             tree.setId(user.getId());
             tree.setParentId(user.getDeptId().toString());
             tree.setText(user.getUserName());
+            tree.setType("file");
             Map<String, Object> state = new HashMap<>(16);
             state.put("opened", true);
             state.put("mType", "user");
@@ -234,9 +229,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
         List<User> list = selectList(wrapper);
-        list.forEach(item -> {
-            item.setUserImg(uploadDir + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6));
-        });
+        list.forEach(item -> item.setUserImg(uploadDir + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6)));
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
                 User.class, list);
         // 使用bos获取excl文件大小
