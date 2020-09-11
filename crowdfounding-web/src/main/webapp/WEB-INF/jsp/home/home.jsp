@@ -35,7 +35,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="wayn-profile animated">
-                        <h3 class="wayn-h3">crowdfounding</h3>
+                        <h3 class="wayn-h3">crowd-admin</h3>
                         <div id="user-avatar" class="pull-left" style="margin-top: 6px">
                             <img alt="image" class="img-circle" src="${user.userImg}"
                                  style="cursor:pointer;height: 64px"
