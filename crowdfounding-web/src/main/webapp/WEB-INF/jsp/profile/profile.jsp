@@ -30,6 +30,10 @@
                             <b class="font-noraml">登录名称：</b>
                             <p class="pull-right">${user.userName}</p>
                         </li>
+                        <li class="list-group-item wayn-li-item"><i class="fa fa-user"></i>
+                            <b class="font-noraml">昵称：</b>
+                            <p class="pull-right">${user.nickName}</p>
+                        </li>
                         <li class="list-group-item wayn-li-item"><i class="fa fa-phone"></i>
                             <b class="font-noraml">手机号码：</b>
                             <p class="pull-right">${user.phone}</p>
@@ -77,6 +81,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-sm-2 control-label">昵称：</label>
+                                                <div class="col-sm-10">
+                                                    <input id="nickName" name="nickName" class="form-control"
+                                                           type="text" value="${user.nickName }">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-sm-2 control-label">手机：</label>
                                                 <div class="col-sm-10">
                                                     <input id="phone" name="phone" class="form-control"
@@ -103,7 +114,8 @@
                                                         <i class="fa fa-check"></i>保 存
                                                     </button>&nbsp;
                                                     <button type="button" class="btn btn-sm btn-danger"
-                                                            onclick="activeTabClose()"><i class="fa fa-reply-all"></i>关 闭
+                                                            onclick="activeTabClose()"><i class="fa fa-reply-all"></i>关
+                                                        闭
                                                     </button>
                                                 </div>
                                             </div>
@@ -181,7 +193,7 @@
                 // 已发布后
                 var iframeWin = layero.find('iframe')[0];
             },
-            btn: ['确 定','取 消'],
+            btn: ['确 定', '取 消'],
             yes: function (index, layero) {
                 //按钮【按钮一】的回调
                 var iframeWin = layero.find('iframe')[0];
