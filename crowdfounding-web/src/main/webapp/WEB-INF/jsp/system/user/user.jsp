@@ -421,10 +421,21 @@
             'core': {
                 'data': tree,
                 'themes': {
-                    'name': "proton"
+                    'name': "default"
                 }
             },
-            "plugins": ["search"]
+            "types": {
+                "root": {
+                    "icon": "glyphicon glyphicon-folder-close",
+                },
+                "dir": {
+                    "icon": 'glyphicon glyphicon-folder-close',
+                },
+                "file": {
+                    "icon": "glyphicon glyphicon-file",
+                }
+            },
+            "plugins": ["search", "types"]
         });
     }
 

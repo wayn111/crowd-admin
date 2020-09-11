@@ -54,11 +54,22 @@
             'core': {
                 'data': tree,
                 'themes': {
-                    'name': "proton"
+                    'name': "default"
+                }
+            },
+            "types": {
+                "root": {
+                    "icon": "glyphicon glyphicon-folder-close",
+                },
+                "dir": {
+                    "icon": 'glyphicon glyphicon-folder-close',
+                },
+                "file": {
+                    "icon": "glyphicon glyphicon-file",
                 }
             },
             // 'checkbox': {"tie_selection": false},
-            "plugins": ["search", "checkbox"]
+            "plugins": ["search", "checkbox", "types"]
         });
     }
 

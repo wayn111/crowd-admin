@@ -106,10 +106,25 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     public Tree<Menu> getTree() {
         List<Tree<Menu>> trees = new ArrayList<>();
         List<Menu> menus = menuDao.selectList(new EntityWrapper<>());
+        List<Long> subMenuIds = new ArrayList<>();
+        for (Menu menu : menus) {
+            boolean flag = true;
+            for (Menu subMenu : menus) {
+                if (menu.getId().equals(subMenu.getPid())) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) subMenuIds.add(menu.getId());
+        }
         menus.forEach(menu -> {
             Tree<Menu> tree = new Tree<>();
             tree.setId(menu.getId().toString());
             tree.setParentId(menu.getPid().toString());
+            tree.setType("dir");
+            if (subMenuIds.contains(menu.getId())) {
+                tree.setType("file");
+            }
             if (menu.getType() == 3) {
                 tree.setText(menu.getMenuName() + "<font color='#888'>&nbsp;&nbsp;&nbsp;&nbsp;" + menu.getResource() + "</font>");
             } else {
