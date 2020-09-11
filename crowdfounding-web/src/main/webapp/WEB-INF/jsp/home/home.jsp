@@ -43,7 +43,7 @@
                         </div>
                         <div id="user-state" class="pull-left margin-left10">
                             <p style="margin: 10px 0px 10px 0px;color: white">
-                                <strong class="font-bold">${user.userName }</strong>
+                                <strong class="font-bold">${user.nickName }</strong>
                             </p>
                             <span>
                                 <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
@@ -150,7 +150,7 @@
                     </li>
                     <li class="dropdown user-menu">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown" data-delay="0">
-                            <span class="hidden-xs">${user.userName}</span>
+                            <span class="hidden-xs">${user.nickName}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="mt5">
