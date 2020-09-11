@@ -70,13 +70,24 @@
             'core': {
                 'data': menuTree,
                 'themes': {
-                    'name': "proton"
+                    'name': "default"
+                }
+            },
+            "types": {
+                "root": {
+                    "icon": "glyphicon glyphicon-folder-close",
+                },
+                "dir": {
+                    "icon": 'glyphicon glyphicon-folder-close',
+                },
+                "file": {
+                    "icon": "glyphicon glyphicon-file",
                 }
             },
             "checkbox": {
                 "three_state": true,
             },
-            "plugins": ["wholerow", "checkbox"]
+            "plugins": ["wholerow", "checkbox", "types"]
         });
     }
 

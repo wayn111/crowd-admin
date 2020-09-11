@@ -72,11 +72,22 @@
 
     function loadMenuTree(menuTree) {
         $('#menuTree').jstree({
-            "plugins": ["wholerow", "checkbox"],
+            "plugins": ["wholerow", "checkbox", "types"],
             'core': {
                 'data': menuTree,
                 'themes': {
-                    'name': "proton"
+                    'name': "default"
+                }
+            },
+            "types": {
+                "root": {
+                    "icon": "glyphicon glyphicon-folder-close",
+                },
+                "dir": {
+                    "icon": 'glyphicon glyphicon-folder-close',
+                },
+                "file": {
+                    "icon": "glyphicon glyphicon-file",
                 }
             },
             "checkbox": {

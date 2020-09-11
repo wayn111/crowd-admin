@@ -53,12 +53,27 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
     @Override
     public Tree<Dept> getTree() {
         List<Tree<Dept>> trees = new ArrayList<>();
-        List<Dept> menus = deptDao.selectList(new EntityWrapper<>());
-        menus.forEach(menu -> {
+        List<Dept> depts = deptDao.selectList(new EntityWrapper<>());
+        List<Long> subDeptIds = new ArrayList<>();
+        for (Dept dept : depts) {
+            boolean flag = true;
+            for (Dept subDept : depts) {
+                if (dept.getId().equals(subDept.getPid())) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) subDeptIds.add(dept.getId());
+        }
+        depts.forEach(dept -> {
             Tree<Dept> tree = new Tree<>();
-            tree.setId(menu.getId().toString());
-            tree.setParentId(menu.getPid().toString());
-            tree.setText(menu.getDeptName());
+            tree.setId(dept.getId().toString());
+            tree.setParentId(dept.getPid().toString());
+            tree.setText(dept.getDeptName());
+            tree.setType("dir");
+            if (subDeptIds.contains(dept.getId())) {
+                tree.setType("file");
+            }
             trees.add(tree);
         });
         return TreeBuilderUtil.build(trees);

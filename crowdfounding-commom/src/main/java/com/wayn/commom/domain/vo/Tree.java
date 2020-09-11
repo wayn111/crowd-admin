@@ -54,6 +54,11 @@ public class Tree<T> implements Serializable {
 	 */
 	private Boolean hasChildren = false;
 
+	/**
+	 * 节点类型
+	 */
+	private String type;
+
 	public String getId() {
 		return id;
 	}
@@ -126,8 +131,16 @@ public class Tree<T> implements Serializable {
 		this.parentId = parentId;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public Tree(String id, String text, Map<String, Object> state, Boolean checked, Map<String, Object> attributes,
-			List<Tree<T>> children, Boolean isParent, Boolean isChildren, String parentID) {
+				List<Tree<T>> children, Boolean isParent, Boolean isChildren, String parentID) {
 		super();
 		this.id = id;
 		this.text = text;
@@ -151,6 +164,7 @@ public class Tree<T> implements Serializable {
 				.add("text='" + text + "'")
 				.add("state=" + state)
 				.add("checked=" + checked)
+				.add("type=" + type)
 				.add("attributes=" + attributes)
 				.add("children=" + children)
 				.add("parentId='" + parentId + "'")

@@ -51,6 +51,7 @@ public class TreeBuilderUtil {
         } else {
             root.setId("-1");
             root.setParentId("");
+            root.setType("root");
             root.setHasParent(false);
             root.setChildren(true);
             root.setChecked(true);
