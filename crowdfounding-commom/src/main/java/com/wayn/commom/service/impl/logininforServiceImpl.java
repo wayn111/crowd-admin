@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.dao.LogininforDao;
 import com.wayn.commom.domain.Logininfor;
-import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.util.FileUtils;
@@ -59,7 +58,7 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                OperLog.class, list);
+                Logininfor.class, list);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);

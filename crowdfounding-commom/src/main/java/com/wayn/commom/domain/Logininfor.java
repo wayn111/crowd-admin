@@ -1,5 +1,6 @@
 package com.wayn.commom.domain;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -28,36 +29,43 @@ public class Logininfor extends BaseEntity {
     /**
      * 用户账号
      */
+    @Excel(name = "用户账号", width = 20)
     private String loginName;
 
     /**
-     * 登录状态 0成功 1失败
+     * 登录状态 1成功 -1失败
      */
+    @Excel(name = "登录状态", replace = {"成功_1", "失败_-1"})
     private String status;
 
     /**
      * 登录IP地址
      */
+    @Excel(name = "登录IP地址", width = 20)
     private String ipaddr;
 
     /**
      * 登录地点
      */
+    @Excel(name = "登录地点", width = 20)
     private String loginLocation;
 
     /**
      * 浏览器类型
      */
+    @Excel(name = "浏览器类型", width = 20)
     private String browser;
 
     /**
      * 操作系统
      */
+    @Excel(name = "操作系统", width = 20)
     private String os;
 
     /**
      * 提示消息
      */
+    @Excel(name = "提示消息", width = 20)
     private String msg;
 
     public Long getInfoId() {
