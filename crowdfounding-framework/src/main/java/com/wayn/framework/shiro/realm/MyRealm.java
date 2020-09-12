@@ -1,9 +1,11 @@
 package com.wayn.framework.shiro.realm;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.wayn.commom.constant.Constant;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.enums.StateEnum;
 import com.wayn.commom.exception.BusinessException;
+import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.service.RoleMenuService;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
@@ -53,6 +55,9 @@ public class MyRealm extends AuthorizingRealm {
     private RoleMenuService roleMenuService;
 
     @Autowired
+    private LogininforService logininforService;
+
+    @Autowired
     private SessionDAO sessionDAO;
 
     @Autowired
@@ -93,16 +98,19 @@ public class MyRealm extends AuthorizingRealm {
         String password = ShiroUtil.md5encrypt(new String(token2.getPassword()), username);
         User sysUser = userService.selectOne(new EntityWrapper<User>().eq("userName", username));
         if (sysUser == null) {
+            logininforService.addLog(username, Constant.LOGIN_FAIL, "用户不存在");
             throw new UnknownAccountException("用户不存在");
         }
         if (sysUser.getUserState() == -1) {
+            logininforService.addLog(username, Constant.LOGIN_FAIL, "用户已被禁用");
             throw new UnknownAccountException("用户已被禁用");
         }
-        /// 此处不再需要做密码验证，由CredentialsMatch的实现做密码校验
+        // 此处不再需要做密码验证，由CredentialsMatch的实现做密码校验
         /*if (!sysUser.getPassword().equals(password)) {
             throw new IncorrectCredentialsException("账号或密码不正确");
         }*/
         if (sysUser.getUserState() == StateEnum.DISABLE.getState()) {
+            logininforService.addLog(username, Constant.LOGIN_FAIL, "该用户已被锁定，请稍后再试");
             throw new LockedAccountException("该用户已被锁定，请稍后再试");
         }
         // 是否进行单一用户登陆处理
@@ -125,13 +133,14 @@ public class MyRealm extends AuthorizingRealm {
                                 simpMessagingTemplate.convertAndSendToUser(user.getId(), "/queue/getResponse", "新消息：" + "该账号已在其他机器登陆！");
                             }
                         } else {
+                            logininforService.addLog(username, Constant.LOGIN_FAIL, "该用户已登陆，请先登出！");
                             throw new BusinessException("该用户已登陆，请先登出！");
                         }
                     }
                 }
             }
         }
-        //盐值加密
+        // 盐值加密
         ByteSource byteSource = ByteSource.Util.bytes(username);
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(sysUser, sysUser.getPassword(), byteSource, getName());
         return info;

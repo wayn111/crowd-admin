@@ -12,6 +12,8 @@ public interface LogininforService extends IService<Logininfor> {
 
     Page<Logininfor> listPage(Page<Logininfor> page, Logininfor log);
 
+    boolean addLog(String username, String status, String message);
+
     void export(Logininfor log, HttpServletResponse response, HttpServletRequest request) throws IOException;
 
 }
