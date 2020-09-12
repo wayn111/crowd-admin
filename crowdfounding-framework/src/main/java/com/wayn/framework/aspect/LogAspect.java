@@ -28,12 +28,7 @@ import java.util.Objects;
 @Component
 public class LogAspect {
 
-    private static ThreadLocal<Long> startTimeLocal = new ThreadLocal<Long>() {
-        @Override
-        protected Long initialValue() {
-            return 0L;
-        }
-    };
+    private static ThreadLocal<Long> startTimeLocal = ThreadLocal.withInitial(() -> 0L);
 
     @Autowired
     private LogQueue logQueue;

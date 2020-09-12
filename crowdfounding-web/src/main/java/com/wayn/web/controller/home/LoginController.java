@@ -2,18 +2,20 @@ package com.wayn.web.controller.home;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.enums.Operator;
+import com.wayn.commom.constant.Constant;
 import com.wayn.commom.exception.BusinessException;
+import com.wayn.commom.service.LogininforService;
+import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,17 +33,21 @@ import java.io.IOException;
 @RequestMapping("/home")
 public class LoginController extends BaseControlller {
 
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     private static final String PREFIX = "home";
 
     @Autowired
     private Producer producer;
+
+    @Autowired
+    private LogininforService logininforService;
 
     @GetMapping("/login")
     public String login(ModelMap map) {
         return PREFIX + "/login";
     }
 
-    @Log(value = "系统登陆", operator = Operator.LOGIN, isNeedParam = false)
     @ResponseBody
     @PostMapping("/doLogin")
     public Response doLogin(String userName, String password, String clienkaptcha) {
@@ -54,15 +60,21 @@ public class LoginController extends BaseControlller {
         if (!currentUser.isAuthenticated()) {
             //token.setRememberMe(true);
             currentUser.login(token);
+            logininforService.addLog(ShiroUtil.getSessionUser().getUserName(), Constant.LOGIN_SUCCESS, "登陆成功");
         }
         return Response.success();
     }
 
-    @Log(value = "退出登陆", operator = Operator.LOGOUT)
     @GetMapping("/logout")
-    public String logout(Model model) {
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
+    public String logout() {
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            logininforService.addLog(ShiroUtil.getSessionUser().getUserName(), Constant.LOGOUT, "退出成功");
+        } catch (Exception exception) {
+            logininforService.addLog(ShiroUtil.getSessionUser().getUserName(), Constant.LOGIN_FAIL, "退出失败：" + exception.getMessage());
+            logger.error(exception.getMessage(), exception);
+        }
         return redirectTo("/");
     }
 

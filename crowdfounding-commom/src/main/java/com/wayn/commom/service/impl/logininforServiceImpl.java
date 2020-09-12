@@ -5,15 +5,19 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.wayn.commom.constant.Constant;
 import com.wayn.commom.dao.LogininforDao;
 import com.wayn.commom.domain.Logininfor;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.LogininforService;
-import com.wayn.commom.util.FileUtils;
-import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.shiro.util.ShiroUtil;
+import com.wayn.commom.util.*;
+import eu.bitwalker.useragentutils.UserAgent;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +38,7 @@ import java.util.List;
 @Service
 public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor> implements LogininforService {
 
-    @Autowired
-    private LogininforDao logininforDao;
+    private static final Logger logger = LoggerFactory.getLogger(logininforServiceImpl.class);
 
     @Override
     public Page<Logininfor> listPage(Page<Logininfor> page, Logininfor log) {
@@ -45,6 +48,41 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         wrapper.like("status", log.getStatus());
         Page<Logininfor> logPage = selectPage(page, wrapper);
         return logPage;
+    }
+
+    @Override
+    public boolean addLog(String username, String status, String message) {
+        final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtil.getRequest().getHeader("User-Agent"));
+        final String ip = ShiroUtil.getIP();
+        String address = IP2RegionUtil.getCityInfo(ShiroUtil.getIP());
+        StringBuilder s = new StringBuilder();
+        s.append(com.wayn.commom.util.LogUtils.getBlock(ip));
+        s.append(address);
+        s.append(LogUtils.getBlock(username));
+        s.append(LogUtils.getBlock(status));
+        s.append(LogUtils.getBlock(message));
+        // 打印信息到日志
+        logger.info(s.toString());
+        // 获取客户端操作系统
+        String os = userAgent.getOperatingSystem().getName();
+        // 获取客户端浏览器
+        String browser = userAgent.getBrowser().getName();
+        // 封装对象
+        Logininfor logininfor = new Logininfor();
+        logininfor.setLoginName(username);
+        logininfor.setIpaddr(ip);
+        logininfor.setLoginLocation(address);
+        logininfor.setBrowser(browser);
+        logininfor.setOs(os);
+        logininfor.setMsg(message);
+        // 日志状态
+        if (StringUtils.equalsAny(status, Constant.LOGIN_SUCCESS, Constant.LOGOUT, Constant.REGISTER)) {
+            logininfor.setStatus(Constant.SUCCESS);
+        } else if (Constant.LOGIN_FAIL.equals(status)) {
+            logininfor.setStatus(Constant.FAIL);
+        }
+        // 插入数据
+        return insert(logininfor);
     }
 
     @Override
