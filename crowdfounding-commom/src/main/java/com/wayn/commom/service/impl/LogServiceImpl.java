@@ -10,13 +10,12 @@ import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.LogService;
-import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.util.FileUtils;
 import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.UserAgentUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +37,7 @@ import java.util.Map;
  */
 @Service
 public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogService {
-    private static Map<String, String> map;
+    private static final Map<String, String> map;
 
     static {
         map = new HashMap<>();
@@ -46,9 +45,6 @@ public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogS
             map.put(operator.getCode(), operator.getName());
         }
     }
-
-    @Autowired
-    private UserRoleService userRoleService;
 
     @Override
     public Page<OperLog> listPage(Page<OperLog> page, OperLog log) {
@@ -96,5 +92,15 @@ public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogS
         workbook.close();
         os.close();
         bos.close();
+    }
+
+    @Override
+    public OperLog detail(String id) {
+        OperLog operLog = selectById(id);
+        String browserName = UserAgentUtils.getBrowserName(operLog.getAgent());
+        String osName = UserAgentUtils.getOsName(operLog.getAgent());
+        operLog.setAgent(browserName + "\t" + osName);
+        operLog.setOperation(map.get(operLog.getOperation()));
+        return operLog;
     }
 }

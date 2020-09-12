@@ -1,3 +1,4 @@
+<a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
 <script src="${_ctx }/static/plugin/jquery/jquery-2.2.4.js"></script>
 <script
 	src="${_ctx }/static/plugin/validate/jquery.validate.min.js?v=1.13"></script>

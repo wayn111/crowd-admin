@@ -20,4 +20,6 @@ public interface LogService extends IService<OperLog> {
     Page<OperLog> listPage(Page<OperLog> page, OperLog log);
 
     void export(OperLog log, HttpServletResponse response, HttpServletRequest request) throws IOException;
+
+    OperLog detail(String id);
 }

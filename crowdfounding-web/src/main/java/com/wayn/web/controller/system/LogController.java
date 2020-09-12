@@ -9,7 +9,6 @@ import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.LogService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
-import com.wayn.commom.util.UserAgentUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,11 +56,7 @@ public class LogController extends BaseControlller {
     @RequestMapping("/detail/{id}")
     @GetMapping
     public String detail(ModelMap map, @PathVariable("id") String id) {
-        OperLog operLog = logService.selectById(id);
-        String browserName = UserAgentUtils.getBrowserName(operLog.getAgent());
-        String osName = UserAgentUtils.getOsName(operLog.getAgent());
-        operLog.setAgent(browserName + "\t" + osName);
-        map.addAttribute("log", operLog);
+        map.addAttribute("log", logService.detail(id));
         return PREFIX + "/detail";
     }
 

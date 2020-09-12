@@ -193,9 +193,9 @@
 	                            + '\')"><i class="fa fa-edit"></i>编辑</a> ';
 	                        var p = '<a class="btn btn-primary btn-sm '
 	                            + s_add_h
-	                            + '" href="#" mce_href="#" title="添加下级" onclick="add(\''
+	                            + '" href="#" mce_href="#" title="添加" onclick="add(\''
 	                            + item.id
-	                            + '\')"><i class="fa fa-plus"></i>添加下级</a> ';
+	                            + '\')"><i class="fa fa-plus"></i>添加</a> ';
 	                        var d = '<a class="btn btn-warning btn-sm '
 	                            + s_remove_h
 	                            + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
