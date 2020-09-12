@@ -196,25 +196,18 @@
                             sortable: true
                         },
                         {
-                            field: 'params',
-                            title: '详情',
-                            formatter: function (value, row, index) {
-                                var d = '<a class="'
-                                    + ' btn btn-info btn-sm" href="#" title="详情"  mce_href="#" onclick="detail(\''
-                                    + row.id + '\')"><i class="fa detail"></i>详情</a> ';
-                                return d;
-                            }
-                        },
-                        {
                             title: '操作',
                             field: 'id',
                             align: 'center',
                             formatter: function (value, row, index) {
-                                var d = '<a class="'
+                                var r = '<a class="'
                                     + s_remove
                                     + ' btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                     + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ';
-                                return d;
+                                var d = '<a class="'
+                                    + ' btn btn-info btn-sm" href="#" title="详情"  mce_href="#" onclick="detail(\''
+                                    + row.id + '\')"><i class="fa fa-info-circle"></i>详情</a> ';
+                                return d + r;
                             }
                         }]
                 });
