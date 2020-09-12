@@ -22,6 +22,9 @@ $(function () {
     }, "*请输入正确的邮箱！");
 });
 
+/**
+ * 绑定向上滚动元素
+ */
 (function ($) {
     'use strict';
     $.fn.toTop = function(opt) {
