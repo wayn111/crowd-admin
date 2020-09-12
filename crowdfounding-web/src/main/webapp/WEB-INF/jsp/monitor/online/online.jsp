@@ -94,6 +94,14 @@
                         checkbox: true
                     },
                     {
+                        title: '序号',
+                        align: 'center',
+                        width: 10,
+                        formatter: function (value, row, index) {
+                            return generatorTableSequence('#table1', index);
+                        }
+                    },
+                    {
                         field: 'id', // 列字段名
                         title: '会话id', // 列标题
                         width: '18%'
@@ -149,7 +157,7 @@
                         formatter: function (value, row, index) {
                             var d = '<a class="' + s_logout + ' btn btn-warning btn-sm" href="#" title="强退"  mce_href="#" onclick="forceLogout(\''
                                 + row.id
-                                + '\')"><i class="fa fa-remove"></i>强退</a> ';
+                                + '\')"><i class="fa fa-sign-out"></i>强退</a> ';
                             return row.status == 'ON_LINE' ? d : '';
                         }
                     }]

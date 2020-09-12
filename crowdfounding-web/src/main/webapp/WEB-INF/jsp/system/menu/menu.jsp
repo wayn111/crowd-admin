@@ -233,8 +233,8 @@
 														+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
 														+ item.id + '\')"><i class="fa fa-edit"></i>编辑</a> ';
 												var p = item.type == 3?'':'<a class="btn btn-primary btn-sm ' + s_add_h
-														+ '" href="#" mce_href="#" title="添加下级" onclick="add(\''
-														+ item.id + '\')"><i class="fa fa-plus"></i>添加下级</a> ';
+														+ '" href="#" mce_href="#" title="添加" onclick="add(\''
+														+ item.id + '\')"><i class="fa fa-plus"></i>添加</a> ';
 												var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
 														+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
 														+ item.id + '\')"><i class="fa fa-remove"></i>删除</a> ';

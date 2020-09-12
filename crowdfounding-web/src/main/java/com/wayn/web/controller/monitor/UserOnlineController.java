@@ -5,7 +5,6 @@ import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserOnline;
 import com.wayn.commom.enums.Operator;
-import com.wayn.commom.service.CacheManagerService;
 import com.wayn.commom.service.UserOnlineService;
 import com.wayn.commom.util.Response;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -20,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RequestMapping("/monitor/online")
 @Controller
@@ -33,9 +31,6 @@ public class UserOnlineController extends BaseControlller {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @Autowired
-    private CacheManagerService cacheManagerService;
-
 
     @RequiresPermissions("monitor:online:online")
     @GetMapping
@@ -47,7 +42,7 @@ public class UserOnlineController extends BaseControlller {
     @RequiresPermissions("monitor:online:online")
     @ResponseBody
     @PostMapping("/list")
-    public List<UserOnline> list(Model model, @RequestBody(required = false) Map<String, Object> params) {
+    public List<UserOnline> list() {
         return userOnlineService.list();
     }
 
@@ -72,7 +67,7 @@ public class UserOnlineController extends BaseControlller {
     public Response batchForceLogout(@RequestParam("ids[]") String[] ids) {
         for (String id : ids) {
             if (getSessionId().equals(id)) {
-                return Response.error("当前登陆用户无法强退");
+                return Response.error("当前用户无法强退");
             }
             sendMsg2User(id);
             userOnlineService.forceLogout(id);
