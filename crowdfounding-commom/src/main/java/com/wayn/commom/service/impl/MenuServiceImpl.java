@@ -154,12 +154,27 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
             }
         }
         List<Menu> menus = menuDao.selectList(new EntityWrapper<>());
+        List<Long> subMenuIds = new ArrayList<>();
+        for (Menu menu : menus) {
+            boolean flag = true;
+            for (Menu subMenu : menus) {
+                if (menu.getId().equals(subMenu.getPid())) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) subMenuIds.add(menu.getId());
+        }
         List<Tree<Menu>> trees = new ArrayList<>();
         menus.forEach(menu -> {
             Tree<Menu> tree = new Tree<>();
             tree.setId(menu.getId().toString());
             tree.setParentId(menu.getPid().toString());
             tree.setText(menu.getMenuName());
+            tree.setType("dir");
+            if (subMenuIds.contains(menu.getId())) {
+                tree.setType("file");
+            }
             Map<String, Object> state = new HashMap<>();
             Long menuId = menu.getId();
             //设置选中状态

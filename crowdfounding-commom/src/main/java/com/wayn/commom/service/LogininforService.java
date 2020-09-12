@@ -1,0 +1,17 @@
+package com.wayn.commom.service;
+
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.IService;
+import com.wayn.commom.domain.Logininfor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public interface LogininforService extends IService<Logininfor> {
+
+    Page<Logininfor> listPage(Page<Logininfor> page, Logininfor log);
+
+    void export(Logininfor log, HttpServletResponse response, HttpServletRequest request) throws IOException;
+
+}
