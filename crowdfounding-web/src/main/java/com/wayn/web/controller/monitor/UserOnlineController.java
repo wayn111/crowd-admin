@@ -13,6 +13,8 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ import java.util.List;
 @RequestMapping("/monitor/online")
 @Controller
 public class UserOnlineController extends BaseControlller {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserOnlineController.class);
+
     private static final String PREFIX = "monitor/online";
     @Autowired
     private UserOnlineService userOnlineService;
@@ -33,6 +38,7 @@ public class UserOnlineController extends BaseControlller {
 
     @Autowired
     private SessionDAO sessionDAO;
+
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
@@ -55,18 +61,10 @@ public class UserOnlineController extends BaseControlller {
     @ResponseBody
     @DeleteMapping("/forceLogout/{id}")
     public Response forceLogout(Model model, @PathVariable("id") String id) {
-        String userName = userOnlineService.getUserName(id);
         if (getSessionId().equals(id)) {
             return Response.error("当前登陆用户无法强退");
         }
-        try {
-            userOnlineService.forceLogout(id);
-            sendMsg2User(id);
-            logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出 " + userName + " 成功");
-        } catch (Exception exception) {
-            logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出 " + userName + " 失败");
-
-        }
+        logout(id);
         return Response.success("强制下线用户成功！");
 
     }
@@ -80,17 +78,27 @@ public class UserOnlineController extends BaseControlller {
                 return Response.error("当前用户无法强退");
             }
             String userName = userOnlineService.getUserName(id);
-            try {
-                userOnlineService.forceLogout(id);
-                sendMsg2User(id);
-                logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出 " + userName + " 成功");
-            } catch (Exception exception) {
-                logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出 " + userName + " 失败");
-
-            }
+            logout(id);
         }
         return Response.success("强制下线用户成功！");
 
+    }
+
+    /**
+     * 后台退出指定用户
+     *
+     * @param id 用户ID
+     */
+    private void logout(String id) {
+        String userName = userOnlineService.getUserName(id);
+        try {
+            userOnlineService.forceLogout(id);
+            sendMsg2User(id);
+            logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出 " + userName + " 成功");
+        } catch (Exception exception) {
+            logger.error(exception.getMessage(), exception);
+            logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出 " + userName + " 失败");
+        }
     }
 
     /**
@@ -98,7 +106,7 @@ public class UserOnlineController extends BaseControlller {
      *
      * @param id sessionId
      */
-    public void sendMsg2User(String id) {
+    private void sendMsg2User(String id) {
         Session session = sessionDAO.readSession(id);
         if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) != null) {
             SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
