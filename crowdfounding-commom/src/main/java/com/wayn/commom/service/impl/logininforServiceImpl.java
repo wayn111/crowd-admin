@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,9 +46,9 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         EntityWrapper<Logininfor> wrapper = ParameterUtil.get();
         wrapper.like("loginName", log.getLoginName());
         wrapper.like("ipaddr", log.getIpaddr());
-        wrapper.like("status", log.getStatus());
-        Page<Logininfor> logPage = selectPage(page, wrapper);
-        return logPage;
+        wrapper.like("loginLocation", log.getLoginLocation());
+        wrapper.eq(StringUtils.isNoneEmpty(log.getStatus()), "status", log.getStatus());
+        return selectPage(page, wrapper);
     }
 
     @Override
@@ -75,6 +76,7 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         logininfor.setBrowser(browser);
         logininfor.setOs(os);
         logininfor.setMsg(message);
+        logininfor.setCreateTime(new Date());
         // 日志状态
         if (StringUtils.equalsAny(status, Constant.LOGIN_SUCCESS, Constant.LOGOUT, Constant.REGISTER)) {
             logininfor.setStatus(Constant.SUCCESS);
@@ -90,7 +92,7 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         EntityWrapper<Logininfor> wrapper = ParameterUtil.get();
         wrapper.like("loginName", log.getLoginName());
         wrapper.like("ipaddr", log.getIpaddr());
-        wrapper.like("status", log.getStatus());
+        wrapper.eq(StringUtils.isNoneEmpty(log.getStatus()), "status", log.getStatus());
         List<Logininfor> list = selectList(wrapper);
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);

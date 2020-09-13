@@ -13,8 +13,6 @@ public enum Operator {
     UPLOAD("上传", "upload"),
     DOWNLOAD("下载", "download"),
     OTHER("其他", "other"),
-    LOGIN("登陆", "login"),
-    LOGOUT("登出", "logout"),
     FILE_OPERATE("文件操作", "fileOperate"),
     GEN_CODE("代码生成", "genCode"),
     EXECUTOR("执行", "executor");

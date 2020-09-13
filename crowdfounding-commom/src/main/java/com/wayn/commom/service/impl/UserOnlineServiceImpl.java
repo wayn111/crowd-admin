@@ -89,4 +89,12 @@ public class UserOnlineServiceImpl implements UserOnlineService {
         }
     }
 
+    @Override
+    public String getUserName(String sessionId) {
+        OnlineSession session = (OnlineSession) sessionDAO.readSession(sessionId);
+        if (session != null) {
+            return session.getUsername();
+        }
+        return "未知用户";
+    }
 }

@@ -2,9 +2,10 @@ package com.wayn.web.controller.monitor;
 
 import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.constant.Constant;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserOnline;
-import com.wayn.commom.enums.Operator;
+import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.service.UserOnlineService;
 import com.wayn.commom.util.Response;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -26,6 +27,10 @@ public class UserOnlineController extends BaseControlller {
     private static final String PREFIX = "monitor/online";
     @Autowired
     private UserOnlineService userOnlineService;
+
+    @Autowired
+    private LogininforService logininforService;
+
     @Autowired
     private SessionDAO sessionDAO;
     @Autowired
@@ -46,21 +51,26 @@ public class UserOnlineController extends BaseControlller {
         return userOnlineService.list();
     }
 
-    @Log(value = "在线用户管理", operator = Operator.LOGOUT)
     @RequiresPermissions("monitor:online:logout")
     @ResponseBody
     @DeleteMapping("/forceLogout/{id}")
     public Response forceLogout(Model model, @PathVariable("id") String id) {
+        String userName = userOnlineService.getUserName(id);
         if (getSessionId().equals(id)) {
             return Response.error("当前登陆用户无法强退");
         }
-        sendMsg2User(id);
-        userOnlineService.forceLogout(id);
+        try {
+            userOnlineService.forceLogout(id);
+            sendMsg2User(id);
+            logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出" + userName + "成功");
+        } catch (Exception exception) {
+            logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出" + userName + "失败");
+
+        }
         return Response.success("强制下线用户成功！");
 
     }
 
-    @Log(value = "在线用户管理", operator = Operator.LOGOUT)
     @RequiresPermissions("monitor:online:logout")
     @ResponseBody
     @PostMapping("/batchForceLogout")
@@ -69,8 +79,15 @@ public class UserOnlineController extends BaseControlller {
             if (getSessionId().equals(id)) {
                 return Response.error("当前用户无法强退");
             }
-            sendMsg2User(id);
-            userOnlineService.forceLogout(id);
+            String userName = userOnlineService.getUserName(id);
+            try {
+                userOnlineService.forceLogout(id);
+                sendMsg2User(id);
+                logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出" + userName + "成功");
+            } catch (Exception exception) {
+                logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出" + userName + "失败");
+
+            }
         }
         return Response.success("强制下线用户成功！");
 

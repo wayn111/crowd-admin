@@ -26,8 +26,12 @@
                 <input type="text" class="form-control wayn-width-105" id="loginName" name="loginName">
             </div>
             <div class="form-group  margin-left10">
-                <label for="ipaddr">IP地址</label>
+                <label for="ipaddr">登陆地址</label>
                 <input type="text" class="form-control wayn-width-105" id="ipaddr" name="ipaddr">
+            </div>
+            <div class="form-group  margin-left10">
+                <label for="loginLocation">登陆地点</label>
+                <input type="text" class="form-control wayn-width-105" id="loginLocation" name="loginLocation">
             </div>
             <div class="form-group margin-left10">
                 <label for="status">操作状态</label>
@@ -119,6 +123,7 @@
                     queryParams: function (params) {
                         params.loginName = $('#loginName').val();
                         params.ipaddr = $('#ipaddr').val();
+                        params.loginLocation = $('#loginLocation').val();
                         params.status = $('#status').val();
                         params.startTime = $('#startTime').val();
                         params.endTime = $('#endTime').val();
