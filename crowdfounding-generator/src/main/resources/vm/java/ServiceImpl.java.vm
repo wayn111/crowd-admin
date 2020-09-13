@@ -18,6 +18,7 @@ import ${package}.service.${className}Service;
  */
 @Service
 public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${className}> implements ${className}Service {
+
     @Autowired
     private ${className}Dao ${classname}Dao;
 

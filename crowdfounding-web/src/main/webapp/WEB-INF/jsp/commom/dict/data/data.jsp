@@ -53,6 +53,10 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
                         </button>
                     </shiro:hasPermission>
+                    <button type="button" class="btn  btn-info"
+                            onclick="activeTabClose()">
+                        <i class="fa fa-reply-all" aria-hidden="true"></i>关闭
+                    </button>
                 </div>
                 <table id="exampleTable" data-mobile-responsive="true">
                 </table>
