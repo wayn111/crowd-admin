@@ -62,9 +62,9 @@ public class UserOnlineController extends BaseControlller {
         try {
             userOnlineService.forceLogout(id);
             sendMsg2User(id);
-            logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出" + userName + "成功");
+            logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出 " + userName + " 成功");
         } catch (Exception exception) {
-            logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出" + userName + "失败");
+            logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出 " + userName + " 失败");
 
         }
         return Response.success("强制下线用户成功！");
@@ -83,9 +83,9 @@ public class UserOnlineController extends BaseControlller {
             try {
                 userOnlineService.forceLogout(id);
                 sendMsg2User(id);
-                logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出" + userName + "成功");
+                logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出 " + userName + " 成功");
             } catch (Exception exception) {
-                logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出" + userName + "失败");
+                logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出 " + userName + " 失败");
 
             }
         }
