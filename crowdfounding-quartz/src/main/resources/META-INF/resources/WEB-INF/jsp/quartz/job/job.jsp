@@ -222,6 +222,10 @@
                             title: '发布人'
                         },
                         {
+                            field: 'remarks',
+                            title: '备注'
+                        },
+                        {
                             field: 'createTime',
                             width: '10%',
                             title: '创建时间',
@@ -291,7 +295,7 @@
     function view(id) {
         layer.open({
             type: 2,
-            title: '定时任务修改',
+            title: '定时任务详情',
             maxmin: true,
             shadeClose: false,
             area: ['800px', '600px'],
