@@ -42,7 +42,6 @@ public class UserOnlineController extends BaseControlller {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-
     @RequiresPermissions("monitor:online:online")
     @GetMapping
     public String onlineIndex() {
@@ -77,7 +76,6 @@ public class UserOnlineController extends BaseControlller {
             if (getSessionId().equals(id)) {
                 return Response.error("当前用户无法强退");
             }
-            String userName = userOnlineService.getUserName(id);
             logout(id);
         }
         return Response.success("强制下线用户成功！");

@@ -63,6 +63,10 @@
                             <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>导出
                         </button>
                     </shiro:hasPermission>
+                    <button type="button" class="btn  btn-info"
+                            onclick="activeTabClose()">
+                        <i class="fa fa-reply-all" aria-hidden="true"></i>关闭
+                    </button>
                 </div>
                 <table id="table1" data-mobile-responsive="true">
                 </table>
@@ -190,7 +194,7 @@
                             formatter: function (value, row, index) {
                                 var r = '<a class="btn btn-warning btn-sm ' + s_remove_h
                                     + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
-                                    + '\')"><i class="fa fa-play-circle-o"></i>删除</a> ';
+                                    + '\')"><i class="fa fa-remove"></i>删除</a> ';
                                 return r;
                             }
                         }]
