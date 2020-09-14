@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.wayn.commom.base.BaseEntity;
 
+import java.util.Date;
 import java.util.StringJoiner;
 
 /**
@@ -67,6 +68,12 @@ public class Logininfor extends BaseEntity {
      */
     @Excel(name = "提示消息", width = 20)
     private String msg;
+
+    /**
+     * 提示消息
+     */
+    @Excel(name = "登陆时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    private Date loginTime;
 
     public Long getInfoId() {
         return infoId;
@@ -132,6 +139,14 @@ public class Logininfor extends BaseEntity {
         this.msg = msg;
     }
 
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Logininfor.class.getSimpleName() + "[", "]")
@@ -143,6 +158,7 @@ public class Logininfor extends BaseEntity {
                 .add("browser='" + browser + "'")
                 .add("os='" + os + "'")
                 .add("msg='" + msg + "'")
+                .add("loginTime='" + loginTime + "'")
                 .toString();
     }
 }

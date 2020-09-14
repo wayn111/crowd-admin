@@ -76,6 +76,7 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         logininfor.setBrowser(browser);
         logininfor.setOs(os);
         logininfor.setMsg(message);
+        logininfor.setLoginTime(new Date());
         logininfor.setCreateTime(new Date());
         // 日志状态
         if (StringUtils.equalsAny(status, Constant.LOGIN_SUCCESS, Constant.LOGOUT, Constant.REGISTER)) {
