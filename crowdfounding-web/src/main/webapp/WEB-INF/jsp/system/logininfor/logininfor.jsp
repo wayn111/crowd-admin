@@ -191,7 +191,7 @@
                             title: '操作信息'
                         },
                         {
-                            field: 'createTime',
+                            field: 'loginTime',
                             title: '登录时间',
                             sortable: true
                         },
@@ -203,7 +203,7 @@
                                 var r = '<a class="'
                                     + s_remove
                                     + ' btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                    + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ';
+                                    + row.infoId + '\')"><i class="fa fa-remove"></i>删除</a> ';
                                 return r;
                             }
                         }]
@@ -255,7 +255,7 @@
             var ids = new Array();
             // 遍历所有选择的行数据，取每条数据对应的ID
             $.each(rows, function (i, row) {
-                ids[i] = row['id'];
+                ids[i] = row['infoId'];
             });
             $.ajax({
                 type: 'POST',
