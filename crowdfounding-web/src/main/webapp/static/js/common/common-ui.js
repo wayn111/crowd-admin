@@ -139,10 +139,10 @@ function switchInit(module, config) {
 function menuItemCreate(url, name) {
     //m 确保data-index不重复
     var o = url, m = Math.ceil(Math.random() * 1000) + 1000, l = name, k = true;
-    var topWindow = $(window.top.document);
     if (o == undefined || $.trim(o).length == 0) {
         return false
     }
+    var topWindow = $(window.top.document);
     $(".J_menuTab", topWindow).each(function () {
         if ($(this).data("id") == o) {
             if (!$(this).hasClass("active")) {
@@ -160,7 +160,7 @@ function menuItemCreate(url, name) {
         }
     });
     if (k) {
-        var index = window.top.layer.msg('正在加载中', {
+        var index = window.top.layer.msg('正在加载中，请稍后...', {
             icon: 16,
             shade: 0.1
         });
@@ -168,7 +168,7 @@ function menuItemCreate(url, name) {
         $(".J_menuTab", topWindow).removeClass("active");
         var n = '<iframe class="J_iframe" name="iframe' + m + '" width="100%" height="100%" src="' + o + '" frameborder="0" data-id="' + o + '" seamless></iframe>';
         $(".J_mainContent", topWindow).find("iframe.J_iframe").hide().parents(".J_mainContent").append(n);
-        $('.J_mainContent iframe.J_iframe:visible').load(function () {
+        $('.J_mainContent iframe.J_iframe:visible', topWindow).load(function () {
             window.top.layer.close(index);
         });
         $(".J_menuTabs .page-tabs-content", topWindow).append(p);
