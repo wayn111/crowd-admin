@@ -125,9 +125,9 @@
                             <span class="label label-warning">{{total}}</span>通知
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
-                            <li v-for="row in rows" class="m-t-xs wayn-m-t-xs">
+                            <li v-for="row in rows" v-on:click="viewNotifyRecord(row.notifyRecordId)" class="m-t-xs wayn-m-t-xs">
                                 <div class="dropdown-messages-box">
-                                    <a class="pull-left" v-on:click="viewNotifyRecord(row.notifyRecordId)">
+                                    <a class="pull-left">
                                         <i class="fa fa-paper-plane"></i>
                                     </a>
                                     <div class="media-body">
@@ -154,7 +154,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="mt5">
-                                <a href="javascript:void(0);" onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')">
+                                <a href="javascript:void(0);" class="noactive" onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')">
                                     <i class="fa fa-user"></i> 个人中心</a>
                             </li>
                             <li class="divider"></li>
@@ -223,6 +223,8 @@
 <script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
 <script src="${_ctx }/static/plugin/toastr/toastr.min.js"></script>
 <script>
+    var isLinkage = true;
+
     var prefix = _ctx + '/oa/notifyRecord';
 
     var toastrDefaultConfig = {

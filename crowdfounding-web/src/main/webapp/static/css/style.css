@@ -7514,3 +7514,10 @@ input.error, select.error, .form-control.error {
     bottom: 2px;
     visibility: visible;
 }
+
+/** 左侧菜单选中样式 **/
+#side-menu li.active.selected>a,
+#side-menu li.active.selected>a:focus {
+    background-color: #21b9bb;
+    color: #fff;
+}
