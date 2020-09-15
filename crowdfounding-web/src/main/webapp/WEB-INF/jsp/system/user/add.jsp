@@ -20,6 +20,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>昵称：</label>
+                            <div class="col-sm-8">
+                                <input id="nickName" name="nickName" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>密码：</label>
                             <div class="col-sm-8">
                                 <input id="password" name="password" class="form-control"
