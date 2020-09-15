@@ -196,6 +196,11 @@
                         sortable: true
                     },
                     {
+                        field: 'nickName',
+                        title: '昵称',
+                        sortable: true
+                    },
+                    {
                         field: 'phone',
                         title: '手机号',
                         sortable: true

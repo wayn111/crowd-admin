@@ -22,6 +22,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>昵称：</label>
+                            <div class="col-sm-8">
+                                <input id="nickName" name="nickName" class="form-control"
+                                       type="text" value="${user.nickName }">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">手机：</label>
                             <div class="col-sm-8">
                                 <input id="phone" name="phone" class="form-control"
