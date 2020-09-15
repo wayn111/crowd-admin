@@ -99,6 +99,16 @@ $(function () {
      */
     function c() {
         var o = $(this).attr("href"), m = $(this).data("index"), l = $.trim($(this).text()), k = true;
+        var $dataObj = $('a[href$="' + decodeURI(o) + '"]');
+        if (!$dataObj.hasClass("noactive")) {
+            $('.tab-pane li').removeClass("active");
+            $('.nav ul').removeClass("in");
+            $dataObj.parents("ul").addClass("in")
+            $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
+            $dataObj.parents("ul").css('height', 'auto').height();
+            $(".nav ul li, .nav li").removeClass("selected");
+            $(this).parent("li").addClass("selected");
+        }
         if (o == undefined || $.trim(o).length == 0) {
             return false
         }
@@ -137,6 +147,9 @@ $(function () {
         return false
     }
 
+    /**
+     * 点击左侧菜单除触发
+     */
     $(".J_menuItem").on("click", c);
 
     function h() {
@@ -214,6 +227,7 @@ $(function () {
     function e() {
         if (!$(this).hasClass("active")) {
             var k = $(this).data("id");
+            syncMenuTab(k);
             $(".J_mainContent .J_iframe").each(function () {
                 if ($(this).data("id") == k) {
                     $(this).show().siblings(".J_iframe").hide();
@@ -222,6 +236,26 @@ $(function () {
             });
             $(this).addClass("active").siblings(".J_menuTab").removeClass("active");
             g(this)
+        }
+    }
+
+    function syncMenuTab(dataId) {
+        if(isLinkage) {
+            var $dataObj = $('a[href$="' + decodeURI(dataId) + '"]');
+            if ($dataObj.attr("class") != null && !$dataObj.hasClass("noactive")) {
+                $('.nav ul').removeClass("in");
+                $dataObj.parents("ul").addClass("in")
+                $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
+                $dataObj.parents("ul").css('height', 'auto').height();
+                $dataObj.click();
+                // 顶部菜单同步处理
+                var tabStr = $dataObj.parents(".tab-pane").attr("id");
+                if (tabStr != null && tabStr.trim(value) != "") {
+                    var sepIndex = tabStr.lastIndexOf('_');
+                    var menuId = tabStr.substring(sepIndex + 1, tabStr.length);
+                    $("#tab_" + menuId + " a").click();
+                }
+            }
         }
     }
 
