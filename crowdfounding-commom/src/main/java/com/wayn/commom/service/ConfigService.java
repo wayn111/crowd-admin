@@ -3,7 +3,11 @@ package com.wayn.commom.service;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.wayn.commom.domain.Config;
+import com.wayn.commom.domain.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -55,8 +59,12 @@ public interface ConfigService extends IService<Config> {
 
     /**
      * 根据参数key获取参数value
+     *
      * @param key
      * @return
      */
     String getValueByKey(String key);
+
+    void export(Config config, HttpServletResponse response, HttpServletRequest request) throws IOException;
+
 }

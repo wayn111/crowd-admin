@@ -19,6 +19,8 @@ public interface ConfigDao extends BaseMapper<Config> {
      * @param page，自动分页
      * @return 参数配置信息
      */
-    List<Config> selectConfigList(Pagination page, Config config);
+    List<Config> selectConfigPageList(Pagination page, Config config);
+
+    List<Config> selectConfigList(Config config);
 
 }

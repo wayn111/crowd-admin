@@ -1,5 +1,6 @@
 package com.wayn.commom.domain;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -18,93 +19,121 @@ import java.util.Date;
 @TableName("sys_config")
 public class Config extends BusinessEntity {
 
-    /** 参数主键 */
+    /**
+     * 参数主键
+     */
     @TableId(type = IdType.AUTO)
     private Integer configId;
-    /** 参数名称 */
+    /**
+     * 参数名称
+     */
+    @Excel(name = "参数名称")
     private String configName;
-    /** 参数键名 */
+    /**
+     * 参数键名
+     */
+    @Excel(name = "参数键名")
     private String configKey;
-    /** 参数键值 */
+    /**
+     * 参数键值
+     */
+    @Excel(name = "参数键值")
     private String configValue;
-    /** 系统内置（Y是 N否） */
+    /**
+     * 系统内置（Y是 N否）
+     */
+    @Excel(name = "系统内置", replace =  {"是_Y", "否_-N"})
     private String configType;
-    /** 创建者 */
+    /**
+     * 创建者
+     */
+    @Excel(name = "创建者")
     private String createBy;
-    /** 更新者 */
+    /**
+     * 更新者
+     */
     private String updateBy;
-    /** 更新时间 */
+    /**
+     * 更新时间
+     */
     private Date updateTime;
 
-    public void setConfigId(Integer configId){
-            this.configId = configId;
+    public void setConfigId(Integer configId) {
+        this.configId = configId;
     }
 
-    public Integer getConfigId(){
-            return configId;
-    }
-    public void setConfigName(String configName){
-            this.configName = configName;
+    public Integer getConfigId() {
+        return configId;
     }
 
-    public String getConfigName(){
-            return configName;
-    }
-    public void setConfigKey(String configKey){
-            this.configKey = configKey;
+    public void setConfigName(String configName) {
+        this.configName = configName;
     }
 
-    public String getConfigKey(){
-            return configKey;
-    }
-    public void setConfigValue(String configValue){
-            this.configValue = configValue;
+    public String getConfigName() {
+        return configName;
     }
 
-    public String getConfigValue(){
-            return configValue;
-    }
-    public void setConfigType(String configType){
-            this.configType = configType;
+    public void setConfigKey(String configKey) {
+        this.configKey = configKey;
     }
 
-    public String getConfigType(){
-            return configType;
-    }
-    public void setCreateBy(String createBy){
-            this.createBy = createBy;
+    public String getConfigKey() {
+        return configKey;
     }
 
-    public String getCreateBy(){
-            return createBy;
-    }
-    public void setUpdateBy(String updateBy){
-            this.updateBy = updateBy;
+    public void setConfigValue(String configValue) {
+        this.configValue = configValue;
     }
 
-    public String getUpdateBy(){
-            return updateBy;
-    }
-    public void setUpdateTime(Date updateTime){
-            this.updateTime = updateTime;
+    public String getConfigValue() {
+        return configValue;
     }
 
-    public Date getUpdateTime(){
-            return updateTime;
+    public void setConfigType(String configType) {
+        this.configType = configType;
+    }
+
+    public String getConfigType() {
+        return configType;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("configId", getConfigId())
-            .append("configName", getConfigName())
-            .append("configKey", getConfigKey())
-            .append("configValue", getConfigValue())
-            .append("configType", getConfigType())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remarks", getRemarks())
-        .append(super.toString()).toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("configId", getConfigId())
+                .append("configName", getConfigName())
+                .append("configKey", getConfigKey())
+                .append("configValue", getConfigValue())
+                .append("configType", getConfigType())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .append("remarks", getRemarks())
+                .append(super.toString()).toString();
     }
 }
