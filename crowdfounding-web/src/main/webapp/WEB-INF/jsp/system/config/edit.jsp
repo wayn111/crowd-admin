@@ -41,10 +41,12 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">系统内置：</label>
                             <div class="col-sm-8">
-                                <label class="checkbox-inline i-checks">
-                                    <input name="roleId" type="radio">是
-                                    <input name="roleId" type="radio">否
-                                </label>
+                                <c:forEach items="${sysBuildIn}" var="item">
+                                    <label class="checkbox-inline i-checks">
+                                        <input name="configType" type="radio" value="${item.id}"
+                                               <c:if test="${item.id == config.configType }">checked</c:if>>${item.text }
+                                    </label>
+                                </c:forEach>
                             </div>
                         </div>
                         <div class="form-group">
@@ -66,7 +68,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    var prefix = _ctx + '/system/role';
+    var prefix = _ctx + '/system/config';
 
     function validateRule() {
         var e = '<i class="fa fa-times-circle"></i> ';
@@ -104,7 +106,7 @@
     function update() {
         var config = {
             url: prefix + "/editSave",
-            data: $('#config-form').serialize() + "&menuIds=" + menuIds,
+            data: $('#config-form').serialize(),
             type: "POST",
             dataType: "json",
             success: function (data) {

@@ -52,4 +52,11 @@ public interface ConfigService extends IService<Config> {
      * @return 结果
      */
     boolean batchRemove(Integer[] ids);
+
+    /**
+     * 根据参数key获取参数value
+     * @param key
+     * @return
+     */
+    String getValueByKey(String key);
 }

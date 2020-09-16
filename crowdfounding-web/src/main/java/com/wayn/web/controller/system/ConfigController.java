@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.Config;
 import com.wayn.commom.service.ConfigService;
+import com.wayn.commom.service.DictService;
+import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 /**
  * 参数配置 控制层
@@ -28,9 +32,13 @@ public class ConfigController extends BaseControlller {
     @Autowired
     private ConfigService configService;
 
+    @Autowired
+    private DictService dictService;
+
     @RequiresPermissions("sys:config:config")
     @GetMapping
-    public String ConfigIndex() {
+    public String ConfigIndex(Model model) {
+        model.addAttribute("sysBuildIn", dictService.selectDictsValueByType("sysBuildIn"));
         return PREFIX + "/config";
     }
 
@@ -46,6 +54,7 @@ public class ConfigController extends BaseControlller {
     @RequiresPermissions("sys:config:add")
     @GetMapping("/add")
     public String add(ModelMap modelMap) {
+        modelMap.addAttribute("sysBuildIn", dictService.selectDictsValueByType("sysBuildIn", "Y"));
         return PREFIX + "/add";
     }
 
@@ -54,6 +63,7 @@ public class ConfigController extends BaseControlller {
     public String edit(ModelMap modelMap, @PathVariable("id") Long id) {
         Config config = configService.selectById(id);
         modelMap.put("config", config);
+        modelMap.addAttribute("sysBuildIn", dictService.selectDictsValueByType("sysBuildIn"));
         return PREFIX + "/edit";
     }
 
@@ -61,6 +71,8 @@ public class ConfigController extends BaseControlller {
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(ModelMap modelMap, Config config) {
+        config.setCreateTime(new Date());
+        config.setCreateBy(ShiroUtil.getSessionUser().getUserName());
         configService.save(config);
         return Response.success("新增成功");
     }
@@ -69,6 +81,8 @@ public class ConfigController extends BaseControlller {
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, Config config) {
+        config.setUpdateTime(new Date());
+        config.setUpdateBy(ShiroUtil.getSessionUser().getUserName());
         configService.update(config);
         return Response.success("修改成功");
     }

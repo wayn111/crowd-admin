@@ -1,10 +1,13 @@
 package com.wayn.commom.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.dao.ConfigDao;
 import com.wayn.commom.domain.Config;
+import com.wayn.commom.domain.User;
 import com.wayn.commom.service.ConfigService;
+import com.wayn.commom.util.ParameterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +33,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
      */
     @Override
     public Page<Config> selectConfigList(Page<Config> page, Config config) {
-        return page.setRecords(configDao. selectConfigList(page,config));
+        return page.setRecords(configDao.selectConfigList(page, config));
     }
 
     @Override
@@ -51,6 +54,17 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
     @Override
     public boolean batchRemove(Integer[] ids) {
         return deleteBatchIds(Arrays.asList(ids));
+    }
+
+    @Override
+    public String getValueByKey(String key) {
+        EntityWrapper<Config> wrapper = new EntityWrapper<>();
+        wrapper.eq("configKey", key);
+        Config config = selectOne(wrapper);
+        if (config != null) {
+            return config.getConfigValue();
+        }
+        return null;
     }
 
 }
