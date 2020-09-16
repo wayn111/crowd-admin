@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowdfounding 系统角色</title>
+    <title>crowdfounding 系统参数</title>
     <meta name="keywords" content="crowdfounding,基于H+,后台HTML,响应式后台">
     <meta name="description"
           content="design by wayn">
@@ -19,16 +19,14 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="col-sm-12 search-collapse">
-        <form class="form-inline" id="roleSelect">
+        <form class="form-inline" id="configSelect">
             <div class="form-group">
-                <label for="roleName">角色名称</label>
-                <input type="text" class="form-control" id="roleName" name="roleName">
+                <label for="configName">参数名称</label>
+                <input type="text" class="form-control" id="configName" name="configName">
             </div>
-            <div class="form-group margin-left10">
-                <label for="roleState">角色状态</label>
-                <select
-                        class="js-example-basic-single" id="roleState" name="roleState">
-                </select>
+            <div class="form-group">
+                <label for="configKey">参数键名</label>
+                <input type="text" class="form-control" id="configKey" name="configKey">
             </div>
             <div class="form-group margin-left10 select-time">
                 <label for="startTime">创建时间</label>
@@ -49,19 +47,19 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div id="exampleToolbar" role="group">
-                    <shiro:hasPermission name="sys:role:add">
+                    <shiro:hasPermission name="sys:config:add">
                         <button type="button" class="btn btn-primary" title="在根节点下添加菜单"
                                 onclick="add('0')">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
                     </shiro:hasPermission>
-                    <shiro:hasPermission name="sys:role:remove">
+                    <shiro:hasPermission name="sys:config:remove">
                         <button type="button" class="btn btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
                         </button>
                     </shiro:hasPermission>
-                    <shiro:hasPermission name="	sys:role:role">
+                    <shiro:hasPermission name="	sys:config:config">
                         <button type="button" class="btn btn-success" onclick="exportExcel()">
                             <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>导出
                         </button>
@@ -78,12 +76,12 @@
             var s_edit_h = 'hidden';
             var s_remove_h = 'hidden';
         </script>
-        <shiro:hasPermission name="sys:role:edit">
+        <shiro:hasPermission name="sys:config:edit">
             <script>
                 s_edit_h = '';
             </script>
         </shiro:hasPermission>
-        <shiro:hasPermission name="sys:role:remove">
+        <shiro:hasPermission name="sys:config:remove">
             <script>
                 s_remove_h = '';
             </script>
@@ -92,12 +90,12 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    var prefix = _ctx + '/system/role';
+    var prefix = _ctx + '/system/config';
 
     function add() {
         layer.open({
             type: 2,
-            title: '增加角色',
+            title: '增加参数',
             maxmin: true,
             shadeClose: false, // 点击遮罩关闭层
             area: ['800px', '520px'],
@@ -108,7 +106,7 @@
     function edit(id) {
         layer.open({
             type: 2,
-            title: '修改角色',
+            title: '修改参数',
             maxmin: true,
             shadeClose: false, // 点击遮罩关闭层
             area: ['800px', '520px'],
@@ -136,11 +134,11 @@
     }
 
     function exportExcel() {
-        layer.confirm("确认要导出所有角色数据吗?", {
+        layer.confirm("确认要导出所有参数数据吗?", {
             btn: ['确定', '取消']
             // 按钮
         }, function () {
-            exportData(prefix + '/export', 'roleSelect', '角色列表.xls');
+            exportData(prefix + '/export', 'configSelect', '参数列表.xls');
         }, function () {
         });
     }
@@ -210,8 +208,8 @@
                 //the params object contains: limit, offset, search, sort, order.
                 //Else, it contains: pageSize, pageNumber, searchText, sortName, sortOrder.
                 queryParams: function (params) {
-                    params.roleName = $('#roleName').val().trim();
-                    params.roleState = $('#roleState').val();
+                    params.configName = $('#configName').val().trim();
+                    params.configKey = $('#configKey').val();
                     params.startTime = $('#startTime').val();
                     params.endTime = $('#endTime').val();
                     return params;
@@ -237,19 +235,29 @@
                         }
                     },
                     {
-                        field: 'roleName',
-                        title: '角色名',
+                        field: 'configName',
+                        title: '参数名称',
                         sortable: true
                     },
                     {
-                        field: 'roleState',
-                        title: '角色状态',
+                        field: 'configKey',
+                        title: '参数键名',
+                        sortable: true
+                    },
+                    {
+                        field: 'configValue',
+                        title: '参数值名',
+                        sortable: true
+                    },
+                    {
+                        field: 'configType',
+                        title: '系统内置',
                         formatter: function (value, row, index) {
-                            if (value === 1) {
-                                return '<span class="badge badge-primary">启动</span>';
+                            if (value === 'Y') {
+                                return '<span class="badge badge-primary">是</span>';
                             }
-                            if (value === -1) {
-                                return '<span class="badge badge-danger">禁用</span>';
+                            if (value === 'N') {
+                                return '<span class="badge badge-danger">否</span>';
                             }
                         }
                     },
@@ -260,17 +268,15 @@
                         sortable: true
                     },
                     {
-                        field: '',
-                        title: '权限'
-                    },
-                    {
                         field: 'remarks',
-                        title: '角色备注',
-                        width: '15%'
+                        title: '参数备注',
+                        width: '10%',
+                        formatter: function (value, row, index) {
+                            return toolTip(value, row, index);
+                        }
                     },
                     {
                         title: '操作',
-                        field: 'roleId',
                         align: 'center',
                         formatter: function (value, row, index) {
                             var e = '<a class="btn btn-primary btn-sm ' + s_edit_h
@@ -281,7 +287,13 @@
                                 + '\')"><i class="fa fa-remove"></i>删除</a> ';
                             return e + d;
                         }
-                    }]
+                    }
+                ],
+                // 加载完毕
+                onLoadSuccess: function (data) {
+                    //我要在这里获取所有的数据的总行数
+                    $("[data-toggle='tooltip']").tooltip();
+                }
             });
     }
 
@@ -290,20 +302,8 @@
     }
 
     $(function () {
-        var data = JSON.parse('${states}');
-        data.splice(0, 0, {
-            id: '',
-            text: '全部'
-        });
-        var config = {
-            data: data,
-            width: '150px',
-            minimumResultsForSearch: -1
-        };
-        select2Init('.js-example-basic-single', config);
         load();
     })
 </script>
 </body>
-<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 </html>

@@ -19,22 +19,22 @@ import org.springframework.web.bind.annotation.*;
  * @author wayn
  * @date 2020-09-16
  */
-@RequestMapping("/web/config")
+@RequestMapping("/system/config")
 @Controller
 public class ConfigController extends BaseControlller {
 
-    private static final String PREFIX = "web/config";
+    private static final String PREFIX = "system/config";
 
     @Autowired
     private ConfigService configService;
 
-    @RequiresPermissions("web:config:list")
+    @RequiresPermissions("sys:config:config")
     @GetMapping
     public String ConfigIndex() {
         return PREFIX + "/config";
     }
 
-    @RequiresPermissions("web:config:list")
+    @RequiresPermissions("sys:config:config")
     @ResponseBody
     @PostMapping("/list")
     public Page<Config> list(Model model, Config config) {
@@ -43,13 +43,13 @@ public class ConfigController extends BaseControlller {
         return configService.selectConfigList(page, config);
     }
 
-    @RequiresPermissions("web:config:add")
+    @RequiresPermissions("sys:config:add")
     @GetMapping("/add")
     public String add(ModelMap modelMap) {
         return PREFIX + "/add";
     }
 
-    @RequiresPermissions("web:config:edit")
+    @RequiresPermissions("sys:config:edit")
     @GetMapping("/edit/{id}")
     public String edit(ModelMap modelMap, @PathVariable("id") Long id) {
         Config config = configService.selectById(id);
@@ -57,7 +57,7 @@ public class ConfigController extends BaseControlller {
         return PREFIX + "/edit";
     }
 
-    @RequiresPermissions("web:config:add")
+    @RequiresPermissions("sys:config:add")
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(ModelMap modelMap, Config config) {
@@ -65,7 +65,7 @@ public class ConfigController extends BaseControlller {
         return Response.success("新增成功");
     }
 
-    @RequiresPermissions("web:config:edit")
+    @RequiresPermissions("sys:config:edit")
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, Config config) {
@@ -74,7 +74,7 @@ public class ConfigController extends BaseControlller {
     }
 
 
-    @RequiresPermissions("web:config:remove")
+    @RequiresPermissions("sys:config:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Integer id) {
@@ -82,7 +82,7 @@ public class ConfigController extends BaseControlller {
         return Response.success("删除成功");
     }
 
-    @RequiresPermissions("web:config:remove")
+    @RequiresPermissions("sys:config:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Integer[] ids) {
