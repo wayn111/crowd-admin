@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wayn.commom.dao.ConfigDao">
+
+    <resultMap type="com.wayn.commom.domain.Config" id="ConfigResult">
+        <result property="configId" column="configId"/>
+        <result property="configName" column="configName"/>
+        <result property="configKey" column="configKey"/>
+        <result property="configValue" column="configValue"/>
+        <result property="configType" column="configType"/>
+        <result property="createBy" column="createBy"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateBy" column="updateBy"/>
+        <result property="updateTime" column="updateTime"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <sql id="selectConfigVo">
+        select configId, configName, configKey, configValue, configType, createBy, createTime, updateBy, updateTime, remarks, from sys_config
+    </sql>
+
+    <select id="selectConfigList" parameterType="Config" resultMap="ConfigResult">
+        <include refid="selectConfigVo"/>
+        <where>
+            <if test="configId != null ">and configId = #{configId}</if>
+            <if test="configName != null  and configName != '' ">and configName = #{configName}</if>
+            <if test="configKey != null  and configKey != '' ">and configKey = #{configKey}</if>
+            <if test="configValue != null  and configValue != '' ">and configValue = #{configValue}</if>
+            <if test="configType != null  and configType != '' ">and configType = #{configType}</if>
+            <if test="createBy != null  and createBy != '' ">and createBy = #{createBy}</if>
+            <if test="createStartTime != null and createStartTime != ''">and createTime <![CDATA[ > ]]>
+                #{createStartTime}
+            </if>
+            <if test="createEndTime != null and createEndTime != ''">and createTime <![CDATA[ < ]]>#{createEndTime}
+            </if>
+            <if test="updateBy != null  and updateBy != '' ">and updateBy = #{updateBy}</if>
+            <if test="updateStartTime != null and updateStartTime != ''">and updateTime <![CDATA[ > ]]>
+                #{updateStartTime}
+            </if>
+            <if test="updateEndTime != null and updateEndTime != ''">and updateTime <![CDATA[ < ]]>#{updateEndTime}
+            </if>
+            <if test="remarks != null  and remarks != '' ">and remarks = #{remarks}</if>
+        </where>
+    </select>
+
+</mapper>

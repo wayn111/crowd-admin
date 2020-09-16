@@ -18,6 +18,6 @@ public interface ${className}Dao extends BaseMapper<${className}>{
      * @param page，自动分页
      * @return ${tableComment}信息
      */
-    public List<${className}> select${className}List(Pagination page, ${className} ${classname});
+    List<${className}> select${className}List(Pagination page, ${className} ${classname});
 
 }
