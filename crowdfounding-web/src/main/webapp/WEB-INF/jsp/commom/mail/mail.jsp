@@ -59,6 +59,8 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">smtp地址：</label>
                                                 <div class="col-sm-10">
+                                                    <input name="id" class="form-control"
+                                                           type="hidden" value="${mail.id }">
                                                     <input id="host" name="host" class="form-control"
                                                            type="text" value="${mail.host }">
                                                 </div>
@@ -150,6 +152,8 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">是否发送用户邮件：</label>
                                                 <div class="col-sm-8">
+                                                    <input type="hidden" name="id"
+                                                           value="${mail.id }">
                                                     <input type="hidden" id="userSendState" name="userSendState"
                                                            value="${mail.userSendState }">
                                                     <input type="checkbox" name="userSendStateSwicth" checked>
