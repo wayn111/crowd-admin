@@ -29,10 +29,10 @@
         <div class="col-sm-7">
             <div class="signin-info">
                 <div class="logopanel m-b">
-                    <h1>[ crowdfounding ]</h1>
+                    <h1>[ ${sysName} ]</h1>
                 </div>
                 <div class="m-b"></div>
-                <h4>欢迎使用 <strong>crowdfounding</strong></h4>
+                <h4>欢迎使用 <strong>${sysName}</strong></h4>
                 <ul class="m-b">
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> spring</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> mybatis-plus</li>

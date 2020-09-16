@@ -28,6 +28,12 @@
                 <label for="configKey">参数键名</label>
                 <input type="text" class="form-control" id="configKey" name="configKey">
             </div>
+            <div class="form-group margin-left10">
+                <label for="configType">系统内置</label>
+                <select
+                        class="js-example-basic-single" name="configType" id="configType">
+                </select>
+            </div>
             <div class="form-group margin-left10 select-time">
                 <label for="startTime">创建时间</label>
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
@@ -210,6 +216,7 @@
                 queryParams: function (params) {
                     params.configName = $('#configName').val().trim();
                     params.configKey = $('#configKey').val();
+                    params.configType = $('#configType').val();
                     params.startTime = $('#startTime').val();
                     params.endTime = $('#endTime').val();
                     return params;
@@ -302,6 +309,17 @@
     }
 
     $(function () {
+        var data = JSON.parse('${sysBuildIn}');
+        data.splice(0, 0, {
+            id: '',
+            text: '全部'
+        });
+        var config = {
+            data: data,
+            width: '80px',
+            minimumResultsForSearch: -1
+        };
+        select2Init('.js-example-basic-single', config);
         load();
     })
 </script>

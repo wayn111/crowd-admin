@@ -5,6 +5,7 @@ import com.google.code.kaptcha.Producer;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.constant.Constant;
 import com.wayn.commom.exception.BusinessException;
+import com.wayn.commom.service.ConfigService;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.Response;
@@ -43,8 +44,12 @@ public class LoginController extends BaseControlller {
     @Autowired
     private LogininforService logininforService;
 
+    @Autowired
+    private ConfigService configService;
+
     @GetMapping("/login")
     public String login(ModelMap map) {
+        map.addAttribute("sysName", configService.getValueByKey("sys.name"));
         return PREFIX + "/login";
     }
 

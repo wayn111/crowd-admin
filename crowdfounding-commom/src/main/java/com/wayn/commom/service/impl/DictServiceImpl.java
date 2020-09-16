@@ -128,8 +128,17 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
                 .eq("dictType", dictType)
                 .eq("dictState", 1);
         List<Dict> dictList = selectList(wrapper);
-        List<JSONObject> objectList = convert2select(dictList);
-        return objectList;
+        return convert2select(dictList);
+    }
+
+    public List<JSONObject> selectDictsValueByType(String dictType, String value) {
+        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
+        wrapper.eq("type", 2)
+                .eq("delFlag", "0")
+                .eq("dictType", dictType)
+                .eq("dictState", 1);
+        List<Dict> dictList = selectList(wrapper);
+        return convert2select(dictList, value);
     }
 
     /**
@@ -141,6 +150,18 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     public List<JSONObject> convert2select(List<Dict> dicts) {
         return dicts.stream().map(data -> {
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", data.getValue());
+            jsonObject.put("text", data.getName());
+            return jsonObject;
+        }).collect(Collectors.toList());
+    }
+
+    public List<JSONObject> convert2select(List<Dict> dicts, String value) {
+        return dicts.stream().map(data -> {
+            JSONObject jsonObject = new JSONObject();
+            if (data.getValue().equals(value)) {
+                jsonObject.put("seleted", true);
+            }
             jsonObject.put("id", data.getValue());
             jsonObject.put("text", data.getName());
             return jsonObject;

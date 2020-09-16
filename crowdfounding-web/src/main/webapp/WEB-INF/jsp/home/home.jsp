@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowdfounding 首页</title>
+    <title>${sysName } 首页</title>
     <meta name="keywords" content="crowdfounding,基于H+,后台HTML,响应式后台">
     <meta name="description"
           content="design by wayn">
@@ -35,7 +35,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="wayn-profile animated">
-                        <h3 class="wayn-h3">crowd-admin</h3>
+                        <h3 class="wayn-h3">${sysName }</h3>
                         <div id="user-avatar" class="pull-left" style="margin-top: 6px">
                             <img alt="image" class="img-circle" src="${user.userImg}"
                                  style="cursor:pointer;height: 64px"

@@ -2,6 +2,7 @@ package com.wayn.web.controller.home;
 
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.Menu;
+import com.wayn.commom.service.ConfigService;
 import com.wayn.commom.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,14 @@ public class MainController extends BaseControlller {
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private ConfigService configService;
+
     @GetMapping
     public String index(Model model) throws Exception {
         List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
         model.addAttribute("treeMenus", treeMenus);
+        model.addAttribute("sysName", configService.getValueByKey("sys.name"));
         model.addAttribute("user", getCurUser());
         return HOME_PREFIX + "/home" ;
     }
