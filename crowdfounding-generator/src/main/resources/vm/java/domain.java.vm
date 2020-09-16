@@ -6,9 +6,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.wayn.commom.base.BaseEntity;
+import com.wayn.commom.base.BusinessEntity;
 #foreach ($column in $columns)
-    #if($column.attrType == 'Date' && ($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark'))
+    #if($column.attrType == 'Date' && ($column.attrname != 'createTime' && $column.attrname != 'remarks'))
     import java.util.Date;
         #break
     #end
@@ -27,7 +27,7 @@ import com.wayn.commom.base.BaseEntity;
  * @date ${datetime}
  */
 @TableName("${tableName}")
-public class ${className} extends BaseEntity {
+public class ${className} extends BusinessEntity {
 
 #foreach ($column in $columns)
     #if($column.attrname != 'createTime' && $column.attrname != 'remarks')
@@ -46,7 +46,7 @@ public class ${className} extends BaseEntity {
 #end
 
 #foreach ($column in $columns)
-    #if($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark')
+    #if($column.attrname != 'createTime' && $column.attrname != 'remarks')
     public void set${column.attrName}($column.attrType $column.attrname){
             this.$column.attrname = $column.attrname;
     }
