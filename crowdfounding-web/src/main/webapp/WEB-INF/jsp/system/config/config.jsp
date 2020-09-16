@@ -253,7 +253,7 @@
                     },
                     {
                         field: 'configValue',
-                        title: '参数值名',
+                        title: '参数键值',
                         sortable: true
                     },
                     {

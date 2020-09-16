@@ -3,6 +3,7 @@ package com.wayn.web.controller.system;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.commom.base.BaseControlller;
 import com.wayn.commom.domain.Config;
+import com.wayn.commom.domain.User;
 import com.wayn.commom.service.ConfigService;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -15,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -102,6 +105,11 @@ public class ConfigController extends BaseControlller {
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Integer[] ids) {
         configService.batchRemove(ids);
         return Response.success("删除成功");
+    }
+
+    @PostMapping("/export")
+    public void export(Config config, HttpServletResponse response) throws IOException {
+        configService.export(config, response, request);
     }
 
 }

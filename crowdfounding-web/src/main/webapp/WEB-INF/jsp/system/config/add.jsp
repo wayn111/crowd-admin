@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="configValue"><span
-                                    class="wayn-required-span">*</span>参数值称：</label>
+                                    class="wayn-required-span">*</span>参数键值：</label>
                             <div class="col-sm-8">
                                 <input id="configValue" name="configValue" class="form-control"
                                        type="text">

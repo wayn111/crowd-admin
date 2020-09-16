@@ -21,6 +21,21 @@
         select configId, configName, configKey, configValue, configType, createBy, createTime, updateBy, updateTime, remarks from sys_config
     </sql>
 
+    <select id="selectConfigPageList" parameterType="Config" resultMap="ConfigResult">
+        <include refid="selectConfigVo"/>
+        <where>
+            <if test="configId != null ">and configId = #{configId}</if>
+            <if test="configName != null  and configName != '' ">and configName like CONCAT('%',#{configName},'%')</if>
+            <if test="configKey != null  and configKey != '' ">and configKey like CONCAT('%',#{configKey},'%')</if>
+            <if test="configValue != null  and configValue != '' ">and configValue like CONCAT('%',#{configValue},'%')</if>
+            <if test="configType != null  and configType != '' ">and configType = #{configType}</if>
+            <if test="createBy != null  and createBy != '' ">and createBy = #{createBy}</if>
+            <if test="startTime != null and startTime != ''">and createTime <![CDATA[ > ]]>#{startTime}</if>
+            <if test="endTime != null and endTime != ''">and createTime <![CDATA[ < ]]>#{endTime}</if>
+            <if test="remarks != null  and remarks != '' ">and remarks = #{remarks}</if>
+        </where>
+    </select>
+
     <select id="selectConfigList" parameterType="Config" resultMap="ConfigResult">
         <include refid="selectConfigVo"/>
         <where>
