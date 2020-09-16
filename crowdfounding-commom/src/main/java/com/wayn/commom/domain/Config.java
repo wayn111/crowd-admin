@@ -27,27 +27,27 @@ public class Config extends BusinessEntity {
     /**
      * 参数名称
      */
-    @Excel(name = "参数名称")
+    @Excel(name = "参数名称", width = 30)
     private String configName;
     /**
      * 参数键名
      */
-    @Excel(name = "参数键名")
+    @Excel(name = "参数键名", width = 20)
     private String configKey;
     /**
      * 参数键值
      */
-    @Excel(name = "参数键值")
+    @Excel(name = "参数键值", width = 20)
     private String configValue;
     /**
      * 系统内置（Y是 N否）
      */
-    @Excel(name = "系统内置", replace =  {"是_Y", "否_-N"})
+    @Excel(name = "系统内置", replace = {"是_Y", "否_-N"})
     private String configType;
     /**
      * 创建者
      */
-    @Excel(name = "创建者")
+    @Excel(name = "创建者", width = 20)
     private String createBy;
     /**
      * 更新者
