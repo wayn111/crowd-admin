@@ -94,7 +94,7 @@
             rules: {
                 name: {
                     required: true,
-                    minlength: 2
+                    minlength: 1
                 },
                 value: {
                     required: true,

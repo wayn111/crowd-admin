@@ -25,9 +25,9 @@
         <include refid="selectConfigVo"/>
         <where>
             <if test="configId != null ">and configId = #{configId}</if>
-            <if test="configName != null  and configName != '' ">and configName = #{configName}</if>
-            <if test="configKey != null  and configKey != '' ">and configKey = #{configKey}</if>
-            <if test="configValue != null  and configValue != '' ">and configValue = #{configValue}</if>
+            <if test="configName != null  and configName != '' ">and configName like CONCAT('%',#{configName},'%')</if>
+            <if test="configKey != null  and configKey != '' ">and configKey like CONCAT('%',#{configKey},'%')</if>
+            <if test="configValue != null  and configValue != '' ">and configValue like CONCAT('%',#{configValue},'%')</if>
             <if test="configType != null  and configType != '' ">and configType = #{configType}</if>
             <if test="createBy != null  and createBy != '' ">and createBy = #{createBy}</if>
             <if test="startTime != null and startTime != ''">and createTime <![CDATA[ > ]]>#{startTime}</if>
