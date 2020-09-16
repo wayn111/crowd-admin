@@ -26,13 +26,13 @@ public class ${className}Controller extends BaseControlller {
     @Autowired
     private ${className}Service ${classname}Service;
 
-    @RequiresPermissions("${moduleName}:${classname}:list")
+    @RequiresPermissions("${moduleName}:${classname}:${classname}")
     @GetMapping
     public String ${className}Index() {
         return PREFIX + "/${classname}";
     }
 
-    @RequiresPermissions("${moduleName}:${classname}:list")
+    @RequiresPermissions("${moduleName}:${classname}:${classname}")
     @ResponseBody
     @PostMapping("/list")
     public Page<${className}> list(Model model, ${className} ${classname}) {

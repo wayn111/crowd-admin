@@ -396,3 +396,22 @@ function exportData(exportUrl, formId, filename) {
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send($('#' + formId + '').serialize());
 }
+
+/**
+ * 使用tooltip优化长文本显示，配合<br>
+ * $("[data-toggle='tooltip']").tooltip();<br>
+ * 使用
+ * @param value
+ * @param row
+ * @param index
+ * @returns {string}
+ */
+function toolTip (value, row, index) {
+    var nameString;
+    if (value.length > 9) {
+        nameString = value.substring(0, 9) + '...';
+    } else {
+        nameString = value;
+    }
+    return '<a href="#" data-toggle="tooltip" data-placement="top" title=' + value + '>' + nameString + '</a>';
+}
