@@ -237,10 +237,10 @@
                             align: 'center',
                             formatter: function (value, row, index) {
                                 var r = '<a class="btn btn-success btn-sm ' + s_executor_h
-                                    + '" href="#" title="执行一次"  mce_href="#" onclick="run(\'' + row.id
+                                    + '" href="#" title="执行一次" onclick="run(\'' + row.id
                                     + '\')"><i class="fa fa-play-circle-o"></i>执行一次</a> ';
                                 var v = '<a class="btn btn-info btn-sm ' + s_executor_h
-                                    + '" href="#" title="查看"  mce_href="#" onclick="view(\'' + row.id
+                                    + '" href="#" title="查看" onclick="view(\'' + row.id
                                     + '\')"><i class="fa fa-search"></i>查看</a> ';
                                 return r + v;
                             }

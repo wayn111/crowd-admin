@@ -155,7 +155,7 @@
                         field: 'id',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            var d = '<a class="' + s_logout + ' btn btn-warning btn-sm" href="#" title="强退"  mce_href="#" onclick="forceLogout(\''
+                            var d = '<a class="' + s_logout + ' btn btn-warning btn-sm" href="#" title="强退" onclick="forceLogout(\''
                                 + row.id
                                 + '\')"><i class="fa fa-sign-out"></i>强退</a> ';
                             return row.status == 'ON_LINE' ? d : '';

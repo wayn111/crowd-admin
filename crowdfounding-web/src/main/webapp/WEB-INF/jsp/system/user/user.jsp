@@ -242,16 +242,16 @@
                         align: 'center',
                         formatter: function (value, row, index) {
                             var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
-                                + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id
+                                + '" href="#" title="编辑" onclick="edit(\'' + row.id
                                 + '\')"><i class="fa fa-edit "></i>编辑</a> ';
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
-                                + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
+                                + '" href="#" title="删除" onclick="remove(\'' + row.id
                                 + '\')"><i class="fa fa-remove"></i>删除</a> ';
                             var a = '<a class="btn btn-success btn-sm ' + s_editAcount_h
-                                + '" href="#" title="编辑用户名称"  mce_href="#" onclick="editAcount(\'' + row.id
+                                + '" href="#" title="编辑用户名称" onclick="editAcount(\'' + row.id
                                 + '\')"><i class="fa fa-user"></i>编辑用户名称</a> ';
                             var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h
-                                + '" href="#" title="重置密码"  mce_href="#" onclick="resetPwd(\'' + row.id
+                                + '" href="#" title="重置密码" onclick="resetPwd(\'' + row.id
                                 + '\')"><i class="fa fa-key"></i>重置密码</a> ';
                             return e + d + a + f;
                         }
