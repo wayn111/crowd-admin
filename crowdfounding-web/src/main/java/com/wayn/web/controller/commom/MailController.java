@@ -34,8 +34,7 @@ public class MailController {
     @ResponseBody
     @PostMapping("update")
     public Response update(MailConfig mailConfig) {
-        mailConfig.setId(1L);
-        mailConfigService.updateById(mailConfig);
+        mailConfigService.insertOrUpdate(mailConfig);
         return Response.success("修改成功");
     }
 
