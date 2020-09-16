@@ -164,11 +164,11 @@
                             formatter: function (value, row, index) {
                                 var d = '<a class="'
                                     + s_remove
-                                    + ' btn btn-warning btn-sm" href="#" title="代码生成"  mce_href="#" onclick="genCode(\''
+                                    + ' btn btn-warning btn-sm" href="#" title="代码生成" onclick="genCode(\''
                                     + row.tableName + '\')"><i class="fa fa-download"></i>代码生成</a> ';
                                 var v = '<a class="'
                                     + s_remove
-                                    + ' btn btn-info btn-sm" href="#" title="预览"  mce_href="#" onclick="preview(\''
+                                    + ' btn btn-info btn-sm" href="#" title="预览" onclick="preview(\''
                                     + row.tableName + '\')"><i class="fa fa-search"></i>预览</a> ';
                                 return v + d;
                             }

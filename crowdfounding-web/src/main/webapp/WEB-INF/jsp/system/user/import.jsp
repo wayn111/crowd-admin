@@ -19,7 +19,7 @@
                         </div>
                         <div class="pull-left m-t-sm" style="color: red; ">
                             <p>1,仅允许导入“xls”或“xlsx”格式文件！</p>
-                            <p>2,导入用户密码默认为123456</p>
+                            <p>2,导入用户密码默认为${initPassWord }</p>
                         </div>
                     </div>
                     <div class="form-group">

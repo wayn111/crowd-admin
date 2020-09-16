@@ -26,7 +26,7 @@
                             <label class="col-sm-3 control-label" for="configKey"><span
                                     class="wayn-required-span">*</span>参数键名：</label>
                             <div class="col-sm-8">
-                                <input id="configKey" name="configKey" class="form-control"
+                                <input id="configKey" name="configKey" class="form-control" <c:if test="${config.configType == 'Y'}" >readonly</c:if>
                                        type="text" value="${config.configKey }">
                             </div>
                         </div>

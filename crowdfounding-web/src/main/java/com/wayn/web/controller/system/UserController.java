@@ -65,6 +65,9 @@ public class UserController extends BaseControlller {
     @Autowired
     private MailQueueProducer mailQueueProducer;
 
+    @Autowired
+    private ConfigService configService;
+
     @RequiresPermissions("sys:user:user")
     @GetMapping
     public String userIndex(Model model) {
@@ -200,7 +203,8 @@ public class UserController extends BaseControlller {
     }
 
     @GetMapping("/import")
-    public String importExecl() {
+    public String importExecl(Model model) {
+        model.addAttribute("initPassWord", configService.getValueByKey("sys.user.initPassword"));
         return PREFIX + "/import";
     }
 

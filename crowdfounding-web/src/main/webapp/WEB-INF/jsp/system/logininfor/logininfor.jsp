@@ -202,7 +202,7 @@
                             formatter: function (value, row, index) {
                                 var r = '<a class="'
                                     + s_remove
-                                    + ' btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                                    + ' btn btn-warning btn-sm" href="#" title="删除" onclick="remove(\''
                                     + row.infoId + '\')"><i class="fa fa-remove"></i>删除</a> ';
                                 return r;
                             }

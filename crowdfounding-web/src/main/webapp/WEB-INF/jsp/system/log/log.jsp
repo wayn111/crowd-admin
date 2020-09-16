@@ -202,10 +202,10 @@
                             formatter: function (value, row, index) {
                                 var r = '<a class="'
                                     + s_remove
-                                    + ' btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                                    + ' btn btn-warning btn-sm" href="#" title="删除" onclick="remove(\''
                                     + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ';
                                 var d = '<a class="'
-                                    + ' btn btn-info btn-sm" href="#" title="详情"  mce_href="#" onclick="detail(\''
+                                    + ' btn btn-info btn-sm" href="#" title="详情" onclick="detail(\''
                                     + row.id + '\')"><i class="fa fa-info-circle"></i>详情</a> ';
                                 return d + r;
                             }

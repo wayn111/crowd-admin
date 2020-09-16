@@ -193,7 +193,7 @@
                             align: 'center',
                             formatter: function (value, row, index) {
                                 var r = '<a class="btn btn-warning btn-sm ' + s_remove_h
-                                    + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id
+                                    + '" href="#" title="删除" onclick="remove(\'' + row.id
                                     + '\')"><i class="fa fa-remove"></i>删除</a> ';
                                 return r;
                             }
