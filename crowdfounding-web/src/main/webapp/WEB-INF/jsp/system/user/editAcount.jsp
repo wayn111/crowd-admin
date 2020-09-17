@@ -26,7 +26,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-12 control-label danger">修改用户名称后，密码将重置为123456.</label>
+							<label class="col-sm-12 control-label danger">修改用户名称后，密码将重置为${initPassWord }</label>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-8 col-sm-offset-3">

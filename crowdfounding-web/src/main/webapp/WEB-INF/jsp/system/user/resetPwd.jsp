@@ -69,7 +69,7 @@
 				},
 				messages : {
 					password : {
-						required : icon + "请输入您的密码",
+						required : icon + "请输入用户密码",
 						minlength : icon + "密码必须6个字符以上"
 					}
 				},
