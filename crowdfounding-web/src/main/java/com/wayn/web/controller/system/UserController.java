@@ -20,6 +20,7 @@ import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
 import com.wayn.framework.jms.queue.MailQueueProducer;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -213,7 +214,9 @@ public class UserController extends BaseControlller {
         List<User> list = new ExcelImportService().importExcelByIs(inputstream, User.class, params, false).getList();
         String requestUrl = HttpUtil.getRequestContext(request);
         list.forEach(item -> {
-            item.setUserImg(requestUrl + "/" + item.getUserImg().substring(item.getUserImg().indexOf("upload")));
+            if (StringUtils.isNotEmpty(item.getUserImg())) {
+                item.setUserImg(requestUrl + "/" + item.getUserImg().substring(item.getUserImg().indexOf("upload")));
+            }
             item.setDeptId(1L);
             String password = configService.getValueByKey("sys.user.initPassword");
             item.setPassword(ShiroUtil.md5encrypt(password, item.getUserName()));
