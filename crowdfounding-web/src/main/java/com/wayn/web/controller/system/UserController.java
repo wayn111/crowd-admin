@@ -54,9 +54,6 @@ public class UserController extends BaseControlller {
     private DeptService deptService;
 
     @Autowired
-    private UserRoleService userRoleService;
-
-    @Autowired
     private DictService dictService;
 
     @Autowired
@@ -218,7 +215,8 @@ public class UserController extends BaseControlller {
         list.forEach(item -> {
             item.setUserImg(requestUrl + "/" + item.getUserImg().substring(item.getUserImg().indexOf("upload")));
             item.setDeptId(1L);
-            item.setPassword(ShiroUtil.md5encrypt("123456", item.getUserName()));
+            String password = configService.getValueByKey("sys.user.initPassword");
+            item.setPassword(ShiroUtil.md5encrypt(password, item.getUserName()));
         });
         userService.insertBatch(list);
         return Response.success("导入用户数据成功");
