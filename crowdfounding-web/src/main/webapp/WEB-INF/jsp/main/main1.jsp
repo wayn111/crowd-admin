@@ -88,11 +88,37 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v18">v1.8.0</a><code
+                                            class="pull-right">2020.9.17</code>
+                                    </h5>
+                                </div>
+                                <div id="v18" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            添加登陆日志，系统参数管理
+                                        </div>
+                                        <ol>
+                                            <li>添加登录日志菜单</li>
+                                            <li>添加系统参数菜单</li>
+                                            <li>优化主页左侧菜单显示</li>
+                                            <li>优化导航栏与左侧菜单联动显示</li>
+                                            <li>优化代码生成预览显示</li>
+                                            <li>优化数插件显示效果</li>
+                                            <li>用户列表添加部门名称显示</li>
+                                            <li>用户列表添加昵称显示</li>
+                                            <li>pom文件依赖升级</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v16">v1.6.0</a><code
                                             class="pull-right">2020.1.3</code>
                                     </h5>
                                 </div>
-                                <div id="v16" class="panel-collapse collapse in">
+                                <div id="v16" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             整合elfinder文件管理模块
