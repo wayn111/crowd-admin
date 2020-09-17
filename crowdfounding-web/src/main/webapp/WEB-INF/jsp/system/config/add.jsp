@@ -92,7 +92,7 @@
                     required: e + "请输入参数键名"
                 },
                 "configValue": {
-                    required: e + "请输入角色值名"
+                    required: e + "请输入角色键值"
                 },
             },
             ignore: ".ignore",

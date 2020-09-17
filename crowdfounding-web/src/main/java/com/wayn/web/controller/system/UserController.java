@@ -126,6 +126,7 @@ public class UserController extends BaseControlller {
     @GetMapping("/editAcount/{id}")
     public String editAcount(Model model, @PathVariable("id") String id) {
         model.addAttribute("id", id);
+        model.addAttribute("initPassWord", configService.getValueByKey("sys.user.initPassword"));
         model.addAttribute("userName", userService.selectById(id).getUserName());
         return PREFIX + "/editAcount";
     }
