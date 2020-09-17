@@ -17,7 +17,7 @@ import java.util.StringJoiner;
  * @author wayn
  * @since 2020-09-12
  */
-@TableName("sys_Logininfor")
+@TableName("sys_logininfor")
 public class Logininfor extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
