@@ -201,6 +201,10 @@
                         sortable: true
                     },
                     {
+                        field: 'deptName',
+                        title: '部门名称',
+                    },
+                    {
                         field: 'phone',
                         title: '手机号',
                         sortable: true

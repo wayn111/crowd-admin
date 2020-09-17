@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.Tree;
+import com.wayn.commom.domain.vo.UserVO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ import java.util.Map;
  */
 public interface UserService extends IService<User> {
 
-    Page<User> listPage(Page<User> page, User user);
+    Page<UserVO> listPage(Page<User> page, User user);
 
     boolean exit(Map<String, Object> params);
 
@@ -37,7 +38,7 @@ public interface UserService extends IService<User> {
 
     boolean resetPwd(String id, String password);
 
-    boolean editAcount(String id, String userName);
+    boolean editAccount(String id, String userName);
 
     Tree<Dept> getTree();
 
