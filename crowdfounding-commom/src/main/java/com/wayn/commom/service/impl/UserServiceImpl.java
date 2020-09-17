@@ -12,6 +12,7 @@ import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserRole;
 import com.wayn.commom.domain.vo.Tree;
+import com.wayn.commom.domain.vo.UserVO;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
@@ -24,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
@@ -60,14 +62,27 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     private String uploadDir;
 
     @Override
-    public Page<User> listPage(Page<User> page, User user) {
+    public Page<UserVO> listPage(Page<User> page, User user) {
         EntityWrapper<User> wrapper = ParameterUtil.get();
         wrapper.like("userName", user.getUserName());
         wrapper.like("phone", user.getPhone());
         wrapper.like("email", user.getEmail());
         wrapper.eq(user.getUserState() != null, "userState", user.getUserState());
         wrapper.eq(user.getDeptId() != null, "deptId", user.getDeptId());
-        return selectPage(page, wrapper);
+        Page<User> userPage = selectPage(page, wrapper);
+        List<User> records = userPage.getRecords();
+        List<UserVO> collect = records.stream().map(user1 -> {
+            UserVO userVO = new UserVO();
+            BeanUtils.copyProperties(user1, userVO);
+            userVO.setDeptName(deptDao.selectById(userVO.getDeptId()).getDeptName());
+            return userVO;
+        }).collect(Collectors.toList());
+        Page<UserVO> userVOPage = new Page<>();
+        userVOPage.setRecords(collect);
+        userVOPage.setCurrent(userPage.getCurrent());
+        userVOPage.setSize(userPage.getSize());
+        userVOPage.setTotal(userPage.getTotal());
+        return userVOPage;
     }
 
     @Override
@@ -154,7 +169,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     }
 
     @Override
-    public boolean editAcount(String id, String userName) {
+    public boolean editAccount(String id, String userName) {
         updateForSet("userName = '" + userName + "', password ='" + ShiroUtil.md5encrypt("123456", userName) + "'",
                 new EntityWrapper<User>().eq("id", id));
         return true;

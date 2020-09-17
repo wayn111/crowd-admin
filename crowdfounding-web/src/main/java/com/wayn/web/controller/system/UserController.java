@@ -13,6 +13,7 @@ import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.RoleChecked;
 import com.wayn.commom.domain.vo.SendMailVO;
 import com.wayn.commom.domain.vo.Tree;
+import com.wayn.commom.domain.vo.UserVO;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.*;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -77,7 +78,7 @@ public class UserController extends BaseControlller {
     @RequiresPermissions("sys:user:user")
     @ResponseBody
     @PostMapping("/list")
-    public Page<User> list(Model model, User user) {
+    public Page<UserVO> list(Model model, User user) {
         Page<User> page = getPage();
         //设置通用查询字段
         ParameterUtil.setWrapper();
@@ -135,7 +136,7 @@ public class UserController extends BaseControlller {
     @ResponseBody
     @PostMapping("/editAcount")
     public Response editAcount(Model model, @RequestParam String id, @RequestParam String userName) {
-        userService.editAcount(id, userName);
+        userService.editAccount(id, userName);
         return Response.success("修改用户名称成功");
     }
 
