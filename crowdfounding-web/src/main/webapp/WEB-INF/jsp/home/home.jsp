@@ -141,7 +141,7 @@
                             </li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a class="J_menuItem" href="${_ctx}/oa/notifyRecord">
+                                    <a class="J_menuItem noactive" href="${_ctx}/oa/notifyRecord">
                                         <i class="fa fa-envelope"></i> <strong> 我的通知</strong>
                                     </a>
                                 </div>

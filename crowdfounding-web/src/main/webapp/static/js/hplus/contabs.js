@@ -152,6 +152,10 @@ $(function () {
      */
     $(".J_menuItem").on("click", c);
 
+    /**
+     * 点击导航栏tab关闭按钮触发
+     * @returns {boolean}
+     */
     function h() {
         var m = $(this).parents(".J_menuTab").data("id");
         var l = $(this).parents(".J_menuTab").width();
@@ -186,6 +190,7 @@ $(function () {
                         return false
                     }
                 });
+                syncMenuTab($(this).parents(".J_menuTab").prev(".J_menuTab:last").data("id"));
                 $(this).parents(".J_menuTab").remove();
                 $(".J_mainContent .J_iframe").each(function () {
                     if ($(this).data("id") == m) {
