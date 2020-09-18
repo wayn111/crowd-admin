@@ -151,10 +151,6 @@
                             }
                         },
                         {
-                            field: 'ipaddr',
-                            title: '访问地址'
-                        },
-                        {
                             field: 'loginName',
                             title: '登录名称',
                             sortable: true
