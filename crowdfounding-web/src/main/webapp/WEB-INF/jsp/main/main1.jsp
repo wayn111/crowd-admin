@@ -47,7 +47,7 @@
                         <br>Druid数据源,数据库监控
                         <br>使用H+作为后台管理模板，基于jsp模板改造
                         <br>如果你先找一个简单易学，代码风格良好，基于现有功能快速上手开发的话
-                        <h4 class="text-danger">那么，现在crowdfounding来了</h4>
+                        <h4 class="text-danger">那么，现在${sysName }来了</h4>
                     </blockquote>
 
                     <h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
