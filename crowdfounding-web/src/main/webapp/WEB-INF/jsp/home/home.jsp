@@ -254,7 +254,7 @@
 
     $(function () {
         connect();
-        toastr['success']('欢迎来crowdounding！');
+        toastr['success']('欢迎来${sysName }！');
         // tab栏右键菜单实现
         $.contextMenu({
             selector: ".J_menuTab",

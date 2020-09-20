@@ -129,12 +129,17 @@
     }
 
     function login() {
+        var index = layer.msg('正在登陆...', {
+            icon: 16,
+            shade: 0.1
+        });
         var config = {
             url: prefix + "/doLogin",
             data: $('#login-form').serialize(),
             type: "POST",
             dataType: "json",
             success: function (data) {
+                layer.close(index);
                 if (data.code != 100) {
                     layer.msg(data.msg, {icon: 5});
                     $('#kaptcha-input').val();
@@ -143,6 +148,7 @@
                 }
             },
             error: function (err) {
+                layer.close(index);
                 console.log(err)
             }
         };

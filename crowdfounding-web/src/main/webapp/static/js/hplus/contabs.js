@@ -334,6 +334,7 @@ $(function () {
         $(".page-tabs-content").children("[data-id]:first").each(function () {
             $('.J_iframe[data-id="' + $(this).data("id") + '"]').show();
             $(this).addClass("active")
+            syncMenuTab($(this).data('id'));
         });
         $(".page-tabs-content").css("margin-left", "0")
     })
