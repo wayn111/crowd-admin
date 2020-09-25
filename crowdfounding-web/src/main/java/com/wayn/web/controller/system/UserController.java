@@ -17,6 +17,7 @@ import com.wayn.commom.domain.vo.UserVO;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.*;
 import com.wayn.commom.shiro.util.ShiroUtil;
+import com.wayn.commom.util.AdminUtil;
 import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
@@ -119,23 +120,29 @@ public class UserController extends BaseControlller {
     @ResponseBody
     @PostMapping("/resetPwd")
     public Response resetPwd(Model model, @RequestParam String id, @RequestParam String password) {
+        if (AdminUtil.isAdmin(id)) {
+            return Response.error("管理员账号无法操作");
+        }
         userService.resetPwd(id, ShiroUtil.md5encrypt(password, userService.selectById(id).getUserName()));
         return Response.success("修改用户密码成功");
     }
 
-    @RequiresPermissions("sys:user:editAcount")
-    @GetMapping("/editAcount/{id}")
-    public String editAcount(Model model, @PathVariable("id") String id) {
+    @RequiresPermissions("sys:user:editAccount")
+    @GetMapping("/editAccount/{id}")
+    public String editAccount(Model model, @PathVariable("id") String id) {
         model.addAttribute("id", id);
         model.addAttribute("initPassWord", configService.getValueByKey("sys.user.initPassword"));
         model.addAttribute("userName", userService.selectById(id).getUserName());
-        return PREFIX + "/editAcount";
+        return PREFIX + "/editAccount";
     }
 
-    @RequiresPermissions("sys:user:editAcount")
+    @RequiresPermissions("sys:user:editAccount")
     @ResponseBody
-    @PostMapping("/editAcount")
-    public Response editAcount(Model model, @RequestParam String id, @RequestParam String userName) {
+    @PostMapping("/editAccount")
+    public Response editAccount(Model model, @RequestParam String id, @RequestParam String userName) {
+        if (AdminUtil.isAdmin(id)) {
+            return Response.error("管理员账号无法操作");
+        }
         userService.editAccount(id, userName);
         return Response.success("修改用户名称成功");
     }
@@ -171,6 +178,9 @@ public class UserController extends BaseControlller {
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(Model model, User user, String roleIds) {
+        if (AdminUtil.isAdmin(user.getId())) {
+            return Response.error("管理员账号无法操作");
+        }
         userService.update(user, roleIds);
         return Response.success("修改用户成功");
 
@@ -181,6 +191,9 @@ public class UserController extends BaseControlller {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(Model model, @PathVariable("id") String id) {
+        if (AdminUtil.isAdmin(id)) {
+            return Response.error("管理员账号无法操作");
+        }
         userService.remove(id);
         return Response.success("删除用户成功");
 
@@ -191,6 +204,11 @@ public class UserController extends BaseControlller {
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(Model model, @RequestParam("ids[]") String[] ids) {
+        for (String id : ids) {
+            if (AdminUtil.isAdmin(id)) {
+                return Response.error("管理员账号无法操作");
+            }
+        }
         userService.batchRemove(ids);
         return Response.success("删除用户成功");
 
