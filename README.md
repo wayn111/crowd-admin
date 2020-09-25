@@ -80,11 +80,11 @@
 - [Mybatis Plus](https://mp.baomidou.com/guide)文档
 
 ### 获取源码
-- [crowdfounding 码云](https://gitee.com/wayn111/crowdfounding)
-- [crowdfounding github](https://github.com/wayn111/crowdfounding)
+- [crowd-admin 码云](https://gitee.com/wayn111/crowdfounding)
+- [crowd-admin github](https://github.com/wayn111/crowdfounding)
 
 ### 在线演示
-- <a href="http://wayn.xin" target="_blank">~~crowdfounding-web~~</a>
+- <a href="http://wayn.xin:8080" target="_blank">crowd-admin</a>
 
 ### 参考项目
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
