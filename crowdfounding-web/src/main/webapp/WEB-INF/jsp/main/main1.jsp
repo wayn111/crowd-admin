@@ -39,7 +39,7 @@
                 <div class="ibox-content">
                     <blockquote class="text-muted" style="font-size:14px">
                         面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质
-                        <br>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统
+                        <br>${sysName }是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统
                         <br>基于stomp协议实现后台消息推送以及指定用户通信的功能
                         <br>整合elfinder文件管理
                         <br>整合quartz实现任务调度级任务日志记录
@@ -53,10 +53,10 @@
                     <h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
                     <ul>
                         <li>
-                            <a href="https://gitee.com/wayn111/crowdfounding" target="_blank">crowdfounding 码云</a>
+                            <a href="https://gitee.com/wayn111/crowd-admin" target="_blank">${sysName } 码云</a>
                         </li>
                         <li>
-                            <a href="https://github.com/wayn111/crowdfounding" target="_blank">crowdfounding github</a>
+                            <a href="https://github.com/wayn111/crowd-admin" target="_blank">${sysName } github</a>
                         </li>
                     </ul>
 
@@ -245,7 +245,7 @@
                                     <div class="panel-body">
                                         <div class="alert alert-success">项目立项</div>
                                         <ol>
-                                            <li>crowdfounding项目初始化；</li>
+                                            <li>crowd-admin项目初始化；</li>
                                         </ol>
                                     </div>
                                 </div>

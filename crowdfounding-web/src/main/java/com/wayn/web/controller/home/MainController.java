@@ -35,11 +35,13 @@ public class MainController extends BaseControlller {
 
     @GetMapping("/mainIndex")
     public String mainIndex(Model model) {
+        model.addAttribute("sysName", configService.getValueByKey("sys.name"));
         return MAIN_PREFIX + "/main" ;
     }
 
     @GetMapping("/mainIndex1")
     public String mainIndex1(Model model) {
+        model.addAttribute("sysName", configService.getValueByKey("sys.name"));
         return MAIN_PREFIX + "/main1" ;
     }
 

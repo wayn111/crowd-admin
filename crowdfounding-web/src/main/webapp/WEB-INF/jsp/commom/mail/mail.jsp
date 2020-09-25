@@ -7,7 +7,7 @@
     <%@ include file="/commom/taglib.jsp" %>
     <%@ include file="/commom/header.jsp" %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>crowdfounding 邮件配置</title>
+    <title>crowd-admin 邮件配置</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
           name="viewport">
     <style>
