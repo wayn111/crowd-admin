@@ -265,13 +265,15 @@
                 <div class="ibox-content">
                     <%--<p><i class="fa fa-send-o"></i> 官网：<a href="http://www.ruoyi.vip" target="_blank">http://www.ruoyi.vip</a>
                     </p>--%>
-                    <p><i class="fa fa-qq"></i> QQ：<a
-                            href="http://wpa.qq.com/msgrd?v=3&amp;uin=1669738430&amp;site=qq&amp;menu=yes"
-                            target="_blank">1669738430</a>
+                    <p><i class="fa fa-qq"></i>QQ：
+                        <a target="_blank"
+                           href="http://wpa.qq.com/msgrd?v=3&uin=1669738430&site=qq&menu=yes"><img
+                                border="0" src="http://wpa.qq.com/pa?p=2:1669738430:52" alt="1669738430"
+                                title="1669738430"/>1669738430</a>
                     </p>
-                    <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">/ *wayn</a>
+                    <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">/ *waynaqua</a>
                     </p>
-                    <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *wayn</a>
+                    <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *waynaqua</a>
                     </p>
                     <%--<p id="pay-qrcode">
                         <a href="javascript:;"><img src="${_ctx}/static/img/pay.png" width="100%" alt="请使用手机支付宝或者微信扫码支付">
