@@ -87,7 +87,7 @@
     </div>
     <div class="signup-footer">
         <div class="pull-left">
-            © 2019 WAYN Copyright
+            ${sysFooter }
         </div>
     </div>
 </div>

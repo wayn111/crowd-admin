@@ -203,7 +203,7 @@
         </div>
         <div class="footer">
             <div class="pull-right">
-                © 2019 Wayn Copyright
+                ${sysFooter }
             </div>
         </div>
     </div>

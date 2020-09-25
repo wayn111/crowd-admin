@@ -29,6 +29,7 @@ public class MainController extends BaseControlller {
         List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
         model.addAttribute("treeMenus", treeMenus);
         model.addAttribute("sysName", configService.getValueByKey("sys.name"));
+        model.addAttribute("sysFooter", configService.getValueByKey("sys.footer.copyright"));
         model.addAttribute("user", getCurUser());
         return HOME_PREFIX + "/home" ;
     }
