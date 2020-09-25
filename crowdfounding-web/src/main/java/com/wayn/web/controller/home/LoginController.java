@@ -48,8 +48,9 @@ public class LoginController extends BaseControlller {
     private ConfigService configService;
 
     @GetMapping("/login")
-    public String login(ModelMap map) {
-        map.addAttribute("sysName", configService.getValueByKey("sys.name"));
+    public String login(ModelMap model) {
+        model.addAttribute("sysName", configService.getValueByKey("sys.name"));
+        model.addAttribute("sysFooter", configService.getValueByKey("sys.footer.copyright"));
         return PREFIX + "/login";
     }
 
