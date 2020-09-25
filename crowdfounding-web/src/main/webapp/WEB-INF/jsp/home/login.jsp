@@ -48,7 +48,7 @@
             <form id="login-form" action="#">
                 <h4 class="no-margins">登录：</h4>
                 <p class="m-t-md">登录到${sysName }后台</p>
-                <input type="text" class="form-control" name="userName" placeholder="用户名" value="admin"/>
+                <input type="text" class="form-control" name="userName" placeholder="用户名" value="crowd"/>
                 <input type="password" class="form-control m-b" name="password" placeholder="密码" value="123456"/>
                 <div class="row">
                     <div class="col-xs-7">
