@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 通知通告 服务层实现
@@ -122,7 +121,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
     public List<String> fillNotifyRecordList(Notify notify, String receiveUserIds, List<NotifyRecord> collect) {
         List<String> split = new ArrayList<>();
         if (StringUtils.isEmpty(receiveUserIds)) {
-            for (User user : userService.selectList(new EntityWrapper<User>())) {
+            for (User user : userService.selectList(new EntityWrapper<>())) {
                 NotifyRecord notifyRecord = new NotifyRecord();
                 notifyRecord.setCreateTime(new Date());
                 notifyRecord.setRead(false);
@@ -134,15 +133,19 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
             }
         } else {
             split.addAll(Arrays.asList(receiveUserIds.split(",")));
-            collect.addAll(new ArrayList<String>(split).stream().map(item -> {
+            for (String receiveUserId : split) {
+                User user = userService.selectById(receiveUserId);
+                if (user == null) {
+                    continue;
+                }
                 NotifyRecord notifyRecord = new NotifyRecord();
                 notifyRecord.setCreateTime(new Date());
                 notifyRecord.setRead(false);
-                notifyRecord.setReceiveUserId(item);
-                notifyRecord.setReceiveUserName(userService.selectById(item).getUserName());
+                notifyRecord.setReceiveUserId(receiveUserId);
+                notifyRecord.setReceiveUserName(user.getUserName());
                 notifyRecord.setNotifyId(notify.getId());
-                return notifyRecord;
-            }).collect(Collectors.toList()));
+                collect.add(notifyRecord);
+            }
         }
         return split;
     }
