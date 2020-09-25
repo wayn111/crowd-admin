@@ -14,12 +14,12 @@
 </head>
 <body>
 	<div class="panel panel-default">
-		<%--<div class="panel-heading">了解crowdfounding</div>--%>
+		<%--<div class="panel-heading">了解crowd-admin</div>--%>
 		<div style="padding: 10px 0 20px 10px;">
 			<h3>&nbsp;&nbsp;&nbsp;项目介绍</h3>
 			<ul>
 				<li>面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质</li>
-				<li>crowdfounding是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统。</li>
+				<li>${sysName }是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统。</li>
 				<li>Encache权限缓存。</li>
 				<li>Druid数据源,数据库监控。</li>
 				<li>使用H+作为后台管理模板，基于jsp模板改造</li>
@@ -30,10 +30,10 @@
 			<h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
 			<ul>
 				<li>
-					<a href="https://gitee.com/wayn111/crowdfounding" target="_blank">crowdfounding 码云</a>
+					<a href="https://gitee.com/wayn111/crowd-admin" target="_blank">${sysName } 码云</a>
 				</li>
 				<li>
-					<a href="https://github.com/wayn111/crowdfounding" target="_blank">crowdfounding github</a>
+					<a href="https://github.com/wayn111/crowd-admin" target="_blank">${sysName } github</a>
 				</li>
 			</ul>
 

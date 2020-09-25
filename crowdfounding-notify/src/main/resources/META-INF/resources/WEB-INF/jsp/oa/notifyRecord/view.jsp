@@ -6,7 +6,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowdfounding 通知页面</title>
+    <title>crowd-admin 通知页面</title>
     <%@ include file="/commom/taglib.jsp" %>
     <link href="${_ctx }/static/plugin/bootstrap-3.3.7-dist/css/bootstrap.min.css?v=3.3.7"
           rel="stylesheet">

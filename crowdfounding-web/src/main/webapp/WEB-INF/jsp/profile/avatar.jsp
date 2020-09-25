@@ -8,7 +8,7 @@
     <%@ include file="/commom/header.jsp" %>
     <link rel="stylesheet" href="${_ctx }/static/plugin/cropbox/cropbox.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>crowdfounding 上传头像</title>
+    <title>crowd-admin 上传头像</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
           name="viewport">
 </head>

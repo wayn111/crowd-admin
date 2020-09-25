@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowdfounding 登陆</title>
-    <meta name="keywords" content="crowdfounding,基于H+,后台HTML,响应式后台">
+    <title>crowd-admin 登陆</title>
+    <meta name="keywords" content="crowd-admin,基于H+,后台HTML,响应式后台">
     <meta name="description"
           content="design by wayn">
     <%@ include file="/commom/taglib.jsp" %>
@@ -35,8 +35,10 @@
                 <h4>欢迎使用 <strong>${sysName}</strong></h4>
                 <ul class="m-b">
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> spring</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> mybatis-plus</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> shiro</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> mybatis</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 消息推送</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 文件管理</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 代码生成</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 系统监控</li>
                 </ul>
@@ -45,7 +47,7 @@
         <div class="col-sm-5 animated bounceInDown">
             <form id="login-form" action="#">
                 <h4 class="no-margins">登录：</h4>
-                <p class="m-t-md">登录到crowdfounding后台</p>
+                <p class="m-t-md">登录到${sysName }后台</p>
                 <input type="text" class="form-control" name="userName" placeholder="用户名" value="admin"/>
                 <input type="password" class="form-control m-b" name="password" placeholder="密码" value="123456"/>
                 <div class="row">
@@ -69,12 +71,12 @@
                     </div>
                     <div class="outside-login-cot">
                         <a class="outside-login-btn gitee" target="_Blank"
-                           href="https://gitee.com/wayn111/crowdfounding">
+                           href="https://gitee.com/wayn111/crowd-admin">
                             <em><i class="fa fa-git-square"></i></em>
                             <span>码云仓库</span>
                         </a>
                         <a class="outside-login-btn git" target="_Blank"
-                           href="https://github.com/wayn111/crowdfounding">
+                           href="https://github.com/wayn111/crowd-admin">
                             <em><i class="fa fa-github"></i></em>
                             <span>GitHub仓库</span>
                         </a>

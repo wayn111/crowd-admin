@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowdfounding 字典数据</title>
-    <meta name="keywords" content="crowdfounding,基于H+,后台HTML,响应式后台">
+    <title>crowd-admin 字典数据</title>
+    <meta name="keywords" content="crowd-admin,基于H+,后台HTML,响应式后台">
     <meta name="description"
           content="design by wayn">
     <%@ include file="/commom/taglib.jsp" %>
