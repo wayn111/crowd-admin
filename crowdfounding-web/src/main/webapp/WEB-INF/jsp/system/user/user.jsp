@@ -107,7 +107,7 @@
             var s_edit_h = 'hidden';
             var s_remove_h = 'hidden';
             var s_resetPwd_h = 'hidden';
-            var s_editAcount_h = 'hidden';
+            var s_editAccount_h = 'hidden';
         </script>
         <shiro:hasPermission name="sys:user:edit">
             <script>
@@ -124,9 +124,9 @@
                 s_resetPwd_h = '';
             </script>
         </shiro:hasPermission>'
-        <shiro:hasPermission name="sys:user:editAcount">
+        <shiro:hasPermission name="sys:user:editAccount">
             <script>
-                s_editAcount_h = '';
+                s_editAccount_h = '';
             </script>
         </shiro:hasPermission>
     </div>
@@ -251,8 +251,8 @@
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h
                                 + '" href="#" title="删除" onclick="remove(\'' + row.id
                                 + '\')"><i class="fa fa-remove"></i>删除</a> ';
-                            var a = '<a class="btn btn-success btn-sm ' + s_editAcount_h
-                                + '" href="#" title="编辑用户名称" onclick="editAcount(\'' + row.id
+                            var a = '<a class="btn btn-success btn-sm ' + s_editAccount_h
+                                + '" href="#" title="编辑用户名称" onclick="editAccount(\'' + row.id
                                 + '\')"><i class="fa fa-user"></i>编辑用户名称</a> ';
                             var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h
                                 + '" href="#" title="重置密码" onclick="resetPwd(\'' + row.id
@@ -348,14 +348,14 @@
         });
     }
 
-    function editAcount(id) {
+    function editAccount(id) {
         layer.open({
             type: 2,
             title: '编辑用户名称',
             maxmin: true,
             shadeClose: false, // 点击遮罩关闭层
             area: ['400px', '320px'],
-            content: prefix + '/editAcount/' + id // iframe的url
+            content: prefix + '/editAccount/' + id // iframe的url
         });
     }
 

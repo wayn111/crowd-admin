@@ -5,6 +5,12 @@
 <meta charset="utf-8">
 <%@ include file="/commom/taglib.jsp" %>
 <%@ include file="/commom/header.jsp" %>
+<style>
+    .danger {
+        color: red;
+        font-size: 5px;
+    }
+</style>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -13,11 +19,14 @@
                 <form class="form-horizontal m-t" id="user-form">
                     <input id="id" name="id" value="${id}" type="hidden">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">输入密码：</label>
+                        <label class="col-sm-3 control-label">请输入用户名称：</label>
                         <div class="col-sm-8">
-                            <input id="password" name="password" class="form-control"
-                                   type="password">
+                            <input id="userName" name="userName" class="form-control" value="${userName}"
+                                   type="text">
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label danger">修改用户名称后，密码将重置为${initPassWord }</label>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-8 col-sm-offset-3">
@@ -37,7 +46,7 @@
         $.ajax({
             cache: true,
             type: "POST",
-            url: prefix + "/resetPwd",
+            url: prefix + "/editAccount",
             data: $('#user-form').serialize(),// 你的formid
             async: false,
             error: function (request) {
@@ -63,15 +72,27 @@
         var icon = "<i class='fa fa-times-circle'></i> ";
         $("#user-form").validate({
             rules: {
-                password: {
+                userName: {
                     required: true,
-                    minlength: 6
+                    minlength: 2,
+                    remote: {
+                        url: prefix + "/exists", // 后台处理程序
+                        type: "post", // 数据发送方式
+                        dataType: "json", // 接受数据格式
+                        data: { // 要传递的数据
+                            userName: function () {
+                                return $("#userName").val();
+                            }
+                        }
+                    }
                 }
             },
             messages: {
-                password: {
-                    required: icon + "请输入用户密码",
-                    minlength: icon + "密码必须6个字符以上"
+
+                userName: {
+                    required: icon + "请输入您的用户名",
+                    minlength: icon + "用户名必须两个字符以上",
+                    remote: icon + "用户名已经存在"
                 }
             },
             submitHandler: function () {
