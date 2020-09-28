@@ -84,7 +84,7 @@
 - [crowd-admin github](https://github.com/wayn111/crowdfounding)
 
 ### 在线演示
-- <a href="http://wayn.xin:8080" target="_blank">crowd-admin</a>
+- <a href="http://wayn.xin/crowd" target="_blank">crowd-admin</a>
 
 ### 参考项目
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
