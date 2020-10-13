@@ -26,7 +26,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <spring.version>4.3.26.RELEASE</spring.version>
         <spring.redis.version>1.8.11.RELEASE</spring.redis.version>
         <mybatis-plus.version>2.3.3</mybatis-plus.version>
