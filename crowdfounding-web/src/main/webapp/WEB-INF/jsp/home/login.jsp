@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="col-xs-7">
                         <div class="form-group">
-                            <input class="form-control" id="kaptcha-input" name="clienkaptcha" maxlength="4"
+                            <input class="form-control" id="kaptcha-input" name="clientKaptcha" maxlength="4"
                                    placeholder="验证码">
                         </div>
                     </div>
@@ -62,6 +62,11 @@
                             <img id="verify-img" alt="更换验证码" height="37" width="100%"
                                  onclick="getVerify(this);">
                         </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-7">
+                        <input type="checkbox" id="rememberMe" name="rememberMe"> <label for="rememberme">记住我</label>
                     </div>
                 </div>
                 <button id="login-button" class="btn btn-success btn-block" type="submit">登录</button>
