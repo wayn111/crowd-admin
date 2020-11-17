@@ -56,19 +56,16 @@ public class LoginController extends BaseControlller {
 
     @ResponseBody
     @PostMapping("/doLogin")
-    public Response doLogin(String userName, String password, String clienkaptcha) {
+    public Response doLogin(String userName, String password, boolean rememberMe, String clientKaptcha) {
         String kaptcha = (String) SecurityUtils.getSubject().getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        if (!StringUtils.equalsIgnoreCase(clienkaptcha, kaptcha)) {
+        if (!StringUtils.equalsIgnoreCase(clientKaptcha, kaptcha)) {
             logininforService.addLog(userName, Constant.LOGIN_FAIL, "验证码错误");
             return Response.error("验证码错误");
         }
         Subject currentUser = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
-        if (!currentUser.isAuthenticated()) {
-            //token.setRememberMe(true);
-            currentUser.login(token);
-            logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "登陆成功");
-        }
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, password, rememberMe);
+        currentUser.login(token);
+        logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "登陆成功");
         return Response.success();
     }
 
