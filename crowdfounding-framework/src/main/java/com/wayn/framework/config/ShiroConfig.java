@@ -11,6 +11,7 @@ import com.wayn.framework.shiro.session.RedisSessionDAO;
 import com.wayn.framework.web.filter.OnlineSessionFilter;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.SessionFactory;
@@ -18,6 +19,7 @@ import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -54,6 +56,35 @@ public class ShiroConfig {
     @Value("${shiro.unauthorizedUrl}")
     private String unauthorizedUrl;
 
+    /**
+     * 设置Cookie的域名
+     */
+    @Value("${shiro.cookie.domain}")
+    private String domain;
+
+    /**
+     * 设置cookie的有效访问路径
+     */
+    @Value("${shiro.cookie.path}")
+    private String path;
+
+    /**
+     * 设置HttpOnly属性
+     */
+    @Value("${shiro.cookie.httpOnly}")
+    private boolean httpOnly;
+
+    /**
+     * 设置Cookie的过期时间，秒为单位
+     */
+    @Value("${shiro.cookie.maxAge}")
+    private int maxAge;
+
+    /**
+     * 设置cipherKey密钥
+     */
+    @Value("${shiro.cookie.cipherKey}")
+    private String cipherKey;
 
     @Autowired(required = false)
     private RedisOpts opts;
@@ -82,7 +113,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/home/*", "anon");
-        filterChainDefinitionMap.put("/**", "authc,onlineSession");
+        filterChainDefinitionMap.put("/**", "user,onlineSession");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -98,20 +129,45 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        //设置realm.
+        // 设置realm.
         securityManager.setRealm(userRealm());
+        // 记住我
+        securityManager.setRememberMeManager(rememberMeManager());
         // 自定义缓存实现 使用redis
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
             securityManager.setCacheManager(rediscacheManager());
-        } else if(Constant.CACHE_TYPE_EACHACEH.equals(cacheType)) {
+        } else if (Constant.CACHE_TYPE_EACHACEH.equals(cacheType)) {
             securityManager.setCacheManager(shiroEhCacheManager());
         }
+        // session管理器
         securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 
+    /**
+     * cookie 属性设置
+     */
+    public SimpleCookie rememberMeCookie() {
+        SimpleCookie cookie = new SimpleCookie("rememberMe");
+        cookie.setDomain(domain);
+        cookie.setPath(path);
+        cookie.setHttpOnly(httpOnly);
+        cookie.setMaxAge(maxAge * 24 * 60 * 60);
+        return cookie;
+    }
+
+    /**
+     * 记住我
+     */
+    public CookieRememberMeManager rememberMeManager() {
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(rememberMeCookie());
+        cookieRememberMeManager.setCipherKey(Base64.decode(cipherKey));
+        return cookieRememberMeManager;
+    }
+
     @Bean
-    MyRealm userRealm() {
+    public MyRealm userRealm() {
         MyRealm userRealm = new MyRealm();
         // 定义自己的的密码验证服务
         MyCredentialsMatcher credentialsMatcher = new MyCredentialsMatcher();
@@ -205,7 +261,7 @@ public class ShiroConfig {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         // 设置cookie
         SimpleCookie sessionIdCookie = new SimpleCookie();
-        sessionIdCookie.setName("wayn-session-id");
+        sessionIdCookie.setName("wayn.session");
         sessionManager.setSessionIdCookie(sessionIdCookie);
         sessionManager.setSessionIdUrlRewritingEnabled(false);
 
