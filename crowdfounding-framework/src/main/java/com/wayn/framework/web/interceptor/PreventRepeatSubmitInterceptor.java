@@ -1,6 +1,6 @@
 package com.wayn.framework.web.interceptor;
 
-import com.google.gson.Gson;
+import com.alibaba.fastjson.JSONObject;
 import com.wayn.commom.util.Response;
 import com.wayn.commom.annotation.RepeatSubmit;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public abstract class PreventRepeatSubmitInterceptor extends HandlerInterceptorA
                     PrintWriter writer = null;
                     try {
                         writer = response.getWriter();
-                        writer.print(new Gson().toJson(Response.error("不允许重复提交，请稍后再试")));
+                        writer.print(new JSONObject().toJSONString(Response.error("不允许重复提交，请稍后再试")));
                         writer.flush();
                     } catch (IOException e) {
                         e.printStackTrace();
