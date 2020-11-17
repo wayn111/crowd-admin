@@ -20,6 +20,8 @@ import java.util.StringJoiner;
 @TableName("sys_dict")
 public class Dict extends BusinessEntity<Dict> {
 
+    private static final long serialVersionUID = 3111600516184636033L;
+
     /**
      * 编号
      */

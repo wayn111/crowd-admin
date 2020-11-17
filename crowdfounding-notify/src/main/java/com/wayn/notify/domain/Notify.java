@@ -17,6 +17,8 @@ import java.util.Date;
 @TableName("oa_notify")
 public class Notify extends BusinessEntity {
 
+    private static final long serialVersionUID = 671279142887585179L;
+
     /**
      * 编号
      */

@@ -19,6 +19,8 @@ import java.util.StringJoiner;
 @TableName("sys_dept")
 public class Dept extends BusinessEntity<Dept> {
 
+	private static final long serialVersionUID = 6236105927807085550L;
+
 	/**
 	 * 主键
 	 */
