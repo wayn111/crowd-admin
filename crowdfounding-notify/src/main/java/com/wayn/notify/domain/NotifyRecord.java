@@ -16,6 +16,8 @@ import java.util.Date;
 @TableName("oa_notify_record")
 public class NotifyRecord extends BaseEntity {
 
+    private static final long serialVersionUID = -2348311485953647689L;
+
     /**
      * 主键
      */

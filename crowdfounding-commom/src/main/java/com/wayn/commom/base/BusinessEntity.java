@@ -6,6 +6,8 @@ import java.util.StringJoiner;
 
 public class BusinessEntity<T> extends BaseEntity<T> {
 
+    private static final long serialVersionUID = 120550327270507569L;
+
     @Excel(name = "备注", width = 20)
     private String remarks;
 

@@ -20,6 +20,8 @@ import java.util.StringJoiner;
 public class Role extends BusinessEntity<Role> {
 
 
+    private static final long serialVersionUID = -479636130833732532L;
+
     /**
      * 主键
      */

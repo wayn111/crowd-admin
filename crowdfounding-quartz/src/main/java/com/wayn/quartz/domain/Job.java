@@ -17,6 +17,8 @@ import java.util.Date;
 @TableName("sys_job")
 public class Job extends BusinessEntity<Job> {
 
+    private static final long serialVersionUID = 8774987738630789465L;
+
     /**
      * 任务ID
      */
