@@ -1,6 +1,6 @@
 package com.wayn.commom.util;
 
-import com.google.gson.Gson;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,7 +107,7 @@ public class LogUtils {
 
     protected static String getParams(HttpServletRequest request) {
         Map<String, String[]> params = request.getParameterMap();
-        return new Gson().toJson(params);
+        return new JSONObject().toJSONString(params);
     }
 
     protected static String getUsername() {
