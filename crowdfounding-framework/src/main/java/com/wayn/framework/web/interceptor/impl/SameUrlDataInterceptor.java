@@ -1,6 +1,6 @@
 package com.wayn.framework.web.interceptor.impl;
 
-import com.google.gson.Gson;
+import com.alibaba.fastjson.JSONObject;
 import com.wayn.framework.web.interceptor.PreventRepeatSubmitInterceptor;
 import org.springframework.stereotype.Component;
 
@@ -36,10 +36,10 @@ public class SameUrlDataInterceptor extends PreventRepeatSubmitInterceptor {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean isRepeatSubmit(HttpServletRequest request) throws Exception {
+    public boolean isRepeatSubmit(HttpServletRequest request) {
         // 本次参数及系统时间
-        String nowParams = new Gson().toJson(request.getParameterMap());
-        Map<String, Object> nowDataMap = new HashMap<String, Object>();
+        String nowParams = new JSONObject().toJSONString(request.getParameterMap());
+        Map<String, Object> nowDataMap = new HashMap<>();
         nowDataMap.put(REPEAT_PARAMS, nowParams);
         nowDataMap.put(REPEAT_TIME, System.currentTimeMillis());
 
@@ -57,7 +57,7 @@ public class SameUrlDataInterceptor extends PreventRepeatSubmitInterceptor {
                 }
             }
         }
-        Map<String, Object> sessionMap = new HashMap<String, Object>();
+        Map<String, Object> sessionMap = new HashMap<>();
         sessionMap.put(url, nowDataMap);
         session.setAttribute(SESSION_REPEAT_KEY, sessionMap);
         return false;
@@ -78,9 +78,6 @@ public class SameUrlDataInterceptor extends PreventRepeatSubmitInterceptor {
     private boolean compareTime(Map<String, Object> nowMap, Map<String, Object> preMap) {
         long time1 = (Long) nowMap.get(REPEAT_TIME);
         long time2 = (Long) preMap.get(REPEAT_TIME);
-        if ((time1 - time2) < (this.intervalTime * 1000)) {
-            return true;
-        }
-        return false;
+        return (time1 - time2) < (this.intervalTime * 1000);
     }
 }
