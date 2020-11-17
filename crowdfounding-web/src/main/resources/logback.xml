@@ -41,6 +41,9 @@
     <logger name="com.wayn" level="DEBUG">
         <appender-ref ref="SQL"/>
     </logger>
+    <!--<logger name="org.apache.shiro" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>-->
     <!--<logger name="org.springframework" level="INFO">
         <appender-ref ref="STDOUT" />
     </logger>-->
@@ -50,4 +53,4 @@
         <!--<appender-ref ref="SQL" />-->
     </root>
 
-</configuration>  
+</configuration>

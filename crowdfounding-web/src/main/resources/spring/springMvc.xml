@@ -26,7 +26,7 @@
     <!--本地文件上传路径-->
     <mvc:resources mapping="/upload/**" location="file:///${wayn.uploadDir}/"/>
 
-    <mvc:redirect-view-controller path="/index" redirect-url="/home/login"/>
+    <mvc:redirect-view-controller path="/index" redirect-url="/main"/>
 
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -63,7 +63,7 @@
             <bean class="com.wayn.framework.web.interceptor.impl.SameUrlDataInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
-    
+
     <!-- API 接口跨域配置 -->
     <mvc:cors>
         <mvc:mapping path="/**"

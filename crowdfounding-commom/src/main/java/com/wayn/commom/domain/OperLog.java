@@ -19,6 +19,8 @@ import java.util.StringJoiner;
 @TableName("sys_oper_log")
 public class OperLog extends BaseEntity<OperLog> {
 
+    private static final long serialVersionUID = -9183720904726318126L;
+
     /**
      * 主键
      */

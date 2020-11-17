@@ -2,10 +2,13 @@ package com.wayn.commom.domain;
 
 import com.wayn.commom.enums.OnlineStatus;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.StringJoiner;
 
-public class UserOnline {
+public class UserOnline implements Serializable {
+
+    private static final long serialVersionUID = -7806042672831614089L;
 
     private String id;
 
