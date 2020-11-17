@@ -16,6 +16,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @TableName("sys_job_log")
 public class JobLog extends BaseEntity {
+
+    private static final long serialVersionUID = -5352824197215057392L;
+
     /**
      * 任务日志ID
      */

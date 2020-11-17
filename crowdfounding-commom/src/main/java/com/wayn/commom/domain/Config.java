@@ -19,6 +19,8 @@ import java.util.Date;
 @TableName("sys_config")
 public class Config extends BusinessEntity {
 
+    private static final long serialVersionUID = 8544099501857050777L;
+
     /**
      * 参数主键
      */

@@ -5,6 +5,8 @@ package com.wayn.notify.domain;
  */
 public class NotifyRecordTip extends Notify {
 
+    private static final long serialVersionUID = 8570042875494680049L;
+
     private Long notifyRecordId;
 
     private String before;
