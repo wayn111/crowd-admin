@@ -100,14 +100,18 @@ $(function () {
     function c() {
         var o = $(this).attr("href"), m = $(this).data("index"), l = $.trim($(this).text()), k = true;
         var $dataObj = $('a[href$="' + decodeURI(o) + '"]');
+        // 点击右上角通知图标
+        if ($dataObj.length > 1) {
+            $dataObj = $dataObj.eq(0);
+        }
         if (!$dataObj.hasClass("noactive")) {
             $('.tab-pane li').removeClass("active");
             $('.nav ul').removeClass("in");
-            $dataObj.parents("ul").addClass("in")
+            $dataObj.parents("ul").addClass("in");
             $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
             $dataObj.parents("ul").css('height', 'auto').height();
             $(".nav ul li, .nav li").removeClass("selected");
-            $(this).parent("li").addClass("selected");
+            $dataObj.parent("li").addClass("selected");
         }
         if (o == undefined || $.trim(o).length == 0) {
             return false
@@ -245,8 +249,12 @@ $(function () {
     }
 
     function syncMenuTab(dataId) {
-        if(isLinkage) {
+        debugger
+        if (isLinkage) {
             var $dataObj = $('a[href$="' + decodeURI(dataId) + '"]');
+            if ($dataObj.length > 1) {
+                $dataObj = $dataObj.eq(0);
+            }
             if ($dataObj.attr("class") != null && !$dataObj.hasClass("noactive")) {
                 $('.nav ul').removeClass("in");
                 $dataObj.parents("ul").addClass("in")
@@ -287,6 +295,7 @@ $(function () {
             }
         })
     }
+
     $(".J_tabRefresh").on("click", r);
 
 
