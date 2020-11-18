@@ -1,4 +1,4 @@
-package com.wayn.commom.controller;
+package com.wayn.web.controller.commom;
 
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.util.*;
@@ -32,20 +32,16 @@ public class CommonController {
      * @param delete   是否删除
      */
     @GetMapping("/download")
-    public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request) {
+    public void fileDownload(String fileName, Boolean delete, HttpServletResponse response) {
         try {
             String uploadDir = ProperUtil.get("wayn.uploadDir");
-            if (!FileUtils.isValidFilename(fileName)) {
+            if (!FileUtils.checkAllowDownload(fileName)) {
                 throw new BusinessException("文件名称(" + fileName + ")非法，不允许下载。 ");
             }
 
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
             String filePath = uploadDir + File.separatorChar + fileName;
-
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("multipart/form-data");
-            response.setHeader("Content-Disposition",
-                    "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, realFileName));
+            FileUtils.setAttachmentResponseHeader(response, realFileName);
             FileUtils.writeBytes(filePath, response.getOutputStream());
             if (delete) {
                 FileUtils.deleteFile(filePath);
@@ -63,18 +59,14 @@ public class CommonController {
     @GetMapping("/downTemplate")
     public void downTemplate(String fileName, HttpServletResponse response, HttpServletRequest request) {
         try {
-            if (!FileUtils.isValidFilename(fileName)) {
+            if (!FileUtils.checkAllowDownload(fileName)) {
                 throw new BusinessException("文件名称(" + fileName + ")非法，不允许下载。 ");
             }
 
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
             String realPath = request.getSession().getServletContext().getRealPath("/") + File.separator + "template";
             String filePath = realPath + File.separatorChar + fileName;
-
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("multipart/form-data");
-            response.setHeader("Content-Disposition",
-                    "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, realFileName));
+            FileUtils.setAttachmentResponseHeader(response, realFileName);
             FileUtils.writeBytes(filePath, response.getOutputStream());
         } catch (Exception e) {
             log.error("下载文件失败", e);
@@ -86,7 +78,7 @@ public class CommonController {
      */
     @PostMapping("/upload")
     @ResponseBody
-    public Response uploadFile(MultipartFile file, HttpServletRequest request) throws Exception {
+    public Response uploadFile(MultipartFile file, HttpServletRequest request) {
         try {
             // 上传文件路径
             String filePath = ProperUtil.get("wayn.uploadDir");
