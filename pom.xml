@@ -15,7 +15,7 @@
         <module>crowdfounding-generator</module>
         <module>crowdfounding-notify</module>
         <module>crowdfounding-quartz</module>
-        <module>crowdfounding-filemanager</module>
+        <module>crowdfounding-elfinder</module>
         <module>crowdfounding-mailserver</module>
     </modules>
     <packaging>pom</packaging>
