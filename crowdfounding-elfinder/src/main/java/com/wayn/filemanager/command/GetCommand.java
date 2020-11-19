@@ -32,6 +32,7 @@
 package com.wayn.filemanager.command;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wayn.commom.util.ImageUtil;
 import com.wayn.filemanager.constant.ElFinderConstants;
 import com.wayn.filemanager.service.ElfinderStorage;
 import com.wayn.filemanager.service.VolumeHandler;
@@ -42,15 +43,19 @@ import java.io.InputStream;
 
 public class GetCommand extends AbstractJsonCommand implements ElfinderCommand {
 
-    public static final String ENCODING = "utf-8";
+    public static final String ENCODING = "UTF-8";
 
     @Override
     protected void execute(ElfinderStorage elfinderStorage, HttpServletRequest request, JSONObject json) throws Exception {
         final String target = request.getParameter(ElFinderConstants.ELFINDER_PARAMETER_TARGET);
         final VolumeHandler vh = findTarget(elfinderStorage, target);
         final InputStream is = vh.openInputStream();
-        final String content = IOUtils.toString(is, ENCODING);
-        is.close();
-        json.put(ElFinderConstants.ELFINDER_PARAMETER_CONTENT, content);
+        if (vh.getMimeType().contains("image")) {
+            json.put(ElFinderConstants.ELFINDER_PARAMETER_CONTENT, ImageUtil.getImageStr(is, "image/jpeg"));
+        } else {
+            final String content = IOUtils.toString(is, ENCODING);
+            is.close();
+            json.put(ElFinderConstants.ELFINDER_PARAMETER_CONTENT, content);
+        }
     }
 }
