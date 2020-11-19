@@ -142,6 +142,7 @@
                     // Connector URL
                     url : '${_ctx }/elfinder/connector',
                     notifyDelay : 1000,
+                    height  : '100%',
 
                     // Callback when a file is double-clicked
                     getFileCallback : function(file) {
