@@ -40,7 +40,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.wayn</groupId>
-			<artifactId>crowdfounding-filemanager</artifactId>
+			<artifactId>crowdfounding-elfinder</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
