@@ -44,14 +44,15 @@ import java.io.InputStream;
 public class GetCommand extends AbstractJsonCommand implements ElfinderCommand {
 
     public static final String ENCODING = "UTF-8";
+    public static final String IMAGE_MIME_TYPE = "image";
 
     @Override
     protected void execute(ElfinderStorage elfinderStorage, HttpServletRequest request, JSONObject json) throws Exception {
         final String target = request.getParameter(ElFinderConstants.ELFINDER_PARAMETER_TARGET);
         final VolumeHandler vh = findTarget(elfinderStorage, target);
         final InputStream is = vh.openInputStream();
-        if (vh.getMimeType().contains("image")) {
-            json.put(ElFinderConstants.ELFINDER_PARAMETER_CONTENT, ImageUtil.getImageStr(is, "image/jpeg"));
+        if (vh.getMimeType().contains(IMAGE_MIME_TYPE)) {
+            json.put(ElFinderConstants.ELFINDER_PARAMETER_CONTENT, ImageUtil.getImageStr(is, vh.getMimeType()));
         } else {
             final String content = IOUtils.toString(is, ENCODING);
             is.close();
