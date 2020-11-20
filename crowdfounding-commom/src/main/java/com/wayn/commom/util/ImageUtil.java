@@ -1,5 +1,6 @@
 package com.wayn.commom.util;
 
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import java.io.File;
@@ -81,5 +82,11 @@ public class ImageUtil {
             }
         }
         return fileContentBase64;
+    }
+
+    public static byte[] decodeImageStr(String content) throws IOException {
+        BASE64Decoder decoder = new BASE64Decoder();
+        byte[] bytes = decoder.decodeBuffer(content);
+        return bytes;
     }
 }
