@@ -43,7 +43,7 @@
                         <br>基于stomp协议实现后台消息推送以及指定用户通信的功能
                         <br>整合elfinder文件管理
                         <br>整合quartz实现任务调度级任务日志记录
-                        <br>Encache/Redis作为权限缓存，可切换
+                        <br>Ehcache/Redis作为权限缓存，可切换
                         <br>Druid数据源,数据库监控
                         <br>使用H+作为后台管理模板，基于jsp模板改造
                         <br>如果你先找一个简单易学，代码风格良好，基于现有功能快速上手开发的话
@@ -88,11 +88,32 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v19">v1.9.0</a><code
+                                            class="pull-right">2020.11.23</code>
+                                    </h5>
+                                </div>
+                                <div id="v19" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            优化文件管理菜单
+                                        </div>
+                                        <ol>
+                                            <li>升级elfinder版本至2.1.57</li>
+                                            <li>修复文件管理首页树列表显示bug</li>
+                                            <li>修复文件管理put命令写入图片bug</li>
+                                            <li>修复文件管理get命令获取图片bug</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v18">v1.8.0</a><code
                                             class="pull-right">2020.9.17</code>
                                     </h5>
                                 </div>
-                                <div id="v18" class="panel-collapse collapse in">
+                                <div id="v18" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             添加登陆日志，系统参数管理
