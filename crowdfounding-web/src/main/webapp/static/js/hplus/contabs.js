@@ -249,7 +249,6 @@ $(function () {
     }
 
     function syncMenuTab(dataId) {
-        debugger
         if (isLinkage) {
             var $dataObj = $('a[href$="' + decodeURI(dataId) + '"]');
             if ($dataObj.length > 1) {
