@@ -23,7 +23,7 @@
 - <a href="http://wayn.xin" target="_blank">crowd-admin</a>
 
 ### Reference 
-- [AdminLTE-admin ](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
+- [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
 - [bootdo](https://gitee.com/lcg0124/bootdo)
 - [RuoYi](https://gitee.com/y_project/RuoYi)
 
