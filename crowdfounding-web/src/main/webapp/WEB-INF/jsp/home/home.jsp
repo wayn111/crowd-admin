@@ -11,8 +11,9 @@
           content="design by wayn">
     <%@ include file="/commom/taglib.jsp" %>
     <%@ include file="/commom/header.jsp" %>
-    <link href="${_ctx }/static/plugin/contextMenu/jquery.contextMenu.min.css" rel="stylesheet">
+    <link href="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.contextMenu.min.css" rel="stylesheet">
     <link href="${_ctx }/static/plugin/toastr/toastr.min.css" rel="stylesheet">
+    <link href="${_ctx }/static/plugin/metisMenu/metisMenu.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -125,7 +126,8 @@
                             <span class="label label-warning">{{total}}</span>通知
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
-                            <li v-for="row in rows" v-on:click="viewNotifyRecord(row.notifyRecordId)" class="m-t-xs wayn-m-t-xs">
+                            <li v-for="row in rows" v-on:click="viewNotifyRecord(row.notifyRecordId)"
+                                class="m-t-xs wayn-m-t-xs">
                                 <div class="dropdown-messages-box">
                                     <a class="pull-left">
                                         <i class="fa fa-paper-plane"></i>
@@ -154,7 +156,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="mt5">
-                                <a href="javascript:void(0);" class="noactive" onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')">
+                                <a href="javascript:void(0);" class="noactive"
+                                   onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')">
                                     <i class="fa fa-user"></i> 个人中心</a>
                             </li>
                             <li class="divider"></li>
@@ -214,8 +217,8 @@
 <script src="${_ctx }/static/plugin/fullscreen/jquery.fullscreen.js"></script>
 <script src="${_ctx }/static/plugin/metisMenu/jquery.metisMenu.js"></script>
 <script src="${_ctx }/static/plugin/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${_ctx }/static/plugin/contextMenu/jquery.contextMenu.min.js"></script>
-<script src="${_ctx }/static/plugin/contextMenu/jquery.ui.position.min.js"></script>
+<script src="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.contextMenu.min.js"></script>
+<script src="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.ui.position.min.js"></script>
 <script src="${_ctx }/static/js/hplus/hplus.js?v=4.1.0"></script>
 <script src="${_ctx }/static/js/hplus/contabs.js"></script>
 <script src="${_ctx }/static/plugin/vue-2.2.6/vue.min.js"></script>
