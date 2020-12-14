@@ -96,7 +96,6 @@
                     {
                         title: '序号',
                         align: 'center',
-                        width: 10,
                         formatter: function (value, row, index) {
                             return generatorTableSequence('#table1', index);
                         }
@@ -104,7 +103,6 @@
                     {
                         field: 'id', // 列字段名
                         title: '会话id', // 列标题
-                        width: '18%'
                     },
                     {
                         field: 'username',
