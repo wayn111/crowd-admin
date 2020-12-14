@@ -52,10 +52,10 @@
         <jsp-api.version>2.1</jsp-api.version>
         <jstl.version>1.2</jstl.version>
         <freemarker.version>2.3.28</freemarker.version>
-        <bitwalker.version>1.19</bitwalker.version>
+        <bitwalker.version>1.21</bitwalker.version>
         <jsoup.version>1.9.2</jsoup.version>
         <velocity.version>2.1</velocity.version>
-        <oshi.version>3.13.3</oshi.version>
+        <oshi.version>5.3.6</oshi.version>
         <thumbnailator.version>0.4.13</thumbnailator.version>
         <quartz.version>2.3.0</quartz.version>
         <java-image-scaling.version>0.8.6</java-image-scaling.version>
