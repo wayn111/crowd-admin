@@ -13,7 +13,6 @@
     <%@ include file="/commom/header.jsp" %>
     <link href="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.contextMenu.min.css" rel="stylesheet">
     <link href="${_ctx }/static/plugin/toastr/toastr.min.css" rel="stylesheet">
-    <link href="${_ctx }/static/plugin/metisMenu/metisMenu.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->

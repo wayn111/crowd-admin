@@ -171,7 +171,6 @@
                         {
                             field: 'jobState',
                             title: '执行状态',
-                            width: '5%',
                             sortable: true,
                             formatter: function (value, row, index) {
                                 if (value == '-1') {
@@ -183,7 +182,6 @@
                         },
                         {
                             field: 'createTime',
-                            width: '10%',
                             title: '创建时间',
                             sortable: true
                         },

@@ -1,9 +1,9 @@
 <link rel="shortcut icon" href="${_ctx }/static/img/favicon.ico">
 <link
-	href="${_ctx }/static/plugin/bootstrap-3.3.7-dist/css/bootstrap.min.css?v=3.3.7"
+	href="${_ctx }/static/plugin/bootstrap-v3.3.7/css/bootstrap.min.css?v=3.3.7"
 	rel="stylesheet">
 <link
-	href="${_ctx }/static/plugin/bootstrap-table/bootstrap-table.min.css"
+	href="${_ctx }/static/plugin/bootstrap-table-v1.18.0/bootstrap-table.min.css"
 	rel="stylesheet">
 <link href="${_ctx }/static/plugin/layer/skin/layer.css"
 	rel="stylesheet">
@@ -26,6 +26,6 @@
 	rel="stylesheet">
 <link
 		href="${_ctx }/static/plugin/iCheck/custom.css" rel="stylesheet">
-<link href="${_ctx }/static/plugin/summernote/summernote.css" rel="stylesheet">
+<link href="${_ctx }/static/plugin/summernote/summernote.min.css" rel="stylesheet">
 <link href="${_ctx }/static/css/style.css?v=4.0" rel="stylesheet">
 

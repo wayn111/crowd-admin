@@ -210,7 +210,6 @@
                         {
                             field: 'jobState',
                             title: '状态',
-                            width: '5%',
                             sortable: true,
                             formatter: function (value, row, index) {
                                 return stateTools(row);
@@ -218,7 +217,6 @@
                         },
                         {
                             field: 'createBy',
-                            width: '5%',
                             title: '发布人'
                         },
                         {
@@ -227,7 +225,6 @@
                         },
                         {
                             field: 'createTime',
-                            width: '10%',
                             title: '创建时间',
                             sortable: true
                         },
