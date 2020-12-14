@@ -256,7 +256,6 @@
                     {
                         field: 'createTime',
                         title: '创建时间',
-                        width: '10%',
                         sortable: true
                     },
                     {
@@ -266,7 +265,6 @@
                     {
                         field: 'remarks',
                         title: '角色备注',
-                        width: '15%'
                     },
                     {
                         title: '操作',

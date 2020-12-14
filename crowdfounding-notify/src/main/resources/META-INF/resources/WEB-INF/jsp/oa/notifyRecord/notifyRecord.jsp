@@ -149,7 +149,6 @@
                         {
                             title: '序号',
                             align: 'center',
-                            width: 20,
                             formatter: function (value, row, index) {
                                 //return index + 1;
                                 var pageSize = $('#table1').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
@@ -167,7 +166,6 @@
                         }, {
                             field: 'type', // 列字段名
                             title: '通知类型', // 列标题
-                            width: '5%',
                             formatter: function (value, row, index) {
                                 if (value == 2) {
                                     return '通知';
@@ -178,7 +176,6 @@
                         }, {
                             field: 'read',
                             title: '状态',
-                            width: '5%',
                             formatter: function (value, row, index) {
                                 if (value) {
                                     return '<span class="badge badge-primary">已读</span>';
@@ -189,30 +186,25 @@
                         },
                         {
                             field: 'createBy',
-                            width: '5%',
                             title: '发布人'
                         },
                         {
                             field: 'createTime',
-                            width: '10%',
                             title: '创建时间',
                             sortable: true
                         },
                         {
                             field: 'updateBy',
-                            width: '5%',
                             title: '修改人'
                         },
                         {
                             field: 'updateTime',
-                            width: '10%',
                             title: '修改时间',
                             sortable: true
                         },
                         {
                             title: '操作',
                             field: 'id',
-                            width: '10%',
                             align: 'center',
                             formatter: function (value, row, index) {
                                 var e = '<a  class="btn btn-primary btn-sm ' + s_view_h

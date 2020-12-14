@@ -128,7 +128,6 @@
                     },
                     {
                         field: 'id',
-                        width: '5%',
                         title: '字典主键'
                     },
                     {
@@ -139,7 +138,7 @@
                         field: 'value',
                         title: '字典类型',
                         formatter: function (value, row, index) {
-                            return '<a href="#" onclick="dictData(\'' + row.value + '\')">'+row.value+'</a>';
+                            return '<a href="#" onclick="dictData(\'' + row.value + '\')">' + row.value + '</a>';
                         }
                     }, {
                         field: 'dictState',
@@ -155,17 +154,14 @@
                     {
                         field: 'sort',
                         title: '字典排序',
-                        width: '8%',
                         sortable: true
                     },
                     {
                         field: 'remarks',
                         title: '描述',
-                        width: '15%'
                     },
                     {
                         title: '字典数据',
-                        width: '8%',
                         formatter: function (value, row, index) {
                             return '<button type="button" class="btn btn-sm btn-info" onclick="dictData(\'' + row.value + '\')">' +
                                 '<i class="fa fa-server" aria-hidden="true"></i>列表</button>';
@@ -174,12 +170,10 @@
                     {
                         field: 'createTime',
                         title: '创建时间',
-                        width: '10%',
                         sortable: true
                     },
                     {
                         title: '操作',
-                        width: '15%',
                         align: 'center',
                         formatter: function (value, row, index) {
                             var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h

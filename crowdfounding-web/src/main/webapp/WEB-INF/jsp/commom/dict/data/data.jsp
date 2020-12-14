@@ -131,7 +131,6 @@
                     },
                     {
                         field: 'id',
-                        width: '5%',
                         title: '字典主键'
                     },
                     {
@@ -163,12 +162,10 @@
                     },
                     {
                         field: 'remarks',
-                        title: '描述',
-                        width: '15%'
+                        title: '描述'
                     },
                     {
                         title: '操作',
-                        width: '15%',
                         align: 'center',
                         formatter: function (value, row, index) {
                             var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h

@@ -133,7 +133,6 @@
                         {
                             title: '序号',
                             align: 'center',
-                            width: 20,
                             formatter: function (value, row, index) {
                                 //return index + 1;
                                 var pageSize = $('#table1').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条

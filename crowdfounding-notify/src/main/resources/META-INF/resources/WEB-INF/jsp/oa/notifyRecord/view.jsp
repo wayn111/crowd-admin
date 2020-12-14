@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>crowd-admin 通知页面</title>
     <%@ include file="/commom/taglib.jsp" %>
-    <link href="${_ctx }/static/plugin/bootstrap-3.3.7-dist/css/bootstrap.min.css?v=3.3.7"
+    <link href="${_ctx }/static/plugin/bootstrap-v3.3.7/css/bootstrap.min.css?v=3.3.7"
           rel="stylesheet">
     <link href="${_ctx }/static/css/font-awesome.css?v=4.7.0" rel="stylesheet">
     <link href="${_ctx }/static/css/animate.css" rel="stylesheet">
@@ -43,9 +43,9 @@
     </div>
 
 </div>
-<script src="${_ctx }/static/plugin/jquery/jquery-2.2.4.js"></script>
+<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
 <script
-        src="${_ctx }/static/plugin/bootstrap-3.3.7-dist/js/bootstrap.min.js?v=3.3.7"></script>
+        src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
 <script src="${_ctx }/static/js/hplus/content.js"></script>
 </body>
 <!-- Mirrored from www.zi-han.net/theme/hplus/article.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->

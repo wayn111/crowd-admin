@@ -180,12 +180,10 @@
                 columns: [
                     {
                         checkbox: true,
-                        width: '4%',
                     },
                     {
                         title: '序号',
                         align: 'center',
-                        width: 10,
                         formatter: function (value, row, index) {
                             return generatorTableSequence('#exampleTable', index);
                         }
@@ -242,7 +240,6 @@
                     },
                     {
                         title: '操作',
-                        field: 'userId',
                         align: 'center',
                         formatter: function (value, row, index) {
                             var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h
