@@ -1,17 +1,17 @@
 /**
- * jQuery contextMenu v2.9.0 - Plugin for simple contextMenu handling
+ * jQuery contextMenu v2.9.2 - Plugin for simple contextMenu handling
  *
- * Version: v2.9.0
+ * Version: v2.9.2
  *
  * Authors: Björn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
  * Web: http://swisnl.github.io/jQuery-contextMenu/
  *
- * Copyright (c) 2011-2019 SWIS BV and contributors
+ * Copyright (c) 2011-2020 SWIS BV and contributors
  *
  * Licensed under
  *   MIT License http://www.opensource.org/licenses/mit-license
  *
- * Date: 2019-10-13T13:09:56.900Z
+ * Date: 2020-05-13T13:55:36.983Z
  */
 
 // jscs:disable
@@ -461,7 +461,7 @@
 
                         // also need to try and focus this element if we're in a contenteditable area,
                         // as the layer will prevent the browser mouse action we want
-                        if (target.isContentEditable) {
+                        if (target !== null && target.isContentEditable) {
                             var range = document.createRange(),
                                 sel = window.getSelection();
                             range.selectNode(target);
@@ -1505,7 +1505,7 @@
                         width: $win.width(),
                         display: 'block',
                         position: 'fixed',
-                        'z-index': zIndex,
+                        'z-index': zIndex - 1,
                         top: 0,
                         left: 0,
                         opacity: 0,
@@ -1513,7 +1513,7 @@
                         'background-color': '#000'
                     })
                     .data('contextMenuRoot', opt)
-                    .insertBefore(this)
+                    .appendTo(document.body)
                     .on('contextmenu', handle.abortevent)
                     .on('mousedown', handle.layerClick);
 

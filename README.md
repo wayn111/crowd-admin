@@ -32,7 +32,7 @@
     - 持久层框架：Mybatis-Plus
     - 日志管理：SLF4J > logback
     - 缓存控制：Ehcache/Redis可切换
-    - 环境控制：使用spring profile可根据`System/JVM`参数灵活切换配置文件
+    - 环境控制：使用spring profile可根据`-Dspring.profiles.active=dev`参数灵活切换配置文件
 2. 前端
     - 模板选型：Jsp
     - 管理模板：H+
@@ -47,7 +47,8 @@
 3. 开发平台
     - JDK版本：1.8+
     - Maven：3.5+
-    - 数据库：mysql5+
+    - 数据库：mysql8+
+    - 缓存：ehcache/redis
     - ide：Eclipse/Idea
 
 ### 内置模块
@@ -64,7 +65,7 @@
     - 通知管理：管理员发送并管理通知消息
 4. 基础管理
     - 数据字典：对系统中经常使用的一些较为固定的数据进行维护
-    - 文件管理：方便管理查看系统内上传文件
+    - 文件管理：集成elfinder，便于对系统内文件进行查看修改
 5. 系统工具
     - 代码生成：可动态根据数据库表，生成后台java代码
     - 任务调度：根据调度策略以及执行目标配置任务调度
