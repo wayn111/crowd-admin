@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <%@ include file="/commom/taglib.jsp" %>
 <%@ include file="/commom/header.jsp" %>
+<link href="${_ctx }/static/plugin/summernote/summernote.min.css" rel="stylesheet">
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInDown">
     <div class="row">
@@ -81,6 +82,8 @@
 
 </div>
 <%@ include file="/commom/footer.jsp" %>
+<script src="${_ctx }/static/plugin/summernote/summernote.min.js"></script>
+<script src="${_ctx }/static/plugin/summernote/lang/summernote-zh-CN.js"></script>
 <script>
     var prefix = _ctx + "/oa/notify";
 

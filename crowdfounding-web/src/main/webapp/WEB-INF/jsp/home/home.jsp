@@ -211,7 +211,12 @@
     </div>
     <!--右侧部分结束-->
 </div>
-<%@ include file="/commom/footer.jsp" %>
+<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
+<script src="${_ctx }/static/plugin/validate/jquery.validate.min.js?v=1.13"></script>
+<script src="${_ctx }/static/plugin/validate/messages_zh.min.js"></script>
+<script src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
+<script src="${_ctx }/static/plugin/layer/layer.min.js"></script>
+<script src="${_ctx }/static/js/common/common-ui.js"></script>
 <script src="${_ctx }/static/plugin/pace/pace.min.js"></script>
 <script src="${_ctx }/static/plugin/fullscreen/jquery.fullscreen.js"></script>
 <script src="${_ctx }/static/plugin/metisMenu/jquery.metisMenu.js"></script>

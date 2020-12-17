@@ -26,14 +26,14 @@ public class PoiTest {
         user.setPhone("1332342");
         user.setEmail("1332342@qq.com");
         user.setRemarks("wayn");
-        user.setUserImg("E:/wayn/upload/avatar/2020/01/11/eb083d2dcfdc194b32891db53668d08f.png");
+        user.setUserImg("/opt/wayn/upload/avatar/2020/01/11/eb083d2dcfdc194b32891db53668d08f.png");
         user.setCreateTime(new Date());
         User user1 = new User();
         user1.setUserName("张三");
         user1.setUserState(1);
         user1.setPhone("332134");
         user1.setEmail("1332342@qq.com");
-        user1.setUserImg("E:/wayn/upload/avatar/2020/01/05/d3607ba554729fba72f7da784456aafc.png");
+        user1.setUserImg("/opt/wayn/upload/avatar/2020/01/05/d3607ba554729fba72f7da784456aafc.png");
         user1.setCreateTime(new Date());
         user1.setRemarks("wayn");
 

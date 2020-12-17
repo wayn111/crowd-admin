@@ -8,7 +8,6 @@
     <meta name="description"
           content="design by wayn">
     <%@ include file="/commom/taglib.jsp" %>
-    <%@ include file="/commom/header.jsp" %>
     <!-- Section CSS -->
     <!-- jQuery UI (REQUIRED) -->
     <link rel="stylesheet" href="${_ctx }/static/plugin/elfinder/jquery/jquery-ui-1.12.0.css" type="text/css">
@@ -30,8 +29,8 @@
 
     <!-- Section JavaScript -->
     <!-- jQuery and jQuery UI (REQUIRED) -->
-    <script src="${_ctx }/static/plugin/elfinder/jquery/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
-    <script src="${_ctx }/static/plugin/elfinder/jquery/jquery-ui-1.12.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${_ctx }/static/plugin/elfinder/jquery/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${_ctx }/static/plugin/elfinder/jquery/jquery-ui-1.12.0.min.js" type="text/javascript" charset="utf-8"></script>
 
     <!-- elfinder core -->
     <script src="${_ctx }/static/plugin/elfinder/js/elFinder.js"></script>
