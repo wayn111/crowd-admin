@@ -53,7 +53,7 @@
                     <h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
                     <ul>
                         <li>
-                            <a href="https://gitee.com/wayn111/crowd-admin" target="_blank">${sysName } 码云</a>
+                            <a href="https://gitee.com/wayn111/crowdfounding" target="_blank">${sysName } 码云</a>
                         </li>
                         <li>
                             <a href="https://github.com/wayn111/crowd-admin" target="_blank">${sysName } github</a>
@@ -305,8 +305,20 @@
         </div>
     </div>
 </div>
-<%@ include file="/commom/footer.jsp" %>
-<script src="${_ctx }/static/plugin/jquery-ui/jquery-ui.min.js"></script>
+<%--<%@ include file="/commom/footer.jsp" %>--%>
+<a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
+<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
+<script src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
+<script src="${_ctx }/static/js/common/common-ui.js"></script>
+<script>
+    $(function () {
+        // 回到顶部绑定
+        if ($.fn.toTop !== undefined) {
+            $('#scroll-up').toTop();
+        }
+    })
+</script>
+<%--<script src="${_ctx }/static/plugin/jquery-ui/jquery-ui.min.js"></script>--%>
 <%--<script src="${_ctx }/static/js/hplus/content.js"></script>--%>
 </body>
 </html>
