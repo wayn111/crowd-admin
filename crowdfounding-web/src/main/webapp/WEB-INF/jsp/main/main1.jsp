@@ -88,11 +88,34 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v20">v2.0.0</a><code
+                                            class="pull-right">2020.12.17</code>
+                                    </h5>
+                                </div>
+                                <div id="v20" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            优化前端资源,升级前端插件,性能优化,修复bug
+                                        </div>
+                                        <ol>
+                                            <li>升级bootstrap-table版本至1.18.0</li>
+                                            <li>升级metisMenu版本至3.0.6</li>
+                                            <li>升级contextMenu版本至2.9.2</li>
+                                            <li>升级summernote版本至0.8.18</li>
+                                            <li>升级toastr版本</li>
+                                            <li>修复登陆页面登陆bug</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v19">v1.9.0</a><code
                                             class="pull-right">2020.11.23</code>
                                     </h5>
                                 </div>
-                                <div id="v19" class="panel-collapse collapse in">
+                                <div id="v19" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             优化文件管理菜单
