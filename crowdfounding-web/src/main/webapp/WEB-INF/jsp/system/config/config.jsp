@@ -234,12 +234,9 @@
                         // 列表中显示复选框
                     },
                     {
+                        field: 'configId',
                         title: '序号',
-                        align: 'center',
-                        width: 10,
-                        formatter: function (value, row, index) {
-                            return generatorTableSequence('#table1', index);
-                        }
+                        align: 'center'
                     },
                     {
                         field: 'configName',
@@ -271,13 +268,11 @@
                     {
                         field: 'createTime',
                         title: '创建时间',
-                        width: '10%',
                         sortable: true
                     },
                     {
                         field: 'remarks',
                         title: '参数备注',
-                        width: '10%',
                         formatter: function (value, row, index) {
                             return toolTip(value, row, index);
                         }
