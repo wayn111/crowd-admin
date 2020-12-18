@@ -20,7 +20,7 @@
 - [crowd-admin git](https://github.com/wayn111/crowdfounding)
 
 ### Online demo
-- <a href="http://wayn.xin" target="_blank">crowd-admin</a>
+- <a href="http://wayn.xin/crowd" target="_blank">crowd-admin</a>
 
 ### Reference 
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
@@ -34,15 +34,15 @@ __Login__
 ![Login](./crowdfounding-web/crowdfounding-img/系统登陆.png "系统登陆.png")
 __Home__
 ![Home](./crowdfounding-web/crowdfounding-img/首页.png "首页.png")
-__userManager__
-![userManager](./crowdfounding-web/crowdfounding-img/用户管理.png "用户管理.png")
-__addRole__
-![addRole](./crowdfounding-web/crowdfounding-img/添加角色.png "添加角色.png")
-__menuManager__
-![menuManager](./crowdfounding-web/crowdfounding-img/菜单管理.png "菜单管理.png")
-__notifyManager__
-![notifyManager](./crowdfounding-web/crowdfounding-img/通知管理.png "通知管理.png")
-__notifyView__
-![notifyView](./crowdfounding-web/crowdfounding-img/查看通知.png "查看通知.png")
-__dictManager__
-![dictManager](./crowdfounding-web/crowdfounding-img/字典管理.png "字典管理.png")
+__user manager__
+![user manager](./crowdfounding-web/crowdfounding-img/用户管理.png "用户管理.png")
+__menu manager__
+![menu manager](./crowdfounding-web/crowdfounding-img/菜单管理.png "菜单管理.png")
+__notify manager__
+![view notification](./crowdfounding-web/crowdfounding-img/通知管理.png "通知管理.png")
+__view notification__
+![file manager](./crowdfounding-web/crowdfounding-img/查看通知.png "查看通知.png")
+__file manager__
+![file manager](./crowdfounding-web/crowdfounding-img/文件管理.png "文件管理.png")
+__system server__
+![system server](./crowdfounding-web/crowdfounding-img/系统服务.jpg "系统服务.jpg")

@@ -4,7 +4,7 @@
 - [简体中文](README.md)|[English](README_en.md)
 
 ### 项目介绍
-基于Spring,Shiro,Redis,Mybatis的通用后台权限管理系统，并且集成了rbac权限管理，后台消息推送，邮件发送，任务调度，代码生成，elfinder文件管理等常用功能，易于上手，学习，使用二次开发。
+crowd-admin是一个通用后台权限管理系统，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
 
 #### 主要特性
 - 项目按功能模块化，提升开发，测试效率
@@ -99,16 +99,16 @@ __首页__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/首页.png "首页.png")
 __用户管理__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/用户管理.png "用户管理.png")
-__添加角色__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/添加角色.png "添加角色.png")
 __菜单管理__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/菜单管理.png "菜单管理.png")
 __通知管理__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/通知管理.png "通知管理.png")
 __查看通知__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/查看通知.png "查看通知.png")
-__字典管理__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/字典管理.png "字典管理.png")
+__文件管理__
+![输入图片说明](./crowdfounding-web/crowdfounding-img/文件管理.png "文件管理.png")
+__系统服务__
+![输入图片说明](./crowdfounding-web/crowdfounding-img/系统服务.jpg "系统服务.jpg")
 
 ### 特别赞助
 <a href="https://www.jetbrains.com/" target="_blank">
