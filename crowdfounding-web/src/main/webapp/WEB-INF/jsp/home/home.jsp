@@ -149,6 +149,24 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-hover="dropdown" data-delay="0"
+                           data-toggle="dropdown" href="https://github.com/wayn111/crowd-admin">
+                            源码
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="mt5">
+                                <a href="http://github.com/wayn111/crowd-admin">
+                                    <i class="fa fa-github"></i> github</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href=http://gitee.com/wayn111/crowdfounding>
+                                    <i class="fa fa-gg"></i> gitee
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="dropdown user-menu">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown" data-delay="0">
                             <span class="hidden-xs">${user.nickName}</span>
