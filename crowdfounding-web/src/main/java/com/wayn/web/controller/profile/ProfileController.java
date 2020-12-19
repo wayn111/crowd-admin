@@ -15,6 +15,7 @@ import com.wayn.commom.util.ProperUtil;
 import com.wayn.commom.util.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -107,6 +108,7 @@ public class ProfileController extends BaseControlller {
     }
 
     @ResponseBody
+    @RequiresPermissions("sys:user:resetPwd")
     @PostMapping("userResetPwd")
     public Response userResetPwd(UserResetPasswordVO userResetPasswordVO) {
         String password = ShiroUtil.md5encrypt(userResetPasswordVO.getNewPassword(), userService.selectById(getCurUserId()).getUserName());
