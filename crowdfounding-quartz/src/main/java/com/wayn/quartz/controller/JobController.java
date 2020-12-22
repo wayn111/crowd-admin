@@ -118,7 +118,7 @@ public class JobController extends BaseControlller {
     @PostMapping("/run/{id}")
     public Response run(ModelMap modelMap, @PathVariable("id") Long id) throws SchedulerException {
         jobService.run(id);
-        return Response.success("删除成功");
+        return Response.success("执行成功");
     }
 
     /**

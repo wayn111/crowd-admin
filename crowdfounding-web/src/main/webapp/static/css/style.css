@@ -3183,7 +3183,7 @@ video {
 }
 
 .wrapper-content {
-    padding: 10px 20px;
+    padding: 2px 10px;
 }
 
 #page-wrapper {
@@ -3270,7 +3270,7 @@ body.body-small .footer.fixed {
 /*CONTENTTABS*/
 .content-tabs {
     position: relative;
-    height: 42px;
+    height: 41px;
     background: #fafafa;
     line-height: 40px;
 }
