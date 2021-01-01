@@ -121,7 +121,7 @@
                         <!-- 无边框 -->
                         <prop key="kaptcha.border">no</prop>
                         <!--文本集合，验证码值从此集合中获取-->
-                        <prop key="kaptcha.textproducer.char.string">abc123457890qwezxc</prop>
+                        <prop key="kaptcha.textproducer.char.string">123457890</prop>
                         <prop key="kaptcha.textproducer.font.color">blue</prop>
                         <!-- 渲染效果：水纹：WaterRipple；鱼眼：FishEyeGimpy；阴影：ShadowGimpy -->
                         <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
