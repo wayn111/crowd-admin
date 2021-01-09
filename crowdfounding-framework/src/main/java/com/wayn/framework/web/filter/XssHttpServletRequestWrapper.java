@@ -1,7 +1,6 @@
 package com.wayn.framework.web.filter;
 
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+import com.wayn.commom.util.JsoupUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -22,7 +21,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
             String[] escapseValues = new String[length];
             for (int i = 0; i < length; i++) {
                 // 防xss攻击和过滤前后空格
-                escapseValues[i] = Jsoup.clean(values[i], Whitelist.relaxed()).trim();
+                escapseValues[i] = JsoupUtil.clean(values[i]).trim();
             }
             return escapseValues;
         }

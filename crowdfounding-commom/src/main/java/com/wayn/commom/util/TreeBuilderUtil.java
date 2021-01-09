@@ -2,7 +2,10 @@ package com.wayn.commom.util;
 
 import com.wayn.commom.domain.vo.Tree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ztree所需json数据返回帮助类
