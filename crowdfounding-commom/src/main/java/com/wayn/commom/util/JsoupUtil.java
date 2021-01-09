@@ -4,12 +4,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
  * xss非法标签过滤
  * {@link http://www.jianshu.com/p/32abc12a175a?nomobile=yes}
+ *
  * @author yangwenkui
  * @version v2.0
  * @time 2017年4月27日 下午5:47:09
@@ -39,15 +39,15 @@ public class JsoupUtil {
         return Jsoup.clean(content, "", whitelist, outputSettings);
     }
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws IOException {
         String text = "<p><br></p><table class=\"table table-bordered" +
                 "\"><tbody><tr><td>11</td><td>2</td><td>3</td></tr></tbody></table><p>123</p><table class=\"table table-bordered" +
                 "\"><tbody><tr><td>123</td></tr></tbody></table><p><br></p>";
         System.out.println(clean(text));
 
-		System.out.println("------------------------");
+        System.out.println("------------------------");
         System.out.println(Jsoup.clean(text, Whitelist.relaxed()).trim());
 
-	}
+    }
 
 }
