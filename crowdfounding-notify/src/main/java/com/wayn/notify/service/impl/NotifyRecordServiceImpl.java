@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.util.DateUtils;
-import com.wayn.commom.util.FileUtils;
+import com.wayn.commom.util.ServletUtil;
 import com.wayn.notify.dao.NotifyRecordDao;
 import com.wayn.notify.domain.NotifyRecord;
 import com.wayn.notify.domain.NotifyRecordTip;
@@ -84,17 +84,11 @@ public class NotifyRecordServiceImpl extends ServiceImpl<NotifyRecordDao, Notify
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                NotifyRecordVO.class, notifyRecordVOS);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, NotifyRecordVO.class, notifyRecordVOS);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("multipart/form-data");
-        response.setHeader("Content-Length", bos.size() + "");
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "我的通知列表.xls"));
-        response.setContentType("application/octet-stream;charset=UTF-8");
+        ServletUtil.setExportResponse(request, response, "我的通知列表.xls", bos.size());
         //保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);

@@ -7,11 +7,9 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.dao.ConfigDao;
 import com.wayn.commom.domain.Config;
-import com.wayn.commom.domain.User;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.ConfigService;
-import com.wayn.commom.util.FileUtils;
-import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.ServletUtil;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,17 +83,11 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                Config.class, configs);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, Config.class, configs);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("multipart/form-data");
-        response.setHeader("Content-Length", bos.size() + "");
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "用户列表.xls"));
-        response.setContentType("application/octet-stream;charset=UTF-8");
+        ServletUtil.setExportResponse(request, response, "参数配置.xls", bos.size());
         //保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);

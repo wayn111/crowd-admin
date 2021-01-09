@@ -17,8 +17,8 @@ import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.shiro.util.ShiroUtil;
-import com.wayn.commom.util.FileUtils;
 import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.ServletUtil;
 import com.wayn.commom.util.TreeBuilderUtil;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -245,18 +245,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
         List<User> list = selectList(wrapper);
         list.forEach(item -> item.setUserImg(uploadDir + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6)));
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                User.class, list);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, User.class, list);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("multipart/form-data");
-        response.setHeader("Content-Length", bos.size() + "");
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "用户列表.xls"));
-        response.setContentType("application/octet-stream;charset=UTF-8");
-        //保存数据
+        ServletUtil.setExportResponse(request, response, "用户列表.xls", bos.size());
+        // 保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);
         workbook.close();

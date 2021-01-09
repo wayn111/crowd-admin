@@ -5,7 +5,7 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
-import com.wayn.commom.util.FileUtils;
+import com.wayn.commom.util.ServletUtil;
 import com.wayn.quartz.dao.JobLogDao;
 import com.wayn.quartz.domain.JobLog;
 import com.wayn.quartz.service.JobLogService;
@@ -70,17 +70,11 @@ public class JobLogServiceImpl extends ServiceImpl<JobLogDao, JobLog> implements
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                JobLog.class, jobLogs);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, JobLog.class, jobLogs);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("multipart/form-data");
-        response.setHeader("Content-Length", bos.size() + "");
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "任务日志.xls"));
-        response.setContentType("application/octet-stream;charset=UTF-8");
+        ServletUtil.setExportResponse(request, response, "任务日志列表.xls", bos.size());
         //保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);

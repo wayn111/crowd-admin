@@ -1,6 +1,6 @@
 package com.wayn.framework.web.interceptor.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.wayn.framework.web.interceptor.PreventRepeatSubmitInterceptor;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +38,7 @@ public class SameUrlDataInterceptor extends PreventRepeatSubmitInterceptor {
     @Override
     public boolean isRepeatSubmit(HttpServletRequest request) {
         // 本次参数及系统时间
-        String nowParams = new JSONObject().toJSONString(request.getParameterMap());
+        String nowParams = JSON.toJSONString(request.getParameterMap());
         Map<String, Object> nowDataMap = new HashMap<>();
         nowDataMap.put(REPEAT_PARAMS, nowParams);
         nowDataMap.put(REPEAT_TIME, System.currentTimeMillis());
@@ -78,6 +78,6 @@ public class SameUrlDataInterceptor extends PreventRepeatSubmitInterceptor {
     private boolean compareTime(Map<String, Object> nowMap, Map<String, Object> preMap) {
         long time1 = (Long) nowMap.get(REPEAT_TIME);
         long time2 = (Long) preMap.get(REPEAT_TIME);
-        return (time1 - time2) < (this.intervalTime * 1000);
+        return (time1 - time2) < (this.intervalTime * 1000L);
     }
 }

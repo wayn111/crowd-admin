@@ -16,8 +16,8 @@ import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.service.RoleService;
 import com.wayn.commom.service.UserRoleService;
-import com.wayn.commom.util.FileUtils;
 import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.ServletUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -77,17 +77,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
         List<Role> list = selectList(wrapper);
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                Role.class, list);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, Role.class, list);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("multipart/form-data");
-        response.setHeader("Content-Length", bos.size() + "");
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "角色列表.xls"));
-        response.setContentType("application/octet-stream;charset=UTF-8");
+        ServletUtil.setExportResponse(request, response, "角色列表.xls", bos.size());
         //保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);

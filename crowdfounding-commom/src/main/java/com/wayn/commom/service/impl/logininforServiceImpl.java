@@ -11,7 +11,10 @@ import com.wayn.commom.domain.Logininfor;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.shiro.util.ShiroUtil;
-import com.wayn.commom.util.*;
+import com.wayn.commom.util.IP2RegionUtil;
+import com.wayn.commom.util.LogUtils;
+import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.ServletUtil;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -98,17 +101,11 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                Logininfor.class, list);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, Logininfor.class, list);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("multipart/form-data");
-        response.setHeader("Content-Length", bos.size() + "");
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "日志列表.xls"));
-        response.setContentType("application/octet-stream;charset=UTF-8");
+        ServletUtil.setExportResponse(request, response, "日志列表.xls", bos.size());
         //保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);

@@ -12,6 +12,7 @@ import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.LogService;
 import com.wayn.commom.util.FileUtils;
 import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.ServletUtil;
 import com.wayn.commom.util.UserAgentUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -75,17 +76,11 @@ public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogS
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                OperLog.class, list);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, OperLog.class, list);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("multipart/form-data");
-        response.setHeader("Content-Length", bos.size() + "");
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, "日志列表.xls"));
-        response.setContentType("application/octet-stream;charset=UTF-8");
+        ServletUtil.setExportResponse(request, response, "日志列表.xls", bos.size());
         //保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);
