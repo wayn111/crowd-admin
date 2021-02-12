@@ -1,6 +1,6 @@
 package com.wayn.framework.config;
 
-import com.wayn.commom.constant.Constant;
+import com.wayn.commom.constant.Constants;
 import com.wayn.framework.redis.RedisOpts;
 import com.wayn.framework.shiro.cache.RedisCacheManager;
 import com.wayn.framework.shiro.credentials.MyCredentialsMatcher;
@@ -134,9 +134,9 @@ public class ShiroConfig {
         // 记住我
         securityManager.setRememberMeManager(rememberMeManager());
         // 自定义缓存实现 使用redis
-        if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
+        if (Constants.CACHE_TYPE_REDIS.equals(cacheType)) {
             securityManager.setCacheManager(rediscacheManager());
-        } else if (Constant.CACHE_TYPE_EACHACEH.equals(cacheType)) {
+        } else if (Constants.CACHE_TYPE_EACHACEH.equals(cacheType)) {
             securityManager.setCacheManager(shiroEhCacheManager());
         }
         // session管理器
@@ -242,7 +242,7 @@ public class ShiroConfig {
 
     @Bean
     public SessionDAO sessionDAO() {
-        if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
+        if (Constants.CACHE_TYPE_REDIS.equals(cacheType)) {
             return redisSessionDAO();
         } else {
             return ehCacheSessionDAO();

@@ -1,7 +1,7 @@
 package com.wayn.web.controller.system;
 
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Menu;
 import com.wayn.commom.domain.vo.MenuVO;
 import com.wayn.commom.domain.vo.Tree;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/system/menu")
-public class MenuController extends BaseControlller {
+public class MenuController extends BaseController {
     private static final String PREFIX = "system/menu";
     @Autowired
     private MenuService menuService;
@@ -50,7 +50,7 @@ public class MenuController extends BaseControlller {
         if (pid == 0) {
             model.addAttribute("pName", "顶级节点");
         } else {
-            model.addAttribute("pName", menuService.selectById(pid).getMenuName());
+            model.addAttribute("pName", menuService.getById(pid).getMenuName());
         }
         return PREFIX + "/add";
     }
@@ -58,7 +58,7 @@ public class MenuController extends BaseControlller {
     @RequiresPermissions("sys:menu:edit")
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
-        Menu menu = menuService.selectById(id);
+        Menu menu = menuService.getById(id);
         model.addAttribute("menuTypes", dictService.selectDictsValueByType("menuType"));
         model.addAttribute("menu", menu);
         model.addAttribute("pid", menu.getPid());
@@ -66,7 +66,7 @@ public class MenuController extends BaseControlller {
         if (menu.getPid() == 0) {
             pName = "顶级节点";
         } else {
-            pName = menuService.selectById(menu.getPid()).getMenuName();
+            pName = menuService.getById(menu.getPid()).getMenuName();
         }
         model.addAttribute("pName", pName);
         return PREFIX + "/edit";

@@ -1,8 +1,8 @@
 package com.wayn.commom.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.Tree;

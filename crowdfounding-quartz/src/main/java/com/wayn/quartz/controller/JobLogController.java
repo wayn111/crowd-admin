@@ -1,7 +1,7 @@
 package com.wayn.quartz.controller;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.wayn.commom.base.BaseControlller;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
 import com.wayn.quartz.domain.JobLog;
@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @RequestMapping("/quartz/jobLog")
 @Controller
-public class JobLogController extends BaseControlller {
+public class JobLogController extends BaseController {
 
     private static final String PREFIX = "quartz/jobLog";
 

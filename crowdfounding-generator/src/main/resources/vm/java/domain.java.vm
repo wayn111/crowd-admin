@@ -34,7 +34,7 @@ public class ${className} extends BusinessEntity {
     /** $column.columnComment */
     #if($column.attrname == $primaryKey.attrname)
     #if($primaryKey.attrType == 'String')
-    @TableId(type = IdType.UUID)
+    @TableId(type = IdType.ASSIGN_UUID)
     #else
     @TableId(type = IdType.AUTO)
     #end

@@ -1,9 +1,9 @@
 package com.wayn.commom.service;
 
-import java.util.Set;
-
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.RoleMenu;
+
+import java.util.Set;
 
 /**
  * <p>
@@ -16,5 +16,5 @@ import com.wayn.commom.domain.RoleMenu;
 public interface RoleMenuService extends IService<RoleMenu> {
 
 	Set<String> findMenusByUid(String id);
-	
-}	
+
+}

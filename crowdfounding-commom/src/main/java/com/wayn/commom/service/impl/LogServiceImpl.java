@@ -2,21 +2,21 @@ package com.wayn.commom.service.impl;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.LogDao;
 import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.LogService;
-import com.wayn.commom.util.FileUtils;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.ServletUtil;
 import com.wayn.commom.util.UserAgentUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,16 +47,19 @@ public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogS
         }
     }
 
+    @Autowired
+    private LogDao logDao;
+
     @Override
     public Page<OperLog> listPage(Page<OperLog> page, OperLog log) {
-        EntityWrapper<OperLog> wrapper = ParameterUtil.get();
+        QueryWrapper<OperLog> wrapper = ParameterUtil.get();
         wrapper.like("userName", log.getUserName());
         wrapper.like("moduleName", log.getModuleName());
         wrapper.like("ip", log.getIp());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
         wrapper.eq(log.getOperState() != null, "operState", log.getOperState());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
-        Page<OperLog> logPage = selectPage(page, wrapper);
+        Page<OperLog> logPage = logDao.selectPage(page, wrapper);
         for (OperLog record : logPage.getRecords()) {
             record.setOperation(map.get(record.getOperation()));
         }
@@ -65,14 +68,14 @@ public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogS
 
     @Override
     public void export(OperLog log, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        EntityWrapper<OperLog> wrapper = ParameterUtil.get();
+        QueryWrapper<OperLog> wrapper = ParameterUtil.get();
         wrapper.like("userName", log.getUserName());
         wrapper.like("moduleName", log.getModuleName());
         wrapper.like("ip", log.getIp());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
         wrapper.eq(log.getOperState() != null, "operState", log.getOperState());
         wrapper.eq(StringUtils.isNotEmpty(log.getOperation()), "operation", log.getOperation());
-        List<OperLog> list = selectList(wrapper);
+        List<OperLog> list = list(wrapper);
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
@@ -91,7 +94,7 @@ public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogS
 
     @Override
     public OperLog detail(String id) {
-        OperLog operLog = selectById(id);
+        OperLog operLog = getById(id);
         String browserName = UserAgentUtils.getBrowserName(operLog.getAgent());
         String osName = UserAgentUtils.getOsName(operLog.getAgent());
         operLog.setAgent(browserName + "\t" + osName);

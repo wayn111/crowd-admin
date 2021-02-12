@@ -1,9 +1,9 @@
 package com.wayn.generator.util;
 
-import com.wayn.commom.constant.Constant;
+import com.wayn.commom.constant.Constants;
+import com.wayn.generator.config.GenConfig;
 import com.wayn.generator.domain.ColumnInfo;
 import com.wayn.generator.domain.TableInfo;
-import com.wayn.generator.config.GenConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.velocity.VelocityContext;
@@ -34,7 +34,7 @@ public class GenUtils {
     /**
      * 类型转换
      */
-    public static Map<String, String> javaTypeMap = new HashMap<String, String>();
+    public static Map<String, String> javaTypeMap = new HashMap<>();
 
     static {
         javaTypeMap.put("tinyint", "Integer");
@@ -127,7 +127,7 @@ public class GenUtils {
      * @return 模板列表
      */
     public static List<String> getTemplates() {
-        List<String> templates = new ArrayList<String>();
+        List<String> templates = new ArrayList<>();
         templates.add("vm/java/domain.java.vm");
         templates.add("vm/java/Dao.java.vm");
         templates.add("vm/java/Service.java.vm");
@@ -147,7 +147,7 @@ public class GenUtils {
     public static String tableToJava(String tableName) {
         String autoRemovePre = GenConfig.getAutoRemovePre();
         String tablePrefix = GenConfig.getTablePrefix();
-        if (Constant.TRUE.equals(autoRemovePre) && StringUtils.isNotEmpty(tablePrefix)) {
+        if (Constants.TRUE.equals(autoRemovePre) && StringUtils.isNotEmpty(tablePrefix)) {
             for (String prefix : tablePrefix.split(",", -1)) {
                 if (tableName.contains(prefix)) {
                     tableName = tableName.replaceFirst(prefix, "");
@@ -218,27 +218,22 @@ public class GenUtils {
     public static String getModuleName(String packageName) {
         int lastIndex = packageName.lastIndexOf(".");
         int nameLength = packageName.length();
-        String moduleName = StringUtils.substring(packageName, lastIndex + 1, nameLength);
-        return moduleName;
+        return StringUtils.substring(packageName, lastIndex + 1, nameLength);
     }
 
     public static String getBasePackage(String packageName) {
         int lastIndex = packageName.lastIndexOf(".");
-        String basePackage = StringUtils.substring(packageName, 0, lastIndex);
-        return basePackage;
+        return StringUtils.substring(packageName, 0, lastIndex);
     }
 
     public static String getProjectPath() {
         String packageName = GenConfig.getPackageName();
-        StringBuffer projectPath = new StringBuffer();
-        projectPath.append("main/java/");
-        projectPath.append(packageName.replace(".", "/"));
-        projectPath.append("/");
-        return projectPath.toString();
+        return "main/java/" +
+                packageName.replace(".", "/") +
+                "/";
     }
 
     public static String replaceKeyword(String keyword) {
-        String keyName = keyword.replaceAll("(?:表|信息|管理)", "");
-        return keyName;
+        return keyword.replaceAll("(?:表|信息|管理)", "");
     }
 }

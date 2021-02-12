@@ -33,7 +33,7 @@ public class UserTest {
 			user.setPassword(ShiroUtil.md5encrypt("123456","admin"));
 			entityList.add(user);
 		}
-		userService.insertBatch(entityList);
+		userService.saveBatch(entityList);
 	}
 
 }

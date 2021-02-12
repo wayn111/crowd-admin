@@ -1,6 +1,6 @@
 package com.wayn.commom.service;
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.vo.Tree;
 
@@ -25,6 +25,6 @@ public interface DeptService extends IService<Dept> {
 	Tree<Dept> getTree();
 
 	List<Long> listChildrenIds(Long pid);
-	
+
 	List<Dept> list(Dept dept);
 }

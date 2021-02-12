@@ -2,8 +2,8 @@ package com.wayn.web.controller.system;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.wayn.commom.base.BaseControlller;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.LogService;
@@ -23,7 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/system/log")
-public class LogController extends BaseControlller {
+public class LogController extends BaseController {
     private static final String PREFIX = "system/log";
 
     @Autowired
@@ -64,7 +64,7 @@ public class LogController extends BaseControlller {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap map, @PathVariable("id") String id) {
-        logService.deleteById(id);
+        logService.removeById(id);
         return Response.success("删除日志成功");
     }
 
@@ -73,7 +73,7 @@ public class LogController extends BaseControlller {
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap map, @RequestParam("ids[]") String[] ids) {
         List<String> idList = Arrays.asList(ids);
-        logService.deleteBatchIds(idList);
+        logService.removeByIds(idList);
         return Response.success("删除日志成功");
     }
 

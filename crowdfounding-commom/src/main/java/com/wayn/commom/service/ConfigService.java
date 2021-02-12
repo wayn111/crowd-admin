@@ -1,14 +1,12 @@
 package com.wayn.commom.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.Config;
-import com.wayn.commom.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * 参数配置 服务层
@@ -23,7 +21,7 @@ public interface ConfigService extends IService<Config> {
      * @param page 分页对象，自动分页
      * @return 参数配置信息
      */
-    public Page<Config> selectConfigList(Page<Config> page, Config config);
+    Page<Config> selectConfigList(Page<Config> page, Config config);
 
     /**
      * 新增{tableComment}

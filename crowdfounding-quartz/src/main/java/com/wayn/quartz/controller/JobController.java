@@ -1,8 +1,8 @@
 package com.wayn.quartz.controller;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.util.ParameterUtil;
@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/quartz/job")
 @Controller
-public class JobController extends BaseControlller {
+public class JobController extends BaseController {
 
     private static final String PREFIX = "quartz/job";
-    private Logger logger = LoggerFactory.getLogger(JobController.class);
+    private final Logger logger = LoggerFactory.getLogger(JobController.class);
     @Autowired
     private JobService jobService;
 
@@ -59,7 +59,7 @@ public class JobController extends BaseControlller {
     @RequiresPermissions("quartz:job:edit")
     @GetMapping("/{option}/{id}")
     public String edit(ModelMap modelMap, @PathVariable("option") String option, @PathVariable("id") Long id) {
-        Job job = jobService.selectById(id);
+        Job job = jobService.getById(id);
         modelMap.put("job", job);
         modelMap.addAttribute("misfirePolicys", dictService.selectDictsValueByType("misfirePolicy"));
         return PREFIX + "/" + option;
@@ -106,7 +106,7 @@ public class JobController extends BaseControlller {
     @ResponseBody
     @PostMapping("/changeStatus/{id}")
     public Response changeStatus(ModelMap modelMap, @PathVariable("id") Long id) throws SchedulerException {
-        Job job = jobService.selectById(id);
+        Job job = jobService.getById(id);
         job.setJobState(job.getJobState() == 1 ? -1 : 1);
         jobService.changeStatus(job);
         return Response.success("修改成功");

@@ -2,9 +2,9 @@ package com.wayn.commom.service.impl;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.RoleDao;
 import com.wayn.commom.dao.RoleMenuDao;
 import com.wayn.commom.dao.UserRoleDao;
@@ -23,7 +23,6 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,27 +55,26 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
     @Autowired
     private UserRoleService userRoleService;
 
-    @Value("${wayn.uploadDir}")
-    private String uploadDir;
+    @Autowired
+    private RoleDao roleDao;
 
     @Override
     public Page<Role> listPage(Page<Role> page, Role role) {
-        EntityWrapper<Role> wrapper = ParameterUtil.get();
+        QueryWrapper<Role> wrapper = ParameterUtil.get();
         wrapper.like("roleName", role.getRoleName());
         wrapper.eq(role.getRoleState() != null, "roleState", role.getRoleState());
-        Page<Role> selectPage = selectPage(page, wrapper);
-        return selectPage;
+        return roleDao.selectPage(page, wrapper);
     }
 
     @Override
     public void export(Role role, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        EntityWrapper<Role> wrapper = ParameterUtil.get();
+        QueryWrapper<Role> wrapper = ParameterUtil.get();
         wrapper.like("roleName", role.getRoleName());
         wrapper.eq(role.getRoleState() != null, "roleState", role.getRoleState());
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
-        List<Role> list = selectList(wrapper);
+        List<Role> list = list(wrapper);
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams, Role.class, list);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -94,8 +92,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
     @Transactional
     @Override
     public boolean save(Role role, String menuIds) {
-        boolean flag = insert(role);
-        List<RoleMenu> list = new ArrayList<RoleMenu>();
+        boolean flag = save(role);
+        List<RoleMenu> list = new ArrayList<>();
         if (StringUtils.isNotBlank(menuIds)) {
             String[] split = menuIds.split(",");
             for (String menuId : split) {
@@ -106,7 +104,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
                 list.add(roleMenu);
             }
         }
-        roleMenuDao.delete(new EntityWrapper<RoleMenu>().eq("roleId", role.getId()));
+        roleMenuDao.delete(new QueryWrapper<RoleMenu>().eq("roleId", role.getId()));
         if (list.size() > 0) {
             roleMenuDao.batchSave(list);
         }
@@ -118,7 +116,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
     @Override
     public boolean update(Role role, String menuIds) throws Exception {
         boolean flag = updateById(role);
-        List<RoleMenu> list = new ArrayList<RoleMenu>();
+        List<RoleMenu> list = new ArrayList<>();
         if (StringUtils.isNotBlank(menuIds)) {
             String[] split = menuIds.split(",");
             for (String menuId : split) {
@@ -129,7 +127,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
                 list.add(roleMenu);
             }
         }
-        roleMenuDao.delete(new EntityWrapper<RoleMenu>().eq("roleId", role.getId()));
+        roleMenuDao.delete(new QueryWrapper<RoleMenu>().eq("roleId", role.getId()));
         if (list.size() > 0) {
             roleMenuDao.batchSave(list);
         }
@@ -140,12 +138,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
     @Transactional
     @Override
     public boolean remove(String roleId) throws BusinessException {
-        if (userRoleDao.selectList(new EntityWrapper<UserRole>().eq("roleId", roleId)).size() > 0) {
+        if (userRoleDao.selectList(new QueryWrapper<UserRole>().eq("roleId", roleId)).size() > 0) {
             throw new BusinessException("该角色有绑定用户，请先解绑");
         }
-        deleteById(roleId);
-        roleMenuDao.delete(new EntityWrapper<RoleMenu>().eq("roleId", roleId));
-        userRoleDao.delete(new EntityWrapper<UserRole>().eq("roleId", roleId));
+        removeById(roleId);
+        roleMenuDao.delete(new QueryWrapper<RoleMenu>().eq("roleId", roleId));
+        userRoleDao.delete(new QueryWrapper<UserRole>().eq("roleId", roleId));
         return true;
     }
 
@@ -153,11 +151,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
     @Override
     public boolean batchRemove(String[] ids) throws BusinessException {
         for (String id : ids) {
-            if (userRoleDao.selectList(new EntityWrapper<UserRole>().eq("roleId", id)).size() > 0) {
+            if (userRoleDao.selectList(new QueryWrapper<UserRole>().eq("roleId", id)).size() > 0) {
                 throw new BusinessException("该角色有绑定用户，请先解绑");
             }
         }
-        return deleteBatchIds(Arrays.asList(ids));
+        return removeByIds(Arrays.asList(ids));
     }
 
     /**
@@ -167,9 +165,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
      */
     @Override
     public List<RoleChecked> listCheckedRolesByUid(String uid) {
-        List<Role> list = selectList(new EntityWrapper<Role>().eq("roleState", 1));
+        List<Role> list = list(new QueryWrapper<Role>().eq("roleState", 1));
         Set<String> sets = userRoleService.findRolesByUid(uid);
-        List<RoleChecked> list2 = list.stream().map(role -> {
+        return list.stream().map(role -> {
             RoleChecked checked = new RoleChecked();
             BeanUtils.copyProperties(role, checked);
             sets.forEach(item -> {
@@ -179,7 +177,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
             });
             return checked;
         }).collect(Collectors.toList());
-        return list2;
     }
 
 }

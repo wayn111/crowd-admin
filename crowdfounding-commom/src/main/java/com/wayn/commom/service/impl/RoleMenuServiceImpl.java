@@ -1,17 +1,16 @@
 package com.wayn.commom.service.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.RoleMenuDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wayn.commom.domain.RoleMenu;
 import com.wayn.commom.service.MenuService;
 import com.wayn.commom.service.RoleMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -30,10 +29,8 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuDao, RoleMenu> impl
 	@Override
 	public Set<String> findMenusByUid(String id) {
 		List<String> list = mynuService.selectResourceByUid(id);
-		Set<String> set = new HashSet<String>();
-		list.forEach(data -> {
-			set.add(data);
-		});
+		Set<String> set = new HashSet<>();
+		set.addAll(list);
 		return set;
 	}
 

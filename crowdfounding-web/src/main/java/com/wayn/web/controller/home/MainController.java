@@ -1,6 +1,6 @@
 package com.wayn.web.controller.home;
 
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Menu;
 import com.wayn.commom.service.ConfigService;
 import com.wayn.commom.service.MenuService;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/main")
-public class MainController extends BaseControlller {
+public class MainController extends BaseController {
 
     private static final String HOME_PREFIX = "home" ;
     private static final String MAIN_PREFIX = "main" ;

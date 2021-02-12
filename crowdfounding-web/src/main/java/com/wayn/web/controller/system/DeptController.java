@@ -1,7 +1,7 @@
 package com.wayn.web.controller.system;
 
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.enums.Operator;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/system/dept")
-public class DeptController extends BaseControlller {
+public class DeptController extends BaseController {
     private static final String PREFIX = "system/dept";
 
     @Autowired
@@ -44,7 +44,7 @@ public class DeptController extends BaseControlller {
         if (pid == 0) {
             model.addAttribute("pName", "顶级节点");
         } else {
-            model.addAttribute("pName", deptService.selectById(pid).getDeptName());
+            model.addAttribute("pName", deptService.getById(pid).getDeptName());
         }
         return PREFIX + "/add";
     }
@@ -52,14 +52,14 @@ public class DeptController extends BaseControlller {
     @RequiresPermissions("sys:dept:edit")
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
-        Dept dept = deptService.selectById(id);
+        Dept dept = deptService.getById(id);
         Long pid = dept.getPid();
         model.addAttribute("pid", pid);
         model.addAttribute("dept", dept);
         if (pid == 0) {
             model.addAttribute("pName", "顶级节点");
         } else {
-            model.addAttribute("pName", deptService.selectById(pid).getDeptName());
+            model.addAttribute("pName", deptService.getById(pid).getDeptName());
         }
         return PREFIX + "/edit";
     }

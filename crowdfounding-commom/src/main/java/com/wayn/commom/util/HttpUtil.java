@@ -1,6 +1,6 @@
 package com.wayn.commom.util;
 
-import com.wayn.commom.constant.Constant;
+import com.wayn.commom.constant.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,7 +65,7 @@ public class HttpUtil {
      */
     public static void ajaxStatus(HttpServletResponse response, int status, String tip) {
         try {
-            response.setContentType("text/html;charset=" + Constant.UTF_ENCODING);
+            response.setContentType("text/html;charset=" + Constants.UTF_ENCODING);
             response.setStatus(status);
             PrintWriter out = response.getWriter();
             out.print(tip);
@@ -153,7 +153,7 @@ public class HttpUtil {
         retStr.append(retParam);
         retStr.append("=");
         try {
-            retStr.append(URLEncoder.encode(retUrl, Constant.UTF_ENCODING));
+            retStr.append(URLEncoder.encode(retUrl, Constants.UTF_ENCODING));
         } catch (UnsupportedEncodingException e) {
             logger.severe("encodeRetURL error." + url);
             e.printStackTrace();
@@ -183,7 +183,7 @@ public class HttpUtil {
         String retUrl = "";
 
         try {
-            retUrl = URLDecoder.decode(url, Constant.UTF_ENCODING);
+            retUrl = URLDecoder.decode(url, Constants.UTF_ENCODING);
         } catch (UnsupportedEncodingException e) {
             logger.severe("encodeRetURL error." + url);
             e.printStackTrace();

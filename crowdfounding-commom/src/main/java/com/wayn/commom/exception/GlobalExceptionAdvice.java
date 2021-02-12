@@ -1,6 +1,6 @@
 package com.wayn.commom.exception;
 
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.util.HttpUtil;
 import com.wayn.commom.util.Response;
 import org.apache.shiro.ShiroException;
@@ -19,7 +19,7 @@ import java.util.Map;
  * 全局异常处理类
  */
 @RestControllerAdvice
-public class GlobalExceptionAdvice extends BaseControlller {
+public class GlobalExceptionAdvice extends BaseController {
 
     /**
      * 处理登陆认证异常

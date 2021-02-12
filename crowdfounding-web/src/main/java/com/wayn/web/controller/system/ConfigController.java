@@ -1,9 +1,8 @@
 package com.wayn.web.controller.system;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.wayn.commom.base.BaseControlller;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Config;
-import com.wayn.commom.domain.User;
 import com.wayn.commom.service.ConfigService;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -28,7 +27,7 @@ import java.util.Date;
  */
 @RequestMapping("/system/config")
 @Controller
-public class ConfigController extends BaseControlller {
+public class ConfigController extends BaseController {
 
     private static final String PREFIX = "system/config";
 
@@ -64,7 +63,7 @@ public class ConfigController extends BaseControlller {
     @RequiresPermissions("sys:config:edit")
     @GetMapping("/edit/{id}")
     public String edit(ModelMap modelMap, @PathVariable("id") Long id) {
-        Config config = configService.selectById(id);
+        Config config = configService.getById(id);
         modelMap.put("config", config);
         modelMap.addAttribute("sysBuildIn", dictService.selectDictsValueByType("sysBuildIn"));
         return PREFIX + "/edit";

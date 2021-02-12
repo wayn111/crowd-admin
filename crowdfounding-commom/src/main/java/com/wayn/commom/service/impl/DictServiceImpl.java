@@ -1,9 +1,9 @@
 package com.wayn.commom.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.DictDao;
 import com.wayn.commom.domain.Dict;
 import com.wayn.commom.domain.User;
@@ -17,7 +17,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +37,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
 
     @Override
     public Page<Dict> listPage(Page<Dict> page, Dict dict) {
-        EntityWrapper<Dict> wrapper = ParameterUtil.get();
+        QueryWrapper<Dict> wrapper = ParameterUtil.get();
         Integer type = dict.getType();
         if (type == 2 && StringUtils.isNotEmpty(dict.getDictType())) {
             wrapper.eq("dictType", dict.getDictType());
@@ -46,7 +45,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         wrapper.eq("type", type);
         wrapper.eq("delFlag", "0");
         wrapper.like("name", dict.getName());
-        return selectPage(page, wrapper);
+        return dictDao.selectPage(page, wrapper);
     }
 
     @Override
@@ -54,11 +53,11 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         //如果是修改字典数据，数据值未改变则通过校验
         if (dict.getId() != null) {
             String value = dict.getValue();
-            if (selectById(dict.getId()).getValue().equals(value)) {
+            if (getById(dict.getId()).getValue().equals(value)) {
                 return false;
             }
         }
-        int count = selectCount(new EntityWrapper<Dict>()
+        int count = count(new QueryWrapper<Dict>()
                 .eq("value", dict.getValue())
                 .eq("type", dict.getType())
                 .eq("dictType", dict.getDictType())
@@ -71,7 +70,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     public boolean save(Dict dict) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         dict.setCreateBy(user.getUserName()).setCreateTime(new Date());
-        return insert(dict);
+        return save(dict);
     }
 
     @CacheEvict(value = "dictCache", allEntries = true)
@@ -79,30 +78,33 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     public boolean update(Dict dict) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         dict.setUpdateBy(user.getUserName()).setUpdateTime(new Date());
-        Dict oldDict = selectById(dict.getId());
-        updateForSet("dictType = '" + dict.getValue() + "'", new EntityWrapper<Dict>().eq("dictType", oldDict.getValue()).eq("type", ""));
-        return updateById(dict);
+        Dict oldDict = getById(dict.getId());
+        return update().set("dictType", dict.getValue())
+                .eq("dictType", oldDict.getValue())
+                .eq("type", "").update();
     }
 
     @CacheEvict(value = "dictCache", allEntries = true)
     @Override
     public boolean remove(Serializable id) {
-        return updateForSet("delFlag = 1", new EntityWrapper<Dict>().eq("id", id));
+        return update().set("delFlag", 1)
+                .eq("id", id).update();
     }
 
     @CacheEvict(value = "dictCache", allEntries = true)
     @Override
     public boolean batchRemove(Serializable[] ids) {
-        return updateForSet("delFlag = 1", new EntityWrapper<Dict>().in("id", Arrays.asList(ids)));
+        return update().set("delFlag", 1)
+                .in("id", ids).update();
     }
 
     @Cacheable(value = "dictCache", key = "#root.method + '_' + #root.args[0]")
     @Override
     public List<JSONObject> selectDicts(String dictTypeSelected) {
-        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
+        QueryWrapper<Dict> wrapper = new QueryWrapper<>();
         wrapper.eq("type", 1);
         wrapper.eq("delFlag", "0");
-        List<Dict> dicts = selectList(wrapper);
+        List<Dict> dicts = list(wrapper);
         List<JSONObject> objectList = dicts.stream().map(data -> {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id", data.getValue());
@@ -122,22 +124,22 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     @Cacheable(value = "dictCache", key = "#root.method + '_' + #root.args[0]")
     @Override
     public List<JSONObject> selectDictsValueByType(String dictType) {
-        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
+        QueryWrapper<Dict> wrapper = new QueryWrapper<>();
         wrapper.eq("type", 2)
                 .eq("delFlag", "0")
                 .eq("dictType", dictType)
                 .eq("dictState", 1);
-        List<Dict> dictList = selectList(wrapper);
+        List<Dict> dictList = list(wrapper);
         return convert2select(dictList);
     }
 
     public List<JSONObject> selectDictsValueByType(String dictType, String value) {
-        EntityWrapper<Dict> wrapper = new EntityWrapper<>();
+        QueryWrapper<Dict> wrapper = new QueryWrapper<>();
         wrapper.eq("type", 2)
                 .eq("delFlag", "0")
                 .eq("dictType", dictType)
                 .eq("dictState", 1);
-        List<Dict> dictList = selectList(wrapper);
+        List<Dict> dictList = list(wrapper);
         return convert2select(dictList, value);
     }
 

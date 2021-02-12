@@ -1,12 +1,12 @@
 package com.wayn.commom.service.impl;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.DeptDao;
 import com.wayn.commom.domain.Dept;
-import com.wayn.commom.util.TreeBuilderUtil;
 import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.service.DeptService;
+import com.wayn.commom.util.TreeBuilderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -34,7 +34,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
     @Override
     public boolean save(Dept dept) {
         dept.setCreateTime(new Date());
-        return insert(dept);
+        return save(dept);
     }
 
     @CacheEvict(value = "deptCache", allEntries = true)
@@ -46,14 +46,14 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
     @CacheEvict(value = "deptCache", allEntries = true)
     @Override
     public boolean remove(Long id) {
-        return deleteById(id);
+        return removeById(id);
     }
 
     @Cacheable(value = "deptCache", key = "#root.method  + '_dept'")
     @Override
     public Tree<Dept> getTree() {
         List<Tree<Dept>> trees = new ArrayList<>();
-        List<Dept> depts = deptDao.selectList(new EntityWrapper<>());
+        List<Dept> depts = deptDao.selectList(new QueryWrapper<>());
         List<Long> subDeptIds = new ArrayList<>();
         for (Dept dept : depts) {
             boolean flag = true;
@@ -81,15 +81,15 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
 
     @Override
     public List<Long> listChildrenIds(Long pid) {
-        List<Dept> list = deptDao.selectList(new EntityWrapper<Dept>());
+        List<Dept> list = deptDao.selectList(new QueryWrapper<>());
         return treeDept(list, pid);
     }
 
     public List<Long> treeDept(List<Dept> list, Long pid) {
-        List<Long> deptIds = new ArrayList<Long>();
+        List<Long> deptIds = new ArrayList<>();
         deptIds.add(pid);
         list.forEach(dept -> {
-            if (pid == dept.getPid()) {
+            if (pid.equals(dept.getPid())) {
                 deptIds.addAll(treeDept(list, dept.getId()));
                 deptIds.add(dept.getId());
             }
@@ -100,9 +100,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
     @Cacheable(value = "deptCache", key = "#root.method  + '_' + #root.args[0]")
     @Override
     public List<Dept> list(Dept dept) {
-        EntityWrapper<Dept> wrapper = new EntityWrapper<Dept>();
+        QueryWrapper<Dept> wrapper = new QueryWrapper<>();
         wrapper.like("deptName", dept.getDeptName());
-        return selectList(wrapper.orderBy("sort"));
+        return list(wrapper.orderByAsc("sort"));
     }
 
 }

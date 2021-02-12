@@ -1,7 +1,7 @@
 package com.wayn.notify.config;
 
 import com.wayn.notify.config.handshakehandler.MyPrincipalHandshakeHandler;
-import com.wayn.notify.constant.Constant;
+import com.wayn.notify.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -44,7 +44,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.setUserDestinationPrefix("/user/");
-        if (Constant.BROKER_TYPE_ACTIVEMQ.equalsIgnoreCase(brokerConfig.getBrokerType())) {
+        if (Constants.BROKER_TYPE_ACTIVEMQ.equalsIgnoreCase(brokerConfig.getBrokerType())) {
             registry.setApplicationDestinationPrefixes("/app");//走@messageMapping
             registry.enableStompBrokerRelay("/topic", "/queue")
                     .setRelayHost(brokerConfig.getHost())
@@ -53,7 +53,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
                     .setClientPasscode(brokerConfig.getPassword())
                     .setSystemLogin(brokerConfig.getUsername())
                     .setSystemPasscode(brokerConfig.getPassword());
-        } else if(Constant.BROKER_TYPE_MEMORY.equals(brokerConfig.getBrokerType())){
+        } else if(Constants.BROKER_TYPE_MEMORY.equals(brokerConfig.getBrokerType())){
             registry.enableSimpleBroker("/topic", "/queue");
         }
 //        registry.setPathMatcher(new AntPathMatcher()); // 设置路径匹配规则

@@ -1,8 +1,8 @@
 package com.wayn.web.controller.profile;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wayn.commom.annotation.RepeatSubmit;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.UserResetPasswordVO;
@@ -36,7 +36,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/profile")
-public class ProfileController extends BaseControlller {
+public class ProfileController extends BaseController {
 
     private static final String PREFIX = "profile";
 
@@ -51,10 +51,10 @@ public class ProfileController extends BaseControlller {
         User curUser = getCurUser();
         model.addAttribute("user", curUser);
         List<String> deptNames = new ArrayList<>();
-        Dept dept = deptService.selectById(curUser.getDeptId());
+        Dept dept = deptService.getById(curUser.getDeptId());
         deptNames.add(dept.getDeptName());
         while (dept.getPid() != 0) {
-            dept = deptService.selectById(dept.getPid());
+            dept = deptService.getById(dept.getPid());
             deptNames.add(dept.getDeptName());
         }
         model.addAttribute("deptName", StringUtils.join(deptNames, " / "));
@@ -86,7 +86,7 @@ public class ProfileController extends BaseControlller {
         userService.updateById(user);
         Subject subject = SecurityUtils.getSubject();
         String realmName = subject.getPrincipals().getRealmNames().iterator().next();
-        PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(userService.selectById(user.getId()), realmName);
+        PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(userService.getById(user.getId()), realmName);
         // 重新加载Principal
         subject.runAs(newPrincipalCollection);
         return Response.success("修改用户信息成功！");
@@ -102,8 +102,8 @@ public class ProfileController extends BaseControlller {
     @PostMapping("judgeOldPasswordSuccess")
     public boolean judgeOldPasswordSuccess(String oldPassword) {
         // 获取加密后的密码
-        String password = ShiroUtil.md5encrypt(oldPassword, userService.selectById(getCurUserId()).getUserName());
-        List<User> users = userService.selectList(new EntityWrapper<User>().eq("password", password));
+        String password = ShiroUtil.md5encrypt(oldPassword, userService.getById(getCurUserId()).getUserName());
+        List<User> users = userService.list(new QueryWrapper<User>().eq("password", password));
         return users.size() > 0;
     }
 
@@ -111,8 +111,8 @@ public class ProfileController extends BaseControlller {
     @RequiresPermissions("sys:user:resetPwd")
     @PostMapping("userResetPwd")
     public Response userResetPwd(UserResetPasswordVO userResetPasswordVO) {
-        String password = ShiroUtil.md5encrypt(userResetPasswordVO.getNewPassword(), userService.selectById(getCurUserId()).getUserName());
-        userService.updateForSet("password = '" + password + "'", new EntityWrapper<User>().eq("id", getCurUserId()));
+        String password = ShiroUtil.md5encrypt(userResetPasswordVO.getNewPassword(), userService.getById(getCurUserId()).getUserName());
+        userService.update().set("password", password).eq("id", getCurUserId()).update();
         return Response.success("修改用户密码成功！");
     }
 
@@ -133,11 +133,12 @@ public class ProfileController extends BaseControlller {
         // Thumbnails.of(filePath + "/" + fileName).size(64, 64).toFile(new File(filePath, fileName));
         String requestUrl = HttpUtil.getRequestContext(request);
         String url = requestUrl + "/upload/avatar/" + fileName;
-        userService.updateForSet("userImg = '" + url + "'", new EntityWrapper<User>().eq("id", getCurUserId()));
+        userService.update().set("userImg", url).eq("id", getCurUserId()).update();
+
         // 更新subject中用户信息
         Subject subject = SecurityUtils.getSubject();
         String realmName = subject.getPrincipals().getRealmNames().iterator().next();
-        PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(userService.selectById(getCurUserId()), realmName);
+        PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(userService.getById(getCurUserId()), realmName);
         // 重新加载Principal
         subject.runAs(newPrincipalCollection);
         return Response.success("上传头像成功！").add("imgSrc", url);

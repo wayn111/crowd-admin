@@ -1,7 +1,7 @@
 package com.wayn.commom.service.impl;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.MenuDao;
 import com.wayn.commom.dao.RoleMenuDao;
 import com.wayn.commom.domain.Menu;
@@ -105,7 +105,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     @Override
     public Tree<Menu> getTree() {
         List<Tree<Menu>> trees = new ArrayList<>();
-        List<Menu> menus = menuDao.selectList(new EntityWrapper<>());
+        List<Menu> menus = menuDao.selectList(new QueryWrapper<>());
         List<Long> subMenuIds = new ArrayList<>();
         for (Menu menu : menus) {
             boolean flag = true;
@@ -143,7 +143,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     @Cacheable(value = "menuCache", key = "#root.method + '_roleID_' + #root.args[0]")
     @Override
     public Tree<Menu> getTree(String id) {
-        List<RoleMenu> list = roleMenuDao.selectList(new EntityWrapper<RoleMenu>().eq("roleId", id));
+        List<RoleMenu> list = roleMenuDao.selectList(new QueryWrapper<RoleMenu>().eq("roleId", id));
         List<Long> menuIds = new ArrayList<>();
         list.forEach(item -> menuIds.add(item.getMenuId()));
         //去掉菜单的父菜单，jstree默认会勾选父菜单
@@ -153,7 +153,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
                 menuIds.remove(menu.getPid());
             }
         }
-        List<Menu> menus = menuDao.selectList(new EntityWrapper<>());
+        List<Menu> menus = menuDao.selectList(new QueryWrapper<>());
         List<Long> subMenuIds = new ArrayList<>();
         for (Menu menu : menus) {
             boolean flag = true;
@@ -190,9 +190,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     }
 
     @CacheEvict(value = "menuCache", allEntries = true)
-    @Override
     public boolean insert(Menu entity) {
-        return super.insert(entity);
+        return save(entity);
     }
 
     @CacheEvict(value = "menuCache", allEntries = true)
@@ -202,18 +201,17 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     }
 
     @CacheEvict(value = "menuCache", allEntries = true)
-    @Override
     public boolean deleteById(Serializable id) {
-        return super.deleteById(id);
+        return removeById(id);
     }
 
     @Cacheable(value = "menuCache", key = "#root.method + '_' + #root.args[0]")
     @Override
     public List<Menu> list(MenuVO menu) {
-        EntityWrapper<Menu> wrapper = new EntityWrapper<>();
+        QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.like("menuName", menu.getMenuName());
         wrapper.in(StringUtils.isNotEmpty(menu.getType()), "type", Arrays.asList(menu.getType().split(",")));
-        List<Menu> menus = selectList(wrapper.orderBy("sort"));
+        List<Menu> menus = list(wrapper.orderByAsc("sort"));
         List<Menu> menusList = new ArrayList<>(menus);
         if (StringUtils.isNotEmpty(menu.getMenuName())) {
             selectChildren(menus, menusList);
@@ -231,7 +229,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     public List<Menu> selectChildren(List<Menu> menus, List<Menu> menusList) {
         menus.forEach(item -> {
             if (item.getType() < 3) {
-                menusList.addAll(selectChildren(selectList(new EntityWrapper<Menu>().eq("pid", item.getId()).orderBy("sort")), menusList));
+                menusList.addAll(selectChildren(list(new QueryWrapper<Menu>().eq("pid", item.getId()).orderByAsc("sort")), menusList));
             }
         });
         return menus;

@@ -1,6 +1,6 @@
 package com.wayn.commom.service;
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.Menu;
 import com.wayn.commom.domain.vo.MenuVO;
 import com.wayn.commom.domain.vo.Tree;

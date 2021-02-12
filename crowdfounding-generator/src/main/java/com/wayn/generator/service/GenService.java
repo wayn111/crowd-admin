@@ -1,7 +1,7 @@
 package com.wayn.generator.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.generator.domain.TableInfo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,7 @@ public interface GenService extends IService<TableInfo> {
      * @param tableName 表名称
      * @return 数据
      */
-    public byte[] generatorCode(String tableName);
+    byte[] generatorCode(String tableName);
 
     /**
      * 批量生成代码
@@ -37,7 +37,7 @@ public interface GenService extends IService<TableInfo> {
      * @param tableNames 表数组
      * @return 数据
      */
-    public byte[] generatorCode(String[] tableNames);
+    byte[] generatorCode(String[] tableNames);
 
     /**
      * 预览代码

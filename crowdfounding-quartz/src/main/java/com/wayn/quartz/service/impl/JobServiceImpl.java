@@ -1,7 +1,7 @@
 package com.wayn.quartz.service.impl;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.quartz.consts.ScheduleConstants;
 import com.wayn.quartz.dao.JobDao;
@@ -48,7 +48,7 @@ public class JobServiceImpl extends ServiceImpl<JobDao, Job> implements JobServi
     public boolean save(Job job) {
         job.setCreateTime(new Date());
         job.setCreateBy(ShiroUtil.getSessionUser().getUserName());
-        boolean insert = insert(job);
+        boolean insert = save(job);
         ScheduleUtil.createScheduleJob(scheduler, job);
         return insert;
     }
@@ -69,8 +69,8 @@ public class JobServiceImpl extends ServiceImpl<JobDao, Job> implements JobServi
     @Transactional
     @Override
     public boolean remove(Long id) throws SchedulerException {
-        String jobGroup = selectById(id).getJobGroup();
-        boolean flag = deleteById(id);
+        String jobGroup = getById(id).getJobGroup();
+        boolean flag = removeById(id);
         if (flag) {
             scheduler.deleteJob(ScheduleUtil.getJobKey(id, jobGroup));
         }
@@ -112,7 +112,7 @@ public class JobServiceImpl extends ServiceImpl<JobDao, Job> implements JobServi
 
     @Override
     public void run(Long id) throws SchedulerException {
-        Job job = selectById(id);
+        Job job = getById(id);
         String jobGroup = job.getJobGroup();
         // 参数
         JobDataMap dataMap = new JobDataMap();

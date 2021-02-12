@@ -2,9 +2,9 @@ package com.wayn.commom.service.impl;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.ConfigDao;
 import com.wayn.commom.domain.Config;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
@@ -48,7 +48,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
 
     @Override
     public boolean save(Config config) {
-        return insert(config);
+        return save(config);
     }
 
     @Override
@@ -58,23 +58,23 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
 
     @Override
     public boolean remove(Integer id) {
-        return deleteById(id);
+        return removeById(id);
     }
 
     @Override
     public boolean batchRemove(Integer[] ids) {
-        return deleteBatchIds(Arrays.asList(ids));
+        return removeByIds(Arrays.asList(ids));
     }
 
     @Override
     public String getValueByKey(String key) {
-        EntityWrapper<Config> wrapper = new EntityWrapper<>();
+        QueryWrapper<Config> wrapper = new QueryWrapper<>();
         wrapper.eq("configKey", key);
-        Config config = selectOne(wrapper);
-        if (config != null) {
-            return config.getConfigValue();
+        Config config = getOne(wrapper);
+        if (config == null) {
+            return null;
         }
-        return null;
+        return config.getConfigValue();
     }
 
     @Override
@@ -88,7 +88,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
         ServletUtil.setExportResponse(request, response, "参数配置.xls", bos.size());
-        //保存数据
+        // 保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);
         workbook.close();

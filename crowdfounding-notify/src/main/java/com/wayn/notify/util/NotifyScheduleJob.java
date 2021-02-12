@@ -1,6 +1,5 @@
 package com.wayn.notify.util;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.service.UserOnlineService;
 import com.wayn.commom.util.SpringContextUtil;
@@ -34,6 +33,6 @@ public class NotifyScheduleJob extends QuartzJobBean {
                 }
             }
         }
-        notifyService.updateForSet("notifyState = 1", new EntityWrapper<Notify>().eq("id", notify.getId()));
+        notifyService.update().set("notifyState", 1).eq("id", notify.getId());
     }
 }

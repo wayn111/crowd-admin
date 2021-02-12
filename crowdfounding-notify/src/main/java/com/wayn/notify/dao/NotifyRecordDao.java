@@ -1,7 +1,7 @@
 package com.wayn.notify.dao;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.notify.domain.NotifyRecord;
 import com.wayn.notify.domain.NotifyRecordTip;
 import com.wayn.notify.domain.vo.NotifyRecordVO;
@@ -22,7 +22,7 @@ public interface NotifyRecordDao extends BaseMapper<NotifyRecord> {
      * @param notifyRecord
      * @return 通知记录信息
      */
-    List<NotifyRecordVO> selectNotifyRecordList(Pagination page, NotifyRecordVO notifyRecord);
+    List<NotifyRecordVO> selectNotifyRecordList(Page page, NotifyRecordVO notifyRecord);
 
     /**
      * 查询通知记录信息，不分页
@@ -40,5 +40,5 @@ public interface NotifyRecordDao extends BaseMapper<NotifyRecord> {
      */
     NotifyRecordVO selectNotifyByNotifyRecordId(Long id);
 
-    List<NotifyRecordTip> selectNotifyRecordTipList(Pagination page, String curUserId);
+    List<NotifyRecordTip> selectNotifyRecordTipList(Page page, String curUserId);
 }

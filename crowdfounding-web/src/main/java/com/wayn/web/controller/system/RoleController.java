@@ -1,8 +1,8 @@
 package com.wayn.web.controller.system;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Role;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.exception.BusinessException;
@@ -24,7 +24,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/system/role")
-public class RoleController extends BaseControlller {
+public class RoleController extends BaseController {
 	private static final String PREFIX = "system/role";
 	@Autowired
 	private RoleService roleService;
@@ -62,7 +62,7 @@ public class RoleController extends BaseControlller {
 	@RequiresPermissions("sys:role:edit")
 	@GetMapping("/edit")
 	public String edit(Model model, String id) {
-		Role role = roleService.selectById(id);
+		Role role = roleService.getById(id);
 		model.addAttribute("role1", role);
 		return PREFIX + "/edit";
 	}

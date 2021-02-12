@@ -1,6 +1,6 @@
 package com.wayn.commom.service.impl;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.MailConfigDao;
 import com.wayn.commom.domain.MailConfig;
 import com.wayn.commom.service.MailConfigService;

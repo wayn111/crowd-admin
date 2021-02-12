@@ -56,29 +56,27 @@ public class OnlineSessionFilter extends AccessControlFilter {
     }
 
     @Override
-    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         Subject subject = getSubject(request, response);
         if (subject == null || subject.getSession() == null) {
             return true;
         }
         Session session = sessionDAO.readSession(subject.getSession().getId());
-        if (session != null && session instanceof OnlineSession) {
+        if (session instanceof OnlineSession) {
             OnlineSession onlineSession = (OnlineSession) session;
             request.setAttribute(ONLINE_SESSION, onlineSession);
             //把user id设置进去
             boolean isGuest = StringUtils.isEmpty(onlineSession.getUserId());
-            if (isGuest == true) {
+            if (isGuest) {
                 User user = ShiroUtil.getSessionUser();
                 if (user != null) {
                     onlineSession.setUserId(user.getId());
                     onlineSession.setUsername(user.getUserName());
-                    Dept dept = deptService.selectById(user.getDeptId());
+                    Dept dept = deptService.getById(user.getDeptId());
                     onlineSession.setDeptName(dept.getDeptName());
                     sessionDAO.update(onlineSession);
                 }
-                if (onlineSession.getStatus() == OnlineStatus.OFF_LINE) {
-                    return false;
-                }
+                return onlineSession.getStatus() != OnlineStatus.OFF_LINE;
             }
         }
         return true;

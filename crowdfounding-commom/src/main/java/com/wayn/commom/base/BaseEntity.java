@@ -1,7 +1,7 @@
 package com.wayn.commom.base;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
 import java.util.Date;

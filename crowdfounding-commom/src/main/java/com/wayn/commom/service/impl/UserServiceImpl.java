@@ -3,9 +3,9 @@ package com.wayn.commom.service.impl;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.DeptDao;
 import com.wayn.commom.dao.UserDao;
 import com.wayn.commom.domain.Dept;
@@ -63,13 +63,13 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public Page<UserVO> listPage(Page<User> page, User user) {
-        EntityWrapper<User> wrapper = ParameterUtil.get();
+        QueryWrapper<User> wrapper = ParameterUtil.get();
         wrapper.like("userName", user.getUserName());
         wrapper.like("phone", user.getPhone());
         wrapper.like("email", user.getEmail());
         wrapper.eq(user.getUserState() != null, "userState", user.getUserState());
         wrapper.eq(user.getDeptId() != null, "deptId", user.getDeptId());
-        Page<User> userPage = selectPage(page, wrapper);
+        Page<User> userPage = userDao.selectPage(page, wrapper);
         List<User> records = userPage.getRecords();
         List<UserVO> collect = records.stream().map(user1 -> {
             UserVO userVO = new UserVO();
@@ -95,7 +95,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
                 return false;
             }
         }
-        Integer count = userDao.selectCount(new EntityWrapper<User>().eq("userName", userName));
+        Integer count = userDao.selectCount(new QueryWrapper<User>().eq("userName", userName));
         return count > 0;
     }
 
@@ -105,7 +105,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     public boolean save(User user, String roleIds) {
         user.setCreateTime(new Date());
         user.setPassword(new SimpleHash("MD5", user.getPassword(), user.getUserName(), 1024).toString());
-        boolean flag = insert(user);
+        boolean flag = save(user);
         List<UserRole> list = new ArrayList<>();
         if (StringUtils.isNotBlank(roleIds)) {
             String[] split = roleIds.split(",");
@@ -116,9 +116,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
                 list.add(userRole);
             }
         }
-        userRoleService.delete(new EntityWrapper<UserRole>().eq("userId", user.getId()));
+        userRoleService.removeById(new QueryWrapper<UserRole>().eq("userId", user.getId()));
         if (list.size() > 0) {
-            userRoleService.insertBatch(list);
+            userRoleService.saveBatch(list);
         }
         return flag;
     }
@@ -138,9 +138,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
                 list.add(userRole);
             }
         }
-        userRoleService.delete(new EntityWrapper<UserRole>().eq("userId", user.getId()));
+        userRoleService.remove(new QueryWrapper<UserRole>().eq("userId", user.getId()));
         if (list.size() > 0) {
-            userRoleService.insertBatch(list);
+            userRoleService.saveBatch(list);
         }
         return flag;
     }
@@ -149,7 +149,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Override
     public boolean remove(String id) {
         userDao.deleteById(id);
-        userRoleService.delete(new EntityWrapper<UserRole>().eq("userId", id));
+        userRoleService.remove(new QueryWrapper<UserRole>().eq("userId", id));
         return true;
     }
 
@@ -158,28 +158,28 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     public boolean batchRemove(String[] ids) {
         List<String> list = Arrays.asList(ids);
         userDao.deleteBatchIds(list);
-        list.forEach(id -> userRoleService.delete(new EntityWrapper<UserRole>().eq("userId", id)));
+        list.forEach(id -> userRoleService.remove(new QueryWrapper<UserRole>().eq("userId", id)));
         return true;
     }
 
     @Override
     public boolean resetPwd(String id, String password) {
-        updateForSet("password = '" + password + "'", new EntityWrapper<User>().eq("id", id));
-        return true;
+        return update().set("password", password).eq("id", id).update();
     }
 
     @Override
     public boolean editAccount(String id, String userName) {
-        updateForSet("userName = '" + userName + "', password ='" + ShiroUtil.md5encrypt("123456", userName) + "'",
-                new EntityWrapper<User>().eq("id", id));
-        return true;
+        return update().set("userName", userName)
+                .set("password", ShiroUtil.md5encrypt("123456", userName))
+                .eq("id", id).update();
+
     }
 
     @Override
     public Tree<Dept> getTree() {
         List<Tree<Dept>> trees = new ArrayList<>();
-        List<Dept> depts = deptDao.selectList(new EntityWrapper<>());
-        List<User> users = userDao.selectList(new EntityWrapper<>());
+        List<Dept> depts = deptDao.selectList(new QueryWrapper<>());
+        List<User> users = userDao.selectList(new QueryWrapper<>());
         // 获取部门所有pid
         List<Long> ds = depts.stream().map(Dept::getPid).distinct().collect(Collectors.toList());
         // 获取用户所有deptId
@@ -221,7 +221,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public List<JSONObject> selectUser2JsonObj() {
-        List<User> users = selectList(new EntityWrapper<>());
+        List<User> users = list(new QueryWrapper<>());
         List<JSONObject> list = new ArrayList<>();
         for (User user : users) {
             JSONObject jsonObject = new JSONObject();
@@ -234,7 +234,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public void export(User user, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        EntityWrapper<User> wrapper = ParameterUtil.get();
+        QueryWrapper<User> wrapper = ParameterUtil.get();
         wrapper.like("userName", user.getUserName());
         wrapper.like("phone", user.getPhone());
         wrapper.like("email", user.getEmail());
@@ -243,7 +243,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
-        List<User> list = selectList(wrapper);
+        List<User> list = list(wrapper);
         list.forEach(item -> item.setUserImg(uploadDir + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6)));
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams, User.class, list);
         // 使用bos获取excl文件大小

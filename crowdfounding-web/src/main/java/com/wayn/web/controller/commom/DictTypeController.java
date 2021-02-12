@@ -1,13 +1,13 @@
 package com.wayn.web.controller.commom;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.wayn.commom.base.BaseControlller;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wayn.commom.annotation.Log;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Dict;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
-import com.wayn.commom.annotation.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RequestMapping("/commom/dict/type")
 @Controller
-public class DictTypeController extends BaseControlller {
+public class DictTypeController extends BaseController {
 
     private static final String PREFIX = "commom/dict/type";
 
@@ -54,7 +54,7 @@ public class DictTypeController extends BaseControlller {
     @RequiresPermissions("commom:dict:edit")
     @GetMapping("/edit/{id}")
     public String edit(ModelMap modelMap, @PathVariable("id") Long id) {
-        Dict dict = dictService.selectById(id);
+        Dict dict = dictService.getById(id);
         modelMap.put("dict", dict);
         return PREFIX + "/edit";
     }

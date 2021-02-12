@@ -20,7 +20,7 @@ import java.util.Date;
 @DisallowConcurrentExecution
 public class ScheduleJobDisallowConcurrent extends QuartzJobBean {
 
-    private static Logger log = LoggerFactory.getLogger(ScheduleJobDisallowConcurrent.class);
+    private static final Logger log = LoggerFactory.getLogger(ScheduleJobDisallowConcurrent.class);
 
     @Override
     protected void executeInternal(JobExecutionContext context) {
@@ -44,6 +44,6 @@ public class ScheduleJobDisallowConcurrent extends QuartzJobBean {
             log.error("任务执行异常  - ：", e);
         }
         JobLogService jobLogService = SpringContextUtil.getBean(JobLogService.class);
-        jobLogService.insert(jobLog);
+        jobLogService.save(jobLog);
     }
 }

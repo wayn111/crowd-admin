@@ -1,9 +1,9 @@
 package com.wayn.commom.domain;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.wayn.commom.base.BusinessEntity;
 
 import java.util.StringJoiner;
@@ -25,7 +25,7 @@ public class Role extends BusinessEntity<Role> {
     /**
      * 主键
      */
-    @TableId(type = IdType.UUID)
+    @TableId(type = IdType.ASSIGN_UUID)
     private String id;
 
     /**

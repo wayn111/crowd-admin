@@ -1,7 +1,7 @@
 package com.wayn.web.controller.system;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.wayn.commom.base.BaseControlller;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Logininfor;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.util.ParameterUtil;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/system/logininfor")
-public class LogininforController extends BaseControlller {
+public class LogininforController extends BaseController {
     private static final String PREFIX = "system/logininfor";
 
     @Autowired
@@ -47,7 +47,7 @@ public class LogininforController extends BaseControlller {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap map, @PathVariable("id") Long id) {
-        logininforService.deleteById(id);
+        logininforService.removeById(id);
         return Response.success("删除登陆日志成功");
     }
 
@@ -56,7 +56,7 @@ public class LogininforController extends BaseControlller {
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap map, @RequestParam("ids[]") Long[] ids) {
         List<Long> idList = Arrays.asList(ids);
-        logininforService.deleteBatchIds(idList);
+        logininforService.removeByIds(idList);
         return Response.success("删除登陆日志成功");
     }
 

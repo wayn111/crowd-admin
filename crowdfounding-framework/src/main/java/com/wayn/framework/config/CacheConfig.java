@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wayn.commom.constant.Constant;
+import com.wayn.commom.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
@@ -104,7 +104,7 @@ public class CacheConfig extends CachingConfigurerSupport {
     public CacheManager cacheManager(@Autowired(required = false) RedisTemplate<String, Object> redisTemplate,
                                      @Autowired(required = false) net.sf.ehcache.CacheManager ehCacheManager) {
         CacheManager cacheManager = null;
-        if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
+        if (Constants.CACHE_TYPE_REDIS.equals(cacheType)) {
             cacheManager = new RedisCacheManager(redisTemplate);
             ((RedisCacheManager) cacheManager).setUsePrefix(true);
             ((RedisCacheManager) cacheManager).setDefaultExpiration(expire);
@@ -116,7 +116,7 @@ public class CacheConfig extends CachingConfigurerSupport {
             cacheNames.add("dictCache");
             cacheNames.add("timerTaskCache");
             ((RedisCacheManager) cacheManager).setCacheNames(cacheNames);
-        } else if (Constant.CACHE_TYPE_EACHACEH.equals(cacheType)) {
+        } else if (Constants.CACHE_TYPE_EACHACEH.equals(cacheType)) {
             cacheManager = ehCacheCacheManager(ehCacheManager);
         }
         return cacheManager;

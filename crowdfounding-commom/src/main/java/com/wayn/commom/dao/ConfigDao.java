@@ -1,7 +1,7 @@
 package com.wayn.commom.dao;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.commom.domain.Config;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface ConfigDao extends BaseMapper<Config> {
      * @param page，自动分页
      * @return 参数配置信息
      */
-    List<Config> selectConfigPageList(Pagination page, Config config);
+    List<Config> selectConfigPageList(Page<Config> page, Config config);
 
     List<Config> selectConfigList(Config config);
 

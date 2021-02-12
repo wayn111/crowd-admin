@@ -1,6 +1,6 @@
 package com.wayn.commom.service;
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.MailConfig;
 
 /**

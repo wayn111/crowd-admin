@@ -3,7 +3,7 @@ package com.wayn.framework.aspect;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.constant.Constant;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -28,7 +28,7 @@ import java.util.Objects;
 @Component
 public class LogAspect {
 
-    private static ThreadLocal<Long> startTimeLocal = ThreadLocal.withInitial(() -> 0L);
+    private static final ThreadLocal<Long> startTimeLocal = ThreadLocal.withInitial(() -> 0L);
 
     @Autowired
     private LogQueue logQueue;
@@ -95,7 +95,7 @@ public class LogAspect {
             String methodName = method.getName();
             operLog.setMethod(className + "." + methodName + "()");
             operLog.setIp(IP2RegionUtil.getCityInfo(ShiroUtil.getIP()));
-            operLog.setOperState(Constant.OPERATOR_SUCCESS);
+            operLog.setOperState(Constants.OPERATOR_SUCCESS);
             operLog.setAgent(UserAgentUtils.getUserAgent(request));
             operLog.setRequestMethod(request.getMethod());
             operLog.setExecuteTime(executeTime / 1000000);
@@ -119,7 +119,7 @@ public class LogAspect {
                 operLog.setRequestParams(StringUtils.substring(obj.toJSONString(), 0, 2000));
             }
             if (e != null) {
-                operLog.setOperState(Constant.OPERATOR_fail);
+                operLog.setOperState(Constants.OPERATOR_fail);
                 operLog.setErrorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
             }
             logQueue.add(operLog);

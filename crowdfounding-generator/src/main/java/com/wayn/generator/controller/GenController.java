@@ -1,8 +1,8 @@
 package com.wayn.generator.controller;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.util.Response;
 import com.wayn.generator.domain.TableInfo;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/tool/gen")
-public class GenController extends BaseControlller {
+public class GenController extends BaseController {
 
     private static final String PREFIX = "tool/gen";
 

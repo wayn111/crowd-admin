@@ -29,7 +29,7 @@
         <junit.version>4.13.1</junit.version>
         <spring.version>4.3.30.RELEASE</spring.version>
         <spring.redis.version>1.8.23.RELEASE</spring.redis.version>
-        <mybatis-plus.version>2.3.3</mybatis-plus.version>
+        <mybatis-plus.version>3.4.2</mybatis-plus.version>
         <mysql.version>8.0.16</mysql.version>
         <jackson.version>2.11.2</jackson.version>
         <druid.version>1.2.4</druid.version>
@@ -40,22 +40,21 @@
         <activemq.version>5.15.11</activemq.version>
         <tika.version>1.24.1</tika.version>
         <fastjson.version>1.2.75</fastjson.version>
-        <kaptcha-version>0.0.9</kaptcha-version>
+        <captcha-version>1.6.2</captcha-version>
         <ehcache.version>2.10.6</ehcache.version>
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-        <guava.version>[24.1.1,)</guava.version>
-        <findbug.version>3.0.2</findbug.version>
-        <shiro.version>1.7.0</shiro.version>
+        <guava.version>30.1-jre</guava.version>
+        <shiro.version>1.7.1</shiro.version>
         <logback.version>1.0.7</logback.version>
         <log4j.over.slf4j>1.7.7</log4j.over.slf4j>
         <servlet-api.version>3.1.0</servlet-api.version>
         <jsp-api.version>2.1</jsp-api.version>
         <jstl.version>1.2</jstl.version>
-        <freemarker.version>2.3.28</freemarker.version>
         <bitwalker.version>1.21</bitwalker.version>
         <jsoup.version>1.13.1</jsoup.version>
         <velocity.version>2.1</velocity.version>
         <oshi.version>5.3.6</oshi.version>
+        <jedis.version>2.10.2</jedis.version>
         <thumbnailator.version>0.4.13</thumbnailator.version>
         <quartz.version>2.3.0</quartz.version>
         <java-image-scaling.version>0.8.6</java-image-scaling.version>
@@ -146,7 +145,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
+            <version>${jedis.version}</version>
         </dependency>
         <!-- MySql -->
         <dependency>
@@ -270,11 +269,11 @@
             <artifactId>ehcache</artifactId>
             <version>${ehcache.version}</version>
         </dependency>
-        <!-- kaptcha -->
+        <!-- captcha -->
         <dependency>
-            <groupId>com.github.axet</groupId>
-            <artifactId>kaptcha</artifactId>
-            <version>${kaptcha-version}</version>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>${captcha-version}</version>
         </dependency>
 
         <!--hibernate-validator -->
@@ -288,11 +287,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>${findbug.version}</version>
         </dependency>
 
         <!-- 解析客户端操作系统、浏览器等 -->
@@ -373,6 +367,9 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArgs>
+                        <compilerArg>-parameters</compilerArg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>

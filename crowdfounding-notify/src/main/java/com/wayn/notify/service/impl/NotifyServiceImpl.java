@@ -1,8 +1,8 @@
 package com.wayn.notify.service.impl;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -66,11 +66,11 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         if (notify.getPublishTime() == null) {
             notify.setPublishTime(new Date());
         }
-        boolean insert = insert(notify);
+        boolean insert = save(notify);
         List<NotifyRecord> collect = new ArrayList<>();
         List<String> receiveUserList = fillNotifyRecordList(notify, receiveUserIds, collect);
         NotifyScheduleUtil.createScheduleJob(scheduler, notify, receiveUserList);
-        notifyRecordService.insertBatch(collect);
+        notifyRecordService.saveBatch(collect);
         return insert;
     }
 
@@ -80,14 +80,14 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         notify.setUpdateTime(new Date());
         notify.setUpdateBy(ShiroUtil.getSessionUid());
         boolean update = updateById(notify);
-        notifyRecordService.delete(new EntityWrapper<NotifyRecord>().eq("notifyId", notify.getId()));
+        notifyRecordService.remove(new QueryWrapper<NotifyRecord>().eq("notifyId", notify.getId()));
         List<NotifyRecord> collect = new ArrayList<>();
         List<String> receiveUserList = fillNotifyRecordList(notify, receiveUserIds, collect);
         if (scheduler.checkExists(NotifyScheduleUtil.getTriggerKey(notify.getId()))) {
             scheduler.deleteJob(NotifyScheduleUtil.getJobKey(notify.getId()));
         }
         NotifyScheduleUtil.createScheduleJob(scheduler, notify, receiveUserList);
-        notifyRecordService.insertBatch(collect);
+        notifyRecordService.saveBatch(collect);
         return update;
     }
 
@@ -96,7 +96,8 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         if (scheduler.checkExists(NotifyScheduleUtil.getTriggerKey(id))) {
             scheduler.deleteJob(NotifyScheduleUtil.getJobKey(id));
         }
-        return updateForSet("delFlag = 1", new EntityWrapper<Notify>().eq("id", id));
+        return update().set("delFlag", 1).eq("id", id).update();
+
     }
 
     @Override
@@ -106,7 +107,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
                 scheduler.deleteJob(NotifyScheduleUtil.getJobKey(id));
             }
         }
-        return updateForSet("delFlag = 1", new EntityWrapper<Notify>().in("id", Arrays.asList(ids)));
+        return update().set("delFlag", 1).in("id", Arrays.asList(ids)).update();
     }
 
 
@@ -121,7 +122,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
     public List<String> fillNotifyRecordList(Notify notify, String receiveUserIds, List<NotifyRecord> collect) {
         List<String> split = new ArrayList<>();
         if (StringUtils.isEmpty(receiveUserIds)) {
-            for (User user : userService.selectList(new EntityWrapper<>())) {
+            for (User user : userService.list(new QueryWrapper<>())) {
                 NotifyRecord notifyRecord = new NotifyRecord();
                 notifyRecord.setCreateTime(new Date());
                 notifyRecord.setRead(false);
@@ -134,7 +135,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         } else {
             split.addAll(Arrays.asList(receiveUserIds.split(",")));
             for (String receiveUserId : split) {
-                User user = userService.selectById(receiveUserId);
+                User user = userService.getById(receiveUserId);
                 if (user == null) {
                     continue;
                 }

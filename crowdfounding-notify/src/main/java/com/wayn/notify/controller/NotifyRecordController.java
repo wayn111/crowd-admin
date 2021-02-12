@@ -1,9 +1,8 @@
 package com.wayn.notify.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.util.ParameterUtil;
@@ -25,7 +24,7 @@ import java.io.IOException;
 
 @RequestMapping("/oa/notifyRecord")
 @Controller
-public class NotifyRecordController extends BaseControlller {
+public class NotifyRecordController extends BaseController {
 
     private static final String PREFIX = "oa/notifyRecord";
 
@@ -69,7 +68,7 @@ public class NotifyRecordController extends BaseControlller {
         NotifyRecordVO notifyRecordVO = notifyRecordService.selectNotifyByNotifyRecordId(id);
         // 将状态变为已读
         if (!notifyRecordVO.getRead()) {
-            notifyRecordService.updateForSet("isRead = 1", new EntityWrapper<NotifyRecord>().eq("id", id));
+            notifyRecordService.update().set("isRead", 1).eq("id", id).update();
         }
         simpMessagingTemplate.convertAndSendToUser(getCurUserId(), "/queue/notifyRecordTip", "");
         modelMap.put("notifyRecordVO", notifyRecordVO);

@@ -1,12 +1,10 @@
 package com.wayn.commom.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wayn.commom.domain.Menu;
-
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import java.util.List;
 
 /**
  * <p>

@@ -1,9 +1,9 @@
 package com.wayn.web.controller.commom;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Dict;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DictService;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 @RequestMapping("/commom/dict/data")
 @Controller
-public class DictDataController extends BaseControlller {
+public class DictDataController extends BaseController {
 
     private static final String PREFIX = "commom/dict/data";
 
@@ -60,7 +60,7 @@ public class DictDataController extends BaseControlller {
     @RequiresPermissions("commom:dict:edit")
     @GetMapping("/edit/{id}")
     public String edit(ModelMap modelMap, @PathVariable("id") Long id) {
-        Dict dict = dictService.selectById(id);
+        Dict dict = dictService.getById(id);
         modelMap.put("dict", dict);
         return PREFIX + "/edit";
     }

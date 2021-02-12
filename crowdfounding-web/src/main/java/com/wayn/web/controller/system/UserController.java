@@ -2,10 +2,10 @@ package com.wayn.web.controller.system;
 
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.imports.ExcelImportService;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.MailConfig;
 import com.wayn.commom.domain.Role;
@@ -42,7 +42,7 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/system/user")
-public class UserController extends BaseControlller {
+public class UserController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private static final String PREFIX = "system/user";
@@ -89,7 +89,7 @@ public class UserController extends BaseControlller {
     @RequiresPermissions("sys:user:add")
     @GetMapping("/add")
     public String add(Model model) {
-        List<Role> list = roleService.selectList(new EntityWrapper<Role>().eq("roleState", 1));
+        List<Role> list = roleService.list(new QueryWrapper<Role>().eq("roleState", 1));
         model.addAttribute("roles", list);
         return PREFIX + "/add";
     }
@@ -97,9 +97,9 @@ public class UserController extends BaseControlller {
     @RequiresPermissions("sys:user:edit")
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") String id) {
-        User user = userService.selectById(id);
+        User user = userService.getById(id);
         model.addAttribute("user", user);
-        Dept dept = deptService.selectById(user.getDeptId());
+        Dept dept = deptService.getById(user.getDeptId());
         if (Objects.nonNull(dept)) {
             String deptName = dept.getDeptName();
             model.addAttribute("deptName", deptName);
@@ -123,7 +123,7 @@ public class UserController extends BaseControlller {
         if (AdminUtil.isAdmin(id)) {
             return Response.error("管理员账号无法操作");
         }
-        userService.resetPwd(id, ShiroUtil.md5encrypt(password, userService.selectById(id).getUserName()));
+        userService.resetPwd(id, ShiroUtil.md5encrypt(password, userService.getById(id).getUserName()));
         return Response.success("修改用户密码成功");
     }
 
@@ -132,7 +132,7 @@ public class UserController extends BaseControlller {
     public String editAccount(Model model, @PathVariable("id") String id) {
         model.addAttribute("id", id);
         model.addAttribute("initPassWord", configService.getValueByKey("sys.user.initPassword"));
-        model.addAttribute("userName", userService.selectById(id).getUserName());
+        model.addAttribute("userName", userService.getById(id).getUserName());
         return PREFIX + "/editAccount";
     }
 
@@ -159,7 +159,7 @@ public class UserController extends BaseControlller {
     @PostMapping("/addSave")
     public Response addSave(Model model, User user, String roleIds) {
         if (userService.save(user, roleIds)) {
-            MailConfig mailConfig = mailConfigService.selectById(1L);
+            MailConfig mailConfig = mailConfigService.getById(1L);
             if (!mailConfigService.checkMailConfig(mailConfig)) {
                 return Response.error("邮件信息未配置完全，请先填写配置信息");
             }
@@ -167,7 +167,7 @@ public class UserController extends BaseControlller {
             mailVO.setReceiverUser(user.getUserName());
             mailVO.setSendMail(user.getEmail());
             mailVO.setTitle("欢迎：" + user.getUserName());
-            mailQueueProducer.sendMail(mailConfig, mailVO);
+            // mailQueueProducer.sendMail(mailConfig, mailVO);
             return Response.success("新增用户成功");
         }
         return Response.error("新增用户失败");
@@ -241,7 +241,7 @@ public class UserController extends BaseControlller {
             String password = configService.getValueByKey("sys.user.initPassword");
             item.setPassword(ShiroUtil.md5encrypt(password, item.getUserName()));
         });
-        userService.insertBatch(list);
+        userService.saveBatch(list);
         return Response.success("导入用户数据成功");
     }
 

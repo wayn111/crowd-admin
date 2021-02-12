@@ -1,10 +1,9 @@
 package com.wayn.commom.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.UserRole;
 
 import java.util.Set;
-
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>

@@ -1,9 +1,9 @@
 package com.wayn.notify.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
+import com.wayn.commom.base.BaseController;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.util.DateUtils;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/oa/notify")
 @Controller
-public class NotifyController extends BaseControlller {
+public class NotifyController extends BaseController {
 
     private static final String PREFIX = "oa/notify";
 
@@ -72,7 +72,7 @@ public class NotifyController extends BaseControlller {
     @GetMapping("/{option}/{id}")
     public String option(ModelMap modelMap, @PathVariable("option") String option, @PathVariable("id") Long id) {
         // 查询通知
-        Notify notify = notifyService.selectById(id);
+        Notify notify = notifyService.getById(id);
         NotifyVO notifyVO = new NotifyVO();
         if (notify.getPublishTime() != null) {
             notifyVO.setPublishTime(DateFormatUtils.format(notify.getPublishTime(), "yyyy-MM-dd HH:mm:ss"));
@@ -83,7 +83,7 @@ public class NotifyController extends BaseControlller {
         notifyVO.setContent(s);
         modelMap.put("notify", notifyVO);
         // 查询接收用户
-        List<NotifyRecord> records = notifyRecordService.selectList(new EntityWrapper<NotifyRecord>().eq("notifyId", notifyVO.getId()));
+        List<NotifyRecord> records = notifyRecordService.list(new QueryWrapper<NotifyRecord>().eq("notifyId", notifyVO.getId()));
         List<String> receiveUserIds = records.stream().map(NotifyRecord::getReceiveUserId).collect(Collectors.toList());
         List<String> receiveUserNames = records.stream().map(NotifyRecord::getReceiveUserName).collect(Collectors.toList());
         modelMap.put("receiveUserIds", StringUtils.join(receiveUserIds, ","));

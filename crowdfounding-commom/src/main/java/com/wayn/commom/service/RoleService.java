@@ -1,7 +1,7 @@
 package com.wayn.commom.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.Role;
 import com.wayn.commom.domain.vo.RoleChecked;
 import com.wayn.commom.exception.BusinessException;

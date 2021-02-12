@@ -1,8 +1,8 @@
 package com.wayn.web.controller.monitor;
 
 import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseControlller;
-import com.wayn.commom.constant.Constant;
+import com.wayn.commom.base.BaseController;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.UserOnline;
 import com.wayn.commom.service.LogininforService;
@@ -25,7 +25,7 @@ import java.util.List;
 
 @RequestMapping("/monitor/online")
 @Controller
-public class UserOnlineController extends BaseControlller {
+public class UserOnlineController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserOnlineController.class);
 
@@ -92,10 +92,10 @@ public class UserOnlineController extends BaseControlller {
         try {
             userOnlineService.forceLogout(id);
             sendMsg2User(id);
-            logininforService.addLog(userName, Constant.LOGIN_SUCCESS, "后台强制退出 " + userName + " 成功");
+            logininforService.addLog(userName, Constants.LOGIN_SUCCESS, "后台强制退出 " + userName + " 成功");
         } catch (Exception exception) {
             logger.error(exception.getMessage(), exception);
-            logininforService.addLog(userName, Constant.LOGIN_FAIL, "后台强制退出 " + userName + " 失败");
+            logininforService.addLog(userName, Constants.LOGIN_FAIL, "后台强制退出 " + userName + " 失败");
         }
     }
 

@@ -2,10 +2,10 @@ package com.wayn.commom.service.impl;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.wayn.commom.constant.Constant;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.dao.LogininforDao;
 import com.wayn.commom.domain.Logininfor;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
@@ -21,6 +21,7 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,14 +45,17 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
 
     private static final Logger logger = LoggerFactory.getLogger(logininforServiceImpl.class);
 
+    @Autowired
+    private LogininforDao logininforDao;
+
     @Override
     public Page<Logininfor> listPage(Page<Logininfor> page, Logininfor log) {
-        EntityWrapper<Logininfor> wrapper = ParameterUtil.get();
+        QueryWrapper<Logininfor> wrapper = ParameterUtil.get();
         wrapper.like("loginName", log.getLoginName());
         wrapper.like("ipaddr", log.getIpaddr());
         wrapper.like("loginLocation", log.getLoginLocation());
         wrapper.eq(StringUtils.isNoneEmpty(log.getStatus()), "status", log.getStatus());
-        return selectPage(page, wrapper);
+        return logininforDao.selectPage(page, wrapper);
     }
 
     @Override
@@ -82,22 +86,22 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         logininfor.setLoginTime(new Date());
         logininfor.setCreateTime(new Date());
         // 日志状态
-        if (StringUtils.equalsAny(status, Constant.LOGIN_SUCCESS, Constant.LOGOUT, Constant.REGISTER)) {
-            logininfor.setStatus(Constant.SUCCESS);
-        } else if (Constant.LOGIN_FAIL.equals(status)) {
-            logininfor.setStatus(Constant.FAIL);
+        if (StringUtils.equalsAny(status, Constants.LOGIN_SUCCESS, Constants.LOGOUT, Constants.REGISTER)) {
+            logininfor.setStatus(Constants.SUCCESS);
+        } else if (Constants.LOGIN_FAIL.equals(status)) {
+            logininfor.setStatus(Constants.FAIL);
         }
         // 插入数据
-        return insert(logininfor);
+        return save(logininfor);
     }
 
     @Override
     public void export(Logininfor log, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        EntityWrapper<Logininfor> wrapper = ParameterUtil.get();
+        QueryWrapper<Logininfor> wrapper = ParameterUtil.get();
         wrapper.like("loginName", log.getLoginName());
         wrapper.like("ipaddr", log.getIpaddr());
         wrapper.eq(StringUtils.isNoneEmpty(log.getStatus()), "status", log.getStatus());
-        List<Logininfor> list = selectList(wrapper);
+        List<Logininfor> list = list(wrapper);
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());

@@ -1,6 +1,6 @@
 package com.wayn.commom.dao;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wayn.commom.domain.Role;
 
 /**
@@ -12,5 +12,5 @@ import com.wayn.commom.domain.Role;
  * @since 2019-04-13
  */
 public interface RoleDao extends BaseMapper<Role> {
-	
+
 }

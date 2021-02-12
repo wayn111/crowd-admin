@@ -1,7 +1,7 @@
 package com.wayn.commom.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wayn.commom.domain.Dict;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
  * <p>

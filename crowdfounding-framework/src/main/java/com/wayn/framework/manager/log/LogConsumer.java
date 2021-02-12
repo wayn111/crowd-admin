@@ -48,7 +48,7 @@ public class LogConsumer implements Runnable {
 				temp.add(log);
 			}
 			if (temp.size() != 0) {
-				logService.insertBatch(temp);
+				logService.saveBatch(temp);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();

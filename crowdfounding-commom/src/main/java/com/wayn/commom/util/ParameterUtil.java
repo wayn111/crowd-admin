@@ -1,6 +1,6 @@
 package com.wayn.commom.util;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wayn.commom.base.BaseEntity;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class ParameterUtil {
     private static final String BASE_ENTITY = "BaseEntity";
-    private static ThreadLocal<EntityWrapper> entityWrapperThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<QueryWrapper> entityWrapperThreadLocal = new ThreadLocal<>();
 
     /**
      * 设置wrapper类得通用查询属性
@@ -22,7 +22,7 @@ public class ParameterUtil {
      * @param <T>
      */
     public static <T> void setWrapper() {
-        EntityWrapper<T> wrapper = new EntityWrapper<T>();
+        QueryWrapper<T> wrapper = new QueryWrapper<>();
         String startTime = ServletUtil.getParameter("startTime");
         String endTime = ServletUtil.getParameter("endTime");
         ServletUtil.setParameter("startTime", startTime);
@@ -67,11 +67,7 @@ public class ParameterUtil {
                                 Method method = aClass.getDeclaredMethod("set" + StringUtils.capitalize(declaredField.getName()), String.class);
                                 method.setAccessible(true);
                                 method.invoke(baseEntity, startTime);
-                            } catch (NoSuchMethodException e) {
-                                e.printStackTrace();
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
+                            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                                 e.printStackTrace();
                             }
                         }
@@ -103,11 +99,7 @@ public class ParameterUtil {
                                 Method method = aClass.getMethod("set" + StringUtils.capitalize(declaredField.getName()), String.class);
                                 method.setAccessible(true);
                                 method.invoke(baseEntity, endTime);
-                            } catch (NoSuchMethodException e) {
-                                e.printStackTrace();
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
+                            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                                 e.printStackTrace();
                             }
                         }
@@ -117,7 +109,7 @@ public class ParameterUtil {
         });
     }
 
-    public static <T> EntityWrapper<T> get() {
+    public static <T> QueryWrapper<T> get() {
         return entityWrapperThreadLocal.get();
     }
 

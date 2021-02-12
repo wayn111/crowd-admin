@@ -1,7 +1,7 @@
 package com.wayn.framework.shiro.realm;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.wayn.commom.constant.Constant;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.enums.StateEnum;
 import com.wayn.commom.service.*;
@@ -80,13 +80,13 @@ public class MyRealm extends AuthorizingRealm {
         UsernamePasswordToken token2 = (UsernamePasswordToken) token;
         String username = token2.getUsername();
         // String password = ShiroUtil.md5encrypt(new String(token2.getPassword()), username);
-        User sysUser = userService.selectOne(new EntityWrapper<User>().eq("userName", username));
+        User sysUser = userService.getOne(new QueryWrapper<User>().eq("userName", username));
         if (sysUser == null) {
-            logininforService.addLog(username, Constant.LOGIN_FAIL, "用户不存在");
+            logininforService.addLog(username, Constants.LOGIN_FAIL, "用户不存在");
             throw new UnknownAccountException("用户不存在");
         }
         if (sysUser.getUserState() == -1) {
-            logininforService.addLog(username, Constant.LOGIN_FAIL, "用户已被禁用");
+            logininforService.addLog(username, Constants.LOGIN_FAIL, "用户已被禁用");
             throw new UnknownAccountException("用户已被禁用");
         }
         // 此处不再需要做密码验证，由CredentialsMatch的实现做密码校验
@@ -94,7 +94,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new IncorrectCredentialsException("账号或密码不正确");
         }*/
         if (sysUser.getUserState().equals(StateEnum.DISABLE.getState())) {
-            logininforService.addLog(username, Constant.LOGIN_FAIL, "该用户已被锁定，请稍后再试");
+            logininforService.addLog(username, Constants.LOGIN_FAIL, "该用户已被锁定，请稍后再试");
             throw new LockedAccountException("该用户已被锁定，请稍后再试");
         }
         // 是否进行单一用户登陆处理
@@ -111,7 +111,7 @@ public class MyRealm extends AuthorizingRealm {
                         // 单一用户登出逻辑，是否强制登出前一用户
                         boolean singeKickoutBefore = Boolean.parseBoolean(configService.getValueByKey("sys.user.singeKickoutBefore"));
                         if (!singeKickoutBefore) {
-                            logininforService.addLog(username, Constant.LOGIN_FAIL, "该用户已登陆，请先登出！");
+                            logininforService.addLog(username, Constants.LOGIN_FAIL, "该用户已登陆，请先登出！");
                             throw new AuthenticationException("该用户已登陆，请先登出！");
                         }
                         Session session = sessionDAO.readSession(activeSession.getId());

@@ -27,25 +27,25 @@ public class MailController {
 
     @GetMapping
     public String index(HttpServletRequest request) {
-        request.setAttribute("mail", mailConfigService.selectById(1L));
+        request.setAttribute("mail", mailConfigService.getById(1L));
         return PREFIX + "/mail";
     }
 
     @ResponseBody
     @PostMapping("update")
     public Response update(MailConfig mailConfig) {
-        mailConfigService.insertOrUpdate(mailConfig);
+        mailConfigService.saveOrUpdate(mailConfig);
         return Response.success("修改成功");
     }
 
     @ResponseBody
     @PostMapping("sendMail")
     public Response sendMail(SendMailVO mailVO) {
-        MailConfig mailConfig = mailConfigService.selectById(1L);
+        MailConfig mailConfig = mailConfigService.getById(1L);
         if (!mailConfigService.checkMailConfig(mailConfig)) {
             return Response.error("邮件信息未配置完全，请先填写配置信息");
         }
-        mailQueueProducer.sendMail(mailConfig, mailVO);
+        // mailQueueProducer.sendMail(mailConfig, mailVO);
         return Response.success("发送成功，请等待");
     }
 }

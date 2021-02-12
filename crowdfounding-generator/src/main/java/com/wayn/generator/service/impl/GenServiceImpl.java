@@ -2,9 +2,9 @@ package com.wayn.generator.service.impl;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.wayn.commom.constant.Constant;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.util.ServletUtil;
 import com.wayn.generator.config.GenConfig;
@@ -119,7 +119,7 @@ public class GenServiceImpl extends ServiceImpl<GenDao, TableInfo> implements Ge
         for (String template : templates) {
             // 渲染模板
             StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, Constant.UTF_ENCODING);
+            Template tpl = Velocity.getTemplate(template, Constants.UTF_ENCODING);
             tpl.merge(context, sw);
             dataMap.put(template.substring(template.lastIndexOf("//") + 1, template.indexOf(".vm")), sw.toString());
         }
@@ -175,13 +175,13 @@ public class GenServiceImpl extends ServiceImpl<GenDao, TableInfo> implements Ge
         for (String template : templates) {
             // 渲染模板
             StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, Constant.UTF_ENCODING);
+            Template tpl = Velocity.getTemplate(template, Constants.UTF_ENCODING);
 
             tpl.merge(context, sw);
             try {
                 // 添加到zip
                 zip.putNextEntry(new ZipEntry(Objects.requireNonNull(GenUtils.getFileName(template, table, moduleName))));
-                IOUtils.write(sw.toString(), zip, Constant.UTF_ENCODING);
+                IOUtils.write(sw.toString(), zip, Constants.UTF_ENCODING);
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
             } catch (IOException e) {

@@ -2,8 +2,8 @@ package com.wayn.notify.service.impl;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.util.DateUtils;
 import com.wayn.commom.util.ServletUtil;
@@ -45,7 +45,7 @@ public class NotifyRecordServiceImpl extends ServiceImpl<NotifyRecordDao, Notify
 
     @Override
     public boolean save(NotifyRecord notifyRecord) {
-        return insert(notifyRecord);
+        return save(notifyRecord);
     }
 
     @Override
@@ -55,12 +55,12 @@ public class NotifyRecordServiceImpl extends ServiceImpl<NotifyRecordDao, Notify
 
     @Override
     public boolean remove(Long id) {
-        return deleteById(id);
+        return removeById(id);
     }
 
     @Override
     public boolean batchRemove(Long[] ids) {
-        return deleteBatchIds(Arrays.asList(ids));
+        return removeByIds(Arrays.asList(ids));
     }
 
     @Override
