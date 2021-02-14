@@ -123,8 +123,8 @@ public class UserController extends BaseController {
         if (AdminUtil.isAdmin(id)) {
             return Response.error("管理员账号无法操作");
         }
-        userService.resetPwd(id, ShiroUtil.md5encrypt(password, userService.getById(id).getUserName()));
-        return Response.success("修改用户密码成功");
+        boolean resetPwd = userService.resetPwd(id, ShiroUtil.md5encrypt(password, userService.getById(id).getUserName()));
+        return Response.result(resetPwd, "修改用户密码成功");
     }
 
     @RequiresPermissions("sys:user:editAccount")
@@ -143,8 +143,7 @@ public class UserController extends BaseController {
         if (AdminUtil.isAdmin(id)) {
             return Response.error("管理员账号无法操作");
         }
-        userService.editAccount(id, userName);
-        return Response.success("修改用户名称成功");
+        return Response.result(userService.editAccount(id, userName), "修改用户名称成功");
     }
 
     @ResponseBody
@@ -158,19 +157,19 @@ public class UserController extends BaseController {
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(Model model, User user, String roleIds) {
-        if (userService.save(user, roleIds)) {
-            MailConfig mailConfig = mailConfigService.getById(1L);
-            if (!mailConfigService.checkMailConfig(mailConfig)) {
-                return Response.error("邮件信息未配置完全，请先填写配置信息");
-            }
-            SendMailVO mailVO = new SendMailVO();
-            mailVO.setReceiverUser(user.getUserName());
-            mailVO.setSendMail(user.getEmail());
-            mailVO.setTitle("欢迎：" + user.getUserName());
-            // mailQueueProducer.sendMail(mailConfig, mailVO);
-            return Response.success("新增用户成功");
+        if (!userService.save(user, roleIds)) {
+            return Response.error("新增用户失败");
         }
-        return Response.error("新增用户失败");
+        MailConfig mailConfig = mailConfigService.getById(1L);
+        if (!mailConfigService.checkMailConfig(mailConfig)) {
+            return Response.error("邮件信息未配置完全，请先填写配置信息");
+        }
+        SendMailVO mailVO = new SendMailVO();
+        mailVO.setReceiverUser(user.getUserName());
+        mailVO.setSendMail(user.getEmail());
+        mailVO.setTitle("欢迎：" + user.getUserName());
+        mailQueueProducer.sendMail(mailConfig, mailVO);
+        return Response.success("新增用户成功");
     }
 
     @Log(value = "用户管理", operator = Operator.UPDATE)
@@ -181,8 +180,7 @@ public class UserController extends BaseController {
         if (AdminUtil.isAdmin(user.getId())) {
             return Response.error("管理员账号无法操作");
         }
-        userService.update(user, roleIds);
-        return Response.success("修改用户成功");
+        return Response.result(userService.update(user, roleIds),"修改用户成功");
 
     }
 
@@ -194,8 +192,7 @@ public class UserController extends BaseController {
         if (AdminUtil.isAdmin(id)) {
             return Response.error("管理员账号无法操作");
         }
-        userService.remove(id);
-        return Response.success("删除用户成功");
+        return Response.result(userService.remove(id),"删除用户成功");
 
     }
 
@@ -209,8 +206,7 @@ public class UserController extends BaseController {
                 return Response.error("管理员账号无法操作");
             }
         }
-        userService.batchRemove(ids);
-        return Response.success("删除用户成功");
+        return Response.result(userService.batchRemove(ids),"删除用户成功");
 
     }
 
@@ -241,8 +237,7 @@ public class UserController extends BaseController {
             String password = configService.getValueByKey("sys.user.initPassword");
             item.setPassword(ShiroUtil.md5encrypt(password, item.getUserName()));
         });
-        userService.saveBatch(list);
-        return Response.success("导入用户数据成功");
+        return Response.result(userService.saveBatch(list),"导入用户数据成功");
     }
 
     @ResponseBody

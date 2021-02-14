@@ -91,7 +91,7 @@ public class NotifyController extends BaseController {
         return PREFIX + "/" + option;
     }
 
-    @Log(value = "办公通知",operator = Operator.ADD)
+    @Log(value = "办公通知", operator = Operator.ADD)
     @RequiresPermissions("oa:notify:add")
     @ResponseBody
     @PostMapping("/addSave")
@@ -100,11 +100,10 @@ public class NotifyController extends BaseController {
         if (StringUtils.isEmpty(receiveUserIds)) {
             receiveUserIds = "";
         }
-        notifyService.save(notify, receiveUserIds);
-        return Response.success("新增成功");
+        return Response.result(notifyService.save(notify, receiveUserIds), "新增成功");
     }
 
-    @Log(value = "办公通知",operator = Operator.UPDATE)
+    @Log(value = "办公通知", operator = Operator.UPDATE)
     @RequiresPermissions("oa:notify:edit")
     @ResponseBody
     @PostMapping("/editSave")
@@ -113,8 +112,7 @@ public class NotifyController extends BaseController {
         if (StringUtils.isEmpty(receiveUserIds)) {
             receiveUserIds = "";
         }
-        notifyService.update(notify, receiveUserIds);
-        return Response.success("修改成功");
+        return Response.result(notifyService.update(notify, receiveUserIds), "修改成功");
     }
 
     /**
@@ -138,22 +136,20 @@ public class NotifyController extends BaseController {
     }
 
 
-    @Log(value = "办公通知",operator = Operator.DELETE)
+    @Log(value = "办公通知", operator = Operator.DELETE)
     @RequiresPermissions("oa:notify:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Long id) throws SchedulerException {
-        notifyService.remove(id);
-        return Response.success("删除成功");
+        return Response.result(notifyService.remove(id), "删除成功");
     }
 
-    @Log(value = "办公通知",operator = Operator.DELETE)
+    @Log(value = "办公通知", operator = Operator.DELETE)
     @RequiresPermissions("oa:notify:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) throws SchedulerException {
-        notifyService.batchRemove(ids);
-        return Response.success("删除成功");
+        return Response.result(notifyService.batchRemove(ids), "删除成功");
     }
 
 }

@@ -70,8 +70,7 @@ public class JobController extends BaseController {
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(ModelMap modelMap, Job job) {
-        jobService.save(job);
-        return Response.success("新增成功");
+        return Response.result(jobService.save(job), "新增成功");
     }
 
     @Log(value = "任务调度", operator = Operator.UPDATE)
@@ -79,8 +78,7 @@ public class JobController extends BaseController {
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, Job job) throws SchedulerException {
-        jobService.update(job);
-        return Response.success("修改成功");
+        return Response.result(jobService.update(job), "修改成功");
     }
 
     @Log(value = "任务调度", operator = Operator.DELETE)
@@ -88,8 +86,7 @@ public class JobController extends BaseController {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Long id) throws SchedulerException {
-        jobService.remove(id);
-        return Response.success("删除成功");
+        return Response.result(jobService.remove(id), "删除成功");
     }
 
     @Log(value = "任务调度", operator = Operator.DELETE)
@@ -97,8 +94,7 @@ public class JobController extends BaseController {
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) throws SchedulerException {
-        jobService.batchRemove(ids);
-        return Response.success("删除成功");
+        return Response.result(jobService.batchRemove(ids), "删除成功");
     }
 
     @Log(value = "任务调度", operator = Operator.UPDATE)
@@ -108,8 +104,7 @@ public class JobController extends BaseController {
     public Response changeStatus(ModelMap modelMap, @PathVariable("id") Long id) throws SchedulerException {
         Job job = jobService.getById(id);
         job.setJobState(job.getJobState() == 1 ? -1 : 1);
-        jobService.changeStatus(job);
-        return Response.success("修改成功");
+        return Response.result(jobService.changeStatus(job),"修改成功");
     }
 
     @Log(value = "任务调度", operator = Operator.EXECUTOR)

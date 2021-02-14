@@ -5,6 +5,6 @@
     <resultMap id="BaseResultMap" type="com.wayn.commom.domain.Dept">
         <id column="id" property="id"/>
         <result column="deptName" property="deptName"/>
-        <result column="deptDesc" property="deptDesc"/>
+        <result column="remarks" property="remarks"/>
     </resultMap>
 </mapper>

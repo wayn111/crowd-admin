@@ -17,7 +17,7 @@ public interface GenDao extends BaseMapper<TableInfo> {
      * @param tableInfo 表信息
      * @return 数据库表列表
      */
-    public List<TableInfo> selectTableList(Page page, TableInfo tableInfo);
+    List<TableInfo> selectTableList(Page<TableInfo> page, TableInfo tableInfo);
 
 
     List<TableInfo> selectTableList(TableInfo tableInfo);

@@ -62,7 +62,7 @@ public class MenuController extends BaseController {
         model.addAttribute("menuTypes", dictService.selectDictsValueByType("menuType"));
         model.addAttribute("menu", menu);
         model.addAttribute("pid", menu.getPid());
-        String pName = "";
+        String pName;
         if (menu.getPid() == 0) {
             pName = "顶级节点";
         } else {
@@ -92,7 +92,10 @@ public class MenuController extends BaseController {
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(Model model, Menu menu) {
-        menuService.update(menu);
+        boolean update = menuService.update(menu);
+        if (!update) {
+            return Response.error("更新菜单失败");
+        }
         ShiroCacheUtil.clearCachedAuthorizationInfo();
         return Response.success("菜单修改成功");
     }
@@ -102,7 +105,10 @@ public class MenuController extends BaseController {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(Model model, @PathVariable("id") Long id) {
-        menuService.remove(id);
+        boolean remove = menuService.remove(id);
+        if (!remove) {
+            return Response.error("删除菜单失败");
+        }
         ShiroCacheUtil.clearCachedAuthorizationInfo();
         return Response.success("菜单删除成功");
     }
@@ -121,7 +127,6 @@ public class MenuController extends BaseController {
     @ResponseBody
     @PostMapping("/tree/{roleId}")
     Tree<Menu> tree(@PathVariable("roleId") String roleId) {
-        Tree<Menu> tree = menuService.getTree(roleId);
-        return tree;
+        return menuService.getTree(roleId);
     }
 }

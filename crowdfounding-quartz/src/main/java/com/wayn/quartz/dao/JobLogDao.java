@@ -19,8 +19,8 @@ public interface JobLogDao extends BaseMapper<JobLog> {
      * @param page，自动分页
      * @return 定时任务调度日志信息
      */
-    public List<JobLog> selectJobLogList(Page page, JobLog jobLog);
+    List<JobLog> selectJobLogList(Page<JobLog> page, JobLog jobLog);
 
-    public List<JobLog> selectJobLogList(JobLog jobLog);
+    List<JobLog> selectJobLogList(JobLog jobLog);
 
 }

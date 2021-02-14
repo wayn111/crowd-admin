@@ -79,16 +79,14 @@ public class NotifyRecordController extends BaseController {
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(ModelMap modelMap, NotifyRecord notifyRecord) {
-        notifyRecordService.save(notifyRecord);
-        return Response.success("新增成功");
+        return Response.result(notifyRecordService.save(notifyRecord), "新增成功");
     }
 
     @RequiresPermissions("oa:notifyRecord:edit")
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, NotifyRecord notifyRecord) {
-        notifyRecordService.update(notifyRecord);
-        return Response.success("修改成功");
+        return Response.result(notifyRecordService.update(notifyRecord), "修改成功");
     }
 
 
@@ -97,8 +95,7 @@ public class NotifyRecordController extends BaseController {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Long id) {
-        notifyRecordService.remove(id);
-        return Response.success("删除成功");
+        return Response.result(notifyRecordService.remove(id), "删除成功");
     }
 
     @Log(value = "我的通知", operator = Operator.DELETE)
@@ -106,8 +103,7 @@ public class NotifyRecordController extends BaseController {
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) {
-        notifyRecordService.batchRemove(ids);
-        return Response.success("删除成功");
+        return Response.result(notifyRecordService.batchRemove(ids), "删除成功");
     }
 
     @PostMapping("/export")
@@ -120,14 +116,14 @@ public class NotifyRecordController extends BaseController {
 
     /**
      * 获取右上角通知图标最新状态
+     *
      * @return
      */
     @ResponseBody
     @GetMapping("/notifyRecordTip")
     public Page<NotifyRecordTip> notifyRecordTip() {
         Page<NotifyRecordTip> page = getPage(1, 5);
-        Page<NotifyRecordTip> list = notifyRecordService.selectNotifyRecordTipList(page, getCurUserId());
-        return list;
+        return notifyRecordService.selectNotifyRecordTipList(page, getCurUserId());
     }
 
 }

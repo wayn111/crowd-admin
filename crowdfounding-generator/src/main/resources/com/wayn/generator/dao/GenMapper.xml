@@ -9,7 +9,7 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <resultMap type="ColumnInfo" id="ColumnInfoResult">
+    <resultMap type="com.wayn.generator.domain.ColumnInfo" id="ColumnInfoResult">
         <id property="columnName" column="column_name"/>
         <result property="dataType" column="data_type"/>
         <result property="columnComment" column="column_comment"/>
@@ -22,17 +22,17 @@
     <select id="selectTableList" parameterType="TableInfo" resultMap="TableInfoResult">
         <include refid="selectGenVo"/>
         where table_comment <![CDATA[ <> ]]> '' and table_schema = (select database())
-        <if test="tableName != null and tableName != ''">
-            AND table_name like concat('%', #{tableName}, '%')
+        <if test="tableInfo.tableName != null and tableInfo.tableName != ''">
+            AND table_name like concat('%', #{tableInfo.tableName}, '%')
         </if>
-        <if test="tableComment != null and tableComment != ''">
-            AND table_comment like concat('%', #{tableComment}, '%')
+        <if test="tableInfo.tableComment != null and tableInfo.tableComment != ''">
+            AND table_comment like concat('%', #{tableInfo.tableComment}, '%')
         </if>
-        <if test="startTime != null and startTime != ''"><!-- 开始时间检索 -->
-            and date_format(create_time,'%y%m%d') &gt;= date_format(#{startTime},'%y%m%d')
+        <if test="tableInfo.startTime != null and tableInfo.startTime != ''"><!-- 开始时间检索 -->
+            and date_format(create_time,'%y%m%d') &gt;= date_format(#{tableInfo.startTime},'%y%m%d')
         </if>
-        <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
-            and date_format(create_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+        <if test="tableInfo.endTime != null and tableInfo.endTime != ''"><!-- 结束时间检索 -->
+            and date_format(create_time,'%y%m%d') &lt;= date_format(#{tableInfo.endTime},'%y%m%d')
         </if>
     </select>
 

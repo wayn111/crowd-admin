@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wayn.quartz.dao.JobDao">
 
-    <resultMap type="Job" id="JobResult">
+    <resultMap type="com.wayn.quartz.domain.Job" id="JobResult">
         <result property="id" column="id"/>
         <result property="jobName" column="jobName"/>
         <result property="jobGroup" column="jobGroup"/>
@@ -27,17 +27,17 @@
     <select id="selectJobList" parameterType="Job" resultMap="JobResult">
         <include refid="selectJobVo"/>
         <where>
-            <if test="id != null ">and id = #{id}</if>
-            <if test="jobName != null  and jobName != '' ">and jobName like CONCAT('%',#{jobName},'%')</if>
-            <if test="jobGroup != null  and jobGroup != '' ">and jobGroup = #{jobGroup}</if>
-            <if test="invokeTarget != null  and invokeTarget != '' ">and invokeTarget = #{invokeTarget}</if>
-            <if test="cronExpression != null  and cronExpression != '' ">and cronExpression = #{cronExpression}</if>
-            <if test="misfirePolicy != null  and misfirePolicy != '' ">and misfirePolicy = #{misfirePolicy}</if>
-            <if test="concurrent != null">and concurrent = #{concurrent}</if>
-            <if test="jobState != null">and jobState = #{jobState}</if>
-            <if test="startTime != null and startTime != ''">and createTime <![CDATA[ > ]]> #{startTime}</if>
-            <if test="endTime != null and endTime != ''">and createTime <![CDATA[ < ]]> #{endTime}</if>
-            <if test="remarks != null  and remarks != '' ">and remarks = #{remarks}</if>
+            <if test="job.id != null ">and id = #{job.id}</if>
+            <if test="job.jobName != null and job.jobName != ''">and jobName like CONCAT('%',#{job.jobName},'%')</if>
+            <if test="job.jobGroup != null and job.jobGroup != ''">and jobGroup = #{job.jobGroup}</if>
+            <if test="job.invokeTarget != null and job.invokeTarget != ''">and invokeTarget = #{job.invokeTarget}</if>
+            <if test="job.cronExpression != null and job.cronExpression != ''">and cronExpression = #{job.cronExpression}</if>
+            <if test="job.misfirePolicy != null and job.misfirePolicy != ''">and misfirePolicy = #{job.misfirePolicy}</if>
+            <if test="job.concurrent != null">and concurrent = #{job.concurrent}</if>
+            <if test="job.jobState != null">and jobState = #{job.jobState}</if>
+            <if test="job.startTime != null and job.startTime != ''">and createTime <![CDATA[ > ]]> #{job.startTime}</if>
+            <if test="job.endTime != null and job.endTime != ''">and createTime <![CDATA[ < ]]> #{job.endTime}</if>
+            <if test="job.remarks != null  and job.remarks != ''">and remarks = #{job.remarks}</if>
         </where>
     </select>
 

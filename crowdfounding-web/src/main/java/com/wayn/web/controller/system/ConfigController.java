@@ -75,8 +75,7 @@ public class ConfigController extends BaseController {
     public Response addSave(ModelMap modelMap, Config config) {
         config.setCreateTime(new Date());
         config.setCreateBy(ShiroUtil.getSessionUser().getUserName());
-        configService.save(config);
-        return Response.success("新增成功");
+        return Response.result(configService.save(config), "新增成功");
     }
 
     @RequiresPermissions("sys:config:edit")
@@ -85,8 +84,7 @@ public class ConfigController extends BaseController {
     public Response editSave(ModelMap modelMap, Config config) {
         config.setUpdateTime(new Date());
         config.setUpdateBy(ShiroUtil.getSessionUser().getUserName());
-        configService.update(config);
-        return Response.success("修改成功");
+        return Response.result(configService.update(config), "修改成功");
     }
 
 
@@ -94,16 +92,14 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Integer id) {
-        configService.remove(id);
-        return Response.success("删除成功");
+        return Response.result(configService.remove(id), "删除成功");
     }
 
     @RequiresPermissions("sys:config:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Integer[] ids) {
-        configService.batchRemove(ids);
-        return Response.success("删除成功");
+        return Response.result(configService.batchRemove(ids), "删除成功");
     }
 
     @PostMapping("/export")

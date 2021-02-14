@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
-public class TableInfo extends BaseEntity {
+public class TableInfo extends BaseEntity<TableInfo> {
     private static final long serialVersionUID = 1L;
 
     /**

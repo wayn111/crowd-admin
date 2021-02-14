@@ -19,6 +19,6 @@ public interface JobDao extends BaseMapper<Job> {
      * @param page，自动分页
      * @return 定时任务调度信息
      */
-    public List<Job> selectJobList(Page page, Job job);
+    List<Job> selectJobList(Page<Job> page, Job job);
 
 }

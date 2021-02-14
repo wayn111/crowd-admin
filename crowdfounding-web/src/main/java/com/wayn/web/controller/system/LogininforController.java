@@ -47,8 +47,7 @@ public class LogininforController extends BaseController {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap map, @PathVariable("id") Long id) {
-        logininforService.removeById(id);
-        return Response.success("删除登陆日志成功");
+        return Response.result(logininforService.removeById(id), "删除登陆日志成功");
     }
 
     @RequiresPermissions("sys:logininfor:remove")
@@ -56,8 +55,7 @@ public class LogininforController extends BaseController {
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap map, @RequestParam("ids[]") Long[] ids) {
         List<Long> idList = Arrays.asList(ids);
-        logininforService.removeByIds(idList);
-        return Response.success("删除登陆日志成功");
+        return Response.result(logininforService.removeByIds(idList), "删除登陆日志成功");
     }
 
     @PostMapping("/export")

@@ -67,14 +67,14 @@
         <include refid="selectNotifyRecordJoinNotify"/>
         <where>
             n.notifyState = 1
-            and r.receiveUserId = #{receiveUserId}
-            <if test="id != null ">and r.id = #{id}</if>
-            <if test="notifyId != null ">and r.notifyId = #{notifyId}</if>
-            <if test="isRead != null ">and r.isRead = #{isRead}</if>
-            <if test="createBy != null and createBy != ''">and n.createBy = #{createBy}</if>
-            <if test="readTime != null and readTime != ''">and r.readTime = #{readTime}</if>
-            <if test="startTime != null and startTime != ''">and r.createTime <![CDATA[ > ]]> #{startTime}</if>
-            <if test="endTime != null and endTime != ''">and r.createTime <![CDATA[ < ]]> #{endTime}</if>
+            and r.receiveUserId = #{notifyRecord.receiveUserId}
+            <if test="notifyRecord.id != null">and r.id = #{notifyRecord.id}</if>
+            <if test="notifyRecord.notifyId != null">and r.notifyId = #{notifyRecord.notifyId}</if>
+            <if test="notifyRecord.isRead != null">and r.isRead = #{notifyRecord.isRead}</if>
+            <if test="notifyRecord.createBy != null and notifyRecord.createBy != ''">and n.createBy = #{notifyRecord.createBy}</if>
+            <if test="notifyRecord.readTime != null and notifyRecord.readTime != ''">and r.readTime = #{notifyRecord.readTime}</if>
+            <if test="notifyRecord.startTime != null and notifyRecord.startTime != ''">and r.createTime <![CDATA[ > ]]> #{notifyRecord.startTime}</if>
+            <if test="notifyRecord.endTime != null and notifyRecord.endTime != ''">and r.createTime <![CDATA[ < ]]> #{notifyRecord.endTime}</if>
         </where>
     </select>
 
@@ -90,7 +90,7 @@
         <where>
             n.notifyState = 1
             and isRead = 0
-            and r.receiveUserId = #{receiveUserId}
+            and r.receiveUserId = #{curUserId}
         </where>
     </select>
 

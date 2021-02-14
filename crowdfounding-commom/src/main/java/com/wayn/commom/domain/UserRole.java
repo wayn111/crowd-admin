@@ -24,7 +24,7 @@ public class UserRole implements Serializable {
      * 主键
      */
     @TableId(type = IdType.ASSIGN_UUID)
-    private String Id;
+    private String id;
 
     /**
      * 用户主键
@@ -37,11 +37,11 @@ public class UserRole implements Serializable {
     private String roleId;
 
     public String getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(String Id) {
-        this.Id = Id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUserId() {
@@ -63,7 +63,7 @@ public class UserRole implements Serializable {
     @Override
     public String toString() {
         return new StringJoiner(", ", UserRole.class.getSimpleName() + "[", "]")
-                .add("Id='" + Id + "'")
+                .add("id='" + id + "'")
                 .add("userId='" + userId + "'")
                 .add("roleId='" + roleId + "'")
                 .toString();

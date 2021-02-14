@@ -9,11 +9,10 @@
         <result column="dictState" property="dictState"/>
         <result column="type" property="type"/>
         <result column="sort" property="sort"/>
-        <result column="parentId" property="parentId"/>
         <result column="createBy" property="createBy"/>
-        <result column="createDate" property="createDate"/>
+        <result column="createTime" property="createTime"/>
         <result column="updateBy" property="updateBy"/>
-        <result column="updateDate" property="updateDate"/>
+        <result column="updateTime" property="updateTime"/>
         <result column="remarks" property="remarks"/>
         <result column="delFlag" property="delFlag"/>
     </resultMap>

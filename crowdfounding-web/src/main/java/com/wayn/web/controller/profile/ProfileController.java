@@ -78,12 +78,11 @@ public class ProfileController extends BaseController {
     @ResponseBody
     @PostMapping("updateUser")
     public Response updateUser(HttpServletRequest request, User user) {
-        // 更新用户信息后，浏览器端订阅的用户认证信息就不一致了，需要刷新浏览器。
-        // 如果想要一致，需要修改stompEndpointRegistry添加握手处理器，将用户认证消息替换成用户id。
         ServletServerHttpRequest servletServerHttpRequest = new ServletServerHttpRequest(request);
         servletServerHttpRequest.getPrincipal();
-
-        userService.updateById(user);
+        if (!userService.updateById(user)) {
+            return Response.error("更新用户信息失败");
+        }
         Subject subject = SecurityUtils.getSubject();
         String realmName = subject.getPrincipals().getRealmNames().iterator().next();
         PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(userService.getById(user.getId()), realmName);
@@ -112,7 +111,10 @@ public class ProfileController extends BaseController {
     @PostMapping("userResetPwd")
     public Response userResetPwd(UserResetPasswordVO userResetPasswordVO) {
         String password = ShiroUtil.md5encrypt(userResetPasswordVO.getNewPassword(), userService.getById(getCurUserId()).getUserName());
-        userService.update().set("password", password).eq("id", getCurUserId()).update();
+        boolean update = userService.update().set("password", password).eq("id", getCurUserId()).update();
+        if (!update) {
+            return Response.error("更新用户密码失败");
+        }
         return Response.success("修改用户密码成功！");
     }
 
@@ -133,8 +135,10 @@ public class ProfileController extends BaseController {
         // Thumbnails.of(filePath + "/" + fileName).size(64, 64).toFile(new File(filePath, fileName));
         String requestUrl = HttpUtil.getRequestContext(request);
         String url = requestUrl + "/upload/avatar/" + fileName;
-        userService.update().set("userImg", url).eq("id", getCurUserId()).update();
-
+        boolean update = userService.update().set("userImg", url).eq("id", getCurUserId()).update();
+        if (!update) {
+            return Response.error("更新用户头像失败");
+        }
         // 更新subject中用户信息
         Subject subject = SecurityUtils.getSubject();
         String realmName = subject.getPrincipals().getRealmNames().iterator().next();

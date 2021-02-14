@@ -22,7 +22,7 @@ public interface NotifyRecordDao extends BaseMapper<NotifyRecord> {
      * @param notifyRecord
      * @return 通知记录信息
      */
-    List<NotifyRecordVO> selectNotifyRecordList(Page page, NotifyRecordVO notifyRecord);
+    List<NotifyRecordVO> selectNotifyRecordList(Page<NotifyRecordVO> page, NotifyRecordVO notifyRecord);
 
     /**
      * 查询通知记录信息，不分页
@@ -40,5 +40,11 @@ public interface NotifyRecordDao extends BaseMapper<NotifyRecord> {
      */
     NotifyRecordVO selectNotifyByNotifyRecordId(Long id);
 
-    List<NotifyRecordTip> selectNotifyRecordTipList(Page page, String curUserId);
+    /**
+     * 首页查看当前用户的左上角通知
+     * @param page
+     * @param curUserId
+     * @return
+     */
+    List<NotifyRecordTip> selectNotifyRecordTipList(Page<NotifyRecordTip> page, String curUserId);
 }

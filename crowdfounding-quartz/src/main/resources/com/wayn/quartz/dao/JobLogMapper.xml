@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wayn.quartz.dao.JobLogDao">
 
-    <resultMap type="JobLog" id="JobLogResult">
+    <resultMap type="com.wayn.quartz.domain.JobLog" id="JobLogResult">
         <result property="id" column="id"/>
         <result property="jobName" column="jobName"/>
         <result property="jobGroup" column="jobGroup"/>
@@ -22,15 +22,15 @@
     <select id="selectJobLogList" parameterType="JobLog" resultMap="JobLogResult">
         <include refid="selectJobLogVo"/>
         <where>
-            <if test="id != null ">and id = #{id}</if>
-            <if test="jobName != null  and jobName != '' ">and jobName like CONCAT('%',#{jobName},'%')</if>
-            <if test="jobGroup != null  and jobGroup != '' ">and jobGroup = #{jobGroup}</if>
-            <if test="invokeTarget != null  and invokeTarget != '' ">and invokeTarget = #{invokeTarget}</if>
-            <if test="jobMessage != null  and jobMessage != '' ">and jobMessage = #{jobMessage}</if>
-            <if test="jobState != null  and jobState != '' ">and jobState = #{jobState}</if>
-            <if test="exceptionInfo != null  and exceptionInfo != '' ">and exceptionInfo = #{exceptionInfo}</if>
-            <if test="startTime != null and startTime != ''">and createTime <![CDATA[ > ]]> #{startTime}</if>
-            <if test="endTime != null and endTime != ''">and createTime <![CDATA[ < ]]> #{endTime}</if>
+            <if test="jobLog.id != null">and id = #{jobLog.id}</if>
+            <if test="jobLog.jobName != null and jobLog.jobName != ''">and jobName like CONCAT('%',#{jobLog.jobName},'%')</if>
+            <if test="jobLog.jobGroup != null and jobLog.jobGroup != ''">and jobGroup = #{jobLog.jobGroup}</if>
+            <if test="jobLog.invokeTarget != null and jobLog.invokeTarget != ''">and invokeTarget = #{jobLog.invokeTarget}</if>
+            <if test="jobLog.jobMessage != null and jobLog.jobMessage != ''">and jobMessage = #{jobLog.jobMessage}</if>
+            <if test="jobLog.jobState != null and jobLog.jobState != ''">and jobState = #{jobLog.jobState}</if>
+            <if test="jobLog.exceptionInfo != null and jobLog.exceptionInfo != ''">and exceptionInfo = #{jobLog.exceptionInfo}</if>
+            <if test="jobLog.startTime != null and jobLog.startTime != ''">and createTime <![CDATA[ > ]]> #{jobLog.startTime}</if>
+            <if test="jobLog.endTime != null and jobLog.endTime != ''">and createTime <![CDATA[ < ]]> #{jobLog.endTime}</if>
         </where>
     </select>
 

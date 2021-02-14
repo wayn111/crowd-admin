@@ -69,8 +69,7 @@ public class DeptController extends BaseController {
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(Model model, Dept dept) {
-        deptService.save(dept);
-        return Response.success("部门新增成功");
+        return Response.result(deptService.save(dept), "部门新增成功");
     }
 
     @Log(value = "部门管理", operator = Operator.UPDATE)
@@ -78,8 +77,7 @@ public class DeptController extends BaseController {
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(Model model, Dept dept) {
-        deptService.update(dept);
-        return Response.success("部门修改成功");
+        return Response.result(deptService.update(dept), "部门修改成功");
     }
 
     @Log(value = "部门管理", operator = Operator.DELETE)
@@ -87,8 +85,7 @@ public class DeptController extends BaseController {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(Model model, @PathVariable("id") Long id) {
-        deptService.remove(id);
-        return Response.success("部门删除成功");
+        return Response.result(deptService.remove(id),"部门删除成功");
     }
 
     @ResponseBody

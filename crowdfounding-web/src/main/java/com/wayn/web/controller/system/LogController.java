@@ -64,8 +64,7 @@ public class LogController extends BaseController {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap map, @PathVariable("id") String id) {
-        logService.removeById(id);
-        return Response.success("删除日志成功");
+        return Response.result(logService.removeById(id),"删除日志成功");
     }
 
     @RequiresPermissions("sys:log:remove")
@@ -73,8 +72,7 @@ public class LogController extends BaseController {
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap map, @RequestParam("ids[]") String[] ids) {
         List<String> idList = Arrays.asList(ids);
-        logService.removeByIds(idList);
-        return Response.success("删除日志成功");
+        return Response.result(logService.removeByIds(idList),"删除日志成功");
     }
 
     @PostMapping("/export")

@@ -20,6 +20,6 @@ public interface NotifyDao extends BaseMapper<Notify> {
      * @param page，自动分页
      * @return 通知通告信息
      */
-    List<Notify> selectNotifyList(Page page, Notify notify);
+    List<Notify> selectNotifyList(Page<Notify> page, Notify notify);
 
 }

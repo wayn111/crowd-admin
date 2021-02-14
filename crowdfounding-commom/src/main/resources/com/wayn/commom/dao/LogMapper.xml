@@ -5,9 +5,17 @@
     <resultMap id="BaseResultMap" type="com.wayn.commom.domain.OperLog">
         <id column="id" property="id" />
         <result column="userName" property="userName" />
-        <result column="title" property="title" />
-        <result column="url" property="url" />
+        <result column="operState" property="operState" />
+        <result column="ip" property="ip" />
+        <result column="method" property="method" />
+        <result column="agent" property="agent" />
+        <result column="errorMsg" property="errorMsg" />
+        <result column="moduleName" property="moduleName" />
+        <result column="operation" property="operation" />
+        <result column="executeTime" property="executeTime" />
         <result column="requestParams" property="requestParams" />
+        <result column="requestMethod" property="requestMethod" />
+        <result column="requestResponse" property="requestResponse" />
         <result column="createTime" property="createTime" />
     </resultMap>
 </mapper>
