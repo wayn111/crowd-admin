@@ -41,7 +41,7 @@
                                  style="cursor:pointer;height: 64px"
                                  onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')"/>
                         </div>
-                        <div id="user-state" class="pull-left margin-left10">
+                        <div id="user-state" class="pull-left">
                             <p style="margin: 10px 0px 10px 0px;color: white">
                                 <strong class="font-bold">${user.nickName }</strong>
                             </p>

@@ -7,6 +7,7 @@
 <script src="${_ctx }/static/plugin/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
 <script src="${_ctx }/static/plugin/bootstrap-table-v1.18.0/bootstrap-table.min.js"></script>
 <script src="${_ctx }/static/plugin/bootstrap-table-v1.18.0/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="${_ctx }/static/plugin/bootstrap-table-v1.18.0/extensions/mobile/bootstrap-table-mobile.min.js?v=20210202"></script>
 <script src="${_ctx }/static/plugin/jsTree/jstree.min.js"></script>
 <script src="${_ctx }/static/plugin/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <script src="${_ctx }/static/plugin/layer/layer.min.js"></script>
@@ -26,7 +27,7 @@
             $('#scroll-up').toTop();
         }
 
-        // laydate 时间控件绑定
+        // layDate 时间控件绑定
         layDateQuery();
 
         // 初始化绑定树搜索控件

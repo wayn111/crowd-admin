@@ -7398,6 +7398,10 @@ body.skin-3 {
     position: relative;
 }
 
+.search-collapse .form-inline .form-group{
+    margin: 0 10px 0 0;
+}
+
 .margin-left10{
 	margin-left: 10px;
 }

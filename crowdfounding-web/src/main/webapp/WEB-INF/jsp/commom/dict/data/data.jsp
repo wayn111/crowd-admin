@@ -26,12 +26,12 @@
                         class="js-example-basic-single" id="dictType">
                 </select>
             </div>
-            <div class="form-group margin-left10">
+            <div class="form-group">
                 <label for="name">标签名</label>
                 <input type="text"
                        class="form-control" id="name">
             </div>
-            <a class="btn btn-primary btn-rounded btn-sm margin-left10"
+            <a class="btn btn-primary btn-rounded btn-sm"
                onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a>
             <a
                     class="btn btn-warning btn-rounded btn-sm" onclick="selectReset()"><i

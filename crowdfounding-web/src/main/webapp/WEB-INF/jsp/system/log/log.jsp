@@ -25,34 +25,34 @@
                 <label for="userName">操作用户</label>
                 <input type="text" class="form-control wayn-width-105" id="userName" name="userName">
             </div>
-            <div class="form-group  margin-left10">
+            <div class="form-group">
                 <label for="userName">模块名称</label>
                 <input type="text" class="form-control wayn-width-105" id="moduleName" name="moduleName">
             </div>
-            <div class="form-group  margin-left10">
+            <div class="form-group">
                 <label for="userName">IP</label>
                 <input type="text" class="form-control wayn-width-105" id="ip" name="ip">
             </div>
-            <div class="form-group margin-left10">
+            <div class="form-group">
                 <label for="operState">操作类型</label>
                 <select
                         class="js-example-basic-single" id="operation" name="operation">
                 </select>
             </div>
-            <div class="form-group margin-left10">
+            <div class="form-group">
                 <label for="operState">操作状态</label>
                 <select
                         class="js-example-basic-single" id="operState" name="operState">
                 </select>
             </div>
-            <div class="form-group margin-left10 select-time">
+            <div class="form-group select-time">
                 <label for="startTime">操作时间</label>
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
                        placeholder="开始时间"/>
                 <span>-</span>
                 <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
             </div>
-            <a class="btn btn-primary btn-rounded btn-sm margin-left10" onclick="reload()">
+            <a class="btn btn-primary btn-rounded btn-sm" onclick="reload()">
                 <i class="fa fa-search"></i>&nbsp;搜索
             </a>
             <a class="btn btn-warning btn-rounded btn-sm" onclick="selectReset()">

@@ -28,20 +28,20 @@
                 <label for="configKey">参数键名</label>
                 <input type="text" class="form-control" id="configKey" name="configKey">
             </div>
-            <div class="form-group margin-left10">
+            <div class="form-group">
                 <label for="configType">系统内置</label>
                 <select
                         class="js-example-basic-single" name="configType" id="configType">
                 </select>
             </div>
-            <div class="form-group margin-left10 select-time">
+            <div class="form-group select-time">
                 <label for="startTime">创建时间</label>
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
                        placeholder="开始时间"/>
                 <span>-</span>
                 <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
             </div>
-            <a class="btn btn-primary btn-rounded btn-sm margin-left10" onclick="reload()">
+            <a class="btn btn-primary btn-rounded btn-sm" onclick="reload()">
                 <i class="fa fa-search"></i>&nbsp;搜索
             </a>
             <a class="btn btn-warning btn-rounded btn-sm" onclick="selectReset()">

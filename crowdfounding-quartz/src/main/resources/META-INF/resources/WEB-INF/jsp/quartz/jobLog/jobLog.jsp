@@ -25,12 +25,12 @@
                 <label for="jobName">任务名称</label>
                 <input type="text" class="form-control" id="jobName" name="jobName">
             </div>
-            <div class="form-group margin-left10">
+            <div class="form-group">
                 <label for="jobState">执行状态</label>
                 <select class="js-example-basic-single" name="jobState" id="jobState">
                 </select>
             </div>
-            <div class="form-group margin-left10 select-time">
+            <div class="form-group select-time">
                 <label for="startTime">创建时间</label>
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
                        placeholder="开始时间"/>
@@ -38,7 +38,7 @@
                 <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime"
                        placeholder="结束时间"/>
             </div>
-            <a class="btn btn-primary btn-rounded btn-sm margin-left10"
+            <a class="btn btn-primary btn-rounded btn-sm"
                onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索
             </a>
             <a class="btn btn-warning btn-rounded btn-sm"
