@@ -7522,6 +7522,6 @@ input.error, select.error, .form-control.error {
 /** 左侧菜单选中样式 **/
 #side-menu li.active.selected>a,
 #side-menu li.active.selected>a:focus {
-    background-color: #21b9bb;
+    background-color: #19aa8d;
     color: #fff;
 }
