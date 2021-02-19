@@ -45,7 +45,7 @@ public class NotifyRecordServiceImpl extends ServiceImpl<NotifyRecordDao, Notify
 
     @Override
     public boolean save(NotifyRecord notifyRecord) {
-        return save(notifyRecord);
+        return super.save(notifyRecord);
     }
 
     @Override

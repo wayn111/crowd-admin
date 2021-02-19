@@ -47,26 +47,6 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
     }
 
     @Override
-    public boolean save(Config config) {
-        return save(config);
-    }
-
-    @Override
-    public boolean update(Config config) {
-        return updateById(config);
-    }
-
-    @Override
-    public boolean remove(Integer id) {
-        return removeById(id);
-    }
-
-    @Override
-    public boolean batchRemove(Integer[] ids) {
-        return removeByIds(Arrays.asList(ids));
-    }
-
-    @Override
     public String getValueByKey(String key) {
         QueryWrapper<Config> wrapper = new QueryWrapper<>();
         wrapper.eq("configKey", key);

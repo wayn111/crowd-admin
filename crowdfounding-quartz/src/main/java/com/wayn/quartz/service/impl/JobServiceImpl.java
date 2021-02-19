@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -48,7 +49,7 @@ public class JobServiceImpl extends ServiceImpl<JobDao, Job> implements JobServi
     public boolean save(Job job) {
         job.setCreateTime(new Date());
         job.setCreateBy(ShiroUtil.getSessionUser().getUserName());
-        boolean insert = save(job);
+        boolean insert = super.save(job);
         ScheduleUtil.createScheduleJob(scheduler, job);
         return insert;
     }
@@ -80,10 +81,7 @@ public class JobServiceImpl extends ServiceImpl<JobDao, Job> implements JobServi
     @Transactional
     @Override
     public boolean batchRemove(Long[] ids) throws SchedulerException {
-        for (Long id : ids) {
-            remove(id);
-        }
-        return true;
+        return removeByIds(Arrays.asList(ids));
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface DeptService extends IService<Dept> {
 
-	boolean save(Dept dept);
+	boolean saveDept(Dept dept);
 
 	boolean update(Dept dept);
 

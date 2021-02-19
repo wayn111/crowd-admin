@@ -14,6 +14,7 @@ import com.wayn.commom.domain.UserRole;
 import com.wayn.commom.domain.vo.Tree;
 import com.wayn.commom.domain.vo.UserVO;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
+import com.wayn.commom.exception.BusinessException;
 import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -105,7 +106,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     public boolean save(User user, String roleIds) {
         user.setCreateTime(new Date());
         user.setPassword(new SimpleHash("MD5", user.getPassword(), user.getUserName(), 1024).toString());
-        boolean flag = save(user);
+        boolean save = save(user);
+        if (!save) {
+            throw new BusinessException("保存用户失败");
+        }
         List<UserRole> list = new ArrayList<>();
         if (StringUtils.isNotBlank(roleIds)) {
             String[] split = roleIds.split(",");
@@ -116,18 +120,14 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
                 list.add(userRole);
             }
         }
-        userRoleService.removeById(new QueryWrapper<UserRole>().eq("userId", user.getId()));
-        if (list.size() > 0) {
-            userRoleService.saveBatch(list);
-        }
-        return flag;
+        userRoleService.remove(new QueryWrapper<UserRole>().eq("userId", user.getId()));
+        return list.size() <= 0 || userRoleService.saveBatch(list);
     }
 
     @CacheEvict(value = "menuCache", allEntries = true)
     @Transactional
     @Override
     public boolean update(User user, String roleIds) {
-        boolean flag = updateById(user);
         List<UserRole> list = new ArrayList<>();
         if (StringUtils.isNotBlank(roleIds)) {
             String[] split = roleIds.split(",");
@@ -142,24 +142,22 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         if (list.size() > 0) {
             userRoleService.saveBatch(list);
         }
-        return flag;
+        return updateById(user);
     }
 
     @Transactional
     @Override
     public boolean remove(String id) {
-        userDao.deleteById(id);
         userRoleService.remove(new QueryWrapper<UserRole>().eq("userId", id));
-        return true;
+        return removeById(id);
     }
 
     @Transactional
     @Override
     public boolean batchRemove(String[] ids) {
         List<String> list = Arrays.asList(ids);
-        userDao.deleteBatchIds(list);
-        list.forEach(id -> userRoleService.remove(new QueryWrapper<UserRole>().eq("userId", id)));
-        return true;
+        userRoleService.remove(new QueryWrapper<UserRole>().in("userId", list));
+        return removeByIds(list);
     }
 
     @Override

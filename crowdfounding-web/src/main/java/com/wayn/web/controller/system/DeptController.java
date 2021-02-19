@@ -69,7 +69,7 @@ public class DeptController extends BaseController {
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(Model model, Dept dept) {
-        return Response.result(deptService.save(dept), "部门新增成功");
+        return Response.result(deptService.saveDept(dept), "部门新增成功");
     }
 
     @Log(value = "部门管理", operator = Operator.UPDATE)

@@ -67,10 +67,10 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
 
     @CacheEvict(value = "dictCache", allEntries = true)
     @Override
-    public boolean save(Dict dict) {
+    public boolean saveDict(Dict dict) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         dict.setCreateBy(user.getUserName()).setCreateTime(new Date());
-        return save(dict);
+        return super.save(dict);
     }
 
     @CacheEvict(value = "dictCache", allEntries = true)

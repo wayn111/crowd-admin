@@ -32,7 +32,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptDao, Dept> implements DeptS
 
     @CacheEvict(value = "deptCache", allEntries = true)
     @Override
-    public boolean save(Dept dept) {
+    public boolean saveDept(Dept dept) {
         dept.setCreateTime(new Date());
         return save(dept);
     }

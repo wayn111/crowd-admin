@@ -46,7 +46,7 @@ public class JobLogServiceImpl extends ServiceImpl<JobLogDao, JobLog> implements
 
     @Override
     public boolean save(JobLog jobLog) {
-        return save(jobLog);
+        return super.save(jobLog);
     }
 
     @Override

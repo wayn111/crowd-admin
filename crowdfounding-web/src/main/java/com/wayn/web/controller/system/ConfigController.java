@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -84,7 +85,7 @@ public class ConfigController extends BaseController {
     public Response editSave(ModelMap modelMap, Config config) {
         config.setUpdateTime(new Date());
         config.setUpdateBy(ShiroUtil.getSessionUser().getUserName());
-        return Response.result(configService.update(config), "修改成功");
+        return Response.result(configService.updateById(config), "修改成功");
     }
 
 
@@ -92,14 +93,14 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Integer id) {
-        return Response.result(configService.remove(id), "删除成功");
+        return Response.result(configService.removeById(id), "删除成功");
     }
 
     @RequiresPermissions("sys:config:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Integer[] ids) {
-        return Response.result(configService.batchRemove(ids), "删除成功");
+        return Response.result(configService.removeByIds(Arrays.asList(ids)), "删除成功");
     }
 
     @PostMapping("/export")

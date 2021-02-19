@@ -22,15 +22,15 @@ public interface MenuService extends IService<Menu> {
 
     boolean remove(Long id);
 
-    public List<String> selectMenuIdsByUid(String id);
+    List<String> selectMenuIdsByUid(String id);
 
-    public List<String> selectResourceByUid(String id);
+    List<String> selectResourceByUid(String id);
 
-    public List<Menu> selectTreeMenuByUserId(String id) throws Exception;
+    List<Menu> selectTreeMenuByUserId(String id) throws Exception;
 
-    public Tree<Menu> getTree();
+    Tree<Menu> getTree();
 
-    public Tree<Menu> getTree(String roleId);
+    Tree<Menu> getTree(String roleId);
 
-    public List<Menu> list(MenuVO menu);
+    List<Menu> list(MenuVO menu);
 }

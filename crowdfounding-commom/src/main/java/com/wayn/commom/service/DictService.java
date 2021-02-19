@@ -22,7 +22,7 @@ public interface DictService extends IService<Dict> {
 
     boolean exists(Dict dict);
 
-    boolean save(Dict dict);
+    boolean saveDict(Dict dict);
 
     boolean update(Dict dict);
 

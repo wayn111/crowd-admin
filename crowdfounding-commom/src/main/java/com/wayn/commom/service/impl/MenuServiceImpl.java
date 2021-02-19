@@ -40,7 +40,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
     @CacheEvict(value = "menuCache", allEntries = true)
     @Override
     public boolean save(Menu menu) {
-        return insert(menu);
+        return super.save(menu);
     }
 
     @CacheEvict(value = "menuCache", allEntries = true)
@@ -187,11 +187,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuS
             trees.add(tree);
         });
         return TreeBuilderUtil.build(trees);
-    }
-
-    @CacheEvict(value = "menuCache", allEntries = true)
-    public boolean insert(Menu entity) {
-        return save(entity);
     }
 
     @CacheEvict(value = "menuCache", allEntries = true)

@@ -24,38 +24,6 @@ public interface ConfigService extends IService<Config> {
     Page<Config> selectConfigList(Page<Config> page, Config config);
 
     /**
-     * 新增{tableComment}
-     *
-     * @param config 参数配置信息
-     * @return 结果
-     */
-    boolean save(Config config);
-
-    /**
-     * 修改参数配置
-     *
-     * @param config 参数配置信息
-     * @return 结果
-     */
-    boolean update(Config config);
-
-    /**
-     * 删除参数配置
-     *
-     * @param id
-     * @return 结果
-     */
-    boolean remove(Integer id);
-
-    /**
-     * 批量删除参数配置
-     *
-     * @param ids
-     * @return 结果
-     */
-    boolean batchRemove(Integer[] ids);
-
-    /**
      * 根据参数key获取参数value
      *
      * @param key

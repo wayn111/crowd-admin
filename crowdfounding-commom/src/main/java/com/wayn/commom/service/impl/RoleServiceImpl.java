@@ -92,7 +92,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, Role> implements RoleS
     @Transactional
     @Override
     public boolean save(Role role, String menuIds) {
-        boolean flag = save(role);
+        boolean flag = super.save(role);
         List<RoleMenu> list = new ArrayList<>();
         if (StringUtils.isNotBlank(menuIds)) {
             String[] split = menuIds.split(",");
