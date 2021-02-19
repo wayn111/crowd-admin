@@ -1,12 +1,15 @@
 # crowd-admin
 
 ### Language
+
 - [简体中文](README.md)|[English](README_en.md)
 
 ### 项目介绍
-crowd-admin是一个通用后台权限管理系统，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
 
-#### 主要特性
+crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
+
+### 主要特性
+
 - 项目按功能模块化拆分，提升开发，测试效率
 - 支持后台消息推送
 - 集成elfinder进行文件管理
@@ -21,6 +24,7 @@ crowd-admin是一个通用后台权限管理系统，集成了rbac权限管理�
 - 支持统一输出异常，避免繁琐的判断
 
 ### 技术选型
+
 1. 后端
     - 核心框架：Spring
     - 控制层框架：SpringMVC
@@ -52,6 +56,7 @@ crowd-admin是一个通用后台权限管理系统，集成了rbac权限管理�
     - ide：Eclipse/Idea
 
 ### 内置模块
+
 1. 系统管理
     - 用户管理：系统操作者，可绑定多角色
     - 角色管理：菜单权限携带者，可配置到按钮级权限
@@ -75,24 +80,28 @@ crowd-admin是一个通用后台权限管理系统，集成了rbac权限管理�
     - 数据监控：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈
     - 系统服务：监视当前系统CPU、内存、磁盘、堆栈等相关信息
 
+### 参考教程
 
-### 开发教程
-- [RuoYi](https://gitee.com/y_project/RuoYi)文档
-- [Mybatis Plus](https://mp.baomidou.com/guide)文档
+- [RuoYi](http://doc.ruoyi.vip/) 文档
+- [Mybatis Plus](https://mp.baomidou.com/guide) 文档
 
 ### 获取源码
+
 - [crowd-admin 码云](https://gitee.com/wayn111/crowdfounding)
 - [crowd-admin github](https://github.com/wayn111/crowdfounding)
 
 ### 在线演示
+
 - <a href="http://wayn.xin/crowd" target="_blank">crowd-admin</a>
 
 ### 参考项目
+
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
 - [bootdo](https://gitee.com/lcg0124/bootdo)
 - [RuoYi](https://gitee.com/y_project/RuoYi)
 
 ### 实例截图
+
 __系统登陆__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/系统登陆.png "系统登陆.png")
 __首页__
@@ -111,5 +120,6 @@ __系统服务__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/系统服务.jpg "系统服务.jpg")
 
 ### 特别赞助
+
 <a href="https://www.jetbrains.com/" target="_blank">
 <img src="./crowdfounding-web/crowdfounding-img/jetbrains.png" width="100px" alt=""></a>
