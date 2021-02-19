@@ -1,10 +1,13 @@
 # crowdfounding
 
 ### Language
+
 - [简体中文](README.md)|[English](README_en.md)
 
 ### Introduction
-- Learning-oriented open source framework, simple and efficient, reasonable modular split, showing the essence of technology
+
+- Learning-oriented open source framework, simple and efficient, reasonable modular split, showing the essence of
+  technology
 - crowd-admin is a streamlined background admin system developed with SpringMVC+Shiro+Mybatis-Plus as the core
 - Encache + Redis configuration switch
 - Websocket message push
@@ -14,15 +17,17 @@
 - Add code generation module
 - Add server monitor module
 
-
 ### Get Source code
+
 - [crowd-admin gitee](https://gitee.com/wayn111/crowdfounding)
 - [crowd-admin git](https://github.com/wayn111/crowdfounding)
 
 ### Online demo
+
 - <a href="http://wayn.xin/crowd" target="_blank">crowd-admin</a>
 
-### Reference 
+### Reference
+
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
 - [bootdo](https://gitee.com/lcg0124/bootdo)
 - [RuoYi](https://gitee.com/y_project/RuoYi)
