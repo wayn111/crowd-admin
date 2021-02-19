@@ -44,9 +44,7 @@
 
 </div>
 <script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
-<script
-        src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
-<script src="${_ctx }/static/js/hplus/content.js"></script>
+<script src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
 </body>
 <!-- Mirrored from www.zi-han.net/theme/hplus/article.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
 </html>

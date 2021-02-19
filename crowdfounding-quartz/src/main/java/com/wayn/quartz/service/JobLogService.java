@@ -24,7 +24,7 @@ public interface JobLogService extends IService<JobLog> {
     public Page<JobLog> selectJobLogList(Page<JobLog> page, JobLog jobLog);
 
     /**
-     * 新增{tableComment}
+     * 新增任务调度日志
      *
      * @param jobLog 定时任务调度日志信息
      * @return 结果

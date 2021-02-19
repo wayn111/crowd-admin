@@ -1,7 +1,28 @@
+/**
+ * 首页方法封装处理
+ */
+layer.config({
+    extend: 'moon/style.css',
+    skin: 'layer-ext-moon'
+});
+
+/**
+ * 是否是手机环境
+ */
+function isMobileEnv() {
+    return navigator.userAgent.match(/(Android|iPhone|SymbianOS|Windows Phone|iPad|iPod)/i);
+}
+
+/**
+ * 导航栏切换
+ */
 function NavToggle() {
     $(".navbar-minimalize").trigger("click")
 }
 
+/**
+ * 左侧菜单系统名、头像动画
+ */
 function SmoothlyMenu() {
     if ($("body").hasClass("mini-navbar")) {
         $("body").hasClass("fixed-sidebar") ? ($("#side-menu").hide(), setTimeout(function () {
@@ -22,45 +43,30 @@ function localStorageSupport() {
     return "localStorage" in window && null !== window.localStorage
 }
 
-layer.config({
-    // extend: ["extend/layer.ext.js", "skin/moon/style.css"],
-    // skin: "layer-ext-moon"
-}), $(document).ready(function () {
-    function e() {
-        var e = $("body > #wrapper").height() - 61;
-        $(".sidebard-panel").css("min-height", e + "px")
-    }
+$(document).ready(function () {
 
-    $("#side-menu").metisMenu(), $(".right-sidebar-toggle").click(function () {
-        $("#right-sidebar").toggleClass("sidebar-open")
-    }), $(".sidebar-container").slimScroll({
-        height: "100%",
-        railOpacity: .4,
-        wheelStep: 10
-    }), $(".open-small-chat").click(function () {
-        $(this).children().toggleClass("fa-comments").toggleClass("fa-remove"), $(".small-chat-box").toggleClass("active")
-    }), $(".small-chat-box .content").slimScroll({
-        height: "234px",
-        railOpacity: .4
-    }), $(".check-link").click(function () {
-        var e = $(this).find("i"), a = $(this).next("span");
-        return e.toggleClass("fa-check-square").toggleClass("fa-square-o"), a.toggleClass("todo-completed"), !1
-    }), $(function () {
+    $("#side-menu").metisMenu();
+
+    $(function () {
         $(".sidebar-collapse").slimScroll({height: "100%", railOpacity: .9, alwaysVisible: !1})
-    }), $(".navbar-minimalize").click(function () {
+    });
+
+    $(".navbar-minimalize").click(function () {
         $("body").toggleClass("mini-navbar"), SmoothlyMenu()
-    }), e(), $(window).bind("load resize click scroll", function () {
-        $("body").hasClass("body-small") || e()
-    }), $(window).scroll(function () {
-        $(window).scrollTop() > 0 && !$("body").hasClass("fixed-nav") ? $("#right-sidebar").addClass("sidebar-top") : $("#right-sidebar").removeClass("sidebar-top")
-    }), $(".full-height-scroll").slimScroll({height: "100%"}), $("#side-menu>li").click(function () {
+    });
+
+
+    $("#side-menu>li").click(function () {
         $("body").hasClass("mini-navbar") && NavToggle()
-    }), $("#side-menu>li li a").click(function () {
+    });
+
+    $("#side-menu>li li a").click(function () {
         $(window).width() < 769 && NavToggle()
-    }), $(".nav-close").click(NavToggle), /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) && $("#content-main").css("overflow-y", "auto")
-}), $(window).bind("load resize", function () {
-    $(this).width() < 769 && ($("body").addClass("mini-navbar"), $(".navbar-static-side").fadeIn())
-}), $(function () {
+    });
+    $(".nav-close").click(NavToggle), /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) && $("#content-main").css("overflow-y", "auto")
+});
+
+$(function () {
     if ($("#fixednavbar").click(function () {
         $("#fixednavbar").is(":checked") ? ($(".navbar-static-top").removeClass("navbar-static-top").addClass("navbar-fixed-top"), $("body").removeClass("boxed-layout"), $("body").addClass("fixed-nav"), $("#boxedlayout").prop("checked", !1), localStorageSupport && localStorage.setItem("boxedlayout", "off"), localStorageSupport && localStorage.setItem("fixednavbar", "on")) : ($(".navbar-fixed-top").removeClass("navbar-fixed-top").addClass("navbar-static-top"), $("body").removeClass("fixed-nav"), localStorageSupport && localStorage.setItem("fixednavbar", "off"))
     }), $("#collapsemenu").click(function () {
@@ -88,11 +94,17 @@ layer.config({
 /**
  * 移动端适配
  */
+var isMobile = false;
 $(window).bind("load resize",
     function () {
-        if ($(this).width() < 769) {
+        isMobile = isMobileEnv() || $(window).width() < 769;
+        if (isMobile) {
+            $("body").addClass("mini-navbar");
             $('.navbar-static-side').fadeIn();
             $(".wayn-h3,#user-state,.navbar-top-links").fadeOut();
+        } else {
         }
     }
 );
+
+
