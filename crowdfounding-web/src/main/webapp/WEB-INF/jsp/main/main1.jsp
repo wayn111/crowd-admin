@@ -88,11 +88,31 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v21">v2.1.0</a><code
+                                            class="pull-right">2021.02.20</code>
+                                    </h5>
+                                </div>
+                                <div id="v21" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            升级mybatis plus至3.4.2，优化移动端显示效果，修复bug
+                                        </div>
+                                        <ol>
+                                            <li>升级mybatis plus至3.4.2</li>
+                                            <li>优化移动端显示效果</li>
+                                            <li>修复bug</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v20">v2.0.0</a><code
                                             class="pull-right">2020.12.17</code>
                                     </h5>
                                 </div>
-                                <div id="v20" class="panel-collapse collapse in">
+                                <div id="v20" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             优化前端资源,升级前端插件,性能优化,修复bug
