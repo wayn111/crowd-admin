@@ -321,6 +321,7 @@
         select2Init('.js-example-basic-single', config);
         load();
     })
+
 </script>
 </body>
 </html>
