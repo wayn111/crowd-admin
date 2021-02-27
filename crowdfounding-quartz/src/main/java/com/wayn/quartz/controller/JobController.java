@@ -21,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 @RequestMapping("/quartz/job")
 @Controller
 public class JobController extends BaseController {
@@ -94,7 +96,7 @@ public class JobController extends BaseController {
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) throws SchedulerException {
-        return Response.result(jobService.batchRemove(ids), "删除成功");
+        return Response.result(jobService.removeByIds(Arrays.asList(ids)), "删除成功");
     }
 
     @Log(value = "任务调度", operator = Operator.UPDATE)

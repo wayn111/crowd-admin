@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -76,12 +75,6 @@ public class JobServiceImpl extends ServiceImpl<JobDao, Job> implements JobServi
             scheduler.deleteJob(ScheduleUtil.getJobKey(id, jobGroup));
         }
         return flag;
-    }
-
-    @Transactional
-    @Override
-    public boolean batchRemove(Long[] ids) throws SchedulerException {
-        return removeByIds(Arrays.asList(ids));
     }
 
     @Override

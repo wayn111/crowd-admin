@@ -45,14 +45,19 @@ public interface JobService extends IService<Job> {
     boolean remove(Long id) throws SchedulerException;
 
     /**
-     * 批量删除定时任务调度
+     * 修改定时任务状态
      *
-     * @param ids
-     * @return 结果
+     * @param job 定时任务调度信息
+     * @return
+     * @throws SchedulerException
      */
-    boolean batchRemove(Long[] ids) throws SchedulerException;
-
     boolean changeStatus(Job job) throws SchedulerException;
 
+    /**
+     * 定时任务执行
+     *
+     * @param id 定时任务ID
+     * @throws SchedulerException
+     */
     void run(Long id) throws SchedulerException;
 }
