@@ -10,7 +10,8 @@
     <%@ include file="/commom/taglib.jsp" %>
     <link href="${_ctx }/static/plugin/bootstrap-v3.3.7/css/bootstrap.min.css?v=3.3.7"
           rel="stylesheet">
-    <link href="${_ctx }/static/css/font-awesome.css?v=4.7.0" rel="stylesheet">
+<%--    <link href="${_ctx }/static/css/font-awesome.css?v=4.7.0" rel="stylesheet">--%>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     <link href="${_ctx }/static/css/animate.min.css" rel="stylesheet">
     <link href="${_ctx }/static/css/style.css?v=4.0" rel="stylesheet">
 </head>

@@ -244,8 +244,10 @@
 <script src="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.ui.position.min.js"></script>
 <script src="${_ctx }/static/js/hplus/hplus.js?v=4.1.0"></script>
 <script src="${_ctx }/static/js/hplus/contabs.js"></script>
-<script src="${_ctx }/static/plugin/vue-2.6.10/vue.min.js"></script>
-<script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>
+<%--<script src="${_ctx }/static/plugin/vue-2.6.10/vue.min.js"></script>--%>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
+<%--<script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>--%>
+<script src="https://cdn.bootcdn.net/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
 <script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
 <script src="${_ctx }/static/plugin/toastr/toastr.min.js"></script>
 <script>
