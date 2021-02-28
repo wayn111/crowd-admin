@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wayn.commom.dao.LogininforDao">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wayn.commom.domain.Logininfor">
+        <id column="infoId" property="infoId"/>
+        <result column="loginName" property="loginName"/>
+        <result column="status" property="status"/>
+        <result column="ipaddr" property="ipaddr"/>
+        <result column="loginLocation" property="loginLocation"/>
+        <result column="browser" property="browser"/>
+        <result column="os" property="os"/>
+        <result column="msg" property="msg"/>
+        <result column="createTime" property="createTime"/>
+    </resultMap>
+
+    <resultMap id="LoginLocationCountMap" type="com.wayn.commom.domain.vo.CityCountVO">
+        <result column="loginLocation" property="loginLocation"/>
+        <result column="num" property="num"/>
+    </resultMap>
+
+    <select id="selectLoginLocationCount" resultMap="LoginLocationCountMap">
+        SELECT
+            l.loginLocation,
+            COUNT( 1 ) as num
+        FROM
+            sys_logininfor l
+        WHERE
+            l.loginLocation LIKE '中国%'
+        GROUP BY
+            l.loginLocation
+    </select>
+</mapper>

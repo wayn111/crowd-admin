@@ -75,6 +75,44 @@
             </div>
         </div>
         <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>图表</h5>
+                </div>
+                <div class="ibox-content">
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="main" style="height:500px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>联系信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <%--<p><i class="fa fa-send-o"></i> 官网：<a href="http://www.ruoyi.vip" target="_blank">http://www.ruoyi.vip</a>
+                    </p>--%>
+                    <p><i class="fa fa-qq"></i>QQ：
+                        <a target="_blank"
+                           href="http://wpa.qq.com/msgrd?v=3&uin=1669738430&site=qq&menu=yes"><img
+                                border="0" src="http://wpa.qq.com/pa?p=2:1669738430:52" alt="1669738430"
+                                title="1669738430"/>1669738430</a>
+                    </p>
+                    <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">/ *waynaqua</a>
+                    </p>
+                    <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *waynaqua</a>
+                    </p>
+                    <%--<p id="pay-qrcode">
+                        <a href="javascript:;"><img src="${_ctx}/static/img/pay.png" width="100%" alt="请使用手机支付宝或者微信扫码支付">
+                        </a>
+                    </p>--%>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
             <div class="ibox float-e-margins no-drop">
                 <div class="ibox-title">
                     <h5>更新日志</h5>
@@ -320,38 +358,13 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>联系信息</h5>
-                </div>
-                <div class="ibox-content">
-                    <%--<p><i class="fa fa-send-o"></i> 官网：<a href="http://www.ruoyi.vip" target="_blank">http://www.ruoyi.vip</a>
-                    </p>--%>
-                    <p><i class="fa fa-qq"></i>QQ：
-                        <a target="_blank"
-                           href="http://wpa.qq.com/msgrd?v=3&uin=1669738430&site=qq&menu=yes"><img
-                                border="0" src="http://wpa.qq.com/pa?p=2:1669738430:52" alt="1669738430"
-                                title="1669738430"/>1669738430</a>
-                    </p>
-                    <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">/ *waynaqua</a>
-                    </p>
-                    <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *waynaqua</a>
-                    </p>
-                    <%--<p id="pay-qrcode">
-                        <a href="javascript:;"><img src="${_ctx}/static/img/pay.png" width="100%" alt="请使用手机支付宝或者微信扫码支付">
-                        </a>
-                    </p>--%>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 <%--<%@ include file="/commom/footer.jsp" %>--%>
 <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
 <script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
 <script src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
+<script src="${_ctx }/static/plugin/echarts-v5.0.2/echarts.min.js?v=5.0.2"></script>
 <script src="${_ctx }/static/js/common/common-ui.js"></script>
 <script>
     $(function () {
@@ -359,6 +372,58 @@
         if ($.fn.toTop !== undefined) {
             $('#scroll-up').toTop();
         }
+
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+            title: {
+                text: '全国各省访问次数',
+                subtext: '',
+                left: 'right'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                type: 'scroll',
+                left: 'left',
+                orient: 'vertical',
+                right: 10,
+                top: 20,
+                bottom: 20,
+            },
+            series: [
+                {
+                    name: '访问',
+                    type: 'pie',
+                    radius: '50%',
+                    center: ['50%', '50%'],
+                    data: [
+                        {value: 108, name: '湖北'},
+                        {value: 73, name: '湖南'},
+                        {value: 58, name: '河北'},
+                        {value: 48, name: '广东'},
+                        {value: 30, name: '黑龙江'}
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        $.get(_ctx + '/main/countryProvinceCount', function (res) {
+            if (res.code == 100) {
+                option.series[0].data = res.map.data;
+            }
+            option && myChart.setOption(option);
+        });
+
     })
 </script>
 </body>
