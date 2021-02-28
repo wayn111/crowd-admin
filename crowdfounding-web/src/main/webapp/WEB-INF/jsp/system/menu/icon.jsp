@@ -8,7 +8,8 @@
 <%@ include file="/commom/taglib.jsp"%>
 <%@ include file="/commom/header.jsp"%>
 <title>Font Awesome Ico list</title>
-<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
+<%--<%--<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>--%>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.js"></script>
 <style type="text/css">
 .fa {
 	margin: 5px;

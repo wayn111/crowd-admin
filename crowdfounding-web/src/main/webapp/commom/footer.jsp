@@ -1,5 +1,6 @@
 <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
-<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
+<%--<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>--%>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.js"></script>
 <script src="${_ctx }/static/plugin/validate/jquery.validate.min.js?v=1.13"></script>
 <script src="${_ctx }/static/plugin/validate/messages_zh.min.js"></script>
 <script src="${_ctx }/static/plugin/jquery-layout/jquery.layout-latest.js?v=1.4"></script>

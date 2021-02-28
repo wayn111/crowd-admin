@@ -362,7 +362,8 @@
 </div>
 <%--<%@ include file="/commom/footer.jsp" %>--%>
 <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
-<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
+<%--<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>--%>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.js"></script>
 <script src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
 <%--<script src="${_ctx }/static/plugin/echarts-v5.0.2/echarts.min.js?v=5.0.2"></script>--%>
 <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.1/echarts.min.js"></script>
@@ -424,7 +425,6 @@
             }
             option && myChart.setOption(option);
         });
-
     })
 </script>
 </body>

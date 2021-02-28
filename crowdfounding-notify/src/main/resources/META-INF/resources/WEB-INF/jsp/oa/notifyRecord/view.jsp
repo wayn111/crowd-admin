@@ -11,9 +11,10 @@
     <link href="${_ctx }/static/plugin/bootstrap-v3.3.7/css/bootstrap.min.css?v=3.3.7"
           rel="stylesheet">
 <%--    <link href="${_ctx }/static/css/font-awesome.css?v=4.7.0" rel="stylesheet">--%>
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
-    <link href="${_ctx }/static/css/animate.min.css" rel="stylesheet">
-    <link href="${_ctx }/static/css/style.css?v=4.0" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<%--    <link href="${_ctx }/static/css/animate.min.css" rel="stylesheet">--%>
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="${_ctx }/static/css/style.min.css?v=4.0" rel="stylesheet">
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content  animated fadeInRight article">
@@ -44,7 +45,8 @@
     </div>
 
 </div>
-<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
+<%--<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>--%>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.js"></script>
 <script src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
 </body>
 <!-- Mirrored from www.zi-han.net/theme/hplus/article.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
