@@ -1,10 +1,17 @@
-# crowdfounding
+# crowd-admin
 
 ### Language
 
 - [简体中文](README.md)|[English](README_en.md)
 
-### Introduction
+### Introductio
+
+Crowd-admin is a scaffolding of a background authority management system, which integrates common functions such as rbac
+authority management, message push, email sending, task scheduling, code generation, elfinder file management, etc. Each
+business in the system is divided by modules, and the front desk uses H+ templates. It is easy to learn for a newcomer
+to Java, and can quickly integrate into the enterprise development guidance project after learning.
+
+### Features
 
 - Learning-oriented open source framework, simple and efficient, reasonable modular split, showing the essence of
   technology
@@ -51,3 +58,8 @@ __file manager__
 ![file manager](./crowdfounding-web/crowdfounding-img/文件管理.png "文件管理.png")
 __system server__
 ![system server](./crowdfounding-web/crowdfounding-img/系统服务.jpg "系统服务.jpg")
+
+### Sponsor
+
+<a href="https://www.jetbrains.com/" target="_blank">
+<img src="./crowdfounding-web/crowdfounding-img/jetbrains.png" width="100px" alt=""></a>
