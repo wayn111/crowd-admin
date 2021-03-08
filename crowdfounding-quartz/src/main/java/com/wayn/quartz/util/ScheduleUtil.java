@@ -48,7 +48,6 @@ public class ScheduleUtil {
             // 根据是否允许并行，获取Job任务类
             Class<? extends org.quartz.Job> jobClass = job.getConcurrent() == 1 ? ScheduleJob.class : ScheduleJobDisallowConcurrent.class;
             // 构建job信息
-            // 构建job信息
             Long jobId = job.getId();
             String jobGroup = job.getJobGroup();
 
@@ -68,6 +67,12 @@ public class ScheduleUtil {
 
             // 放入参数，运行时的方法可以获取
             jobDetail.getJobDataMap().put(ScheduleConstants.TASK_PROPERTIES, job);
+            // 判断是否存在
+            if (scheduler.checkExists(getJobKey(jobId, jobGroup))) {
+                // 防止创建时存在数据问题 先移除，然后在执行创建操作
+                scheduler.deleteJob(getJobKey(jobId, jobGroup));
+            }
+
             scheduler.scheduleJob(jobDetail, trigger);
 
             // 暂停任务
@@ -88,7 +93,6 @@ public class ScheduleUtil {
             // 参数
             JobDataMap dataMap = new JobDataMap();
             dataMap.put(ScheduleConstants.TASK_PROPERTIES, job);
-
             scheduler.triggerJob(getJobKey(job.getId(), job.getJobGroup()), dataMap);
         } catch (SchedulerException e) {
             log.error("执行定时任务失败", e);

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.wayn.commom.base.BusinessEntity;
+import com.wayn.quartz.util.CronUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
@@ -155,6 +157,13 @@ public class Job extends BusinessEntity<Job> {
     public Job setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
         return this;
+    }
+
+    public Date getNextValidTime() {
+        if (StringUtils.isNotEmpty(cronExpression)) {
+            return CronUtils.getNextExecution(cronExpression);
+        }
+        return null;
     }
 
     @Override
