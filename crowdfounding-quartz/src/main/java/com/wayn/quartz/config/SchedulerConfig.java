@@ -11,7 +11,7 @@ import java.util.Properties;
 public class SchedulerConfig {
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource,AutowiringSpringBeanJobFactory jobFactory) {
+    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource, AutowiringSpringBeanJobFactory jobFactory) {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setDataSource(dataSource);
 
