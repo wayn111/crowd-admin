@@ -118,7 +118,7 @@ __文件管理__
 __系统服务__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/系统服务.jpg "系统服务.jpg")
 
-### 特别赞助
+### 特别赞助 
 
 <a href="https://www.jetbrains.com/" target="_blank">
 <img src="./crowdfounding-web/crowdfounding-img/jetbrains.png" width="100px" alt=""></a>
