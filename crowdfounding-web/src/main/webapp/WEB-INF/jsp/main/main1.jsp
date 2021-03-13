@@ -81,7 +81,7 @@
                 </div>
                 <div class="ibox-content">
                     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-                    <div id="main" style="height:500px;"></div>
+                    <div id="main" style="min-width: 330px;min-height: 360px"></div>
                 </div>
             </div>
         </div>
@@ -383,7 +383,7 @@
             title: {
                 text: '全国各省访问次数',
                 subtext: '',
-                left: 'right'
+                left: 'center'
             },
             tooltip: {
                 trigger: 'item'
@@ -391,7 +391,7 @@
             legend: {
                 type: 'scroll',
                 left: 'left',
-                orient: 'auto',
+                orient: 'vertical',
                 right: 10,
                 top: 20,
                 bottom: 20,
@@ -402,6 +402,14 @@
                     type: 'pie',
                     radius: '50%',
                     center: ['50%', '50%'],
+                    label: {
+                        // position: 'outer',
+                        // alignTo: 'edge',
+                        // margin: 20
+                        position: 'outer',
+                        alignTo: 'labelLine',
+                        bleedMargin: 5
+                    },
                     data: [
                         {value: 108, name: '湖北'},
                         {value: 73, name: '湖南'},
@@ -415,6 +423,53 @@
                             shadowOffsetX: 0,
                             shadowColor: 'rgba(0, 0, 0, 0.5)'
                         }
+                    }
+                }
+            ],
+            media: [ // 这里定义了 media query 的逐条规则。
+                {
+                    query: {
+                        maxAspectRatio: 1           // 当长宽比小于1时。
+                    },
+                    option: {
+                        legend: {                   // legend 放在底部中间。
+                            right: 'center',
+                            bottom: 0,
+                            orient: 'horizontal'    // legend 横向布局。
+                        },
+                        series: [                   // 两个饼图左右布局。
+                            {
+                                type: 'pie',
+                                radius: '50%',
+                                center: ['50%', '50%']
+                            }
+                        ]
+                    }
+                },
+                {
+                    query: {
+                        maxWidth: 769               // 当容器宽度小于 769 时。
+                    },
+                    option: {
+                        title: {
+                            text: '全国各省访问次数',
+                            subtext: '',
+                            left: 'left'
+                        },
+                        legend: {
+                            // show: false             // 不展示
+                            type: 'scroll',
+                            top: '10%',
+                            left: 'center',
+                            bottom: 10,
+                        },
+                        series: [                   // 两个饼图上下布局。
+                            {
+                                type: 'pie',
+                                radius: '50%',
+                                center: ['50%', '50%']
+                            }
+                        ]
                     }
                 }
             ]

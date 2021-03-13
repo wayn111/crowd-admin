@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,12 +59,22 @@ public class MainController extends BaseController {
     @GetMapping("/countryProvinceCount")
     public Response countryProvinceCount(Model model) {
         List<CityCountVO> locationCountVOS = logininforService.selectLoginLocationCount();
-        List<CityCountVO> collect = locationCountVOS.stream().map(loginLocationCountVO -> {
-            CityCountVO locationCountVO = new CityCountVO();
-            locationCountVO.setValue(loginLocationCountVO.getNum());
-            locationCountVO.setName(loginLocationCountVO.getLoginLocation().split("\\|")[2]);
-            return locationCountVO;
-        }).collect(Collectors.toList());
+        List<CityCountVO> collect = new ArrayList<>(locationCountVOS.stream()
+                .filter(loginLocationCountVO -> {
+                    String province = loginLocationCountVO.getLoginLocation().split("\\|")[2];
+                    return province.length() > 2;
+                })
+                .map(loginLocationCountVO -> {
+                    CityCountVO locationCountVO = new CityCountVO();
+                    String province = loginLocationCountVO.getLoginLocation().split("\\|")[2];
+                    locationCountVO.setValue(loginLocationCountVO.getNum());
+                    locationCountVO.setName(province);
+                    return locationCountVO;
+                })
+                .collect(Collectors.toMap(CityCountVO::getName, cityCountVO -> cityCountVO, (o1, o2) -> {
+                    o1.setValue(o1.getValue() + o2.getValue());
+                    return o1;
+                })).values()).stream().sorted((o1, o2) -> (int) (o2.getValue() - o1.getValue())).collect(Collectors.toList());
         return Response.success().add("data", collect);
     }
 
