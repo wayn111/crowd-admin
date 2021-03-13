@@ -391,7 +391,7 @@
             legend: {
                 type: 'scroll',
                 left: 'left',
-                orient: 'vertical',
+                orient: 'auto',
                 right: 10,
                 top: 20,
                 bottom: 20,
