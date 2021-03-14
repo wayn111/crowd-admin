@@ -62,4 +62,4 @@ __system server__
 ### Sponsor
 
 <a href="https://www.jetbrains.com/" target="_blank">
-<img src="./crowdfounding-web/crowdfounding-img/jetbrains.png" width="100px" alt=""></a>
+<img src="./crowdfounding-web/crowdfounding-img/jetbrains-training-partner.svg" alt=""></a>
