@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * 定时任务schedule帮助类
  */
 public class ScheduleUtil {
-    private static Logger log = LoggerFactory.getLogger(ScheduleUtil.class);
+    private static final Logger log = LoggerFactory.getLogger(ScheduleUtil.class);
 
     /**
      * 获取触发器key
@@ -46,7 +46,7 @@ public class ScheduleUtil {
 
         try {
             // 根据是否允许并行，获取Job任务类
-            Class<? extends org.quartz.Job> jobClass = job.getConcurrent() == 1 ? ScheduleJob.class : ScheduleJobDisallowConcurrent.class;
+            Class<? extends org.quartz.Job> jobClass = job.getConcurrent() == 1 ? ScheduleJobExecution.class : ScheduleJobDisallowConcurrentExecution.class;
             // 构建job信息
             Long jobId = job.getId();
             String jobGroup = job.getJobGroup();

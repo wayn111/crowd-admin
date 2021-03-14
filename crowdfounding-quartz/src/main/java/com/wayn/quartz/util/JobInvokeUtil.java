@@ -103,8 +103,8 @@ public class JobInvokeUtil {
         }
         String[] methodParams = methodStr.split(",");
         List<Object[]> classs = new LinkedList<>();
-        for (int i = 0; i < methodParams.length; i++) {
-            String str = StringUtils.trimToEmpty(methodParams[i]);
+        for (String methodParam : methodParams) {
+            String str = StringUtils.trimToEmpty(methodParam);
             // String字符串类型，包含'
             if (StringUtils.contains(str, "'")) {
                 // date类型，str可被解析为date对象
@@ -158,14 +158,13 @@ public class JobInvokeUtil {
         Object[] classs = new Object[methodParams.size()];
         int index = 0;
         for (Object[] os : methodParams) {
-            classs[index] = (Object) os[0];
+            classs[index] = os[0];
             index++;
         }
         return classs;
     }
 
     public static boolean checkInvokeTargetIsValid(String invokeTarget) throws Exception {
-
         String method = StringUtils.substringBefore(invokeTarget, "(");
         String methodName = StringUtils.substringAfterLast(method, ".");
         String className = StringUtils.substringBeforeLast(method, ".");

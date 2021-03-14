@@ -24,8 +24,9 @@ public class WelComeJob {
     }
 
     public void test(String a, Integer b) {
-        logger.info("welComeJob ----- test({},{})", a, b);
+        logger.info("welComeJob 欢迎----- test({},{})", a, b);
     }
+
 }
 
 
