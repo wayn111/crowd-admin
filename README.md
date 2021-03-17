@@ -93,7 +93,7 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 
 - <a href="http://wayn.xin/crowd" target="_blank">crowd-admin</a>
 
-### 参考项目 
+### 参考项目
 
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
 - [bootdo](https://gitee.com/lcg0124/bootdo)
@@ -118,7 +118,7 @@ __文件管理__
 __系统服务__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/系统服务.jpg "系统服务.jpg")
 
-### 特别赞助 
+### 特别赞助
 
 <a href="https://www.jetbrains.com/" target="_blank">
 <img src="./crowdfounding-web/crowdfounding-img/jetbrains-training-partner.svg" width="20%" alt=""></a>
