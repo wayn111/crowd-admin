@@ -56,8 +56,8 @@ public class MainController extends BaseController {
     }
 
     @ResponseBody
-    @GetMapping("/countryProvinceCount")
-    public Response countryProvinceCount(Model model) {
+    @GetMapping("/countryProvinceAccessCount")
+    public Response countryProvinceAccessCount(Model model) {
         List<CityCountVO> locationCountVOS = logininforService.selectLoginLocationCount();
         List<CityCountVO> collect = new ArrayList<>(locationCountVOS.stream()
                 .filter(loginLocationCountVO -> {

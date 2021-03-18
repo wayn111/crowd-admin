@@ -474,7 +474,7 @@
                 }
             ]
         };
-        $.get(_ctx + '/main/countryProvinceCount', function (res) {
+        $.get(_ctx + '/main/countryProvinceAccessCount', function (res) {
             if (res.code == 100) {
                 option.series[0].data = res.map.data;
             }
