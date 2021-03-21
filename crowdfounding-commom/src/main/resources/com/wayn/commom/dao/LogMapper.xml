@@ -18,4 +18,23 @@
         <result column="requestResponse" property="requestResponse" />
         <result column="createTime" property="createTime" />
     </resultMap>
+
+    <resultMap id="EcharMap" type="com.wayn.commom.domain.vo.EchartVO">
+        <result column="name" property="name"/>
+        <result column="value" property="value"/>
+    </resultMap>
+
+
+    <select id="selectModuleUseStatistic" resultMap="EcharMap">
+        SELECT
+            l.moduleName as name,
+            COUNT( 1 ) as value
+        FROM
+            sys_oper_log l
+        GROUP BY
+            l.moduleName
+        ORDER BY
+            value DESC
+    </select>
+
 </mapper>

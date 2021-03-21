@@ -2,8 +2,9 @@ package com.wayn.web.controller.home;
 
 import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Menu;
-import com.wayn.commom.domain.vo.CityCountVO;
+import com.wayn.commom.domain.vo.EchartVO;
 import com.wayn.commom.service.ConfigService;
+import com.wayn.commom.service.LogService;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.service.MenuService;
 import com.wayn.commom.util.Response;
@@ -33,6 +34,9 @@ public class MainController extends BaseController {
     @Autowired
     private LogininforService logininforService;
 
+    @Autowired
+    private LogService logService;
+
     @GetMapping
     public String index(Model model) throws Exception {
         List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
@@ -58,24 +62,32 @@ public class MainController extends BaseController {
     @ResponseBody
     @GetMapping("/countryProvinceAccessCount")
     public Response countryProvinceAccessCount(Model model) {
-        List<CityCountVO> locationCountVOS = logininforService.selectLoginLocationCount();
-        List<CityCountVO> collect = new ArrayList<>(locationCountVOS.stream()
+        List<EchartVO> echartVOS = logininforService.selectLoginLocationCount();
+        List<EchartVO> collect = new ArrayList<>(echartVOS.stream()
                 .filter(loginLocationCountVO -> {
-                    String province = loginLocationCountVO.getLoginLocation().split("\\|")[2];
+                    String province = loginLocationCountVO.getName().split("\\|")[2];
                     return province.length() > 2;
                 })
                 .map(loginLocationCountVO -> {
-                    CityCountVO locationCountVO = new CityCountVO();
-                    String province = loginLocationCountVO.getLoginLocation().split("\\|")[2];
-                    locationCountVO.setValue(loginLocationCountVO.getNum());
-                    locationCountVO.setName(province);
-                    return locationCountVO;
+                    EchartVO echartVO = new EchartVO();
+                    String province = loginLocationCountVO.getName().split("\\|")[2];
+                    echartVO.setValue(loginLocationCountVO.getValue());
+                    echartVO.setName(province);
+                    return echartVO;
                 })
-                .collect(Collectors.toMap(CityCountVO::getName, cityCountVO -> cityCountVO, (o1, o2) -> {
+                .collect(Collectors.toMap(EchartVO::getName, echartVO -> echartVO, (o1, o2) -> {
                     o1.setValue(o1.getValue() + o2.getValue());
                     return o1;
                 })).values()).stream().sorted((o1, o2) -> (int) (o2.getValue() - o1.getValue())).collect(Collectors.toList());
         return Response.success().add("data", collect);
     }
 
+    @ResponseBody
+    @GetMapping("/moduleUseStatistic")
+    public Response moduleUseStatistic(Model model) {
+        List<EchartVO> list = logService.selectModuleUseStatistic();
+        List<String> nameList = list.stream().map(EchartVO::getName).collect(Collectors.toList());
+        List<Integer> dataList = list.stream().map(EchartVO::getValue).collect(Collectors.toList());
+        return Response.success().add("nameList", nameList).add("dataList", dataList);
+    }
 }

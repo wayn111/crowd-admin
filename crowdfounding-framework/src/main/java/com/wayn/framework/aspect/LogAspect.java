@@ -6,6 +6,9 @@ import com.wayn.commom.annotation.Log;
 import com.wayn.commom.constant.Constants;
 import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.domain.User;
+import com.wayn.commom.enums.Operator;
+import com.wayn.commom.exception.BusinessException;
+import com.wayn.commom.service.ConfigService;
 import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.IP2RegionUtil;
 import com.wayn.commom.util.ServletUtil;
@@ -33,6 +36,9 @@ public class LogAspect {
     @Autowired
     private LogQueue logQueue;
 
+    @Autowired
+    private ConfigService configService;
+
     @Pointcut("@annotation(com.wayn.commom.annotation.Log)")
     public void logPointCut() {
     }
@@ -40,17 +46,18 @@ public class LogAspect {
     /**
      * 当方法执行前
      *
-     * @param joinPoint
+     * @param joinPoint 切点
      */
     @Before(value = "logPointCut()")
     public void doBefore(JoinPoint joinPoint) {
         startTimeLocal.set(System.nanoTime());
+        viewModelHandler(joinPoint);
     }
 
     /**
      * 当方法正常返回时执行
      *
-     * @param joinPoint
+     * @param joinPoint 切点
      */
     @AfterReturning(value = "logPointCut()", returning = "response")
     public void doAfterReturning(JoinPoint joinPoint, Object response) {
@@ -60,7 +67,7 @@ public class LogAspect {
     /**
      * 当方法异常返回时执行
      *
-     * @param joinPoint
+     * @param joinPoint 切点
      */
     @AfterThrowing(value = "logPointCut()", throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
@@ -70,16 +77,16 @@ public class LogAspect {
     /**
      * 日志处理方法
      *
-     * @param joinPoint
-     * @param e
-     * @param response
+     * @param joinPoint 切点
+     * @param e         异常
+     * @param response  切面方法返回
      */
     private void handlerLog(JoinPoint joinPoint, Exception e, Object response) {
-        Long executeTime = System.nanoTime() - startTimeLocal.get();
+        long executeTime = System.nanoTime() - startTimeLocal.get();
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
         HttpServletRequest request = ServletUtil.getRequest();
-        //获取日志注解
+        // 获取日志注解
         Log log = method.getAnnotation(Log.class);
         User user = ShiroUtil.getSessionUser();
         if (log != null) {
@@ -124,6 +131,27 @@ public class LogAspect {
             }
             logQueue.add(operLog);
             startTimeLocal.remove();
+        }
+    }
+
+    /**
+     * 判断是否是演示模式，是的话则不能进行更新或者删除
+     */
+    private void viewModelHandler(JoinPoint joinPoint) {
+        boolean viewModel = Boolean.parseBoolean(configService.getValueByKey("sys.viewModel"));
+        if (!viewModel) {
+            return;
+        }
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        Method method = methodSignature.getMethod();
+        // 获取日志注解
+        Log log = method.getAnnotation(Log.class);
+        Operator operator = log.operator();
+        String name = log.operator().getName();
+        switch (operator) {
+            case UPDATE:
+            case DELETE:
+                throw new BusinessException(String.format("演示模式，请勿%s", name));
         }
     }
 }

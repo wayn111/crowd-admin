@@ -1,11 +1,13 @@
 package com.wayn.web.controller.profile;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.annotation.RepeatSubmit;
 import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Dept;
 import com.wayn.commom.domain.User;
 import com.wayn.commom.domain.vo.UserResetPasswordVO;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.DeptService;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -74,6 +76,7 @@ public class ProfileController extends BaseController {
      * @param user
      * @return
      */
+    @Log(value = "个人信息管理", operator = Operator.UPDATE)
     @RepeatSubmit
     @ResponseBody
     @PostMapping("updateUser")
@@ -97,6 +100,7 @@ public class ProfileController extends BaseController {
      * @param oldPassword
      * @return
      */
+    @Log(value = "个人信息管理", operator = Operator.UPDATE)
     @ResponseBody
     @PostMapping("judgeOldPasswordSuccess")
     public boolean judgeOldPasswordSuccess(String oldPassword) {
@@ -106,6 +110,7 @@ public class ProfileController extends BaseController {
         return users.size() > 0;
     }
 
+    @Log(value = "个人信息管理", operator = Operator.UPDATE)
     @ResponseBody
     @RequiresPermissions("sys:user:resetPwd")
     @PostMapping("userResetPwd")
@@ -126,6 +131,7 @@ public class ProfileController extends BaseController {
      * @return
      * @throws IOException
      */
+    @Log(value = "个人信息管理", operator = Operator.UPDATE)
     @ResponseBody
     @PostMapping("updateAvatar")
     public Response updateAvatar(@RequestParam("avatarfile") MultipartFile file) throws IOException {
@@ -153,6 +159,7 @@ public class ProfileController extends BaseController {
      *
      * @return Response
      */
+    @Log(value = "个人信息管理", operator = Operator.UPDATE)
     @ResponseBody
     @PostMapping("auth")
     public Response auth() {

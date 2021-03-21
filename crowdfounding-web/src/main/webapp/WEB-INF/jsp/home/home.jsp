@@ -37,7 +37,7 @@
                     <div class="wayn-profile animated">
                         <h3 class="wayn-h3">${sysName }</h3>
                         <div id="user-avatar" class="pull-left" style="margin-top: 6px">
-                            <img alt="image" class="img-circle" src="${user.userImg}"
+                            <img alt="avatar" class="img-circle" src="${user.userImg}"
                                  style="cursor:pointer;height: 64px"
                                  onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')"/>
                         </div>

@@ -2,7 +2,7 @@ package com.wayn.commom.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wayn.commom.domain.Logininfor;
-import com.wayn.commom.domain.vo.CityCountVO;
+import com.wayn.commom.domain.vo.EchartVO;
 
 import java.util.List;
 
@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface LogininforDao extends BaseMapper<Logininfor> {
 
-    List<CityCountVO> selectLoginLocationCount();
+    List<EchartVO> selectLoginLocationCount();
 }

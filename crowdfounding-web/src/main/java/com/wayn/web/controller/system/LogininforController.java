@@ -1,8 +1,10 @@
 package com.wayn.web.controller.system;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Logininfor;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.util.ParameterUtil;
 import com.wayn.commom.util.Response;
@@ -42,7 +44,7 @@ public class LogininforController extends BaseController {
         return logininforService.listPage(page, logininfor);
     }
 
-
+    @Log(value = "登陆日志管理", operator = Operator.DELETE)
     @RequiresPermissions("sys:logininfor:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
@@ -50,6 +52,7 @@ public class LogininforController extends BaseController {
         return Response.result(logininforService.removeById(id), "删除登陆日志成功");
     }
 
+    @Log(value = "登陆日志管理", operator = Operator.DELETE)
     @RequiresPermissions("sys:logininfor:remove")
     @ResponseBody
     @PostMapping("/batchRemove")

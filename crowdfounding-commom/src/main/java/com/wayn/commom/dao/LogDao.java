@@ -2,6 +2,9 @@ package com.wayn.commom.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wayn.commom.domain.OperLog;
+import com.wayn.commom.domain.vo.EchartVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.wayn.commom.domain.OperLog;
  */
 public interface LogDao extends BaseMapper<OperLog> {
 
+    List<EchartVO> selectModuleUseStatistic();
 }
