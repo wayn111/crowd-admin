@@ -454,7 +454,6 @@
         var chartDom = document.getElementById('main2');
         var myChart = echarts.init(chartDom);
         var option;
-
         option = {
             title: {
                 text: '模块访问统计',
