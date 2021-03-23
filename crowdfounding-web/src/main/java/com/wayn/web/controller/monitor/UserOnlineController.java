@@ -61,7 +61,7 @@ public class UserOnlineController extends BaseController {
     @DeleteMapping("/forceLogout/{id}")
     public Response forceLogout(Model model, @PathVariable("id") String id) {
         if (getSessionId().equals(id)) {
-            return Response.error("当前登陆用户无法强退");
+            return Response.error("登陆用户无法强退自己");
         }
         logout(id);
         return Response.success("强制下线用户成功！");

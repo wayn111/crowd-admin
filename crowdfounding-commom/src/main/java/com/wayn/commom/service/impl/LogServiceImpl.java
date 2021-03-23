@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.dao.LogDao;
 import com.wayn.commom.domain.OperLog;
+import com.wayn.commom.domain.vo.EchartVO;
 import com.wayn.commom.enums.Operator;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.LogService;
@@ -101,4 +102,10 @@ public class LogServiceImpl extends ServiceImpl<LogDao, OperLog> implements LogS
         operLog.setOperation(map.get(operLog.getOperation()));
         return operLog;
     }
+
+    @Override
+    public List<EchartVO> selectModuleUseStatistic() {
+        return logDao.selectModuleUseStatistic();
+    }
+
 }

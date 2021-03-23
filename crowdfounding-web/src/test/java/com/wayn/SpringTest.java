@@ -3,7 +3,6 @@ package com.wayn;
 import com.wayn.commom.dao.RoleMenuDao;
 import com.wayn.commom.domain.Menu;
 import com.wayn.commom.domain.User;
-import com.wayn.commom.domain.vo.CityCountVO;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -17,7 +16,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/spring-*.xml" })
@@ -48,17 +46,6 @@ public class SpringTest {
 		userService.saveBatch(entityList);
 	}
 
-	@Test
-	public void test1() {
-		List<CityCountVO> locationCountVOS = logininforService.selectLoginLocationCount();
-		List<CityCountVO> collect = locationCountVOS.stream().map(loginLocationCountVO -> {
-			CityCountVO locationCountVO = new CityCountVO();
-			locationCountVO.setValue(loginLocationCountVO.getNum());
-			locationCountVO.setName(loginLocationCountVO.getLoginLocation().split("\\|")[2]);
-			return locationCountVO;
-		}).collect(Collectors.toList());
-		System.out.println(collect);
-	}
 
 	@Test
 	public void test2() {

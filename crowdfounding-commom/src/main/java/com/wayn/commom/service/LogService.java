@@ -3,10 +3,12 @@ package com.wayn.commom.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.OperLog;
+import com.wayn.commom.domain.vo.EchartVO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * <p>
@@ -22,4 +24,6 @@ public interface LogService extends IService<OperLog> {
     void export(OperLog log, HttpServletResponse response, HttpServletRequest request) throws IOException;
 
     OperLog detail(String id);
+
+    List<EchartVO> selectModuleUseStatistic();
 }

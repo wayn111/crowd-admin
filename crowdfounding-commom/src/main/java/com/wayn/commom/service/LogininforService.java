@@ -3,7 +3,7 @@ package com.wayn.commom.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wayn.commom.domain.Logininfor;
-import com.wayn.commom.domain.vo.CityCountVO;
+import com.wayn.commom.domain.vo.EchartVO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,5 +18,5 @@ public interface LogininforService extends IService<Logininfor> {
 
     void export(Logininfor log, HttpServletResponse response, HttpServletRequest request) throws IOException;
 
-    List<CityCountVO> selectLoginLocationCount();
+    List<EchartVO> selectLoginLocationCount();
 }

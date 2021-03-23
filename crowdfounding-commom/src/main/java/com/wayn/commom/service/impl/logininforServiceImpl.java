@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wayn.commom.constant.Constants;
 import com.wayn.commom.dao.LogininforDao;
 import com.wayn.commom.domain.Logininfor;
-import com.wayn.commom.domain.vo.CityCountVO;
+import com.wayn.commom.domain.vo.EchartVO;
 import com.wayn.commom.excel.IExcelExportStylerImpl;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -120,7 +120,7 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
     }
 
     @Override
-    public List<CityCountVO> selectLoginLocationCount() {
+    public List<EchartVO> selectLoginLocationCount() {
         return logininforDao.selectLoginLocationCount();
     }
 }

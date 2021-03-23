@@ -14,15 +14,15 @@
         <result column="createTime" property="createTime"/>
     </resultMap>
 
-    <resultMap id="LoginLocationCountMap" type="com.wayn.commom.domain.vo.CityCountVO">
-        <result column="loginLocation" property="loginLocation"/>
-        <result column="num" property="num"/>
+    <resultMap id="EcharMap" type="com.wayn.commom.domain.vo.EchartVO">
+        <result column="name" property="name"/>
+        <result column="value" property="value"/>
     </resultMap>
 
-    <select id="selectLoginLocationCount" resultMap="LoginLocationCountMap">
+    <select id="selectLoginLocationCount" resultMap="EcharMap">
         SELECT
-            l.loginLocation,
-            COUNT( 1 ) as num
+            l.loginLocation as name,
+            COUNT( 1 ) as value
         FROM
             sys_logininfor l
         WHERE

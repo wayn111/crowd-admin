@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * <p>继承SpringBeanJobFactory接口获取Job实例，
+ * 继承SpringBeanJobFactory接口获取Job实例，
  * 并通过AutowireCapableBeanFactory
  * 将Job实例交给Spring管理生命周期
  */

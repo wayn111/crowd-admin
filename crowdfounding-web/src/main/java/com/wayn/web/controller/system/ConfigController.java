@@ -1,8 +1,10 @@
 package com.wayn.web.controller.system;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Config;
+import com.wayn.commom.enums.Operator;
 import com.wayn.commom.service.ConfigService;
 import com.wayn.commom.service.DictService;
 import com.wayn.commom.shiro.util.ShiroUtil;
@@ -45,6 +47,7 @@ public class ConfigController extends BaseController {
         return PREFIX + "/config";
     }
 
+    @Log(value = "参数管理")
     @RequiresPermissions("sys:config:config")
     @ResponseBody
     @PostMapping("/list")
@@ -70,6 +73,7 @@ public class ConfigController extends BaseController {
         return PREFIX + "/edit";
     }
 
+    @Log(value = "参数管理", operator = Operator.ADD)
     @RequiresPermissions("sys:config:add")
     @ResponseBody
     @PostMapping("/addSave")
@@ -79,6 +83,7 @@ public class ConfigController extends BaseController {
         return Response.result(configService.save(config), "新增成功");
     }
 
+    @Log(value = "参数管理", operator = Operator.UPDATE)
     @RequiresPermissions("sys:config:edit")
     @ResponseBody
     @PostMapping("/editSave")
@@ -89,6 +94,7 @@ public class ConfigController extends BaseController {
     }
 
 
+    @Log(value = "参数管理", operator = Operator.DELETE)
     @RequiresPermissions("sys:config:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
@@ -96,6 +102,7 @@ public class ConfigController extends BaseController {
         return Response.result(configService.removeById(id), "删除成功");
     }
 
+    @Log(value = "参数管理", operator = Operator.DELETE)
     @RequiresPermissions("sys:config:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
@@ -103,6 +110,7 @@ public class ConfigController extends BaseController {
         return Response.result(configService.removeByIds(Arrays.asList(ids)), "删除成功");
     }
 
+    @Log(value = "参数管理", operator = Operator.EXECUTOR)
     @PostMapping("/export")
     public void export(Config config, HttpServletResponse response) throws IOException {
         configService.export(config, response, request);

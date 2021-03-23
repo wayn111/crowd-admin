@@ -85,6 +85,10 @@
             processData: false,
             contentType: false,
             success: function (data) {
+                if (data.code != 100) {
+                    layer.alert(data.msg);
+                    return;
+                }
                 parent.layer.msg(data.msg, {icon: 1});
                 // 更换父页面和顶层页面图片路径
                 $('.img-circle', parent.document).attr('src', data.map.imgSrc);

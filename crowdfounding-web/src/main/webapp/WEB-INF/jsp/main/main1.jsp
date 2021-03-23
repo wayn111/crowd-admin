@@ -14,7 +14,7 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>项目介绍</h5>
@@ -38,55 +38,104 @@
                 </div>
                 <div class="ibox-content">
                     <blockquote class="text-muted" style="font-size:14px">
-                        面向学习型的开源框架，简洁高效，合理的模块化拆分，展现技术本质
-                        <br>${sysName }是以SpringMVC+Shiro+Mybatis-Plus为核心开发的精简后台基础系统
-                        <br>基于stomp协议实现后台消息推送以及指定用户通信的功能
-                        <br>整合elfinder文件管理
-                        <br>整合quartz实现任务调度级任务日志记录
-                        <br>Ehcache/Redis作为权限缓存，可切换
-                        <br>Druid数据源,数据库监控
-                        <br>使用H+作为后台管理模板，基于jsp模板改造
-                        <br>如果你先找一个简单易学，代码风格良好，基于现有功能快速上手开发的话
-                        <h4 class="text-danger">那么，现在${sysName }来了</h4>
+                        <br>${sysName }是一个后台权限管理系统脚手架，
+                        集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、系统监控、elfinder文件管理等常用功能，
+                        系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
+                        <br>如果你想找一个完整的后台管理，代码风格良好，基于现有功能快速上手开发的话
+                        <h4 class="text-danger">${sysName }是你的不二选择</h4>
                     </blockquote>
-
-                    <h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
-                    <ul>
-                        <li>
-                            <a href="https://gitee.com/wayn111/crowdfounding" target="_blank">${sysName } 码云</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/wayn111/crowd-admin" target="_blank">${sysName } github</a>
-                        </li>
-                    </ul>
-
-                    <h3>&nbsp;&nbsp;&nbsp;参考项目</h3>
-                    <ul>
-                        <li><a href="https://gitee.com/zhougaojun/KangarooAdmin/tree/master"
-                               target="_blank"> AdminLTE-admin</a></li>
-                        <li><a href="https://gitee.com/lcg0124/bootdo" target="_blank">
-                            bootdo</a></li>
-                        <li><a href="https://gitee.com/y_project/RuoYi" target="_blank">
-                            ruoyi</a></li>
-                        <li><a href="https://github.com/wuyouzhuguli/FEBS-Security" target="_blank">
-                            FEBS-Security</a></li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p><b>&nbsp;&nbsp;&nbsp;当前版本：</b>
+                                <a class="btn btn-default btn-sm btn-outline"
+                                   href="#v22">2.2.0
+                                </a>
+                            </p>
+                            <p><b>&nbsp;&nbsp;&nbsp;获取源码：</b>
+                                <a class="btn btn-primary btn-outline btn-sm"
+                                   href="https://github.com/wayn111" target="_blank">
+                                    <i class="fa fa-github"> </i> github
+                                </a>
+                                <a class="btn btn-success btn-outline btn-sm"
+                                   href="https://github.com/wayn111" target="_blank">
+                                    <i class="fa fa-home"> </i> 我的主页
+                                </a>
+                            </p>
+                            <p><b>&nbsp;&nbsp;&nbsp;是否收费：</b>
+                                <span class="label label-info"><i class="fa fa-rmb"></i> 免费开源</span>
+                            </p>
+                            <p><b>&nbsp;&nbsp;&nbsp;LICENSE：</b>
+                                <a class="btn btn-warning btn-outline btn-sm"
+                                   href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository#disclaimer"
+                                   target="_blank">
+                                    <i class="fa fa-id-card"></i> MIT
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>主要特性</h4>
+                            <ol>
+                                <li>
+                                    项目按功能模块化拆分，自定义全局统一异常输出，代码清晰合理
+                                </li>
+                                <li>
+                                    集成elfinder模块，包含完整的文件管理操作，包含文件上传、删除、压缩、移动、预览等诸多操作
+                                </li>
+                                <li>
+                                    支持后台消息/邮件推送、数据字典、系统参数配置、各模块操作日记记录
+                                </li>
+                                <li>
+                                    支持系统服务监控、在线用户监控、数据源监控等操作
+                                </li>
+                                <li>
+                                    支持redis/ehcache切换使用
+                                </li>
+                                <li>
+                                    支持ip2region本地化
+                                </li>
+                                <li>
+                                    支持多数据源操作
+                                </li>
+                                <li>
+                                    前端使用H+模板，样式美观，支持ajax下载文件，js代码简洁，清晰，避免过度封装
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>参考项目</h4>
+                            <ul>
+                                <li><a href="https://gitee.com/zhougaojun/KangarooAdmin/tree/master"
+                                       target="_blank"> AdminLTE-admin</a></li>
+                                <li><a href="https://gitee.com/lcg0124/bootdo" target="_blank">
+                                    bootdo</a></li>
+                                <li><a href="https://gitee.com/y_project/RuoYi" target="_blank">
+                                    ruoyi</a></li>
+                                <li><a href="https://github.com/wuyouzhuguli/FEBS-Security" target="_blank">
+                                    FEBS-Security</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>图表</h5>
                 </div>
                 <div class="ibox-content">
-                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-                    <div id="main" style="min-width: 330px;min-height: 360px"></div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                            <div id="main1" style="min-width: 280px;min-height:350px;"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div id="main2" style="min-width: 280px;min-height:350px;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-sm-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -101,9 +150,12 @@
                                 border="0" src="http://wpa.qq.com/pa?p=2:1669738430:52" alt="1669738430"
                                 title="1669738430"/>1669738430</a>
                     </p>
+                    <p><i class="fa fa-envelope-o"></i> 邮箱：<a target="_blank"
+                                                              href="https://mail.qq.com/">1669738430@qq.com</a>
+                    </p>
                     <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">/ *waynaqua</a>
                     </p>
-                    <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *waynaqua</a>
+                    <p><i class="fa fa-cc-paypal"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *waynaqua</a>
                     </p>
                     <%--<p id="pay-qrcode">
                         <a href="javascript:;"><img src="${_ctx}/static/img/pay.png" width="100%" alt="请使用手机支付宝或者微信扫码支付">
@@ -126,11 +178,32 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v22">v2.2.0</a><code
+                                            class="pull-right">2021.02.20</code>
+                                    </h5>
+                                </div>
+                                <div id="v22" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            添加echart图标展示，添加演示模式，代码优化
+                                        </div>
+                                        <ol>
+                                            <li>添加全国各省访问次数图</li>
+                                            <li>添加模块访问统计图</li>
+                                            <li>优化定时任务模块</li>
+                                            <li>优化首页展示</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v21">v2.1.0</a><code
                                             class="pull-right">2021.02.20</code>
                                     </h5>
                                 </div>
-                                <div id="v21" class="panel-collapse collapse in">
+                                <div id="v21" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             升级mybatis plus至3.4.2，优化移动端显示效果，修复bug
@@ -358,7 +431,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <%--<%@ include file="/commom/footer.jsp" %>--%>
 <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
@@ -374,8 +446,80 @@
         if ($.fn.toTop !== undefined) {
             $('#scroll-up').toTop();
         }
+        countryProvinceAccessCount();
+        moduleUseStatistic();
+    })
 
-        var chartDom = document.getElementById('main');
+    function moduleUseStatistic() {
+        var chartDom = document.getElementById('main2');
+        var myChart = echarts.init(chartDom);
+        var option;
+        option = {
+            title: {
+                text: '模块访问统计',
+                subtext: '',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '访问次数',
+                    type: 'bar',
+                    barWidth: '30%',
+                    data: [10, 52, 200, 334, 390, 330, 220]
+                }
+            ],
+            media: [ // 这里定义了 media query 的逐条规则。
+                {
+                    query: {
+                        maxWidth: 400               // 当容器宽度小于 400 时。
+                    },
+                    option: {
+                        title: {
+                            left: 'left'
+                        }
+                    }
+                }
+            ]
+        };
+
+        $.get(_ctx + '/main/moduleUseStatistic', function (res) {
+            if (res.code == 100) {
+                option.xAxis[0].data = res.map.nameList;
+                option.series[0].data = res.map.dataList;
+            }
+            option && myChart.setOption(option);
+        });
+
+    }
+
+    function countryProvinceAccessCount() {
+        var chartDom = document.getElementById('main1');
         var myChart = echarts.init(chartDom);
         var option;
 
@@ -398,7 +542,7 @@
             },
             series: [
                 {
-                    name: '访问',
+                    name: '访问次数',
                     type: 'pie',
                     radius: '50%',
                     center: ['50%', '50%'],
@@ -429,39 +573,19 @@
             media: [ // 这里定义了 media query 的逐条规则。
                 {
                     query: {
-                        maxAspectRatio: 1           // 当长宽比小于1时。
-                    },
-                    option: {
-                        legend: {                   // legend 放在底部中间。
-                            right: 'center',
-                            bottom: 0,
-                            orient: 'horizontal'    // legend 横向布局。
-                        },
-                        series: [                   // 两个饼图左右布局。
-                            {
-                                type: 'pie',
-                                radius: '50%',
-                                center: ['50%', '50%']
-                            }
-                        ]
-                    }
-                },
-                {
-                    query: {
-                        maxWidth: 769               // 当容器宽度小于 769 时。
+                        maxWidth: 400               // 当容器宽度小于 400 时。
                     },
                     option: {
                         title: {
-                            text: '全国各省访问次数',
-                            subtext: '',
                             left: 'left'
                         },
                         legend: {
-                            // show: false             // 不展示
+                            // show: false,             // 不展示
                             type: 'scroll',
                             top: '10%',
                             left: 'center',
-                            bottom: 10,
+                            bottom: 0,
+                            orient: 'horizontal'    // legend 横向布局。
                         },
                         series: [                   // 两个饼图上下布局。
                             {
@@ -480,7 +604,7 @@
             }
             option && myChart.setOption(option);
         });
-    })
+    }
 </script>
 </body>
 </html>

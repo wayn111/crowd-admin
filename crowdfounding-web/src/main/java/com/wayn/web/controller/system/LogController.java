@@ -3,6 +3,7 @@ package com.wayn.web.controller.system;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wayn.commom.annotation.Log;
 import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.OperLog;
 import com.wayn.commom.enums.Operator;
@@ -60,6 +61,7 @@ public class LogController extends BaseController {
         return PREFIX + "/detail";
     }
 
+    @Log(value = "日志管理", operator = Operator.DELETE)
     @RequiresPermissions("sys:log:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
@@ -67,6 +69,7 @@ public class LogController extends BaseController {
         return Response.result(logService.removeById(id),"删除日志成功");
     }
 
+    @Log(value = "日志管理", operator = Operator.DELETE)
     @RequiresPermissions("sys:log:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
