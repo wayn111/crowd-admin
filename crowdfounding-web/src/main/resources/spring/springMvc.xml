@@ -67,7 +67,7 @@
     <!-- API 接口跨域配置 -->
     <mvc:cors>
         <mvc:mapping path="/**"
-                     allowed-origins="http://localhost:3000"
+                     allowed-origins="*"
                      allowed-methods="POST,GET,OPTIONS,DELETE,PUT"
                      allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
                      allow-credentials="true"/>
