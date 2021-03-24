@@ -150,6 +150,7 @@ public class LogAspect {
         String name = log.operator().getName();
         switch (operator) {
             case UPDATE:
+                // fall through
             case DELETE:
                 throw new BusinessException(String.format("演示模式，请勿%s", name));
         }
