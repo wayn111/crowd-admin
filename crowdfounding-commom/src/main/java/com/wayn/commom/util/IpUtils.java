@@ -1,6 +1,8 @@
 package com.wayn.commom.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -12,6 +14,8 @@ import java.net.UnknownHostException;
  * @author ruoyi
  */
 public class IpUtils {
+    private static final Logger logger = LoggerFactory.getLogger(IpUtils.class);
+
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";

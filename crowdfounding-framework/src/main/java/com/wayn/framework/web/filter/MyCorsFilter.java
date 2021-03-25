@@ -16,11 +16,11 @@ public class MyCorsFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        resp.addHeader("Access-Control-Allow-Origin","*");
+        resp.addHeader("Access-Control-Allow-Origin","http://www.wayn.xin:8080");
         resp.addHeader("Access-Control-Allow-Methods","*");
-        resp.addHeader("Access-Control-Max-Age","100");
+        resp.addHeader("Access-Control-Max-Age","3600");
         resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
-        resp.addHeader("Access-Control-Allow-Credentials","false");
+        resp.addHeader("Access-Control-Allow-Credentials","true");
         chain.doFilter(req, resp);
     }
 
