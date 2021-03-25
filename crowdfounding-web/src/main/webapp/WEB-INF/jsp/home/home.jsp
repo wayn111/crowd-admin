@@ -150,6 +150,11 @@
                         </ul>
                     </li>
                     <li class="dropdown">
+                        <a class="dropdown-toggle" target="_blank" href="https://github.com/wayn111/newbee-mall">
+                            newbee商城
+                        </a>
+                    </li>
+                    <li class="dropdown">
                         <a class="dropdown-toggle" data-hover="dropdown" data-delay="0"
                            data-toggle="dropdown" href="https://github.com/wayn111/crowd-admin">
                             源码
@@ -362,7 +367,7 @@
      * 建立stomp连接
      */
     function connect() {
-        var sock = new SockJS(_ctx + "/notify");
+        var sock = new SockJS("http://wayn.xin:8080/crowd/ws/notify");
         var stompClient = Stomp.over(sock);
         stompClient.connect('guest', 'guest', function (frame) {
             /** 

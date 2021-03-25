@@ -111,6 +111,7 @@ public class ShiroConfig {
         // 定义拦过滤器链
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
+        filterChainDefinitionMap.put("/ws/**", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/upload/**", "anon");
         filterChainDefinitionMap.put("/home/*", "anon");

@@ -26,7 +26,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
         stompEndpointRegistry.setErrorHandler(new StompSubProtocolErrorHandler());
-        stompEndpointRegistry.addEndpoint("/notify")
+        stompEndpointRegistry.addEndpoint("/ws/notify")
                 // 配置拦截器，在拦截器中配置用户认证信息
                 .addInterceptors(new HttpSessionHandshakeInterceptor())
                 // 配置握手处理器，websocket的用户认证信息从握手处理器获得

@@ -45,7 +45,7 @@
                         <h4 class="text-danger">${sysName }是你的不二选择</h4>
                     </blockquote>
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <p><b>&nbsp;&nbsp;&nbsp;当前版本：</b>
                                 <a class="btn btn-default btn-sm btn-outline"
                                    href="#v22">2.2.0
@@ -72,14 +72,14 @@
                                 </a>
                             </p>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-5">
                             <h4>主要特性</h4>
                             <ol>
                                 <li>
                                     项目按功能模块化拆分，自定义全局统一异常输出，代码清晰合理
                                 </li>
                                 <li>
-                                    集成elfinder模块，包含完整的文件管理操作，包含文件上传、删除、压缩、移动、预览等诸多操作
+                                    集成elfinder模块，包含完整的文件管理操作，文件上传、编辑、删除、压缩、移动、预览等诸多操作
                                 </li>
                                 <li>
                                     支持后台消息/邮件推送、数据字典、系统参数配置、各模块操作日记记录
@@ -101,7 +101,7 @@
                                 </li>
                             </ol>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <h4>参考项目</h4>
                             <ul>
                                 <li><a href="https://gitee.com/zhougaojun/KangarooAdmin/tree/master"
