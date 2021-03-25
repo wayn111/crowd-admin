@@ -64,14 +64,14 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!-- API 接口跨域配置 -->
-    <mvc:cors>
-        <mvc:mapping path="/**"
-                     allowed-origins="*"
-                     allowed-methods="POST,GET,OPTIONS,DELETE,PUT"
-                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-                     allow-credentials="true"/>
-    </mvc:cors>
+    <!-- API 接口跨域配置，在本系统中mvc:cors设置不起作用,spring拦截器执行不到这里-->
+<!--    <mvc:cors>-->
+<!--        <mvc:mapping path="/**"-->
+<!--                     allowed-origins="*"-->
+<!--                     allowed-methods="POST,GET,OPTIONS,DELETE,PUT"-->
+<!--                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"-->
+<!--                     allow-credentials="true"/>-->
+<!--    </mvc:cors>-->
 
 
     <!-- 开启druids-pring监控 -->

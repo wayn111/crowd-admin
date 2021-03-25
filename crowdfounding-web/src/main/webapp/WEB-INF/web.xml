@@ -22,6 +22,17 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--cors过滤器-->
+    <filter>
+        <filter-name>myCorsFilter</filter-name>
+        <filter-class>com.wayn.framework.web.filter.MyCorsFilter</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+    <filter-mapping>
+        <filter-name>myCorsFilter</filter-name>
+        <url-pattern>/ws/*</url-pattern>
+    </filter-mapping>
+
     <!--防止xss攻击过滤器-->
     <filter>
         <filter-name>xssFilter</filter-name>
