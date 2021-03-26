@@ -32,6 +32,7 @@
 package com.wayn.filemanager.command;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wayn.commom.util.ImageUtil;
 import com.wayn.filemanager.constant.ElFinderConstants;
 import com.wayn.filemanager.service.ElfinderStorage;
 import com.wayn.filemanager.service.VolumeHandler;
@@ -43,7 +44,7 @@ import java.io.OutputStream;
 public class PutCommand extends AbstractJsonCommand implements ElfinderCommand {
 
     public static final String ENCODING = "utf-8";
-    public static final String IAMGE_BASE64_FLAG = "data:image/jpeg;base64,";
+    public static final String IMAGE_BASE64_FLAG = ";base64,";
 
     @Override
     protected void execute(ElfinderStorage elfinderStorage, HttpServletRequest request, JSONObject json) throws Exception {
@@ -51,9 +52,9 @@ public class PutCommand extends AbstractJsonCommand implements ElfinderCommand {
         VolumeHandler file = findTarget(elfinderStorage, target);
         OutputStream os = file.openOutputStream();
         String content = request.getParameter(ElFinderConstants.ELFINDER_PARAMETER_CONTENT);
-        if (content.contains(IAMGE_BASE64_FLAG)) {
-            // byte[] bytes = ImageUtil.decodeImageStr(content.substring(IAMGE_BASE64_FLAG.length()));
-            // IOUtils.write(bytes, os);
+        if (content.contains(IMAGE_BASE64_FLAG)) {
+            byte[] bytes = ImageUtil.base64ToImg(content.substring(content.indexOf(IMAGE_BASE64_FLAG) + IMAGE_BASE64_FLAG.length()));
+            IOUtils.write(bytes, os);
         } else {
             IOUtils.write(content, os, ENCODING);
         }
