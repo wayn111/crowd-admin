@@ -1,0 +1,73 @@
+/* status bar */
+.elfinder .elfinder-statusbar {
+  padding: 6px 8px 2px;
+  position: relative;
+
+  border-top: 1px solid #bfbfbf;
+
+  box-shadow: 0 1px 0 #fff inset;
+  border-radius: 0;
+
+  background: #cfd1cf;
+  background-image: linear-gradient(to bottom, #ebebeb, #cfd1cf);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#ebebeb', endColorstr='#cfd1cf');
+}
+
+.elfinder .elfinder-stat-size {
+}
+
+/* breadcrumbs */
+.elfinder .elfinder-path {
+  max-width: none;
+  font-size: 0; /* hide the text "/" divider */
+  float: left;
+  margin: 0 6px 5px 0;
+  border: 1px solid #a6a6a6;
+  border-bottom-color: #979797;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 0 2px rgba(255,255,255,.15) inset, 0 1px 0 rgba(255,255,255,.15) inset;
+  background: #e4e4e4;
+  background-image: linear-gradient(to bottom, #ffffff, #e4e4e4);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#ffffff', endColorstr='#e4e4e4');
+}
+
+/* style each element of the trail */
+.elfinder .elfinder-path a {
+  font-size: 12px;
+  cursor: pointer;
+  display: block;
+  float: left;
+  padding: 5px;
+}
+
+/* css divider */
+.elfinder .elfinder-path a:not(:first-child) {
+  border-left: 1px dotted #a6a6a6;
+}
+
+/* hovering */
+.elfinder .elfinder-path a:hover,
+.elfinder .elfinder-path a:hover:focus,
+.elfinder .elfinder-path a:hover:active {
+  box-shadow: 0 0 1px rgba(0,0,0,.3) inset;
+  background: #ccc;
+  background-image: linear-gradient(to bottom, #f2f2f2, #ccc);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#f2f2f2', endColorstr='#cccccc');
+}
+
+.elfinder .elfinder-statusbar .elfinder-stat-selected {
+  float: right;
+  font-size: 12px;
+  padding: 5px;
+  margin: 0 0 5px 6px;
+
+  padding: 5px;
+  text-align: right;
+}
+
+/* size information */
+.elfinder .elfinder-statusbar .elfinder-stat-size {
+  font-size: 12px;
+  padding: 5px;
+  margin: 0 0 5px 6px;
+}

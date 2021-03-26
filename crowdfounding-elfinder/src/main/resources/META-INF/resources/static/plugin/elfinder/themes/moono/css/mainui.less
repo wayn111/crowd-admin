@@ -1,0 +1,45 @@
+/* main */
+.elfinder {
+  display: block;
+  border: 1px solid #b6b6b6;
+  padding: 0;
+  box-shadow: 0 0 3px rgba(0,0,0,.15);
+  height: 100%;
+  border-radius: 0;
+}
+
+
+.elfinder * {
+  border-collapse: collapse;
+  font: normal normal normal 12px Arial,Helvetica,Tahoma,Verdana,Sans-Serif;
+  color: #000;
+  text-align: left;
+  cursor: auto;
+}
+
+/* resizer */
+.elfinder .ui-icon-gripsmall-diagonal-se,
+.elfinder-dialog .ui-icon-gripsmall-diagonal-se {
+  background-image: none;
+  bottom: 3px;
+  right: 3px;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  border-width: 10px 10px 0 0;
+  border-color: transparent #666 transparent transparent;
+  border-style: dashed solid dashed dashed;
+  font-size: 0;
+  vertical-align: bottom;
+  margin-top: 6px;
+  margin-bottom: 2px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.3);
+  cursor: se-resize;
+}
+
+/* dragging */
+.elfinder-drag-helper * { font-size: 42px; }
+.elfinder-drag-num { font-size: 12px; }

@@ -1,0 +1,82 @@
+/* toolbar */
+.elfinder-button-icon,
+.elfinder-menu-item-sort-dir {
+  background: none;
+  font-size: 14px;
+  height: 16px;
+  width: 16px;
+  overflow: hidden;
+  display: block;
+  text-align: center;
+  line-height: 16px;
+}
+.elfinder-button-icon:before,
+.elfinder-button-icon:after,
+.elfinder-menu-item-sort-dir:before {
+  font-family: FontAwesome;
+  background: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+.elfinder-button-icon-back:before { content: '\f137'; }
+.elfinder-button-icon-forward:before { content: '\f138'; }
+.elfinder-button-icon-netmount:before { content: '\f233'; }
+.elfinder-button-icon-reload:before { content: '\f021'; }
+.elfinder-button-icon-home:before { content: '\f015'; }
+.elfinder-button-icon-up:before { content: '\f148'; }
+.elfinder-button-icon-mkdir:before { content: '\f114'; }
+.elfinder-button-icon-mkfile:before { content: '\f016'; }
+.elfinder-button-icon-upload:before { content: '\f093'; }
+.elfinder-button-icon-open:before { content: '\f115'; }
+.elfinder-button-icon-download:before { content: '\f019'; }
+.elfinder-button-icon-getfile:before { content: '\f0a6'; }
+.elfinder-button-icon-info:before { content: '\f05a'; }
+.elfinder-button-icon-quicklook:before { content: '\f06e'; }
+.elfinder-button-icon-copy:before { content: '\f0c5'; }
+.elfinder-button-icon-cut:before { content: '\f0c4'; }
+.elfinder-button-icon-paste:before { content: '\f0ea'; }
+.elfinder-button-icon-view:before { content: '\f00a'; }
+.elfinder-button-icon-view-list:before { content: '\f0ca'; }
+.elfinder-button-icon-help:before { content: '\f059'; }
+.elfinder-button-icon-help:before { content: '\f059'; }
+.elfinder-button-icon-duplicate:before { content: '\f24d';}
+.elfinder-button-icon-rm:before { content: '\f014'; }
+.elfinder-button-icon-edit:before { content: '\f044'; }
+.elfinder-button-icon-rename:before { content: '\f246'; }
+.elfinder-button-icon-archive:before { content: '\f1c6'; }
+.elfinder-button-icon-archive:after { /* '+' icon overlaying archive */
+  position: absolute;
+  content: '\f067';
+  bottom: 2px;
+  right: 5px;
+  font-size: 10px;
+}
+.elfinder-button-icon-resize:before { content: '\f065'; }
+.elfinder-button-icon-extract:before { content: '\f1c6'; }
+.elfinder-button-icon-sort:before { content: '\f0dc'; }
+.elfinder-button-icon-fullscreen:before { content: '\f0b2'; }
+
+/* menus */
+.elfinder-button-menu {
+  background-color: #fff;
+  border: 1px solid #b6b6b6;
+  border-bottom-color: #999;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0,0,0,.15);
+  margin: 0;
+  padding: 0;
+}
+.elfinder-button-menu-item {
+  margin: 3px;
+  cursor: pointer;
+}
+.elfinder-button-menu-item-selected,
+.elfinder-button-menu-item.ui-state-hover {
+  background-image: none;
+  border-color: #dedede;
+  background-color: #f2f2f2;
+  box-shadow: 0 0 2px rgba(0,0,0,.1) inset;
+}
+.elfinder-button-menu-item-selected.elfinder-menu-item-sort-asc .elfinder-menu-item-sort-dir:before { content: '\f0de'; }
+.elfinder-button-menu-item-selected.elfinder-menu-item-sort-desc .elfinder-menu-item-sort-dir:before { content: '\f0dd'; }

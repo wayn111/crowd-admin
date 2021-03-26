@@ -1,0 +1,93 @@
+/* arrow */
+.elfinder .elfinder-navbar-arrow {
+  background-image: none !important;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 16px;
+  width: 20px;
+  text-align: center;
+}
+.elfinder .elfinder-navbar-arrow:before {
+  font-family: FontAwesome;
+  height: 16px;
+  width: 16px;
+  content: '\f0da';
+  background: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* arrow open */
+.elfinder .elfinder-navbar-expanded .elfinder-navbar-arrow:before {
+  content: '\f0d7';
+}
+
+.elfinder .elfinder-navbar-icon,
+.elfinder-lock,
+.elfinder-perms,
+.elfinder-symlink {
+  background-image: none !important;
+  overflow: hidden;
+  height: 16px;
+  width: 16px;
+  font-size: 14px;
+  line-height: 16px;
+  margin-left: 3px;
+}
+
+.elfinder .elfinder-navbar-icon:before,
+.elfinder-lock:before,
+.elfinder-perms:before,
+.elfinder-symlink:before {
+  font-family: FontAwesome;
+  background: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  font-size: smaller;
+}
+
+.elfinder-lock:before,
+.elfinder-perms:before,
+.elfinder-symlink:before {
+  color:grey;
+  opacity: 0.9;
+}
+/* read-only */
+.elfinder-ro .elfinder-perms:before {
+  content: '\f023';
+}
+
+/* not available */
+.elfinder-na .elfinder-perms:before {
+  content: '\f05e';
+}
+
+/* write-only available */
+.elfinder-wo .elfinder-perms:before {
+  content: '\f01a';
+}
+
+/* home */
+.elfinder .elfinder-navbar-root > .elfinder-navbar-icon:before,
+.elfinder .elfinder-navbar-root.elfinder-navbar-expanded > .elfinder-navbar-icon:before {
+  content: '\f015';
+}
+
+/* directory */
+.elfinder .elfinder-navbar-icon:before {
+  content: '\f07b';
+}
+
+/* directory open */
+.elfinder .elfinder-navbar-expanded > .elfinder-navbar-icon:before {
+  content: '\f07c';
+}
+
+/* directories */
+
+/* resizable handle */
+.elfinder .ui-resizable-handle.ui-resizable-e {
+  cursor: e-resize;
+}

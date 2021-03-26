@@ -1,0 +1,92 @@
+/* default settings */
+.elfinder-cwd-icon {
+  background-image: none !important;
+  overflow: hidden;
+}
+.elfinder-cwd-icon:before {
+  font-family: FontAwesome;
+  background: none;
+  display: block;
+  text-align: center;
+}
+
+/* generic files */
+.elfinder-cwd-icon-application:before { content: '\f016'; }
+
+/* directories */
+.elfinder-cwd-icon-directory:before { content: '\f07b'; }
+.elfinder-droppable-active .elfinder-cwd-icon-directory:before { content: '\f07c'; }
+
+/* empty files */
+.elfinder-cwd-icon-x-empty:before,
+.elfinder-cwd-icon-inode:before { content: '\f1c9'; }
+
+/* rich text */
+.elfinder-cwd-icon-text:before,
+.elfinder-cwd-icon-rtf:before,
+.elfinder-cwd-icon-rtfd:before { content: '\f0f6'; }
+
+/* pdfs */
+.elfinder-cwd-icon-pdf:before { content: '\f1c1'; }
+
+/* html/web documents */
+.elfinder-cwd-icon-html:before { content: '\f0ac'; }
+
+/* word */
+.elfinder-cwd-icon-vnd-ms-word:before { content: '\f1c2'; }
+
+/* powerpoint */
+.elfinder-cwd-icon-vnd-ms-powerpoint:before { content: '\f1c4'; }
+
+/* excel */
+.elfinder-cwd-icon-ms-excel:before,
+.elfinder-cwd-icon-vnd-ms-excel:before,
+.elfinder-cwd-icon-vnd-ms-excel-addin-macroEnabled-12:before,
+.elfinder-cwd-icon-vnd-ms-excel-sheet-binary-macroEnabled-12:before,
+.elfinder-cwd-icon-vnd-ms-excel-sheet-macroEnabled-12:before,
+.elfinder-cwd-icon-vnd-ms-excel-template-macroEnabled-12:before { content: '\f1c3'; }
+
+/* images */
+.elfinder-cwd-icon-image:before,
+.elfinder-cwd-icon-vnd-adobe-photoshop:before,
+.elfinder-cwd-icon-postscript:before { content: '\f1c5'; }
+
+/* audio */
+.elfinder-cwd-icon-audio:before { content: '\f1c7'; }
+
+/* video */
+.elfinder-cwd-icon-video:before,
+.elfinder-cwd-icon-flash-video:before { content: '\f1c8'; }
+
+/* archives */
+.elfinder-cwd-icon-zip:before,
+.elfinder-cwd-icon-x-zip:before,
+.elfinder-cwd-icon-x-xz:before,
+.elfinder-cwd-icon-x-7z-compressed:before,
+.elfinder-cwd-icon-x-gzip:before,
+.elfinder-cwd-icon-x-tar:before,
+.elfinder-cwd-icon-x-bzip:before,
+.elfinder-cwd-icon-x-bzip2:before,
+.elfinder-cwd-icon-x-rar:before { content: '\f1c6'; }
+
+/* code/script files */
+.elfinder-cwd-icon-javascript:before,
+.elfinder-cwd-icon-x-javascript:before,
+.elfinder-cwd-icon-x-perl:before,
+.elfinder-cwd-icon-x-python:before,
+.elfinder-cwd-icon-x-ruby:before,
+.elfinder-cwd-icon-x-sh:before,
+.elfinder-cwd-icon-x-shellscript:before,
+.elfinder-cwd-icon-x-c:before,
+.elfinder-cwd-icon-x-csrc:before,
+.elfinder-cwd-icon-x-chdr:before,
+.elfinder-cwd-icon-x-c--:before,
+.elfinder-cwd-icon-x-c--src:before,
+.elfinder-cwd-icon-x-c--hdr:before,
+.elfinder-cwd-icon-x-java:before,
+.elfinder-cwd-icon-x-java-source:before,
+.elfinder-cwd-icon-x-php:before,
+.elfinder-cwd-icon-xml:before { content: '\f1c9'; }
+
+/* unknown file types */
+.elfinder-cwd-icon-unknown:before { content: '\f016'; }

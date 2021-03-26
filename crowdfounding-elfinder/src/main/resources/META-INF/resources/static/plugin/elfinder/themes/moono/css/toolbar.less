@@ -1,0 +1,151 @@
+/* toolbar */
+.elfinder .elfinder-toolbar {
+  /*border: 1px solid #b2b2b2;*/
+  border-bottom: 1px solid #b6b6b6;
+  padding: 6px 8px 2px;
+
+  /* Allow breaking toolbars when in a narrow editor. (#9947) */
+  white-space: normal;
+
+  box-shadow: 0 1px 0 #fff inset;
+
+  background: #cfd1cf;
+  background-image: linear-gradient(to bottom, #f5f5f5, #cfd1cf);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#f5f5f5', endColorstr='#cfd1cf');
+}
+
+/* toolbar buttons */
+.elfinder .elfinder-buttonset {
+  float: left;
+  margin: 0 6px 5px 0;
+  border: 1px solid #a6a6a6;
+  border-bottom-color: #979797;
+
+  border-radius: 3px;
+
+  box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 0 2px rgba(255,255,255,.15) inset, 0 1px 0 rgba(255,255,255,.15) inset;
+
+  background: #e4e4e4;
+  background-image: linear-gradient(to bottom, #ffffff, #e4e4e4);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#ffffff', endColorstr='#e4e4e4');
+}
+
+/* toolbar buttons */
+.elfinder .elfinder-buttonset .elfinder-button {
+  display: inline-block;
+  height: 18px;
+  padding: 4px 6px;
+  outline: none;
+  cursor: default;
+  float: left;
+  border: none;
+  border-radius: 0;
+  background: none;
+}
+
+/* hovered buttons */
+.elfinder .elfinder-buttonset .elfinder-button:hover,
+.elfinder .elfinder-buttonset .elfinder-button:focus,
+.elfinder .elfinder-buttonset .elfinder-button:active {
+  box-shadow: 0 0 1px rgba(0,0,0,.3) inset;
+  background: #ccc;
+  background-image: linear-gradient(to bottom, #f2f2f2, #ccc);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#f2f2f2', endColorstr='#cccccc');
+}
+
+/* disabled buttons */
+.elfinder .elfinder-buttonset .elfinder-button.ui-state-disabled {
+  opacity: 0.3;
+}
+
+/* disabled buttons */
+
+/* don't show any separators in the toolbar buttonset */
+.elfinder .elfinder-buttonset .elfinder-toolbar-button-separator {
+  display: none;
+}
+
+/* searchbar */
+.elfinder-toolbar .elfinder-button-search {
+  margin: 0 0 5px 5px;
+  height: 28px;
+  width: 200px;
+  box-sizing: border-box;
+}
+
+/* searchbar menu (v2.1) */
+.elfinder-toolbar .elfinder-button-search .elfinder-button-menu {
+  padding: 4px 0 0 4px;
+}
+
+/* searchbar menu items */
+.elfinder-toolbar .elfinder-button-search .elfinder-button-menu .ui-button-text {
+  cursor: pointer;
+}
+
+/* searchbar menu unselected items */
+.elfinder-toolbar .elfinder-button-search .elfinder-button-menu .ui-state-default {
+  background-image: none;
+  background: #eaeaea;
+}
+
+/* searchbar menu hovered items */
+.elfinder-toolbar .elfinder-button-search .elfinder-button-menu .ui-state-hover {
+  background-image: none;
+  background: #d0ebf4;
+  border: 1px solid #509ece !important;
+}
+
+/* searchbar menu hovered items text */
+.elfinder-toolbar .elfinder-button-search .elfinder-button-menu .ui-button-text:hover {
+  color: #509ece;
+}
+
+/* at the time of speaking, v2.1 has a second, non-functional search bar, so
+   we'll hide it - this does mean that the CTRL-F shortcut will not work in v2.1
+   though */
+.elfinder-toolbar .elfinder-button-search:nth-child(2) {
+  display: none !important;
+}
+
+.elfinder-toolbar .elfinder-button-search input {
+  height: 26px;
+  width: 200px;
+  padding-left: 24px;
+  box-sizing: border-box;
+}
+
+.elfinder-toolbar .elfinder-button-search .ui-icon {
+  background-image: none !important;
+  overflow: hidden;
+  height: 16px;
+  width: 16px;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.elfinder-toolbar .elfinder-button-search .ui-icon:before {
+  font-family: FontAwesome;
+  background: none;
+  display: block;
+  text-align: center;
+  text-indent: 0;
+}
+
+/* search icon */
+.elfinder-toolbar .elfinder-button-search .ui-icon-search {
+  margin-left: 5px;
+  margin-right: 5px;
+  overflow: hidden;
+  display: block;
+}
+
+.elfinder-toolbar .elfinder-button-search .ui-icon-search:before {
+  content: '\f002';
+}
+
+/* close search results */
+.elfinder-toolbar .elfinder-button-search .ui-icon-close:before {
+  content: '\f00d';
+}

@@ -1,0 +1,54 @@
+/* main file wrapper */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file {
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* reset inner styles */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file *,
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file .elfinder-cwd-filename,
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file .elfinder-cwd-file-wrapper {
+  background: none;
+  cursor: pointer;
+  color: #000;
+}
+
+/* icon */
+.elfinder .elfinder-cwd-wrapper .elfinder-cwd-view-icons .elfinder-cwd-icon {
+  overflow: hidden;
+  height: 52px;
+  width: 52px;
+  font-size: 48px;
+  line-height: 52px;
+}
+
+/* filename */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file .elfinder-cwd-filename {
+  font-size: 12px;
+}
+
+/* hover state */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file:hover,
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file:active,
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file.ui-selected {
+  background: none; /* reset background */
+  border-color: #dedede;
+  background-color: #f2f2f2;
+  box-shadow: 0 0 2px rgba(0,0,0,.1) inset;
+  border-radius: 6px;
+}
+
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file:hover *,
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file:active *,
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file.ui-selected * {
+  color: #666666;
+}
+
+/* active and hovered */
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file.ui-selected:hover {
+  background-color: #f4f4f4;
+}
+
+.elfinder .elfinder-cwd-view-icons .elfinder-cwd-file.ui-selected:hover * {
+  color: #b7b7b7;
+}
