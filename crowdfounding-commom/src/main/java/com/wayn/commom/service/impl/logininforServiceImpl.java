@@ -65,7 +65,7 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         final String ip = ShiroUtil.getIP();
         String address = IP2RegionUtil.getCityInfo(ShiroUtil.getIP());
         StringBuilder s = new StringBuilder();
-        s.append(com.wayn.commom.util.LogUtils.getBlock(ip));
+        s.append(LogUtils.getBlock(ip));
         s.append(address);
         s.append(LogUtils.getBlock(username));
         s.append(LogUtils.getBlock(status));

@@ -32,7 +32,6 @@
 package com.wayn.filemanager.command;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wayn.commom.util.ImageUtil;
 import com.wayn.filemanager.constant.ElFinderConstants;
 import com.wayn.filemanager.service.ElfinderStorage;
 import com.wayn.filemanager.service.VolumeHandler;
@@ -52,7 +51,7 @@ public class GetCommand extends AbstractJsonCommand implements ElfinderCommand {
         final VolumeHandler vh = findTarget(elfinderStorage, target);
         final InputStream is = vh.openInputStream();
         if (vh.getMimeType().contains(IMAGE_MIME_TYPE)) {
-            json.put(ElFinderConstants.ELFINDER_PARAMETER_CONTENT, ImageUtil.getImageStr(is, vh.getMimeType()));
+            // json.put(ElFinderConstants.ELFINDER_PARAMETER_CONTENT, ImageUtil.getImageStr(is, vh.getMimeType()));
         } else {
             final String content = IOUtils.toString(is, ENCODING);
             is.close();

@@ -1,92 +1,33 @@
 package com.wayn.commom.util;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Base64;
 
 public class ImageUtil {
 
     /**
-     * 图片转化成base64字符串,返回的string可以直接在src上显示
+     * 图片转换base64编码
      *
-     * @param file     图片文件
-     * @param fileType 图片格式
-     * @return
-     * @throws IOException
+     * @param in   输入流
+     * @param type 编码头
+     * @return base64编码字符串
      */
-    public static String getImageStr(File file, String fileType) throws IOException {
-        String fileContentBase64 = null;
-        String base64Str = "data:" + fileType + ";base64,";
-        String content = null;
-        //将图片文件转化为字节数组字符串，并对其进行Base64编码处理
-        InputStream in = null;
-        byte[] data;
-        //读取图片字节数组
-        try {
-            in = new FileInputStream(file);
-            data = new byte[in.available()];
-            in.read(data);
-            in.close();
-            //对字节数组Base64编码
-            if (data == null || data.length == 0) {
-                return null;
+    public static String imgToBase64(InputStream in, String type) {
+        int ch;
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            while ((ch = in.read()) != -1) {
+                outputStream.write(ch);
             }
-            BASE64Encoder encoder = new BASE64Encoder();
-            content = encoder.encode(data);
-            content = content.replaceAll("\n", "").replaceAll("\r", "");
-            if (content == null || "".equals(content)) {
-                return null;
-            }
-            fileContentBase64 = base64Str + content;
+            return type + Base64.getEncoder().encodeToString(outputStream.toByteArray());
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (in != null) {
-                in.close();
-            }
         }
-        return fileContentBase64;
+        throw new RuntimeException("图片转base64编码失败");
     }
 
-    public static String getImageStr(InputStream in, String fileType) throws IOException {
-        String fileContentBase64 = null;
-        String base64Str = "data:" + fileType + ";base64,";
-        String content = null;
-        //将图片文件转化为字节数组字符串，并对其进行Base64编码处理
-        byte[] data;
-        //读取图片字节数组
-        try {
-            data = new byte[in.available()];
-            in.read(data);
-            in.close();
-            //对字节数组Base64编码
-            if (data == null || data.length == 0) {
-                return null;
-            }
-            BASE64Encoder encoder = new BASE64Encoder();
-            content = encoder.encode(data);
-            content = content.replaceAll("\n", "").replaceAll("\r", "");
-            if (content == null || "".equals(content)) {
-                return null;
-            }
-            fileContentBase64 = base64Str + content;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (in != null) {
-                in.close();
-            }
-        }
-        return fileContentBase64;
+    public static void main(String[] args) throws FileNotFoundException {
+        File file = new File("E:/123.jpg");
+        System.out.println(imgToBase64(new FileInputStream(file), "data:image/png;base64,"));
     }
 
-    public static byte[] decodeImageStr(String content) throws IOException {
-        BASE64Decoder decoder = new BASE64Decoder();
-        byte[] bytes = decoder.decodeBuffer(content);
-        return bytes;
-    }
 }

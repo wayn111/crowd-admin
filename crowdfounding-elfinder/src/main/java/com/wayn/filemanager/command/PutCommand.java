@@ -32,7 +32,6 @@
 package com.wayn.filemanager.command;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wayn.commom.util.ImageUtil;
 import com.wayn.filemanager.constant.ElFinderConstants;
 import com.wayn.filemanager.service.ElfinderStorage;
 import com.wayn.filemanager.service.VolumeHandler;
@@ -53,8 +52,8 @@ public class PutCommand extends AbstractJsonCommand implements ElfinderCommand {
         OutputStream os = file.openOutputStream();
         String content = request.getParameter(ElFinderConstants.ELFINDER_PARAMETER_CONTENT);
         if (content.contains(IAMGE_BASE64_FLAG)) {
-            byte[] bytes = ImageUtil.decodeImageStr(content.substring(IAMGE_BASE64_FLAG.length()));
-            IOUtils.write(bytes, os);
+            // byte[] bytes = ImageUtil.decodeImageStr(content.substring(IAMGE_BASE64_FLAG.length()));
+            // IOUtils.write(bytes, os);
         } else {
             IOUtils.write(content, os, ENCODING);
         }

@@ -30,7 +30,7 @@
     </filter>
     <filter-mapping>
         <filter-name>myCorsFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/ws/*</url-pattern>
     </filter-mapping>
 
     <!--防止xss攻击过滤器-->

@@ -27,9 +27,13 @@ public class IpUtils {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Forwarded-For");
         }
-        // 腾讯云cdn
+        // 腾讯云cdn，回源设置添加X-Forward-For用于携带用户端真是IP，eg：122.191.134.95, 101.89.34.223
+        // 122.191.134.95是真实IP，101.89.34.223是cdn节点IP
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Forward-For");
+            if (ip.contains(",")) {
+                ip = ip.split(", ")[0];
+            }
         }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
