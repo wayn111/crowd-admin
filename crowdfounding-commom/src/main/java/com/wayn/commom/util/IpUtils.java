@@ -31,7 +31,7 @@ public class IpUtils {
         // 122.191.134.95是真实IP，101.89.34.223是cdn节点IP
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Forward-For");
-            if (ip != null && ip.contains(",")) {
+            if (ip != null && ip.contains(", ")) {
                 ip = ip.split(", ")[0];
             }
         }
