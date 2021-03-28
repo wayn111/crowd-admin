@@ -17,6 +17,7 @@
         <module>crowdfounding-quartz</module>
         <module>crowdfounding-elfinder</module>
         <module>crowdfounding-mailserver</module>
+        <module>crowdfounding-tencentcloudapi</module>
     </modules>
     <packaging>pom</packaging>
     <name>crowdfounding-parent</name>

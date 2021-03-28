@@ -1,13 +1,20 @@
 package com.wayn.web.controller.home;
 
+import com.tencentcloudapi.cdn.v20180606.models.DescribeCdnDataResponse;
+import com.tencentcloudapi.cdn.v20180606.models.ListTopDataResponse;
+import com.tencentcloudapi.cdn.v20180606.models.TimestampData;
 import com.wayn.commom.base.BaseController;
 import com.wayn.commom.domain.Menu;
 import com.wayn.commom.domain.vo.EchartVO;
+import com.wayn.commom.enums.tencentcloud.cdn.FilterEnum;
+import com.wayn.commom.enums.tencentcloud.cdn.MetricEnum;
 import com.wayn.commom.service.ConfigService;
 import com.wayn.commom.service.LogService;
 import com.wayn.commom.service.LogininforService;
 import com.wayn.commom.service.MenuService;
+import com.wayn.commom.util.Arith;
 import com.wayn.commom.util.Response;
+import com.wayn.tencentcloudapi.cdn.datasearch.service.CdnDataSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +22,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Controller
@@ -33,6 +44,9 @@ public class MainController extends BaseController {
 
     @Autowired
     private LogininforService logininforService;
+
+    @Autowired
+    private CdnDataSearchService cdnDataSearchService;
 
     @Autowired
     private LogService logService;
@@ -90,4 +104,44 @@ public class MainController extends BaseController {
         List<Integer> dataList = list.stream().map(EchartVO::getValue).collect(Collectors.toList());
         return Response.success().add("nameList", nameList).add("dataList", dataList);
     }
+
+
+    @ResponseBody
+    @GetMapping("/flowUseStatistic")
+    public Response flowUseStatistic(Model model) {
+        Response success = Response.success();
+        String startTime = "2021-03-25 00:00:00";
+        String endTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        List<CompletableFuture<Void>> list = new ArrayList<>();
+        CompletableFuture<Void> completableFuture1 = CompletableFuture.supplyAsync(() ->
+                cdnDataSearchService.topDataSearch(startTime, endTime, MetricEnum.HOST.getLowerName(), FilterEnum.FLUX.getLowerName()))
+                .thenAccept(data -> {
+                    ListTopDataResponse response = (ListTopDataResponse) data;
+                    Float flow = response.getData()[0].getDetailData()[0].getValue();
+                    success.add("totalFlow", Arith.div(flow, 4, 1024, 1024, 1024));
+                });
+        CompletableFuture<Void> completableFuture2 = CompletableFuture.supplyAsync(() ->
+                cdnDataSearchService.topDataSearch(startTime, endTime, MetricEnum.HOST.getLowerName(), FilterEnum.FLUXHITRATE.getLowerName()))
+                .thenAccept(data -> {
+                    ListTopDataResponse response = (ListTopDataResponse) data;
+                    Float avgTrafficHitRate = response.getData()[0].getDetailData()[0].getValue();
+                    success.add("avgTrafficHitRate", avgTrafficHitRate);
+                });
+        CompletableFuture<Void> completableFuture3 = CompletableFuture.supplyAsync(() ->
+                cdnDataSearchService.accessDataSearch(startTime, endTime, "flux"))
+                .thenAccept(data -> {
+                    DescribeCdnDataResponse response = (DescribeCdnDataResponse) data;
+                    TimestampData[] detailData = response.getData()[0].getCdnData()[0].getDetailData();
+                    List<String> timeList = Arrays.stream(detailData).map(TimestampData::getTime).collect(Collectors.toList());
+                    List<Double> valueList = Arrays.stream(detailData).map(timestampData -> Arith.div(timestampData.getValue(), 4, 1024, 1024, 1024)).collect(Collectors.toList());
+                    success.add("timeList", timeList);
+                    success.add("valueList", valueList);
+                });
+        list.add(completableFuture1);
+        list.add(completableFuture2);
+        list.add(completableFuture3);
+        CompletableFuture.allOf(list.toArray(new CompletableFuture[0])).join();
+        return success;
+    }
+
 }

@@ -132,6 +132,9 @@
                         <div class="col-sm-7">
                             <div id="main2" style="min-width: 280px;min-height:350px;"></div>
                         </div>
+                        <div class="col-sm-12">
+                            <div id="main3" style="min-width: 280px;min-height:350px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -448,6 +451,7 @@
         }
         countryProvinceAccessCount();
         moduleUseStatistic();
+        flowUseStatistic();
     })
 
     function moduleUseStatistic() {
@@ -457,7 +461,6 @@
         option = {
             title: {
                 text: '模块访问统计',
-                subtext: '',
                 left: 'center'
             },
             tooltip: {
@@ -526,7 +529,6 @@
         option = {
             title: {
                 text: '全国各省访问次数',
-                subtext: '',
                 left: 'center'
             },
             tooltip: {
@@ -601,6 +603,42 @@
         $.get(_ctx + '/main/countryProvinceAccessCount', function (res) {
             if (res.code == 100) {
                 option.series[0].data = res.map.data;
+            }
+            option && myChart.setOption(option);
+        });
+    }
+
+    function flowUseStatistic() {
+        var chartDom = document.getElementById('main3');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+            title: {
+                text: '流量趋势(GB)',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                padding:[20,10,20,10],
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '流量:',
+                data: [150, 230, 224, 218, 135, 147, 260],
+                type: 'line'
+            }]
+        };
+        $.get(_ctx + '/main/flowUseStatistic', function (res) {
+            if (res.code == 100) {
+                option.xAxis.data = res.map.timeList;
+                option.series[0].data = res.map.valueList;
             }
             option && myChart.setOption(option);
         });
