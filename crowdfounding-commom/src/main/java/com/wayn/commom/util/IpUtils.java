@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Objects;
 
 /**
  * 获取IP方法
@@ -27,14 +28,6 @@ public class IpUtils {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Forwarded-For");
         }
-        // 腾讯云cdn，回源设置添加X-Forward-For用于携带用户端真是IP，eg：122.191.134.95, 101.89.34.223
-        // 122.191.134.95是真实IP，101.89.34.223是cdn节点IP
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("X-Forward-For");
-            if (ip != null && ip.contains(", ")) {
-                ip = ip.split(", ")[0];
-            }
-        }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
@@ -43,6 +36,12 @@ public class IpUtils {
         }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
+        }
+
+        // 腾讯云cdn，回源设置添加X-Forward-For用于携带用户端真是IP，eg：220.203.38.207, 101.89.34.223
+        // 122.191.134.95是真实IP，101.89.34.223是cdn节点IP
+        if (Objects.nonNull(ip) && ip.contains(",")) {
+            ip = ip.split(",", -1)[0];
         }
 
         return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;

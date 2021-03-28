@@ -37,12 +37,12 @@
                     </div>--%>
                 </div>
                 <div class="ibox-content">
-                    <blockquote class="text-muted" style="font-size:14px">
-                        <br>${sysName }是一个后台权限管理系统脚手架，
+                    <blockquote class="text-muted">
+                        ${sysName }是一个后台权限管理系统脚手架，
                         集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、系统监控、elfinder文件管理等常用功能，
-                        系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
-                        <br>如果你想找一个完整的后台管理，代码风格良好，基于现有功能快速上手开发的话
-                        <h4 class="text-danger">${sysName }是你的不二选择</h4>
+                        系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目，
+                        如果你想找一个完整的后台管理，代码风格良好，基于现有功能快速上手开发的话
+                        <h3 class="text-danger">${sysName }是你的不二选择</h3>
                     </blockquote>
                     <div class="row">
                         <div class="col-sm-3">
@@ -125,11 +125,11 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-5">
                             <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
                             <div id="main1" style="min-width: 280px;min-height:350px;"></div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                             <div id="main2" style="min-width: 280px;min-height:350px;"></div>
                         </div>
                     </div>

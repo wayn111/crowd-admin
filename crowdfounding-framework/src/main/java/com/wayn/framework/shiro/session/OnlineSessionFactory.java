@@ -7,6 +7,8 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SessionContext;
 import org.apache.shiro.session.mgt.SessionFactory;
 import org.apache.shiro.web.session.mgt.WebSessionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
  * 定义自己的session示例
  */
 public class OnlineSessionFactory implements SessionFactory {
+
+    private static final Logger logger = LoggerFactory.getLogger(OnlineSessionFactory.class);
+
 
     @Override
     public Session createSession(SessionContext initData) {
@@ -26,7 +31,9 @@ public class OnlineSessionFactory implements SessionFactory {
             String os = UserAgentUtils.getOs(request);
             // 获取客户端浏览器
             String browser = UserAgentUtils.getBrowser(userAgent).getName();
-            session.setHost(IpUtils.getIpAddr(request));
+            String ipAddr = IpUtils.getIpAddr(request);
+            logger.info("createSession ip: {}", ipAddr);
+            session.setHost(ipAddr);
             session.setBrowser(browser);
             session.setOs(os);
         }
