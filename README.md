@@ -101,7 +101,8 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 __系统登陆__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/系统登陆.png "系统登陆.png")
 __首页__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/首页.png "首页.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/首页1.png "首页1.png")
+![输入图片说明](./crowdfounding-web/crowdfounding-img/首页2.png "首页2.png")
 __用户管理__
 ![输入图片说明](./crowdfounding-web/crowdfounding-img/用户管理.png "用户管理.png")
 __菜单管理__

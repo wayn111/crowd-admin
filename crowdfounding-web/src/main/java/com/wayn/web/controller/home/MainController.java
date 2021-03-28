@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -110,8 +111,10 @@ public class MainController extends BaseController {
     @GetMapping("/flowUseStatistic")
     public Response flowUseStatistic(Model model) {
         Response success = Response.success();
-        String startTime = "2021-03-25 00:00:00";
-        String endTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String startTime = now.minus(7, ChronoUnit.DAYS).format(formatter);
+        String endTime = now.format(formatter);
         List<CompletableFuture<Void>> list = new ArrayList<>();
         CompletableFuture<Void> completableFuture1 = CompletableFuture.supplyAsync(() ->
                 cdnDataSearchService.topDataSearch(startTime, endTime, MetricEnum.HOST.getLowerName(), FilterEnum.FLUX.getLowerName()))

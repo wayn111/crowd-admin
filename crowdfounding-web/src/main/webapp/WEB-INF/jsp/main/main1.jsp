@@ -16,6 +16,27 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
+                <%--                <div class="ibox-title">--%>
+                <%--                    <h5>图表</h5>--%>
+                <%--                </div>--%>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="main3" style="min-width: 280px;min-height:350px;"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                            <div id="main1" style="min-width: 280px;min-height:350px;"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div id="main2" style="min-width: 280px;min-height:350px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>项目介绍</h5>
                     <%--<div class="ibox-tools">
@@ -113,27 +134,6 @@
                                 <li><a href="https://github.com/wuyouzhuguli/FEBS-Security" target="_blank">
                                     FEBS-Security</a></li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>图表</h5>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-                            <div id="main1" style="min-width: 280px;min-height:350px;"></div>
-                        </div>
-                        <div class="col-sm-7">
-                            <div id="main2" style="min-width: 280px;min-height:350px;"></div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div id="main3" style="min-width: 280px;min-height:350px;"></div>
                         </div>
                     </div>
                 </div>
@@ -615,7 +615,8 @@
 
         option = {
             title: {
-                text: '流量趋势(GB)',
+                text: '网站7日流量趋势(GB)',
+                subtext: '总流量：',
                 left: 'center'
             },
             tooltip: {
@@ -637,6 +638,7 @@
         };
         $.get(_ctx + '/main/flowUseStatistic', function (res) {
             if (res.code == 100) {
+                option.title.subtext = option.title.subtext + res.map.totalFlow;
                 option.xAxis.data = res.map.timeList;
                 option.series[0].data = res.map.valueList;
             }
