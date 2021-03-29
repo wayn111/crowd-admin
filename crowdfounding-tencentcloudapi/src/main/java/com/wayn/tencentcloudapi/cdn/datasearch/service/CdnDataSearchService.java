@@ -17,8 +17,8 @@ public interface CdnDataSearchService {
      * @param endTime   结束时间
      * @param metric    排序使用的指标名称
      * @param filter    Get 排序使用的指标名称
-     * @param <T>
-     * @return
+     * @param <T>       泛型返回类型
+     * @return 返回指定泛型
      */
     <T> T topDataSearch(String startTime, String endTime, String metric, String filter);
 
@@ -28,8 +28,8 @@ public interface CdnDataSearchService {
      * @param startTime 开始时间
      * @param endTime   结束时间
      * @param metric    排序使用的指标名称
-     * @param <T>
-     * @return
+     * @param <T>       泛型返回类型
+     * @return 返回指定泛型
      */
     <T> T accessDataSearch(String startTime, String endTime, String metric);
 }
