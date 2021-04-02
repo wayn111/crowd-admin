@@ -88,7 +88,7 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 
 ### 在线演示
 
-- <a href="http://wayn.xin/crowd" target="_blank">crowd-admin</a>
+- <a href="http://www.wayn.xin/crowd" target="_blank">crowd-admin</a>
 
 ### 参考项目
 

@@ -31,7 +31,7 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 
 ### Online demo
 
-- <a href="http://wayn.xin/crowd" target="_blank">crowd-admin</a>
+- <a href="http://www.wayn.xin/crowd" target="_blank">crowd-admin</a>
 
 ### Reference
 
