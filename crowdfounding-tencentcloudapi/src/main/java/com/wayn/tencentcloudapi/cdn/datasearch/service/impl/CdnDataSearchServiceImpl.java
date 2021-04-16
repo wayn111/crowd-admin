@@ -11,6 +11,7 @@ import com.wayn.tencentcloudapi.cdn.datasearch.service.CdnDataSearchService;
 import com.wayn.tencentcloudapi.config.CredentialConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,23 +19,13 @@ public class CdnDataSearchServiceImpl implements CdnDataSearchService {
 
     private static final Logger logger = LoggerFactory.getLogger(CdnDataSearchServiceImpl.class);
 
-    @Override
-    public CdnClient getCdnClient() {
-        Credential cred = new Credential(CredentialConfig.getSecretId(), CredentialConfig.getSecretKey());
-
-        HttpProfile httpProfile = new HttpProfile();
-        httpProfile.setEndpoint(CredentialConfig.getHost());
-
-        ClientProfile clientProfile = new ClientProfile();
-        clientProfile.setHttpProfile(httpProfile);
-
-        return new CdnClient(cred, "", clientProfile);
-    }
+    @Autowired
+    private CdnClient cdnClient;
 
     @Override
     public <T> T topDataSearch(String startTime, String endTime, String metric, String filter) {
         try {
-            CdnClient client = getCdnClient();
+            CdnClient client = cdnClient;
 
             ListTopDataRequest req = new ListTopDataRequest();
             req.setStartTime("2021-03-22 00:00:00");
@@ -52,7 +43,7 @@ public class CdnDataSearchServiceImpl implements CdnDataSearchService {
     public <T> T accessDataSearch(String startTime, String endTime, String metric) {
         try {
 
-            CdnClient client = getCdnClient();
+            CdnClient client = cdnClient;
 
             DescribeCdnDataRequest req = new DescribeCdnDataRequest();
             req.setStartTime(startTime);

@@ -15,12 +15,13 @@ import java.util.Objects;
  * @author ruoyi
  */
 public class IpUtils {
-    private static final Logger logger = LoggerFactory.getLogger(IpUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(IpUtils.class);
 
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";
         }
+        HttpUtil.getHeaders(request);
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");

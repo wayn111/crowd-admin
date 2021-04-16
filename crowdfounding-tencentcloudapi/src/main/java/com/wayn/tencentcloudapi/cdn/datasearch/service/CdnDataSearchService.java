@@ -7,9 +7,6 @@ import com.tencentcloudapi.cdn.v20180606.CdnClient;
  */
 public interface CdnDataSearchService {
 
-
-    CdnClient getCdnClient();
-
     /**
      * top数据查询
      *

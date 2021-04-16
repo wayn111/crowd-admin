@@ -1,6 +1,11 @@
 package com.wayn.tencentcloudapi.config;
 
+import com.tencentcloudapi.cdn.v20180606.CdnClient;
+import com.tencentcloudapi.common.Credential;
+import com.tencentcloudapi.common.profile.ClientProfile;
+import com.tencentcloudapi.common.profile.HttpProfile;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -8,36 +13,25 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:tencentcloud.properties")
 public class CredentialConfig {
 
-    private static String host;
-
-    private static String secretId;
-
-    private static String secretKey;
-
-    public static String getSecretId() {
-        return secretId;
-    }
+    @Value("${tencentcloud.host}")
+    private String host;
 
     @Value("${tencentcloud.secretId}")
-    public void setSecretId(String secretId) {
-        this.secretId = secretId;
-    }
-
-    public static String getSecretKey() {
-        return secretKey;
-    }
+    private String secretId;
 
     @Value("${tencentcloud.secretKey}")
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
+    private String secretKey;
 
-    public static String getHost() {
-        return host;
-    }
+    @Bean
+    public CdnClient getCdnClient() {
+        Credential cred = new Credential(secretId, secretKey);
 
-    @Value("${tencentcloud.host}")
-    public static void setHost(String host) {
-        CredentialConfig.host = host;
+        HttpProfile httpProfile = new HttpProfile();
+        httpProfile.setEndpoint(host);
+
+        ClientProfile clientProfile = new ClientProfile();
+        clientProfile.setHttpProfile(httpProfile);
+
+        return new CdnClient(cred, "", clientProfile);
     }
 }

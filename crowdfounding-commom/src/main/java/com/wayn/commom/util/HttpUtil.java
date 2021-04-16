@@ -1,18 +1,20 @@
 package com.wayn.commom.util;
 
 import com.wayn.commom.constant.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Enumeration;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class HttpUtil {
 
-    private static final Logger logger = Logger.getLogger("HttpUtil");
+    private static final Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     /**
      * 允许 JS 跨域设置
@@ -71,7 +73,7 @@ public class HttpUtil {
             out.print(tip);
             out.flush();
         } catch (IOException e) {
-            logger.severe(e.toString());
+            logger.error(e.toString());
         }
     }
 
@@ -155,7 +157,7 @@ public class HttpUtil {
         try {
             retStr.append(URLEncoder.encode(retUrl, Constants.UTF_ENCODING));
         } catch (UnsupportedEncodingException e) {
-            logger.severe("encodeRetURL error." + url);
+            logger.error("encodeRetURL error." + url);
             e.printStackTrace();
         }
 
@@ -185,7 +187,7 @@ public class HttpUtil {
         try {
             retUrl = URLDecoder.decode(url, Constants.UTF_ENCODING);
         } catch (UnsupportedEncodingException e) {
-            logger.severe("encodeRetURL error." + url);
+            logger.error("encodeRetURL error." + url);
             e.printStackTrace();
         }
 
@@ -234,7 +236,7 @@ public class HttpUtil {
         try {
             response.sendRedirect(location);
         } catch (IOException e) {
-            logger.severe("sendRedirect location:" + location);
+            logger.error("sendRedirect location:" + location);
             e.printStackTrace();
         }
     }
@@ -311,5 +313,22 @@ public class HttpUtil {
         url.append(request.getHeader("host"));// 请求服务器
         url.append(request.getContextPath());// 工程名
         return url.toString();
+    }
+
+    /**
+     * 获取请求头信息
+     *
+     * @param request 请求对象
+     * @return 请求头信息
+     */
+    public static String getHeaders(HttpServletRequest request) {
+        StringBuffer sb = new StringBuffer();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String name = headerNames.nextElement();
+            sb.append(name).append(" = ").append(request.getHeader(name)).append("\n");
+        }
+        logger.info("request header: {}", sb.toString());
+        return sb.toString();
     }
 }
