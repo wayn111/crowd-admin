@@ -328,7 +328,7 @@ public class HttpUtil {
             String name = headerNames.nextElement();
             sb.append(name).append(" = ").append(request.getHeader(name)).append("\n");
         }
-        logger.info("request header: {}", sb.toString());
+        logger.info("request header: {}", sb);
         return sb.toString();
     }
 }
