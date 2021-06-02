@@ -3,6 +3,9 @@ package com.wayn.commom.util;
 import java.io.*;
 import java.util.Base64;
 
+/**
+ * 图片帮助类
+ */
 public class ImageUtil {
 
     /**

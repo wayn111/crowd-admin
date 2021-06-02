@@ -11,7 +11,6 @@ import com.wayn.framework.shiro.session.RedisSessionDAO;
 import com.wayn.framework.web.filter.OnlineSessionFilter;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.SessionFactory;
@@ -79,12 +78,6 @@ public class ShiroConfig {
      */
     @Value("${shiro.cookie.maxAge}")
     private int maxAge;
-
-    /**
-     * 设置cipherKey密钥
-     */
-    @Value("${shiro.cookie.cipherKey}")
-    private String cipherKey;
 
     @Autowired(required = false)
     private RedisOpts opts;
@@ -164,7 +157,6 @@ public class ShiroConfig {
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());
-        cookieRememberMeManager.setCipherKey(Base64.decode(cipherKey));
         return cookieRememberMeManager;
     }
 

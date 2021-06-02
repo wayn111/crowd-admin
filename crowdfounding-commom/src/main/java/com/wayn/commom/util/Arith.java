@@ -79,10 +79,6 @@ public class Arith {
         return v1;
     }
 
-    public static void main(String[] args) {
-        System.out.println(div(1000, 10, 10, 10));
-    }
-
     /**
      * 提供（相对）精确的除法运算。当发生除不尽的情况时，由scale参数指
      * 定精度，以后的数字四舍五入。
@@ -118,7 +114,7 @@ public class Arith {
                     "The scale must be a positive integer or zero");
         }
         BigDecimal b = new BigDecimal(Double.toString(v));
-        BigDecimal one = new BigDecimal("1");
+        BigDecimal one = BigDecimal.ONE;
         return b.divide(one, scale, RoundingMode.HALF_UP).doubleValue();
     }
 }
