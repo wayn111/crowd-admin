@@ -42,3 +42,4 @@ logs
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
+out/

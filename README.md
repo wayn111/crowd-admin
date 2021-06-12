@@ -99,24 +99,24 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 ### 实例截图
 
 __系统登陆__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/系统登陆.png "系统登陆.png")
+![输入图片说明](./crowd-web/crowd-img/系统登陆.png "系统登陆.png")
 __首页__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/首页1.png "首页1.png")
-![输入图片说明](./crowdfounding-web/crowdfounding-img/首页2.png "首页2.png")
+![输入图片说明](./crowd-web/crowd-img/首页1.png "首页1.png")
+![输入图片说明](./crowd-web/crowd-img/首页2.png "首页2.png")
 __用户管理__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/用户管理.png "用户管理.png")
+![输入图片说明](./crowd-web/crowd-img/用户管理.png "用户管理.png")
 __菜单管理__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/菜单管理.png "菜单管理.png")
+![输入图片说明](./crowd-web/crowd-img/菜单管理.png "菜单管理.png")
 __通知管理__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/通知管理.png "通知管理.png")
+![输入图片说明](./crowd-web/crowd-img/通知管理.png "通知管理.png")
 __查看通知__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/查看通知.png "查看通知.png")
+![输入图片说明](./crowd-web/crowd-img/查看通知.png "查看通知.png")
 __文件管理__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/文件管理.png "文件管理.png")
+![输入图片说明](./crowd-web/crowd-img/文件管理.png "文件管理.png")
 __系统服务__
-![输入图片说明](./crowdfounding-web/crowdfounding-img/系统服务.jpg "系统服务.jpg")
+![输入图片说明](./crowd-web/crowd-img/系统服务.jpg "系统服务.jpg")
 
 ### 特别赞助
 
 <a href="https://www.jetbrains.com/" target="_blank">
-<img src="./crowdfounding-web/crowdfounding-img/jetbrains-training-partner.svg" width="20%" alt=""></a>
+<img src="./crowd-web/crowd-img/jetbrains-training-partner.svg" width="20%" alt=""></a>
