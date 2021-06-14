@@ -32,6 +32,7 @@
 package com.wayn.filemanager.command;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.util.HttpUtil;
 import com.wayn.filemanager.constant.ElFinderConstants;
 import com.wayn.filemanager.core.Target;
@@ -61,7 +62,7 @@ public class ZipdlCommand extends AbstractCommand implements ElfinderCommand {
             String downloadFileName = targets[2];
             String mime = targets[3];
             VolumeHandler archiveTarget = findTarget(elfinderStorage, archiveFileTarget);
-            response.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding(Constants.UTF_ENCODING);
             response.setContentType(mime);
             response.setHeader("Content-Disposition", HttpUtil.safeHttpHeader("attachments; "
                     + HttpUtil.getAttachementFileName(downloadFileName, request.getHeader("USER-AGENT"))));

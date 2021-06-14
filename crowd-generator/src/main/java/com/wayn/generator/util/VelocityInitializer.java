@@ -1,5 +1,6 @@
 package com.wayn.generator.util;
 
+import com.wayn.commom.constant.Constants;
 import org.apache.velocity.app.Velocity;
 
 import java.util.Properties;
@@ -20,7 +21,7 @@ public class VelocityInitializer {
             p.setProperty("resource.loader.file.class",
                     "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
             // 定义字符集
-            p.setProperty(Velocity.ENCODING_DEFAULT, "UTF-8");
+            p.setProperty(Velocity.ENCODING_DEFAULT, Constants.UTF_ENCODING);
             // 初始化Velocity引擎，指定配置Properties
             Velocity.init(p);
         } catch (Exception e) {

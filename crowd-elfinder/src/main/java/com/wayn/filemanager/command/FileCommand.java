@@ -31,6 +31,7 @@
  */
 package com.wayn.filemanager.command;
 
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.util.HttpUtil;
 import com.wayn.filemanager.service.ElfinderStorage;
 import com.wayn.filemanager.service.VolumeHandler;
@@ -53,7 +54,7 @@ public class FileCommand extends AbstractCommand implements ElfinderCommand {
         VolumeHandler fsi = super.findTarget(elfinderStorage, target);
         String mime = fsi.getMimeType();
 
-        response.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding(Constants.UTF_ENCODING);
         response.setContentType(mime);
         String fileName = fsi.getName();
         if (download) {

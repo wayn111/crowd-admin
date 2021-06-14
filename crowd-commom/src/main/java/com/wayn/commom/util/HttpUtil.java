@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -336,11 +337,14 @@ public class HttpUtil {
     /**
      * 过滤HTTP Response Splitting攻击
      *
-     * @param str 响应头
+     * @param value 响应头
      * @return string
      */
-    public static String safeHttpHeader(String str) {
-        return str.replaceAll("[^a-zA-Z ]", "");
+    public static String safeHttpHeader(String value) {
+        String temp;
+        temp = value.replaceAll("\n", "");
+        temp = temp.replaceAll("\r", "");
+        return temp;
     }
 
     public static String getAttachementFileName(String fileName, String userAgent) throws UnsupportedEncodingException {
@@ -355,7 +359,7 @@ public class HttpUtil {
                 return "filename*=UTF-8''" + URLEncoder.encode(fileName, "UTF8");
             }
             if (userAgent.contains("safari")) {
-                return "filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO8859-1") + "\"";
+                return "filename=\"" + new String(fileName.getBytes(StandardCharsets.UTF_8), "ISO8859-1") + "\"";
             }
             if (userAgent.contains("mozilla")) {
                 return "filename*=UTF-8''" + URLEncoder.encode(fileName, "UTF8");

@@ -1,5 +1,6 @@
 package com.wayn.commom.util;
 
+import com.wayn.commom.constant.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,7 +8,7 @@ import java.security.MessageDigest;
 
 /**
  * Md5加密方法
- * 
+ *
  * @author ruoyi
  */
 public class Md5Utils
@@ -21,7 +22,7 @@ public class Md5Utils
         {
             algorithm = MessageDigest.getInstance("MD5");
             algorithm.reset();
-            algorithm.update(s.getBytes("UTF-8"));
+            algorithm.update(s.getBytes(Constants.UTF_ENCODING));
             byte[] messageDigest = algorithm.digest();
             return messageDigest;
         }
@@ -56,7 +57,7 @@ public class Md5Utils
     {
         try
         {
-            return new String(toHex(md5(s)).getBytes("UTF-8"), "UTF-8");
+            return new String(toHex(md5(s)).getBytes(Constants.UTF_ENCODING), Constants.UTF_ENCODING);
         }
         catch (Exception e)
         {

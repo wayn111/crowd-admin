@@ -32,6 +32,7 @@
 package com.wayn.filemanager.command;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.util.ImageUtil;
 import com.wayn.filemanager.constant.ElFinderConstants;
 import com.wayn.filemanager.service.ElfinderStorage;
@@ -43,7 +44,7 @@ import java.io.InputStream;
 
 public class GetCommand extends AbstractJsonCommand implements ElfinderCommand {
 
-    public static final String ENCODING = "UTF-8";
+    public static final String ENCODING = Constants.UTF_ENCODING;
     public static final String IMAGE_MIME_TYPE = "image";
 
     @Override

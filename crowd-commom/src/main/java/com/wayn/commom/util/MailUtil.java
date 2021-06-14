@@ -1,6 +1,7 @@
 package com.wayn.commom.util;
 
 import com.sun.mail.util.MailSSLSocketFactory;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.domain.MailConfig;
 import com.wayn.commom.domain.vo.SendMailVO;
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class MailUtil {
 //            session.setDebug(true);
             // 创建默认的 MimeMessage 对象
             MimeMessage message = new MimeMessage(session);
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, Constants.UTF_ENCODING);
             // Set From: 头部头字段
             helper.setFrom(new InternetAddress(from));
             // Set To: 头部头字段

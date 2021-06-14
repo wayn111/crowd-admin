@@ -1,5 +1,6 @@
 package com.wayn.commom.util;
 
+import com.wayn.commom.constant.Constants;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -87,7 +88,7 @@ public class ServletUtil {
     public static String renderString(HttpServletResponse response, String string) {
         try {
             response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding(Constants.UTF_ENCODING);
             response.getWriter().print(string);
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,7 +105,7 @@ public class ServletUtil {
      * @throws UnsupportedEncodingException 不支持字符编码异常
      */
     public static void setExportResponse(HttpServletRequest request, HttpServletResponse response, String fileName, Integer size) throws UnsupportedEncodingException {
-        response.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding(Constants.UTF_ENCODING);
         response.setContentType("multipart/form-data");
         response.setHeader("Content-Length", HttpUtil.safeHttpHeader(size + ""));
         response.setHeader("Content-Disposition", HttpUtil.safeHttpHeader("attachment;fileName=" + FileUtils.setFileDownloadHeader(request, fileName)));

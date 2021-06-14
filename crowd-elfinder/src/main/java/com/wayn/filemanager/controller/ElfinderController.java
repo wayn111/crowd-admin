@@ -1,6 +1,7 @@
 package com.wayn.filemanager.controller;
 
 import com.wayn.commom.annotation.Log;
+import com.wayn.commom.constant.Constants;
 import com.wayn.commom.enums.Operator;
 import com.wayn.filemanager.command.ElfinderCommand;
 import com.wayn.filemanager.command.ElfinderCommandFactory;
@@ -113,7 +114,7 @@ public class ElfinderController {
         ServletFileUpload servletFileUpload = new ServletFileUpload();
         String characterEncoding = request.getCharacterEncoding();
         if (characterEncoding == null) {
-            characterEncoding = "UTF-8";
+            characterEncoding = Constants.UTF_ENCODING;
         }
         servletFileUpload.setHeaderEncoding(characterEncoding);
 
