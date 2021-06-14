@@ -83,8 +83,8 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 
 ### 获取源码
 
+- [crowd-admin github](https://github.com/wayn111/crowd-admin)
 - [crowd-admin 码云](https://gitee.com/wayn111/crowdfounding)
-- [crowd-admin github](https://github.com/wayn111/crowdfounding)
 
 ### 在线演示
 

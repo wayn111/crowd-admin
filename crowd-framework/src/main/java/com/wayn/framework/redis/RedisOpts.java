@@ -9,7 +9,7 @@ import redis.clients.jedis.JedisPool;
 
 import java.util.Set;
 
-@Profile({"dev"})
+@Profile({"redis"})
 @Component
 public class RedisOpts {
 

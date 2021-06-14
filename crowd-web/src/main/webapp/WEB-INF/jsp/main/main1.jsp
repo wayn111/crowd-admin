@@ -181,11 +181,30 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v23">v2.3.0</a><code
+                                            class="pull-right">2021.06.14</code>
+                                    </h5>
+                                </div>
+                                <div id="v23" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            代码目录重构，优化部署文件
+                                        </div>
+                                        <ol>
+                                            <li>代码目录重构</li>
+                                            <li>sql文件优化</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#version" href="#v22">v2.2.0</a><code
                                             class="pull-right">2021.02.20</code>
                                     </h5>
                                 </div>
-                                <div id="v22" class="panel-collapse collapse in">
+                                <div id="v22" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             添加echart图标展示，添加演示模式，代码优化

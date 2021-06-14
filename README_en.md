@@ -26,8 +26,8 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 
 ### Get Source code
 
+- [crowd-admin git](https://github.com/wayn111/crowd-admin)
 - [crowd-admin gitee](https://gitee.com/wayn111/crowdfounding)
-- [crowd-admin git](https://github.com/wayn111/crowdfounding)
 
 ### Online demo
 
@@ -43,23 +43,23 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 
 -------------
 __Login__
-![Login](./crowdfounding-web/crowdfounding-img/系统登陆.png "系统登陆.png")
+![Login](./crowd-web/crowd-img/系统登陆.png "系统登陆.png")
 __Home__
-![Home](./crowdfounding-web/crowdfounding-img/首页.png "首页.png")
+![Home](./crowd-web/crowd-img/首页.png "首页.png")
 __user manager__
-![user manager](./crowdfounding-web/crowdfounding-img/用户管理.png "用户管理.png")
+![user manager](./crowd-web/crowd-img/用户管理.png "用户管理.png")
 __menu manager__
-![menu manager](./crowdfounding-web/crowdfounding-img/菜单管理.png "菜单管理.png")
+![menu manager](./crowd-web/crowd-img/菜单管理.png "菜单管理.png")
 __notify manager__
-![view notification](./crowdfounding-web/crowdfounding-img/通知管理.png "通知管理.png")
+![view notification](./crowd-web/crowd-img/通知管理.png "通知管理.png")
 __view notification__
-![file manager](./crowdfounding-web/crowdfounding-img/查看通知.png "查看通知.png")
+![file manager](./crowd-web/crowd-img/查看通知.png "查看通知.png")
 __file manager__
-![file manager](./crowdfounding-web/crowdfounding-img/文件管理.png "文件管理.png")
+![file manager](./crowd-web/crowd-img/文件管理.png "文件管理.png")
 __system server__
-![system server](./crowdfounding-web/crowdfounding-img/系统服务.jpg "系统服务.jpg")
+![system server](./crowd-web/crowd-img/系统服务.jpg "系统服务.jpg")
 
 ### Sponsor
 
 <a href="https://www.jetbrains.com/" target="_blank">
-<img src="./crowdfounding-web/crowdfounding-img/jetbrains-training-partner.svg" width="20%" alt=""></a>
+<img src="./crowd-web/crowd-img/jetbrains-training-partner.svg" width="20%" alt=""></a>

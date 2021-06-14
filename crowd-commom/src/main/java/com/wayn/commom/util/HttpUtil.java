@@ -301,7 +301,7 @@ public class HttpUtil {
 
     /**
      * 获取当前项目路径，<br>
-     * 例如：http://localhost:8081/crowdfounding
+     * 例如：http://localhost:8081/crowd-admin
      *
      * @param request
      * @return

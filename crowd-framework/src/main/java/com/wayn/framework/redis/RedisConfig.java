@@ -16,7 +16,7 @@ import redis.clients.jedis.JedisPoolConfig;
 /**
  * redis配置
  */
-@Profile({"dev"})
+@Profile({"redis"})
 @Configuration
 public class RedisConfig {
 

@@ -58,7 +58,7 @@ public class CacheConfig extends CachingConfigurerSupport {
     @Value("${redis.databaseIndex}")
     private int databaseIndex = 0;
 
-    @Profile({"dev"})
+    @Profile({"redis"})
     @Bean
     public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig) { JedisConnectionFactory connectionFactory = new JedisConnectionFactory(jedisPoolConfig);
         connectionFactory.setHostName(host);
@@ -68,7 +68,7 @@ public class CacheConfig extends CachingConfigurerSupport {
         return connectionFactory;
     }
 
-    @Profile({"dev"})
+    @Profile({"redis"})
     @Bean
     public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
