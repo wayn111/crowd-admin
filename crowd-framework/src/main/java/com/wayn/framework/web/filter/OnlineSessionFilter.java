@@ -66,7 +66,7 @@ public class OnlineSessionFilter extends AccessControlFilter {
             OnlineSession onlineSession = (OnlineSession) session;
             request.setAttribute(ONLINE_SESSION, onlineSession);
             //把user id设置进去
-            boolean isGuest = StringUtils.isEmpty(onlineSession.getUserId());
+            boolean isGuest = StringUtils.isBlank(onlineSession.getUserId());
             if (isGuest) {
                 User user = ShiroUtil.getSessionUser();
                 if (user != null) {

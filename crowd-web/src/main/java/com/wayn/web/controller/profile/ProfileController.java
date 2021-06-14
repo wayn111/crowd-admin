@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,12 +128,11 @@ public class ProfileController extends BaseController {
      *
      * @param file
      * @return
-     * @throws IOException
      */
     @Log(value = "个人信息管理", operator = Operator.UPDATE)
     @ResponseBody
     @PostMapping("updateAvatar")
-    public Response updateAvatar(@RequestParam("avatarfile") MultipartFile file) throws IOException {
+    public Response updateAvatar(@RequestParam("avatarfile") MultipartFile file) {
         // 上传文件路径
         String filePath = ProperUtil.get("wayn.uploadDir") + "/avatar";
         String fileName = FileUploadUtil.uploadFile(file, filePath);

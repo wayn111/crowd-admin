@@ -3,6 +3,8 @@ package com.wayn.commom.util;
 import com.wayn.commom.exception.BusinessException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -13,14 +15,19 @@ import java.io.IOException;
  */
 public class FileUploadUtil {
 
-    public static String uploadFile(MultipartFile file, String filePath) throws IOException {
+    private static final Logger logger = LoggerFactory.getLogger(FileUploadUtil.class);
+
+    public static String uploadFile(MultipartFile file, String filePath) {
         int fileNameLength = file.getOriginalFilename().length();
         if (fileNameLength > 100) {
             throw new BusinessException("文件名称过长");
         }
         String fileName = file.getOriginalFilename();
+        if (FileUtils.checkAllowDownload(fileName)) {
+            throw new BusinessException("文件名称(" + fileName + ")非法，不允许下载。 ");
+        }
         String extension = FilenameUtils.getExtension(fileName);
-        if (StringUtils.isEmpty(extension)) {
+        if (StringUtils.isBlank(extension)) {
             extension = MimeTypeUtils.getExtension(file.getContentType());
         }
         String encodingFilename = FileUtils.encodingFilename(fileName);
@@ -29,10 +36,14 @@ public class FileUploadUtil {
         if (!desc.getParentFile().exists()) {
             desc.getParentFile().mkdirs();
         }
-        if (!desc.exists()) {
-            desc.createNewFile();
+        try {
+            if (!desc.exists()) {
+                desc.createNewFile();
+            }
+            file.transferTo(desc);
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
         }
-        file.transferTo(desc);
         return fileName;
     }
 }

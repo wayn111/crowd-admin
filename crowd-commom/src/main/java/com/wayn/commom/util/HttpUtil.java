@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -255,7 +256,7 @@ public class HttpUtil {
         try {
             InputStream inputStream = request.getInputStream();
             if (inputStream != null) {
-                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName(Constants.UTF_ENCODING)));
                 char[] charBuffer = new char[128];
                 int bytesRead = -1;
                 while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
@@ -330,5 +331,17 @@ public class HttpUtil {
         }
         // logger.info("request header: {}", sb);
         return sb.toString();
+    }
+
+    /**
+     * 过滤HTTP Response Splitting攻击
+     *
+     * @param value 响应头
+     * @return string
+     */
+    public static String safeHttpHeader(String value) {
+        value = value.replaceAll("\r", "");
+        value = value.replaceAll("\n", "");
+        return value;
     }
 }

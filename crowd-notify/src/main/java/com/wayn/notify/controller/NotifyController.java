@@ -97,7 +97,7 @@ public class NotifyController extends BaseController {
     @PostMapping("/addSave")
     public Response addSave(ModelMap modelMap, NotifyVO notifyVO, String receiveUserIds) throws ParseException {
         Notify notify = getNotify(notifyVO);
-        if (StringUtils.isEmpty(receiveUserIds)) {
+        if (StringUtils.isBlank(receiveUserIds)) {
             receiveUserIds = "";
         }
         return Response.result(notifyService.save(notify, receiveUserIds), "新增成功");
@@ -109,7 +109,7 @@ public class NotifyController extends BaseController {
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, NotifyVO notifyVO, String receiveUserIds) throws ParseException, SchedulerException {
         Notify notify = getNotify(notifyVO);
-        if (StringUtils.isEmpty(receiveUserIds)) {
+        if (StringUtils.isBlank(receiveUserIds)) {
             receiveUserIds = "";
         }
         return Response.result(notifyService.update(notify, receiveUserIds), "修改成功");

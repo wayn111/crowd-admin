@@ -1,7 +1,5 @@
 package com.wayn.framework.web.listener;
 
-import com.wayn.commom.constant.Constants;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -16,14 +14,9 @@ public class ProfileListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         //侦测jvm环境，并缓存到全局变量中
         String env = System.getProperty("spring.profiles.active");
-        if (env == null) {
-            Constants.ENV = "dev";
-        } else {
-            Constants.ENV = env;
-        }
 
         System.out.println("==================================================================================================");
-        System.out.println("The Application " + sce.getServletContext().getInitParameter("applicationName") + " is running on the environment:" + Constants.ENV);
+        System.out.println("The Application " + sce.getServletContext().getInitParameter("applicationName") + " is running on the environment:" + env);
         System.out.println("==================================================================================================");
     }
 

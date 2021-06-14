@@ -161,7 +161,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
                 .append("utf-8''")
                 .append(percentEncodedFileName);
 
-        response.setHeader("Content-disposition", contentDispositionValue.toString());
+        response.setHeader("Content-disposition", HttpUtil.safeHttpHeader(contentDispositionValue.toString()));
     }
 
     /**

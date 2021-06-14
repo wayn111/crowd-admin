@@ -5,18 +5,18 @@
  * %%
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of the Trustsystems Desenvolvimento de Sistemas, LTDA. nor the names of its contributors
  *    may be used to endorse or promote products derived from this software without
  *    specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -33,6 +33,7 @@ package com.wayn.filemanager.command;
 
 import com.mortennobel.imagescaling.DimensionConstrain;
 import com.mortennobel.imagescaling.ResampleOp;
+import com.wayn.commom.util.HttpUtil;
 import com.wayn.filemanager.service.ElfinderStorage;
 import com.wayn.filemanager.service.VolumeHandler;
 import org.joda.time.DateTime;
@@ -69,8 +70,8 @@ public class TmbCommand extends AbstractCommand implements ElfinderCommand {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(b, "png", baos);
 
-            response.setHeader("Last-Modified", dateTimeFormatter.print(dateTime));
-            response.setHeader("Expires", dateTimeFormatter.print(dateTime.plusYears(2)));
+            response.setHeader("Last-Modified", HttpUtil.safeHttpHeader(dateTimeFormatter.print(dateTime)));
+            response.setHeader("Expires", HttpUtil.safeHttpHeader(dateTimeFormatter.print(dateTime.plusYears(2))));
 
             ImageIO.write(b, "png", response.getOutputStream());
         }

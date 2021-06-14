@@ -13,9 +13,9 @@ public class MailConfigServiceImpl extends ServiceImpl<MailConfigDao, MailConfig
 
     @Override
     public boolean checkMailConfig(MailConfig mailConfig) {
-        if (StringUtils.isEmpty(mailConfig.getFromUser())
-                || StringUtils.isEmpty(mailConfig.getHost())
-                || StringUtils.isEmpty(mailConfig.getPass())) {
+        if (StringUtils.isBlank(mailConfig.getFromUser())
+                || StringUtils.isBlank(mailConfig.getHost())
+                || StringUtils.isBlank(mailConfig.getPass())) {
             return false;
         }
         return true;

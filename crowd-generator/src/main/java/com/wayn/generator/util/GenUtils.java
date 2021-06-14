@@ -85,12 +85,12 @@ public class GenUtils {
 
     private static String convertToCamelCase(String columnName) {
         StringBuilder sb = new StringBuilder();
-        if (StringUtils.isEmpty(columnName)) {
+        if (StringUtils.isBlank(columnName)) {
             return "";
         }
         String[] split = columnName.split("_", -1);
         for (String s : split) {
-            if (StringUtils.isEmpty(s)) {
+            if (StringUtils.isBlank(s)) {
                 continue;
             }
             sb.append(StringUtils.capitalize(s));

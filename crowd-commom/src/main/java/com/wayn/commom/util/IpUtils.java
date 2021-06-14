@@ -1,5 +1,6 @@
 package com.wayn.commom.util;
 
+import com.wayn.commom.constant.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 import java.util.Objects;
 
 /**
@@ -54,7 +56,7 @@ public class IpUtils {
     }
 
     private static boolean internalIp(byte[] addr) {
-        if (StringUtils.isEmpty(new String(addr)) || addr.length < 2) {
+        if (StringUtils.isEmpty(new String(addr, Charset.forName(Constants.UTF_ENCODING))) || addr.length < 2) {
             return true;
         }
         final byte b0 = addr[0];

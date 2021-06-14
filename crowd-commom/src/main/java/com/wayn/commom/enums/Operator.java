@@ -29,16 +29,8 @@ public enum Operator {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getCode() {
         return code;
     }
 
-    public Operator setCode(String code) {
-        this.code = code;
-        return this;
-    }
 }

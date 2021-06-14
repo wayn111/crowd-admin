@@ -121,7 +121,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
      */
     public List<String> fillNotifyRecordList(Notify notify, String receiveUserIds, List<NotifyRecord> collect) {
         List<String> split = new ArrayList<>();
-        if (StringUtils.isEmpty(receiveUserIds)) {
+        if (StringUtils.isBlank(receiveUserIds)) {
             for (User user : userService.list(new QueryWrapper<>())) {
                 NotifyRecord notifyRecord = new NotifyRecord();
                 notifyRecord.setCreateTime(new Date());
