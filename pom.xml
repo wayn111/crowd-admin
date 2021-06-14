@@ -41,7 +41,7 @@
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-compress.version>1.20</commons-compress.version>
-        <activemq.version>5.15.11</activemq.version>
+        <activemq.version>5.15.14</activemq.version>
         <tika.version>1.26</tika.version>
         <fastjson.version>1.2.76</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
@@ -64,7 +64,7 @@
         <joda-time.version>2.10.8</joda-time.version>
         <ip2region.version>1.7.2</ip2region.version>
         <reactor-net.version>2.0.8.RELEASE</reactor-net.version>
-        <netty-all.version>4.0.33.Final</netty-all.version>
+        <netty-all.version>4.1.65.Final</netty-all.version>
         <easypoi.version>4.2.0</easypoi.version>
         <mail.version>1.4.7</mail.version>
     </properties>
