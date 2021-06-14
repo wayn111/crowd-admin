@@ -336,13 +336,11 @@ public class HttpUtil {
     /**
      * 过滤HTTP Response Splitting攻击
      *
-     * @param value 响应头
+     * @param str 响应头
      * @return string
      */
-    public static String safeHttpHeader(String value) {
-        value = value.replaceAll("\r", "");
-        value = value.replaceAll("\n", "");
-        return value;
+    public static String safeHttpHeader(String str) {
+        return str.replaceAll("[^a-zA-Z ]", "");
     }
 
     public static String getAttachementFileName(String fileName, String userAgent) throws UnsupportedEncodingException {
