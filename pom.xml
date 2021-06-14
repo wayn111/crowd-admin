@@ -65,7 +65,7 @@
         <ip2region.version>1.7.2</ip2region.version>
         <reactor-net.version>2.0.8.RELEASE</reactor-net.version>
         <netty-all.version>4.1.65.Final</netty-all.version>
-        <easypoi.version>4.2.0</easypoi.version>
+        <easypoi.version>4.4.0</easypoi.version>
         <mail.version>1.4.7</mail.version>
     </properties>
 
@@ -365,7 +365,7 @@
             <artifactId>tencentcloud-sdk-java</artifactId>
             <!-- go to https://search.maven.org/search?q=tencentcloud-sdk-java and get the latest version. -->
             <!-- 请到https://search.maven.org/search?q=tencentcloud-sdk-java查询所有版本，最新版本如下 -->
-            <version>3.1.233</version>
+            <version>3.1.288</version>
         </dependency>
     </dependencies>
     <build>
