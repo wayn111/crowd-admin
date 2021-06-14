@@ -107,8 +107,7 @@ public class ServletUtil {
         response.setCharacterEncoding("utf-8");
         response.setContentType("multipart/form-data");
         response.setHeader("Content-Length", HttpUtil.safeHttpHeader(size + ""));
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, fileName));
+        response.setHeader("Content-Disposition", HttpUtil.safeHttpHeader("attachment;fileName=" + FileUtils.setFileDownloadHeader(request, fileName)));
         response.setContentType("application/octet-stream;charset=UTF-8");
     }
 }

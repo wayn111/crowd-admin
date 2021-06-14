@@ -31,9 +31,9 @@
  */
 package com.wayn.filemanager.command;
 
+import com.wayn.commom.util.HttpUtil;
 import com.wayn.filemanager.service.ElfinderStorage;
 import com.wayn.filemanager.service.VolumeHandler;
-import com.wayn.filemanager.util.HttpUtil;
 import org.apache.commons.io.IOUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,8 +57,7 @@ public class FileCommand extends AbstractCommand implements ElfinderCommand {
         response.setContentType(mime);
         String fileName = fsi.getName();
         if (download) {
-            response.setHeader("Content-Disposition",
-                    "attachments; " + HttpUtil.getAttachementFileName(fileName, request.getHeader("USER-AGENT")));
+            response.setHeader("Content-Disposition", HttpUtil.safeHttpHeader("attachments; " + HttpUtil.getAttachementFileName(fileName, request.getHeader("USER-AGENT"))));
             response.setHeader("Content-Transfer-Encoding", "binary");
         }
 
