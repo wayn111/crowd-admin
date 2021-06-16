@@ -19,6 +19,7 @@ import com.wayn.commom.service.UserRoleService;
 import com.wayn.commom.service.UserService;
 import com.wayn.commom.shiro.util.ShiroUtil;
 import com.wayn.commom.util.ParameterUtil;
+import com.wayn.commom.util.ProperUtil;
 import com.wayn.commom.util.ServletUtil;
 import com.wayn.commom.util.TreeBuilderUtil;
 import org.apache.commons.lang3.ArrayUtils;
@@ -28,7 +29,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,9 +58,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     private DeptDao deptDao;
     @Autowired
     private UserRoleService userRoleService;
-
-    @Value("${wayn.uploadDir}")
-    private String uploadDir;
 
     @Override
     public Page<UserVO> listPage(Page<User> page, User user) {
@@ -242,7 +239,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
         List<User> list = list(wrapper);
-        list.forEach(item -> item.setUserImg(uploadDir + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6)));
+        list.forEach(item -> item.setUserImg(ProperUtil.get("wayn.uploadDir") + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6)));
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams, User.class, list);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
