@@ -368,7 +368,8 @@
      * 建立stomp连接
      */
     function connect() {
-        var sock = new SockJS(_ctx + "/ws/notify");
+        // var sock = new SockJS(_ctx + "/ws/notify");
+        var sock = new SockJS("http://wayn.xin:8080//ws/notify");
         var stompClient = Stomp.over(sock);
         stompClient.connect('guest', 'guest', function (frame) {
             /** 
