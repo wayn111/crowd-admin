@@ -345,7 +345,7 @@
 
     function connect() {
         // var sock = new SockJS(_ctx + "/ws/notify");
-        var sock = new SockJS("http://wayn.xin:8080/ws/notify");
+        var sock = new SockJS("http://www.wayn.xin/ws/notify");
         var stompClient = Stomp.over(sock);
         stompClient.connect('guest', 'guest', function (frame) {
             // 修改我的通知状态
