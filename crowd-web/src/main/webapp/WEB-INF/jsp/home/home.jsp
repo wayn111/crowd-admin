@@ -369,7 +369,7 @@
      */
     function connect() {
         // var sock = new SockJS(_ctx + "/ws/notify");
-        var sock = new SockJS("http://www.wayn.xin/ws/notify");
+        var sock = new SockJS("http://www.wayn.xin/crowd/ws/notify");
         var stompClient = Stomp.over(sock);
         stompClient.connect('guest', 'guest', function (frame) {
             /** 
