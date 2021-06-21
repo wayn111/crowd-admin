@@ -30,6 +30,10 @@
         <filter-name>myCorsFilter</filter-name>
         <filter-class>com.wayn.framework.web.filter.MyCorsFilter</filter-class>
         <async-supported>true</async-supported>
+        <init-param>
+            <param-name>allowedOrigins</param-name>
+            <param-value>http://localhost:8080,http://127.0.0.1:8080,http://wayn.xin:8080,http://wayn.xin,http://www.wayn.xin</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>myCorsFilter</filter-name>

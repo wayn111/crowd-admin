@@ -22,8 +22,8 @@ public class CdnDataSearchServiceImpl implements CdnDataSearchService {
     public <T> T topDataSearch(String startTime, String endTime, String metric, String filter) {
         try {
             ListTopDataRequest req = new ListTopDataRequest();
-            req.setStartTime("2021-03-22 00:00:00");
-            req.setEndTime("2021-03-28 15:00:00");
+            req.setStartTime(startTime);
+            req.setEndTime(endTime);
             req.setMetric(metric);
             req.setFilter(filter);
             return (T) cdnClient.ListTopData(req);
