@@ -20,7 +20,7 @@ public class MyCorsFilter implements Filter {
         resp.addHeader("Access-Control-Allow-Methods","*");
         resp.addHeader("Access-Control-Max-Age","3600");
         resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
-        resp.addHeader("Access-Control-Allow-Credentials","true");
+        resp.addHeader("Access-Control-Allow-Credentials","false");
         chain.doFilter(req, resp);
     }
 
