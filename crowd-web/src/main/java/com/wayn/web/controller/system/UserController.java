@@ -217,7 +217,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/import")
-    public String importExecl(Model model) {
+    public String importExcl(Model model) {
         model.addAttribute("initPassWord", configService.getValueByKey("sys.user.initPassword"));
         return PREFIX + "/import";
     }
