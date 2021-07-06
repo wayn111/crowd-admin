@@ -1,7 +1,7 @@
 # crowd-admin
 
 ### Language
- 
+
 - [简体中文](README.md)|[English](README_en.md)
 
 ### 项目介绍
@@ -20,7 +20,7 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 - 前端使用H+模板，样式美观，支持ajax下载文件，js代码简洁，清晰，避免过度封装
 
 ### 内置模块
- 
+
 1. 系统管理
     - 用户管理：系统操作者，可绑定多角色
     - 角色管理：菜单权限携带者，可配置到按钮级权限
@@ -64,7 +64,7 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
     - JS框架：jQuery
     - 数据表格：bootstrapTable
     - 文件管理：elfinder
-    - 弹出层：layer 
+    - 弹出层：layer
     - 通知消息：Toastr
     - 消息推送/轮询：sockJs、stomp
     - 树结构控件：jsTree
@@ -75,6 +75,30 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
     - 数据库：mysql8+
     - 缓存：ehcache/redis
     - ide：Eclipse/Idea
+
+### 开发部署
+
+```
+# 1. 克隆项目
+git clone git@github.com:wayn111/crowd-amin.git
+
+# 2. 导入项目依赖
+将crowd-admin目录用idea打开，导入maven依赖
+
+# 3. 安装Mysql8.0+、Redis3.0+、Tomcat8.5+、Jdk8+、Maven3.5+
+
+# 4. 导入sql文件
+在项目根目录下crowd-web文件夹下，找到`crowd-admin.sql`文件，新建mysql数据库crowd-admin，导入其中
+
+# 5. 修改Mysql、Redis连接配置
+修改`application-dev.yml`文件中数据连接配置相关信息
+
+# 6. 启动项目
+idea/eclipse配置好tomcat信息后，部署crowd-admin项目到tomcat中，修改项目名称为crwod，启动tomcat
+
+# 7. 访问
+打开浏览器输入：http://localhost:8080/crowd/
+```
 
 ### 参考教程
 
@@ -88,7 +112,7 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 
 ### 在线演示
 
-- <a href="http://www.wayn.xin/crowd" target="_blank">crowd-admin</a>
+<a href="https://www.wayn.xin/crowd" target="_blank">crowd-admin</a>
 
 ### 参考项目
 
