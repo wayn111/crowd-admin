@@ -90,7 +90,7 @@ public class LogAspect {
         Log log = method.getAnnotation(Log.class);
         User user = ShiroUtil.getSessionUser();
         if (log != null) {
-            //创建操作日志对象
+            // 创建操作日志对象
             OperLog operLog = new OperLog();
             operLog.setCreateTime(new Date());
             operLog.setModuleName(log.value());
