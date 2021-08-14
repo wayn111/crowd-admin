@@ -1,10 +1,10 @@
 package com.wayn.generator.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseController;
-import com.wayn.commom.enums.Operator;
-import com.wayn.commom.util.Response;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.base.BaseController;
+import com.wayn.common.enums.Operator;
+import com.wayn.common.util.Response;
 import com.wayn.generator.domain.TableInfo;
 import com.wayn.generator.service.GenService;
 import org.apache.commons.io.IOUtils;

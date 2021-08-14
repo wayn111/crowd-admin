@@ -1,10 +1,10 @@
 package com.wayn.framework.shiro.realm;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wayn.commom.constant.Constants;
-import com.wayn.commom.domain.User;
-import com.wayn.commom.enums.StateEnum;
-import com.wayn.commom.service.*;
+import com.wayn.common.constant.Constants;
+import com.wayn.common.domain.User;
+import com.wayn.common.enums.StateEnum;
+import com.wayn.common.service.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

@@ -1,8 +1,8 @@
 package com.wayn.filemanager.controller;
 
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.constant.Constants;
-import com.wayn.commom.enums.Operator;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.constant.Constants;
+import com.wayn.common.enums.Operator;
 import com.wayn.filemanager.command.ElfinderCommand;
 import com.wayn.filemanager.command.ElfinderCommandFactory;
 import com.wayn.filemanager.constant.ElFinderConstants;

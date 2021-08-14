@@ -1,7 +1,7 @@
 package com.wayn.quartz.manager.task;
 
-import com.wayn.commom.service.ConfigService;
-import com.wayn.commom.util.SpringContextUtil;
+import com.wayn.common.service.ConfigService;
+import com.wayn.common.util.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

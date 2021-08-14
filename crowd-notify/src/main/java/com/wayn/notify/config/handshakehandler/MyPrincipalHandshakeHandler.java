@@ -1,6 +1,6 @@
 package com.wayn.notify.config.handshakehandler;
 
-import com.wayn.commom.domain.User;
+import com.wayn.common.domain.User;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.slf4j.Logger;

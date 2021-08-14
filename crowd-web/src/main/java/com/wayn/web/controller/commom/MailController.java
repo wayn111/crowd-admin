@@ -1,9 +1,9 @@
 package com.wayn.web.controller.commom;
 
-import com.wayn.commom.domain.MailConfig;
-import com.wayn.commom.domain.vo.SendMailVO;
-import com.wayn.commom.service.MailConfigService;
-import com.wayn.commom.util.Response;
+import com.wayn.common.domain.MailConfig;
+import com.wayn.common.domain.vo.SendMailVO;
+import com.wayn.common.service.MailConfigService;
+import com.wayn.common.util.Response;
 import com.wayn.framework.jms.queue.MailQueueProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/commom/mail")
 public class MailController {
-    private static final String PREFIX = "commom/mail";
+    private static final String PREFIX = "common/mail";
 
     @Autowired
     private MailConfigService mailConfigService;

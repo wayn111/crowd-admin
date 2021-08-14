@@ -1,15 +1,15 @@
 package com.wayn.web.controller.system;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseController;
-import com.wayn.commom.domain.Role;
-import com.wayn.commom.enums.Operator;
-import com.wayn.commom.exception.BusinessException;
-import com.wayn.commom.service.DictService;
-import com.wayn.commom.service.RoleService;
-import com.wayn.commom.util.ParameterUtil;
-import com.wayn.commom.util.Response;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.base.BaseController;
+import com.wayn.common.domain.Role;
+import com.wayn.common.enums.Operator;
+import com.wayn.common.exception.BusinessException;
+import com.wayn.common.service.DictService;
+import com.wayn.common.service.RoleService;
+import com.wayn.common.util.ParameterUtil;
+import com.wayn.common.util.Response;
 import com.wayn.framework.util.ShiroCacheUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

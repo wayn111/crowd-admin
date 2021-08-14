@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.wayn.commom.base.BusinessEntity;
+import com.wayn.common.base.BusinessEntity;
 #foreach ($column in $columns)
     #if($column.attrType == 'Date' && ($column.attrname != 'createTime' && $column.attrname != 'remarks'))
     import java.util.Date;

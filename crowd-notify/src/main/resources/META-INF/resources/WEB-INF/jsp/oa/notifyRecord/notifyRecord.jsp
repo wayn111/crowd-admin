@@ -93,8 +93,7 @@
     </div>
 </div>
 <%@ include file="/commom/footer.jsp" %>
-<%--<script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>--%>
-<script src="https://cdn.bootcdn.net/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+<script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>
 <script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
 <script>
     var prefix = _ctx + '/oa/notifyRecord';

@@ -90,7 +90,7 @@
     }
 
     function downTemplate() {
-        window.location.href = _ctx + "/commom/downTemplate?fileName=用户列表.xls";
+        window.location.href = _ctx + "/common/downTemplate?fileName=用户列表.xls";
     }
 
     $(function () {

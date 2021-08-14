@@ -62,7 +62,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    var prefix = _ctx + "/commom/dict/type"
+    var prefix = _ctx + "/common/dict/type"
 
     function save() {
         $.ajax({

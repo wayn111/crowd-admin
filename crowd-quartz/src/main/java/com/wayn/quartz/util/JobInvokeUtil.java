@@ -1,7 +1,7 @@
 package com.wayn.quartz.util;
 
-import com.wayn.commom.util.DateUtils;
-import com.wayn.commom.util.SpringContextUtil;
+import com.wayn.common.util.DateUtils;
+import com.wayn.common.util.SpringContextUtil;
 import com.wayn.quartz.domain.Job;
 import org.apache.commons.lang3.StringUtils;
 

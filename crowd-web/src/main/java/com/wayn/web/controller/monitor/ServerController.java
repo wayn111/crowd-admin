@@ -1,6 +1,6 @@
 package com.wayn.web.controller.monitor;
 
-import com.wayn.commom.annotation.Log;
+import com.wayn.common.annotation.Log;
 import com.wayn.framework.web.domian.Server;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;

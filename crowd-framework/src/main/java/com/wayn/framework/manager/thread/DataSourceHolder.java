@@ -1,6 +1,6 @@
 package com.wayn.framework.manager.thread;
 
-import com.wayn.commom.enums.DataSourceEnum;
+import com.wayn.common.enums.DataSourceEnum;
 
 /**
  * 数据库切换threadLocal

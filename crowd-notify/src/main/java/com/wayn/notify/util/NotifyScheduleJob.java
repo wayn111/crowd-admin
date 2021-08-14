@@ -1,8 +1,8 @@
 package com.wayn.notify.util;
 
-import com.wayn.commom.domain.User;
-import com.wayn.commom.service.UserOnlineService;
-import com.wayn.commom.util.SpringContextUtil;
+import com.wayn.common.domain.User;
+import com.wayn.common.service.UserOnlineService;
+import com.wayn.common.util.SpringContextUtil;
 import com.wayn.notify.domain.Notify;
 import com.wayn.notify.service.NotifyService;
 import org.quartz.JobDataMap;

@@ -1,6 +1,6 @@
 package com.wayn.framework.config;
 
-import com.wayn.commom.constant.Constants;
+import com.wayn.common.constant.Constants;
 import com.wayn.framework.redis.RedisOpts;
 import com.wayn.framework.shiro.cache.RedisCacheManager;
 import com.wayn.framework.shiro.credentials.MyCredentialsMatcher;

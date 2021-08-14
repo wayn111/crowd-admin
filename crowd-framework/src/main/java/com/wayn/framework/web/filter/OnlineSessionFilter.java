@@ -1,11 +1,11 @@
 package com.wayn.framework.web.filter;
 
-import com.wayn.commom.domain.Dept;
-import com.wayn.commom.domain.User;
-import com.wayn.commom.enums.OnlineStatus;
-import com.wayn.commom.service.DeptService;
-import com.wayn.commom.shiro.session.OnlineSession;
-import com.wayn.commom.shiro.util.ShiroUtil;
+import com.wayn.common.domain.Dept;
+import com.wayn.common.domain.User;
+import com.wayn.common.enums.OnlineStatus;
+import com.wayn.common.service.DeptService;
+import com.wayn.common.shiro.session.OnlineSession;
+import com.wayn.common.shiro.util.ShiroUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;

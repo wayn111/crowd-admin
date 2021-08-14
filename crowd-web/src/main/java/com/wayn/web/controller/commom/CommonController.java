@@ -1,7 +1,7 @@
 package com.wayn.web.controller.commom;
 
-import com.wayn.commom.exception.BusinessException;
-import com.wayn.commom.util.*;
+import com.wayn.common.exception.BusinessException;
+import com.wayn.common.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

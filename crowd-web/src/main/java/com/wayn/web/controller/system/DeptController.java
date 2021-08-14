@@ -1,12 +1,12 @@
 package com.wayn.web.controller.system;
 
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseController;
-import com.wayn.commom.domain.Dept;
-import com.wayn.commom.domain.vo.Tree;
-import com.wayn.commom.enums.Operator;
-import com.wayn.commom.service.DeptService;
-import com.wayn.commom.util.Response;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.base.BaseController;
+import com.wayn.common.domain.Dept;
+import com.wayn.common.domain.vo.Tree;
+import com.wayn.common.enums.Operator;
+import com.wayn.common.service.DeptService;
+import com.wayn.common.util.Response;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
