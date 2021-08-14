@@ -3,7 +3,7 @@ package com.wayn.notify.domain.vo;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.wayn.commom.base.BaseEntity;
+import com.wayn.common.base.BaseEntity;
 
 /**
  * 通知通告实体VO对象

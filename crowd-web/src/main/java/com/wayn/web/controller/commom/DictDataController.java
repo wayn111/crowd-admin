@@ -2,13 +2,13 @@ package com.wayn.web.controller.commom;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseController;
-import com.wayn.commom.domain.Dict;
-import com.wayn.commom.enums.Operator;
-import com.wayn.commom.service.DictService;
-import com.wayn.commom.util.ParameterUtil;
-import com.wayn.commom.util.Response;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.base.BaseController;
+import com.wayn.common.domain.Dict;
+import com.wayn.common.enums.Operator;
+import com.wayn.common.service.DictService;
+import com.wayn.common.util.ParameterUtil;
+import com.wayn.common.util.Response;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,12 +25,12 @@ import java.util.List;
 @Controller
 public class DictDataController extends BaseController {
 
-    private static final String PREFIX = "commom/dict/data";
+    private static final String PREFIX = "common/dict/data";
 
     @Autowired
     private DictService dictService;
 
-    @RequiresPermissions("commom:dict:type")
+    @RequiresPermissions("common:dict:type")
     @GetMapping("/{dictType}")
     public String dataIndex(ModelMap modelMap, @PathVariable("dictType") String dictType) {
         modelMap.put("dictType", dictType);
@@ -40,7 +40,7 @@ public class DictDataController extends BaseController {
     }
 
     @Log(value = "字典数据")
-    @RequiresPermissions("commom:dict:type")
+    @RequiresPermissions("common:dict:type")
     @ResponseBody
     @PostMapping("/list")
     public Page<Dict> list(Model model, Dict dict) {
@@ -50,14 +50,14 @@ public class DictDataController extends BaseController {
         return dictService.listPage(page, dict);
     }
 
-    @RequiresPermissions("commom:dict:add")
+    @RequiresPermissions("common:dict:add")
     @GetMapping("/add")
     public String add(ModelMap modelMap) {
         modelMap.put("type", 2);
         return PREFIX + "/add";
     }
 
-    @RequiresPermissions("commom:dict:edit")
+    @RequiresPermissions("common:dict:edit")
     @GetMapping("/edit/{id}")
     public String edit(ModelMap modelMap, @PathVariable("id") Long id) {
         Dict dict = dictService.getById(id);
@@ -66,7 +66,7 @@ public class DictDataController extends BaseController {
     }
 
     @Log(value = "字典数据", operator = Operator.ADD)
-    @RequiresPermissions("commom:dict:add")
+    @RequiresPermissions("common:dict:add")
     @ResponseBody
     @PostMapping("/addSave")
     public Response addSave(ModelMap modelMap, Dict dict) {
@@ -75,7 +75,7 @@ public class DictDataController extends BaseController {
     }
 
     @Log(value = "字典数据", operator = Operator.UPDATE)
-    @RequiresPermissions("commom:dict:edit")
+    @RequiresPermissions("common:dict:edit")
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, Dict dict) {
@@ -84,7 +84,7 @@ public class DictDataController extends BaseController {
     }
 
     @Log(value = "字典数据", operator = Operator.DELETE)
-    @RequiresPermissions("commom:dict:remove")
+    @RequiresPermissions("common:dict:remove")
     @ResponseBody
     @DeleteMapping("/remove/{id}")
     public Response remove(ModelMap modelMap, @PathVariable("id") Long id) {
@@ -93,7 +93,7 @@ public class DictDataController extends BaseController {
     }
 
     @Log(value = "字典数据", operator = Operator.DELETE)
-    @RequiresPermissions("commom:dict:remove")
+    @RequiresPermissions("common:dict:remove")
     @ResponseBody
     @PostMapping("/batchRemove")
     public Response batchRemove(ModelMap modelMap, @RequestParam("ids[]") Long[] ids) {

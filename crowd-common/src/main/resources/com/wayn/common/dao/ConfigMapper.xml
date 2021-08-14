@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wayn.common.dao.ConfigDao">
+
+    <resultMap type="com.wayn.common.domain.Config" id="ConfigResult">
+        <result property="configId" column="configId"/>
+        <result property="configName" column="configName"/>
+        <result property="configKey" column="configKey"/>
+        <result property="configValue" column="configValue"/>
+        <result property="configType" column="configType"/>
+        <result property="createBy" column="createBy"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateBy" column="updateBy"/>
+        <result property="updateTime" column="updateTime"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <sql id="selectConfigVo">
+        select configId, configName, configKey, configValue, configType, createBy, createTime, updateBy, updateTime, remarks from sys_config
+    </sql>
+
+    <select id="selectConfigPageList" parameterType="Config" resultMap="ConfigResult">
+        <include refid="selectConfigVo"/>
+        <where>
+            <if test="config.configId != null ">and configId = #{config.configId}</if>
+            <if test="config.configName != null and config.configName != ''">and configName like CONCAT('%',#{config.configName},'%')</if>
+            <if test="config.configKey != null and config.configKey != ''">and configKey like CONCAT('%',#{config.configKey},'%')</if>
+            <if test="config.configValue != null and config.configValue != ''">and configValue like CONCAT('%',#{config.configValue},'%')</if>
+            <if test="config.configType != null and config.configType != ''">and configType = #{config.configType}</if>
+            <if test="config.createBy != null and config.createBy != ''">and createBy = #{config.createBy}</if>
+            <if test="config.startTime != null and config.startTime != ''">and createTime <![CDATA[ > ]]>#{config.startTime}</if>
+            <if test="config.endTime != null and config.endTime != ''">and createTime <![CDATA[ < ]]>#{config.endTime}</if>
+            <if test="config.remarks != null and config.remarks != ''">and remarks = #{config.remarks}</if>
+        </where>
+    </select>
+
+    <select id="selectConfigList" parameterType="Config" resultMap="ConfigResult">
+        <include refid="selectConfigVo"/>
+        <where>
+            <if test="configId != null ">and configId = #{configId}</if>
+            <if test="configName != null  and configName != '' ">and configName like CONCAT('%',#{configName},'%')</if>
+            <if test="configKey != null  and configKey != '' ">and configKey like CONCAT('%',#{configKey},'%')</if>
+            <if test="configValue != null  and configValue != '' ">and configValue like CONCAT('%',#{configValue},'%')</if>
+            <if test="configType != null  and configType != '' ">and configType = #{configType}</if>
+            <if test="createBy != null  and createBy != '' ">and createBy = #{createBy}</if>
+            <if test="startTime != null and startTime != ''">and createTime <![CDATA[ > ]]>#{startTime}</if>
+            <if test="endTime != null and endTime != ''">and createTime <![CDATA[ < ]]>#{endTime}</if>
+            <if test="remarks != null  and remarks != '' ">and remarks = #{remarks}</if>
+        </where>
+    </select>
+
+</mapper>

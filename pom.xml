@@ -9,7 +9,7 @@
     <artifactId>crowd-admin</artifactId>
     <version>2.2.0</version>
     <modules>
-        <module>crowd-commom</module>
+        <module>crowd-common</module>
         <module>crowd-web</module>
         <module>crowd-framework</module>
         <module>crowd-generator</module>

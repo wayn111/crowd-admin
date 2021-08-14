@@ -1,7 +1,7 @@
 package com.wayn.framework.manager.log;
 
-import com.wayn.commom.domain.OperLog;
-import com.wayn.commom.service.LogService;
+import com.wayn.common.domain.OperLog;
+import com.wayn.common.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -1,12 +1,12 @@
 package com.wayn.web.controller.home;
 
 
-import com.wayn.commom.base.BaseController;
-import com.wayn.commom.constant.Constants;
-import com.wayn.commom.service.ConfigService;
-import com.wayn.commom.service.LogininforService;
-import com.wayn.commom.shiro.util.ShiroUtil;
-import com.wayn.commom.util.Response;
+import com.wayn.common.base.BaseController;
+import com.wayn.common.constant.Constants;
+import com.wayn.common.service.ConfigService;
+import com.wayn.common.service.LogininforService;
+import com.wayn.common.shiro.util.ShiroUtil;
+import com.wayn.common.util.Response;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
 import org.apache.commons.lang3.StringUtils;
@@ -51,13 +51,13 @@ public class LoginController extends BaseController {
     public Response doLogin(String userName, String password, @RequestParam(defaultValue = "false") Boolean rememberMe, String clientKaptcha) {
         String kaptcha = (String) SecurityUtils.getSubject().getSession().getAttribute(Constants.CAPTCHA_SESSION_KEY);
         if (!StringUtils.equalsIgnoreCase(clientKaptcha, kaptcha)) {
-            logininforService.addLog(userName, com.wayn.commom.constant.Constants.LOGIN_FAIL, "验证码错误");
+            logininforService.addLog(userName, com.wayn.common.constant.Constants.LOGIN_FAIL, "验证码错误");
             return Response.error("验证码错误");
         }
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password, rememberMe);
         currentUser.login(token);
-        logininforService.addLog(userName, com.wayn.commom.constant.Constants.LOGIN_SUCCESS, "登陆成功");
+        logininforService.addLog(userName, com.wayn.common.constant.Constants.LOGIN_SUCCESS, "登陆成功");
         return Response.success();
     }
 
@@ -67,9 +67,9 @@ public class LoginController extends BaseController {
         try {
             Subject subject = SecurityUtils.getSubject();
             subject.logout();
-            logininforService.addLog(userName, com.wayn.commom.constant.Constants.LOGOUT, "退出成功");
+            logininforService.addLog(userName, com.wayn.common.constant.Constants.LOGOUT, "退出成功");
         } catch (Exception exception) {
-            logininforService.addLog(userName, com.wayn.commom.constant.Constants.LOGIN_FAIL, "退出失败：" + exception.getMessage());
+            logininforService.addLog(userName, com.wayn.common.constant.Constants.LOGIN_FAIL, "退出失败：" + exception.getMessage());
             logger.error(exception.getMessage(), exception);
         }
         return redirectTo("/");

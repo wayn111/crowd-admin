@@ -1,11 +1,11 @@
 package com.wayn;
 
-import com.wayn.commom.dao.RoleMenuDao;
-import com.wayn.commom.domain.Menu;
-import com.wayn.commom.domain.User;
-import com.wayn.commom.service.LogininforService;
-import com.wayn.commom.service.UserService;
-import com.wayn.commom.shiro.util.ShiroUtil;
+import com.wayn.common.dao.RoleMenuDao;
+import com.wayn.common.domain.Menu;
+import com.wayn.common.domain.User;
+import com.wayn.common.service.LogininforService;
+import com.wayn.common.service.UserService;
+import com.wayn.common.shiro.util.ShiroUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

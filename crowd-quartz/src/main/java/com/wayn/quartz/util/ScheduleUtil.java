@@ -1,6 +1,6 @@
 package com.wayn.quartz.util;
 
-import com.wayn.commom.exception.BusinessException;
+import com.wayn.common.exception.BusinessException;
 import com.wayn.quartz.consts.ScheduleConstants;
 import com.wayn.quartz.domain.Job;
 import org.quartz.*;

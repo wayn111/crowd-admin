@@ -1,7 +1,7 @@
 package com.wayn.framework.web.domian.server;
 
-import com.wayn.commom.util.Arith;
-import com.wayn.commom.util.DateUtils;
+import com.wayn.common.util.Arith;
+import com.wayn.common.util.DateUtils;
 import java.lang.management.ManagementFactory;
 
 /**

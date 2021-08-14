@@ -1,6 +1,6 @@
 package com.wayn.framework.shiro.session;
 
-import com.wayn.commom.util.SerializeUtils;
+import com.wayn.common.util.SerializeUtils;
 import com.wayn.framework.redis.RedisOpts;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;

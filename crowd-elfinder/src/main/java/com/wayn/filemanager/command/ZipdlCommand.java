@@ -32,8 +32,8 @@
 package com.wayn.filemanager.command;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wayn.commom.constant.Constants;
-import com.wayn.commom.util.HttpUtil;
+import com.wayn.common.constant.Constants;
+import com.wayn.common.util.HttpUtil;
 import com.wayn.filemanager.constant.ElFinderConstants;
 import com.wayn.filemanager.core.Target;
 import com.wayn.filemanager.service.ElfinderStorage;

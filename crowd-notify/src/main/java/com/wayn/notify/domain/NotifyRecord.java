@@ -3,7 +3,7 @@ package com.wayn.notify.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.wayn.commom.base.BaseEntity;
+import com.wayn.common.base.BaseEntity;
 
 import java.util.Date;
 

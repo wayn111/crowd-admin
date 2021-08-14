@@ -3,7 +3,7 @@ package com.wayn.quartz.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.wayn.commom.base.BusinessEntity;
+import com.wayn.common.base.BusinessEntity;
 import com.wayn.quartz.util.CronUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;

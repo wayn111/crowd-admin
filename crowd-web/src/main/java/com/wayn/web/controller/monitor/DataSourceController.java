@@ -1,7 +1,7 @@
 package com.wayn.web.controller.monitor;
 
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseController;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.base.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

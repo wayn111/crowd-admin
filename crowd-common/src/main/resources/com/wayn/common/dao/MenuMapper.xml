@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wayn.common.dao.MenuDao">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.wayn.common.domain.Menu">
+		<id column="id" property="id" />
+		<result column="menuName" property="menuName" />
+		<result column="pid" property="pid" />
+		<result column="url" property="url" />
+		<result column="icon" property="icon" />
+		<result column="sort" property="sort" />
+		<result column="type" property="type" />
+		<result column="code" property="code" />
+		<result column="resource" property="resource" />
+	</resultMap>
+
+	<select id="selectMenuIdsByUid" parameterType="java.lang.String"
+		resultType="java.lang.String">
+
+		SELECT DISTINCT m.id
+		FROM `sys_user_role` ur
+		INNER JOIN `sys_role` r
+		    ON r.`id` = ur.`roleId`
+		INNER JOIN `sys_role_menu` rm
+		    ON rm.`roleId` = ur.`roleId`
+		INNER JOIN `sys_menu` m
+		    ON m.`id` = rm.`menuId`
+		        AND ur.`userId` = #{uid}
+		        AND r.`roleState` = 1
+		        AND m.`resource` IS NOT NULL
+
+	</select>
+
+	<select id="selectResourceByUid" resultType="java.lang.String">
+		SELECT DISTINCT m.`resource`
+		FROM sys_user_role ur
+		LEFT JOIN sys_role_menu rm
+		    ON ur.`roleId` = rm.`roleId`
+		LEFT JOIN sys_menu m
+		    ON m.`id` = rm.`menuId`
+		LEFT JOIN sys_role r
+		    ON r.`id` = ur.`roleId`
+		WHERE ur.`userId` = #{uid}
+				AND r.`roleState` = 1
+		        AND m.`resource` IS NOT NULL
+		        AND m.`resource` != ''
+		        AND (m.type=2 OR m.type=3)
+	</select>
+</mapper>

@@ -81,7 +81,7 @@
 <script
         src="${_ctx }/static/plugin/bootstrap-ypeahead/bootstrap3-typeahead.min.js"></script>
 <script>
-    var prefix = _ctx + "/commom/dict/type";
+    var prefix = _ctx + "/common/dict/type";
 
     function load(deptId) {
         $('#exampleTable').bootstrapTable(
@@ -189,7 +189,7 @@
     }
 
     function dictData(value) {
-        menuItemCreate(_ctx + '/commom/dict/data/' + value, '字典数据');
+        menuItemCreate(_ctx + '/common/dict/data/' + value, '字典数据');
     }
 
     function reload() {

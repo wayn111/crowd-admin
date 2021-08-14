@@ -33,7 +33,7 @@ package com.wayn.filemanager.command;
 
 import com.mortennobel.imagescaling.DimensionConstrain;
 import com.mortennobel.imagescaling.ResampleOp;
-import com.wayn.commom.util.HttpUtil;
+import com.wayn.common.util.HttpUtil;
 import com.wayn.filemanager.service.ElfinderStorage;
 import com.wayn.filemanager.service.VolumeHandler;
 import org.joda.time.DateTime;

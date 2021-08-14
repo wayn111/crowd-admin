@@ -200,7 +200,7 @@
 </div>
 <%@ include file="/commom/footer.jsp" %>
 <script>
-    var prefix = _ctx + '/commom/mail';
+    var prefix = _ctx + '/common/mail';
 
     function update(dom) {
         var config = {

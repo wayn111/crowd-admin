@@ -28,7 +28,7 @@
         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
         <property name="minEvictableIdleTimeMillis" value="25200000"/>
         <!-- 打开removeAbandoned功能 -->
-        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandoned" value="false"/>
         <!-- 1800秒，也就是30分钟 -->
         <property name="removeAbandonedTimeout" value="1800"/>
         <!-- 关闭abanded连接时输出错误日志 -->
@@ -63,7 +63,7 @@
         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
         <property name="minEvictableIdleTimeMillis" value="25200000"/>
         <!-- 打开removeAbandoned功能 -->
-        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandoned" value="false"/>
         <!-- 1800秒，也就是30分钟 -->
         <property name="removeAbandonedTimeout" value="1800"/>
         <!-- 关闭abanded连接时输出错误日志 -->
@@ -76,7 +76,7 @@
     <bean id="dataSource" class="com.wayn.framework.manager.datasource.RoutingDataSource">
         <property name="defaultTargetDataSource" ref="dataSource_master"/>
         <property name="targetDataSources">
-            <map key-type="com.wayn.commom.enums.DataSourceEnum">
+            <map key-type="com.wayn.common.enums.DataSourceEnum">
                 <entry key="MASTER" value-ref="dataSource_master"/>
                 <entry key="SLAVE" value-ref="dataSource_slave"/>
             </map>

@@ -1,7 +1,7 @@
 package com.wayn.mailserver.listener;
 
-import com.wayn.commom.domain.MailMessage;
-import com.wayn.commom.util.MailUtil;
+import com.wayn.common.domain.MailMessage;
+import com.wayn.common.util.MailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;

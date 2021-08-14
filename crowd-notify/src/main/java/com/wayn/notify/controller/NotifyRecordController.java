@@ -1,12 +1,12 @@
 package com.wayn.notify.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseController;
-import com.wayn.commom.enums.Operator;
-import com.wayn.commom.service.UserService;
-import com.wayn.commom.util.ParameterUtil;
-import com.wayn.commom.util.Response;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.base.BaseController;
+import com.wayn.common.enums.Operator;
+import com.wayn.common.service.UserService;
+import com.wayn.common.util.ParameterUtil;
+import com.wayn.common.util.Response;
 import com.wayn.notify.domain.NotifyRecord;
 import com.wayn.notify.domain.NotifyRecordTip;
 import com.wayn.notify.domain.vo.NotifyRecordVO;

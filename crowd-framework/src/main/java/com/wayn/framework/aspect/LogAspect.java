@@ -2,17 +2,17 @@ package com.wayn.framework.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.constant.Constants;
-import com.wayn.commom.domain.OperLog;
-import com.wayn.commom.domain.User;
-import com.wayn.commom.enums.Operator;
-import com.wayn.commom.exception.BusinessException;
-import com.wayn.commom.service.ConfigService;
-import com.wayn.commom.shiro.util.ShiroUtil;
-import com.wayn.commom.util.IP2RegionUtil;
-import com.wayn.commom.util.ServletUtil;
-import com.wayn.commom.util.UserAgentUtils;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.constant.Constants;
+import com.wayn.common.domain.OperLog;
+import com.wayn.common.domain.User;
+import com.wayn.common.enums.Operator;
+import com.wayn.common.exception.BusinessException;
+import com.wayn.common.service.ConfigService;
+import com.wayn.common.shiro.util.ShiroUtil;
+import com.wayn.common.util.IP2RegionUtil;
+import com.wayn.common.util.ServletUtil;
+import com.wayn.common.util.UserAgentUtils;
 import com.wayn.framework.manager.log.LogQueue;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -39,7 +39,7 @@ public class LogAspect {
     @Autowired
     private ConfigService configService;
 
-    @Pointcut("@annotation(com.wayn.commom.annotation.Log)")
+    @Pointcut("@annotation(com.wayn.common.annotation.Log)")
     public void logPointCut() {
     }
 

@@ -1,14 +1,14 @@
 package com.wayn.web.controller.system;
 
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseController;
-import com.wayn.commom.domain.Menu;
-import com.wayn.commom.domain.vo.MenuVO;
-import com.wayn.commom.domain.vo.Tree;
-import com.wayn.commom.enums.Operator;
-import com.wayn.commom.service.DictService;
-import com.wayn.commom.service.MenuService;
-import com.wayn.commom.util.Response;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.base.BaseController;
+import com.wayn.common.domain.Menu;
+import com.wayn.common.domain.vo.MenuVO;
+import com.wayn.common.domain.vo.Tree;
+import com.wayn.common.enums.Operator;
+import com.wayn.common.service.DictService;
+import com.wayn.common.service.MenuService;
+import com.wayn.common.util.Response;
 import com.wayn.framework.util.ShiroCacheUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,11 @@
 package com.wayn.framework.web.domian.server;
 
 
-import com.wayn.commom.util.Arith;
+import com.wayn.common.util.Arith;
 
 /**
  * CPU相关信息
- * 
+ *
  * @author ruoyi
  */
 public class Cpu

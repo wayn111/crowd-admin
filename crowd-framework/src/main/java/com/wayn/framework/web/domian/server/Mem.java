@@ -1,11 +1,11 @@
 package com.wayn.framework.web.domian.server;
 
 
-import com.wayn.commom.util.Arith;
+import com.wayn.common.util.Arith;
 
 /**
  * 內存相关信息
- * 
+ *
  * @author ruoyi
  */
 public class Mem

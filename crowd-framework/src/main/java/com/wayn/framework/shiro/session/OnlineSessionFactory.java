@@ -1,8 +1,8 @@
 package com.wayn.framework.shiro.session;
 
-import com.wayn.commom.shiro.session.OnlineSession;
-import com.wayn.commom.util.IpUtils;
-import com.wayn.commom.util.UserAgentUtils;
+import com.wayn.common.shiro.session.OnlineSession;
+import com.wayn.common.util.IpUtils;
+import com.wayn.common.util.UserAgentUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SessionContext;
 import org.apache.shiro.session.mgt.SessionFactory;

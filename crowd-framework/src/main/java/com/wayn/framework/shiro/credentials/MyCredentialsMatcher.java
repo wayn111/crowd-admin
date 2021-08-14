@@ -1,6 +1,6 @@
 package com.wayn.framework.shiro.credentials;
 
-import com.wayn.commom.util.DateUtils;
+import com.wayn.common.util.DateUtils;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 import org.apache.shiro.authc.AuthenticationInfo;

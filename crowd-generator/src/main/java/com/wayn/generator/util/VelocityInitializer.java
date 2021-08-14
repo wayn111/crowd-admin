@@ -1,6 +1,6 @@
 package com.wayn.generator.util;
 
-import com.wayn.commom.constant.Constants;
+import com.wayn.common.constant.Constants;
 import org.apache.velocity.app.Velocity;
 
 import java.util.Properties;

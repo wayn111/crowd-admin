@@ -1,6 +1,6 @@
 package com.wayn.framework.web.filter;
 
-import com.wayn.commom.util.JsoupUtil;
+import com.wayn.common.util.JsoupUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

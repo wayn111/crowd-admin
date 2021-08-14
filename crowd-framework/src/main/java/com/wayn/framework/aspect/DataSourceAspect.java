@@ -1,8 +1,8 @@
 package com.wayn.framework.aspect;
 
 
-import com.wayn.commom.annotation.DataSource;
-import com.wayn.commom.enums.DataSourceEnum;
+import com.wayn.common.annotation.DataSource;
+import com.wayn.common.enums.DataSourceEnum;
 import com.wayn.framework.manager.thread.DataSourceHolder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -23,8 +23,8 @@ public class DataSourceAspect {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("@annotation(com.wayn.commom.annotation.DataSource)"
-            + "|| @within(com.wayn.commom.annotation.DataSource)")
+    @Pointcut("@annotation(com.wayn.common.annotation.DataSource)"
+            + "|| @within(com.wayn.common.annotation.DataSource)")
     public void pointCut() {
     }
 

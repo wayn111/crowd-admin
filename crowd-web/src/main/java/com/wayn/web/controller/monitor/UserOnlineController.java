@@ -1,13 +1,13 @@
 package com.wayn.web.controller.monitor;
 
-import com.wayn.commom.annotation.Log;
-import com.wayn.commom.base.BaseController;
-import com.wayn.commom.constant.Constants;
-import com.wayn.commom.domain.User;
-import com.wayn.commom.domain.UserOnline;
-import com.wayn.commom.service.LogininforService;
-import com.wayn.commom.service.UserOnlineService;
-import com.wayn.commom.util.Response;
+import com.wayn.common.annotation.Log;
+import com.wayn.common.base.BaseController;
+import com.wayn.common.constant.Constants;
+import com.wayn.common.domain.User;
+import com.wayn.common.domain.UserOnline;
+import com.wayn.common.service.LogininforService;
+import com.wayn.common.service.UserOnlineService;
+import com.wayn.common.util.Response;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;

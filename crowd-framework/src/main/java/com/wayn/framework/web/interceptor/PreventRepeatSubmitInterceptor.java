@@ -1,9 +1,9 @@
 package com.wayn.framework.web.interceptor;
 
-import com.wayn.commom.annotation.RepeatSubmit;
-import com.wayn.commom.util.JsonUtil;
-import com.wayn.commom.util.Response;
-import com.wayn.commom.util.ServletUtil;
+import com.wayn.common.annotation.RepeatSubmit;
+import com.wayn.common.util.JsonUtil;
+import com.wayn.common.util.Response;
+import com.wayn.common.util.ServletUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

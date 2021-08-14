@@ -1,8 +1,8 @@
 package com.wayn.framework.jms.queue;
 
-import com.wayn.commom.domain.MailConfig;
-import com.wayn.commom.domain.MailMessage;
-import com.wayn.commom.domain.vo.SendMailVO;
+import com.wayn.common.domain.MailConfig;
+import com.wayn.common.domain.MailMessage;
+import com.wayn.common.domain.vo.SendMailVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.wayn.generator.domain;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import com.wayn.commom.base.BaseEntity;
+import com.wayn.common.base.BaseEntity;
 
 import java.util.Date;
 import java.util.List;
