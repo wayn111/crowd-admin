@@ -8,7 +8,7 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/aop
-	http://www.springframework.org/schema/aop/spring-aop.xsd" profile="redis">
+	http://www.springframework.org/schema/aop/spring-aop.xsd" profile="ehcache">
 
     <context:component-scan
             base-package="com.wayn.*">
@@ -28,7 +28,7 @@
             <property name="locations">
                 <array>
                     <value>
-                        classpath:proj-commom.properties
+                        classpath:proj-common.properties
                     </value>
                     <value>
                         classpath:proj-ehcahce.properties
@@ -44,7 +44,7 @@
             <property name="locations">
                 <array>
                     <value>
-                        classpath:proj-commom.properties
+                        classpath:proj-common.properties
                     </value>
                     <value>
                         classpath:proj-redis.properties

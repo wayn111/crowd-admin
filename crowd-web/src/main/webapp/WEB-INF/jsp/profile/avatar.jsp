@@ -4,8 +4,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <%@ include file="/commom/taglib.jsp" %>
-    <%@ include file="/commom/header.jsp" %>
+    <%@ include file="/common/taglib.jsp" %>
+    <%@ include file="/common/header.jsp" %>
     <link rel="stylesheet" href="${_ctx }/static/plugin/cropbox/cropbox.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>crowd-admin 上传头像</title>
@@ -29,7 +29,7 @@
     </div>
     <div class="cropped"></div>
 </div>
-<%@ include file="/commom/footer.jsp" %>
+<%@ include file="/common/footer.jsp" %>
 <script src="${_ctx }/static/plugin/cropbox/cropbox.js"></script>
 <script>
     var prefix = _ctx + '/profile';

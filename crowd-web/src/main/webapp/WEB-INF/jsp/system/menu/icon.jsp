@@ -5,8 +5,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<%@ include file="/commom/taglib.jsp"%>
-<%@ include file="/commom/header.jsp"%>
+<%@ include file="/common/taglib.jsp"%>
+<%@ include file="/common/header.jsp"%>
 <title>Font Awesome Ico list</title>
 <script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
 <style type="text/css">

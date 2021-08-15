@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<%@ include file="/commom/taglib.jsp" %>
-<%@ include file="/commom/header.jsp" %>
+<%@ include file="/common/taglib.jsp" %>
+<%@ include file="/common/header.jsp" %>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -51,7 +51,7 @@
         </div>
     </div>
 </div>
-<%@ include file="/commom/footer.jsp" %>
+<%@ include file="/common/footer.jsp" %>
 <script>
     var prefix = _ctx + '/system/role';
 

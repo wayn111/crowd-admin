@@ -1,4 +1,4 @@
-package ${package}.web.controller.commom;
+package ${package}.web.controller.common;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wayn.common.base.BaseControlller;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import ${package}.commom.domian.${className};
+import ${package}.common.domian.${className};
 
 /**
  * ${tableComment} 控制层

@@ -6,13 +6,7 @@ import com.wayn.common.enums.DataSourceEnum;
  * 数据库切换threadLocal
  */
 public class DataSourceHolder {
-    private static ThreadLocal<DataSourceEnum> dataSourceEnumThreadLocal = new ThreadLocal() {
-
-        @Override
-        protected DataSourceEnum initialValue() {
-            return DataSourceEnum.MASTER;
-        }
-    };
+    private static ThreadLocal<DataSourceEnum> dataSourceEnumThreadLocal = ThreadLocal.withInitial(() -> DataSourceEnum.MASTER);
 
     public static void set(DataSourceEnum dataSourceEnum) {
         dataSourceEnumThreadLocal.set(dataSourceEnum);

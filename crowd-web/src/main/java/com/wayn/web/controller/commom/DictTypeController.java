@@ -1,4 +1,4 @@
-package com.wayn.web.controller.commom;
+package com.wayn.web.controller.common;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.common.annotation.Log;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 字典管理
  */
-@RequestMapping("/commom/dict/type")
+@RequestMapping("/common/dict/type")
 @Controller
 public class DictTypeController extends BaseController {
 

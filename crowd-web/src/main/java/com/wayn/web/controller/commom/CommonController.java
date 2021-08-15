@@ -1,4 +1,4 @@
-package com.wayn.web.controller.commom;
+package com.wayn.web.controller.common;
 
 import com.wayn.common.exception.BusinessException;
 import com.wayn.common.util.*;
@@ -21,7 +21,7 @@ import java.io.File;
  * @author ruoyi
  */
 @Controller
-@RequestMapping("/commom")
+@RequestMapping("/common")
 public class CommonController {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);
 

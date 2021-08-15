@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<%@ include file="/commom/taglib.jsp" %>
-<%@ include file="/commom/header.jsp" %>
+<%@ include file="/common/taglib.jsp" %>
+<%@ include file="/common/header.jsp" %>
 <link href="${_ctx }/static/plugin/summernote/summernote.min.css" rel="stylesheet">
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInDown">
@@ -72,7 +72,7 @@
     </div>
 
 </div>
-<%@ include file="/commom/footer.jsp" %>
+<%@ include file="/common/footer.jsp" %>
 <script src="${_ctx }/static/plugin/summernote/summernote.min.js"></script>
 <script src="${_ctx }/static/plugin/summernote/lang/summernote-zh-CN.js"></script>
 <script>

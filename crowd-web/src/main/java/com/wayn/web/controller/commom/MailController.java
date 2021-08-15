@@ -1,4 +1,4 @@
-package com.wayn.web.controller.commom;
+package com.wayn.web.controller.common;
 
 import com.wayn.common.domain.MailConfig;
 import com.wayn.common.domain.vo.SendMailVO;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/commom/mail")
+@RequestMapping("/common/mail")
 public class MailController {
     private static final String PREFIX = "common/mail";
 

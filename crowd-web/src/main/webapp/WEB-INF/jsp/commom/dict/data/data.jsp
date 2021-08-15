@@ -9,8 +9,8 @@
     <meta name="keywords" content="crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目">
     <meta name="description"
           content="design by wayn">
-    <%@ include file="/commom/taglib.jsp" %>
-    <%@ include file="/commom/header.jsp" %>
+    <%@ include file="/common/taglib.jsp" %>
+    <%@ include file="/common/header.jsp" %>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -42,12 +42,12 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div id="exampleToolbar" role="group">
-                    <shiro:hasPermission name="commom:dict:add">
+                    <shiro:hasPermission name="common:dict:add">
                         <button type="button" class="btn  btn-primary" onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
                     </shiro:hasPermission>
-                    <shiro:hasPermission name="commom:dict:remove">
+                    <shiro:hasPermission name="common:dict:remove">
                         <button type="button" class="btn  btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
@@ -69,19 +69,19 @@
             var s_edit_h = 'hidden';
             var s_remove_h = 'hidden';
         </script>
-        <shiro:hasPermission name="commom:dict:edit">
+        <shiro:hasPermission name="common:dict:edit">
             <script>
                 s_edit_h = '';
             </script>
         </shiro:hasPermission>
-        <shiro:hasPermission name="commom:dict:remove">
+        <shiro:hasPermission name="common:dict:remove">
             <script>
                 s_remove_h = '';
             </script>
         </shiro:hasPermission>
     </div>
 </div>
-<%@ include file="/commom/footer.jsp" %>
+<%@ include file="/common/footer.jsp" %>
 <script>
     var prefix = _ctx + "/common/dict/data";
 

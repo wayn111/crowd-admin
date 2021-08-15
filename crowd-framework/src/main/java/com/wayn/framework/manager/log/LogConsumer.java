@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 日志异步处理线程
@@ -45,8 +46,10 @@ public class LogConsumer implements Runnable {
         List<OperLog> temp = new ArrayList<>();
         try {
             while (temp.size() <= logHandlerNum) {
-                OperLog log = queue.take();
-                temp.add(log);
+                OperLog log = queue.poll(2000, TimeUnit.MILLISECONDS);
+                if (log != null) {
+                    temp.add(log);
+                }
             }
             if (temp.size() != 0) {
                 logService.saveBatch(temp);

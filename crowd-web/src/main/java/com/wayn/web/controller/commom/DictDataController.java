@@ -1,4 +1,4 @@
-package com.wayn.web.controller.commom;
+package com.wayn.web.controller.common;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 字典数据
  */
-@RequestMapping("/commom/dict/data")
+@RequestMapping("/common/dict/data")
 @Controller
 public class DictDataController extends BaseController {
 
