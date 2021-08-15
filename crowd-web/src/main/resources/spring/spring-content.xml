@@ -31,7 +31,7 @@
                         classpath:proj-common.properties
                     </value>
                     <value>
-                        classpath:proj-ehcahce.properties
+                        classpath:proj-ehcache.properties
                     </value>
                 </array>
             </property>
