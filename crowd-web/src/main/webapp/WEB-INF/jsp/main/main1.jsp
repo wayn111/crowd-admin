@@ -181,11 +181,31 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#version" href="#v23">v2.3.0</a><code
+                                        <a data-toggle="collapse" data-parent="#version" href="#v25">v2.2.1</a><code
+                                            class="pull-right">2021.08.15</code>
+                                    </h5>
+                                </div>
+                                <div id="v25" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="alert alert-success">
+                                            优化代码目录拼写，规范代码，修复上传文件bug，默认使用ehcache配置
+                                        </div>
+                                        <ol>
+                                            <li>优化代码目录拼写</li>
+                                            <li>修复上传文件bug</li>
+                                            <li>默认使用ehcache配置</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#version" href="#v23">v2.2.0</a><code
                                             class="pull-right">2021.06.14</code>
                                     </h5>
                                 </div>
-                                <div id="v23" class="panel-collapse collapse in">
+                                <div id="v23" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="alert alert-success">
                                             代码目录重构，优化部署文件
@@ -200,7 +220,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h5 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#version" href="#v22">v2.2.0</a><code
+                                        <a data-toggle="collapse" data-parent="#version" href="#v22">v2.1.1</a><code
                                             class="pull-right">2021.02.20</code>
                                     </h5>
                                 </div>
