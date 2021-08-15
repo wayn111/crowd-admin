@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>crowd-admin 通知页面</title>
-    <%@ include file="/commom/taglib.jsp" %>
+    <%@ include file="/common/taglib.jsp" %>
     <link href="${_ctx }/static/plugin/bootstrap-v3.3.7/css/bootstrap.min.css?v=3.3.7"
           rel="stylesheet">
     <link href="${_ctx }/static/css/font-awesome.css?v=4.7.0" rel="stylesheet">

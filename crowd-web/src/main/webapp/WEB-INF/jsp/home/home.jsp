@@ -10,8 +10,8 @@
           content="crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目">
     <meta name="description"
           content="design by wayn">
-    <%@ include file="/commom/taglib.jsp" %>
-    <%@ include file="/commom/header.jsp" %>
+    <%@ include file="/common/taglib.jsp" %>
+    <%@ include file="/common/header.jsp" %>
     <link href="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.contextMenu.min.css" rel="stylesheet">
     <link href="${_ctx }/static/plugin/toastr/toastr.min.css" rel="stylesheet">
     <!--[if lt IE 9]>

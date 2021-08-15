@@ -4,8 +4,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <%@ include file="/commom/taglib.jsp" %>
-    <%@ include file="/commom/header.jsp" %>
+    <%@ include file="/common/taglib.jsp" %>
+    <%@ include file="/common/header.jsp" %>
     <title>404</title>
 </head>
 <body class="gray-bg">

@@ -276,7 +276,7 @@ function summernoteSendFile(file, obj) {
     data.append('file', file);
     $.ajax({
         type: 'POST',
-        url: _ctx + '/commom/upload',
+        url: _ctx + '/common/upload',
         data: data,
         cache: false,
         contentType: false,
@@ -286,7 +286,7 @@ function summernoteSendFile(file, obj) {
             if (result.code == 100) {
                 $(obj).summernote('editor.insertImage', result.map.url, result.map.fileName);
             } else {
-                layer.alert(result.map.msg);
+                layer.alert(result.msg);
             }
         },
         error: function (error) {

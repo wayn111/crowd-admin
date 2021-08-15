@@ -4,8 +4,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <%@ include file="/commom/taglib.jsp" %>
-    <%@ include file="/commom/header.jsp" %>
+    <%@ include file="/common/taglib.jsp" %>
+    <%@ include file="/common/header.jsp" %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>欢迎页</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"

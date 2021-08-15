@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
  * @author ruoyi
  */
 public class FileUtils extends org.apache.commons.io.FileUtils {
-    public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
+    public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+" ;
 
     private static int counter = 0;
 
@@ -102,7 +102,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
         // 检查允许下载的文件规则
         return ArrayUtils.contains(MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, FilenameUtils.getExtension(resource));
     }
-
 
     /**
      * 下载文件名重新编码

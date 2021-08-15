@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<%@ include file="/commom/taglib.jsp" %>
-<%@ include file="/commom/header.jsp" %>
+<%@ include file="/common/taglib.jsp" %>
+<%@ include file="/common/header.jsp" %>
 <link href="${_ctx }/static/plugin/json-veiw/jquery.jsonview.css"
       rel="stylesheet">
 <body class="gray-bg">
@@ -90,7 +90,7 @@
         </div>
     </form>
 </div>
-<%@ include file="/commom/footer.jsp" %>
+<%@ include file="/common/footer.jsp" %>
 <script src="${_ctx }/static/plugin/json-veiw/jquery.jsonview.js"></script>
 <script>
     $(function () {
