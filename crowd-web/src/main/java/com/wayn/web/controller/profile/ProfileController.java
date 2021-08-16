@@ -122,7 +122,6 @@ public class ProfileController extends BaseController {
         return Response.success("修改用户密码成功！");
     }
 
-
     /**
      * 更新头像照片
      *
