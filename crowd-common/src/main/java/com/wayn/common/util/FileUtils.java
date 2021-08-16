@@ -19,6 +19,8 @@ import java.nio.charset.StandardCharsets;
 public class FileUtils extends org.apache.commons.io.FileUtils {
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+" ;
 
+    public static final String BLOB_EXTENSION = "blob";
+
     private static int counter = 0;
 
     /**
@@ -97,6 +99,11 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
         // 禁止目录上跳级别
         if (StringUtils.contains(resource, "..")) {
             return false;
+        }
+
+        // 兼容头像上传插件
+        if (BLOB_EXTENSION.equalsIgnoreCase(resource)) {
+            return true;
         }
 
         // 检查允许下载的文件规则
