@@ -34,7 +34,7 @@
         <spring.redis.version>1.8.23.RELEASE</spring.redis.version>
         <jedis.version>2.10.2</jedis.version>
 
-        <mybatis-plus.version>3.4.3</mybatis-plus.version>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <mysql.version>8.0.25</mysql.version>
         <jackson.version>2.13.1</jackson.version>
         <druid.version>1.2.8</druid.version>
@@ -49,22 +49,22 @@
         <hibernate-validator.version>7.0.1.Final</hibernate-validator.version>
         <guava.version>31.0.1-jre</guava.version>
         <shiro.version>1.8.0</shiro.version>
-        <logback.version>1.2.9</logback.version>
-        <log4j.over.slf4j>1.7.32</log4j.over.slf4j>
+        <logback.version>1.2.10</logback.version>
+        <log4j.over.slf4j>1.7.35</log4j.over.slf4j>
         <servlet-api.version>5.0.0</servlet-api.version>
         <jsp-api.version>3.0.0</jsp-api.version>
         <jstl.version>1.2</jstl.version>
         <bitwalker.version>1.21</bitwalker.version>
         <jsoup.version>1.14.3</jsoup.version>
         <velocity.version>2.3</velocity.version>
-        <oshi.version>5.8.6</oshi.version>
+        <oshi.version>6.1.0</oshi.version>
         <thumbnailator.version>0.4.13</thumbnailator.version>
         <quartz.version>2.3.2</quartz.version>
         <java-image-scaling.version>0.8.6</java-image-scaling.version>
-        <joda-time.version>2.10.8</joda-time.version>
+        <joda-time.version>2.10.13</joda-time.version>
         <ip2region.version>1.7.2</ip2region.version>
         <reactor-net.version>2.0.8.RELEASE</reactor-net.version>
-        <netty-all.version>4.1.65.Final</netty-all.version>
+        <netty-all.version>4.1.72.Final</netty-all.version>
         <easypoi.version>4.4.0</easypoi.version>
         <mail.version>1.4.7</mail.version>
     </properties>

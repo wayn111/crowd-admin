@@ -28,11 +28,11 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
@@ -52,11 +52,11 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserService {
 
-    @Autowired
+    @Resource
     private UserDao userDao;
-    @Autowired
+    @Resource
     private DeptDao deptDao;
-    @Autowired
+    @Resource
     private UserRoleService userRoleService;
 
     @Override
@@ -93,7 +93,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
                 return false;
             }
         }
-        Integer count = userDao.selectCount(new QueryWrapper<User>().eq("userName", userName));
+        Long count = userDao.selectCount(new QueryWrapper<User>().eq("userName", userName));
         return count > 0;
     }
 

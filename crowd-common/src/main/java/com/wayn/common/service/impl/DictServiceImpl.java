@@ -11,11 +11,11 @@ import com.wayn.common.service.DictService;
 import com.wayn.common.util.ParameterUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @Service
 public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictService {
 
-    @Autowired
+    @Resource
     private DictDao dictDao;
 
     @Override
@@ -57,12 +57,12 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
                 return false;
             }
         }
-        int count = count(new QueryWrapper<Dict>()
+        long count = count(new QueryWrapper<Dict>()
                 .eq("value", dict.getValue())
                 .eq("type", dict.getType())
                 .eq("dictType", dict.getDictType())
                 .eq("delFlag", 0));
-        return count > 0 ? true : false;
+        return count > 0;
     }
 
     @CacheEvict(value = "dictCache", allEntries = true)
@@ -146,8 +146,8 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     /**
      * 将字典列表转化为select2接受的json格式
      *
-     * @param dicts
-     * @return
+     * @param dicts 字典列表
+     * @return jsonArray
      */
     public List<JSONObject> convert2select(List<Dict> dicts) {
         return dicts.stream().map(data -> {
