@@ -8,18 +8,11 @@ import oshi.hardware.CentralProcessor;
 import oshi.hardware.CentralProcessor.TickType;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
-import oshi.hardware.NetworkIF;
-import oshi.hardware.platform.linux.LinuxNetworkIF;
-import oshi.hardware.platform.windows.WindowsNetworkIF;
 import oshi.software.os.FileSystem;
-import oshi.software.os.NetworkParams;
 import oshi.software.os.OSFileStore;
 import oshi.software.os.OperatingSystem;
 import oshi.util.Util;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.List;
@@ -97,6 +90,28 @@ public class Server {
         this.sysFiles = sysFiles;
     }
 
+    /**
+     * 设置磁盘信息
+     */
+    private void setSysFiles(OperatingSystem os) {
+        FileSystem fileSystem = os.getFileSystem();
+        List<OSFileStore> fsArray = fileSystem.getFileStores();
+        for (OSFileStore fs : fsArray) {
+            long free = fs.getUsableSpace();
+            long total = fs.getTotalSpace();
+            long used = total - free;
+            SysFile sysFile = new SysFile();
+            sysFile.setDirName(fs.getMount());
+            sysFile.setSysTypeName(fs.getType());
+            sysFile.setTypeName(fs.getName());
+            sysFile.setTotal(convertFileSize(total));
+            sysFile.setFree(convertFileSize(free));
+            sysFile.setUsed(convertFileSize(used));
+            sysFile.setUsage(Arith.mul(Arith.div(used, total, 4), 100));
+            sysFiles.add(sysFile);
+        }
+    }
+
     public void copyTo() throws Exception {
         SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
@@ -171,28 +186,6 @@ public class Server {
     }
 
     /**
-     * 设置磁盘信息
-     */
-    private void setSysFiles(OperatingSystem os) {
-        FileSystem fileSystem = os.getFileSystem();
-        List<OSFileStore> fsArray = fileSystem.getFileStores();
-        for (OSFileStore fs : fsArray) {
-            long free = fs.getUsableSpace();
-            long total = fs.getTotalSpace();
-            long used = total - free;
-            SysFile sysFile = new SysFile();
-            sysFile.setDirName(fs.getMount());
-            sysFile.setSysTypeName(fs.getType());
-            sysFile.setTypeName(fs.getName());
-            sysFile.setTotal(convertFileSize(total));
-            sysFile.setFree(convertFileSize(free));
-            sysFile.setUsed(convertFileSize(used));
-            sysFile.setUsage(Arith.mul(Arith.div(used, total, 4), 100));
-            sysFiles.add(sysFile);
-        }
-    }
-
-    /**
      * 字节转换
      *
      * @param size 字节大小
@@ -213,12 +206,5 @@ public class Server {
         } else {
             return String.format("%d B", size);
         }
-    }
-
-    public static void main(String[] args) throws SocketException, InstantiationException {
-        WindowsNetworkIF networkIF = new WindowsNetworkIF(NetworkInterface.getByName("eth3"));
-        System.out.println(networkIF.getSpeed());
-        SystemInfo systemInfo = new SystemInfo();
-        NetworkParams networkParams = systemInfo.getOperatingSystem().getNetworkParams();
     }
 }
