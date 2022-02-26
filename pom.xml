@@ -40,7 +40,7 @@
         <druid.version>1.2.8</druid.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
-        <commons-compress.version>1.20</commons-compress.version>
+        <commons-compress.version>1.21</commons-compress.version>
         <activemq.version>5.16.2</activemq.version>
         <tika.version>2.0.0</tika.version>
         <fastjson.version>1.2.79</fastjson.version>
@@ -50,14 +50,14 @@
         <guava.version>31.0.1-jre</guava.version>
         <shiro.version>1.8.0</shiro.version>
         <logback.version>1.2.10</logback.version>
-        <log4j.over.slf4j>1.7.35</log4j.over.slf4j>
+        <log4j.over.slf4j>1.7.36</log4j.over.slf4j>
         <servlet-api.version>5.0.0</servlet-api.version>
         <jsp-api.version>3.0.0</jsp-api.version>
         <jstl.version>1.2</jstl.version>
         <bitwalker.version>1.21</bitwalker.version>
         <jsoup.version>1.14.3</jsoup.version>
         <velocity.version>2.3</velocity.version>
-        <oshi.version>6.1.0</oshi.version>
+        <oshi.version>6.1.2</oshi.version>
         <thumbnailator.version>0.4.13</thumbnailator.version>
         <quartz.version>2.3.2</quartz.version>
         <java-image-scaling.version>0.8.6</java-image-scaling.version>
