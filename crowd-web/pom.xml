@@ -50,6 +50,6 @@
     </dependencies>
 
 	<build>
-		<finalName>crowd-web</finalName>
+		<finalName>crowd</finalName>
 	</build>
 </project>

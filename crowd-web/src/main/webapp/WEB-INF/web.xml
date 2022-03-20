@@ -79,6 +79,10 @@
         <param-value>classpath:spring/spring-*.xml</param-value>
     </context-param>
     <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>ehcache</param-value>
+    </context-param>
+    <context-param>
         <param-name>applicationName</param-name>
         <param-value>crowd-admin</param-value>
     </context-param>
