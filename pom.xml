@@ -29,7 +29,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <junit.version>4.13.2</junit.version>
-        <spring.version>4.3.30.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
         <!-- data-redis1.0版本需要jedis2.0版本配合 -->
         <spring.redis.version>1.8.23.RELEASE</spring.redis.version>
         <jedis.version>2.10.2</jedis.version>
