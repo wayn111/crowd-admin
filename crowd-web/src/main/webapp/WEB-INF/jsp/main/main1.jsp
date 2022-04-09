@@ -21,9 +21,9 @@
                 <%--                </div>--%>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <%--<div class="col-sm-12">
                             <div id="main3" style="min-width: 280px;min-height:350px;"></div>
-                        </div>
+                        </div>--%>
                         <div class="col-sm-6">
                             <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
                             <div id="main1" style="min-width: 280px;min-height:350px;"></div>
@@ -673,14 +673,14 @@
                 type: 'line'
             }]
         };
-        $.get(_ctx + '/main/flowUseStatistic', function (res) {
-            if (res.code == 100) {
-                option.title.subtext = option.title.subtext + res.map.totalFlow;
-                option.xAxis.data = res.map.timeList;
-                option.series[0].data = res.map.valueList;
-            }
-            option && myChart.setOption(option);
-        });
+        // $.get(_ctx + '/main/flowUseStatistic', function (res) {
+        //     if (res.code == 100) {
+        //         option.title.subtext = option.title.subtext + res.map.totalFlow;
+        //         option.xAxis.data = res.map.timeList;
+        //         option.series[0].data = res.map.valueList;
+        //     }
+        //     option && myChart.setOption(option);
+        // });
     }
 </script>
 </body>
