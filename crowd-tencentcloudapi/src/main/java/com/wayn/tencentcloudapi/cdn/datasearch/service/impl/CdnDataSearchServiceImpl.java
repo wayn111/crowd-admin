@@ -15,7 +15,7 @@ public class CdnDataSearchServiceImpl implements CdnDataSearchService {
 
     private static final Logger logger = LoggerFactory.getLogger(CdnDataSearchServiceImpl.class);
 
-    @Autowired
+    @Autowired(required = false)
     private CdnClient cdnClient;
 
     @Override
