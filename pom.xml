@@ -43,7 +43,7 @@
         <commons-compress.version>1.21</commons-compress.version>
         <activemq.version>5.16.2</activemq.version>
         <tika.version>2.3.0</tika.version>
-        <fastjson.version>1.2.79</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
         <ehcache.version>2.10.9.2</ehcache.version>
         <hibernate-validator.version>7.0.3.Final</hibernate-validator.version>
