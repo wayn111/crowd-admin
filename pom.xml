@@ -34,16 +34,16 @@
         <spring.redis.version>1.8.23.RELEASE</spring.redis.version>
         <jedis.version>2.10.2</jedis.version>
 
-        <mybatis-plus.version>3.5.1</mybatis-plus.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <mysql.version>8.0.28</mysql.version>
-        <jackson.version>2.13.2</jackson.version>
-        <druid.version>1.2.8</druid.version>
+        <jackson.version>2.13.3</jackson.version>
+        <druid.version>1.2.11</druid.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-compress.version>1.21</commons-compress.version>
         <activemq.version>5.16.2</activemq.version>
         <tika.version>2.3.0</tika.version>
-        <fastjson.version>1.2.79</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
         <ehcache.version>2.10.9.2</ehcache.version>
         <hibernate-validator.version>7.0.3.Final</hibernate-validator.version>
