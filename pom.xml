@@ -48,7 +48,7 @@
         <ehcache.version>2.10.9.2</ehcache.version>
         <hibernate-validator.version>7.0.3.Final</hibernate-validator.version>
         <guava.version>31.1-jre</guava.version>
-        <shiro.version>1.9.0</shiro.version>
+        <shiro.version>1.9.1</shiro.version>
         <logback.version>1.2.11</logback.version>
         <log4j.over.slf4j>1.7.36</log4j.over.slf4j>
         <servlet-api.version>5.0.0</servlet-api.version>
