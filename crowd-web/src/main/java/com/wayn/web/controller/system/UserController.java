@@ -21,7 +21,6 @@ import com.wayn.common.util.AdminUtil;
 import com.wayn.common.util.HttpUtil;
 import com.wayn.common.util.ParameterUtil;
 import com.wayn.common.util.Response;
-import com.wayn.framework.jms.queue.MailQueueProducer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -62,8 +61,8 @@ public class UserController extends BaseController {
     @Autowired
     private MailConfigService mailConfigService;
 
-    @Autowired
-    private MailQueueProducer mailQueueProducer;
+    // @Autowired
+    // private MailQueueProducer mailQueueProducer;
 
     @Autowired
     private ConfigService configService;
@@ -168,7 +167,7 @@ public class UserController extends BaseController {
         mailVO.setReceiverUser(user.getUserName());
         mailVO.setSendMail(user.getEmail());
         mailVO.setTitle("欢迎：" + user.getUserName());
-        mailQueueProducer.sendMail(mailConfig, mailVO);
+        // mailQueueProducer.sendMail(mailConfig, mailVO);
         return Response.success("新增用户成功");
     }
 

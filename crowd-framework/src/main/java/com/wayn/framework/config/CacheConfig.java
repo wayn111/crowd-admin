@@ -17,20 +17,19 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import redis.clients.jedis.JedisPoolConfig;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Duration;
 import java.util.Objects;
 
 @EnableCaching
@@ -40,40 +39,15 @@ public class CacheConfig extends CachingConfigurerSupport {
     @Value("${cache.type}")
     private String cacheType;
 
-    @Value("${redis.host}")
-    private String host = "127.0.0.1";
-
-    @Value("${redis.port}")
-    private int port = 6379;
-
-    @Value("${redis.password}")
-    private String password = "";
-
-    // 0 - never expire
-    @Value("${redis.expire}")
-    private int expire = 0;
-
-    //数据库位置
-    @Value("${redis.databaseIndex}")
-    private int databaseIndex = 0;
-
-    @Profile({"redis"})
     @Bean
-    public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig) { JedisConnectionFactory connectionFactory = new JedisConnectionFactory(jedisPoolConfig);
-        connectionFactory.setHostName(host);
-        connectionFactory.setPort(port);
-        connectionFactory.setPassword(password);
-        connectionFactory.setDatabase(databaseIndex);
-        return connectionFactory;
-    }
-
-    @Profile({"redis"})
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory connectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
         redisTemplate.setKeySerializer(keySerializer());
+        redisTemplate.setHashKeySerializer(keySerializer());
         redisTemplate.setValueSerializer(valueSerializer());
+        redisTemplate.setHashValueSerializer(valueSerializer());
+        redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
 
@@ -86,34 +60,33 @@ public class CacheConfig extends CachingConfigurerSupport {
                 Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-//        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance);
         om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-//        return jackson2JsonRedisSerializer;
-
-//        return new JdkSerializationRedisSerializer();
         return new FastJsonRedisSerializer<>(Object.class);
     }
 
+    private CacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+        return RedisCacheManager.builder(redisConnectionFactory)
+                .cacheDefaults(defaultCacheConfig())
+                .transactionAware()
+                .build();
+    }
 
+    private RedisCacheConfiguration defaultCacheConfig() {
+        return RedisCacheConfiguration.defaultCacheConfig()
+                .prefixCacheNameWith("crowd")
+                .entryTtl(Duration.ofSeconds(300))
+                .disableCachingNullValues();
+    }
 
     @Primary
     @Bean
     public CacheManager cacheManager(@Autowired(required = false) RedisTemplate<String, Object> redisTemplate,
-                                     @Autowired(required = false) net.sf.ehcache.CacheManager ehCacheManager) {
+                                     @Autowired(required = false) net.sf.ehcache.CacheManager ehCacheManager,
+                                     @Autowired(required = false) RedisConnectionFactory redisConnectionFactory) {
         CacheManager cacheManager = null;
         if (Constants.CACHE_TYPE_REDIS.equals(cacheType)) {
-            cacheManager = new RedisCacheManager(redisTemplate);
-            ((RedisCacheManager) cacheManager).setUsePrefix(true);
-            ((RedisCacheManager) cacheManager).setDefaultExpiration(expire);
-            //定义缓存名称
-            List<String> cacheNames = new ArrayList<>();
-            cacheNames.add("menuCache");
-            cacheNames.add("deptCache");
-            cacheNames.add("permissionCache");
-            cacheNames.add("dictCache");
-            cacheNames.add("timerTaskCache");
-            ((RedisCacheManager) cacheManager).setCacheNames(cacheNames);
+            cacheManager = redisCacheManager(redisConnectionFactory);
         } else if (Constants.CACHE_TYPE_EACHACEH.equals(cacheType)) {
             cacheManager = ehCacheCacheManager(ehCacheManager);
         }
@@ -147,6 +120,7 @@ public class CacheConfig extends CachingConfigurerSupport {
 
 /**
  * 使用fastjson序列化
+ *
  * @param <T>
  */
 class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
