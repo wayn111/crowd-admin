@@ -35,7 +35,7 @@ public class CommonController {
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response) {
         try {
             String uploadDir = ProperUtil.get("wayn.uploadDir");
-            if (!FileUtils.checkAllowDownload(fileName)) {
+            if (FileUtils.checkAllowDownload(fileName)) {
                 throw new BusinessException("文件名称(" + fileName + ")非法，不允许下载。 ");
             }
 
