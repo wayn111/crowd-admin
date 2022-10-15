@@ -1,8 +1,9 @@
 package com.wayn.common.util;
 
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.safety.Whitelist;
+import org.jsoup.safety.Safelist;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class JsoupUtil {
      * strike,strong,sub,sup,u,ul,img
      * 以及a标签的href,img标签的src,align,alt,height,width,title属性
      */
-    private static final Whitelist whitelist = Whitelist.basicWithImages();
+    private static final Safelist whitelist =  Safelist.basicWithImages();
     /**
      * 配置过滤化参数,不对代码进行格式化
      */
@@ -46,7 +47,7 @@ public class JsoupUtil {
         System.out.println(clean(text));
 
         System.out.println("------------------------");
-        System.out.println(Jsoup.clean(text, Whitelist.relaxed()).trim());
+        System.out.println(Jsoup.clean(text,  Safelist.relaxed()).trim());
 
     }
 

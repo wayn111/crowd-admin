@@ -23,7 +23,7 @@ public class FileUploadUtil {
             throw new BusinessException("文件名称过长");
         }
         String fileName = file.getOriginalFilename();
-        if (!FileUtils.checkAllowDownload(fileName)) {
+        if (FileUtils.checkAllowDownload(fileName)) {
             throw new BusinessException("文件名称(" + fileName + ")非法，不允许下载。 ");
         }
         String extension = FilenameUtils.getExtension(fileName);

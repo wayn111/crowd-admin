@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * 精确的浮点数运算
+ * 精确地浮点数运算
  *
  * @author ruoyi
  */
@@ -73,8 +73,8 @@ public class Arith {
     }
 
     public static double div(double v1, int scale, double... v2) {
-        for (int i = 0; i < v2.length; i++) {
-            v1 = div(v1, v2[i], scale);
+        for (double v : v2) {
+            v1 = div(v1, v, scale);
         }
         return v1;
     }

@@ -2,6 +2,7 @@ package com.wayn.common.util;
 
 import com.wayn.common.constant.Constants;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,11 +14,10 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * 文件处理工具类
- *
- * @author ruoyi
  */
-public class FileUtils extends org.apache.commons.io.FileUtils {
-    public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+" ;
+public class FileUtils {
+
+    public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-|.\\u4e00-\\u9fa5]+";
 
     public static final String BLOB_EXTENSION = "blob";
 
@@ -45,20 +45,8 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
         } catch (IOException e) {
             throw e;
         } finally {
-            if (os != null) {
-                try {
-                    os.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
+            IOUtils.close(os);
+            IOUtils.close(fis);
         }
     }
 
@@ -73,8 +61,9 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
         File file = new File(filePath);
         // 路径为文件且不为空则进行删除
         if (file.isFile() && file.exists()) {
-            file.delete();
-            flag = true;
+            if (file.delete()) {
+                flag = true;
+            }
         }
         return flag;
     }
@@ -107,7 +96,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
         }
 
         // 检查允许下载的文件规则
-        return ArrayUtils.contains(MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, FilenameUtils.getExtension(resource));
+        return !ArrayUtils.contains(MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, FilenameUtils.getExtension(resource));
     }
 
     /**
@@ -153,15 +142,14 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
     public static void setAttachmentResponseHeader(HttpServletResponse response, String realFileName) throws UnsupportedEncodingException {
         String percentEncodedFileName = percentEncode(realFileName);
 
-        StringBuilder contentDispositionValue = new StringBuilder();
-        contentDispositionValue.append("attachment; filename=")
-                .append(percentEncodedFileName)
-                .append(";")
-                .append("filename*=")
-                .append("utf-8''")
-                .append(percentEncodedFileName);
+        String contentDispositionValue = "attachment; filename=" +
+                percentEncodedFileName +
+                ";" +
+                "filename*=" +
+                "utf-8''" +
+                percentEncodedFileName;
 
-        response.setHeader("Content-disposition", HttpUtil.safeHttpHeader(contentDispositionValue.toString()));
+        response.setHeader("Content-disposition", HttpUtil.safeHttpHeader(contentDispositionValue));
     }
 
     /**

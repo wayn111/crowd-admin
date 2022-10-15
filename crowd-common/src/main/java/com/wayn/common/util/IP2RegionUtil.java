@@ -18,7 +18,7 @@ public class IP2RegionUtil {
         String dbPath = IP2RegionUtil.class.getClassLoader().getResource("/ip2region.db").getPath();
         File file = new File(dbPath);
 
-        if (file.exists() == false) {
+        if (!file.exists()) {
             System.out.println("Error: Invalid ip2region.db file");
         }
 

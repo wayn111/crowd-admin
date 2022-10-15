@@ -1,6 +1,7 @@
 package com.wayn.common.util;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.Base64;
 
 /**
@@ -61,9 +62,9 @@ public class ImageUtil {
         return Base64.getDecoder().decode(base64);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         File file = new File("E:/123.jpg");
-        System.out.println(imgToBase64(new FileInputStream(file), "data:image/jpg;base64,"));
+        System.out.println(imgToBase64(Files.newInputStream(file.toPath()), "data:image/jpg;base64,"));
     }
 
 }
