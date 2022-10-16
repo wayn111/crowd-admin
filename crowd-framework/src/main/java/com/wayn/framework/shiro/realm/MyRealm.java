@@ -25,25 +25,25 @@ import java.util.Set;
 
 public class MyRealm extends AuthorizingRealm {
 
-    @Autowired
+    // @Autowired
     private UserService userService;
 
-    @Autowired
+    // @Autowired
     private UserRoleService userRoleService;
 
-    @Autowired
+    // @Autowired
     private RoleMenuService roleMenuService;
 
-    @Autowired
+    // @Autowired
     private LogininforService logininforService;
 
-    @Autowired
+    // @Autowired
     private ConfigService configService;
 
-    @Autowired
+    // @Autowired
     private SessionDAO sessionDAO;
 
-    @Autowired
+    // @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
     /**

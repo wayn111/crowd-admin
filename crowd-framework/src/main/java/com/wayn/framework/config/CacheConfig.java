@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wayn.common.constant.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -18,9 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -36,13 +32,10 @@ import java.util.Objects;
 @Configuration
 public class CacheConfig extends CachingConfigurerSupport {
 
-    @Value("${cache.type}")
-    private String cacheType;
-
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory connectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(connectionFactory);
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
         redisTemplate.setKeySerializer(keySerializer());
         redisTemplate.setHashKeySerializer(keySerializer());
         redisTemplate.setValueSerializer(valueSerializer());
@@ -65,32 +58,10 @@ public class CacheConfig extends CachingConfigurerSupport {
         return new FastJsonRedisSerializer<>(Object.class);
     }
 
-    private CacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
-        return RedisCacheManager.builder(redisConnectionFactory)
-                .cacheDefaults(defaultCacheConfig())
-                .transactionAware()
-                .build();
-    }
-
-    private RedisCacheConfiguration defaultCacheConfig() {
-        return RedisCacheConfiguration.defaultCacheConfig()
-                .prefixCacheNameWith("crowd")
-                .entryTtl(Duration.ofSeconds(300))
-                .disableCachingNullValues();
-    }
-
     @Primary
     @Bean
-    public CacheManager cacheManager(@Autowired(required = false) RedisTemplate<String, Object> redisTemplate,
-                                     @Autowired(required = false) net.sf.ehcache.CacheManager ehCacheManager,
-                                     @Autowired(required = false) RedisConnectionFactory redisConnectionFactory) {
-        CacheManager cacheManager = null;
-        if (Constants.CACHE_TYPE_REDIS.equals(cacheType)) {
-            cacheManager = redisCacheManager(redisConnectionFactory);
-        } else if (Constants.CACHE_TYPE_EACHACEH.equals(cacheType)) {
-            cacheManager = ehCacheCacheManager(ehCacheManager);
-        }
-        return cacheManager;
+    public CacheManager cacheManager(net.sf.ehcache.CacheManager ehCacheManager) {
+        return ehCacheCacheManager(ehCacheManager);
     }
 
     public EhCacheCacheManager ehCacheCacheManager(net.sf.ehcache.CacheManager cacheManager) {
@@ -147,7 +118,7 @@ class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 
     @Override
     public T deserialize(byte[] bytes) throws SerializationException {
-        if (bytes == null || bytes.length <= 0) {
+        if (ArrayUtils.isEmpty(bytes)) {
             return null;
         }
         String str = new String(bytes, DEFAULT_CHARSET);

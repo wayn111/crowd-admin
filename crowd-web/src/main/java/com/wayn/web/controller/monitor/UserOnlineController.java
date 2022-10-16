@@ -39,7 +39,7 @@ public class UserOnlineController extends BaseController {
     @Autowired
     private SessionDAO sessionDAO;
 
-    @Autowired
+    @Autowired(required = false)
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @RequiresPermissions("monitor:online:online")

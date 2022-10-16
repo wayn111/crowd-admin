@@ -1,21 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowd-admin 登陆</title>
-    <meta name="keywords" content="crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目">
-    <meta name="description"
-          content="design by wayn">
-    <%@ include file="/common/taglib.jsp" %>
-    <%@ include file="/common/header.jsp" %>
-    <link href="${_ctx }/static/css/login.css?v=4.0"
-          rel="stylesheet">
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html"/>
-    <![endif]-->
+    <th:block th:include="include :: header('登录')" />
+    <link th:href="@{/css/login.css?v=4.0}" rel="stylesheet">
     <script>
         if (window.top !== window.self) {
             window.top.location = window.location;
@@ -29,10 +16,10 @@
         <div class="col-sm-7">
             <div class="signin-info">
                 <div class="logopanel m-b">
-                    <h1>[ ${sysName} ]</h1>
+                    <h1>[ [[${sysName}]] ]</h1>
                 </div>
                 <div class="m-b"></div>
-                <h4>欢迎使用 <strong>${sysName}</strong></h4>
+                <h4>欢迎使用 <strong th:text="${sysName}">crowd-admin</strong></h4>
                 <ul class="m-b">
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> spring</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> shiro</li>
@@ -47,7 +34,7 @@
         <div class="col-sm-5 animated bounceInDown">
             <form id="login-form" action="#">
                 <h4 class="no-margins">登录：</h4>
-                <p class="m-t-md">登录到${sysName }后台</p>
+                <p class="m-t-md" th:text="${sysName }">登录到 后台</p>
                 <input type="text" class="form-control" name="userName" placeholder="用户名" value="crowd"/>
                 <input type="password" class="form-control m-b" name="password" placeholder="密码" value="123456"/>
                 <div class="row">
@@ -91,12 +78,10 @@
         </div>
     </div>
     <div class="signup-footer">
-        <div class="pull-left">
-            ${sysFooter }
-        </div>
+        <div class="pull-left" th:text="${sysFooter}"></div>
     </div>
 </div>
-<%@ include file="/common/footer.jsp" %>
+<th:block th:include="include :: common-js" />
 <script>
     var prefix = _ctx + "/home";
 

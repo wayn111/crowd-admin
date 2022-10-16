@@ -48,7 +48,7 @@
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <guava.version>31.1-jre</guava.version>
         <shiro.version>1.9.1</shiro.version>
-        <jsp-api.version>3.0.0</jsp-api.version>
+        <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <jstl.version>1.2</jstl.version>
         <bitwalker.version>1.21</bitwalker.version>
         <jsoup.version>1.14.3</jsoup.version>
@@ -119,6 +119,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <!-- thymeleaf模板引擎和shiro框架的整合 -->
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>${thymeleaf.extras.shiro.version}</version>
+        </dependency>
 
         <!-- mybatis plus -->
         <dependency>
@@ -165,18 +171,6 @@
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
             <version>${tika.version}</version>
-        </dependency>
-
-        <!-- JSP相关 -->
-        <dependency>
-            <groupId>jakarta.servlet.jsp</groupId>
-            <artifactId>jakarta.servlet.jsp-api</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
         </dependency>
 
         <!-- 文件上传组件 -->

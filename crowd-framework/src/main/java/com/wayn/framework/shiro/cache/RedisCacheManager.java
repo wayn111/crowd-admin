@@ -3,75 +3,47 @@ package com.wayn.framework.shiro.cache;
 /**
  * 定义实现shiro.cache.CacheManager的RedisCacheManager
  */
-import com.wayn.framework.redis.RedisOpts;
+
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class RedisCacheManager implements CacheManager {
 
-	private static final Logger logger = LoggerFactory.getLogger(RedisCacheManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(RedisCacheManager.class);
 
-	// fast lookup by name map
-	private final ConcurrentMap<String, Cache> caches = new ConcurrentHashMap<String, Cache>();
+    private final ConcurrentMap<String, RedisCache<String, Object>> caches = new ConcurrentHashMap<>();
 
-	private RedisOpts opts;
+    private RedisTemplate<String, Object> redisTemplate;
 
-	/**
-	 * The Redis key prefix for caches
-	 */
-	private String keyPrefix = "shiro_redis_cache:";
+    private String keyPrefix;
 
-	/**
-	 * Returns the Redis session keys
-	 * prefix.
-	 * @return The prefix
-	 */
-	public String getKeyPrefix() {
-		return keyPrefix;
-	}
+    public RedisCacheManager(RedisTemplate<String, Object> redisTemplate, String keyPrefix) {
+        this.redisTemplate = redisTemplate;
+        this.keyPrefix = keyPrefix;
+    }
 
-	/**
-	 * Sets the Redis sessions key
-	 * prefix.
-	 * @param keyPrefix The prefix
-	 */
-	public void setKeyPrefix(String keyPrefix) {
-		this.keyPrefix = keyPrefix;
-	}
+    @Override
+    public <K, V> Cache<K, V> getCache(String name) throws CacheException {
+        logger.debug("获取名称为: " + name + " 的RedisCache实例");
 
-	@Override
-	public <K, V> Cache<K, V> getCache(String name) throws CacheException {
-		logger.debug("获取名称为: " + name + " 的RedisCache实例");
+        RedisCache<String, Object> redisCache = caches.get(name);
 
-		Cache c = caches.get(name);
+        if (redisCache == null) {
 
-		if (c == null) {
+            // create a new cache instance
+            redisCache = new RedisCache<>(redisTemplate, keyPrefix);
 
-			// create a new cache instance
-			c = new RedisCache<K, V>(opts, keyPrefix);
-
-			// add it to the cache collection
-			caches.put(name, c);
-		}
-		return c;
-	}
-
-	public RedisOpts getOpts() {
-		return opts;
-	}
-
-	public void setOpts(RedisOpts opts) {
-		this.opts = opts;
-	}
-
-	public ConcurrentMap<String, Cache> getCaches() {
-		return caches;
-	}
+            // add it to the cache collection
+            caches.put(name, redisCache);
+        }
+        return (Cache<K, V>) redisCache;
+    }
 
 }

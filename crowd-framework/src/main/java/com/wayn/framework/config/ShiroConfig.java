@@ -1,7 +1,6 @@
 package com.wayn.framework.config;
 
 import com.wayn.common.constant.Constants;
-import com.wayn.framework.redis.RedisOpts;
 import com.wayn.framework.shiro.cache.RedisCacheManager;
 import com.wayn.framework.shiro.credentials.MyCredentialsMatcher;
 import com.wayn.framework.shiro.realm.MyRealm;
@@ -28,7 +27,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,9 +39,9 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    @Value("${cache.type}")
+    @Value("${wayn.cacheType}")
     private String cacheType;
-    @Value("${shiro.session-timeout}")
+    @Value("${shiro.sessionTimeout}")
     private int sessionTimeout;
     @Value("${shiro.retryCount}")
     private int retryCount;
@@ -79,8 +80,8 @@ public class ShiroConfig {
     @Value("${shiro.cookie.maxAge}")
     private int maxAge;
 
-    @Autowired(required = false)
-    private RedisOpts opts;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private CacheManager ehCacheManager;
@@ -105,7 +106,11 @@ public class ShiroConfig {
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/ws/**", "anon");
-        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/fonts/**", "anon");
+        filterChainDefinitionMap.put("/img/**", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/plugin/**", "anon");
         filterChainDefinitionMap.put("/upload/**", "anon");
         filterChainDefinitionMap.put("/home/*", "anon");
         filterChainDefinitionMap.put("/**", "user,onlineSession");
@@ -198,9 +203,7 @@ public class ShiroConfig {
      * 使用的是shiro-redis开源插件
      */
     private RedisCacheManager rediscacheManager() {
-        RedisCacheManager redisCacheManager = new RedisCacheManager();
-        redisCacheManager.setOpts(opts);
-        return redisCacheManager;
+        return new RedisCacheManager(redisTemplate, "crowd:shrio-cahche:");
     }
 
     /**

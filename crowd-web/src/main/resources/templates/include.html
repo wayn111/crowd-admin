@@ -1,0 +1,76 @@
+<!--header-->
+<head th:fragment="header(title)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="crowd-admin,个后台权限管理系统,脚手架,rbac权限管理,消息推送,邮件发送,任务调度,代码生成,elfinder文件管理">
+    <meta name="description"
+          content="crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目。design by wayn">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <title th:text="${title}">crowd</title>
+    <link rel="shortcut icon" th:href="@{/static/img/favicon.ico}">
+    <link th:href="@{/plugin/bootstrap-v3.3.7/css/bootstrap.min.css?v=3.3.7}" rel="stylesheet">
+    <link th:href="@{/plugin/bootstrap-table-v1.18.0/bootstrap-table.min.css}" rel="stylesheet">
+    <link th:href="@{/plugin/layer/skin/layer.css}" rel="stylesheet">
+    <link th:href="@{/plugin/jquery-layout/layout-default-latest.css?v=1.4}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css?v=4.7.0}" rel="stylesheet">
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/plugin/jsTree/themes/default/style.min.css}" rel="stylesheet">
+    <link th:href="@{/plugin/bootstrap-switch/css/bootstrap3/bootstrap-switch.css}" rel="stylesheet">
+    <link th:href="@{/plugin/select2-4.0.7/css/select2.min.css}" rel="stylesheet">
+    <link th:href="@{/plugin/select2-4.0.7/css/select2-bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/plugin/iCheck/custom.css}" rel="stylesheet">
+    <link th:href="@{/css/style.min.css?v=4.0}" rel="stylesheet">
+</head>
+
+
+<!--header-->
+<div th:fragment="common-js">
+    <script th:inline="javascript"> var _ctx = [[@{/}]];</script>
+    <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
+    <script th:src="@{/plugin/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugin/validate/jquery.validate.min.js?v=1.13}"></script>
+    <script th:src="@{/plugin/validate/messages_zh.min.js}"></script>
+    <script th:src="@{/plugin/jquery-layout/jquery.layout-latest.js?v=1.4}"></script>
+    <script th:src="@{/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7}"></script>
+    <script th:src="@{/plugin/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js}"></script>
+    <script th:src="@{/plugin/bootstrap-table-v1.18.0/bootstrap-table.min.js}"></script>
+    <script th:src="@{/plugin/bootstrap-table-v1.18.0/locale/bootstrap-table-zh-CN.min.js}"></script>
+    <script th:src="@{/plugin/bootstrap-table-v1.18.0/extensions/mobile/bootstrap-table-mobile.min.js?v=20210202}"></script>
+    <script th:src="@{/plugin/jsTree/jstree.min.js}"></script>
+    <script th:src="@{/plugin/bootstrap-switch/js/bootstrap-switch.min.js}"></script>
+    <script th:src="@{/plugin/layer/layer.min.js}"></script>
+    <script th:src="@{/plugin/layDate-v5.0.9/laydate/laydate.js}"></script>
+    <script th:src="@{/plugin/select2-4.0.7/js/select2.min.js}"></script>
+    <script th:src="@{/plugin/iCheck/icheck.min.js}"></script>
+    <script th:src="@{/plugin/select2-4.0.7/js/i18n/zh-CN.js}"></script>
+    <script th:src="@{/js/common/common-ui.js}"></script>
+    <script>
+        $(function () {
+            // select2
+            $.fn.select2.defaults.set("language", "zh-CN"); // 设置默认语言
+            $.fn.select2.defaults.set("theme", "bootstrap"); // 设置默认主题
+
+            // 回到顶部绑定
+            if ($.fn.toTop !== undefined) {
+                $('#scroll-up').toTop();
+            }
+
+            // layDate 时间控件绑定
+            layDateQuery();
+
+            // 初始化绑定树搜索控件
+            treeSearchInit();
+
+            // 初始化多选框/单选框控件
+            $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
+            $.validator.addMethod("checkEmail", function (value, element, params) {
+                var checkEmail = /^[a-z0-9]+@([a-z0-9]+\.)+[a-z]{2,4}$/i;
+                return this.optional(element) || (checkEmail.test(value));
+            }, "*请输入正确的邮箱！");
+        });
+    </script>
+
+</div>

@@ -64,7 +64,7 @@ public class CommonController {
             }
 
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
-            String realPath = request.getSession().getServletContext().getRealPath("/") + File.separator + "template";
+            String realPath = request.getSession().getServletContext().getRealPath("/") + File.separator + "tmp";
             String filePath = realPath + File.separatorChar + fileName;
             FileUtils.setAttachmentResponseHeader(response, realFileName);
             FileUtils.writeBytes(filePath, response.getOutputStream());

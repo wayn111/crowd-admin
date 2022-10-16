@@ -1,13 +1,16 @@
 package com.wayn.framework.shiro.cache;
 
-import com.wayn.common.util.SerializeUtils;
-import com.wayn.framework.redis.RedisOpts;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.util.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class RedisCache<K, V> implements Cache<K, V> {
@@ -17,72 +20,17 @@ public class RedisCache<K, V> implements Cache<K, V> {
     /**
      * The wrapped Jedis instance.
      */
-    private RedisOpts opts;
+    private RedisTemplate<K, V> redisTemplate;
 
     /**
      * The Redis key prefix for the sessions
      */
-    private String keyPrefix = "shiro_redis_cache:";
+    private String keyPrefix;
 
-    /**
-     * Returns the Redis session keys
-     * prefix.
-     *
-     * @return The prefix
-     */
-    public String getKeyPrefix() {
-        return keyPrefix;
-    }
-
-    /**
-     * Sets the Redis sessions key
-     * prefix.
-     *
-     * @param keyPrefix The prefix
-     */
-    public void setKeyPrefix(String keyPrefix) {
+    public RedisCache(RedisTemplate<K, V> redisTemplate, String keyPrefix) {
+        super();
+        this.redisTemplate = redisTemplate;
         this.keyPrefix = keyPrefix;
-    }
-
-    /**
-     * 通过一个JedisManager实例构造RedisCache
-     */
-    public RedisCache(RedisOpts opts) {
-        if (opts == null) {
-            throw new IllegalArgumentException("Cache argument cannot be null.");
-        }
-        this.opts = opts;
-    }
-
-    /**
-     * Constructs a cache instance with the specified
-     * Redis manager and using a custom key prefix.
-     *
-     * @param cache  The cache manager instance
-     * @param prefix The Redis key prefix
-     */
-    public RedisCache(RedisOpts cache,
-                      String prefix) {
-
-        this(cache);
-
-        // set the prefix
-        this.keyPrefix = prefix;
-    }
-
-    /**
-     * 获得byte[]型的key
-     *
-     * @param key
-     * @return
-     */
-    private byte[] getByteKey(K key) {
-        if (key instanceof String) {
-            String preKey = this.keyPrefix + key;
-            return preKey.getBytes();
-        } else {
-            return SerializeUtils.serialize(key);
-        }
     }
 
     @Override
@@ -92,10 +40,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
             if (key == null) {
                 return null;
             } else {
-                byte[] rawValue = opts.get(getByteKey(key));
-                @SuppressWarnings("unchecked")
-                V value = (V) SerializeUtils.deserialize(rawValue);
-                return value;
+                return redisTemplate.opsForValue().get(key);
             }
         } catch (Throwable t) {
             throw new CacheException(t);
@@ -107,7 +52,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
     public V put(K key, V value) throws CacheException {
         logger.debug("根据key从存储 key [" + key + "]");
         try {
-            opts.set(getByteKey(key), SerializeUtils.serialize(value));
+            redisTemplate.opsForValue().set(key, value);
             return value;
         } catch (Throwable t) {
             throw new CacheException(t);
@@ -119,7 +64,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
         logger.debug("从redis中删除 key [" + key + "]");
         try {
             V previous = get(key);
-            opts.del(getByteKey(key));
+            redisTemplate.delete(key);
             return previous;
         } catch (Throwable t) {
             throw new CacheException(t);
@@ -130,17 +75,40 @@ public class RedisCache<K, V> implements Cache<K, V> {
     public void clear() throws CacheException {
         logger.debug("从redis中删除所有元素");
         try {
-            opts.flushDB();
+            Set keys = this.scan(keyPrefix + "*");
+            redisTemplate.delete(keys);
         } catch (Throwable t) {
             throw new CacheException(t);
         }
     }
 
+    /**
+     * 获取匹配的所有key，使用scan避免阻塞
+     *
+     * @param pattern 匹配keys的规则
+     * @return 返回获取到的keys
+     */
+    public Set<K> scan(String pattern) {
+        return redisTemplate.execute((RedisCallback<Set<K>>) connection -> {
+            Set<K> keysTmp = new HashSet<>();
+            try (Cursor<byte[]> cursor = connection.scan(ScanOptions.scanOptions()
+                    .match(pattern)
+                    .count(10000).build())) {
+                while (cursor.hasNext()) {
+                    keysTmp.add((K) new String(cursor.next(), StandardCharsets.UTF_8));
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                throw new RuntimeException(e);
+            }
+            return keysTmp;
+        });
+    }
+
     @Override
     public int size() {
         try {
-            Long longSize = opts.dbSize();
-            return longSize.intValue();
+            return this.scan(keyPrefix + "*").size();
         } catch (Throwable t) {
             throw new CacheException(t);
         }
@@ -149,15 +117,11 @@ public class RedisCache<K, V> implements Cache<K, V> {
     @Override
     public Set<K> keys() {
         try {
-            Set<byte[]> keys = opts.keys(this.keyPrefix + "*");
-            if (CollectionUtils.isEmpty(keys)) {
+            Set<K> set = this.scan(keyPrefix + "*");
+            if (CollectionUtils.isEmpty(set)) {
                 return Collections.emptySet();
             } else {
-                Set<K> newKeys = new HashSet<>();
-                for (byte[] key : keys) {
-                    newKeys.add((K) key);
-                }
-                return newKeys;
+                return set;
             }
         } catch (Throwable t) {
             throw new CacheException(t);
@@ -167,11 +131,11 @@ public class RedisCache<K, V> implements Cache<K, V> {
     @Override
     public Collection<V> values() {
         try {
-            Set<byte[]> keys = opts.keys(this.keyPrefix + "*");
+            Set<K> keys = this.scan(this.keyPrefix + "*");
             if (!CollectionUtils.isEmpty(keys)) {
                 List<V> values = new ArrayList<>(keys.size());
-                for (byte[] key : keys) {
-                    V value = get((K) key);
+                for (K key : keys) {
+                    V value = get(key);
                     if (value != null) {
                         values.add(value);
                     }

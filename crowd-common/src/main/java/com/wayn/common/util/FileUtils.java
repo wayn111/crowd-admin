@@ -96,7 +96,7 @@ public class FileUtils {
         }
 
         // 检查允许下载的文件规则
-        return !ArrayUtils.contains(MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, FilenameUtils.getExtension(resource));
+        return ArrayUtils.contains(MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, FilenameUtils.getExtension(resource));
     }
 
     /**

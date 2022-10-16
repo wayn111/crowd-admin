@@ -15,7 +15,7 @@ public class IP2RegionUtil {
     public static String getCityInfo(String ip) {
         //db
 //        String dbPath = IPUtil.class.getResource("ip2region.db").getPath();
-        String dbPath = IP2RegionUtil.class.getClassLoader().getResource("/ip2region.db").getPath();
+        String dbPath = IP2RegionUtil.class.getClassLoader().getResource("/tmp/ip2region.db").getPath();
         File file = new File(dbPath);
 
         if (!file.exists()) {

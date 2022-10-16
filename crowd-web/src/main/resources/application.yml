@@ -1,0 +1,83 @@
+server:
+  compression:
+    enabled: true
+    min-response-size: 1KB
+  port: 8080
+  servlet:
+    context-path: /crowd
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    # Tomcat启动初始化的线程数，默认值25
+    threads:
+      max: 300
+      min-spare: 30
+
+# spring
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  # 模板引擎
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8 # 中国时区
+    default-property-inclusion: non_null
+  profiles:
+    active: dev
+  task:
+    execution:
+      pool:
+        core-size: 10
+        max-size: 20
+        queue-capacity: 5
+      thread-name-prefix: crowd-task
+  servlet:
+    multipart:
+      max-file-size: 100MB
+
+# mybatis plus
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: false
+  global-config:
+    db-config:
+      logic-delete-field: isDeleted  #全局逻辑删除字段值 3.3.0开始支持，详情看下面。
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  type-aliases-package: com.wayn.**.domain
+
+
+shiro:
+  loginUrl: /home/login
+  successUrl: /
+  unauthorizedUrl: /error/unauth
+  retryCount: 5
+  algorithmName: MD5
+  iterations: 1024
+  sessionTimeout: 1800
+  cookie:
+    domain:
+    path: /
+    httpOnly: true
+    maxAge: 30
+
+wayn:
+  cacheType: ehcache
+  uploadDir: /opt/wayn/crowd/upload
+  adminId: c79ba431f9f74dfbae585b87b0cde933
+  logHandlerTempNum: 3
+  message:
+    brokerType: memory
