@@ -1,22 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${sysName } 首页</title>
-    <meta name="keywords"
-          content="crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目">
-    <meta name="description"
-          content="design by wayn">
-    <%@ include file="/common/taglib.jsp" %>
-    <%@ include file="/common/header.jsp" %>
-    <link href="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.contextMenu.min.css" rel="stylesheet">
-    <link href="${_ctx }/static/plugin/toastr/toastr.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html"/>
-    <![endif]-->
+    <th:block th:include="include :: header('主页')"/>
+    <link th:href="@{/plugin/contextMenu-v2.9.2/jquery.contextMenu.min.css}" rel="stylesheet">
+    <link th:href="@{/plugin/toastr/toastr.min.css}" rel="stylesheet">
     <script>
         if (window.top !== window.self) {
             window.top.location = window.location;
@@ -36,73 +23,70 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="wayn-profile animated">
-                        <h3 class="wayn-h3">${sysName }</h3>
+                        <h3 class="wayn-h3" th:text="${sysName }"></h3>
                         <div id="user-avatar" class="pull-left" style="margin-top: 6px">
-                            <img alt="avatar" class="img-circle" src="${user.userImg}"
+                            <img alt="avatar" class="img-circle" th:src="${user.userImg}"
                                  style="cursor:pointer;height: 64px"
-                                 onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')"/>
+                                 th:onclick="javascript:menuItemCreate('@{/profile}','个人资料')"/>
                         </div>
                         <div id="user-state" class="pull-left" style="margin: 15px 0 0 15px">
                             <p style="color: white">
-                                <strong class="font-bold">${user.nickName }</strong>
+                                <strong class="font-bold" th:text="${user.nickName }"></strong>
                             </p>
                             <span>
                                 <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
-                                <a href="${_ctx }/home/logout" style="padding-left:5px;"><i
+                                <a th:href="@{/home/logout}" style="padding-left:5px;"><i
                                         class="fa fa-sign-out text-danger"></i> 注销</a>
                             </span>
                         </div>
                     </div>
                 </li>
-                <c:forEach var="menu" items="${treeMenus }">
+                <th:block th:each="menu : ${treeMenus}">
                     <li>
-                        <c:if test="${menu.type eq 1 }">
+                        <th:block th:if="${menu.type == 1}">
+                            <div class="order-status-closed"></div>
                             <a href="#">
-                                <i class="${menu.icon }"></i>
-                                <span class="nav-label">${menu.menuName }</span>
+                                <i th:class="${menu.icon }"></i>
+                                <span class="nav-label" th:text="${menu.menuName }"></span>
                                 <span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level collapse">
-                                <c:forEach var="childMenu" items="${menu.children }" varStatus="status">
+                                <th:block th:each="childMenu,status : ${menu.children}">
                                     <li>
-                                        <c:choose>
-                                            <c:when test="${childMenu.type eq 1}">
-                                                <a href="#">${childMenu.menuName}<span class="fa arrow"></span></a>
-                                                <ul class="nav nav-third-level collapse" aria-expanded="false"
-                                                    style="height: 0px;">
-                                                    <c:forEach var="childMenu2" items="${childMenu.children}"
-                                                               varStatus="status2">
-                                                        <c:choose>
-                                                            <c:when test="${childMenu2.type eq 1}">
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <li>
-                                                                    <a class="J_menuItem"
-                                                                       href="${_ctx }${childMenu2.url }"
-                                                                       data-index="${status2.index}">${childMenu2.menuName }</a>
-                                                                </li>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </c:forEach>
-                                                </ul>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a class="J_menuItem" href="${_ctx }${childMenu.url }"
-                                                   data-index="${status.index}">${childMenu.menuName }</a>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <th:block th:if="${childMenu.type == 1}">
+                                            <a href="#">${childMenu.menuName}<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level collapse" aria-expanded="false"
+                                                style="height: 0px;">
+                                                <th:block th:each="childMenu2,status2 : ${childMenu.children}">
+                                                    <c:choose>
+                                                    <c:when test="${childMenu2.type eq 1}">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <li>
+                                                        <a class="J_menuItem"
+                                                           href="${_ctx }${childMenu2.url }"
+                                                           data-index="${status2.index}">${childMenu2.menuName }</a>
+                                                    </li>
+                                                    </c:otherwise>
+                                                    </c:choose>
+                                            </ul>
+                                        </th:block>
+                                        <th:block th:unless="${childMenu.type == 1}">
+                                            <a class="J_menuItem" href="${_ctx }${childMenu.url }"
+                                               data-index="[[${status.index}]]">[[${childMenu.menuName }]]</a>
+                                        </th:block>
                                     </li>
-                                </c:forEach>
+                                </th:block>
                             </ul>
-                        </c:if>
-                        <c:if test="${menu.type eq 2 }">
+                        </th:block>
+                        <th:block th:if="${menu.type == 2}">
                             <a href="#"> <i class="fa fa-home"></i> <span
-                                    class="nav-label">${menu.menuName }</span> <span
+                                    class="nav-label">[[${menu.menuName }]]</span> <span
                                     class="fa arrow"></span>
                             </a>
-                        </c:if>
+                        </th:block>
                     </li>
-                </c:forEach>
+                </th:block>
             </ul>
         </div>
     </nav>
@@ -180,12 +164,12 @@
                         <ul class="dropdown-menu">
                             <li class="mt5">
                                 <a href="javascript:void(0);" class="noactive"
-                                   onclick="javascript:menuItemCreate('${_ctx}/profile','个人资料')">
+                                   onclick="javascript:menuItemCreate(/profile','个人资料')">
                                     <i class="fa fa-user"></i> 个人中心</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="${_ctx }/home/logout">
+                                <a th:href="@{/home/logout}">
                                     <i class="fa fa-sign-out"></i> 退出登录</a>
                             </li>
                         </ul>
@@ -200,7 +184,7 @@
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab"
-                       data-id="${_ctx }/main/mainIndex1">首页</a>
+                       data-id="/main/mainIndex1">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight">
@@ -224,36 +208,36 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="${_ctx }/main/mainIndex1" frameborder="0"
-                    data-id="${_ctx }/main/mainIndex1" seamless></iframe>
+                    src="/main/mainIndex1"
+                    data-id="/main/mainIndex1" seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">
-                ${sysFooter }
+            <div class="pull-right" th:text="${sysFooter }">
             </div>
         </div>
     </div>
     <!--右侧部分结束-->
 </div>
-<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
-<script src="${_ctx }/static/plugin/validate/jquery.validate.min.js?v=1.13"></script>
-<script src="${_ctx }/static/plugin/validate/messages_zh.min.js"></script>
-<script src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
-<script src="${_ctx }/static/plugin/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-<script src="${_ctx }/static/plugin/layer/layer.min.js"></script>
-<script src="${_ctx }/static/js/common/common-ui.js"></script>
-<script src="${_ctx }/static/plugin/pace/pace.min.js"></script>
-<script src="${_ctx }/static/plugin/fullscreen/jquery.fullscreen.js"></script>
-<script src="${_ctx }/static/plugin/metisMenu/jquery.metisMenu.js"></script>
-<script src="${_ctx }/static/plugin/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.contextMenu.min.js"></script>
-<script src="${_ctx }/static/plugin/contextMenu-v2.9.2/jquery.ui.position.min.js"></script>
-<script src="${_ctx }/static/js/hplus/hplus.js?v=4.1.0"></script>
-<script src="${_ctx }/static/js/hplus/contabs.js"></script>
-<script src="${_ctx }/static/plugin/vue-2.6.10/vue.min.js"></script>
-<script src="${_ctx }/static/plugin/socket/sockjs.min.js"></script>
-<script src="${_ctx }/static/plugin/socket/stomp.min.js"></script>
-<script src="${_ctx }/static/plugin/toastr/toastr.min.js"></script>
+<script th:inline="javascript"> var _ctx = [[@{/}]];</script>
+<script th:src="@{/plugin/jquery/jquery.min.js}"></script>
+<script th:src="@{/plugin/validate/jquery.validate.min.js?v=1.13}"></script>
+<script th:src="@{/plugin/validate/messages_zh.min.js}"></script>
+<script th:src="@{/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7}"></script>
+<script th:src="@{/plugin/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js}"></script>
+<script th:src="@{/plugin/layer/layer.min.js}"></script>
+<script th:src="@{/js/common/common-ui.js}"></script>
+<script th:src="@{/plugin/pace/pace.min.js}"></script>
+<script th:src="@{/plugin/fullscreen/jquery.fullscreen.js}"></script>
+<script th:src="@{/plugin/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/plugin/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/plugin/contextMenu-v2.9.2/jquery.contextMenu.min.js}"></script>
+<script th:src="@{/plugin/contextMenu-v2.9.2/jquery.ui.position.min.js}"></script>
+<script th:src="@{/js/hplus/hplus.js?v=4.1.0}"></script>
+<script th:src="@{/js/hplus/contabs.js}"></script>
+<script th:src="@{/plugin/vue-2.6.10/vue.min.js}"></script>
+<script th:src="@{/plugin/socket/sockjs.min.js}"></script>
+<script th:src="@{/plugin/socket/stomp.min.js}"></script>
+<script th:src="@{/plugin/toastr/toastr.min.js}"></script>
 <script>
     var isLinkage = true;
 

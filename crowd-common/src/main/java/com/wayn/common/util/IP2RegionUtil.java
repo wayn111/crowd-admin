@@ -4,6 +4,7 @@ import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
 import org.lionsoul.ip2region.Util;
+import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -14,21 +15,22 @@ import java.lang.reflect.Method;
 public class IP2RegionUtil {
     public static String getCityInfo(String ip) {
         //db
-//        String dbPath = IPUtil.class.getResource("ip2region.db").getPath();
-        String dbPath = IP2RegionUtil.class.getClassLoader().getResource("/tmp/ip2region.db").getPath();
-        File file = new File(dbPath);
-
-        if (!file.exists()) {
-            System.out.println("Error: Invalid ip2region.db file");
-        }
-
-        //查询算法
-        int algorithm = DbSearcher.BTREE_ALGORITHM; //B-tree
         //DbSearcher.BINARY_ALGORITHM //Binary
         //DbSearcher.MEMORY_ALGORITYM //Memory
         try {
+
+            String dbPath = IP2RegionUtil.class.getClassLoader().getResource("ip2region.db").getPath();
+            File file = new File(dbPath);
+
+            if (!file.exists()) {
+                System.out.println("Error: Invalid ip2region.db file");
+            }
+
+            //查询算法
+            int algorithm = DbSearcher.BTREE_ALGORITHM; //B-tree
+
             DbConfig config = new DbConfig();
-            DbSearcher searcher = new DbSearcher(config, dbPath);
+            DbSearcher searcher = new DbSearcher(config, file.getAbsolutePath());
 
             //define the method
             Method method = null;

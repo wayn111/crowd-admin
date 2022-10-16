@@ -25,38 +25,27 @@ import java.util.Set;
 
 public class MyRealm extends AuthorizingRealm {
 
-    // @Autowired
+    @Autowired
     private UserService userService;
 
-    // @Autowired
+    @Autowired
     private UserRoleService userRoleService;
 
-    // @Autowired
+    @Autowired
     private RoleMenuService roleMenuService;
 
-    // @Autowired
+    @Autowired
     private LogininforService logininforService;
 
-    // @Autowired
+    @Autowired
     private ConfigService configService;
 
-    // @Autowired
+    @Autowired
     private SessionDAO sessionDAO;
 
     // @Autowired
-    private SimpMessagingTemplate simpMessagingTemplate;
+    // private SimpMessagingTemplate simpMessagingTemplate;
 
-    /**
-     * 密码加密 测试
-     *
-     * @param args 测试
-     */
-    public static void main(String[] args) {
-        // MD5,"原密码","盐",加密次数
-        String pwd = new SimpleHash("MD5", "123456", "admin", 1024).toString();
-        System.out.println(pwd);
-        System.out.println(Boolean.valueOf("true"));
-    }
 
     /**
      * 授权
@@ -118,7 +107,7 @@ public class MyRealm extends AuthorizingRealm {
                         if (session != null) {
                             session.stop();
                             sessionDAO.delete(session);
-                            simpMessagingTemplate.convertAndSendToUser(user.getId(), "/queue/getResponse", "新消息：" + "该账号已在其他机器登陆！");
+                            // simpMessagingTemplate.convertAndSendToUser(user.getId(), "/queue/getResponse", "新消息：" + "该账号已在其他机器登陆！");
                         }
                     }
                 }

@@ -1,7 +1,4 @@
 server:
-  compression:
-    enabled: true
-    min-response-size: 1KB
   port: 8080
   servlet:
     context-path: /crowd
@@ -11,8 +8,8 @@ server:
     # tomcat最大线程数，默认为200
     # Tomcat启动初始化的线程数，默认值25
     threads:
-      max: 300
-      min-spare: 30
+      max: 400
+      min-spare: 50
 
 # spring
 spring:
