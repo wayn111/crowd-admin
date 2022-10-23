@@ -1,5 +1,7 @@
 # crowd-admin
 
+### 当前main分支是springboot2.7、jdk17版本，老版本在spring4分支上
+
 ### Language
 
 - [简体中文](README.md)|[English](README_en.md)
