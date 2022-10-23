@@ -56,6 +56,9 @@ public class ShiroConfig {
     @Value("${shiro.unauthorizedUrl}")
     private String unauthorizedUrl;
 
+    @Resource
+    private RedisSessionDAO redisSessionDAO;
+
     /**
      * 设置Cookie的域名
      */
@@ -218,16 +221,6 @@ public class ShiroConfig {
 
 
     /**
-     * RedisSessionDAO shiro sessionDao层的实现 通过redis
-     * 使用的是shiro-redis开源插件
-     */
-    private RedisSessionDAO redisSessionDAO() {
-        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-        redisSessionDAO.setTimeOut(sessionTimeout);
-        return redisSessionDAO;
-    }
-
-    /**
      * EhCacheSessionDAO shiro sessionDao层的实现 通过ehcache
      * 使用的是shiro-redis开源插件
      */
@@ -240,7 +233,7 @@ public class ShiroConfig {
     @Bean
     public SessionDAO sessionDAO() {
         if (Constants.CACHE_TYPE_REDIS.equals(cacheType)) {
-            return redisSessionDAO();
+            return redisSessionDAO;
         } else {
             return ehCacheSessionDAO();
         }

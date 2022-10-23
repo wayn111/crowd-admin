@@ -1,11 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-    <meta charset="UTF-8">
-    <%@ include file="/common/taglib.jsp" %>
-    <%@ include file="/common/header.jsp" %>
+    <th:block th:include="include :: header('500')"/>
     <title>500</title>
 </head>
 <body class="gray-bg">
@@ -15,7 +12,7 @@
     <div class="error-desc">
         抱歉，请联系管理员哦~
         <br/>您可以返回主页看看 <br/>
-        <a href="${_ctx }" class="btn btn-primary m-t">主页</a>
+        <a th:href="@{/}" class="btn btn-primary m-t">主页</a>
     </div>
 </div>
 

@@ -53,7 +53,7 @@ public class MainController extends BaseController {
     private LogService logService;
 
     @GetMapping
-    public String index(Model model) throws Exception {
+    public String home(Model model) throws Exception {
         List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
         model.addAttribute("treeMenus", treeMenus);
         model.addAttribute("sysName", configService.getValueByKey("sys.name"));
@@ -62,16 +62,11 @@ public class MainController extends BaseController {
         return HOME_PREFIX + "/home";
     }
 
-    @GetMapping("/mainIndex")
-    public String mainIndex(Model model) {
-        model.addAttribute("sysName", configService.getValueByKey("sys.name"));
-        return MAIN_PREFIX + "/main";
-    }
 
     @GetMapping("/mainIndex1")
     public String mainIndex1(Model model) {
         model.addAttribute("sysName", configService.getValueByKey("sys.name"));
-        return MAIN_PREFIX + "/main1";
+        return MAIN_PREFIX + "/main";
     }
 
     @ResponseBody

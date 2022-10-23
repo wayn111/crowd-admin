@@ -1,29 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-    <meta charset="utf-8">
-    <%@ include file="/common/taglib.jsp" %>
-    <%@ include file="/common/header.jsp" %>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>欢迎页</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-          name="viewport">
+    <th:block th:include="include :: header('main')"/>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
-                <%--                <div class="ibox-title">--%>
-                <%--                    <h5>图表</h5>--%>
-                <%--                </div>--%>
                 <div class="ibox-content">
                     <div class="row">
-                        <%--<div class="col-sm-12">
-                            <div id="main3" style="min-width: 280px;min-height:350px;"></div>
-                        </div>--%>
                         <div class="col-sm-6">
                             <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
                             <div id="main1" style="min-width: 280px;min-height:350px;"></div>
@@ -39,23 +26,6 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>项目介绍</h5>
-                    <%--<div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="draggable_panels.html#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="draggable_panels.html#">选项1</a>
-                            </li>
-                            <li><a href="draggable_panels.html#">选项2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>--%>
                 </div>
                 <div class="ibox-content">
                     <blockquote class="text-muted">
@@ -145,8 +115,6 @@
                     <h5>联系信息</h5>
                 </div>
                 <div class="ibox-content">
-                    <%--<p><i class="fa fa-send-o"></i> 官网：<a href="http://www.ruoyi.vip" target="_blank">http://www.ruoyi.vip</a>
-                    </p>--%>
                     <p><i class="fa fa-qq"></i>QQ：
                         <a target="_blank"
                            href="http://wpa.qq.com/msgrd?v=3&uin=1669738430&site=qq&menu=yes"><img
@@ -160,10 +128,6 @@
                     </p>
                     <p><i class="fa fa-cc-paypal"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *waynaqua</a>
                     </p>
-                    <%--<p id="pay-qrcode">
-                        <a href="javascript:;"><img src="${_ctx}/static/img/pay.png" width="100%" alt="请使用手机支付宝或者微信扫码支付">
-                        </a>
-                    </p>--%>
                 </div>
             </div>
         </div>
@@ -171,9 +135,6 @@
             <div class="ibox float-e-margins no-drop">
                 <div class="ibox-title">
                     <h5>更新日志</h5>
-                    <%--<div class="ibox-tools">
-                        <label class="label label-danger">不可拖动</label>
-                    </div>--%>
                 </div>
                 <div class="ibox-content">
                     <div class="panel-body">
@@ -474,12 +435,8 @@
         </div>
     </div>
 </div>
-<%--<%@ include file="/common/footer.jsp" %>--%>
-<a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
-<script src="${_ctx }/static/plugin/jquery/jquery.min.js"></script>
-<script src="${_ctx }/static/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7"></script>
-<script src="${_ctx }/static/plugin/echarts-v5.0.2/echarts.min.js?v=5.0.2"></script>
-<script src="${_ctx }/static/js/common/common-ui.js"></script>
+<th:block th:include="include :: common-js"/>
+<script th:src="@{/plugin/echarts-v5.0.2/echarts.min.js?v=5.0.2}"></script>
 <script>
     $(function () {
         // 回到顶部绑定
@@ -488,7 +445,7 @@
         }
         countryProvinceAccessCount();
         moduleUseStatistic();
-        flowUseStatistic();
+        // flowUseStatistic();
     })
 
     function moduleUseStatistic() {

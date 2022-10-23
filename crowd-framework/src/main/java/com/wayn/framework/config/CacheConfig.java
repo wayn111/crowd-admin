@@ -1,12 +1,14 @@
 package com.wayn.framework.config;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import com.alibaba.fastjson2.support.spring.data.redis.GenericFastJsonRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -15,22 +17,27 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.SerializationException;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.*;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.Objects;
 
 @EnableCaching
 @Configuration
 public class CacheConfig extends CachingConfigurerSupport {
+
+    @Bean
+    public RedisTemplate<String, byte[]> binaryRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, byte[]> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        redisTemplate.setKeySerializer(keySerializer());
+        redisTemplate.setHashKeySerializer(keySerializer());
+        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+        redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
@@ -49,13 +56,7 @@ public class CacheConfig extends CachingConfigurerSupport {
     }
 
     private RedisSerializer<Object> valueSerializer() {
-        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(
-                Object.class);
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-        return new FastJsonRedisSerializer<>(Object.class);
+        return new GenericFastJsonRedisSerializer();
     }
 
     @Primary
@@ -87,42 +88,4 @@ public class CacheConfig extends CachingConfigurerSupport {
             return sb.toString();
         };
     }
-}
-
-/**
- * 使用fastjson序列化
- *
- * @param <T>
- */
-class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
-
-    public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
-
-    private Class<T> clazz;
-
-    public FastJsonRedisSerializer() {
-    }
-
-    public FastJsonRedisSerializer(Class<T> clazz) {
-        super();
-        this.clazz = clazz;
-    }
-
-    @Override
-    public byte[] serialize(T t) throws SerializationException {
-        if (t == null) {
-            return new byte[0];
-        }
-        return JSON.toJSONString(t, SerializerFeature.WriteClassName).getBytes(DEFAULT_CHARSET);
-    }
-
-    @Override
-    public T deserialize(byte[] bytes) throws SerializationException {
-        if (ArrayUtils.isEmpty(bytes)) {
-            return null;
-        }
-        String str = new String(bytes, DEFAULT_CHARSET);
-        return JSON.parseObject(str, clazz);
-    }
-
 }

@@ -1,5 +1,7 @@
 package com.wayn.common.util;
 
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,9 +11,8 @@ import java.io.*;
  * @author bootdo 1992lcg@163.com
  * @version V1.0
  */
+@Slf4j
 public class SerializeUtils {
-
-	private static Logger logger = LoggerFactory.getLogger(SerializeUtils.class);
 
 	/**
 	 * 反序列化
@@ -39,7 +40,7 @@ public class SerializeUtils {
 				throw new Exception("Failed to deserialize", ex);
 			}
 		} catch (Exception e) {
-			logger.error("Failed to deserialize", e);
+			log.error("Failed to deserialize", e);
 		}
 		return result;
 	}
@@ -76,7 +77,7 @@ public class SerializeUtils {
 				throw new Exception("Failed to serialize", ex);
 			}
 		} catch (Exception ex) {
-			logger.error("Failed to serialize", ex);
+			log.error("Failed to serialize", ex);
 		}
 		return result;
 	}

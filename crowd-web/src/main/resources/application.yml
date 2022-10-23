@@ -22,11 +22,6 @@ spring:
     encoding: utf-8
     # 禁用缓存
     cache: false
-  # 服务模块
-  devtools:
-    restart:
-      # 热部署开关
-      enabled: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8 # 中国时区
@@ -72,9 +67,7 @@ shiro:
     maxAge: 30
 
 wayn:
-  cacheType: ehcache
+  cacheType: redis
   uploadDir: /opt/wayn/crowd/upload
   adminId: c79ba431f9f74dfbae585b87b0cde933
   logHandlerTempNum: 3
-  message:
-    brokerType: memory

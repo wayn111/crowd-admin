@@ -2,7 +2,7 @@ package com.wayn.common.service.impl;
 
 import com.wayn.common.domain.User;
 import com.wayn.common.domain.UserOnline;
-import com.wayn.common.enums.OnlineStatus;
+import com.wayn.common.enums.OnlineStatusEnum;
 import com.wayn.common.service.UserOnlineService;
 import com.wayn.common.shiro.session.OnlineSession;
 import com.wayn.common.util.IP2RegionUtil;
@@ -26,7 +26,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
 
     @Override
     public List<UserOnline> list() {
-        //获取当前系统在线用户
+        // 获取当前系统在线用户
         Collection<Session> activeSessions = sessionDAO.getActiveSessions();
         return activeSessions.stream().map(session -> {
             UserOnline userOnline = new UserOnline();
@@ -40,8 +40,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
                 userOnline.setUsername(user.getUserName());
                 userOnline.setOnlineSession(user.toString());
             }*/
-            if (session instanceof OnlineSession) {
-                OnlineSession onlineSession = (OnlineSession) session;
+            if (session instanceof OnlineSession onlineSession) {
                 userOnline.setUserId(onlineSession.getUserId());
                 userOnline.setUsername(onlineSession.getUsername());
                 userOnline.setDeptName(onlineSession.getDeptName());
@@ -63,7 +62,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
 
     @Override
     public List<User> listUser() {
-        //获取当前系统 SimplePrincipalCollection 中保存的在线用户
+        // 获取当前系统 SimplePrincipalCollection 中保存的在线用户
         Collection<Session> activeSessions = sessionDAO.getActiveSessions();
         return activeSessions.stream().map(session -> {
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
@@ -84,7 +83,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
         if (session != null) {
             session.setExpired(true);
             session.setTimeout(0);
-            session.setStatus(OnlineStatus.OFF_LINE);
+            session.setStatus(OnlineStatusEnum.OFF_LINE.getType());
             sessionDAO.update(session);
         }
     }

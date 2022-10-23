@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.wayn.common.base.BusinessEntity;
 
+import java.io.Serial;
 import java.util.StringJoiner;
 
 /**
@@ -19,6 +20,7 @@ import java.util.StringJoiner;
 @TableName("sys_user")
 public class User extends BusinessEntity<User> {
 
+    @Serial
     private static final long serialVersionUID = 8132056072371500401L;
 
     /**
@@ -53,7 +55,7 @@ public class User extends BusinessEntity<User> {
     /**
      * 头像
      */
-    @Excel(name = "头像", type = 2, width = 40, height = 40, imageType = 1,savePath = "/E:/wayn/upload/excel")
+    @Excel(name = "头像", type = 2, width = 40, height = 40, imageType = 1, savePath = "/E:/wayn/upload/excel")
     private String userImg;
 
     /**

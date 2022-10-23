@@ -25,6 +25,8 @@ public class MyPrincipalHandshakeHandler extends DefaultHandshakeHandler {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;*/
 
+
+
     /**
      * 重写determineUser用于填写用户认证信息
      *

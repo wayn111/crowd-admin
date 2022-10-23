@@ -30,7 +30,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -43,7 +43,7 @@
         <commons-compress.version>1.21</commons-compress.version>
         <activemq.version>5.17.0</activemq.version>
         <tika.version>2.5.0</tika.version>
-        <fastjson.version>2.0.14</fastjson.version>
+        <fastjson.version>2.0.15</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <guava.version>31.1-jre</guava.version>
@@ -91,12 +91,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -107,11 +101,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
         </dependency>
 
         <!-- thymeleaf -->

@@ -1,12 +1,24 @@
 package com.wayn.framework.shiro.session;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
+import com.wayn.common.shiro.session.OnlineSession;
+import com.wayn.common.util.JsonUtil;
+import com.wayn.common.util.SerializeUtils;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,49 +26,24 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author bootdo 1992lcg@163.com
- * @version V1.0
+ * redis session
  */
+@Slf4j
+@Component
 public class RedisSessionDAO extends AbstractSessionDAO {
-    private static Logger logger = LoggerFactory.getLogger(RedisSessionDAO.class);
 
-    private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private RedisTemplate<String, byte[]> binaryRedisTemplate;
     /**
      * shiro-redis的session对象前缀
      */
-    private String keyPrefix = "shiro_redis_session:";
+    private String keyPrefix = "crowd:shiro_redis_session:";
 
     /**
      * session获取时间
      */
-    private Integer timeOut;
-
-	public Integer getTimeOut() {
-		return timeOut;
-	}
-
-	public RedisSessionDAO setTimeOut(Integer timeOut) {
-		this.timeOut = timeOut;
-		return this;
-	}
-
-	public RedisTemplate<String, Object> getRedisTemplate() {
-        return redisTemplate;
-    }
-
-    public RedisSessionDAO setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-        return this;
-    }
-
-    public String getKeyPrefix() {
-        return keyPrefix;
-    }
-
-    public RedisSessionDAO setKeyPrefix(String keyPrefix) {
-        this.keyPrefix = keyPrefix;
-        return this;
-    }
+    @Value("${shiro.sessionTimeout}")
+    private Integer timeOut = 1800;
 
     @Override
     protected Serializable doCreate(Session session) {
@@ -72,22 +59,23 @@ public class RedisSessionDAO extends AbstractSessionDAO {
      * @param session
      * @throws UnknownSessionException
      */
-    private void saveSession(Session session) throws UnknownSessionException {
+    @SneakyThrows
+    private void saveSession(Session session) {
         if (session == null || session.getId() == null) {
-            logger.error("session or session id is null");
+            log.error("session or session id is null");
             return;
         }
-        redisTemplate.opsForValue().set(String.valueOf(session.getId()),session,timeOut, TimeUnit.SECONDS);
+        binaryRedisTemplate.opsForValue().set(keyPrefix + session.getId(), SerializeUtils.serialize(session), timeOut, TimeUnit.SECONDS);
     }
 
+    @SneakyThrows
     @Override
     protected Session doReadSession(Serializable sessionId) {
         if (sessionId == null) {
-            logger.error("session id is null");
+            log.error("session id is null");
             return null;
         }
-		redisTemplate.expire(String.valueOf(sessionId), timeOut, TimeUnit.SECONDS);
-        return (Session) redisTemplate.opsForValue().get(sessionId);
+        return (Session) SerializeUtils.deserialize(binaryRedisTemplate.opsForValue().getAndExpire(keyPrefix + sessionId, timeOut, TimeUnit.SECONDS));
     }
 
     @Override
@@ -98,19 +86,23 @@ public class RedisSessionDAO extends AbstractSessionDAO {
     @Override
     public void delete(Session session) {
         if (session == null || session.getId() == null) {
-            logger.error("session or session id is null");
+            log.error("session or session id is null");
             return;
         }
-        redisTemplate.delete(String.valueOf(session.getId()));
+        binaryRedisTemplate.delete(keyPrefix + session.getId());
     }
 
+    @SneakyThrows
     @Override
     public Collection<Session> getActiveSessions() {
         Set<Session> sessions = new HashSet<>();
-        Set<String> keys = redisTemplate.keys(this.keyPrefix + "*");
+        Set<String> keys = binaryRedisTemplate.keys(this.keyPrefix + "*");
         if (keys != null && keys.size() > 0) {
             for (String key : keys) {
-                Session s = (Session) redisTemplate.opsForValue().get(key);
+                Session s = (Session) SerializeUtils.deserialize(binaryRedisTemplate.opsForValue().getAndExpire(key, timeOut, TimeUnit.SECONDS));
+                if (s == null) {
+                    continue;
+                }
                 sessions.add(s);
             }
         }

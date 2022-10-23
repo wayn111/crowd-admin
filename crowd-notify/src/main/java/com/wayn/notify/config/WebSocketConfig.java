@@ -1,7 +1,6 @@
 package com.wayn.notify.config;
 
 import com.wayn.notify.config.handshakehandler.MyPrincipalHandshakeHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -10,13 +9,15 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import org.springframework.web.socket.messaging.StompSubProtocolErrorHandler;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
+import javax.annotation.Resource;
+
 /**
  * websocket启用stomp消息配置
  */
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
-    @Autowired
+    @Resource
     private MyPrincipalHandshakeHandler myPrincipalHandshakeHandler;
 
     @Override
@@ -28,12 +29,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 // 配置握手处理器，websocket的用户认证信息从握手处理器获得
                 .setHandshakeHandler(myPrincipalHandshakeHandler)
                 // 配置websocket跨域
-                .setAllowedOrigins("*")
+                .setAllowedOriginPatterns("*")
                 // 启用sockjs
-                .withSockJS()
-//                .setClientLibraryUrl("https://cdn.jsdelivr.net/npm/sockjs-client@1.3.0/dist/sockjs.min.js")
-                // 设置连接时长
-                .setDisconnectDelay(30 * 1000);
+                .withSockJS();
     }
 
 

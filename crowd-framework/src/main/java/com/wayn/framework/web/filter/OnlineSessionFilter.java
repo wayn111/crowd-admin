@@ -2,7 +2,7 @@ package com.wayn.framework.web.filter;
 
 import com.wayn.common.domain.Dept;
 import com.wayn.common.domain.User;
-import com.wayn.common.enums.OnlineStatus;
+import com.wayn.common.enums.OnlineStatusEnum;
 import com.wayn.common.service.DeptService;
 import com.wayn.common.shiro.session.OnlineSession;
 import com.wayn.common.shiro.util.ShiroUtil;
@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 
 /**
@@ -62,10 +63,9 @@ public class OnlineSessionFilter extends AccessControlFilter {
             return true;
         }
         Session session = sessionDAO.readSession(subject.getSession().getId());
-        if (session instanceof OnlineSession) {
-            OnlineSession onlineSession = (OnlineSession) session;
+        if (session instanceof OnlineSession onlineSession) {
             request.setAttribute(ONLINE_SESSION, onlineSession);
-            //把user id设置进去
+            // 把user id设置进去
             boolean isGuest = StringUtils.isBlank(onlineSession.getUserId());
             if (isGuest) {
                 User user = ShiroUtil.getSessionUser();
@@ -76,7 +76,7 @@ public class OnlineSessionFilter extends AccessControlFilter {
                     onlineSession.setDeptName(dept.getDeptName());
                     sessionDAO.update(onlineSession);
                 }
-                return onlineSession.getStatus() != OnlineStatus.OFF_LINE;
+                return !Objects.equals(onlineSession.getStatus(), OnlineStatusEnum.OFF_LINE.getType());
             }
         }
         return true;

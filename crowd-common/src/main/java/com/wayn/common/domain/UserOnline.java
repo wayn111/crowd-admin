@@ -1,6 +1,6 @@
 package com.wayn.common.domain;
 
-import com.wayn.common.enums.OnlineStatus;
+import com.wayn.common.enums.OnlineStatusEnum;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -38,7 +38,7 @@ public class UserOnline implements Serializable {
     /**
      * 在线状态
      */
-    private OnlineStatus status = OnlineStatus.ON_LINE;
+    private Integer status = OnlineStatusEnum.ON_LINE.getType();
 
     /**
      * session创建时间
@@ -113,11 +113,11 @@ public class UserOnline implements Serializable {
         return this;
     }
 
-    public OnlineStatus getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public UserOnline setStatus(OnlineStatus status) {
+    public UserOnline setStatus(Integer status) {
         this.status = status;
         return this;
     }
