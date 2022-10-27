@@ -1,19 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crowd-admin 用户</title>
-    <meta name="keywords" content="crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目">
-    <meta name="description"
-          content="design by wayn">
-    <%@ include file="/common/taglib.jsp" %>
-    <%@ include file="/common/header.jsp" %>
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html"/>
-    <![endif]-->
+    <th:block th:include="include :: header('用户')"/>
 </head>
 
 <body class="gray-bg">
@@ -62,7 +50,8 @@
                 <input type="text" class="form-control wayn-width-105" id="startTime" name="startTime"
                        placeholder="开始时间"/>
                 <span>-</span>
-                <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime" placeholder="结束时间"/>
+                <input type="text" class="form-control wayn-width-105" id="endTime" name="endTime"
+                       placeholder="结束时间"/>
             </div>
             <a class="btn btn-primary btn-rounded btn-sm"
                onclick="reload()"><i class="fa fa-search"></i>&nbsp;搜索</a> <a
@@ -123,7 +112,7 @@
             <script>
                 s_resetPwd_h = '';
             </script>
-        </shiro:hasPermission>'
+        </shiro:hasPermission>
         <shiro:hasPermission name="sys:user:editAccount">
             <script>
                 s_editAccount_h = '';
@@ -131,8 +120,8 @@
         </shiro:hasPermission>
     </div>
 </div>
-<%@ include file="/common/footer.jsp" %>
-<script>
+<th:block th:include="include :: common-js"/>
+<script th:inline="javascript">
     var prefix = _ctx + "/system/user";
 
     function load(deptId) {
@@ -471,7 +460,7 @@
     });
 
     $(function () {
-        var data = JSON.parse('${states}');
+        var data = JSON.parse('[[${states}]]');
         data.splice(0, 0, {
             id: '',
             text: '全部'

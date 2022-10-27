@@ -3,8 +3,10 @@ package com.wayn.web.controller.home;
 
 import com.wayn.common.base.BaseController;
 import com.wayn.common.constant.Constants;
+import com.wayn.common.domain.Menu;
 import com.wayn.common.service.ConfigService;
 import com.wayn.common.service.LogininforService;
+import com.wayn.common.service.MenuService;
 import com.wayn.common.shiro.util.ShiroUtil;
 import com.wayn.common.util.Response;
 import com.wf.captcha.SpecCaptcha;
@@ -17,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/home")
@@ -38,6 +42,19 @@ public class LoginController extends BaseController {
 
     @Autowired
     private ConfigService configService;
+
+    @Autowired
+    private MenuService menuService;
+
+    @GetMapping
+    public String home(Model model) throws Exception {
+        List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
+        model.addAttribute("treeMenus", treeMenus);
+        model.addAttribute("sysName", configService.getValueByKey("sys.name"));
+        model.addAttribute("sysFooter", configService.getValueByKey("sys.footer.copyright"));
+        model.addAttribute("user", getCurUser());
+        return PREFIX + "/home";
+    }
 
     @GetMapping("/login")
     public String login(ModelMap model) {

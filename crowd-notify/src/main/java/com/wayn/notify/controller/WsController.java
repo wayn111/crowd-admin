@@ -20,6 +20,6 @@ public class WsController {
     @MessageMapping("/message")
     public void message(Response message) {
         log.info(message.toString());
-        simpMessagingTemplate.convertAndSend("/topic/getResponse", Response.success("tip"));
+        simpMessagingTemplate.convertAndSend("/topic/getResponse", Response.success("/topic/getResponse tip"));
     }
 }

@@ -35,10 +35,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/main")
 public class MainController extends BaseController {
 
-    private static final String HOME_PREFIX = "home";
     private static final String MAIN_PREFIX = "main";
-    @Autowired
-    private MenuService menuService;
 
     @Autowired
     private ConfigService configService;
@@ -52,19 +49,9 @@ public class MainController extends BaseController {
     @Autowired
     private LogService logService;
 
+
     @GetMapping
-    public String home(Model model) throws Exception {
-        List<Menu> treeMenus = menuService.selectTreeMenuByUserId(getCurUserId());
-        model.addAttribute("treeMenus", treeMenus);
-        model.addAttribute("sysName", configService.getValueByKey("sys.name"));
-        model.addAttribute("sysFooter", configService.getValueByKey("sys.footer.copyright"));
-        model.addAttribute("user", getCurUser());
-        return HOME_PREFIX + "/home";
-    }
-
-
-    @GetMapping("/mainIndex1")
-    public String mainIndex1(Model model) {
+    public String index(Model model) {
         model.addAttribute("sysName", configService.getValueByKey("sys.name"));
         return MAIN_PREFIX + "/main";
     }
@@ -112,21 +99,21 @@ public class MainController extends BaseController {
         String endTime = now.format(formatter);
         List<CompletableFuture<Void>> list = new ArrayList<>();
         CompletableFuture<Void> completableFuture1 = CompletableFuture.supplyAsync(() ->
-                cdnDataSearchService.topDataSearch(startTime, endTime, MetricEnum.HOST.getLowerName(), FilterEnum.FLUX.getLowerName()))
+                        cdnDataSearchService.topDataSearch(startTime, endTime, MetricEnum.HOST.getLowerName(), FilterEnum.FLUX.getLowerName()))
                 .thenAccept(data -> {
                     ListTopDataResponse response = (ListTopDataResponse) data;
                     Float flow = response.getData()[0].getDetailData()[0].getValue();
                     success.add("totalFlow", Arith.div(flow, 4, 1024, 1024, 1024));
                 });
         CompletableFuture<Void> completableFuture2 = CompletableFuture.supplyAsync(() ->
-                cdnDataSearchService.topDataSearch(startTime, endTime, MetricEnum.HOST.getLowerName(), FilterEnum.FLUXHITRATE.getLowerName()))
+                        cdnDataSearchService.topDataSearch(startTime, endTime, MetricEnum.HOST.getLowerName(), FilterEnum.FLUXHITRATE.getLowerName()))
                 .thenAccept(data -> {
                     ListTopDataResponse response = (ListTopDataResponse) data;
                     Float avgTrafficHitRate = response.getData()[0].getDetailData()[0].getValue();
                     success.add("avgTrafficHitRate", avgTrafficHitRate);
                 });
         CompletableFuture<Void> completableFuture3 = CompletableFuture.supplyAsync(() ->
-                cdnDataSearchService.accessDataSearch(startTime, endTime, "flux"))
+                        cdnDataSearchService.accessDataSearch(startTime, endTime, "flux"))
                 .thenAccept(data -> {
                     DescribeCdnDataResponse response = (DescribeCdnDataResponse) data;
                     TimestampData[] detailData = response.getData()[0].getCdnData()[0].getDetailData();

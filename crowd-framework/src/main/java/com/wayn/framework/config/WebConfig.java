@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "/main/index");
+        registry.addRedirectViewController("/", "/home");
     }
 
     @Override

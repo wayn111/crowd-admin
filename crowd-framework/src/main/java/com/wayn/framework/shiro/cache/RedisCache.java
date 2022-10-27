@@ -1,7 +1,9 @@
 package com.wayn.framework.shiro.cache;
 
+import com.wayn.common.domain.User;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +42,11 @@ public class RedisCache<K, V> implements Cache<K, V> {
             if (key == null) {
                 return null;
             } else {
-                return redisTemplate.opsForValue().get(key);
+                if (key instanceof SimplePrincipalCollection principalCollection) {
+                    User user = (User) principalCollection.getPrimaryPrincipal();
+                    key = (K) user.getId();
+                }
+                return redisTemplate.opsForValue().get(keyPrefix + key);
             }
         } catch (Throwable t) {
             throw new CacheException(t);
@@ -52,7 +58,11 @@ public class RedisCache<K, V> implements Cache<K, V> {
     public V put(K key, V value) throws CacheException {
         logger.debug("根据key从存储 key [" + key + "]");
         try {
-            redisTemplate.opsForValue().set(key, value);
+            if (key instanceof SimplePrincipalCollection principalCollection) {
+                User user = (User) principalCollection.getPrimaryPrincipal();
+                key = (K) user.getId();
+            }
+            redisTemplate.opsForValue().set((K) (keyPrefix + key), value);
             return value;
         } catch (Throwable t) {
             throw new CacheException(t);
@@ -63,8 +73,12 @@ public class RedisCache<K, V> implements Cache<K, V> {
     public V remove(K key) throws CacheException {
         logger.debug("从redis中删除 key [" + key + "]");
         try {
+            if (key instanceof SimplePrincipalCollection principalCollection) {
+                User user = (User) principalCollection.getPrimaryPrincipal();
+                key = (K) user.getId();
+            }
             V previous = get(key);
-            redisTemplate.delete(key);
+            redisTemplate.delete((K) (keyPrefix + key));
             return previous;
         } catch (Throwable t) {
             throw new CacheException(t);

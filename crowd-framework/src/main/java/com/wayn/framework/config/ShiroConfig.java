@@ -1,5 +1,6 @@
 package com.wayn.framework.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.wayn.common.constant.Constants;
 import com.wayn.framework.shiro.cache.RedisCacheManager;
 import com.wayn.framework.shiro.credentials.MyCredentialsMatcher;
@@ -206,7 +207,7 @@ public class ShiroConfig {
      * 使用的是shiro-redis开源插件
      */
     private RedisCacheManager rediscacheManager() {
-        return new RedisCacheManager(redisTemplate, "crowd:shrio-cahche:");
+        return new RedisCacheManager(redisTemplate, "crowd:shiro-cache:");
     }
 
     /**
@@ -267,5 +268,11 @@ public class ShiroConfig {
         listeners.add(new BDSessionListener());
         sessionManager.setSessionListeners(listeners);
         return sessionManager;
+    }
+
+    //用于thymeleaf模板使用shiro标签
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 }

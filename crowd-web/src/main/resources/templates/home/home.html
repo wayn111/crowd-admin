@@ -61,14 +61,14 @@
                                                     <li>
                                                         <a class="J_menuItem"
                                                            th:href="@{${childMenu2.url} }"
-                                                           data-index="${status2.index}">[[${childMenu2.menuName }]]</a>
+                                                           th:data-index="${status2.index}">[[${childMenu2.menuName }]]</a>
                                                     </li>
                                                 </th:block>
                                             </ul>
                                         </th:block>
                                         <th:block th:unless="${childMenu.type == 1}">
                                             <a class="J_menuItem" th:href="@{${childMenu.url }}"
-                                               data-index="[[${status.index}]]">[[${childMenu.menuName }]]</a>
+                                               th:data-index="${status.index}">[[${childMenu.menuName }]]</a>
                                         </th:block>
                                     </li>
                                 </th:block>
@@ -179,7 +179,7 @@
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab"
-                       th:data-id="@{/main/mainIndex1}">首页</a>
+                       th:data-id="@{/home}">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight">
@@ -203,8 +203,8 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    th:src="@{/main/mainIndex1}"
-                    th:data-id="@{/main/mainIndex1}" seamless></iframe>
+                    th:src="@{/main}"
+                    th:data-id="@{/main}" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right" th:text="${sysFooter }">
@@ -265,7 +265,7 @@
 
     $(function () {
         connect();
-        toastr['success']('欢迎来${sysName }！');
+        toastr['success']('欢迎来[[${sysName }]]！');
         // tab栏右键菜单实现
         $.contextMenu({
             selector: ".J_menuTab",
@@ -382,7 +382,7 @@
             // 定义消息头
             var head = {};
             // 测试发送消息
-            stompClient.send('/app/message', head, payload);
+            stompClient.send('/message', head, payload);
         })
     }
 

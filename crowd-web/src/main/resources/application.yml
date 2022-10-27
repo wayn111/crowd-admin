@@ -54,7 +54,7 @@ mybatis-plus:
 
 shiro:
   loginUrl: /home/login
-  successUrl: /
+  successUrl: /home
   unauthorizedUrl: /error/unauth
   retryCount: 5
   algorithmName: MD5
