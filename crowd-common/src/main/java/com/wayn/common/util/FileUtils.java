@@ -1,5 +1,6 @@
 package com.wayn.common.util;
 
+import com.sun.jna.platform.win32.WinUser;
 import com.wayn.common.constant.Constants;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -22,6 +23,26 @@ public class FileUtils {
     public static final String BLOB_EXTENSION = "blob";
 
     private static int counter = 0;
+
+    /**
+     * 输出指定文件的byte数组
+     *
+     * @param is 文件流
+     * @param os          输出流
+     */
+    public static void writeBytes(InputStream is, OutputStream os) throws IOException {
+        try {
+            byte[] b = new byte[1024];
+            int length;
+            while ((length = is.read(b)) > 0) {
+                os.write(b, 0, length);
+            }
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            IOUtils.close(os);
+        }
+    }
 
     /**
      * 输出指定文件的byte数组
@@ -106,8 +127,7 @@ public class FileUtils {
      * @param fileName 文件名
      * @return 编码后的文件名
      */
-    public static String setFileDownloadHeader(HttpServletRequest request, String fileName)
-            throws UnsupportedEncodingException {
+    public static String setFileDownloadHeader(HttpServletRequest request, String fileName) throws UnsupportedEncodingException {
         final String agent = request.getHeader("USER-AGENT");
         String filename = fileName;
         if (agent.contains("MSIE")) {
@@ -142,12 +162,7 @@ public class FileUtils {
     public static void setAttachmentResponseHeader(HttpServletResponse response, String realFileName) throws UnsupportedEncodingException {
         String percentEncodedFileName = percentEncode(realFileName);
 
-        String contentDispositionValue = "attachment; filename=" +
-                percentEncodedFileName +
-                ";" +
-                "filename*=" +
-                "utf-8''" +
-                percentEncodedFileName;
+        String contentDispositionValue = "attachment; filename=" + percentEncodedFileName + ";" + "filename*=" + "utf-8''" + percentEncodedFileName;
 
         response.setHeader("Content-disposition", HttpUtil.safeHttpHeader(contentDispositionValue));
     }

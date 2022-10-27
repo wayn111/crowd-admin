@@ -13,7 +13,7 @@ import com.wayn.common.service.UserService;
 import com.wayn.common.shiro.util.ShiroUtil;
 import com.wayn.common.util.FileUploadUtil;
 import com.wayn.common.util.HttpUtil;
-import com.wayn.common.util.ProperUtil;
+import com.wayn.common.util.ProjectConfig;
 import com.wayn.common.util.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -28,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +42,14 @@ public class ProfileController extends BaseController {
 
     private static final String PREFIX = "profile";
 
-    @Autowired
+    @Resource
     private DeptService deptService;
 
-    @Autowired
+    @Resource
     private UserService userService;
+
+    @Resource
+    private ProjectConfig projectConfig;
 
     @GetMapping
     public String profile(Model model) {
@@ -134,7 +138,7 @@ public class ProfileController extends BaseController {
     @PostMapping("updateAvatar")
     public Response updateAvatar(@RequestParam("avatarfile") MultipartFile file) {
         // 上传文件路径
-        String filePath = ProperUtil.get("wayn.uploadDir") + "/avatar";
+        String filePath = projectConfig.getUploadDir() + "/avatar";
         String fileName = FileUploadUtil.uploadFile(file, filePath);
         // Thumbnails.of(filePath + "/" + fileName).size(64, 64).toFile(new File(filePath, fileName));
         String requestUrl = HttpUtil.getRequestContext(request);

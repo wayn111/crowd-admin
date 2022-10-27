@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<%@ include file="/common/taglib.jsp" %>
-<%@ include file="/common/header.jsp" %>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('菜单数')"/>
+</head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
 
@@ -25,8 +23,8 @@
         </div>
     </div>
 </div>
-<%@ include file="/common/footer.jsp" %>
-<script>
+<th:block th:include="include :: common-js"/>
+<script th:inline="javascript">
     var prefix = _ctx + '/system/dept';
 
     function search() {

@@ -19,7 +19,7 @@ import com.wayn.common.service.UserRoleService;
 import com.wayn.common.service.UserService;
 import com.wayn.common.shiro.util.ShiroUtil;
 import com.wayn.common.util.ParameterUtil;
-import com.wayn.common.util.ProperUtil;
+import com.wayn.common.util.ProjectConfig;
 import com.wayn.common.util.ServletUtil;
 import com.wayn.common.util.TreeBuilderUtil;
 import org.apache.commons.lang3.ArrayUtils;
@@ -58,6 +58,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     private DeptDao deptDao;
     @Resource
     private UserRoleService userRoleService;
+
+    @Resource
+    private ProjectConfig projectConfig;
 
     @Override
     public Page<UserVO> listPage(Page<User> page, User user) {
@@ -118,7 +121,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
             }
         }
         userRoleService.remove(new QueryWrapper<UserRole>().eq("userId", user.getId()));
-        return list.size() <= 0 || userRoleService.saveBatch(list);
+        return list.size() == 0 || userRoleService.saveBatch(list);
     }
 
     @CacheEvict(value = "menuCache", allEntries = true)
@@ -176,9 +179,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         List<Dept> depts = deptDao.selectList(new QueryWrapper<>());
         List<User> users = userDao.selectList(new QueryWrapper<>());
         // 获取部门所有pid
-        List<Long> ds = depts.stream().map(Dept::getPid).distinct().collect(Collectors.toList());
+        List<Long> ds = depts.stream().map(Dept::getPid).distinct().toList();
         // 获取用户所有deptId
-        List<Long> us = users.stream().map(User::getDeptId).distinct().collect(Collectors.toList());
+        List<Long> us = users.stream().map(User::getDeptId).distinct().toList();
         // 合并部门pid和用户deptId
         Long[] objects = ds.toArray(new Long[]{});
         Long[] objects1 = us.toArray(new Long[]{});
@@ -239,7 +242,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
         List<User> list = list(wrapper);
-        list.forEach(item -> item.setUserImg(ProperUtil.get("wayn.uploadDir") + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6)));
+        list.forEach(item -> item.setUserImg(projectConfig.getUploadDir() + item.getUserImg().substring(item.getUserImg().indexOf("upload") + 6)));
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams, User.class, list);
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

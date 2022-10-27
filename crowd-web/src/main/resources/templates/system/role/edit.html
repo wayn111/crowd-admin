@@ -1,43 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<%@ include file="/common/taglib.jsp" %>
-<%@ include file="/common/header.jsp" %>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('修改角色')"/>
+</head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <form class="form-horizontal m-t layui-form" id="role-form">
+                    <form class="form-horizontal m-t" id="role-form">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="wayn-required-span">*</span>角色名：</label>
+                            <label class="col-sm-3 control-label"><span
+                                    class="wayn-required-span">*</span>角色名：</label>
                             <div class="col-sm-8">
+                                <input type="hidden" id="roleId" name="id" th:value="${role1.id }">
                                 <input id="roleName" name="roleName" class="form-control"
-                                       type="text">
+                                       type="text" th:value="${role1.roleName }">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">状态：</label>
                             <div class="col-sm-8">
-                                <input type="hidden" id="roleState" name="roleState" value="1">
-                                <input type="checkbox" name="roleStateSwicth" checked>
+                                <input type="hidden" id="roleState" name="roleState"
+                                       th:value="${role1.roleState }"> <input type="checkbox"
+                                                                              name="roleStateSwicth" checked>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">角色备注：</label>
                             <div class="col-sm-8">
                                 <input id="remarks" name="remarks" class="form-control"
-                                       type="text">
+                                       type="text" th:value="${role1.remarks }">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">菜单权限：</label>
                             <div class="col-sm-8">
                                 <div id="menuTree"></div>
-                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>勾选角色对应权限</span>
+                                <span class="help-block m-b-none"><i
+                                        class="fa fa-info-circle"></i>勾选角色对应权限</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -51,14 +53,17 @@
         </div>
     </div>
 </div>
-<%@ include file="/common/footer.jsp" %>
-<script>
+<th:block th:include="include :: common-js"/>
+<script type="text/javascript"
+        th:src="@{/plugin/jsTree/jstree.js}"></script>
+<script th:inline="javascript">
     var prefix = _ctx + '/system/role';
 
     function getMenuTreeData() {
         $.ajax({
             type: "POST",
-            url: _ctx + '/system/menu/tree',
+            dataType: "json",
+            url: _ctx + '/system/menu/tree/' + $('#roleId').val(),
             success: function (menuTree) {
                 loadMenuTree(menuTree);
             }
@@ -67,6 +72,7 @@
 
     function loadMenuTree(menuTree) {
         $('#menuTree').jstree({
+            "plugins": ["wholerow", "checkbox", "types"],
             'core': {
                 'data': menuTree,
                 'themes': {
@@ -85,10 +91,13 @@
                 }
             },
             "checkbox": {
-                "three_state": true,
-            },
-            "plugins": ["wholerow", "checkbox", "types"]
+                //"keep_selected_style" : false,
+                //"undetermined" : true,
+                //"three_state" : false,
+                //"cascade" : ' up'
+            }
         });
+        $('#menuTree').jstree('open_all');
     }
 
     $("#menuTree").on("loaded.jstree", function (event, data) {
@@ -101,12 +110,9 @@
     function getAllSelected() {
         var ref = $('#menuTree').jstree(true); // 获得整个树
         var arr = ref.get_selected();
-        $("#menuTree").find(".jstree-undetermined")
-            .each(
-                function (i, element) {
-                    arr.push($(element).closest('.jstree-node')
-                        .attr("id"));
-                });
+        $("#menuTree").find(".jstree-undetermined").each(function (i, element) {
+            arr.push($(element).closest('.jstree-node').attr("id"));
+        });
         menuIds = arr.filter(function (item) {
             if (item != -1) {
                 return true;
@@ -139,7 +145,7 @@
 
     function save() {
         var config = {
-            url: prefix + "/addSave",
+            url: prefix + "/editSave",
             data: $('#role-form').serialize() + "&menuIds=" + menuIds,
             type: "POST",
             dataType: "json",
@@ -162,7 +168,8 @@
     }
 
     $(function () {
-        switchInit('roleState');
+        var state = $('#roleState').val() == "1" ? true : false;
+        switchInit('roleState', {state});
         validateRule();
         getMenuTreeData();
     })

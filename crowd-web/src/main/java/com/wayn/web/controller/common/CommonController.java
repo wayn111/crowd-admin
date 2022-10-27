@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.InputStream;
 
 /**
  * 通用请求处理
@@ -25,6 +27,9 @@ import java.io.File;
 public class CommonController {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);
 
+    @Resource
+    private ProjectConfig projectConfig;
+
     /**
      * 通用下载请求
      *
@@ -34,7 +39,7 @@ public class CommonController {
     @GetMapping("/download")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response) {
         try {
-            String uploadDir = ProperUtil.get("wayn.uploadDir");
+            String uploadDir = projectConfig.getUploadDir();
             if (FileUtils.checkAllowDownload(fileName)) {
                 throw new BusinessException("文件名称(" + fileName + ")非法，不允许下载。 ");
             }
@@ -64,10 +69,10 @@ public class CommonController {
             }
 
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
-            String realPath = request.getSession().getServletContext().getRealPath("/") + File.separator + "tmp";
-            String filePath = realPath + File.separatorChar + fileName;
             FileUtils.setAttachmentResponseHeader(response, realFileName);
-            FileUtils.writeBytes(filePath, response.getOutputStream());
+            try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("tmp/" + fileName)) {
+                FileUtils.writeBytes(is, response.getOutputStream());
+            }
         } catch (Exception e) {
             log.error("下载文件失败", e);
         }
@@ -81,7 +86,7 @@ public class CommonController {
     public Response uploadFile(MultipartFile file, HttpServletRequest request) {
         try {
             // 上传文件路径
-            String filePath = ProperUtil.get("wayn.uploadDir");
+            String filePath = projectConfig.getUploadDir();
             String fileName = FileUploadUtil.uploadFile(file, filePath);
             String requestUrl = HttpUtil.getRequestContext(request);
             String url = requestUrl + "/upload/" + fileName;
