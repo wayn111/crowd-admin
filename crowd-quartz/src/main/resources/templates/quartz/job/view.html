@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">执行策略：</label>
                             <div class="col-sm-8">
-                                <th:block th:each="${misfirePolicy : misfirePolicys}">
+                                <th:block th:each="misfirePolicy : ${misfirePolicys}">
                                     <label class="radio-inline i-checks">
                                         <input type="radio" name="misfirePolicy" disabled=""
                                                th:checked="${misfirePolicy.id eq job.misfirePolicy}"

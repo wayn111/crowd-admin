@@ -57,7 +57,7 @@ public class BaseController {
      * </p>
      */
     protected <T> Page<T> getPage() {
-        //设置通用分页
+        // 设置通用分页
         try {
             Integer pageNumber = ServletUtil.getParameterToInt(Constants.PAGE_NUMBER);
             Integer pageSize = ServletUtil.getParameterToInt(Constants.PAGE_SIZE);
@@ -79,14 +79,31 @@ public class BaseController {
         }
     }
 
-
     /**
      * <p>
      * 获取分页对象
      * </p>
      */
-    protected <T> Page<T> getPage(int pageNumber) {
-        return getPage(pageNumber, 15);
+    protected <T> Page<T> getPage(Integer pageSize) {
+        // 设置通用分页
+        try {
+            Integer pageNumber = ServletUtil.getParameterToInt(Constants.PAGE_NUMBER);
+            String sortName = ServletUtil.getParameter(Constants.SORT_NAME);
+            String sortOrder = ServletUtil.getParameter(Constants.SORT_ORDER);
+            Page<T> tPage = new Page<>(pageNumber, pageSize);
+            if (StringUtils.isNotEmpty(sortName)) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.setColumn(sortName);
+                if (Constants.ORDER_DESC.equals(sortOrder)) {
+                    orderItem.setAsc(false);
+                }
+                tPage.addOrder(orderItem);
+            }
+            return tPage;
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return getPage(1, 10);
+        }
     }
 
     /**

@@ -106,9 +106,8 @@ public class ServletUtil {
      */
     public static void setExportResponse(HttpServletRequest request, HttpServletResponse response, String fileName, Integer size) throws UnsupportedEncodingException {
         response.setCharacterEncoding(Constants.UTF_ENCODING);
-        response.setContentType("multipart/form-data");
         response.setHeader("Content-Length", HttpUtil.safeHttpHeader(size + ""));
-        response.setHeader("Content-Disposition", HttpUtil.safeHttpHeader("attachment;fileName=" + FileUtils.setFileDownloadHeader(request, fileName)));
-        response.setContentType("application/octet-stream;charset=UTF-8");
+        response.setHeader("Content-Disposition", HttpUtil.safeHttpHeader("attachment;filename=" + FileUtils.setFileDownloadHeader(request, fileName)));
+        response.setContentType("application/octet-stream");
     }
 }

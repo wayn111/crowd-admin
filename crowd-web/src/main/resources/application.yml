@@ -5,11 +5,13 @@ server:
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8
-    # tomcat最大线程数，默认为200
-    # Tomcat启动初始化的线程数，默认值25
     threads:
+      # tomcat最大线程数，默认为200
       max: 400
+      # Tomcat启动初始化的线程数，默认值25
       min-spare: 50
+  compression:
+    enabled: true
 
 # spring
 spring:

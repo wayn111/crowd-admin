@@ -19,7 +19,7 @@
         select id, jobName, jobGroup, invokeTarget, jobMessage, jobState, exceptionInfo, createTime from sys_job_log
     </sql>
 
-    <select id="selectJobLogList" parameterType="JobLog" resultMap="JobLogResult">
+    <select id="selectJobLogList" resultMap="JobLogResult">
         <include refid="selectJobLogVo"/>
         <where>
             <if test="jobLog.id != null">and id = #{jobLog.id}</if>

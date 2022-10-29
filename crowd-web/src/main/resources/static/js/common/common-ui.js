@@ -3,7 +3,7 @@
  */
 (function ($) {
     'use strict';
-    $.fn.toTop = function(opt) {
+    $.fn.toTop = function (opt) {
         var elem = this;
         var win = $(window);
         var doc = $('html, body');
@@ -28,12 +28,12 @@
                 'bottom': options.bottom,
             });
         }
-        elem.click(function() {
+        elem.click(function () {
             doc.animate({
                 scrollTop: 0
             }, options.speed);
         });
-        win.scroll(function() {
+        win.scroll(function () {
             var scrolling = win.scrollTop();
             if (options.autohide) {
                 if (scrolling > options.offset) {
@@ -337,11 +337,29 @@ function exportData(exportUrl, formId, filename) {
     req.addEventListener("progress", function (evt, a, b) {
         if (evt.lengthComputable) {
             var percentComplete = evt.loaded / evt.total;
+            $("#process").css({'width': percentComplete * 100 + "%"})
+            $("#processText").text(percentComplete * 100 + "%")
             console.log(percentComplete);
+            if (percentComplete >= 1) {
+                setTimeout(() => {
+                    layer.closeAll();
+                }, 2000);
+            }
         }
     }, false);
-    var index = layer.msg('正在下载，请稍后...', {
-        icon: 16, shade: 0.01
+    layer.closeAll();
+    layer.open({
+        type: 1,
+        title: '正在下载，请稍后...',
+        icon: 16,
+        shade: 0.01,
+        time: false,
+        area: ['240px', '75px'],
+        content: `<div class="progress progress-striped active" style="position: relative;top: 15%;width: 95%;display: inline-flex;margin: 0 0 0 5px;">
+                            <div style="width: 0%" id="process" class="progress-bar progress-bar-danger">
+                                <span id="processText" style="color: #18a689">0%</span>
+                            </div>
+                        </div>` //这里content是一个普通的String
     });
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
@@ -361,7 +379,6 @@ function exportData(exportUrl, formId, filename) {
                     var file = new File([req.response], filename, {type: 'application/force-download'});
                     window.open(URL.createObjectURL(file));
                 }
-                layer.close(index);
             } else {
                 layer.close(index);
                 layer.alert('下载失败！');
@@ -382,7 +399,7 @@ function exportData(exportUrl, formId, filename) {
  * @param index
  * @returns {string}
  */
-function toolTip (value, row, index) {
+function toolTip(value, row, index) {
     var nameString;
     if (value.length > 9) {
         nameString = value.substring(0, 9) + '...';

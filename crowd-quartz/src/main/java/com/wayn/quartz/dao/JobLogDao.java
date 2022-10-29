@@ -3,6 +3,7 @@ package com.wayn.quartz.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wayn.quartz.domain.JobLog;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,7 +21,5 @@ public interface JobLogDao extends BaseMapper<JobLog> {
      * @return 定时任务调度日志信息
      */
     List<JobLog> selectJobLogList(Page<JobLog> page, JobLog jobLog);
-
-    List<JobLog> selectJobLogList(JobLog jobLog);
 
 }

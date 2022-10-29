@@ -25,14 +25,6 @@ public interface NotifyRecordDao extends BaseMapper<NotifyRecord> {
     List<NotifyRecordVO> selectNotifyRecordList(Page<NotifyRecordVO> page, NotifyRecordVO notifyRecord);
 
     /**
-     * 查询通知记录信息，不分页
-     *
-     * @param notifyRecord
-     * @return 通知记录信息
-     */
-    List<NotifyRecordVO> selectNotifyRecordList(NotifyRecordVO notifyRecord);
-
-    /**
      * 根据通知记录id，查看通知对象
      *
      * @param id
