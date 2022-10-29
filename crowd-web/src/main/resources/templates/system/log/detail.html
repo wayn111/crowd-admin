@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('')"/>
+    <link th:href="@{/plugin/json-veiw/jquery.jsonview.css}">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <form class="form-horizontal m-t" id="user-form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">操作用户：</label>
+            <div class="form-control-static">
+                <strong>[[${log.userName}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">模块名称：</label>
+            <div class="form-control-static">
+                <strong>[[${log.moduleName}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">请求状态：</label>
+            <div class="form-control-static">
+                <span class="badge" th:classappend="${log.operState == 1 ? 'badge-primary': 'badge-danger' }">[[${log.operState == 1 ? '成功': '失败' }]]</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">操作类型：</label>
+            <div class="form-control-static">
+                <strong>[[${log.operation}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">请求方法：</label>
+            <div class="form-control-static">
+                <strong>[[${log.method}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">请求类型：</label>
+            <div class="form-control-static">
+                <strong>[[${log.requestMethod}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">执行时间：</label>
+            <div class="form-control-static">
+                <strong>[[${log.executeTime}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">请求url：</label>
+            <div class="form-control-static">
+                <strong>[[${log.url}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">请求ip：</label>
+            <div class="form-control-static">
+                <strong>[[${log.ip}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">浏览器信息：</label>
+            <div class="form-control-static">
+                <strong>[[${log.agent}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">错误信息：</label>
+            <div class="form-control-static">
+                <strong>[[${log.errorMsg}]]</strong>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">参数信息：</label>
+            <div class="form-control-static">
+                <pre id="paramJsonView"></pre>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">请求响应：</label>
+            <div class="form-control-static">
+                <pre id="responseJsonView"></pre>
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:include="include :: common-js"/>
+<script th:src="@{/plugin/json-veiw/jquery.jsonview.js"></script>
+<script th:inline="javascript">
+    $(function () {
+        $('#paramJsonView').JSONView('[[${log.requestParams}]]');
+        $('#responseJsonView').JSONView('[[${log.requestResponse}]]');
+    })
+</script>
+</body>
+</html>

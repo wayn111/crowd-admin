@@ -9,6 +9,7 @@
             window.top.location = window.location;
         }
     </script>
+    <script th:inline="javascript"> var _ctx = [[@{/}]];</script>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg"
@@ -27,7 +28,7 @@
                         <div id="user-avatar" class="pull-left" style="margin-top: 6px">
                             <img alt="avatar" class="img-circle" th:src="${user.userImg}"
                                  style="cursor:pointer;height: 64px"
-                                 th:onclick="javascript:menuItemCreate('@{/profile}','个人资料')"/>
+                                 onclick="menuItemCreate(_ctx + 'profile', '个人资料')" />
                         </div>
                         <div id="user-state" class="pull-left" style="margin: 15px 0 0 15px">
                             <p style="color: white">
@@ -179,7 +180,7 @@
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab"
-                       th:data-id="@{/home}">首页</a>
+                       th:data-id="@{/main}">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight">
@@ -213,7 +214,6 @@
     </div>
     <!--右侧部分结束-->
 </div>
-<script th:inline="javascript"> var _ctx = [[@{/}]];</script>
 <script th:src="@{/plugin/jquery/jquery.min.js}"></script>
 <script th:src="@{/plugin/validate/jquery.validate.min.js?v=1.13}"></script>
 <script th:src="@{/plugin/validate/messages_zh.min.js}"></script>

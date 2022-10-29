@@ -50,7 +50,7 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
 
     @Override
     public boolean exists(Dict dict) {
-        //如果是修改字典数据，数据值未改变则通过校验
+        // 如果是修改字典数据，数据值未改变则通过校验
         if (dict.getId() != null) {
             String value = dict.getValue();
             if (getById(dict.getId()).getValue().equals(value)) {
@@ -161,8 +161,9 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     public List<JSONObject> convert2select(List<Dict> dicts, String value) {
         return dicts.stream().map(data -> {
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("selected", false);
             if (data.getValue().equals(value)) {
-                jsonObject.put("seleted", true);
+                jsonObject.put("selected", true);
             }
             jsonObject.put("id", data.getValue());
             jsonObject.put("text", data.getName());

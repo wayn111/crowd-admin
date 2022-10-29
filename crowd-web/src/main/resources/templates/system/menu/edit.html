@@ -27,8 +27,8 @@
                             <div class="col-sm-8">
                                 <th:block th:each="dict : ${menuTypes}">
                                     <label class="radio-inline i-checks">
-                                        <input type="radio" name="type" th:value="${dict.id}" th:if="${menu.type == dict.id}" checked/>
-                                        <input type="radio" name="type" th:value="${dict.id}" th:unless="${menu.type == dict.id}"/>[[${dict.text}]]
+                                        <input type="radio" name="type" th:value="${dict.id}" th:checked="${#strings.toString(menu.type) == dict.id}" />
+                                        [[${dict.text}]]
                                     </label>
                                 </th:block>
                             </div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('')"/>
+    <link th:href="@{/plugin/bootstrap-v3.3.7/css/bootstrap.min.css?v=3.3.7}"
+          rel="stylesheet">
+    <link th:href="@{/css/font-awesome.css?v=4.7.0}" rel="stylesheet">
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.min.css?v=4.0}" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                        <button class="btn btn-white btn-xs" type="button">[[${notifyRecordVO.type == 1?'公告':'通知'}]]
+                        </button>
+                    </div>
+                    <div class="text-center article-title">
+                        <span class="text-muted"><i class="fa fa-clock-o"></i>
+                            [[${notifyRecordVO.createTime}]]
+                        </span>
+                        <h1>
+                            [[${notifyRecordVO.title}]]
+                        </h1>
+                    </div>
+                    <div th:utext="${notifyRecordVO.content}"></div>
+                    <div class="pull-right" style="font-size: 14px;">
+                        [[${notifyRecordVO.createBy}]]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script th:src="@{/plugin/jquery/jquery.min.js}"></script>
+<script th:src="@{/plugin/bootstrap-v3.3.7/js/bootstrap.min.js?v=3.3.7}"></script>
+</body>
+<!-- Mirrored from www.zi-han.net/theme/hplus/article.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
+</html>

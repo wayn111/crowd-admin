@@ -41,7 +41,7 @@ public class ElfinderController {
     public static final String OPEN_STREAM = "openStream";
     public static final String GET_PARAMETER = "getParameter";
     private static final Logger logger = LoggerFactory.getLogger(ElfinderController.class);
-    private static String PREFIX = "static/elfinder";
+    private static final String PREFIX = "/elfinder";
     @Resource(name = "commandFactory")
     private ElfinderCommandFactory elfinderCommandFactory;
 
