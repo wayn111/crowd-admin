@@ -12,6 +12,8 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 
 ### 主要特性
 
+- 前后端支持stomp高级协议
+- 支持系统参数配置
 - 项目按功能模块化拆分，自定义全局统一异常输出，代码清晰合理
 - 集成elfinder模块，包含完整的文件管理操作，包含文件上传、删除、压缩、移动、预览等诸多操作
 - 支持后台消息/邮件推送、数据字典、系统参数配置、各模块操作日记记录
@@ -61,7 +63,7 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
     - 缓存控制：Ehcache/Redis可切换
     - 环境控制：使用spring profile可根据`-Dspring.profiles.active=dev`参数灵活切换配置文件
 2. 前端
-    - 模板选型：Jsp
+    - 模板选型：thymeleaf
     - 管理模板：H+
     - JS框架：jQuery
     - 数据表格：bootstrapTable
@@ -72,7 +74,7 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
     - 树结构控件：jsTree
     - checkbox选择控件：bootstrapSwitch
 3. 开发平台
-    - JDK版本：1.8+
+    - JDK版本：17+
     - Maven：3.5+
     - 数据库：mysql8+
     - 缓存：ehcache/redis
