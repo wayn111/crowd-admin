@@ -2,6 +2,7 @@ package com.wayn.framework.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.wayn.common.constant.Constants;
+import com.wayn.common.util.SpringContextUtil;
 import com.wayn.framework.shiro.cache.RedisCacheManager;
 import com.wayn.framework.shiro.credentials.MyCredentialsMatcher;
 import com.wayn.framework.shiro.realm.MyRealm;
@@ -13,21 +14,17 @@ import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
-import org.apache.shiro.session.mgt.SessionFactory;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
-import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
@@ -57,9 +54,6 @@ public class ShiroConfig {
     @Value("${shiro.unauthorizedUrl}")
     private String unauthorizedUrl;
 
-    @Resource
-    private RedisSessionDAO redisSessionDAO;
-
     /**
      * 设置Cookie的域名
      */
@@ -84,19 +78,16 @@ public class ShiroConfig {
     @Value("${shiro.cookie.maxAge}")
     private int maxAge;
 
+    @Lazy
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+    @Lazy
+    @Resource
+    private RedisTemplate<String, byte[]> binaryRedisTemplate;
 
-    @Autowired
-    private CacheManager ehCacheManager;
-
-    @Bean
-    public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
-    }
 
     @Bean
-    ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl(loginUrl);
@@ -122,8 +113,7 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
-    @Bean
-    public Filter onlineSessionFilter() {
+    private Filter onlineSessionFilter() {
         OnlineSessionFilter onlineSessionFilter = new OnlineSessionFilter();
         onlineSessionFilter.setForceLogoutUrl(loginUrl);
         onlineSessionFilter.setSessionDAO(sessionDAO());
@@ -169,12 +159,11 @@ public class ShiroConfig {
         return cookieRememberMeManager;
     }
 
-    @Bean
+    // @Bean
     public MyRealm userRealm() {
         MyRealm userRealm = new MyRealm();
         // 定义自己的的密码验证服务
         MyCredentialsMatcher credentialsMatcher = new MyCredentialsMatcher();
-        credentialsMatcher.setPasswordRetryCache(ehCacheManager.getCache("passwordRetryCache"));
         credentialsMatcher.setRetryCount(retryCount);
         credentialsMatcher.setHashAlgorithmName(algorithmName);
         credentialsMatcher.setHashIterations(iterations);
@@ -185,16 +174,6 @@ public class ShiroConfig {
     /**
      * 启动shiro注解
      */
-    @Bean
-    @DependsOn("lifecycleBeanPostProcessor")
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        // 强制使用cglib，防止重复代理和可能引起代理出错的问题
-        // https://zhuanlan.zhihu.com/p/29161098
-        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
-        return defaultAdvisorAutoProxyCreator;
-    }
-
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
@@ -221,27 +200,29 @@ public class ShiroConfig {
     }
 
 
-    /**
-     * EhCacheSessionDAO shiro sessionDao层的实现 通过ehcache
-     * 使用的是shiro-redis开源插件
-     */
+    private RedisSessionDAO redisSessionDAO() {
+        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+        redisSessionDAO.setTimeOut(sessionTimeout);
+        redisSessionDAO.setKeyPrefix("crowd:shiro_redis_session:");
+        redisSessionDAO.setBinaryRedisTemplate(binaryRedisTemplate);
+        return redisSessionDAO;
+    }
+
     private EhCacheSessionDAO ehCacheSessionDAO() {
         EhCacheSessionDAO ehCacheSessionDAO = new EhCacheSessionDAO();
-        ehCacheSessionDAO.setOnlineUser(ehCacheManager.getCache("onlineUser"));
+        CacheManager cacheManager = SpringContextUtil.getBean(CacheManager.class);
+        ehCacheSessionDAO.setOnlineUser(cacheManager.getCache("onlineUser"));
         return ehCacheSessionDAO;
     }
 
     @Bean
     public SessionDAO sessionDAO() {
         if (Constants.CACHE_TYPE_REDIS.equals(cacheType)) {
-            return redisSessionDAO;
+            return redisSessionDAO();
         } else {
             return ehCacheSessionDAO();
         }
-    }
 
-    public SessionFactory sessionFactory() {
-        return new OnlineSessionFactory();
     }
 
     /**
@@ -262,7 +243,7 @@ public class ShiroConfig {
         sessionManager.setGlobalSessionTimeout(sessionTimeout * 1000);
         // 设置sessionDao实现
         sessionManager.setSessionDAO(sessionDAO());
-        sessionManager.setSessionFactory(sessionFactory());
+        sessionManager.setSessionFactory(new OnlineSessionFactory());
         // 设置session监听
         Collection<SessionListener> listeners = new ArrayList<>();
         listeners.add(new BDSessionListener());
@@ -270,7 +251,7 @@ public class ShiroConfig {
         return sessionManager;
     }
 
-    //用于thymeleaf模板使用shiro标签
+    // 用于thymeleaf模板使用shiro标签
     @Bean
     public ShiroDialect shiroDialect() {
         return new ShiroDialect();

@@ -23,7 +23,7 @@ public class JsoupUtil {
      * strike,strong,sub,sup,u,ul,img
      * 以及a标签的href,img标签的src,align,alt,height,width,title属性
      */
-    private static final Safelist whitelist =  Safelist.basicWithImages();
+    private static final Safelist whitelist = Safelist.basicWithImages();
     /**
      * 配置过滤化参数,不对代码进行格式化
      */
@@ -41,13 +41,18 @@ public class JsoupUtil {
     }
 
     public static void main(String[] args) throws IOException {
-        String text = "<p><br></p><table class=\"table table-bordered" +
-                "\"><tbody><tr><td>11</td><td>2</td><td>3</td></tr></tbody></table><p>123</p><table class=\"table table-bordered" +
-                "\"><tbody><tr><td>123</td></tr></tbody></table><p><br></p>";
+        String text = """
+                <p><br></p>
+                <table class="table table-bordered"
+                    <tbody><tr><td>11</td><td>2</td><td>3</td></tr></tbody></table><p>123</p><table class="table table-bordered">
+                    <tbody><tr><td>123</td></tr></tbody>
+                </table>
+                <p><br></p>
+                """;
         System.out.println(clean(text));
 
         System.out.println("------------------------");
-        System.out.println(Jsoup.clean(text,  Safelist.relaxed()).trim());
+        System.out.println(Jsoup.clean(text, Safelist.relaxed()).trim());
 
     }
 

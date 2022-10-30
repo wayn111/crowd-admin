@@ -129,9 +129,9 @@
                         title: '状态',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            if (value == 'ON_LINE') {
+                            if (value == 1) {
                                 return '<span class="label label-success">在线</span>';
-                            } else if (value == 'OFF_LINE') {
+                            } else if (value == 2) {
                                 return '<span class="label label-info">离线</span>';
                             }
                         }

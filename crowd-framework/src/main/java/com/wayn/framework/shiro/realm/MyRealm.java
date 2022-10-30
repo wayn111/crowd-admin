@@ -5,11 +5,11 @@ import com.wayn.common.constant.Constants;
 import com.wayn.common.domain.User;
 import com.wayn.common.enums.StateEnum;
 import com.wayn.common.service.*;
+import com.wayn.common.util.SpringContextUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -17,7 +17,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.Collection;
@@ -25,33 +24,13 @@ import java.util.Set;
 
 public class MyRealm extends AuthorizingRealm {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserRoleService userRoleService;
-
-    @Autowired
-    private RoleMenuService roleMenuService;
-
-    @Autowired
-    private LogininforService logininforService;
-
-    @Autowired
-    private ConfigService configService;
-
-    @Autowired
-    private SessionDAO sessionDAO;
-
-    // @Autowired
-    // private SimpMessagingTemplate simpMessagingTemplate;
-
-
     /**
      * 授权
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        UserRoleService userRoleService = SpringContextUtil.getBean(UserRoleService.class);
+        RoleMenuService roleMenuService = SpringContextUtil.getBean(RoleMenuService.class);
         User sysUser = (User) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<String> roles = userRoleService.findRolesByUid(sysUser.getId());
@@ -66,6 +45,11 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        UserService userService = SpringContextUtil.getBean(UserService.class);
+        LogininforService logininforService = SpringContextUtil.getBean(LogininforService.class);
+        ConfigService configService = SpringContextUtil.getBean(ConfigService.class);
+        SessionDAO sessionDAO = SpringContextUtil.getBean(SessionDAO.class);
+
         UsernamePasswordToken token2 = (UsernamePasswordToken) token;
         String username = token2.getUsername();
         // String password = ShiroUtil.md5encrypt(new String(token2.getPassword()), username);
@@ -78,10 +62,6 @@ public class MyRealm extends AuthorizingRealm {
             logininforService.addLog(username, Constants.LOGIN_FAIL, "用户已被禁用");
             throw new UnknownAccountException("用户已被禁用");
         }
-        // 此处不再需要做密码验证，由CredentialsMatch的实现做密码校验
-        /*if (!sysUser.getPassword().equals(password)) {
-            throw new IncorrectCredentialsException("账号或密码不正确");
-        }*/
         if (sysUser.getUserState().equals(StateEnum.DISABLE.getState())) {
             logininforService.addLog(username, Constants.LOGIN_FAIL, "该用户已被锁定，请稍后再试");
             throw new LockedAccountException("该用户已被锁定，请稍后再试");
@@ -107,7 +87,7 @@ public class MyRealm extends AuthorizingRealm {
                         if (session != null) {
                             session.stop();
                             sessionDAO.delete(session);
-                            // simpMessagingTemplate.convertAndSendToUser(user.getId(), "/queue/getResponse", "新消息：" + "该账号已在其他机器登陆！");
+                            SpringContextUtil.getBean(SimpMessagingTemplate.class).convertAndSendToUser(user.getId(), "/queue/getResponse", "新消息：该账号已在其他机器登陆！");
                         }
                     }
                 }

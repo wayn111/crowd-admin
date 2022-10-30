@@ -1,11 +1,13 @@
 package com.wayn.notify.config.handshakehandler;
 
 import com.wayn.common.domain.User;
+import com.wayn.common.util.SpringContextUtil;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
@@ -21,11 +23,6 @@ import java.util.Objects;
 public class MyPrincipalHandshakeHandler extends DefaultHandshakeHandler {
     private static final Logger log = LoggerFactory.getLogger(MyPrincipalHandshakeHandler.class);
 
-   /* @Lazy
-    @Autowired
-    private SimpMessagingTemplate simpMessagingTemplate;*/
-
-
 
     /**
      * 重写determineUser用于填写用户认证信息
@@ -40,7 +37,7 @@ public class MyPrincipalHandshakeHandler extends DefaultHandshakeHandler {
         Object object = attributes.get(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
         if (Objects.isNull(object)) {
             log.error("未登录系统，禁止登录websocket!");
-//            simpMessagingTemplate.convertAndSend("/topic/judgeUserAuth", "您的登陆信息以过期，请重新登录!");
+            SpringContextUtil.getBean(SimpMessagingTemplate.class).convertAndSend("/topic/judgeUserAuth", "您的登陆信息以过期，请重新登录!");
             return null;
         }
         SimplePrincipalCollection simplePrincipalCollection = (SimplePrincipalCollection) object;

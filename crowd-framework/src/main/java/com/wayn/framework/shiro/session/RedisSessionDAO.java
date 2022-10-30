@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.wayn.common.shiro.session.OnlineSession;
 import com.wayn.common.util.JsonUtil;
 import com.wayn.common.util.SerializeUtils;
+import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -29,21 +30,19 @@ import java.util.concurrent.TimeUnit;
  * redis session
  */
 @Slf4j
-@Component
+@Data
 public class RedisSessionDAO extends AbstractSessionDAO {
 
-    @Resource
     private RedisTemplate<String, byte[]> binaryRedisTemplate;
     /**
      * shiro-redis的session对象前缀
      */
-    private String keyPrefix = "crowd:shiro_redis_session:";
+    private String keyPrefix;
 
     /**
      * session获取时间
      */
-    @Value("${shiro.sessionTimeout}")
-    private Integer timeOut = 1800;
+    private Integer timeOut;
 
     @Override
     protected Serializable doCreate(Session session) {

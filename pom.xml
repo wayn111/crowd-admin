@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.4</version>
+        <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wayn</groupId>
@@ -35,32 +35,32 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <junit.version>4.13.2</junit.version>
-        <jedis.version>4.2.3</jedis.version>
+        <jedis.version>4.3.1</jedis.version>
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
-        <druid.version>1.2.12</druid.version>
+        <druid.version>1.2.14</druid.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-compress.version>1.21</commons-compress.version>
         <activemq.version>5.17.0</activemq.version>
         <tika.version>2.5.0</tika.version>
-        <fastjson.version>2.0.15</fastjson.version>
+        <fastjson.version>2.0.16</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <guava.version>31.1-jre</guava.version>
-        <shiro.version>1.9.1</shiro.version>
+        <shiro.version>1.10.0</shiro.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <jstl.version>1.2</jstl.version>
         <bitwalker.version>1.21</bitwalker.version>
-        <jsoup.version>1.14.3</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <velocity.version>2.3</velocity.version>
-        <oshi.version>6.2.2</oshi.version>
+        <oshi.version>6.3.0</oshi.version>
         <thumbnailator.version>0.4.13</thumbnailator.version>
         <quartz.version>2.3.2</quartz.version>
         <java-image-scaling.version>0.8.6</java-image-scaling.version>
-        <joda-time.version>2.10.13</joda-time.version>
+        <joda-time.version>2.12.0</joda-time.version>
         <ip2region.version>1.7.2</ip2region.version>
         <reactor-net.version>2.0.8.RELEASE</reactor-net.version>
-        <netty-all.version>4.1.72.Final</netty-all.version>
+        <netty-all.version>4.1.84.Final</netty-all.version>
         <easypoi.version>4.4.0</easypoi.version>
         <mail.version>1.4.7</mail.version>
     </properties>

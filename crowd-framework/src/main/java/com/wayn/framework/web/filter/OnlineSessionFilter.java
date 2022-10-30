@@ -6,6 +6,8 @@ import com.wayn.common.enums.OnlineStatusEnum;
 import com.wayn.common.service.DeptService;
 import com.wayn.common.shiro.session.OnlineSession;
 import com.wayn.common.shiro.util.ShiroUtil;
+import com.wayn.common.util.SpringContextUtil;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -23,12 +25,10 @@ import java.util.Objects;
 /**
  * 定义自己的shiro过滤器
  */
+@Data
 public class OnlineSessionFilter extends AccessControlFilter {
 
     private static final String ONLINE_SESSION = "online_session";
-
-    @Autowired
-    private DeptService deptService;
 
 
     /**
@@ -37,24 +37,6 @@ public class OnlineSessionFilter extends AccessControlFilter {
     private String forceLogoutUrl;
 
     private SessionDAO sessionDAO;
-
-    public String getForceLogoutUrl() {
-        return forceLogoutUrl;
-    }
-
-    public OnlineSessionFilter setForceLogoutUrl(String forceLogoutUrl) {
-        this.forceLogoutUrl = forceLogoutUrl;
-        return this;
-    }
-
-    public SessionDAO getSessionDAO() {
-        return sessionDAO;
-    }
-
-    public OnlineSessionFilter setSessionDAO(SessionDAO sessionDAO) {
-        this.sessionDAO = sessionDAO;
-        return this;
-    }
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
@@ -72,7 +54,7 @@ public class OnlineSessionFilter extends AccessControlFilter {
                 if (user != null) {
                     onlineSession.setUserId(user.getId());
                     onlineSession.setUsername(user.getUserName());
-                    Dept dept = deptService.getById(user.getDeptId());
+                    Dept dept = SpringContextUtil.getBean(DeptService.class).getById(user.getDeptId());
                     onlineSession.setDeptName(dept.getDeptName());
                     sessionDAO.update(onlineSession);
                 }

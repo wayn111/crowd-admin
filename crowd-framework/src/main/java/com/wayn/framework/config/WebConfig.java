@@ -25,7 +25,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowCredentials(true);
-
     }
 
     @Bean

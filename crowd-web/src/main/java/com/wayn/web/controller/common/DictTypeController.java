@@ -73,7 +73,7 @@ public class DictTypeController extends BaseController {
     @ResponseBody
     @PostMapping("/editSave")
     public Response editSave(ModelMap modelMap, Dict dict) {
-        dictService.update(dict);
+        dictService.updateById(dict);
         return Response.success("修改字典分类成功");
     }
 

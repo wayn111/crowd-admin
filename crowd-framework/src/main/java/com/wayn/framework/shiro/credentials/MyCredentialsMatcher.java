@@ -1,7 +1,10 @@
 package com.wayn.framework.shiro.credentials;
 
 import com.wayn.common.util.DateUtils;
+import com.wayn.common.util.SpringContextUtil;
+import lombok.Data;
 import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,30 +17,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 自定义密码验证服务
  */
+@Data
 public class MyCredentialsMatcher extends HashedCredentialsMatcher {
 
-
-    private Cache passwordRetryCache;
-
     private Integer retryCount;
-
-    public Integer getRetryCount() {
-        return retryCount;
-    }
-
-    public MyCredentialsMatcher setRetryCount(Integer retryCount) {
-        this.retryCount = retryCount;
-        return this;
-    }
-
-    public Cache getPasswordRetryCache() {
-        return passwordRetryCache;
-    }
-
-    public MyCredentialsMatcher setPasswordRetryCache(Cache passwordRetryCache) {
-        this.passwordRetryCache = passwordRetryCache;
-        return this;
-    }
 
     /**
      * 检查密码重试次数，防止暴力破解
@@ -48,6 +31,9 @@ public class MyCredentialsMatcher extends HashedCredentialsMatcher {
      */
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
+        CacheManager cacheManager = SpringContextUtil.getBean(CacheManager.class);
+        Cache passwordRetryCache = cacheManager.getCache("passwordRetryCache");
+
         String userName = (String) token.getPrincipal();
         //retry count + 1
         Element element = passwordRetryCache.get(userName);
