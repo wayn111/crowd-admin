@@ -28,7 +28,7 @@
                         <div id="user-avatar" class="pull-left" style="margin-top: 6px">
                             <img alt="avatar" class="img-circle" th:src="${user.userImg}"
                                  style="cursor:pointer;height: 64px"
-                                 onclick="menuItemCreate(_ctx + 'profile', '个人资料')" />
+                                 onclick="menuItemCreate(_ctx + 'profile', '个人资料')"/>
                         </div>
                         <div id="user-state" class="pull-left" style="margin: 15px 0 0 15px">
                             <p style="color: white">
@@ -62,7 +62,8 @@
                                                     <li>
                                                         <a class="J_menuItem"
                                                            th:href="@{${childMenu2.url} }"
-                                                           th:data-index="${status2.index}">[[${childMenu2.menuName }]]</a>
+                                                           th:data-index="${status2.index}">[[${childMenu2.menuName
+                                                            }]]</a>
                                                     </li>
                                                 </th:block>
                                             </ul>
@@ -378,7 +379,7 @@
                 });
             });
             // 定义消息载体
-            var payload = JSON.stringify({'code': 100, 'msg': 'tip'});
+            var payload = JSON.stringify({'code': 100, 'msg': 'tip', 'map': {'userId': '[[${user.id}]]'}});
             // 定义消息头
             var head = {};
             // 测试发送消息

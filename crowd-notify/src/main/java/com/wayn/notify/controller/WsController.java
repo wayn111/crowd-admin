@@ -20,6 +20,6 @@ public class WsController extends BaseController {
     @MessageMapping("/message")
     public void message(Response message) {
         log.info(message.toString());
-        simpMessagingTemplate.convertAndSendToUser(getCurUserId(), "/topic/getResponse", "这是一个全局通知！");
+        simpMessagingTemplate.convertAndSendToUser(message.getMap().get("userId").toString(), "/queue/getResponse", "测试个人通知！");
     }
 }

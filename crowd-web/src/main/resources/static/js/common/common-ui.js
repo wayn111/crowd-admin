@@ -356,8 +356,8 @@ function exportData(exportUrl, formId, filename) {
         time: false,
         area: ['240px', '75px'],
         content: `<div class="progress progress-striped active" style="position: relative;top: 15%;width: 95%;display: inline-flex;margin: 0 0 0 5px;">
-                            <div style="width: 0%" id="process" class="progress-bar progress-bar-danger">
-                                <span id="processText" style="color: #18a689">0%</span>
+                            <div style="width: 0%" id="process" class="progress-bar progress-bar-success">
+                                <span id="processText" style="color: #262c2a">0%</span>
                             </div>
                         </div>` //这里content是一个普通的String
     });
