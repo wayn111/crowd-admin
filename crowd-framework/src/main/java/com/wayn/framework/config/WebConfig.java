@@ -1,22 +1,30 @@
 package com.wayn.framework.config;
 
+import com.wayn.common.util.ProjectConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
+
+import javax.annotation.Resource;
 
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    @Resource
+    private ProjectConfig projectConfig;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/", "/home");
     }
 
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:" + projectConfig.getUploadDir() + "/");
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

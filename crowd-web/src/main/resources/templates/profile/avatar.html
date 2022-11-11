@@ -24,7 +24,7 @@
 <th:block th:include="include :: common-js"/>
 <script th:src="@{/plugin/cropbox/cropbox.js}"></script>
 <script th:inline="javascript">
-    var prefix = _ctx + '/profile';
+    var prefix = _ctx + 'profile';
 
     var cropper;
     $(window).load(function () {
@@ -67,9 +67,9 @@
     });
 
     function submitHandler() {
-        var img = cropper.getBlob();
         var formdata = new FormData();
-        formdata.append("avatarfile", img);
+        formdata.append("avatarfile", $('#avatar')[0].files[0]);
+        debugger
         $.ajax({
             url: prefix + "/updateAvatar",
             data: formdata,

@@ -69,7 +69,7 @@ shiro:
     maxAge: 30
 
 wayn:
-  cacheType: redis
+  cacheType: ehcache
   uploadDir: /opt/wayn/crowd/upload
   adminId: c79ba431f9f74dfbae585b87b0cde933
   logHandlerTempNum: 3
