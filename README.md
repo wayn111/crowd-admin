@@ -116,7 +116,7 @@ idea/eclipse配置好tomcat信息后，部署crowd-admin项目到tomcat中，修
 
 ### 在线演示
 
-<a href="http://121.89.238.61/crowd" target="_blank">crowd-admin</a>
+<a href="http://121.4.124.33/crowd" target="_blank">crowd-admin</a>
 
 ### 参考项目
 
