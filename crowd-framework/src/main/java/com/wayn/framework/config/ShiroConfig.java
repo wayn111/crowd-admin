@@ -5,6 +5,7 @@ import com.wayn.common.constant.Constants;
 import com.wayn.common.util.SpringContextUtil;
 import com.wayn.framework.shiro.cache.RedisCacheManager;
 import com.wayn.framework.shiro.credentials.MyCredentialsMatcher;
+import com.wayn.framework.shiro.filter.CustomUserFilter;
 import com.wayn.framework.shiro.realm.MyRealm;
 import com.wayn.framework.shiro.session.EhCacheSessionDAO;
 import com.wayn.framework.shiro.session.OnlineSessionFactory;
@@ -96,6 +97,7 @@ public class ShiroConfig {
         // 定义自己的过滤器
         Map<String, Filter> filters = new LinkedHashMap<>();
         filters.put("onlineSession", onlineSessionFilter());
+        filters.put("customUser", new CustomUserFilter());
         shiroFilterFactoryBean.setFilters(filters);
         // 定义拦过滤器链
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
@@ -108,7 +110,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/plugin/**", "anon");
         filterChainDefinitionMap.put("/upload/**", "anon");
         filterChainDefinitionMap.put("/home/*", "anon");
-        filterChainDefinitionMap.put("/**", "user,onlineSession");
+        filterChainDefinitionMap.put("/**", "customUser,onlineSession");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

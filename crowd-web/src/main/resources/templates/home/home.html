@@ -344,10 +344,12 @@
     /**
      * 建立stomp连接
      */
-    function connect() {
+    function connect(timeout = 5000) {
+        var that = this;
         var sock = new SockJS(_ctx + "/ws/notify");
         var stompClient = Stomp.over(sock);
         stompClient.connect('guest', 'guest', function (frame) {
+            var connId = frame.headers['user-name'];
             /**
              * 订阅了/user/queue/notifications 发送的消息,这里于在控制器的 convertAndSendToUser 定义的地址保持一致
              * 这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。
@@ -363,12 +365,13 @@
                 wrapper.notify();
             });
             stompClient.subscribe('/user/queue/getResponse', function (response) {
-                showToastr({
-                    type: 'info',
-                    msg: response.body,
-                    timeOut: -1,
-                    extendedTimeOut: -1
-                });
+                var resp = JSON.parse(response.body);
+                if (resp.type == 1 && resp.loginStatus == 0 ) {
+                    stompClient.disconnect();
+                    layer.alert('当前登录状态已失效，请重新登录！', function(index){
+                        location.href = _ctx + "/login";
+                    });
+                }
             });
             stompClient.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
                 showToastr({
@@ -379,11 +382,15 @@
                 });
             });
             // 定义消息载体
-            var payload = JSON.stringify({'code': 100, 'msg': 'tip', 'map': {'userId': '[[${user.id}]]'}});
+            var payload = JSON.stringify({'type': 1, 'userId': '[[${user.id}]]', 'connId': connId});
             // 定义消息头
             var head = {};
             // 测试发送消息
             stompClient.send('/message', head, payload);
+        }, err => {//第一次连接失败和连接后断开连接都会调用这个函数 此处调用重连
+            setTimeout(() => {
+                that.connect();
+            }, timeout)
         })
     }
 

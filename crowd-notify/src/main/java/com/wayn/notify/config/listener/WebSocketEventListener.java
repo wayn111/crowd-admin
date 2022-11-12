@@ -27,10 +27,12 @@ public class WebSocketEventListener {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
         SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) headerAccessor.getSessionAttributes().get(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-        Object primaryPrincipal = principalCollection.getPrimaryPrincipal();
-        User user = (User) primaryPrincipal;
-        if (user != null) {
-            log.info("User Disconnected : " + user);
+        if (principalCollection != null) {
+            Object primaryPrincipal = principalCollection.getPrimaryPrincipal();
+            User user = (User) primaryPrincipal;
+            if (user != null) {
+                log.info("User Disconnected : " + user);
+            }
         }
     }
 }

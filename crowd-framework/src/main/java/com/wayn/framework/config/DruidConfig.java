@@ -39,9 +39,6 @@ public class DruidConfig {
         final String filePath = "support/http/resources/js/common.js";
         // 创建filter进行过滤
         Filter filter = new Filter() {
-            @Override
-            public void init(FilterConfig filterConfig) {
-            }
 
             @Override
             public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

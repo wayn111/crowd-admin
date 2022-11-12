@@ -1,13 +1,10 @@
 package com.wayn.notify.config.handshakehandler;
 
 import com.wayn.common.domain.User;
-import com.wayn.common.util.SpringContextUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.server.ServerHttpRequest;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
@@ -15,13 +12,14 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 import java.security.Principal;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * 继承DefaultHandshakeHandler，允许使用request
  */
+@Slf4j
 @Component
 public class MyPrincipalHandshakeHandler extends DefaultHandshakeHandler {
-    private static final Logger log = LoggerFactory.getLogger(MyPrincipalHandshakeHandler.class);
 
 
     /**
@@ -37,11 +35,44 @@ public class MyPrincipalHandshakeHandler extends DefaultHandshakeHandler {
         Object object = attributes.get(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
         if (Objects.isNull(object)) {
             log.error("未登录系统，禁止登录websocket!");
-            SpringContextUtil.getBean(SimpMessagingTemplate.class).convertAndSend("/topic/judgeUserAuth", "您的登陆信息以过期，请重新登录!");
-            return null;
+            return new ObjectPrincipal(UUID.randomUUID().toString());
         }
         SimplePrincipalCollection simplePrincipalCollection = (SimplePrincipalCollection) object;
         User user = (User) simplePrincipalCollection.getPrimaryPrincipal();
-        return user::getId;
+        return new ObjectPrincipal(user.getId());
     }
+
+
+    private static class ObjectPrincipal implements java.security.Principal {
+        private Object object = null;
+
+        public ObjectPrincipal(Object object) {
+            this.object = object;
+        }
+
+        public Object getObject() {
+            return object;
+        }
+
+        public String getName() {
+            return getObject().toString();
+        }
+
+        public int hashCode() {
+            return object.hashCode();
+        }
+
+        public boolean equals(Object o) {
+            if (o instanceof ObjectPrincipal) {
+                ObjectPrincipal op = (ObjectPrincipal) o;
+                return getObject().equals(op.getObject());
+            }
+            return false;
+        }
+
+        public String toString() {
+            return object.toString();
+        }
+    }
+
 }
