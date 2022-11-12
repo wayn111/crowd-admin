@@ -110,7 +110,7 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        ServletUtil.setExportResponse(request, response, "登陆日志列表.xls", bos.size());
+        ServletUtil.setExportResponse(request, response, "登陆日志列表.xlsx", bos.size());
         //保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);

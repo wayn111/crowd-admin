@@ -1,33 +1,42 @@
 package com.wayn.framework.web.filter;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
+/**
+ * 防止XSS攻击的过滤器
+ */
 public class XssFilter implements Filter {
-
-    private static boolean enabled = true;
-
-    private static List<String> excludes = new ArrayList<>();
+    /**
+     * 排除链接
+     */
+    public List<String> excludes = new ArrayList<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        enabled = Boolean.valueOf(filterConfig.getInitParameter("enabled"));
-        excludes.addAll(Arrays.stream(filterConfig.getInitParameter("excludes").split("," , -1)).collect(Collectors.toList()));
+        String tempExcludes = filterConfig.getInitParameter("excludes");
+        if (StringUtils.isNotEmpty(tempExcludes)) {
+            String[] url = tempExcludes.split(",");
+            for (int i = 0; url != null && i < url.length; i++) {
+                excludes.add(url[i]);
+            }
+        }
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        if (handerExcludeUrl(req)) {
+        if (handleExcludeURL(req, resp)) {
             chain.doFilter(request, response);
             return;
         }
@@ -35,12 +44,13 @@ public class XssFilter implements Filter {
         chain.doFilter(xssRequest, response);
     }
 
-    public boolean handerExcludeUrl(HttpServletRequest request) {
-        if (!enabled) {
+    private boolean handleExcludeURL(HttpServletRequest request, HttpServletResponse response) {
+        String method = request.getMethod();
+        // GET DELETE 不过滤
+        if (method == null || method.matches("GET") || method.matches("DELETE")) {
             return true;
         }
-        String servletPath = request.getServletPath();
-        String uri = servletPath;
+        String uri = request.getServletPath();
         for (String pattern : excludes) {
             Pattern p = Pattern.compile("^" + pattern);
             Matcher m = p.matcher(uri);

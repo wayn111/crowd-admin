@@ -55,7 +55,7 @@ public class User extends BusinessEntity<User> {
     /**
      * 头像
      */
-    @Excel(name = "头像", type = 2, width = 40, height = 40, imageType = 1, savePath = "/E:/wayn/upload/excel")
+    // @Excel(name = "头像", type = 2, width = 40, height = 40, imageType = 1, savePath = "/E:/wayn/upload/excel")
     private String userImg;
 
     /**

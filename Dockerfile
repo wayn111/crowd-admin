@@ -9,4 +9,4 @@ RUN bash -c 'touch /opt/crowd.jar'
 # 声明服务运行在8000端口
 EXPOSE 84
 # 指定docker容器启动时运行jar包
-ENTRYPOINT ["sh", "-c", "exec java -jar -Xms1024m -Xmx1024m /opt/crowd.jar"]
+ENTRYPOINT ["sh", "-c", "exec java -jar -Xms512m -Xmx512m /opt/crowd.jar"]

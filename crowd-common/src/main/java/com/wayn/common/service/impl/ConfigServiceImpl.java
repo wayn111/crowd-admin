@@ -13,6 +13,7 @@ import com.wayn.common.util.ServletUtil;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,6 +46,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
         return page.setRecords(configDao.selectConfigPageList(page, config));
     }
 
+    @Cacheable(value = "configCache", key = "#root.method + '_' + #root.args[0]")
     @Override
     public String getValueByKey(String key) {
         QueryWrapper<Config> wrapper = new QueryWrapper<>();
@@ -67,7 +68,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        ServletUtil.setExportResponse(request, response, "参数配置.xls", bos.size());
+        ServletUtil.setExportResponse(request, response, "参数配置.xlsx", bos.size());
         // 保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);

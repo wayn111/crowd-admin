@@ -136,7 +136,7 @@ public class GenServiceImpl extends ServiceImpl<GenDao, TableInfo> implements Ge
         // 使用bos获取excl文件大小
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         workbook.write(bos);
-        ServletUtil.setExportResponse(request, response, "代码生成.xls", bos.size());
+        ServletUtil.setExportResponse(request, response, "代码生成.xlsx", bos.size());
         //保存数据
         OutputStream os = response.getOutputStream();
         workbook.write(os);
