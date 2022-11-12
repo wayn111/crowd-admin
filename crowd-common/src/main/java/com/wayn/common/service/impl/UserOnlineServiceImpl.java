@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +25,23 @@ public class UserOnlineServiceImpl implements UserOnlineService {
 
     @Autowired
     private SessionDAO sessionDAO;
+
+    private Map<String, Object> map = new ConcurrentHashMap<>();
+
+    @Override
+    public void put(String key, Object value) {
+        map.put(key, value);
+    }
+
+    @Override
+    public void remove(String key) {
+        map.remove(key);
+    }
+
+    @Override
+    public Map<String, Object> getActiveMap() {
+        return map;
+    }
 
     @Override
     public List<UserOnline> list() {
@@ -95,5 +114,17 @@ public class UserOnlineServiceImpl implements UserOnlineService {
             return session.getUsername();
         }
         return "未知用户";
+    }
+
+    @Override
+    public boolean checkUserLogin(String userId) {
+        Collection<Session> activeSessions = sessionDAO.getActiveSessions();
+        for (Session activeSession : activeSessions) {
+            OnlineSession session = (OnlineSession) activeSession;
+            if (session.getUserId().equals(userId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

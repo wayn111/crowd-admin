@@ -45,12 +45,12 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">执行策略：</label>
                             <div class="col-sm-8">
-                                <c:forEach items="${misfirePolicys}" var="misfirePolicy">
+                                <th:block th:each="misfirePolicy : ${misfirePolicys}">
                                     <label class="radio-inline i-checks">
                                         <input type="radio" name="misfirePolicy"
-                                               value="${misfirePolicy.id}" ${misfirePolicy.id eq 1 ?'checked':''}/> ${misfirePolicy.text}
+                                               th:value="${misfirePolicy.id}" th:checked="${misfirePolicy.id == 1 }"/> [[${misfirePolicy.text}]]
                                     </label>
-                                </c:forEach>
+                                </th:block>
                             </div>
                         </div>
                         <div class="form-group">
