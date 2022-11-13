@@ -1,5 +1,7 @@
 # crowd-admin
 
+### current main bran is based springboot2.7、jdk17
+
 ### Language
 
 - [简体中文](README.md)|[English](README_en.md)

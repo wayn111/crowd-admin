@@ -8,12 +8,12 @@
 
 ### 项目介绍
 
-crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
+基于jdk17、springboot2.7重构而来，crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
 
 ### 主要特性
 
-- 前后端支持stomp高级协议
-- 支持系统参数配置
+- 前后端支持stomp高级协议，完善的websocket配置，支持自定义用户认证、连接周期监听等
+- 支持系统参数配置，支持spring内存的@Cacheable注解
 - 项目按功能模块化拆分，自定义全局统一异常输出，代码清晰合理
 - 集成elfinder模块，包含完整的文件管理操作，包含文件上传、删除、压缩、移动、预览等诸多操作
 - 支持后台消息/邮件推送、数据字典、系统参数配置、各模块操作日记记录
@@ -76,7 +76,7 @@ crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管�
 3. 开发平台
     - JDK版本：17+
     - Maven：3.5+
-    - 数据库：mysql8+
+    - 数据库：mysql8+（设置表名称大小写忽略）
     - 缓存：ehcache/redis
     - ide：Eclipse/Idea
 
@@ -89,7 +89,7 @@ git clone git@github.com:wayn111/crowd-amin.git
 # 2. 导入项目依赖
 将crowd-admin目录用idea打开，导入maven依赖
 
-# 3. 安装Mysql8.0+、Redis3.0+、Tomcat8.5+、Jdk8+、Maven3.5+
+# 3. 安装Mysql8.0+、Redis3.0+、Jdk17+、Maven3.5+
 
 # 4. 导入sql文件
 在项目根目录下crowd-web文件夹下，找到`crowd-admin.sql`文件，新建mysql数据库crowd-admin，导入其中
@@ -98,8 +98,7 @@ git clone git@github.com:wayn111/crowd-amin.git
 修改`application-dev.yml`文件中数据连接配置相关信息
 
 # 6. 启动项目
-idea/eclipse配置好tomcat信息后，部署crowd-admin项目到tomcat中，修改项目名称为crwod，启动tomcat
-
+进入crowd-web木块，找到CrowdApplication文件，在idea中右键run application运行
 # 7. 访问
 打开浏览器输入：http://localhost:8080/crowd/
 ```
