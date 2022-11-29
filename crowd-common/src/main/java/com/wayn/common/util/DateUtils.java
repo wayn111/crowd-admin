@@ -5,6 +5,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -229,4 +230,35 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static boolean checkDateStrIsValid(String str) {
         return DateUtils.parseDate(str) != null;
     }
+
+    /**
+     * 获取一天中的第一秒时间
+     *
+     * @param srcDate
+     * @return
+     */
+    public static Date getFirstSecondOfOneDay(Date srcDate) {
+        Date date = new Date(srcDate.getTime());
+        Calendar c = Calendar.getInstance();
+        date.setHours(c.getActualMinimum(Calendar.HOUR_OF_DAY));
+        date.setMinutes(c.getActualMinimum(Calendar.MINUTE));
+        date.setSeconds(c.getActualMinimum(Calendar.SECOND));
+        return date;
+    }
+
+    /**
+     * 获取一天中最后一秒时间
+     *
+     * @param srcDate
+     * @return
+     */
+    public static Date getLastSecondOfOneDay(Date srcDate) {
+        Date date = new Date(srcDate.getTime());
+        Calendar c = Calendar.getInstance();
+        date.setHours(c.getActualMaximum(Calendar.HOUR_OF_DAY));
+        date.setMinutes(c.getActualMaximum(Calendar.MINUTE));
+        date.setSeconds(c.getActualMaximum(Calendar.SECOND));
+        return date;
+    }
+
 }

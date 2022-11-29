@@ -4,11 +4,16 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.imports.ExcelImportService;
+import com.wayn.common.dao.LogDao;
+import com.wayn.common.domain.OperLog;
 import com.wayn.common.domain.User;
 import com.wayn.common.excel.IExcelExportStylerImpl;
+import com.wayn.common.util.DateUtils;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,12 +22,16 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class MyTest {
 
     @Test
     public void test() throws IOException {
-        //准备员工数据
+        // 准备员工数据
         User user = new User();
         user.setUserName("张翰");
         user.setUserState(1);
@@ -53,10 +62,9 @@ public class MyTest {
         ExportParams exportParams = new ExportParams();
         exportParams.setStyle(IExcelExportStylerImpl.class);
         exportParams.setColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,
-                User.class, list);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, User.class, list);
 
-        //保存数据
+        // 保存数据
         FileOutputStream fos = new FileOutputStream("emp.xls");
         workbook.write(fos);
         fos.close();
@@ -67,7 +75,8 @@ public class MyTest {
         InputStream inputstream = new FileInputStream("E:\\Goolge\\download\\用户列表 (22).xls");
         ImportParams params = new ImportParams();
         params.setSaveUrl("E://excel");
-        List list = new ExcelImportService().importExcelByIs(inputstream, User.class, params,false).getList();
+        List list = new ExcelImportService().importExcelByIs(inputstream, User.class, params, false).getList();
         System.out.println(list);
     }
+
 }

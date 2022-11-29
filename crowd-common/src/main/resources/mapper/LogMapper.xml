@@ -37,4 +37,8 @@
             value DESC
     </select>
 
+    <select id="selectLogList" resultType="com.wayn.common.domain.OperLog">
+        select  createTime from sys_oper_log where   createTime between  #{begin} and  #{end}
+    </select>
+
 </mapper>

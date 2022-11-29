@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wayn.common.domain.OperLog;
 import com.wayn.common.domain.vo.EchartVO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ import java.util.List;
 public interface LogDao extends BaseMapper<OperLog> {
 
     List<EchartVO> selectModuleUseStatistic();
+
+    List<OperLog> selectLogList(Date begin, Date end);
 }
