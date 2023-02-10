@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version>
+        <version>2.7.8</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wayn</groupId>
@@ -34,20 +34,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <mysql.version>8.0.31</mysql.version>
         <junit.version>4.13.2</junit.version>
         <jedis.version>4.3.1</jedis.version>
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
-        <druid.version>1.2.14</druid.version>
+        <druid.version>1.2.15</druid.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-compress.version>1.21</commons-compress.version>
         <activemq.version>5.17.0</activemq.version>
         <tika.version>2.5.0</tika.version>
-        <fastjson.version>2.0.16</fastjson.version>
+        <fastjson.version>2.0.23</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <guava.version>31.1-jre</guava.version>
-        <shiro.version>1.10.0</shiro.version>
+        <shiro.version>1.11.0</shiro.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <jstl.version>1.2</jstl.version>
         <bitwalker.version>1.21</bitwalker.version>
@@ -126,6 +127,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
         </dependency>
 
         <!--阿里数据库连接池 -->
