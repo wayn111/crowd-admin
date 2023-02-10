@@ -8,7 +8,7 @@
 
 ### Introductio
 
-Crowd-admin is a scaffolding of a background authority management system, which integrates common functions such as rbac
+Refactored based on jdk17 and springboot2.7, Crowd-admin is a scaffolding of a background authority management system, which integrates common functions such as rbac
 authority management, message push, email sending, task scheduling, code generation, elfinder file management, etc. Each
 business in the system is divided by modules, and the front desk uses H+ templates. It is easy to learn for a newcomer
 to Java, and can quickly integrate into the enterprise development guidance project after learning.
@@ -33,7 +33,7 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 
 ### Online demo
 
-- <a href="http://121.89.238.61/crowd" target="_blank">crowd-admin</a>
+- <a href="http://121.4.124.33/crowd" target="_blank">crowd-admin</a>
 
 ### Reference
 
@@ -47,7 +47,7 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 __Login__
 ![Login](./crowd-web/crowd-img/系统登陆.png "系统登陆.png")
 __Home__
-![Home](./crowd-web/crowd-img/首页.png "首页.png")
+![Home](./crowd-web/crowd-img/首页2.png "首页2.png")
 __user manager__
 ![user manager](./crowd-web/crowd-img/用户管理.png "用户管理.png")
 __menu manager__
