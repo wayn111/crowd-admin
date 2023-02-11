@@ -1,8 +1,8 @@
 # crowd-admin
 
-| 分支名称                                                    | Spring Boot Version |
-| ------------------------------------------------------------ | ------------------- |
-| [spring-boot-2.7.8](https://github.com/wayn111/crowd-admin) | 2.7.8      |
+| Branch Name                                                        | Spring Boot Version |
+|--------------------------------------------------------------------| ------------------- |
+| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.8      |
 | [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0
 
 ---
