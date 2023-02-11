@@ -334,9 +334,14 @@ function exportData(exportUrl, formId, filename) {
     req.open("post", exportUrl);
     req.responseType = "blob";
     //监听进度事件
-    req.addEventListener("progress", function (evt, a, b) {
+    req.addEventListener("progress", function (evt) {
+        // 是否有长度信息
         if (evt.lengthComputable) {
-            var percentComplete = evt.loaded / evt.total;
+            // 已加载字节数
+            var loaded = evt.loaded;
+            // 总字节数
+            var total = evt.total;
+            var percentComplete = loaded / total;
             $("#process").css({'width': percentComplete * 100 + "%"})
             $("#processText").text(percentComplete * 100 + "%")
             console.log(percentComplete);

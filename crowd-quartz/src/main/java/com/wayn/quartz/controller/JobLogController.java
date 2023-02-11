@@ -57,7 +57,7 @@ public class JobLogController extends BaseController {
         return Response.success("删除成功");
     }
 
-    @PostMapping("/export")
+    @RequestMapping("/export")
     public void list(JobLog jobLog, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ParameterUtil.set(jobLog);
         jobLogService.export(jobLog, response, request);

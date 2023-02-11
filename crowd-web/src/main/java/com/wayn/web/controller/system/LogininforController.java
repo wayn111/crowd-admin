@@ -61,7 +61,7 @@ public class LogininforController extends BaseController {
         return Response.result(logininforService.removeByIds(idList), "删除登陆日志成功");
     }
 
-    @PostMapping("/export")
+    @RequestMapping("/export")
     public void export(Logininfor log, HttpServletResponse response) throws IOException {
         ParameterUtil.setWrapper();
         logininforService.export(log, response, request);
