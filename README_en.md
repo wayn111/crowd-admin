@@ -1,19 +1,36 @@
 # crowd-admin
 
-### current main bran is based springboot2.7、jdk17
+| 分支名称                                                    | Spring Boot Version |
+| ------------------------------------------------------------ | ------------------- |
+| [spring-boot-2.7.8](https://github.com/wayn111/crowd-admin) | 2.7.8      |
+| [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0
 
-### Language
+---
 
-- [简体中文](README.md)|[English](README_en.md)
+## Language
 
-### Introductio
+- [Chinese](README.md)|[English](README_en.md)
+
+## Introductio
 
 Refactored based on jdk17 and springboot2.7, Crowd-admin is a scaffolding of a background authority management system, which integrates common functions such as rbac
 authority management, message push, email sending, task scheduling, code generation, elfinder file management, etc. Each
 business in the system is divided by modules, and the front desk uses H+ templates. It is easy to learn for a newcomer
 to Java, and can quickly integrate into the enterprise development guidance project after learning.
 
-### Features
+---
+
+- [crowd-admin](#crowd-admin)
+  - [Features](#features)
+  - [Get Source code](#get-source-code)
+  - [Online demo](#online-demo)
+  - [Reference](#reference)
+  - [Instance screenshot](#instance-screenshot)
+  - [Sponsor](#sponsor)
+
+---
+
+## Features
 
 - Learning-oriented open source framework, simple and efficient, reasonable modular split, showing the essence of
   technology
@@ -26,24 +43,29 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 - Add code generation module
 - Add server monitor module
 
-### Get Source code
+---
+
+## Get Source code
 
 - [crowd-admin git](https://github.com/wayn111/crowd-admin)
 - [crowd-admin gitee](https://gitee.com/wayn111/crowdfounding)
 
-### Online demo
+---
+
+## Online demo
 
 - <a href="http://121.4.124.33/crowd" target="_blank">crowd-admin</a>
 
-### Reference
+## Reference
 
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
 - [bootdo](https://gitee.com/lcg0124/bootdo)
 - [RuoYi](https://gitee.com/y_project/RuoYi)
 
-### Instance screenshot
+---
 
--------------
+## Instance screenshot
+
 __Login__
 ![Login](./crowd-web/crowd-img/系统登陆.png "系统登陆.png")
 __Home__
@@ -61,7 +83,9 @@ __file manager__
 __system server__
 ![system server](./crowd-web/crowd-img/系统服务.jpg "系统服务.jpg")
 
-### Sponsor
+---
+
+## Sponsor
 
 <a href="https://www.jetbrains.com/" target="_blank">
 <img src="./crowd-web/crowd-img/jetbrains-training-partner.svg" width="20%" alt=""></a>
