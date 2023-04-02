@@ -40,7 +40,7 @@
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
         <druid.version>1.2.15</druid.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <commons-fileupload.version>1.4</commons-fileupload.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
         <commons-compress.version>1.21</commons-compress.version>
         <activemq.version>5.17.0</activemq.version>
         <tika.version>2.5.0</tika.version>
@@ -58,10 +58,10 @@
         <thumbnailator.version>0.4.13</thumbnailator.version>
         <quartz.version>2.3.2</quartz.version>
         <java-image-scaling.version>0.8.6</java-image-scaling.version>
-        <joda-time.version>2.12.0</joda-time.version>
-        <ip2region.version>1.7.2</ip2region.version>
+        <joda-time.version>2.12.2</joda-time.version>
+        <ip2region.version>2.7.0</ip2region.version>
         <reactor-net.version>2.0.8.RELEASE</reactor-net.version>
-        <netty-all.version>4.1.84.Final</netty-all.version>
+        <netty-all.version>4.1.90.Final</netty-all.version>
         <easypoi.version>4.4.0</easypoi.version>
         <mail.version>1.4.7</mail.version>
     </properties>

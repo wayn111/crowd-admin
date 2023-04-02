@@ -1,69 +1,56 @@
 package com.wayn.common.util;
 
-import org.lionsoul.ip2region.DataBlock;
-import org.lionsoul.ip2region.DbConfig;
-import org.lionsoul.ip2region.DbSearcher;
-import org.lionsoul.ip2region.Util;
-import org.springframework.util.ResourceUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.lionsoul.ip2region.xdb.Searcher;
 
-import java.io.File;
-import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 /**
  * ip2region帮助类
  */
+@Slf4j
 public class IP2RegionUtil {
     public static String getCityInfo(String ip) {
-        //db
-        //DbSearcher.BINARY_ALGORITHM //Binary
-        //DbSearcher.MEMORY_ALGORITYM //Memory
+
+        String dbPath = "D:/ip2region.xdb";
+
+        // 1、从 dbPath 加载整个 xdb 到内存。
+        byte[] cBuff = new byte[0];
         try {
-
-            String dbPath = IP2RegionUtil.class.getClassLoader().getResource("ip2region.db").getPath();
-            File file = new File(dbPath);
-
-            if (!file.exists()) {
-                System.out.println("Error: Invalid ip2region.db file");
-            }
-
-            //查询算法
-            int algorithm = DbSearcher.BTREE_ALGORITHM; //B-tree
-
-            DbConfig config = new DbConfig();
-            DbSearcher searcher = new DbSearcher(config, file.getAbsolutePath());
-
-            //define the method
-            Method method = null;
-            switch (algorithm) {
-                case DbSearcher.BTREE_ALGORITHM:
-                    method = searcher.getClass().getMethod("btreeSearch", String.class);
-                    break;
-                case DbSearcher.BINARY_ALGORITHM:
-                    method = searcher.getClass().getMethod("binarySearch", String.class);
-                    break;
-                case DbSearcher.MEMORY_ALGORITYM:
-                    method = searcher.getClass().getMethod("memorySearch", String.class);
-                    break;
-            }
-
-            DataBlock dataBlock = null;
-            if (Util.isIpAddress(ip) == false) {
-                System.out.println("Error: Invalid ip address");
-            }
-
-            dataBlock = (DataBlock) method.invoke(searcher, ip);
-
-            return dataBlock.getRegion();
-
+            cBuff = Searcher.loadContentFromFile(dbPath);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("failed to load content from `{}`", dbPath, e);
         }
 
+        // 2、使用上述的 cBuff 创建一个完全基于内存的查询对象。
+        Searcher searcher;
+        try {
+            searcher = Searcher.newWithBuffer(cBuff);
+        } catch (Exception e) {
+            log.error("failed to create content cached searcher", e);
+            return null;
+        }
+
+        // 3、查询
+        try {
+            long sTime = System.nanoTime();
+            String region = searcher.search(ip);
+            long cost = TimeUnit.NANOSECONDS.toMicros(System.nanoTime() - sTime);
+            log.info("{region: {}, ioCount: {}, took: {} μs}", region, searcher.getIOCount(), cost);
+            return region;
+        } catch (Exception e) {
+            log.error("failed to search({})", ip, e);
+        }
+
+        // 4、关闭资源 - 该 searcher 对象可以安全用于并发，等整个服务关闭的时候再关闭 searcher
+        // searcher.close();
+
+        // 备注：并发使用，用整个 xdb 数据缓存创建的查询对象可以安全的用于并发，也就是你可以把这个 searcher 对象做成全局对象去跨线程访问。
         return null;
     }
 
     public static void main(String[] args) throws Exception {
-        System.err.println(getCityInfo("220.248.12.158"));
+        getCityInfo("121.4.124.33");
     }
 
 }
