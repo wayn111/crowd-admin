@@ -34,17 +34,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <mysql.version>8.0.31</mysql.version>
+        <mysql.version>8.0.32</mysql.version>
         <junit.version>4.13.2</junit.version>
         <jedis.version>4.3.1</jedis.version>
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
-        <druid.version>1.2.15</druid.version>
+        <druid.version>1.2.16</druid.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-fileupload.version>1.5</commons-fileupload.version>
         <commons-compress.version>1.21</commons-compress.version>
         <activemq.version>5.17.0</activemq.version>
-        <tika.version>2.5.0</tika.version>
-        <fastjson.version>2.0.23</fastjson.version>
+        <tika.version>2.7.0</tika.version>
+        <fastjson.version>2.0.25</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <guava.version>31.1-jre</guava.version>
@@ -52,9 +52,9 @@
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <jstl.version>1.2</jstl.version>
         <bitwalker.version>1.21</bitwalker.version>
-        <jsoup.version>1.15.3</jsoup.version>
+        <jsoup.version>1.15.4</jsoup.version>
         <velocity.version>2.3</velocity.version>
-        <oshi.version>6.3.0</oshi.version>
+        <oshi.version>6.4.0</oshi.version>
         <thumbnailator.version>0.4.13</thumbnailator.version>
         <quartz.version>2.3.2</quartz.version>
         <java-image-scaling.version>0.8.6</java-image-scaling.version>
@@ -70,6 +70,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
         </dependency>
 
         <dependency>

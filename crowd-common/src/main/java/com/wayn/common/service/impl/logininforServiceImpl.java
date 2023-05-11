@@ -12,11 +12,11 @@ import com.wayn.common.domain.vo.EchartVO;
 import com.wayn.common.excel.IExcelExportStylerImpl;
 import com.wayn.common.service.LogininforService;
 import com.wayn.common.shiro.util.ShiroUtil;
-import com.wayn.common.util.IP2RegionUtil;
 import com.wayn.common.util.LogUtils;
 import com.wayn.common.util.ParameterUtil;
 import com.wayn.common.util.ServletUtil;
 import eu.bitwalker.useragentutils.UserAgent;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -42,12 +42,13 @@ import java.util.List;
  * @since 2019-04-13
  */
 @Service
+@AllArgsConstructor
 public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor> implements LogininforService {
 
     private static final Logger logger = LoggerFactory.getLogger(logininforServiceImpl.class);
 
-    @Autowired
     private LogininforDao logininforDao;
+    private Ip2Region ip2Region;
 
     @Override
     public Page<Logininfor> listPage(Page<Logininfor> page, Logininfor log) {
@@ -63,7 +64,7 @@ public class logininforServiceImpl extends ServiceImpl<LogininforDao, Logininfor
     public boolean addLog(String username, String status, String message) {
         final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtil.getRequest().getHeader("User-Agent"));
         final String ip = ShiroUtil.getIP();
-        String address = IP2RegionUtil.getCityInfo(ShiroUtil.getIP());
+        String address = ip2Region.getCity(ShiroUtil.getIP());
         StringBuilder s = new StringBuilder();
         s.append(LogUtils.getBlock(ip));
         s.append(address);

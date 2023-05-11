@@ -82,3 +82,5 @@ wayn:
   uploadDir: /opt/wayn/crowd/upload
   adminId: c79ba431f9f74dfbae585b87b0cde933
   logHandlerTempNum: 3
+  ip2region:
+    path: ${IP_REGION_PATH:D:/ip2region.xdb}

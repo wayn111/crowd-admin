@@ -10,7 +10,7 @@ import com.wayn.common.enums.Operator;
 import com.wayn.common.exception.BusinessException;
 import com.wayn.common.service.ConfigService;
 import com.wayn.common.shiro.util.ShiroUtil;
-import com.wayn.common.util.IP2RegionUtil;
+import com.wayn.common.service.impl.Ip2Region;
 import com.wayn.common.util.ServletUtil;
 import com.wayn.common.util.UserAgentUtils;
 import com.wayn.framework.manager.log.LogQueue;
@@ -38,6 +38,9 @@ public class LogAspect {
 
     @Autowired
     private ConfigService configService;
+
+    @Autowired
+    private Ip2Region ip2Region;
 
     @Pointcut("@annotation(com.wayn.common.annotation.Log)")
     public void logPointCut() {
@@ -101,7 +104,7 @@ public class LogAspect {
             String className = joinPoint.getTarget().getClass().getName();
             String methodName = method.getName();
             operLog.setMethod(className + "." + methodName + "()");
-            operLog.setIp(IP2RegionUtil.getCityInfo(ShiroUtil.getIP()));
+            operLog.setIp(ip2Region.getCity(ShiroUtil.getIP()));
             operLog.setOperState(Constants.OPERATOR_SUCCESS);
             operLog.setAgent(UserAgentUtils.getUserAgent(request));
             operLog.setRequestMethod(request.getMethod());

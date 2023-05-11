@@ -5,7 +5,6 @@ import com.wayn.common.domain.UserOnline;
 import com.wayn.common.enums.OnlineStatusEnum;
 import com.wayn.common.service.UserOnlineService;
 import com.wayn.common.shiro.session.OnlineSession;
-import com.wayn.common.util.IP2RegionUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -25,6 +24,8 @@ public class UserOnlineServiceImpl implements UserOnlineService {
 
     @Autowired
     private SessionDAO sessionDAO;
+    @Autowired
+    private Ip2Region ip2Region;
 
     private Map<String, Object> map = new ConcurrentHashMap<>();
 
@@ -70,7 +71,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
             // 设置session属性至onlineUser中
             userOnline.setId((String) session.getId());
             userOnline.setOnlineSession(session.toString());
-            userOnline.setHost(IP2RegionUtil.getCityInfo(session.getHost()));
+            userOnline.setHost(ip2Region.getCity(session.getHost()));
             userOnline.setStartTimestamp(session.getStartTimestamp());
             userOnline.setLastAccessTime(session.getLastAccessTime());
             userOnline.setTimeout(session.getTimeout());
