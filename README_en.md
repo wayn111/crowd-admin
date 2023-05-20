@@ -1,17 +1,17 @@
 # crowd-admin
 
-| Branch Name                                                        | Spring Boot Version |
-|--------------------------------------------------------------------| ------------------- |
-| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.8      |
-| [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0
+| Branch Name                                                        | Spring Boot Version | JDK Version |
+|--------------------------------------------------------------------| ------------------- |-------------|
+| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.8      | 17          |
+| [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0 | 1.8         |
 
 ---
 
-## Language
+# Language
 
 - [Chinese](README.md)|[English](README_en.md)
 
-## Introductio
+# Introductio
 
 Refactored based on jdk17 and springboot2.7, Crowd-admin is a scaffolding of a background authority management system, which integrates common functions such as rbac
 authority management, message push, email sending, task scheduling, code generation, elfinder file management, etc. Each
@@ -30,7 +30,7 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 
 ---
 
-## Features
+# Features
 
 - Learning-oriented open source framework, simple and efficient, reasonable modular split, showing the essence of
   technology
@@ -45,18 +45,18 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 
 ---
 
-## Get Source code
+# Get Source code
 
 - [crowd-admin git](https://github.com/wayn111/crowd-admin)
 - [crowd-admin gitee](https://gitee.com/wayn111/crowdfounding)
 
 ---
 
-## Online demo
+# Online demo
 
 - <a href="http://121.4.124.33/crowd" target="_blank">crowd-admin</a>
 
-## Reference
+# Reference
 
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
 - [bootdo](https://gitee.com/lcg0124/bootdo)
@@ -64,7 +64,7 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 
 ---
 
-## Instance screenshot
+# Instance screenshot
 
 __Login__
 ![Login](./crowd-web/crowd-img/系统登陆.png "系统登陆.png")
@@ -85,7 +85,7 @@ __system server__
 
 ---
 
-## Sponsor
+# Sponsor
 
 <a href="https://www.jetbrains.com/" target="_blank">
 <img src="./crowd-web/crowd-img/jetbrains-training-partner.svg" width="20%" alt=""></a>
