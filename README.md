@@ -1,21 +1,21 @@
 # crowd-admin
 
-| 分支名称                                                               | Spring Boot Version |
-|--------------------------------------------------------------------| ------------------- |
-| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.8      |
-| [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0
-
+| 分支名称                                                               | Spring Boot 版本 | JDk 版本 |   
+|--------------------------------------------------------------------|----------------|--------|
+| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.8          | 17     |s |
+| [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0      | 1.8    | s|
+ 
 ---
 
-## Language
+# Language
 
 - [简体中文](README.md)|[English](README_en.md)
 
-## 项目介绍
+# 项目介绍
 
 基于jdk17、springboot2.7重构而来，crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
 
-## 主要特性
+# 主要特性
 
 - 前后端支持stomp高级协议，完善的websocket配置，支持自定义用户认证、连接周期监听等
 - 支持系统参数配置，支持spring内存的@Cacheable注解
@@ -52,7 +52,7 @@
 
 ---
 
-## 内置模块
+# 内置模块
 
 1. 系统管理
     - 用户管理：系统操作者，可绑定多角色
@@ -79,7 +79,7 @@
 
 ---
 
-## 技术选型
+# 技术选型
 
 1. 后端
     - 核心框架：Spring
@@ -113,7 +113,7 @@
 
 ---
 
-## 开发部署
+# 开发部署
 
 ```
 # 1. 克隆项目
@@ -137,7 +137,7 @@ git clone git@github.com:wayn111/crowd-amin.git
 ```
 ---
 
-## 参考资料
+# 参考资料
 
 - [RuoYi](http://doc.ruoyi.vip/) 文档
 - [Mybatis Plus](https://mp.baomidou.com/guide) 文档
@@ -146,14 +146,14 @@ git clone git@github.com:wayn111/crowd-amin.git
 - [RuoYi](https://gitee.com/y_project/RuoYi)
 
 
-## 获取源码
+# 获取源码
 
 - [crowd-admin github](https://github.com/wayn111/crowd-admin)
 - [crowd-admin 码云](https://gitee.com/wayn111/crowdfounding)
 
 ---
 
-## 实例截图
+# 实例截图
 
 __系统登陆__
 ![输入图片说明](./crowd-web/crowd-img/系统登陆.png "系统登陆.png")
@@ -175,7 +175,7 @@ __系统服务__
 
 ---
 
-## 特别赞助
+# 特别赞助
 
 <a href="https://www.jetbrains.com/" target="_blank">
 <img src="./crowd-web/crowd-img/jetbrains-training-partner.svg" width="20%" alt=""></a>
