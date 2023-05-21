@@ -1,6 +1,6 @@
 # crowd-admin
 
-| 分支名称                                                               | Spring Boot 版本 | JDk 版本 |   
+| 分支名称                                                               | Spring Boot 版本 | JDK 版本 |   
 |--------------------------------------------------------------------|----------------|--------|
 | [main](https://github.com/wayn111/crowd-admin)                     | 2.7.8          | 17     |s |
 | [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0      | 1.8    | s|
