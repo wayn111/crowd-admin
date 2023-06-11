@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.10</version>
+        <version>2.7.12</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wayn</groupId>
@@ -34,7 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <mysql.version>8.0.32</mysql.version>
+        <mysql.version>8.0.33</mysql.version>
         <junit.version>4.13.2</junit.version>
         <jedis.version>4.3.1</jedis.version>
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
@@ -44,7 +44,7 @@
         <commons-compress.version>1.22</commons-compress.version>
         <activemq.version>5.17.0</activemq.version>
         <tika.version>2.7.0</tika.version>
-        <fastjson.version>2.0.25</fastjson.version>
+        <fastjson.version>2.0.32</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <guava.version>31.1-jre</guava.version>

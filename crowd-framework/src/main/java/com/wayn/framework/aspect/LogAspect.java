@@ -152,6 +152,7 @@ public class LogAspect {
         Operator operator = log.operator();
         String name = log.operator().getName();
         switch (operator) {
+            case ADD:
             case UPDATE:
                 // fall through
             case DELETE:
