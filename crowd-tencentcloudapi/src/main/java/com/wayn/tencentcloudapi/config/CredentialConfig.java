@@ -4,22 +4,20 @@ import com.tencentcloudapi.cdn.v20180606.CdnClient;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource("classpath:tencentcloud.properties")
+@ConfigurationProperties(prefix = "tencentcloud")
 public class CredentialConfig {
 
-    @Value("${tencentcloud.host}")
     private String host;
 
-    @Value("${tencentcloud.secretId}")
     private String secretId;
 
-    @Value("${tencentcloud.secretKey}")
     private String secretKey;
 
     @Bean
