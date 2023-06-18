@@ -7,6 +7,7 @@ ADD crowd-web/target/crowd.jar /opt/crowd.jar
 ADD ip2region.xdb /home/app/ip2region.xdb
 # 添加环境变量
 ENV IP_REGION_PATH=/home/app/ip2region.xdb
+ENV TZ="Asia/Shanghai"
 # 运行过程中创建一个mall-tiny-docker-file.jar文件
 RUN bash -c 'touch /opt/crowd.jar'
 # 声明服务运行在8000端口

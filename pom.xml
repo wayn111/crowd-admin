@@ -22,7 +22,6 @@
         <module>crowd-notify</module>
         <module>crowd-quartz</module>
         <module>crowd-elfinder</module>
-        <module>crowd-mailserver</module>
         <module>crowd-tencentcloudapi</module>
     </modules>
     <packaging>pom</packaging>
