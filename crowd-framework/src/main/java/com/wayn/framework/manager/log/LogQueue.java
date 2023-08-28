@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class LogQueue {
-    private final BlockingQueue<OperLog> queue = new LinkedBlockingDeque<>(1000);
+    private final BlockingQueue<OperLog> queue = new LinkedBlockingDeque<>(10000);
 
     public void add(OperLog log) {
         queue.add(log);

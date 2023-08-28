@@ -8,6 +8,7 @@ import com.wayn.common.shiro.session.OnlineSession;
 import com.wayn.common.shiro.util.ShiroUtil;
 import com.wayn.common.util.SpringContextUtil;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -26,6 +27,7 @@ import java.util.Objects;
  * 定义自己的shiro过滤器
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class OnlineSessionFilter extends AccessControlFilter {
 
     private static final String ONLINE_SESSION = "online_session";

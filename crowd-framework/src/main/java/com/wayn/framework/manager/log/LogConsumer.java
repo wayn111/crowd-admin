@@ -2,6 +2,7 @@ package com.wayn.framework.manager.log;
 
 import com.wayn.common.domain.OperLog;
 import com.wayn.common.service.LogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 日志异步处理线程
  */
+@Slf4j
 @Component
 public class LogConsumer implements Runnable {
 
@@ -51,11 +53,12 @@ public class LogConsumer implements Runnable {
                     temp.add(log);
                 }
             }
-            if (temp.size() != 0) {
+            if (!temp.isEmpty()) {
                 logService.saveBatch(temp);
+                temp.clear();
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 }

@@ -152,11 +152,11 @@ public class LogAspect {
         Operator operator = log.operator();
         String name = log.operator().getName();
         switch (operator) {
-            case ADD:
-            case UPDATE:
-                // fall through
-            case DELETE:
-                throw new BusinessException(String.format("演示模式，请勿%s", name));
+            // fall through
+            case ADD, UPDATE, DELETE -> throw new BusinessException(String.format("演示模式，请勿%s", name));
+            default -> {
+
+            }
         }
     }
 }

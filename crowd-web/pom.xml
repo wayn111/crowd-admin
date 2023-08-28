@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.wayn</groupId>
         <artifactId>crowd-admin</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -25,27 +25,27 @@
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-generator</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-notify</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-quartz</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-elfinder</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-tencentcloudapi</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
     </dependencies>
     <build>

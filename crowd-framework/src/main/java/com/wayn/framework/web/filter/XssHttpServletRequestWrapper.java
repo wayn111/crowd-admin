@@ -18,12 +18,12 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         String[] values = super.getParameterValues(name);
         if (values != null) {
             int length = values.length;
-            String[] escapseValues = new String[length];
+            String[] escapeValues = new String[length];
             for (int i = 0; i < length; i++) {
                 // 防xss攻击和过滤前后空格
-                escapseValues[i] = JsoupUtil.clean(values[i]).trim();
+                escapeValues[i] = JsoupUtil.clean(values[i]).trim();
             }
-            return escapseValues;
+            return escapeValues;
         }
         return super.getParameterValues(name);
     }
