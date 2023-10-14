@@ -3,6 +3,7 @@ package com.wayn.framework.shiro.credentials;
 import com.wayn.common.util.DateUtils;
 import com.wayn.common.util.SpringContextUtil;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
@@ -17,6 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 自定义密码验证服务
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class MyCredentialsMatcher extends HashedCredentialsMatcher {
 

@@ -224,7 +224,6 @@ public class ShiroConfig {
         } else {
             return ehCacheSessionDAO();
         }
-
     }
 
     /**

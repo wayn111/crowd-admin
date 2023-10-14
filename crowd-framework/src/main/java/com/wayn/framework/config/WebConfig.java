@@ -20,7 +20,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addRedirectViewController("/", "/home");
     }
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**").addResourceLocations("file:" + projectConfig.getUploadDir() + "/");

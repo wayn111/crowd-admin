@@ -2,7 +2,7 @@
 
 | 分支名称                                                               | Spring Boot 版本 | JDK 版本 |   
 |--------------------------------------------------------------------|----------------|--------|
-| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.8          | 17     |s |
+| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.16         | 17     |s |
 | [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0      | 1.8    | s|
  
 ---
@@ -16,7 +16,6 @@
 基于jdk17、springboot2.7重构而来，crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
 
 # 主要特性
-
 - 前后端支持stomp高级协议，完善的websocket配置，支持自定义用户认证、连接周期监听等
 - 支持系统参数配置，支持spring内存的@Cacheable注解
 - 项目按功能模块化拆分，自定义全局统一异常输出，代码清晰合理
@@ -29,7 +28,7 @@
 - 前端使用H+模板，样式美观，支持ajax下载文件，js代码简洁，清晰，避免过度封装
 - [在线地址](http://121.4.124.33/crowd/)
 
-> 如果有任何使用问题，欢迎提交Issue或加我QQ:1669738430告知，方便互相交流反馈～ 💘。最后，喜欢的话麻烦给我个star
+> 如果有任何使用问题，欢迎提交Issue或加关注我公众号私信我告知，方便互相交流反馈～ 💘。最后，喜欢的话麻烦给我个star
 
 关注公众号：waynblog，每周更新最新技术文章。回复关键字：
 - **学习**：加群交流，群内问题都会一一解答。
@@ -131,6 +130,7 @@ git clone git@github.com:wayn111/crowd-amin.git
 
 # 6. 启动项目
 进入crowd-web木块，找到CrowdApplication文件，在idea中右键run application运行
+
 # 7. 访问
 打开浏览器输入：http://localhost:8080/crowd/
 ```
