@@ -111,7 +111,7 @@
 
 ---
 
-# 开发部署
+# 本地开发
 
 ```
 # 1. 克隆项目
@@ -134,6 +134,26 @@ git clone git@github.com:wayn111/crowd-amin.git
 # 7. 访问
 打开浏览器输入：http://localhost:8080/crowd/
 ```
+---
+
+# 远程部署
+
+推荐使用 Dockerfile 方式进行远程部署，这里介绍 CentOS 系统下部署方式（默认大家已安装 docker 环境）
+
+```
+# 1. 新建 /opt/wayn/crowd/crowd-web/target 目录
+mkdir -p /opt/wayn/crowd/crowd-web/target
+
+# 2. 上传 crowd-web 项目打包后的 crowd.jar 文件至目录 /opt/wayn/crowd/crowd-web/target 下
+
+# 3. 上传项目根目录下 ip2region.xbd 文件至目录 /opt/wayn/crowd 下 
+
+# 4. 上传项目根目录下 Dockerfile 文件至 /opt/wayn/crowd 目录下
+
+# 5. 构建 docker 镜像，启动容器
+docker build -t crowd . && docker run -p 8080:8080 -v /opt/wayn/crowd:/opt/wayn/crowd --name crowd-web crowd 
+```
+
 ---
 
 # 参考资料
