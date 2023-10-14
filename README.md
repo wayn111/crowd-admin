@@ -152,7 +152,9 @@ mkdir -p /opt/wayn/crowd/logs
 # 4. 上传项目根目录下 Dockerfile 文件至 /opt/wayn/crowd 目录下
 
 # 5. 构建 docker 镜像，启动容器
-docker build -t crowd . && docker run -p 8080:8080 -v /opt/wayn/crowd:/opt/wayn/crowd --name crowd-web crowd 
+cd /opt/wayn/crowd
+docker build -t crowd .
+docker run -p 8080:8080 -v /opt/wayn/crowd:/opt/wayn/crowd --name crowd-web crowd 
 ```
 
 ---
