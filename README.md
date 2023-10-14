@@ -146,7 +146,7 @@ mkdir -p /opt/wayn/crowd/crowd-web/target
 
 # 2. 上传 crowd-web 项目打包后的 crowd.jar 文件至目录 /opt/wayn/crowd/crowd-web/target 下
 
-# 3. 上传项目根目录下 ip2region.xbd 文件至目录 /opt/wayn/crowd 下 
+# 3. 上传项目根目录下 ip2region.xdb 文件至目录 /opt/wayn/crowd 下 
 
 # 4. 上传项目根目录下 Dockerfile 文件至 /opt/wayn/crowd 目录下
 
