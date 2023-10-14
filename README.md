@@ -141,8 +141,9 @@ git clone git@github.com:wayn111/crowd-amin.git
 推荐使用 Dockerfile 方式进行远程部署，这里介绍 CentOS 系统下部署方式（默认大家已安装 docker 环境）
 
 ```
-# 1. 新建 /opt/wayn/crowd/crowd-web/target 目录
+# 1. 新建 /opt/wayn/crowd 目录
 mkdir -p /opt/wayn/crowd/crowd-web/target
+mkdir -p /opt/wayn/crowd/logs
 
 # 2. 上传 crowd-web 项目打包后的 crowd.jar 文件至目录 /opt/wayn/crowd/crowd-web/target 下
 
