@@ -35,29 +35,29 @@
 
         <mysql.version>8.0.33</mysql.version>
         <junit.version>4.13.2</junit.version>
-        <jedis.version>4.4.3</jedis.version>
-        <mybatis.plus.version>3.5.2</mybatis.plus.version>
-        <druid.version>1.2.16</druid.version>
+        <jedis.version>5.0.1</jedis.version>
+        <mybatis.plus.version>3.5.3.2</mybatis.plus.version>
+        <druid.version>1.2.20</druid.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-fileupload.version>1.5</commons-fileupload.version>
-        <commons-compress.version>1.22</commons-compress.version>
+        <commons-compress.version>1.24.0</commons-compress.version>
         <activemq.version>5.17.0</activemq.version>
-        <tika.version>2.7.0</tika.version>
-        <fastjson.version>2.0.39</fastjson.version>
+        <tika.version>2.9.0</tika.version>
+        <fastjson.version>2.0.41</fastjson.version>
         <captcha-version>1.6.2</captcha-version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.1.3-jre</guava.version>
         <shiro.version>1.12.0</shiro.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <jstl.version>1.2</jstl.version>
         <bitwalker.version>1.21</bitwalker.version>
         <jsoup.version>1.15.4</jsoup.version>
         <velocity.version>2.3</velocity.version>
-        <oshi.version>6.4.0</oshi.version>
-        <thumbnailator.version>0.4.13</thumbnailator.version>
+        <oshi.version>6.4.6</oshi.version>
+        <thumbnailator.version>0.4.20</thumbnailator.version>
         <quartz.version>2.3.2</quartz.version>
         <java-image-scaling.version>0.8.6</java-image-scaling.version>
-        <joda-time.version>2.12.2</joda-time.version>
+        <joda-time.version>2.12.5</joda-time.version>
         <ip2region.version>2.7.0</ip2region.version>
         <reactor-net.version>2.0.8.RELEASE</reactor-net.version>
         <netty-all.version>4.1.90.Final</netty-all.version>
