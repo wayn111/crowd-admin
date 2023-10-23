@@ -53,7 +53,6 @@ mybatis-plus:
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
   type-aliases-package: com.wayn.**.domain
 
-
 shiro:
   loginUrl: /home/login
   successUrl: /home

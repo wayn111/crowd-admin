@@ -87,7 +87,7 @@ public class MyRealm extends AuthorizingRealm {
                         if (session != null) {
                             session.stop();
                             sessionDAO.delete(session);
-                            SpringContextUtil.getBean(SimpMessagingTemplate.class).convertAndSendToUser(user.getId(), "/queue/getResponse", "新消息：该账号已在其他机器登陆！");
+                            SpringContextUtil.getBean(SimpMessagingTemplate.class).convertAndSendToUser(user.getId(), "/queue/userLoginStatus", "新消息：该账号已在其他机器登陆！");
                         }
                     }
                 }

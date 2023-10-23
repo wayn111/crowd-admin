@@ -1,22 +1,23 @@
 package com.wayn.common.service.impl;
 
+import com.wayn.common.constant.Constants;
 import com.wayn.common.domain.User;
 import com.wayn.common.domain.UserOnline;
+import com.wayn.common.domain.dto.WsUserPrincipal;
 import com.wayn.common.enums.OnlineStatusEnum;
 import com.wayn.common.service.UserOnlineService;
 import com.wayn.common.shiro.session.OnlineSession;
+import com.wayn.common.util.ProjectConfig;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
+import java.security.Principal;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,22 +27,23 @@ public class UserOnlineServiceImpl implements UserOnlineService {
     private SessionDAO sessionDAO;
     @Autowired
     private Ip2Region ip2Region;
-
-    private Map<String, Object> map = new ConcurrentHashMap<>();
+    @Autowired
+    private CacheManagerServiceImpl<WsUserPrincipal> cacheManagerService;
+    private static final String WS_USER_CACHE_PREFIX = "wsOnlineUser";
 
     @Override
     public void put(String key, Object value) {
-        map.put(key, value);
+        cacheManagerService.putElements(WS_USER_CACHE_PREFIX, key, value);
     }
 
     @Override
     public void remove(String key) {
-        map.remove(key);
+        cacheManagerService.removeElements(WS_USER_CACHE_PREFIX, key);
     }
 
     @Override
-    public Map<String, Object> getActiveMap() {
-        return map;
+    public Set<WsUserPrincipal> wsUserList() {
+        return cacheManagerService.getCacheAll(WS_USER_CACHE_PREFIX);
     }
 
     @Override
@@ -52,14 +54,7 @@ public class UserOnlineServiceImpl implements UserOnlineService {
             UserOnline userOnline = new UserOnline();
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
                 return null;
-            } /*else {
-                SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
-                        .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-                Object primaryPrincipal = principalCollection.getPrimaryPrincipal();
-                User user = (User) primaryPrincipal;
-                userOnline.setUsername(user.getUserName());
-                userOnline.setOnlineSession(user.toString());
-            }*/
+            }
             if (session instanceof OnlineSession onlineSession) {
                 userOnline.setUserId(onlineSession.getUserId());
                 userOnline.setUsername(onlineSession.getUsername());
@@ -128,4 +123,5 @@ public class UserOnlineServiceImpl implements UserOnlineService {
         }
         return false;
     }
+
 }

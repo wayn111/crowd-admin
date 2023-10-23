@@ -15,7 +15,7 @@ public class ProjectConfig {
     private String logHandlerTempNum;
 
     public boolean isAdmin(String userId) {
-        String adminId = this.getUploadDir();
+        String adminId = this.getAdminId();
         return adminId.equals(userId);
     }
 }

@@ -16,6 +16,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,11 +41,14 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
     private UserService userService;
 
     @Autowired
-
     private NotifyRecordService notifyRecordService;
 
     @Autowired
     private Scheduler scheduler;
+
+    @Autowired
+    @Qualifier("threadPoolTaskExecutor")
+    private ThreadPoolTaskExecutor executor;
 
 
     /**
@@ -58,7 +63,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         return page.setRecords(records);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean save(Notify notify, String receiveUserIds) {
         notify.setCreateTime(new Date());
@@ -69,8 +74,10 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         boolean insert = save(notify);
         List<NotifyRecord> collect = new ArrayList<>();
         List<String> receiveUserList = fillNotifyRecordList(notify, receiveUserIds, collect);
-        NotifyScheduleUtil.createScheduleJob(scheduler, notify, receiveUserList);
         notifyRecordService.saveBatch(collect);
+        executor.execute(() -> {
+            NotifyScheduleUtil.createScheduleJob(scheduler, notify, receiveUserList);
+        });
         return insert;
     }
 
@@ -83,10 +90,16 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyDao, Notify> implements
         notifyRecordService.remove(new QueryWrapper<NotifyRecord>().eq("notifyId", notify.getId()));
         List<NotifyRecord> collect = new ArrayList<>();
         List<String> receiveUserList = fillNotifyRecordList(notify, receiveUserIds, collect);
-        if (scheduler.checkExists(NotifyScheduleUtil.getTriggerKey(notify.getId()))) {
-            scheduler.deleteJob(NotifyScheduleUtil.getJobKey(notify.getId()));
-        }
-        NotifyScheduleUtil.createScheduleJob(scheduler, notify, receiveUserList);
+        executor.execute(() -> {
+            try {
+                if (scheduler.checkExists(NotifyScheduleUtil.getTriggerKey(notify.getId()))) {
+                    scheduler.deleteJob(NotifyScheduleUtil.getJobKey(notify.getId()));
+                }
+                NotifyScheduleUtil.createScheduleJob(scheduler, notify, receiveUserList);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        });
         notifyRecordService.saveBatch(collect);
         return update;
     }

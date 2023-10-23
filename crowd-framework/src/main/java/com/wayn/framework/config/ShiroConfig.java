@@ -25,7 +25,6 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
@@ -78,14 +77,10 @@ public class ShiroConfig {
      */
     @Value("${shiro.cookie.maxAge}")
     private int maxAge;
-
-    @Lazy
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
-    @Lazy
     @Resource
     private RedisTemplate<String, byte[]> binaryRedisTemplate;
-
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
@@ -188,7 +183,7 @@ public class ShiroConfig {
      * 使用的是shiro-redis开源插件
      */
     private RedisCacheManager rediscacheManager() {
-        return new RedisCacheManager(redisTemplate, "crowd:shiro-cache:");
+        return new RedisCacheManager(redisTemplate, Constants.REDIS_KEY_PREFIX + Constants.REDIS_KEY_SEPARATOR + "shiro-cache:");
     }
 
     /**
@@ -205,7 +200,7 @@ public class ShiroConfig {
     private RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
         redisSessionDAO.setTimeOut(sessionTimeout);
-        redisSessionDAO.setKeyPrefix("crowd:shiro_redis_session:");
+        redisSessionDAO.setKeyPrefix(Constants.REDIS_KEY_PREFIX + Constants.REDIS_KEY_SEPARATOR + "shiro_redis_session:");
         redisSessionDAO.setBinaryRedisTemplate(binaryRedisTemplate);
         return redisSessionDAO;
     }

@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.wayn</groupId>
         <artifactId>crowd-admin</artifactId>
-        <version>3.0.1</version>
+        <version>3.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -25,27 +25,29 @@
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-generator</artifactId>
-            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-notify</artifactId>
-            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-quartz</artifactId>
-            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-elfinder</artifactId>
-            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.wayn</groupId>
             <artifactId>crowd-tencentcloudapi</artifactId>
-            <version>3.0.1</version>
+        </dependency>
+
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
@@ -53,9 +55,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
-                </configuration>
                 <executions>
                     <execution>
                         <goals>

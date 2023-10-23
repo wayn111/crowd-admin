@@ -1,34 +1,31 @@
 package com.wayn.framework.shiro.session;
 
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
 import com.wayn.common.shiro.session.OnlineSession;
-import com.wayn.common.util.JsonUtil;
 import com.wayn.common.util.SerializeUtils;
+import io.lettuce.core.KeyScanArgs;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
+import org.apache.shiro.session.mgt.SimpleSession;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.KeyScanOptions;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
  * redis session
  */
+@EqualsAndHashCode(callSuper = true)
 @Slf4j
 @Data
 public class RedisSessionDAO extends AbstractSessionDAO {
@@ -60,11 +57,12 @@ public class RedisSessionDAO extends AbstractSessionDAO {
      */
     @SneakyThrows
     private void saveSession(Session session) {
-        if (session == null || session.getId() == null) {
+        if (session == null) {
             log.error("session or session id is null");
             return;
         }
-        binaryRedisTemplate.opsForValue().set(keyPrefix + session.getId(), SerializeUtils.serialize(session), timeOut, TimeUnit.SECONDS);
+        Serializable id = session.getId();
+        binaryRedisTemplate.opsForValue().set(keyPrefix + id, SerializeUtils.serialize(session), timeOut, TimeUnit.SECONDS);
     }
 
     @SneakyThrows
@@ -95,8 +93,17 @@ public class RedisSessionDAO extends AbstractSessionDAO {
     @Override
     public Collection<Session> getActiveSessions() {
         Set<Session> sessions = new HashSet<>();
-        Set<String> keys = binaryRedisTemplate.keys(this.keyPrefix + "*");
-        if (keys != null && keys.size() > 0) {
+        Set<String> keys = new HashSet<>();
+        try (Cursor<String> cursor = binaryRedisTemplate.scan(KeyScanOptions.scanOptions()
+                .match(this.keyPrefix + "*")
+                .count(1000)
+                .build())) {
+            while (cursor.hasNext()) {
+                String key = cursor.next();
+                keys.add(key);
+            }
+        }
+        if (!keys.isEmpty()) {
             for (String key : keys) {
                 Session s = (Session) SerializeUtils.deserialize(binaryRedisTemplate.opsForValue().getAndExpire(key, timeOut, TimeUnit.SECONDS));
                 if (s == null) {
@@ -105,7 +112,6 @@ public class RedisSessionDAO extends AbstractSessionDAO {
                 sessions.add(s);
             }
         }
-
         return sessions;
     }
 }

@@ -62,4 +62,11 @@
         <searchable/>
     </cache>
 
+    <!-- ws用户缓存30 分钟 -->
+    <cache name="wsOnlineUser" maxEntriesLocalHeap="2000" eternal="false"
+           timeToIdleSeconds="3600" overflowToDisk="false"
+           statistics="true">
+        <!-- 配置key 和 value 可查询 -->
+        <searchable/>
+    </cache>
 </ehcache>

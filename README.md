@@ -2,8 +2,9 @@
 
 | 分支名称                                                               | Spring Boot 版本 | JDK 版本 |   
 |--------------------------------------------------------------------|----------------|--------|
-| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.16         | 17     |s |
-| [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0      | 1.8    | s|
+| [main](https://github.com/wayn111/crowd-admin)                     | 2.7.16         | 17     |
+| [spring4.0](https://github.com/wayn111/crowd-admin/tree/spring4.0) | spring4.0      | 1.8    |
+
  
 ---
 
@@ -16,6 +17,7 @@
 基于jdk17、springboot2.7重构而来，crowd-admin是一个后台权限管理系统脚手架，集成了rbac权限管理、消息推送、邮件发送、任务调度、代码生成、elfinder文件管理等常用功能，系统内各个业务按照模块划分，前台使用H+模板。是一个java新人易于上手，学习之后能够快速融入企业开发的指导项目
 
 # 主要特性
+
 - 前后端支持stomp高级协议，完善的websocket配置，支持自定义用户认证、连接周期监听等
 - 支持系统参数配置，支持spring内存的@Cacheable注解
 - 项目按功能模块化拆分，自定义全局统一异常输出，代码清晰合理
@@ -31,6 +33,7 @@
 > 如果有任何使用问题，欢迎提交Issue或加关注我公众号私信我告知，方便互相交流反馈～ 💘。最后，喜欢的话麻烦给我个star
 
 关注公众号：waynblog，每周更新最新技术文章。回复关键字：
+
 - **学习**：加群交流，群内问题都会一一解答。
 - **演示账号**：获得线上项目管理后台演示账号。
 - **开源项目**：获取博主自己写的三个开源项目，包含PC、H5商城、后台权限管理系统等。
@@ -40,13 +43,13 @@
 ---
 
 - [crowd-admin](#crowd-admin)
-  - [内置模块](#内置模块)
-  - [技术选型](#技术选型)
-  - [开发部署](#开发部署)
-  - [参考资料](#参考资料)
-  - [获取源码](#获取源码)
-  - [实例截图](#实例截图)
-  - [特别赞助](#特别赞助)
+    - [内置模块](#内置模块)
+    - [技术选型](#技术选型)
+    - [开发部署](#开发部署)
+    - [参考资料](#参考资料)
+    - [获取源码](#获取源码)
+    - [实例截图](#实例截图)
+    - [特别赞助](#特别赞助)
 
 ---
 
@@ -134,6 +137,7 @@ git clone git@github.com:wayn111/crowd-amin.git
 # 7. 访问
 打开浏览器输入：http://localhost:8080/crowd/
 ```
+
 ---
 
 # 远程部署
@@ -141,20 +145,28 @@ git clone git@github.com:wayn111/crowd-amin.git
 推荐使用 Dockerfile 方式进行远程部署，这里介绍 CentOS 系统下部署方式（默认大家已安装 docker 环境）
 
 ```
-# 1. 新建 /opt/wayn/crowd 目录
+# 1. 修改 application-dev.yml 文件数据库、Redis 连接
+
+# 2. 服务器上新建 /opt/wayn/crowd 目录
 mkdir -p /opt/wayn/crowd/crowd-web/target
 mkdir -p /opt/wayn/crowd/logs
 
-# 2. 上传 crowd-web 项目打包后的 crowd.jar 文件至目录 /opt/wayn/crowd/crowd-web/target 下
+# 3. 在项目根目录执行如下 mvn 命令对 crowd-web 模块进行打包操作
+mvn clean package -DskipTests -pl crowd-web -am
+打包完成后在 crowd-web/target 目录下会生成 crowd.jar 文件
 
-# 3. 上传项目根目录下 ip2region.xdb 文件至目录 /opt/wayn/crowd 下 
+# 4. 上传 crowd.jar 文件至目录服务器 /opt/wayn/crowd/crowd-web/target 目录下
 
-# 4. 上传项目根目录下 Dockerfile 文件至 /opt/wayn/crowd 目录下
+# 6. 上传项目根目录下 ip2region.xdb 文件至服务器 /opt/wayn/crowd 目录下 
 
-# 5. 构建 docker 镜像，启动容器
+# 7. 上传项目根目录下 Dockerfile 文件至服务器 /opt/wayn/crowd 目录下
+
+# 8. 构建 docker 镜像，启动容器
 cd /opt/wayn/crowd
 docker build -t crowd .
 docker run -p 8080:8080 -v /opt/wayn/crowd:/opt/wayn/crowd --name crowd-web crowd 
+
+# 9. 在服务器终端输入 curl -L http://localhost:8080/crowd，有网页内容返回则代表部署成功
 ```
 
 ---
@@ -166,7 +178,6 @@ docker run -p 8080:8080 -v /opt/wayn/crowd:/opt/wayn/crowd --name crowd-web crow
 - [AdminLTE-admin](https://gitee.com/zhougaojun/KangarooAdmin/tree/master)
 - [bootdo](https://gitee.com/lcg0124/bootdo)
 - [RuoYi](https://gitee.com/y_project/RuoYi)
-
 
 # 获取源码
 

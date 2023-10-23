@@ -80,7 +80,7 @@ public class ConfigController extends BaseController {
     public Response addSave(ModelMap modelMap, Config config) {
         config.setCreateTime(new Date());
         config.setCreateBy(ShiroUtil.getSessionUser().getUserName());
-        return Response.result(configService.save(config), "新增成功");
+        return Response.result(configService.saveConfig(config), "新增成功");
     }
 
     @Log(value = "参数管理", operator = Operator.UPDATE)
@@ -90,7 +90,7 @@ public class ConfigController extends BaseController {
     public Response editSave(ModelMap modelMap, Config config) {
         config.setUpdateTime(new Date());
         config.setUpdateBy(ShiroUtil.getSessionUser().getUserName());
-        return Response.result(configService.updateById(config), "修改成功");
+        return Response.result(configService.updateConfig(config), "修改成功");
     }
 
 

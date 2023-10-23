@@ -33,4 +33,7 @@ public interface ConfigService extends IService<Config> {
 
     void export(Config config, HttpServletResponse response, HttpServletRequest request) throws IOException;
 
+    boolean saveConfig(Config config);
+
+    boolean updateConfig(Config config);
 }

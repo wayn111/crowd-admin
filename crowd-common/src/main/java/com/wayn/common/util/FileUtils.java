@@ -1,6 +1,5 @@
 package com.wayn.common.util;
 
-import com.sun.jna.platform.win32.WinUser;
 import com.wayn.common.constant.Constants;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -28,7 +27,7 @@ public class FileUtils {
      * 输出指定文件的byte数组
      *
      * @param is 文件流
-     * @param os          输出流
+     * @param os 输出流
      */
     public static void writeBytes(InputStream is, OutputStream os) throws IOException {
         try {

@@ -1,6 +1,5 @@
 package com.wayn.tencentcloudapi.cdn.datasearch.service;
 
-import com.tencentcloudapi.cdn.v20180606.CdnClient;
 
 /**
  * cdn数据查询接口

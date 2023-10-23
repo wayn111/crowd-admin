@@ -181,7 +181,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         } else if (hour > 0) {
             r += hour + "小时";
         } else if (min > 0) {
-            r += min + "分";
+            r += min + "分钟";
         } else if (s > 0) {
             r += s + "秒";
         }

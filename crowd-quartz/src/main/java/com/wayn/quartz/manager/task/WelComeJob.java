@@ -19,7 +19,7 @@ public class WelComeJob {
     public void welCome() {
         SimpMessagingTemplate simpMessagingTemplate = SpringContextUtil.getBean(SimpMessagingTemplate.class);
         String sysName = configService.getValueByKey("sys.name");
-        simpMessagingTemplate.convertAndSend("/topic/getResponse", "WelCome to " + sysName + "！");
+        simpMessagingTemplate.convertAndSend("/topic/taskResponse", "WelCome to " + sysName + "！");
         logger.info("执行自定义定时任务");
     }
 

@@ -36,7 +36,6 @@ public class WebSocketEventListener {
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-
         SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) headerAccessor.getSessionAttributes().get(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
         if (principalCollection != null) {
             Object primaryPrincipal = principalCollection.getPrimaryPrincipal();

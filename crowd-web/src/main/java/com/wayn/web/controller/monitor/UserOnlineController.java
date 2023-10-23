@@ -111,7 +111,7 @@ public class UserOnlineController extends BaseController {
                     .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
             Object primaryPrincipal = principalCollection.getPrimaryPrincipal();
             User user = (User) primaryPrincipal;
-            simpMessagingTemplate.convertAndSendToUser(user.getId(), "/queue/getResponse", "新消息：该账号已被管理员强制登出！");
+            simpMessagingTemplate.convertAndSendToUser(user.getId(), "/queue/userLoginStatus", "新消息：该账号已被管理员强制登出！");
         }
     }
 }

@@ -2,9 +2,11 @@ package com.wayn.common.service;
 
 import org.springframework.cache.Cache;
 
-public interface CacheManagerService {
+import java.util.Set;
 
-    public String[] getCacheNames();
+public interface CacheManagerService<T> {
+
+    String[] getCacheNames();
 
     /**
      * 根据名称获取缓存对象
@@ -12,7 +14,7 @@ public interface CacheManagerService {
      * @param name
      * @return
      */
-    public Cache getCache(String name);
+    Cache getCache(String name);
 
 
     /**
@@ -22,10 +24,13 @@ public interface CacheManagerService {
      * @param key
      * @return
      */
-    public Object getElements(String name, String key);
+    T getElements(String name, String key);
 
-    public <T> T getElements(String name, String key, Class<T> type);
+    void putElements(String name, String key, T value);
 
-    public void putElements(String name, String key, Object value);
+    void removeElements(String name, String key);
 
+    Set<T> getCacheAll(String name);
+
+    Long ttl(String name, String key);
 }

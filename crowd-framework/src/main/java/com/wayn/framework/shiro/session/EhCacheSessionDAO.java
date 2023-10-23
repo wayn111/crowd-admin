@@ -1,5 +1,6 @@
 package com.wayn.framework.shiro.session;
 
+import lombok.Getter;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 import net.sf.ehcache.search.Result;
@@ -19,14 +20,11 @@ import java.util.stream.Collectors;
  */
 
 
+@Getter
 public class EhCacheSessionDAO extends AbstractSessionDAO {
 
 
     private Cache onlineUser;
-
-    public Cache getOnlineUser() {
-        return onlineUser;
-    }
 
     public EhCacheSessionDAO setOnlineUser(Cache onlineUser) {
         this.onlineUser = onlineUser;

@@ -358,13 +358,23 @@
                 wrapper.notify();
                 showToastr({
                     type: 'info',
+                    msg: response.body,
+                    timeOut: -1,
+                    extendedTimeOut: -1,
+                    positionClass: "toast-top-right"
+                });
+            });
+            //订阅/topic/taskResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
+            stompClient.subscribe('/topic/taskResponse', function (response) {
+                showToastr({
+                    type: 'info',
                     msg: response.body
                 });
             });
             stompClient.subscribe('/user/queue/notifyRecordTip', function (response) {
                 wrapper.notify();
             });
-            stompClient.subscribe('/user/queue/getResponse', function (response) {
+            stompClient.subscribe('/user/queue/userLoginStatus', function (response) {
                 var resp = JSON.parse(response.body);
                 if (resp.type == 1 && resp.loginStatus == 0 ) {
                     stompClient.disconnect();
@@ -373,14 +383,7 @@
                     });
                 }
             });
-            stompClient.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
-                showToastr({
-                    type: 'info',
-                    msg: response.body,
-                    timeOut: -1,
-                    extendedTimeOut: -1
-                });
-            });
+
             // 定义消息载体
             var payload = JSON.stringify({'type': 1, 'userId': '[[${user.id}]]', 'connId': connId});
             // 定义消息头
@@ -388,6 +391,7 @@
             // 测试发送消息
             stompClient.send('/message', head, payload);
         }, err => {//第一次连接失败和连接后断开连接都会调用这个函数 此处调用重连
+            console.error(err);
             setTimeout(() => {
                 that.connect();
             }, timeout)

@@ -5,6 +5,7 @@ import com.wayn.common.base.WebSocketReq;
 import com.wayn.common.base.WebSocketResp;
 import com.wayn.common.service.UserOnlineService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -26,10 +27,10 @@ public class WsController extends BaseController {
     public void message(WebSocketReq webSocketReq) {
         log.info(webSocketReq.toString());
         String connId = webSocketReq.getConnId();
-        if (webSocketReq.getType() == 1) {
+        if (webSocketReq.getType() == 1 && StringUtils.isNotBlank(connId)) {
             String userId = webSocketReq.getUserId();
             WebSocketResp webSocketResp = new WebSocketResp(1, userOnlineService.checkUserLogin(userId) ? 1 : 0);
-            simpMessagingTemplate.convertAndSendToUser(connId, "/queue/getResponse", webSocketResp);
+            simpMessagingTemplate.convertAndSendToUser(connId, "/queue/userLoginStatus", webSocketResp);
         }
     }
 

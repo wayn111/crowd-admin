@@ -3,6 +3,7 @@ package com.wayn.framework.web.domian;
 import com.wayn.common.util.Arith;
 import com.wayn.common.util.IpUtils;
 import com.wayn.framework.web.domian.server.*;
+import lombok.Getter;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.CentralProcessor.TickType;
@@ -21,6 +22,7 @@ import java.util.Properties;
 /**
  * 服务器相关信息
  */
+@Getter
 public class Server {
 
     private static final int OSHI_WAIT_SECOND = 1000;
@@ -50,40 +52,20 @@ public class Server {
      */
     private List<SysFile> sysFiles = new LinkedList<SysFile>();
 
-    public Cpu getCpu() {
-        return cpu;
-    }
-
     public void setCpu(Cpu cpu) {
         this.cpu = cpu;
-    }
-
-    public Mem getMem() {
-        return mem;
     }
 
     public void setMem(Mem mem) {
         this.mem = mem;
     }
 
-    public Jvm getJvm() {
-        return jvm;
-    }
-
     public void setJvm(Jvm jvm) {
         this.jvm = jvm;
     }
 
-    public Sys getSys() {
-        return sys;
-    }
-
     public void setSys(Sys sys) {
         this.sys = sys;
-    }
-
-    public List<SysFile> getSysFiles() {
-        return sysFiles;
     }
 
     public void setSysFiles(List<SysFile> sysFiles) {

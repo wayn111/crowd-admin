@@ -6,9 +6,9 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://localhost:3306/crowd-admin?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+        url: jdbc:mysql://localhost:3306/crowd-admin?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
         username: root
-        password:
+        password: 123456
       # 初始连接数
       initialSize: 10
       # 最小连接池数量
@@ -54,6 +54,4 @@ spring:
     database: 1
     timeout: 3000
     password:
-    lettuce:
-      pool:
-        enabled: true
+    client-type: lettuce

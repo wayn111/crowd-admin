@@ -13,6 +13,7 @@ import com.wayn.common.util.ServletUtil;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,18 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigDao, Config> implements
         workbook.close();
         os.close();
         bos.close();
+    }
+
+    @CacheEvict(value = "configCache", allEntries = true)
+    @Override
+    public boolean saveConfig(Config config) {
+        return save(config);
+    }
+
+    @CacheEvict(value = "configCache", allEntries = true)
+    @Override
+    public boolean updateConfig(Config config) {
+        return updateById(config);
     }
 
 }

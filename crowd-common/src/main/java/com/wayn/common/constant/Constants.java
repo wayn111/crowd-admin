@@ -63,6 +63,8 @@ public class Constants {
      */
     public static final String CACHE_TYPE_REDIS = "redis";
     public static final String CACHE_TYPE_EACHACEH = "ehcache";
+    public static final String REDIS_KEY_SEPARATOR = ":";
+    public static final String REDIS_KEY_PREFIX = "crowd";
     /**
      * 当前页
      */

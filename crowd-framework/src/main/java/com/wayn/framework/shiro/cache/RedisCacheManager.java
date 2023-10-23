@@ -1,8 +1,5 @@
 package com.wayn.framework.shiro.cache;
 
-/**
- * 定义实现shiro.cache.CacheManager的RedisCacheManager
- */
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
@@ -14,6 +11,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * 定义实现shiro.cache.CacheManager的RedisCacheManager
+ */
 public class RedisCacheManager implements CacheManager {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisCacheManager.class);

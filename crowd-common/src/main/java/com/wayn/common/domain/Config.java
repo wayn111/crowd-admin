@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.wayn.common.base.BusinessEntity;
+import lombok.Getter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -16,6 +17,7 @@ import java.util.Date;
  * @author wayn
  * @date 2020-09-16
  */
+@Getter
 @TableName("sys_config")
 public class Config extends BusinessEntity {
 
@@ -64,64 +66,32 @@ public class Config extends BusinessEntity {
         this.configId = configId;
     }
 
-    public Integer getConfigId() {
-        return configId;
-    }
-
     public void setConfigName(String configName) {
         this.configName = configName;
-    }
-
-    public String getConfigName() {
-        return configName;
     }
 
     public void setConfigKey(String configKey) {
         this.configKey = configKey;
     }
 
-    public String getConfigKey() {
-        return configKey;
-    }
-
     public void setConfigValue(String configValue) {
         this.configValue = configValue;
-    }
-
-    public String getConfigValue() {
-        return configValue;
     }
 
     public void setConfigType(String configType) {
         this.configType = configType;
     }
 
-    public String getConfigType() {
-        return configType;
-    }
-
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
-    }
-
-    public String getCreateBy() {
-        return createBy;
     }
 
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy;
     }
 
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
     }
 
     public String toString() {

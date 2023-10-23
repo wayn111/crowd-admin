@@ -75,6 +75,7 @@ public class LoginController extends BaseController {
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password, rememberMe);
         currentUser.login(token);
         logininforService.addLog(userName, com.wayn.common.constant.Constants.LOGIN_SUCCESS, "登陆成功");
+        session.removeAttribute(Constants.CAPTCHA_SESSION_KEY);
         return Response.success();
     }
 
@@ -107,9 +108,9 @@ public class LoginController extends BaseController {
         response.setDateHeader("Expires", 0);
 
         // 三个参数分别为宽、高、位数
-        SpecCaptcha specCaptcha = new SpecCaptcha(140, 54, 4);
+        SpecCaptcha specCaptcha = new SpecCaptcha(120, 34, 4);
         // 设置字体
-        specCaptcha.setFont(new Font("Verdana", Font.PLAIN, 32));  // 有默认字体，可以不用设置
+        specCaptcha.setFont(new Font("Verdana", Font.PLAIN, 28));  // 有默认字体，可以不用设置
         // 设置类型，纯数字、纯字母、字母数字混合
         specCaptcha.setCharType(Captcha.TYPE_ONLY_NUMBER);
 
