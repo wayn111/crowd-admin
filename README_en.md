@@ -54,7 +54,7 @@ to Java, and can quickly integrate into the enterprise development guidance proj
 
 # Online demo
 
-- <a href="http://121.4.124.33/crowd" target="_blank">crowd-admin</a>
+- <a href="http://62.234.206.94/crowd" target="_blank">crowd-admin</a>
 
 # Reference
 
