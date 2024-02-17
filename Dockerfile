@@ -11,6 +11,6 @@ ENV TZ="Asia/Shanghai"
 # 运行过程中创建一个mall-tiny-docker-file.jar文件
 RUN bash -c 'touch /opt/crowd.jar'
 # 声明服务运行在8000端口
-EXPOSE 8080
+EXPOSE 8088
 # 指定docker容器启动时运行jar包
 ENTRYPOINT ["sh", "-c", "exec java -jar -Xms256m -Xmx256m /opt/crowd.jar"]
